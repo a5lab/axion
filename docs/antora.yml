@@ -1,7 +1,7 @@
 name: tabr
 title: Technical and business radar
 version: 0.0.6
-prerelease: -1
+prerelease: -alpha
 nav:
 - modules/ROOT/nav.adoc
 - modules/module-one/nav.adoc
