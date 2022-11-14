@@ -1,7 +1,7 @@
 name: TABR
 title: TABR
 version: 0.0.3
-prerelease: 0.0.3-alpha.1
+prerelease: -alpha.1
 nav:
 - modules/ROOT/nav.adoc
 - modules/module-one/nav.adoc
