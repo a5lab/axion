@@ -1,6 +1,6 @@
-name: component-b
-title: Component B
-version: 2.5
+name: TABR
+title: TABR
+version: 0.1
 prerelease: -beta.1
 nav:
 - modules/ROOT/nav.adoc
