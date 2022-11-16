@@ -4,4 +4,7 @@ version: 0.0.6
 prerelease: -alpha
 nav:
 - modules/ROOT/nav.adoc
-- modules/module-one/nav.adoc
+- modules/information/nav.adoc
+- modules/installation/nav.adoc
+- modules/usage/nav.adoc
+- modules/best_practices/nav.adoc
