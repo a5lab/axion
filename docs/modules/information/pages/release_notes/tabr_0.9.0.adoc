@@ -1,4 +1,4 @@
-= Product information
+= 0.9.0 release notes
 
 This is version *{page-component-display-version}* of Module One in Component B.
 
