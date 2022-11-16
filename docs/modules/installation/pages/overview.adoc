@@ -1,4 +1,4 @@
-= Installation and upgrades overview
+= Installation
 
 This is version *{page-component-display-version}* of Module One in Component B.
 

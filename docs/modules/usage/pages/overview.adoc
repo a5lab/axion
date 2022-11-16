@@ -1,4 +1,4 @@
-= Usage verview
+= Usage
 
 This is version *{page-component-display-version}* of Module One in Component B.
 
