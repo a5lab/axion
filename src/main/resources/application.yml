@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: tabr
+  jmx:
+    enabled: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/tabr
+    username: tabr
+    password:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+  liquibase:
+    change-log: db/changelog/changelog-master.xml
+
