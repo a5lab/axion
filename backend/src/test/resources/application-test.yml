@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:postgresql:14.6:///tabr?TC_DAEMON=true
+  liquibase:
+    change-log: db/changelog/changelog-master.xml
+
