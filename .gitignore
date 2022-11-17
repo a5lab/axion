@@ -1,6 +1,6 @@
 HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
+!backend/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -61,7 +61,7 @@ tmp/**/*
 local.properties
 .settings/
 .loadpath
-/src/main/resources/rebel.xml
+/backend/src/main/resources/rebel.xml
 
 # External tool builders
 .externalToolBuilders/**

@@ -17,6 +17,7 @@
         <java.version>17</java.version>
         <frontend-src-dir>${project.basedir}/frontend</frontend-src-dir>
         <node.version>v18.12.1</node.version>
+        <npm.version>8.19.2</npm.version>
         <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
         <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
     </properties>
@@ -32,6 +33,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -79,6 +84,7 @@
     </dependencies>
 
     <build>
+        <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -98,8 +104,9 @@
                 <version>${frontend-maven-plugin.version}</version>
                 <configuration>
                     <nodeVersion>${node.version}</nodeVersion>
-                    <workingDirectory>${frontend-src-dir}</workingDirectory>
-                    <installDirectory>${project.build.directory}</installDirectory>
+                    <npmVersion>${npm.version}</npmVersion>
+                    <workingDirectory>../frontend</workingDirectory>
+                    <installDirectory>../target</installDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -127,28 +134,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>react-build</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${frontend-src-dir}/build</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+
         </plugins>
     </build>
     <repositories>
