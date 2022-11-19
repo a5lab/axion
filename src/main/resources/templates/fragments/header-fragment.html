@@ -1,0 +1,16 @@
+<head th:fragment="common_header(title,links)">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Technical and Business Radar">
+    <meta name="author" content="a5lab.com">
+
+    <title th:replace="${title}">Technical&Business Radar</title>
+
+    <!-- Common styles and scripts -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+
+    <!--/* Per-page placeholder for additional links */-->
+    <th:block th:replace="${links}" />
+</head>
