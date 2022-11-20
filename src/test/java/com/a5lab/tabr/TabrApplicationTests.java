@@ -6,7 +6,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class Tabr11ApplicationTests {
+class TabrApplicationTests {
 
     @Test
     void contextLoads() {
