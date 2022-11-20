@@ -7,8 +7,10 @@ server:
   port: 8080
   compression:
     enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript
+    min-response-size: 512
   http2:
-    enabled: false
+    enabled: true
   error:
     whitelabel:
       enabled: true
@@ -74,6 +76,12 @@ spring:
         generate_statistics: false
     hibernate:
       ddl-auto: validate
+  web:
+    resources:
+      cache:
+        cachecontrol:
+          max-age: 120
+          must-revalidate: true
 
 
 
