@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <title th:text="#{app.title}" layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" th:content="#{app.description}">
+        <meta name="author" th:content="#{app.author}">
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+        <script th:src="@{/js/bootstrap.bundle.min.js}" defer></script>
+        <script th:src="@{/js/app.js}" defer></script>
+    </head>
+    <body>
+        <header class="bg-light">
+            <div class="container">
+                <nav class="navbar navbar-light navbar-expand-md">
+                    <div class="container-fluid">
+                        <a th:href="@{/}" class="navbar-brand">
+                            <img th:src="@{/images/logo.jpg}" th:alt="#{app.title}" width="30" height="30" class="d-inline-block align-top">
+                            <span th:text="#{app.title}" class="ps-1" />
+                        </a>
+                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
+                                th:aria-label="#{navigation.toggle}" aria-controls="navbarToggle" aria-expanded="false">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarToggle">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="navbar-item">
+                                    <a th:href="@{/}" th:text="#{navigation.home}" class="nav-link" />
+                                </li>
+                                <li class="navbar-item dropdown">
+                                    <a th:text="#{navigation.radar}" class="nav-link dropdown-toggle" href="#" id="navbarEntitiesLink" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false" />
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarEntitiesLink">
+                                        <li><a th:href="@{/techstack}" th:text="#{navigation.radar.stack}" class="dropdown-item" /></li>
+                                        <li><a th:href="@{/demo}" th:text="Demo" class="dropdown-item" /></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <main class="my-5">
+            <div class="container">
+                <p th:if="${MSG_SUCCESS}" th:text="${MSG_SUCCESS}" class="alert alert-success mb-4" role="alert" />
+                <p th:if="${MSG_INFO}" th:text="${MSG_INFO}" class="alert alert-info mb-4" role="alert" />
+                <p th:if="${MSG_ERROR}" th:text="${MSG_ERROR}" class="alert alert-danger mb-4" role="alert" />
+                <div layout:fragment="content" />
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/_mainlayout}">
+<body>
+    <div layout:fragment="content">
+        <div class="starter-template">
+            <h1>Demo</h1>
+            <h2>
+                <span th:text="'Hello, ' + ${person.name()}"></span>
+                <br>
+                <span th:text="'Your age is, ' + ${person.age()}"></span>
+            </h2>
+        </div>
+    </div>
+</body>
+</html>
+
+
