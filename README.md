@@ -1,5 +1,5 @@
 # Repo tabr
-Technical and business radar. Sping boot based application
+Technical and business radar. Spring boot based application
 
 # Installation antora
 * install nvm by command: brew install nvm and make post configuration
