@@ -11,8 +11,8 @@
     <groupId>com.a5lab</groupId>
     <artifactId>tabr</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>tabr11</name>
-    <description>tabr11</description>
+    <name>tabr</name>
+    <description>tabr</description>
     <properties>
         <java.version>17</java.version>
         <testcontainers.version>1.17.6</testcontainers.version>

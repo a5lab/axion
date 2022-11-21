@@ -1,10 +1,7 @@
-# tabr
-Technical and business radar
+# Repo tabr
+Technical and business radar. Sping boot based application
 
-# Antora installation
+# Installation antora
+* install nvm by command: brew install nvm and make post configuration
+* install nodejs by command: nvm install --lts
 * install nvm by command: brew install asciidoctor
-
-# Release:
-* mvn-release
-* change antora.yml 
-* change version: 0.0.4  && prerelease: -alpha.1 at antorya.yml
