@@ -1,0 +1,9 @@
+---
+
+collections:
+  - name: community.general
+    source: https://galaxy.ansible.com
+  - name: community.docker
+    source: https://galaxy.ansible.com
+  - name: community.postgresql
+    source: https://galaxy.ansible.com
