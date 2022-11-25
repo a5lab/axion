@@ -1,0 +1,81 @@
+---
+
+- name: install yum packages
+  become: yes
+  become_user: root
+  yum:
+    name:
+      - yum-utils
+    state: present
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution == 'CentOS'
+    - ansible_distribution_major_version == '7'
+
+- name: install dnf packages
+  become: yes
+  become_user: root
+  dnf:
+    name:
+      - dnf-plugin-config-manager
+      - yum-utils
+    state: present
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution == 'CentOS'
+    - ansible_distribution_major_version == '8'
+
+- name: configure custom yum repositories
+  yum_repository:
+    name: '{{ item.name }}'
+    baseurl:  '{{ item.baseurl }}'
+    description: '{{ item.description | d(omit) }}'
+    gpgcheck: '{{ item.gpgcheck | d(omit) }}'
+    enabled:  '{{ item.enabled | d(omit) }}'
+    gpgkey: '{{ item.gpgkey | d(omit) }}'
+    repo_gpgcheck: '{{ item.repo_gpgcheck | d(omit) }}'
+    sslverify: '{{ item.sslverify | d(omit) }}'
+    sslcacert: '{{ item.sslcacert | d(omit) }}'
+    metadata_expire: '{{ item.metadata_expire | d(omit) }}'
+    state: '{{ item.state | d("present") }}'
+  with_flattened:
+    - '{{ yum__repositories }}'
+    - '{{ yum__group_repositories }}'
+    - '{{ yum__host_repositories }}'
+  when:
+    - yum__enabled|bool
+    - item.baseurl|d()
+    - item.name|d()
+
+- name: configure custom yum key
+  copy:
+    src: '{{ item.src }}'
+    dest: '/etc/pki/rpm-gpg/RPM-GPG-KEY-{{ item.name }}'
+    owner: root
+    group: root
+    mode: 0644
+  with_flattened:
+    - '{{ yum__key }}'
+    - '{{ yum__group_key }}'
+    - '{{ yum__host_key }}'
+  when:
+    - yum__enabled|bool
+    - item.src|d()
+    - item.name|d()
+
+- name: generating yum cache ...
+  shell: "yum -q makecache -y --disablerepo='*' --enablerepo='{{ item.name }}'"
+  args:
+    warn: false
+  with_flattened:
+    - '{{ yum__repositories }}'
+    - '{{ yum__group_repositories }}'
+    - '{{ yum__host_repositories }}'
+  when: (yum__enabled|bool and item.name|d() )
+
+# This option is on for example on docker
+- name: Clean opt from yum config file
+  lineinfile:
+    dest: /etc/yum.conf
+    regexp: '^tsflags=nodocs'
+    state: absent

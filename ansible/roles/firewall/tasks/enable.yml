@@ -1,0 +1,74 @@
+---
+
+- name: install ufw package
+  package:
+    name: ufw
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: ensure ufw is running and enabled on boot
+  service:
+    name: ufw
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'Debian'
+
+- name: add ufw rules
+  ufw:
+    port: "{{ item.port | default(omit) }}"
+    rule: "{{ item.rule | default(omit) }}"
+    proto: "{{ item.proto | default(omit) }}"
+    state: "{{ item.state | default('enabled') }}"
+    direction: "{{ item.direction | default(omit) }}"
+    policy: "{{ item.policy | default(omit) }}"
+    delete: "{{ item.delete | default(omit) }}"
+  with_items:
+    - "{{ firewall_default_services }}"
+    - "{{ firewall_allow_services }}"
+  notify: ufw enable
+  when:
+    - ansible_os_family == 'Debian'
+    - item.port|d() or item.direction|d()
+
+- name: install firewalld package
+  package:
+    name: firewalld
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: ensure firewalld is running and enabled on boot
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+  when: ansible_os_family == 'RedHat'
+
+- name: reload firewalld services
+  shell: "firewall-cmd --reload"
+  when: ansible_os_family == 'RedHat'
+
+- name: add firewalld rules for services from vars
+  firewalld:
+    service: "{{ item.service }}"
+    zone: "{{ item.zone | default('public') }}"
+    permanent: "{{ item.permanent | default(True) }}"
+    state: "{{ item.state | default('enabled') }}"
+  with_items:
+    - "{{ firewall_default_services }}"
+    - "{{ firewall_allow_services }}"
+  notify: firewalld complete reload
+  when:
+    - ansible_os_family == 'RedHat'
+    - item.service | d()
+
+- name: add firewalld rules for ports from vars
+  firewalld:
+    port: "{{ item.port }}"
+    zone: "{{ item.zone | default('public') }}"
+    permanent: "{{ item.permanent | default(True) }}"
+    state: "{{ item.state | default('enabled') }}"
+  with_items: "{{ firewall_allow_ports }}"
+  notify: firewalld reload
+  when:
+    - ansible_os_family == 'RedHat'
+    - item.port | d()

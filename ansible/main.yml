@@ -9,6 +9,6 @@
     - role: sysinfo
     - role: firewall
     - role: workstation
-    - role: app
-    - role: maintenance
-      state: absent
+    #- role: app
+    #- role: maintenance
+    #  state: absent

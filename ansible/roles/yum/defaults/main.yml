@@ -1,0 +1,16 @@
+---
+
+# Enable or disable this role.
+yum__enabled: True
+
+# List of additional YUM repositories for specific hosts in Ansible inventory.
+yum__host_repositories: []
+yum__repositories: []
+yum__group_repositories: []
+
+# List of YUM GPG keys to configure on specific hosts in Ansible inventory.
+yum__host_keys: []
+
+yum__key: []
+yum__group_key: []
+yum__host_key: []

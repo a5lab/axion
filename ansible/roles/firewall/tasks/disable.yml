@@ -1,0 +1,12 @@
+---
+
+- name: disable firewalld package on CentOS
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+  when: ansible_os_family == 'RedHat'
+
+- name: disable ufw package on Ubuntu
+  command: ufw -f disable
+  when: ansible_os_family == 'Debian'

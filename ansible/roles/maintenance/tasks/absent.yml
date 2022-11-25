@@ -1,6 +1,6 @@
 ---
 
-- name: wait until puma and unicorn are started
+- name: wait until tomcat is started
   wait_for:
     host: "127.0.0.1"
     port: "{{ item }}"
