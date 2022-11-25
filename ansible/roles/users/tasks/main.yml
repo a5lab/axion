@@ -1,0 +1,107 @@
+---
+
+- name: install sudo
+  package:
+    name:
+      - sudo
+
+- name: create user groups
+  group:
+    name: '{{ item.group | d(item.name) }}'
+    system: '{{ item.system | d(True if (users__default_system | bool) else omit) }}'
+    gid: '{{ item.gid | d(omit) }}'
+    state: 'present'
+  with_flattened:
+    - '{{ users__groups }}'
+    - '{{ users__group_groups }}'
+    - '{{ users__host_groups }}'
+    - '{{ users__dependent_accounts }}'
+  when:
+    - item|d()
+    - item.name|d()
+    - item.name != 'root'
+    - item.state|d('present') != 'absent'
+  no_log: '{{ users__no_log | bool }}'
+
+- name: get list of available groups
+  getent:
+    database: 'group'
+
+- name: manage user accounts
+  user:
+    name: '{{ item.name }}'
+    uid: '{{ item.uid | d(omit) }}'
+    group: '{{ item.group | d(item.name) }}'
+    groups: '{{ item.groups | d(omit) }}'
+    append: '{{ item.append | d(True) }}'
+    state: '{{ item.state | d("present") }}'
+    comment: '{{ item.comment | d(omit) }}'
+    password: '{{ item.password | d("*") }}'
+    update_password: '{{ item.update_password | d("on_create") }}'
+    system: '{{ item.system | d(True if (users__default_system | bool) else omit) }}'
+    shell: '{{ item.shell | d(omit) }}'
+    home: '{{ item.home | d(omit) }}'
+    createhome: '{{ item.createhome | d(omit) }}'
+    move_home: '{{ item.move_home | d(omit) }}'
+    skeleton: '{{ item.skeleton | d(omit) }}'
+    expires: '{{ item.expires | d(omit) }}'
+    remove: '{{ item.remove | d(omit) }}'
+    force: '{{ item.force | d(omit) }}'
+    non_unique: '{{ item.non_unique | d(omit) }}'
+    generate_ssh_key: '{{ item.generate_ssh_key | d(omit) }}'
+    ssh_key_bits: '{{ item.ssh_key_bits | d(omit) }}'
+    ssh_key_comment: '{{ item.ssh_key_comment | d(omit) }}'
+    ssh_key_file: '{{ item.ssh_key_file | d(omit) }}'
+    ssh_key_passphrase: '{{ item.ssh_key_passphrase | d(omit) }}'
+    ssh_key_type: '{{ item.ssh_key_type | d(omit) }}'
+  with_items:
+    - '{{ users__dependent_accounts }}'
+  when:
+    - item|d()
+    - item.name|d()
+    - item.name != 'root'
+  no_log: '{{ users__no_log | bool }}'
+
+- name: add to PATH ~/bin
+  become_user: "{{ item.name }}"
+  template:
+    src: "home/user/.bashrc.j2"
+    dest: '/home/{{ item.name }}/.bashrc'
+    mode: '0644'
+  with_items:
+    - '{{ users__dependent_accounts }}'
+  when:
+    - item|d()
+    - item.name|d()
+    - item.name != 'root'
+  no_log: '{{ users__no_log | bool }}'
+
+- name: add ssh key file
+  authorized_key:
+    user: '{{ item.name }}'
+    state: present
+    key: "{{ '\n'.join(item.sshkeys) | string }}"
+  when:
+    - item|d()
+    - item.name|d()
+    - item.state|d('present') != 'absent'
+  with_items:
+    - '{{ users__dependent_accounts }}'
+  no_log: '{{ users__no_log | bool }}'
+
+- name: create sudo file
+  copy:
+    dest: /etc/sudoers.d/{{ item.name }}
+    content: "{{ item.sudo | join('\n') }}\n"
+    mode: 0440
+    owner: root
+    group: root
+    validate: 'visudo -cf %s'
+  with_items:
+    - '{{ users__dependent_accounts }}'
+  when:
+    - item|d()
+    - item.name|d()
+    - item.name != 'root'
+    - item.sudo|d()
+  no_log: '{{ users__no_log | bool }}'
