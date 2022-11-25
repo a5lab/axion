@@ -1,0 +1,15 @@
+---
+
+- name: cat /etc/os-release file
+  shell: "/bin/cat /etc/os-release"
+  register: result
+
+- name: output /etc/os-release file
+  debug: msg="{{ result.stdout_lines }}"
+
+- name: cat /etc/hosts file
+  shell: "/bin/cat /etc/hosts"
+  register: result
+
+- name: output /etc/hosts file
+  debug: msg="{{ result.stdout_lines }}"
