@@ -1,8 +1,8 @@
-[a5lab_server]
-www.a5lab.com ansible_host=65.109.7.209
+[demo_server]
+demo.a5lab.com ansible_host=65.109.133.229
 
 [all:children]
-a5lab_server
+demo_server
 
 [all:vars]
 ansible_user=ansible

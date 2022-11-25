@@ -1,7 +1,7 @@
 ---
 
 - name: deploy app
-  hosts: a5lab_server
+  hosts: demo_server
   become: yes
   become_user: root
   roles:
@@ -9,9 +9,6 @@
     - role: sysinfo
     - role: firewall
     - role: workstation
-    - role: chrome
-    - role: postgresql
-    - role: redis
     - role: app
     - role: maintenance
       state: absent

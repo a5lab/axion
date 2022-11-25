@@ -2,11 +2,11 @@
 # IPs are aligned with DevOps to easy cooperate
 #
 
-[a5lab_server]
-a5lab1.a5lab.com ansible_host=192.168.100.1 image=centos8
+[demo_server]
+demo1.a5lab.com ansible_host=192.168.100.1 image=centos8
 
 [all:children]
-a5lab_server
+demo_server
 
 [all:vars]
 ansible_user=ansible
