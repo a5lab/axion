@@ -12,6 +12,6 @@ dependencies:
         sudo:
           - "{{ app__user }} ALL=(ALL) NOPASSWD: ALL"
   - role: openjre
-  - role: js_env
-  - role: yarn
-  - role: apache
+  #- role: js_env
+  #- role: yarn
+  #- role: apache
