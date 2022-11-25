@@ -1,7 +1,7 @@
 ---
 
 - name: deploy app
-  hosts: demo_server
+  hosts: tabr_server
   become: yes
   become_user: root
   roles:

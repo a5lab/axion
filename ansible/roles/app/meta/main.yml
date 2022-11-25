@@ -11,7 +11,7 @@ dependencies:
         sshkeys: []
         sudo:
           - "{{ app__user }} ALL=(ALL) NOPASSWD: ALL"
-  #- role: ruby_env
-  #- role: js_env
-  #- role: yarn
-  #- role: apache
+  - role: openjre
+  - role: js_env
+  - role: yarn
+  - role: apache
