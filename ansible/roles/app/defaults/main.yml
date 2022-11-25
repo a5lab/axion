@@ -8,10 +8,10 @@ app__no_log: false
 # App adapter can be: postgresql, mysql2, sqlite
 #
 app__db_adapter: "postgresql"
-app__db_name: "a5lab"
-app__db_user: "a5lab"
+app__db_name: "tabr"
+app__db_user: "tabr"
 app__db_password: '{{ lookup("env", ci_environment_name + "_database_password") or "secret"}}'
-app__db_host: "{{ hostvars[groups.a5lab_server.0].ansible_host }}"
+app__db_host: "{{ hostvars[groups.demo_server.0].ansible_host }}"
 
 #
 # SMTP section
