@@ -1,0 +1,4 @@
+#{{ ansible_managed }}
+{{ app__rails_environment }}:
+  adapter: {{ app__db_adapter }}
+  database: {{ app__db_name }}.db

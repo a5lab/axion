@@ -1,0 +1,5 @@
+#{{ ansible_managed }}
+{{ app__rails_environment }}:
+  login: "{{ app__paypal_login }}"
+  password: "{{ app__paypal_password }}"
+  signature: "{{ app__paypal_signature }}"

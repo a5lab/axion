@@ -1,0 +1,9 @@
+#{{ ansible_managed }}
+{{ app__rails_environment }}:
+  adapter: {{ app__db_adapter }}
+  host: {{ app__db_host }}
+  database: {{ app__db_name }}
+  username: {{ app__db_user }}
+  password: {{ app__db_password }}
+  encoding: utf8
+  pool: 5

@@ -1,0 +1,21 @@
+#{{ ansible_managed }}
+[Unit]
+Description=puma
+Wants=postgresql.service
+After=network.target local-fs.target postgresql.service
+
+[Service]
+Type=simple
+User={{ app__user }}
+WorkingDirectory={{ app__current_path }}
+PIDFile={{ app__shared_path }}/tmp/pids/puma.pid
+Environment=CONFIG={{ app__current_path }}/config/puma.rb
+Environment=TMPDIR={{ app__shared_path }}/tmp
+SyslogIdentifier=puma
+TimeoutSec=5min
+Restart=on-failure
+RestartSec=5s
+ExecStart={{ app__current_path }}/bin/puma -e {{ app__rails_environment }} -C $CONFIG
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,21 @@
+---
+
+dependencies:
+  - role: users
+    users__dependent_accounts:
+      - name:   '{{ app__user }}'
+        state:  'present'
+        group:  '{{ app__group }}'
+        system: True
+        shell: '/bin/bash'
+        sshkeys: []
+        sudo:
+          - "{{ app__user }} ALL=(ALL) NOPASSWD: ALL"
+
+  - role: ruby_env
+
+  - role: js_env
+
+  - role: yarn
+
+  - role: apache

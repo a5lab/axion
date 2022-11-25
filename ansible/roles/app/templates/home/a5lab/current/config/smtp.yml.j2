@@ -1,0 +1,7 @@
+#{{ ansible_managed }}
+{{ app__rails_environment }}:
+  address: {{ app__smtp_address }}
+  port: {{ app__smtp_port }}
+  domain: {{ app__smtp_domain }}
+  user_name: {{ app__smtp_user_name }}
+  password: {{ app__smtp_user_password }}

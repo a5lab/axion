@@ -1,0 +1,19 @@
+#{{ ansible_managed }}
+
+# Run job every 4 hours: * */4 * * *
+clear_expired_failures_job:
+  cron: "* */4 * * *"
+  class: ClearExpiredFailuresJob
+  queue: medium
+
+# Run job every day at 1:59: 59 1 * * *
+clear_expired_sessions_job:
+  cron: "59 1 * * *"
+  class: ClearExpiredSessionsJob
+  queue: medium
+
+# Run job every day at 6:00: 00 6 * * *
+reset_sidekiq_stats:
+  cron: "00 6 * * *"
+  class: ResetSidekiqStatsJob
+  queue: major

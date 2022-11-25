@@ -1,0 +1,77 @@
+---
+
+- name: configure apache sites a5lab
+  template:
+    src: "etc/httpd/conf.d/a5lab.conf.j2"
+    dest: "/etc/{{ app__apache_conf_map[ansible_os_family] }}/{{ app__domain }}.conf"
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify:
+    - reload apache
+
+- name: enable a5lab website
+  shell: "{{ item }}"
+  with_items:
+    - "a2dissite 000-default.conf"
+    - "a2ensite {{ app__domain }}.conf"
+    - "apache2ctl configtest"
+  when:
+    - ansible_os_family == 'Debian'
+  notify:
+    - reload apache
+
+- name: copy apache static templates
+  template:
+    src: "home/a5lab/current/public/{{ item }}.j2"
+    dest: "{{ app__current_path }}/public/{{ item }}"
+    owner: "{{ item.owner | default('a5lab') }}"
+    group: "{{ item.group | default('a5lab') }}"
+    mode: "0644"
+  with_items: "{{ app__apache_templates }}"
+
+- name: copy apache static vars
+  copy:
+    src: "files/home/a5lab/current/public/{{ item }}"
+    dest: "{{ app__current_path }}/public/{{ item }}"
+    owner: "{{ item.owner | default('a5lab') }}"
+    group: "{{ item.group | default('a5lab') }}"
+    mode: "0644"
+  with_items: "{{ app__apache_vars }}"
+
+- name: allow httpd connection to rails (selinux)
+  seboolean:
+    name: "{{ item }}"
+    state: yes
+    persistent: yes
+  with_items:
+    - httpd_can_network_connect_db
+    - httpd_can_network_connect
+  when:
+    - ansible_selinux|d()
+    - ansible_selinux.status == "enabled"
+
+- name: set selinux rules, see https://red.ht/2GJVVcN
+  sefcontext:
+    target: "{{ item }}"
+    setype: httpd_sys_content_t
+    state: present
+  with_items:
+    - "'{{ app__current_path }}'"
+    - "'{{ app__release_path }}/public(/.*)?'"
+    - "'{{ app__shared_path }}/www(/.*)?'"
+    - "'{{ app__shared_path }}/tmp(/.*)?'"
+  when:
+    - ansible_selinux|d()
+    - ansible_selinux.status == "enabled"
+
+- name: restore selinux context
+  shell: 'restorecon -R -v {{ item }}'
+  with_items:
+    - "{{ app__current_path }}"
+    - "{{ app__release_path }}/public"
+    - "{{ app__shared_path }}/www"
+    - "{{ app__shared_path }}/tmp"
+  when:
+    - ansible_selinux|d()
+    - ansible_selinux.status == "enabled"

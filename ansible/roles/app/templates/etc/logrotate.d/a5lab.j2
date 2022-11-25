@@ -1,0 +1,14 @@
+{{ app__shared_path }}/log/*log {
+  su {{ app__user }} {{ app__group }}
+  daily
+  maxsize 50M
+  missingok
+  rotate 10
+  notifempty
+  compress
+  delaycompress
+
+  lastaction
+    systemctl kill --signal=USR1 unicorn > /dev/null 2>/dev/null || true
+  endscript
+}
