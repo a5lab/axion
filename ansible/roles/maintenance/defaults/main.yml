@@ -1,0 +1,9 @@
+---
+
+maintenance__user: "a5lab"
+maintenance__group: "a5lab"
+maintenance__path: "/home/{{ maintenance__user }}/current/public"
+maintenance__file: "maintenance"
+maintenance__ports:
+  - 33001
+  - 33002

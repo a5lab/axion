@@ -1,0 +1,9 @@
+---
+
+- name: import present tasks
+  import_tasks: present.yml
+  when: (state|d("present") == 'present')
+
+- name: import absent tasks
+  import_tasks: absent.yml
+  when: (state|d("present") == 'absent')

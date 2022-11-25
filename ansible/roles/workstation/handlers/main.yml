@@ -1,0 +1,75 @@
+---
+
+# Docker doesn't allow to start ntpd for CentOS
+- name: restart ntpd
+  systemd:
+    name: ntpd
+    enabled: yes
+    state: restarted
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version == '7'
+    - ansible_virtualization_type|d("bare metal") != "docker"
+
+# Docker doesn't allow to start chronyd for CentOS
+- name: restart chronyd
+  systemd:
+    name: chronyd
+    enabled: yes
+    state: restarted
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version == '8'
+    - ansible_virtualization_type|d("bare metal") != "docker"
+
+# Docker doesn't allow to start ntp for Ubuntu
+- name: restart ntp
+  systemd:
+    name: ntp
+    enabled: yes
+    state: restarted
+  when:
+    - ansible_os_family == "Debian"
+    - ansible_virtualization_type|d("bare metal") != "docker"
+
+- name: restart yum-cron
+  systemd:
+    name: yum-cron
+    enabled: yes
+    state: restarted
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version == '7'
+
+- name: restart dnf-automatic
+  systemd:
+    name: dnf-automatic
+    enabled: yes
+    state: restarted
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distribution_major_version == '8'
+
+- name: restart unattended-upgrades
+  systemd:
+    name: unattended-upgrades
+    enabled: yes
+    state: restarted
+  when:
+    - ansible_os_family == "Debian"
+
+- name: restart crond
+  systemd:
+    name: crond
+    enabled: yes
+    state: restarted
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: restart cron
+  systemd:
+    name: cron
+    enabled: yes
+    state: restarted
+  when:
+    - ansible_os_family == "Debian"
