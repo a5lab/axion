@@ -1,12 +1,13 @@
 ---
 
-- name: wait until tomcat is started
-  wait_for:
-    host: "127.0.0.1"
-    port: "{{ item }}"
-    timeout: 120
-  with_items:
-    - "{{ maintenance__ports }}"
+# todo: uncomment
+#- name: wait until tomcat is started
+#  wait_for:
+#    host: "127.0.0.1"
+#    port: "{{ item }}"
+#    timeout: 120
+#  with_items:
+#    - "{{ maintenance__ports }}"
 
 - name: turn off maintenance
   file:

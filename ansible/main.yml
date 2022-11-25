@@ -10,5 +10,5 @@
     - role: firewall
     - role: workstation
     #- role: app
-    #- role: maintenance
-    #  state: absent
+    - role: maintenance
+      state: absent
