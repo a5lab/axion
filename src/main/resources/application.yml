@@ -7,13 +7,14 @@ server:
   port: 8080
   compression:
     enabled: true
-    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,image/svg+xml
     min-response-size: 512
   http2:
     enabled: true
   error:
     whitelabel:
       enabled: true
+  shutdown: graceful
 
 spring:
   profiles:
@@ -30,7 +31,7 @@ spring:
     hikari:
       poolName: tabr-pool
       auto-commit: false
-      minimum-idle: 20
+      minimum-idle: 10
       maximum-pool-size: 100
       max-lifetime: 300000
       validation-timeout: 500
@@ -71,19 +72,31 @@ spring:
         jdbc:
           time_zone: UTC
           lob.non_contextual_creation: true
-          batch_size: 200
+          batch_size: 100
           fetch_size: 300
           batch_versioned_data: true
         id.new_generator_mappings: true
         generate_statistics: false
+        connection.provider_disables_autocommit: true
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
   web:
     resources:
       cache:
         cachecontrol:
           max-age: 120
           must-revalidate: true
+logging:
+  file:
+    name: tabr.log
+  charset:
+    console: UTF-8
+    file: UTF-8
+  level:
+    root: info
 
 
 
