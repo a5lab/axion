@@ -16,8 +16,7 @@
     ProxyPassReverse / balancer://a5lab_cluster
     # Align balancing with unicorn workers
     <Proxy balancer://a5lab_cluster>
-        BalancerMember http://127.0.0.1:{{ app__puma_port }} retry=10 loadfactor={{ app__puma_worker }}
-        BalancerMember http://127.0.0.1:{{ app__unicorn_port }} retry=10 loadfactor={{ app__unicorn_worker }}
+        BalancerMember http://127.0.0.1:{{ app__tomcat_port }} retry=10
     </Proxy>
 
     DocumentRoot "{{ app__current_path }}/public"
@@ -72,8 +71,7 @@
     ProxyPassReverse / balancer://a5lab_cluster
     # Align balancing with unicorn workers
     <Proxy balancer://a5lab_cluster>
-        BalancerMember http://127.0.0.1:{{ app__puma_port }} retry=10 loadfactor={{ app__puma_worker }}
-        BalancerMember http://127.0.0.1:{{ app__unicorn_port }} retry=10 loadfactor={{ app__unicorn_worker }}
+        BalancerMember http://127.0.0.1:{{ app__tomcat_port }} retry=10
     </Proxy>
 
     DocumentRoot "{{ app__current_path }}/public"
