@@ -1,7 +1,6 @@
 ---
 
-#- include: certbot.yml
-#- include: systemd.yml
-#- include: application.yml
-#- include: apache.yml
-#- include: logrotate.yml
+- include: certbot.yml
+- include: systemd.yml
+- include: application.yml
+- include: apache.yml
