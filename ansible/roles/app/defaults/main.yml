@@ -38,7 +38,7 @@ app__current_path: "{{ app__root_path }}/current"
 app__release_path: "{{ app__root_path }}/releases/{{ ansible_date_time.iso8601_basic_short }}"
 app__keep_releases: 5
 app__web_servers:
-  - tomcat
+  - tabr
 
 #
 # Service configuration
