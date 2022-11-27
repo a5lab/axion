@@ -1,6 +1,5 @@
 ---
 
-#fuck - include: certbot.yml
 - include: systemd.yml
 - include: application.yml
 - include: apache.yml
