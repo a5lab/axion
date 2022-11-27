@@ -27,8 +27,9 @@
     rsync_opts:
       - '--exclude=.*/'
       - '--exclude=/ansible'
-      - '--exclude=/log'
-      - '--exclude=/node_modules'
+      - '--exclude=/docker'
+      - '--exclude=/docs'
+      - '--exclude=/target'
 
 - name: fix owner and group in current release path
   file:
