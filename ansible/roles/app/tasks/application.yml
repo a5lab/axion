@@ -70,9 +70,9 @@
   args:
     chdir: "{{ app__root_path }}/releases"
 
-- name: start services
-  service:
-    name: '{{ item }}'
-    state: started
-  with_items: "{{ app__web_servers }}"
+# fuck - name: start services
+#  service:
+#    name: '{{ item }}'
+#    state: started
+#  with_items: "{{ app__web_servers }}"
 

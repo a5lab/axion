@@ -2,7 +2,7 @@
 
 - name: configure apache sites a5lab
   template:
-    src: "etc/httpd/conf.d/a5lab.conf.j2"
+    src: "etc/httpd/conf.d/tabr.a5lab.com.conf.j2"
     dest: "/etc/{{ app__apache_conf_map[ansible_os_family] }}/{{ app__domain }}.conf"
     owner: 'root'
     group: 'root'
@@ -29,12 +29,3 @@
     group: "{{ item.group | default('a5lab') }}"
     mode: "0644"
   with_items: "{{ app__apache_templates }}"
-
-- name: copy apache static vars
-  copy:
-    src: "files/home/a5lab/current/public/{{ item }}"
-    dest: "{{ app__current_path }}/public/{{ item }}"
-    owner: "{{ item.owner | default('a5lab') }}"
-    group: "{{ item.group | default('a5lab') }}"
-    mode: "0644"
-  with_items: "{{ app__apache_vars }}"
