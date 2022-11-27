@@ -1,0 +1,68 @@
+---
+
+- name: enable power tools channel
+  shell: "{{ item }}"
+  with_items:
+    - dnf config-manager --set-enabled powertools
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution == 'CentOS'
+    - ansible_distribution_major_version == '8'
+
+- name: install epel package
+  package:
+    name:
+      - epel-release
+  when: ansible_os_family == "RedHat"
+
+- name: install common packages
+  package:
+    name: "{{ workstation__package_map[ansible_os_family][ansible_distribution][ansible_distribution_major_version] }}"
+    state: present
+  notify:
+    - restart ntp
+    - restart ntpd
+    - restart chronyd
+    - restart yum-cron
+    - restart dnf-automatic
+    - restart unattended-upgrades
+
+# Docker doesn't allow to change hosts and hostname
+- name: update hostname
+  hostname:
+    name: "{{ hostname_short }}"
+  when:
+    - ansible_virtualization_type|d("bare metal") != "docker"
+    - ansible_virtualization_type|d("bare metal") != "containerd"
+
+- name: setup locale for redhat
+  template:
+    src: "etc/{{ item }}.j2"
+    dest: "/etc/{{ item }}"
+  with_items:
+    - environment
+    - locale.conf
+  when:
+    - ansible_os_family == 'RedHat'
+
+- name: generate locale for debian
+  command: locale-gen en_US.UTF-8
+  when:
+    - ansible_os_family == "Debian"
+
+- name: setup locale for debian
+  command: update-locale LANG=en_US.UTF-8
+  when:
+    - ansible_os_family == "Debian"
+
+- name: configure /etc/crontab
+  lineinfile:
+    dest: "/etc/crontab"
+    regexp: '{{ item }}'
+    state: absent
+  with_items:
+    - (.)*MAILTO=(.)*
+    - (.)*MAILFROM=(.)*
+  notify:
+    - restart cron
+    - restart crond

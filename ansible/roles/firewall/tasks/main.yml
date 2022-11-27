@@ -1,0 +1,13 @@
+---
+
+- name: import enable tasks
+  import_tasks: enable.yml
+  when:
+    - ansible_virtualization_type|d("bare metal") != "docker"
+    - not firewall_disable
+
+- name: import disable tasks
+  import_tasks: disable.yml
+  when:
+    - ansible_virtualization_type|d("bare metal") != "docker"
+    - firewall_disable

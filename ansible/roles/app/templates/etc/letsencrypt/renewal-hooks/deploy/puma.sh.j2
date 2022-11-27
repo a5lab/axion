@@ -1,0 +1,35 @@
+#!/bin/sh
+set -e
+
+for domain in $RENEWED_DOMAINS; do
+    case $domain in
+    {{ app__domain }})
+        # Set path for certificates
+        daemon_cert_root={{ app__shared_path }}/certs
+
+        # Make sure the certificate and private key files are
+        # never world readable, even just for an instant while
+        # we're copying them into daemon_cert_root.
+        umask 077
+
+        # Copy certificates
+        mkdir -p $daemon_cert_root
+        cp "$RENEWED_LINEAGE/privkey.pem" "$daemon_cert_root/privkey.pem"
+        cp "$RENEWED_LINEAGE/cert.pem" "$daemon_cert_root/cert.pem"
+        cp "$RENEWED_LINEAGE/chain.pem" "$daemon_cert_root/chain.pem"
+        cp "$RENEWED_LINEAGE/fullchain.pem" "$daemon_cert_root/fullchain.pem"
+
+        # Apply the proper file ownership and permissions for
+        # the daemon to read its certificate and key.
+        chown -R {{ app__user }}:{{ app__user }} $daemon_cert_root
+        chmod 400 "$daemon_cert_root/privkey.pem"
+        chmod 644 "$daemon_cert_root/cert.pem"
+        chmod 644 "$daemon_cert_root/chain.pem"
+        chmod 644 "$daemon_cert_root/fullchain.pem"
+
+        # Apply new certs to service; puma isn't secured until it is
+        # located on the same server as web server
+        # systemctl restart puma
+        ;;
+    esac
+done

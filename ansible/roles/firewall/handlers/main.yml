@@ -1,0 +1,11 @@
+---
+
+# 'service reload' was not always working, needs complete reload
+- name: firewalld complete reload
+  command: firewall-cmd --complete-reload
+
+- name: firewalld reload
+  command: firewall-cmd --reload
+
+- name: ufw enable
+  command: ufw -f enable

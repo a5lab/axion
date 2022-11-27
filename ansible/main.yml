@@ -1,0 +1,14 @@
+---
+
+- name: deploy app
+  hosts: tabr_server
+  become: yes
+  become_user: root
+  roles:
+    - role: maintenance
+    - role: sysinfo
+    - role: firewall
+    - role: workstation
+    - role: app
+    - role: maintenance
+      state: absent

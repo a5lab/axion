@@ -1,0 +1,10 @@
+---
+
+# Common configuration
+ci_environment_name: "{{ lookup('env', 'CI_ENVIRONMENT_NAME') or 'development'}}"
+
+# Apache configuration
+apache__cert_type: 'letsselfsign'
+
+# App configuration
+app__no_log: false

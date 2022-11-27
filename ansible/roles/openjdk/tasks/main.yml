@@ -1,0 +1,6 @@
+---
+
+- name: install openjdk packages
+  package:
+    name: "{{ openjdk__package_map[ansible_os_family] }}"
+    state: present

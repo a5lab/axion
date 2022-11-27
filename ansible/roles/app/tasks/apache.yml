@@ -1,0 +1,31 @@
+---
+
+- name: configure apache sites tabr
+  template:
+    src: "etc/httpd/conf.d/tabr.a5lab.com.conf.j2"
+    dest: "/etc/{{ app__apache_conf_map[ansible_os_family] }}/{{ app__domain }}.conf"
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify:
+    - reload apache
+
+- name: enable tabr website
+  shell: "{{ item }}"
+  with_items:
+    - "a2dissite 000-default.conf"
+    - "a2ensite {{ app__domain }}.conf"
+    - "apache2ctl configtest"
+  when:
+    - ansible_os_family == 'Debian'
+  notify:
+    - reload apache
+
+#- name: copy apache static templates
+#  template:
+#    src: "home/a5lab/current/public/{{ item }}.j2"
+#    dest: "{{ app__current_path }}/public/{{ item }}"
+#    owner: "{{ item.owner | default('a5lab') }}"
+#    group: "{{ item.group | default('a5lab') }}"
+#    mode: "0644"
+#  with_items: "{{ app__apache_templates }}"

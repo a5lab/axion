@@ -1,0 +1,78 @@
+---
+
+- name: stop services
+  service:
+    name: '{{ item }}'
+    state: stopped
+  with_items: "{{ app__web_servers }}"
+
+- name: create directories for application
+  file:
+    path:    "{{ item }}"
+    owner:   "{{ app__user }}"
+    group:   "{{ app__group }}"
+    state:   directory
+    mode:    "0755"
+  with_items:
+    - "{{ app__root_path }}/"
+    - "{{ app__root_path }}/releases"
+    - "{{ app__release_path }}"
+
+- name: upload the app to remote release path
+  synchronize:
+    src: '../../../../'
+    dest: "{{ app__release_path }}"
+    delete: yes
+    recursive: yes
+    rsync_opts:
+      - '--exclude=.*/'
+      - '--exclude=/ansible'
+      - '--exclude=/docker'
+      - '--exclude=/docs'
+      - '--exclude=/target'
+
+- name: fix owner and group in current release path
+  file:
+    path: "{{ app__release_path }}"
+    state: directory
+    owner:   "{{ app__user }}"
+    group:   "{{ app__group }}"
+    recurse: yes
+
+
+- name: run maven commands
+  become: yes
+  become_user: "{{ app__user }}"
+  shell: "{{ item }}"
+  environment:
+    PATH: "{{ ansible_env.PATH }}"
+  args:
+    executable: /bin/bash
+    chdir: "{{ app__release_path }}"
+  with_items:
+    - mvn clean package -Dmaven.test.skip
+
+- name: create symlink to new release
+  become: yes
+  become_user: "{{ app__user }}"
+  file:
+    src:  "{{ app__release_path }}"
+    dest: "{{ app__current_path }}"
+    state: link
+    force: yes
+
+- name: keep only few last releases
+  shell: "find ./ -maxdepth 1 |
+          grep -G .............. |
+          sort -r |
+          tail -n +{{ app__keep_releases }} |
+          xargs rm -rf"
+  args:
+    chdir: "{{ app__root_path }}/releases"
+
+- name: start services
+  service:
+    name: '{{ item }}'
+    state: started
+  with_items: "{{ app__web_servers }}"
+

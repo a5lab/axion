@@ -1,0 +1,9 @@
+{% if ansible_os_family == 'RedHat' and  ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8' %}
+LANG=C.utf8
+LC_ALL=C.utf8
+LC_CTYPE=C.utf8
+{% else %}
+LANG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+LC_CTYPE=en_US.UTF-8
+{% endif %}

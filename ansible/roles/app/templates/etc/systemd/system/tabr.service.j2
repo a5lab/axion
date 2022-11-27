@@ -1,0 +1,19 @@
+#{{ ansible_managed }}
+[Unit]
+Description=tabr
+Wants=postgresql.service
+After=network.target local-fs.target postgresql.service
+
+[Service]
+Type=simple
+User={{ app__user }}
+WorkingDirectory={{ app__current_path }}
+SyslogIdentifier=tabr
+TimeoutSec=5min
+Restart=on-failure
+RestartSec=5s
+ExecStart=java -jar {{ app__current_path }}/target/tabr-0.0.1-SNAPSHOT.jar
+ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target

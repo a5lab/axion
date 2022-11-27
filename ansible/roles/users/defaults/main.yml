@@ -1,0 +1,27 @@
+---
+
+# Enable or disable Ansible task logging. By default all task logging is
+# disabled because the variables used to define user accounts can contain
+# passwords. This variable should not be changed apart for debugging.
+users__no_log: True
+
+users__default_shell: ''
+
+# List of UNIX groups to manage on all hosts in Ansible inventory.
+users__groups: []
+
+# List of UNIX groups to manage on hosts in specific Ansible inventory group.
+users__group_groups: []
+
+# List of UNIX groups to manage on specific hosts in Ansible inventory.
+users__host_groups: []
+
+# If enabled, user groups and accounts will be considered "system" accounts by
+# default (ie. local accounts vs. LDAP accounts) and will be created with UID
+# and GID < 1000.
+users__default_system: []
+
+# List of UNIX user accounts to manage on specific dependent in Ansible inventory.
+users__dependent_accounts: []
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

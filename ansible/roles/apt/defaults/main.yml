@@ -1,0 +1,72 @@
+---
+
+# Enable or disable this role.
+apt__enabled: True
+
+#
+# APT repository keys
+# These lists define APT GPG keys to configure on hosts to enable authenticated
+# access to additional APT repositories. See :ref:`apt__ref_keys` for more
+# details.
+#
+
+# List of APT GPG keys to configure on all hosts in Ansible inventory.
+apt__keys: []
+
+# List of APT GPG keys to configure on hosts in specific Ansible inventory
+# group.
+apt__group_keys: []
+
+# List of APT GPG keys to configure on specific hosts in Ansible inventory.
+apt__host_keys: []
+
+
+#
+# APT repositories
+#
+# These lists define additional APT repositories in
+# :file:`/etc/apt/sources.list.d/` directory. See :ref:`apt__ref_repositories` for
+# more details.
+#
+
+# List of additional APT repositories for all hosts in Ansible inventory.
+apt__repositories: []
+
+# List of additional APT repositories for hosts in specific Ansible inventory
+# group.
+apt__group_repositories: []
+
+# List of additional APT repositories for specific hosts in Ansible inventory.
+apt__host_repositories: []
+
+
+#
+# Distribution and release detection
+#
+
+# The system architecture present on the host.
+apt__architecture: '{{ apt__architecture_map[ansible_architecture]
+                       | d(ansible_architecture) }}'
+
+# A YAML dictionary which defines a mapping between Ansible architectures and
+# Debian/Ubuntu ports. Only definitions that are different from the detected
+# ones are listed here, otherwise the value of ``ansible_architecture`` is
+# used.
+apt__architecture_map:
+  'x86_64': 'amd64'
+  'i386':   'i386'
+  'armv7l': 'armhf'
+
+# The OS distribution present on the host.
+apt__distribution: '{{ ansible_local.core.distribution
+                       if (ansible_local|d() and ansible_local.core|d() and
+                           ansible_local.core.distribution|d())
+                       else ansible_distribution }}'
+
+# The OS release present on the host.
+apt__distribution_release: '{{ ansible_local.core.distribution_release
+                              if (ansible_local|d() and ansible_local.core|d() and
+                                ansible_local.core.distribution_release|d())
+                            else ansible_lsb.codename
+                              if (ansible_lsb|d() and ansible_lsb.codename|d())
+                            else ansible_distribution_release }}'

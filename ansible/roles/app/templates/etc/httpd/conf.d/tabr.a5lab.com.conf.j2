@@ -1,0 +1,135 @@
+#{{ ansible_managed }}
+<VirtualHost {{ app__domain }}:80>
+    ServerAdmin "hostmaster@a5lab.com"
+    ServerName {{ app__domain }}
+    # LogLevel alert rewrite:trace3
+{% if ansible_os_family == 'RedHat' %}
+    CustomLog logs/{{ app__domain }}_access_log "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""
+    ErrorLog logs/{{ app__domain }}_error_log
+{% else %}
+    CustomLog /var/log/apache2/{{ app__domain }}_access_log "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""
+    ErrorLog /var/log/apache2/{{ app__domain }}_error_log
+{% endif %}
+
+    SSLProxyEngine on
+    ProxyPreserveHost on
+    ProxyPassReverse / balancer://a5lab_cluster
+    # Align balancing with unicorn workers
+    <Proxy balancer://a5lab_cluster>
+        BalancerMember http://127.0.0.1:{{ app__tomcat_port }} retry=10
+    </Proxy>
+
+    DocumentRoot "{{ app__current_path }}/public"
+
+    RewriteEngine On
+
+    # Rules for acme-challenge
+    RewriteCond %{REQUEST_URI} ^\/\.well-known/acme-challenge(.*)$
+    RewriteRule ^\/\.well-known\/acme-challenge(.*)$ /var/www/html/%{REQUEST_URI} [QSA,L]
+
+    # Rules for https redirection
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://{{ app__domain }}%{REQUEST_URI} [R=301]
+</VirtualHost>
+
+
+<VirtualHost {{ app__domain }}:443>
+    ServerAdmin "hostmaster@a5lab.com"
+    ServerName {{ app__domain }}
+    LimitRequestLine 2061
+    MIMEMagicFile /dev/null
+    AddType application/octet-stream .msi
+    AddOutputFilterByType DEFLATE text/html image/svg+xml
+    # LogLevel alert rewrite:trace3
+{% if ansible_os_family == 'RedHat' %}
+    CustomLog logs/{{ app__domain }}_ssl_access_log "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""
+    ErrorLog logs/{{ app__domain }}_ssl_error_log
+{% else %}
+    CustomLog /var/log/apache2/{{ app__domain }}_ssl_access_log "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""
+    ErrorLog /var/log/apache2/{{ app__domain }}_ssl_error_log
+{% endif %}
+
+    SSLEngine on
+{% if ansible_os_family == 'RedHat' %}
+    SSLCertificateFile /etc/httpd/certs/{{ app__domain }}/cert.pem
+    SSLCertificateKeyFile /etc/httpd/certs/{{ app__domain }}/privkey.pem
+    SSLCertificateChainFile /etc/httpd/certs/{{ app__domain }}/fullchain.pem
+{% else %}
+    SSLCertificateFile /etc/apache2/certs/{{ app__domain }}/cert.pem
+    SSLCertificateKeyFile /etc/apache2/certs/{{ app__domain }}/privkey.pem
+    SSLCertificateChainFile /etc/apache2/certs/{{ app__domain }}/fullchain.pem
+{% endif %}
+
+    # Custom error messages
+    ErrorDocument  404 /404.var
+    ErrorDocument  422 /422.var
+    ErrorDocument  500 /500.var
+    ErrorDocument  503 /503.var
+
+    SSLProxyEngine on
+    ProxyPreserveHost on
+    ProxyPassReverse / balancer://a5lab_cluster
+    # Align balancing with unicorn workers
+    <Proxy balancer://a5lab_cluster>
+        BalancerMember http://127.0.0.1:{{ app__tomcat_port }} retry=10
+    </Proxy>
+
+    DocumentRoot "{{ app__current_path }}/public"
+    # Content neg. support(reuireed modules: mod_alias, mod_setenvif, mod_negotiation)
+    <Directory "{{ app__current_path }}/public">
+        Options  +FollowSymLinks
+        Order allow,deny
+        Allow from all
+        AllowOverride All
+        Require all granted
+        <Files *.var>
+            SetHandler type-map
+        </Files>
+        LanguagePriority en ru
+        ForceLanguagePriority Prefer Fallback
+    </Directory>
+
+    # Set type and headers for *.css.gz file
+    <FilesMatch \.css\.gz$>
+        ForceType text/css
+        Header set Content-Encoding gzip
+        Header add Vary Accept-Encoding
+    </FilesMatch>
+
+    # Set type and headers for *.js.gz file
+    <FilesMatch \.js\.gz$>
+        ForceType application/javascript
+        Header set Content-Encoding gzip
+        Header add Vary Accept-Encoding
+    </FilesMatch>
+
+    # Cache assets for one year
+    <LocationMatch "^/(assets|ckeditor_assets|packs|system)/.*$">
+        Header unset ETag
+        FileETag None
+        # RFC says only cache for 1 year
+        ExpiresActive On
+        ExpiresDefault "access plus 1 year"
+    </LocationMatch>
+
+    RewriteEngine on
+    # Rewrite rules for server-status
+    RewriteRule ^\/server-status(.*)$ https://{{ app__domain }}%{REQUEST_URI} [QSA,L]
+
+    # Rewrite rules for setup maintenance mode
+    RewriteCond %{DOCUMENT_ROOT}/maintenance -f
+    RewriteCond %{REQUEST_URI} !(^\/maintenance\.(.*)|\.(css|jpg|png|gif))$
+    RewriteRule ^(.*)$ /maintenance.var [R=307,L]
+
+    # Rewrite rules for discard maintenance mode
+    RewriteCond %{DOCUMENT_ROOT}/maintenance !-f
+    RewriteCond %{REQUEST_URI} \/maintenance\.var
+    RewriteRule ^(.*)$ / [R=301,L]
+
+    # Rules for static content from public
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI} -f
+    RewriteRule ^(.*)$ %{REQUEST_URI} [QSA,L]
+
+    # Rules for dynamic contents
+    RewriteRule ^(.*)$ "balancer\:\/\/a5lab_cluster%{REQUEST_URI}" [P,QSA,L]
+</VirtualHost>

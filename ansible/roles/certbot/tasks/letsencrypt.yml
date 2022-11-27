@@ -1,0 +1,64 @@
+---
+
+- name: install apache packages for certbot
+  package:
+    name: "{{ certbot__apache_package_map[ansible_os_family] }}"
+    state: present
+  when:
+    - certbot__web_server == 'apache'
+
+- name: install nxinx packages for certbot
+  package:
+    name: "{{ certbot__nginx_package_map[ansible_os_family] }}"
+    state: present
+  when:
+    - certbot__web_server == 'nginx'
+
+- name: install certbot packages
+  package:
+    name: "{{ certbot__package_map[ansible_os_family][ansible_distribution][ansible_distribution_major_version] }}"
+    state: present
+
+- name: install certbot for CentOS8
+  shell: "{{ item }}"
+  with_items:
+    - wget https://dl.eff.org/certbot-auto
+    - mv certbot-auto /usr/local/bin/certbot-auto
+    - chown root /usr/local/bin/certbot-auto
+    - chmod 0755 /usr/local/bin/certbot-auto
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution == 'CentOS'
+    - ansible_distribution_major_version == '8'
+
+- name: install certbot certificates
+  shell: >
+    {{ certbot__binary_map[ansible_os_family][ansible_distribution][ansible_distribution_major_version] }} certonly
+    --webroot --webroot-path /var/www/html --agree-tos --non-interactive -m {{ certbot__hostmaster_mail }} -d {{ item }}
+  with_items:
+    - "{{ certbot__domains }}"
+  when: item != ""
+
+- name: configure cron for CentOS7
+  lineinfile:
+    path: "/etc/crontab"
+    regexp: "(.)*certbot\\srenew(.)*"
+    line: "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew"
+  notify:
+    - restart crond
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution == 'CentOS'
+    - ansible_distribution_major_version == '7'
+
+- name: configure cron for CentOS8
+  lineinfile:
+    path: "/etc/crontab"
+    regexp: "(.)*certbot-auto\\srenew(.)*"
+    line: "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && /usr/local/bin/certbot-auto renew"
+  notify:
+    - restart crond
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution == 'CentOS'
+    - ansible_distribution_major_version == '8'
