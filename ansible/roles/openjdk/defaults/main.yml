@@ -1,0 +1,9 @@
+---
+
+# Default package map
+openjdk__package_map:
+  'RedHat':
+    - java-11-openjdk
+  'Debian':
+    - openjdk-17-jdk
+

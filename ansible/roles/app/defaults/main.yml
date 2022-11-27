@@ -29,37 +29,16 @@ app__domain: "{{ inventory_hostname }}"
 app__protocol: 'https'
 
 #
-# PayPal section
-#
-app__paypal_login: '{{ lookup("env", ci_environment_name + "_paypal_login") or "paypal-facilitator_api1.a5lab.com" }}'
-app__paypal_password: '{{ lookup("env", ci_environment_name + "_paypal_password") or "1394567401" }}'
-app__paypal_signature: '{{ lookup("env", ci_environment_name + "_paypal_signature") or "A1ftxr5G36aTOMdMyIMKEbJuXSzSAwBAjtL7qu6zKk3QtyXW1W" }}'
-
-#
-# Credential section
-#
-app__credential_key: '{{ lookup("env", ci_environment_name + "_credential_key") or "6e4bed880238ba43a414f578de2535d3" }}'
-app__credential_yml: '{{ lookup("env", ci_environment_name + "_credential_yml") or "bgJCkF9dcSNU8j8DxQZ3Xk1voE2OK+AdR8l53asACQQ9R2ghzywhvzu8qEdbQ0STspQWOmIxI9x3hJx45nx4MlEbx551yEQVecr8OC+/ESHNgrHyk7iUs8jwnRMtYHypiccdZwEWNjxTXLM/haSj2VdH++QJNmmBBm1npD3b9gyxizIlXoOlJrl4tiCTdcps5UhuPRxmtvFjRNPpgOHAQHjYpg5MpEk1xAx0DofhprC7jlRlIXs/QV7/OdSHr+Z3sO++YTQAZhwlcZkHxvQxDlaWhsrtH02Ewq4egJVhJdxO4guYckX70BbKcqzcOUi26aAvegqE2KkaGw==--sZBBujoTxoPADZvv--hprUXlve80GFt4ymTSBP2w==" }}'
-
-#
 # Deploy section
 #
-app__user: "a5lab"
-app__group: "a5lab"
-app__rails_environment: "{{ lookup('env', 'app__rails_environment') or 'production'}}"
+app__user: "tabr"
+app__group: "tabr"
 app__root_path: '/home/{{ app__user }}'
-app__shared_path: "{{ app__root_path }}/shared"
 app__current_path: "{{ app__root_path }}/current"
 app__release_path: "{{ app__root_path }}/releases/{{ ansible_date_time.iso8601_basic_short }}"
 app__keep_releases: 5
-app__puma_port: 33001
-app__puma_worker: 1
-app__unicorn_port: 33002
-app__unicorn_worker: 1
 app__web_servers:
-  - puma
-  - sidekiq
-  - unicorn
+  - tomcat
 
 #
 # Service configuration
@@ -74,11 +53,3 @@ app__apache_conf_map:
 
 app__apache_templates:
   - robots.txt
-
-app__apache_vars:
-  - 404.var
-  - 414.var
-  - 422.var
-  - 500.var
-  - 503.var
-  - maintenance.var
