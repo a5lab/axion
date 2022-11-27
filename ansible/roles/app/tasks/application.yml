@@ -17,16 +17,6 @@
     - "{{ app__root_path }}/"
     - "{{ app__root_path }}/releases"
     - "{{ app__release_path }}"
-    - "{{ app__shared_path }}"
-    - "{{ app__shared_path }}/log"
-    - "{{ app__shared_path }}/tmp"
-    - "{{ app__shared_path }}/tmp/cache"
-    - "{{ app__shared_path }}/tmp/pids"
-    - "{{ app__shared_path }}/www"
-    - "{{ app__shared_path }}/www/assets"
-    - "{{ app__shared_path }}/www/ckeditor_assets"
-    - "{{ app__shared_path }}/www/packs"
-    - "{{ app__shared_path }}/www/uploads"
 
 - name: upload the app to remote release path
   synchronize:
