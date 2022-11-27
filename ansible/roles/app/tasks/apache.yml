@@ -1,6 +1,6 @@
 ---
 
-- name: configure apache sites a5lab
+- name: configure apache sites tabr
   template:
     src: "etc/httpd/conf.d/tabr.a5lab.com.conf.j2"
     dest: "/etc/{{ app__apache_conf_map[ansible_os_family] }}/{{ app__domain }}.conf"
@@ -10,7 +10,7 @@
   notify:
     - reload apache
 
-- name: enable a5lab website
+- name: enable tabr website
   shell: "{{ item }}"
   with_items:
     - "a2dissite 000-default.conf"
@@ -21,11 +21,11 @@
   notify:
     - reload apache
 
-- name: copy apache static templates
-  template:
-    src: "home/a5lab/current/public/{{ item }}.j2"
-    dest: "{{ app__current_path }}/public/{{ item }}"
-    owner: "{{ item.owner | default('a5lab') }}"
-    group: "{{ item.group | default('a5lab') }}"
-    mode: "0644"
-  with_items: "{{ app__apache_templates }}"
+#- name: copy apache static templates
+#  template:
+#    src: "home/a5lab/current/public/{{ item }}.j2"
+#    dest: "{{ app__current_path }}/public/{{ item }}"
+#    owner: "{{ item.owner | default('a5lab') }}"
+#    group: "{{ item.group | default('a5lab') }}"
+#    mode: "0644"
+#  with_items: "{{ app__apache_templates }}"
