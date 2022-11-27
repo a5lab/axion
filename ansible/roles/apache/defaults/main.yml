@@ -1,0 +1,28 @@
+---
+
+# Certs configuration
+apache__cert_type: 'letsencrypt'
+
+apache__package_map:
+  'RedHat':
+    - httpd
+    - mod_ssl
+    - httpd-tools
+  'Debian':
+    - apache2
+    - apache2-utils
+
+apache__module_map:
+  - expires
+  - headers
+  - lbmethod_byrequests
+  - mime_magic
+  - proxy
+  - proxy_balancer
+  - proxy_http
+  - rewrite
+  - ssl
+
+apache__service_map:
+  'RedHat': "httpd"
+  'Debian': "apache2"
