@@ -8,12 +8,11 @@ After=network.target local-fs.target postgresql.service
 Type=forking
 User={{ app__user }}
 WorkingDirectory={{ app__current_path }}
-Environment=CONFIG={{ app__current_path }}/config/puma.rb
 SyslogIdentifier=tabr
 TimeoutSec=5min
 Restart=on-failure
 RestartSec=5s
-ExecStart={{ app__current_path }}/bin/puma -C $CONFIG
+ExecStart=java -jar {{ app__current_path }}/target/tabr-0.0.1-SNAPSHOT.jar
 
 [Install]
 WantedBy=multi-user.target
