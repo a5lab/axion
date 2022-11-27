@@ -29,13 +29,6 @@
       - '--exclude=/ansible'
       - '--exclude=/log'
       - '--exclude=/node_modules'
-      - '--exclude=/spec'
-      - '--exclude=/tmp'
-      - '--exclude=/public/assets'
-      - '--exclude=/public/ckeditor_assets'
-      - '--exclude=/public/packs'
-      - '--exclude=/public/system'
-      - '--exclude=/public/uploads'
 
 - name: fix owner and group in current release path
   file:
@@ -45,106 +38,18 @@
     group:   "{{ app__group }}"
     recurse: yes
 
-- name: create configuration files
-  template:
-    src: "home/a5lab/current/config/{{ item }}.j2"
-    dest: "{{ app__release_path }}/config/{{ item }}"
-    owner: "{{ app__user | default('a5lab') }}"
-    group: "{{ app__user | default('a5lab') }}"
-    mode: "0644"
-  with_items:
-    - paypal.yml
-    - puma.rb
-    - schedule.yml
-    - sidekiq.yml
-    - smtp.yml
-    - unicorn.rb
-    - credentials/production.key
-    - credentials/production.yml.enc
-    - environments/production.rb
 
-- name: create database configuration files
-  template:
-    src: "home/a5lab/current/config/{{ item }}.{{ app__db_adapter }}.yml.j2"
-    dest: "{{ app__release_path }}/config/{{ item }}.yml"
-    owner: "{{ app__user | default('a5lab') }}"
-    group: "{{ app__user | default('a5lab') }}"
-    mode: "0644"
-  with_items:
-    - database
-
-- name: create shared -> release symlinks
-  file:
-    src:   "{{ app__shared_path }}/{{ item.src }}"
-    dest:  "{{ app__release_path }}/{{ item.dest }}"
-    owner: "{{ app__user }}"
-    group: "{{ app__group }}"
-    state: link
-    force: yes
-  with_items:
-    - { src: "log", dest: "log"}
-    - { src: "tmp", dest: "tmp"}
-    - { src: "www/assets", dest: "public/assets"}
-    - { src: "www/ckeditor_assets", dest: "public/ckeditor_assets"}
-    - { src: "www/packs", dest: "public/packs"}
-    - { src: "www/system", dest: "public/system"}
-
-- name: install bundler
+- name: run maven commands
   become: yes
   become_user: "{{ app__user }}"
-  shell: "gem install bundler -v 1.17.3 --user-install"
-  when:
-    - ansible_os_family == 'RedHat'
-
-- name: install bundler
-  become: yes
-  become_user: root
-  shell: "gem install bundler -v 1.17.3"
-  when:
-    - ansible_os_family == 'Debian'
-
-- name: run bundle install
-  become: yes
-  become_user: "{{ app__user }}"
-  bundler:
-    executable: "{{ app__release_path }}/bin/bundle"
-    gemfile: '{{ app__release_path }}/Gemfile'
-    gem_path: "{{ app__root_path }}/.gem"
-    deployment_mode: yes
-    state: present
-
-- name: print yarn version from app
-  become: yes
-  become_user: "{{ app__user }}"
-  shell: "yarn --version"
+  shell: "{{ item }}"
   environment:
-    PATH: "{{ app__release_path }}/bin:{{ ansible_env.PATH }}"
-    RAILS_ENV: "{{ app__rails_environment }}"
-  args:
-    executable: /bin/bash
-    chdir: "{{ app__release_path }}"
-
-- name: install yarn modules based on package.json
-  become: yes
-  become_user: "{{ app__user }}"
-  yarn:
-    path: "{{ app__release_path }}"
-
-- name: run rails commands
-  become: yes
-  become_user: "{{ app__user }}"
-  shell: "{{ app__release_path }}/bin/rails {{ item }}"
-  environment:
-    PATH: "{{ app__release_path }}/bin:{{ ansible_env.PATH }}"
-    RAILS_ENV: "{{ app__rails_environment }}"
+    PATH: "{{ ansible_env.PATH }}"
   args:
     executable: /bin/bash
     chdir: "{{ app__release_path }}"
   with_items:
-    - db:migrate
-    - db:seed
-    - assets:precompile
-    - sitemap:refresh
+    - mvn clean package -Dmaven.test.skip
 
 - name: create symlink to new release
   become: yes

@@ -1,21 +1,19 @@
 #{{ ansible_managed }}
 [Unit]
-Description=puma
+Description=tabr
 Wants=postgresql.service
 After=network.target local-fs.target postgresql.service
 
 [Service]
-Type=simple
+Type=forking
 User={{ app__user }}
 WorkingDirectory={{ app__current_path }}
-PIDFile={{ app__shared_path }}/tmp/pids/puma.pid
 Environment=CONFIG={{ app__current_path }}/config/puma.rb
-Environment=TMPDIR={{ app__shared_path }}/tmp
-SyslogIdentifier=puma
+SyslogIdentifier=tabr
 TimeoutSec=5min
 Restart=on-failure
 RestartSec=5s
-ExecStart={{ app__current_path }}/bin/puma -e {{ app__rails_environment }} -C $CONFIG
+ExecStart={{ app__current_path }}/bin/puma -C $CONFIG
 
 [Install]
 WantedBy=multi-user.target

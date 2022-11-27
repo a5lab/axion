@@ -1,0 +1,9 @@
+---
+
+# Default package map
+maven__package_map:
+  'RedHat':
+    - maven
+  'Debian':
+    - maven
+
