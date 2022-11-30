@@ -1,3 +1,9 @@
+logging:
+  charset:
+    console: UTF-8
+  level:
+    root: info
+
 server:
   servlet:
     context-path: /
@@ -89,14 +95,3 @@ spring:
         cachecontrol:
           max-age: 120
           must-revalidate: true
-logging:
-  file:
-    name: tabr.log
-  charset:
-    console: UTF-8
-    file: UTF-8
-  level:
-    root: info
-
-
-
