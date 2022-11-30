@@ -1,3 +1,9 @@
+logging:
+  charset:
+    console: UTF-8
+  level:
+    root: info
+
 server:
   servlet:
     context-path: /
