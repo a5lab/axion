@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="../properties.yml" relativeToChangelogFile="true"/>
+
+    <changeSet id="create_radar_rings_table" author="a5lab">
+        <createTable tableName="radar_rings" remarks="Holds information about radar rings">
+            <column name="name" type="${ring.name}" remarks="Radar Ring Name. Primary key">
+                <constraints primaryKey="true" primaryKeyName="pk_radar_rings_name" nullable="false"
+                             checkConstraint="upper(name)=name"/>
+            </column>
+            <column name="description" type="${text.type}" remarks="Description for radar ring">
+                <constraints nullable="false"/>
+            </column>
+            <column name="info" type="text" remarks="Holds detailed information about the radar ring"/>
+            <column name="ring_position" type="integer" remarks="Represents ring position in radar starting from zero">
+                <constraints unique="true" nullable="false" checkConstraint="ring_position>=0"
+                             uniqueConstraintName="uc_radar_rings_position"/>
+            </column>
+
+            <column name="created_by"
+                    type="${user.type}"
+                    remarks="user who created the record">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date"
+                    type="${datetime.type}"
+                    defaultValue="now()"
+                    remarks="when record was created"/>
+            <column name="last_modified_by" type="${user.type}"
+                    remarks="user who modified the record"/>
+            <column name="last_modified_date" type="${datetime.type}" remarks="when record was modified"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="load_defaults_radar_rings" author="a5lab">
+        <loadData tableName="radar_rings"
+                  separator=","
+                  file="db/changelog/data/dictionaries/fill_radar_rings.csv">
+            <column name="name" type="STRING"/>
+            <column name="description" type="STRING"/>
+            <column name="ring_position" type="STRING"/>
+            <column name="created_by" type="STRING"/>
+        </loadData>
+    </changeSet>
+
+
+</databaseChangeLog>

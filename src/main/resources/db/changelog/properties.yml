@@ -1,0 +1,118 @@
+databaseChangeLog:
+  -
+  - property:
+      name: autoIncrement
+      value: true
+      dbms: postgresql
+  - property:
+      name: autoIncrement
+      value: true
+      dbms: h2
+
+  # BigInt
+  - property:
+      name: bigint.type
+      value: bigint
+      dbms: postgresql
+  - property:
+      name: bigint.type
+      value: BIGINT
+      dbms: h2
+
+  # ring
+  - property:
+      name: ring.name
+      value: text
+      dbms: postgresql
+  - property:
+      name: ring.name
+      value: varchar(255)
+      dbms: h2
+
+
+  # sequence
+  - property:
+      name: sequence.max-size
+      value: 9223372036854775807
+
+  - property:
+      name: sequence.start-value
+      value: 10000
+
+  - property:
+      name: sequence.increment-by
+      value: 5
+
+  - property:
+      name: sequence.cache-size
+      value: 5
+
+  # dictionary
+  - property:
+      name: dictionary.code
+      value: text
+      dbms: postgresql
+  - property:
+      name: dictionary.code
+      value: varchar(255)
+      dbms: h2
+
+  # CLOB
+  - property:
+      name: clob
+      value: text
+      dbms: postgresql
+  - property:
+      name: clob
+      value: clob
+      dbms: h2
+
+  # DATETIME
+  - property:
+      name: datetime.type
+      value: timestamp with time zone
+
+  - property:
+      name: uuid.string
+      value: char(36)
+
+  #Decimal type
+  - property:
+      name: decimal.type
+      value: NUMERIC
+      dbms: postgresql
+  - property:
+      name: decimal.type
+      value: decimal(1000, 6)
+      dbms: h2
+
+  #Text type
+  - property:
+      name: text.type
+      value: text
+      dbms: postgresql
+  - property:
+      name: text.type
+      value: varchar(4000)
+      dbms: h2
+
+  # json
+  - property:
+      name: json.type
+      value: jsonb
+      dbms: postgresql
+  - property:
+      name: json.type
+      value: clob
+      dbms: h2
+
+  # user
+  - property:
+      name: user.type
+      value: text
+      dbms: postgresql
+  - property:
+      name: user.type
+      value: varchar(255)
+      dbms: h2
+
