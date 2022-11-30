@@ -8,7 +8,7 @@ Technical and business radar. Spring boot based application
 
 # Useful commands:
 * build package by command: mvn clean package -Dmaven.test.skip
-* run postsgrewql by command: docker-compose -f ./postgresql.yml up
+* run postsgresql by command: docker-compose -f ./postgresql.yml up
 * run application by command: mvn spring-boot:run
 * run application with profile by command:  mvn spring-boot:run -Pdev
 * run database migration by command: mvn liquibase:update
