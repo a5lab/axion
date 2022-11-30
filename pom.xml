@@ -116,9 +116,12 @@
     </build>
     <profiles>
         <profile>
-            <id>local</id>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <properties>
-                <spring.profiles.active>local</spring.profiles.active>
+                <spring.profiles.active>dev</spring.profiles.active>
             </properties>
             <dependencies>
                 <dependency>
@@ -130,6 +133,15 @@
                     <artifactId>h2</artifactId>
                 </dependency>
             </dependencies>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
         </profile>
     </profiles>
 
