@@ -8,3 +8,4 @@ Technical and business radar. Spring boot based application
 
 # Useful commands:
 * build package by command: mvn clean package -Dmaven.test.skip
+* run postsgrewql by command: docker-compose -f ./postgresql.yml up
