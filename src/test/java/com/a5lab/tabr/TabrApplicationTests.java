@@ -10,9 +10,6 @@ class TabrApplicationTests {
 
     @Test
     void contextLoads() {
-        int a = 1;
-        int b = 1;
-        assert (a == b);
     }
 
 }
