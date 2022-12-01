@@ -12,6 +12,7 @@ SyslogIdentifier=tabr
 TimeoutSec=5min
 Restart=on-failure
 RestartSec=5s
+SuccessExitStatus=143
 ExecStart=java -jar {{ app__current_path }}/target/tabr-0.0.1-SNAPSHOT.jar
 ExecStop=/bin/kill -15 $MAINPID
 
