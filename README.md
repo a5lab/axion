@@ -12,3 +12,5 @@ Technical and business radar. Spring boot based application
 * run application by command: mvnw spring-boot:run
 * run application with profile by command:  mvnw spring-boot:run -Pdev
 * run database migration by command: mvnw liquibase:update
+* obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
+
