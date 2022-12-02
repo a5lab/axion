@@ -17,6 +17,7 @@
         <java.version>17</java.version>
         <testcontainers.version>1.17.6</testcontainers.version>
         <liquibase.plugin.version>4.17.2</liquibase.plugin.version>
+        <checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -153,5 +154,16 @@
             </properties>
         </profile>
     </profiles>
-
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.plugin.version}</version>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
