@@ -13,9 +13,9 @@ postgresql__conf_dir_map:
       '20': "/etc/postgresql/12/main/"
       '22': "/etc/postgresql/14/main/"
 
-# Input type is [], example "host all a5lab all md5"
+# Input type is [], example "host all tabr all md5"
 postgresql__ipv4_pg_hba:
-  - "host    all             a5lab       all                     md5"
+  - "host    all             tabr       all                     md5"
 
 #
 postgresql__ipv6_pg_hba: []
@@ -32,8 +32,8 @@ postgresql__port: '5432'
 # details.
 # Input type is [], name = database, owner = username
 postgresql__dependent_databases:
-  - name: "a5lab"
-    owner: "a5lab"
+  - name: "tabr"
+    owner: "tabr"
 
 # List of PostgreSQL databases, specified as YAML dicts. See
 # :ref:`postgresql__ref_databases` for more details.
@@ -43,12 +43,12 @@ postgresql__databases: []
 # dependency variables. See :ref:`postgresql__ref_roles` for more details.
 # Input type is []
 postgresql__dependent_roles:
-  - name: "a5lab"
+  - name: "tabr"
     password: "{{ lookup('env', ci_environment_name + '_database_password') or 'secret' }}"
     role_attr_flags:
       - "NOSUPERUSER"
       - "CREATEDB"
-    db: "a5lab"
+    db: "tabr"
     priv:
       - "ALL"
 
