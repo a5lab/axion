@@ -6,6 +6,10 @@ Technical and business radar. Spring boot based application
 * install nodejs by command: nvm install --lts
 * install nvm by command: brew install asciidoctor
 
+# Installation checkstyle-ide
+* see overview https://plugins.jetbrains.com/plugin/1065-checkstyle-idea
+* see GitHub https://github.com/jshiell/checkstyle-idea/blob/main/README.md
+
 # Useful commands:
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
 * build package by command: mvnw clean package -Dmaven.test.skip

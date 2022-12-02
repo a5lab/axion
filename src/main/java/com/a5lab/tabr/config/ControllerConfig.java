@@ -10,6 +10,7 @@ public class ControllerConfig {
 
     /**
      * The public name of a hero that is common knowledge.
+     *
      * @param binder the binder
      */
     @InitBinder
