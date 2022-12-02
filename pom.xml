@@ -81,6 +81,12 @@
             <artifactId>postgresql</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>${checkstyle.plugin.version}</version>
+            <type>maven-plugin</type>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
