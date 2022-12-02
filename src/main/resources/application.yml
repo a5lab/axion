@@ -95,3 +95,31 @@ spring:
         cachecontrol:
           max-age: 120
           must-revalidate: true
+
+management:
+  server:
+    port: 8080
+  security:
+    enabled: false
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        include: "health,info,metrics"
+    web:
+      base-path: /actuator
+      exposure:
+        include: "health,info,metrics"
