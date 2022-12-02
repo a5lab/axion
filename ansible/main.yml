@@ -9,6 +9,7 @@
     - role: sysinfo
     - role: firewall
     - role: workstation
+    - role: postgresql
     - role: app
     - role: maintenance
       state: absent

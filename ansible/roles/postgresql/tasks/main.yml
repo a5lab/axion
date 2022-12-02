@@ -1,0 +1,111 @@
+---
+
+- name: install postgresql packages
+  package:
+    name: "{{ postgresql__package_map[ansible_os_family][ansible_distribution][ansible_distribution_major_version] }}"
+    state: present
+
+- name: initdb for pg
+  command: >
+    postgresql-setup initdb
+    creates={{ postgresql__conf_dir_map[ansible_os_family][ansible_distribution][ansible_distribution_major_version] }}/pg_hba.conf
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: systemctl enable postgresql
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - postgresql
+
+- name: configuration ipv4 at pg_hba.conf
+  lineinfile:
+    dest: "{{ postgresql__conf_dir_map[ansible_os_family][ansible_distribution][ansible_distribution_major_version] }}/pg_hba.conf"
+    regexp: '{{ item }}'
+    line: "{{ item }}"
+    insertafter: (.)*IPv4\slocal(.)*
+    state: present
+  with_items:
+    - '{{ postgresql__ipv4_pg_hba }}'
+  notify:
+    - restart postgresql
+
+- name: configuration ipv6 at pg_hba.conf
+  lineinfile:
+    dest: "{{ postgresql__conf_dir_map[ansible_os_family][ansible_distribution][ansible_distribution_major_version] }}/pg_hba.conf"
+    regexp: '{{ item }}'
+    line: "{{ item }}"
+    insertafter: (.)*IPv6\slocal(.)*
+    state: present
+  with_items:
+    - '{{ postgresql__ipv6_pg_hba }}'
+  notify:
+    - restart postgresql
+
+- name: configuration postgresql.conf
+  lineinfile:
+    path: "{{ postgresql__conf_dir_map[ansible_os_family][ansible_distribution][ansible_distribution_major_version] }}/postgresql.conf"
+    regexp: "{{ item.regex }}"
+    line: "{{ item.value }}"
+  with_items:
+    - "{{ postgresql__conf_options }}"
+  notify:
+    - restart postgresql
+
+- name: restart postgresql
+  meta: flush_handlers
+
+- name: create postgresql roles
+  become: yes
+  become_user: '{{ postgresql__user }}'
+  postgresql_user:
+    name: '{{ item.name | d(item.role) }}'
+    port: '{{ item.port | d(postgresql__port if postgresql__port else omit) }}'
+    password: '{{ item.password }}'
+    encrypted: '{{ item.encrypted | d(omit) }}'
+    no_password_changes: '{{ item.no_password_changes | d(omit) }}'
+    expires: '{{ item.expires | d(omit) }}'
+    role_attr_flags: '{{ (item.role_attr_flags|d() | join(",")) | d(omit) }}'
+    state: 'present'
+  with_flattened:
+    - '{{ postgresql__roles }}'
+    - '{{ postgresql__dependent_roles }}'
+  when: (((item.name|d() and item.name) or (item.role|d() and item.role)) and
+    (item.state is undefined or item.state != 'absent'))
+
+- name: create postgresql databases
+  become: yes
+  become_user: '{{ postgresql__user }}'
+  postgresql_db:
+    name: '{{ item.name | d(item.database) }}'
+    port: '{{ item.port | d(postgresql__port if postgresql__port else omit) }}'
+    owner: '{{ item.owner | d(omit) }}'
+    template: '{{ item.template | d(omit) }}'
+    encoding: '{{ item.encoding | d(omit) }}'
+    lc_collate: '{{ item.lc_collate | d(omit) }}'
+    lc_ctype: '{{ item.lc_ctype | d(omit) }}'
+    state: 'present'
+  with_flattened:
+    - '{{ postgresql__databases }}'
+    - '{{ postgresql__dependent_databases }}'
+  when: (((item.name|d() and item.name) or (item.database|d() and item.database)) and
+    (item.state is undefined or item.state != 'absent'))
+
+- name: grant database privileges to postgresql roles
+  become: yes
+  become_user: '{{ postgresql__user }}'
+  postgresql_user:
+    name: '{{ item.name | d(item.role) }}'
+    port: '{{ item.port | d(postgresql__port if postgresql__port else omit) }}'
+    db: '{{ item.db }}'
+    priv: '{{ item.priv | join("/") }}'
+    state: 'present'
+  with_flattened:
+    - '{{ postgresql__roles }}'
+    - '{{ postgresql__dependent_roles }}'
+  when: (((item.name|d() and item.name) or (item.role|d() and item.role)) and
+    (item.state is undefined or item.state != 'absent') and
+    (item.db|d() and item.db) and
+    (item.priv|d() and item.priv))

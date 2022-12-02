@@ -1,0 +1,98 @@
+---
+
+# Pg conf dir location
+postgresql__conf_dir_map:
+  'RedHat':
+    'CentOS':
+      '7': "/var/lib/pgsql/data/"
+      '8': "/var/lib/pgsql/data/"
+  'Debian':
+    'Ubuntu':
+      '16': "/etc/postgresql/10/main/"
+      '18': "/etc/postgresql/10/main/"
+      '20': "/etc/postgresql/12/main/"
+      '22': "/etc/postgresql/14/main/"
+
+# Input type is [], example "host all tabr all md5"
+postgresql__ipv4_pg_hba:
+  - "host    all             tabr       all                     md5"
+
+#
+postgresql__ipv6_pg_hba: []
+
+# Default options
+postgresql__conf_options:
+  - { regex: "(.)*listen_addresses\\s=(.)*", value: "listen_addresses = '*'		# what IP address(es) to listen on;"}
+
+# Default port number of the PostgreSQL server to use (local or remote).
+postgresql__port: '5432'
+
+# List of PostgreSQL databases, specified as a YAML dicts, defined by other
+# roles via dependency variables. See :ref:`postgresql__ref_databases` for more
+# details.
+# Input type is [], name = database, owner = username
+postgresql__dependent_databases:
+  - name: "tabr"
+    owner: "tabr"
+
+# List of PostgreSQL databases, specified as YAML dicts. See
+# :ref:`postgresql__ref_databases` for more details.
+postgresql__databases: []
+
+# List of PostgreSQL roles, specified as YAML dicts by other Ansible roles via
+# dependency variables. See :ref:`postgresql__ref_roles` for more details.
+# Input type is []
+postgresql__dependent_roles:
+  - name: "tabr"
+    password: "{{ lookup('env', ci_environment_name + '_database_password') or 'secret' }}"
+    role_attr_flags:
+      - "NOSUPERUSER"
+      - "CREATEDB"
+    db: "tabr"
+    priv:
+      - "ALL"
+
+# List of PostgresSQL roles, specified as YAML dicts. See
+# :ref:`postgresql__ref_roles` for more details.
+postgresql__roles: []
+
+# PostgreSQL user account to which Ansible will switch to perform
+# database-related operations. Should be the same on local and remote database
+# servers.
+postgresql__user: 'postgres'
+
+# Default package map
+postgresql__package_map:
+  'RedHat':
+    'CentOS':
+      '7':
+        - libselinux-python
+        - postgresql
+        - postgresql-contrib
+        - postgresql-libs
+        - postgresql-server
+        - python-psycopg2
+      '8':
+        - postgresql
+        - postgresql-contrib
+        - postgresql-server
+        - python3-psycopg2
+  'Debian':
+    'Ubuntu':
+      '16':
+        - postgresql
+        - postgresql-contrib
+        - python-psycopg2
+      '18':
+        - postgresql
+        - postgresql-contrib
+        - python-psycopg2
+        - python3-psycopg2
+      '20':
+        - postgresql
+        - postgresql-contrib
+        - python3-psycopg2
+      '22':
+        - postgresql
+        - postgresql-contrib
+        - python3-psycopg2
