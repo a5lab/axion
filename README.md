@@ -7,8 +7,11 @@ Technical and business radar. Spring boot based application
 * install nvm by command: brew install asciidoctor
 
 # Useful commands:
-* build package by command: mvnw clean package -Dmaven.test.skip
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
+* build package by command: mvnw clean package -Dmaven.test.skip
 * run application by command: mvnw spring-boot:run
 * run application with profile by command: mvnw spring-boot:run -Pdev
 * run database migration by command: mvnw liquibase:update
+* create checkstyle report by command: mvn checkstyle:checkstyle
+* create site by command: mvn site
+* create javadoc by command: mvn javadoc:javadoc
