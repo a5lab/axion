@@ -16,6 +16,7 @@ Technical and business radar. Spring boot based application
 * run application by command: mvnw spring-boot:run
 * run application with profile by command: mvnw spring-boot:run -Pdev
 * run database migration by command: mvnw liquibase:update
+* get coverage report by command: mvn jacoco:report -Pdev
 * create checkstyle report by command: mvn checkstyle:checkstyle
 * create site by command: mvn site
 * create javadoc by command: mvn javadoc:javadoc

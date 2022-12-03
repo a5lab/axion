@@ -1,6 +1,17 @@
+logging:
+  charset:
+  level:
+    root: debug
+
 spring:
   datasource:
     url: jdbc:h2:mem:tabr;MODE=PostgreSQL
   h2:
     console:
       enabled: true
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+    cache: false
+  resources:
+    static-locations: file:src/main/resources/static/
+    cache-period: 0
