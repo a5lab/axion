@@ -8,6 +8,7 @@
         <meta name="description" th:content="#{app.description}">
         <meta name="author" th:content="#{app.author}">
         <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link th:href="@{/css/app.css}" rel="stylesheet"/>
         <script th:src="@{/js/bootstrap.bundle.min.js}" defer></script>
         <script th:src="@{/js/app.js}" defer></script>
     </head>
@@ -51,5 +52,6 @@
                 <div layout:fragment="content" />
             </div>
         </main>
+        <header th:insert="~{fragments/footer.html}"> </header>
     </body>
 </html>

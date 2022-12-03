@@ -1,3 +1,9 @@
+logging:
+  charset:
+    console: UTF-8
+  level:
+    root: info
+
 server:
   servlet:
     context-path: /
@@ -27,7 +33,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/tabr
     username: tabr
-    password: tabr
+    password: secret
     hikari:
       poolName: tabr-pool
       auto-commit: false
@@ -89,14 +95,25 @@ spring:
         cachecontrol:
           max-age: 120
           must-revalidate: true
-logging:
-  file:
-    name: tabr.log
-  charset:
-    console: UTF-8
-    file: UTF-8
-  level:
-    root: info
 
-
-
+management:
+  server:
+    port: 8080
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      base-path: /actuator
+      exposure:
+        include: "health,info,metrics,prometheus"

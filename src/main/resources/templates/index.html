@@ -1,8 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/_mainlayout}">
+      layout:decorate="~{layouts/_welcome}">
 <head>
     <title th:text="#{home.index.headline}" />
+    <link th:href="@{/css/radar.css}" rel="stylesheet"/>
+    <script th:src="@{/js/d3.min.js}" defer></script>
+    <script th:src="@{/js/radar.js}" defer></script>
 </head>
 <body>
 <div layout:fragment="content">
