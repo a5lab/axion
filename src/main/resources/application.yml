@@ -33,7 +33,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/tabr
     username: tabr
-    password: tabr
+    password: secret
     hikari:
       poolName: tabr-pool
       auto-commit: false
