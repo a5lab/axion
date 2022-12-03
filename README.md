@@ -20,3 +20,5 @@ Technical and business radar. Spring boot based application
 * create checkstyle report by command: mvn checkstyle:checkstyle
 * create site by command: mvn site
 * create javadoc by command: mvn javadoc:javadoc
+* obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
+

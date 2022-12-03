@@ -21,6 +21,7 @@
         <checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
         <jxr.plugin.version>3.3.0</jxr.plugin.version>
         <javadoc.plugin.version>3.4.1</javadoc.plugin.version>
+        <micrometer.plugin.version>1.10.2</micrometer.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -57,7 +58,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -68,7 +68,15 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>${micrometer.plugin.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -178,6 +186,7 @@
                     <nohelp>true</nohelp>
                 </configuration>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -196,7 +205,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
     <profiles>
@@ -249,11 +258,13 @@
                     <configLocation>checkstyle.xml</configLocation>
                 </configuration>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>${jxr.plugin.version}</version>
             </plugin>
+            -->
         </plugins>
     </reporting>
 </project>
