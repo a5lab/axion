@@ -21,11 +21,11 @@ databaseChangeLog:
 
   # ring
   - property:
-      name: ring.name
+      name: ring.title
       value: text
       dbms: postgresql
   - property:
-      name: ring.name
+      name: ring.title
       value: varchar(255)
       dbms: h2
 

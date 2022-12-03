@@ -1,5 +1,0 @@
-name,description,ring_position,created_by
-ADOPT,Represents blips that we think you should seriously consider using,0,a5lab
-TRIAL,For blips that we think are ready for use but not as completely proven as those in the Adopt ring,1,a5lab
-ASSESS,things to look at closely but not necessarily trial yet - unless you think they would be a particularly good fit for you,2,a5lab
-HOLD,for things (that even though they are accepted in the industry) we haven't had a good experience with,3,a5lab
