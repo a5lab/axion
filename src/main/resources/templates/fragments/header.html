@@ -1,0 +1,32 @@
+<!-- Header-->
+<header class="bg-light">
+    <div class="container">
+        <nav class="navbar navbar-light navbar-expand-md">
+            <div class="container-fluid">
+                <a th:href="@{/}" class="navbar-brand">
+                    <img th:src="@{/images/logo.jpg}" th:alt="#{app.title}" width="30" height="30" class="d-inline-block align-top">
+                    <span th:text="#{app.title}" class="ps-1" />
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
+                        th:aria-label="#{navigation.toggle}" aria-controls="navbarToggle" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="navbar-item">
+                            <a th:href="@{/}" th:text="#{navigation.home}" class="nav-link" />
+                        </li>
+                        <li class="navbar-item dropdown">
+                            <a th:text="#{navigation.radar}" class="nav-link dropdown-toggle" href="#" id="navbarEntitiesLink" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false" />
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarEntitiesLink">
+                                <li><a th:href="@{/techstack}" th:text="#{navigation.radar.stack}" class="dropdown-item" /></li>
+                                <li><a th:href="@{/demo}" th:text="Demo" class="dropdown-item" /></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
