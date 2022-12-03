@@ -99,8 +99,6 @@ spring:
 management:
   server:
     port: 8080
-  security:
-    enabled: false
   endpoint:
     health:
       enabled: true
@@ -110,16 +108,12 @@ management:
       enabled: true
     prometheus:
       enabled: true
-  metrics:
-    export:
-      prometheus:
-        enabled: true
   endpoints:
     enabled-by-default: false
     jmx:
       exposure:
-        include: "health,info,metrics"
+        exclude: "*"
     web:
       base-path: /actuator
       exposure:
-        include: "health,info,metrics"
+        include: "health,info,metrics,prometheus"
