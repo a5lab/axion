@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-        <head th:insert="~{fragments/meta_info.html}"> </head>
-    </head>
+    <head th:insert="~{fragments/head.html}"> </head>
     <body>
         <header th:insert="~{fragments/header.html}"> </header>
         <main class="my-5">
             <div class="container">
-                <p th:if="${MSG_SUCCESS}" th:text="${MSG_SUCCESS}" class="alert alert-success mb-4" role="alert" />
-                <p th:if="${MSG_INFO}" th:text="${MSG_INFO}" class="alert alert-info mb-4" role="alert" />
-                <p th:if="${MSG_ERROR}" th:text="${MSG_ERROR}" class="alert alert-danger mb-4" role="alert" />
+                <div layout:fragment="system_flash" />
                 <div layout:fragment="content" />
             </div>
         </main>
