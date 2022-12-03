@@ -18,6 +18,9 @@
         <testcontainers.version>1.17.6</testcontainers.version>
         <liquibase.plugin.version>4.17.2</liquibase.plugin.version>
         <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
+        <checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
+        <jxr.plugin.version>3.3.0</jxr.plugin.version>
+        <javadoc.plugin.version>3.4.1</javadoc.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -166,6 +169,34 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.plugin.version}</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <configLocation>checkstyle.xml</configLocation>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <profiles>
@@ -198,5 +229,31 @@
             </properties>
         </profile>
     </profiles>
-
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.plugin.version}</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                    <stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.plugin.version}</version>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>${jxr.plugin.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
