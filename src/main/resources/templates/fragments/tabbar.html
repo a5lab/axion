@@ -1,16 +1,10 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <div th:switch="${servletPath.startWith('/dashbaord')}">
-            <a th:if="${true}" class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
-            <a th:if="${false}" class="nav-link" href="/dashboard">Dashboard</a>
-            <a th:case="*">Should never happen, but who knows...</a>
-        </div>
+        <a th:if="${#strings.startsWith(servletPath,'/dashboard')}" class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+        <a th:unless="${#strings.startsWith(servletPath,'/dashboard')}" class="nav-link" href="/dashboard">Dashboard</a>
     </li>
     <li class="nav-item">
-        <a th:if="@{__${#httpServletRequest.requestURI.startWith('/dashbaord')}}" class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
-        <a th:unless="@{__${#httpServletRequest.requestURI.startWith('/dashbaord')}}" class="nav-link" ahref="/dashboard">Dashboard</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/settings/tenants">Settings</a>
+        <a th:if="${#strings.startsWith(servletPath,'/settings')}" class="nav-link active" aria-current="page" href="/settings/tenants">Settings</a>
+        <a th:unless="${#strings.startsWith(servletPath,'/settings')}" class="nav-link" href="/settings/tenants">Settings</a>
     </li>
 </ul>
