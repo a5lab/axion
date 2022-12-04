@@ -3,7 +3,6 @@ package com.a5lab.tabr.utils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
-import lombok.SneakyThrows;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -34,8 +33,8 @@ public class WebUtils {
             localeResolver.resolveLocale(getRequest()));
     }
 
-    @SneakyThrows
-    public static boolean isRequiredField(final Object dto, final String fieldName) {
+    public static boolean isRequiredField(final Object dto, final String fieldName)
+        throws NoSuchFieldException {
         return dto.getClass().getDeclaredField(fieldName).getAnnotation(NotNull.class) != null;
     }
 

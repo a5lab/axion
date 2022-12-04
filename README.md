@@ -22,4 +22,9 @@ Technical and business radar. Spring boot based application
 * create javadoc by command: mvn javadoc:javadoc
 * create cross reference source by command: mvn jxr:jxr
 * create site by command: mvn site
+* obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
+* run spotbugs GUI command: mvn spotbugs:gui
+* run sonarqube analysis command: mvn sonar:sonar (pre-condition: sonar is running locally using docker-compose
+  sonar.yml file)
+
 
