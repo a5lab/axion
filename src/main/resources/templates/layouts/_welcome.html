@@ -4,9 +4,10 @@
     <body>
         <navbar th:insert="~{fragments/navbar.html}"> </navbar>
         <header th:insert="~{fragments/header.html}"> </header>
+        <div th:insert="~{fragments/system_flash.html}"> </div>
+        <div th:insert="~{fragments/list_menu.html}"> </div>
         <main class="my-5">
             <div class="container">
-                <div layout:fragment="system_flash" />
                 <div layout:fragment="content" />
             </div>
         </main>
