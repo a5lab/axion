@@ -4,10 +4,10 @@
     <body>
         <navbar th:insert="~{fragments/navbar.html}"> </navbar>
         <header th:insert="~{fragments/header.html}"> </header>
-        <div th:insert="~{fragments/system_flash.html}"> </div>
+        <div th:replace="~{fragments/system_flash.html}"> </div>
         <div class="container-fluid">
             <div class="row flex-nowrap">
-                <div th:insert="~{fragments/sidebar.html}"> </div>
+                <div th:replace="~{fragments/sidebar.html}"> </div>
                 <div class="col py-3">
                     <div layout:fragment="content" />
                 </div>
