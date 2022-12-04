@@ -2,14 +2,12 @@ package com.a5lab.tabr.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
-import lombok.SneakyThrows;
+import java.util.Objects;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.LocaleResolver;
-
-import java.util.Objects;
 
 @Component
 public class WebUtils {
@@ -26,15 +24,17 @@ public class WebUtils {
     }
 
     public static HttpServletRequest getRequest() {
-        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        return ((ServletRequestAttributes) Objects.requireNonNull(
+            RequestContextHolder.getRequestAttributes())).getRequest();
     }
 
     public static String getMessage(final String code, final Object... args) {
-        return messageSource.getMessage(code, args, code, localeResolver.resolveLocale(getRequest()));
+        return messageSource.getMessage(code, args, code,
+            localeResolver.resolveLocale(getRequest()));
     }
 
-    @SneakyThrows
-    public static boolean isRequiredField(final Object dto, final String fieldName) {
+    public static boolean isRequiredField(final Object dto, final String fieldName)
+        throws NoSuchFieldException {
         return dto.getClass().getDeclaredField(fieldName).getAnnotation(NotNull.class) != null;
     }
 
