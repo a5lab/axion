@@ -19,7 +19,7 @@ public class DemoController {
 
     var acceptValue = request.getHeader(HttpHeaders.ACCEPT);
     if (acceptValue != null && acceptValue.toLowerCase().contains("text/html")) {
-      modelAndView.setViewName("demo/demo");
+      modelAndView.setViewName("demo");
     } else {
       var view = new MappingJackson2JsonView();
       view.setExtractValueFromSingleKeyModel(true);
