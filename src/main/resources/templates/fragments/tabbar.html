@@ -1,9 +1,14 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/demo1">Dashboard</a>
+        <a th:if="@{__${#httpServletRequest.requestURI.startWith('/dashbaord')}}" class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+        <a th:unless="@{__${#httpServletRequest.requestURI.startWith('/dashbaord')}}" class="nav-link" ahref="/dashboard">Dashboard</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/demo2">Settings</a>
+        <a th:if="@{__${#httpServletRequest.requestURI.startWith('/tenant')}}" class="nav-link active" aria-current="page" href="/tenant">Settings</a>
+        <a th:unless="@{__${#httpServletRequest.requestURI.startWith('/tenant')}}" class="nav-link" ahref="/tenant">Settings</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/tenant">Settings</a>
     </li>
     <li class="nav-item">
         <a class="nav-link disabled">Disabled</a>
