@@ -8,9 +8,9 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 class TabrApplicationTests {
 
-    @Test
-    void contextLoads() {
+  @Test
+  void contextLoads() {
 
-    }
+  }
 
 }
