@@ -8,9 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Controller
-public class Demo1Controller {
+public class DashboardController {
 
-  @GetMapping("/demo1")
+  @GetMapping("/dashboard")
   public ModelAndView demo(HttpServletRequest request) {
     Person artem = new Person("Artem", 20);
 
@@ -19,7 +19,7 @@ public class Demo1Controller {
 
     var acceptValue = request.getHeader(HttpHeaders.ACCEPT);
     if (acceptValue != null && acceptValue.toLowerCase().contains("text/html")) {
-      modelAndView.setViewName("demo1");
+      modelAndView.setViewName("dashboard");
     } else {
       var view = new MappingJackson2JsonView();
       view.setExtractValueFromSingleKeyModel(true);
