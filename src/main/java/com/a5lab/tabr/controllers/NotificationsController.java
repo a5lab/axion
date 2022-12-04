@@ -8,19 +8,18 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Controller
-public class DashboardController {
+public class NotificationsController {
 
-  @GetMapping("/dashboard")
-  public ModelAndView demo(HttpServletRequest request) {
+  @GetMapping("/account/notifications")
+  public ModelAndView index(HttpServletRequest request) {
     Person artem = new Person("Artem", 20);
 
     ModelAndView modelAndView = new ModelAndView();
-    modelAndView.addObject("servletPath", request.getServletPath());
     modelAndView.addObject("person", artem);
 
     var acceptValue = request.getHeader(HttpHeaders.ACCEPT);
     if (acceptValue != null && acceptValue.toLowerCase().contains("text/html")) {
-      modelAndView.setViewName("dashboard");
+      modelAndView.setViewName("account/notifications");
     } else {
       var view = new MappingJackson2JsonView();
       view.setExtractValueFromSingleKeyModel(true);

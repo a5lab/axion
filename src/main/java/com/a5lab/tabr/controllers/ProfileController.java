@@ -10,8 +10,8 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @Controller
 public class ProfileController {
 
-  @GetMapping("/profile")
-  public ModelAndView demo(HttpServletRequest request) {
+  @GetMapping("/account/profile")
+  public ModelAndView index(HttpServletRequest request) {
     Person artem = new Person("Artem", 20);
 
     ModelAndView modelAndView = new ModelAndView();
@@ -19,7 +19,7 @@ public class ProfileController {
 
     var acceptValue = request.getHeader(HttpHeaders.ACCEPT);
     if (acceptValue != null && acceptValue.toLowerCase().contains("text/html")) {
-      modelAndView.setViewName("profile");
+      modelAndView.setViewName("account/profile");
     } else {
       var view = new MappingJackson2JsonView();
       view.setExtractValueFromSingleKeyModel(true);

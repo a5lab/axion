@@ -1,16 +1,18 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
+        <div th:switch="@{__${#httpServletRequest.requestURI.startWith('/dashbaord')}}">
+            <a th:if="${true}" class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+            <a th:if="${false}" class="nav-link" href="/dashboard">Dashboard</a>
+            <a th:case="*">Should never happen, but who knows...</a>
+        </div>
+    </li>
+    <li class="nav-item">
         <a th:if="@{__${#httpServletRequest.requestURI.startWith('/dashbaord')}}" class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
         <a th:unless="@{__${#httpServletRequest.requestURI.startWith('/dashbaord')}}" class="nav-link" ahref="/dashboard">Dashboard</a>
     </li>
     <li class="nav-item">
-        <a th:if="@{__${#httpServletRequest.requestURI.startWith('/tenant')}}" class="nav-link active" aria-current="page" href="/tenant">Settings</a>
-        <a th:unless="@{__${#httpServletRequest.requestURI.startWith('/tenant')}}" class="nav-link" ahref="/tenant">Settings</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/tenant">Settings</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled">Disabled</a>
+        <a class="nav-link" href="/settings/tenants">Settings</a>
     </li>
 </ul>
+
+<span th:text="${#request}" />
