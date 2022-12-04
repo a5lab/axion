@@ -274,6 +274,7 @@
             </activation>
             <properties>
                 <spring.profiles.active>dev</spring.profiles.active>
+                <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
             </properties>
             <dependencies>
                 <dependency>
