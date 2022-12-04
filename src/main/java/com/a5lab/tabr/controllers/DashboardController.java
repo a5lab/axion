@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 public class DashboardController {
 
   @GetMapping("/dashboard")
-  public ModelAndView demo(HttpServletRequest request) {
+  public ModelAndView index(HttpServletRequest request) {
     Person artem = new Person("Artem", 20);
 
     ModelAndView modelAndView = new ModelAndView();
