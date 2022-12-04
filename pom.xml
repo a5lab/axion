@@ -16,7 +16,6 @@
     <properties>
         <java.version>17</java.version>
         <testcontainers.version>1.17.6</testcontainers.version>
-        <liquibase.plugin.version>4.17.2</liquibase.plugin.version>
         <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
         <checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
         <jxr.plugin.version>3.3.0</jxr.plugin.version>
@@ -27,8 +26,6 @@
         <findsecbug.plugin.version>1.12.0</findsecbug.plugin.version>
         <sonar.plugin.version>3.9.1.2184</sonar.plugin.version>
         <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
-        <error-prone.version>2.16</error-prone.version>
-        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -132,14 +129,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>${liquibase.plugin.version}</version>
-                <configuration>
-                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
@@ -222,7 +211,6 @@
                     <failOnViolation>true</failOnViolation>
                     <!-- printFailingErrors is pretty useful -->
                     <printFailingErrors>true</printFailingErrors>
-                    <linkXRef>false</linkXRef>
                     <targetJdk>${java.version}</targetJdk>
                 </configuration>
                 <executions>
@@ -266,28 +254,6 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>${sonar.plugin.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
-                <configuration>
-                    <release>${java.version}</release>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerArgs>
-                        <arg>-XDcompilePolicy=simple</arg>
-                        <arg>-Xplugin:ErrorProne</arg>
-                    </compilerArgs>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>com.google.errorprone</groupId>
-                            <artifactId>error_prone_core</artifactId>
-                            <version>${error-prone.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -362,18 +328,14 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>${pmd.plugin.version}</version>
-            </plugin>
-
-            <!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>${jxr.plugin.version}</version>
             </plugin>
-            -->
-
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${pmd.plugin.version}</version>
+            </plugin>
         </plugins>
     </reporting>
 </project>
