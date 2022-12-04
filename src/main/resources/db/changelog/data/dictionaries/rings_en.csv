@@ -1,0 +1,5 @@
+title|description|priority|created_by|last_modified_by
+ADOPT|Represents blips that we think you should seriously consider using|0|tabr|tabr
+TRIAL|For blips that we think are ready for use but not as completely proven as those in the Adopt ring|1|tabr|tabr
+ASSESS|Things to look at closely but not necessarily trial yet - unless you think they would be a particularly good fit for you|2|tabr|tabr
+HOLD|For things (that even though they are accepted in the industry) we haven't had a good experience with|3|tabr|tabr

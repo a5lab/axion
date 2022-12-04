@@ -12,14 +12,16 @@ Technical and business radar. Spring boot based application
 
 # Useful commands:
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
+* obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
 * build package by command: mvnw clean package -Dmaven.test.skip
 * run application by command: mvnw spring-boot:run
 * run application with profile by command: mvnw spring-boot:run -Pdev
 * run database migration by command: mvnw liquibase:update
-* get coverage report by command: mvn jacoco:report -Pdev
 * create checkstyle report by command: mvn checkstyle:checkstyle
-* create site by command: mvn site
+* get coverage report by command: mvn jacoco:report -Pdev
 * create javadoc by command: mvn javadoc:javadoc
+* create cross reference source by command: mvn jxr:jxr
+* create site by command: mvn site
 * obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
 * run spotbugs GUI command: mvn spotbugs:gui
 * run sonarqube analysis command: mvn sonar:sonar (pre-condition: sonar is running locally using docker-compose

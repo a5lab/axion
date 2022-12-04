@@ -7,9 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-    @GetMapping( {"/", "index.html"})
-    public ModelAndView main() {
-        return new ModelAndView("index.html");
-    }
+  @GetMapping({"/", "index.html"})
+  public ModelAndView main() {
+    return new ModelAndView("index.html");
+  }
 
 }

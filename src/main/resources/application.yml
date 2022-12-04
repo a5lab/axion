@@ -53,6 +53,8 @@ spring:
     default-timeout: 30s
   liquibase:
     change-log: db/changelog/changelog-master.xml
+    label-filter: locale_en
+    contexts: data
   thymeleaf:
     cache: true
   data:
@@ -88,7 +90,7 @@ spring:
           use_second_level_cache: false
           use_query_cache: false
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
   web:
     resources:
       cache:
