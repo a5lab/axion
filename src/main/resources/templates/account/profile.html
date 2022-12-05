@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/_account}">
-<head>
-    <title th:text="#{home.index.headline}" />
-</head>
-<body>
+<html layout:decorate="~{layouts/_account}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{home.index.headline}"/>
+  </head>
+  <body>
     <div layout:fragment="content">
-        <h1>Profile</h1>
+      <h1>Profile</h1>
     </div>
-</body>
+  </body>
 </html>
