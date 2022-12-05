@@ -1,0 +1,6 @@
+<th:block th:if="${#strings.startsWith(servletPath,'/account')}">
+  <div th:replace="~{fragments/account_sidebar.html}"> </div>
+</th:block>
+<th:block th:if="${#strings.startsWith(servletPath,'/settings')}">
+  <div th:replace="~{fragments/settings_sidebar.html}"> </div>
+</th:block>

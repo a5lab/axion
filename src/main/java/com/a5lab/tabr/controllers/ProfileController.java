@@ -15,6 +15,7 @@ public class ProfileController {
     Person artem = new Person("Artem", 20);
 
     ModelAndView modelAndView = new ModelAndView();
+    modelAndView.addObject("servletPath", request.getServletPath());
     modelAndView.addObject("person", artem);
 
     var acceptValue = request.getHeader(HttpHeaders.ACCEPT);
