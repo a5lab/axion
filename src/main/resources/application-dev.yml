@@ -4,6 +4,11 @@ logging:
     root: debug
 
 spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
   datasource:
     url: jdbc:h2:mem:tabr;MODE=PostgreSQL
   h2:
