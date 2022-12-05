@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head th:insert="~{fragments/head.html}"> </head>
+    <body>
+        <navbar th:insert="~{fragments/navbar.html}"> </navbar>
+        <header th:insert="~{fragments/header.html}"> </header>
+        <div th:replace="~{fragments/tabbar.html}"> </div>
+        <div th:replace="~{fragments/system_flash.html}"> </div>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div th:replace="~{fragments/sidebar.html}"> </div>
+                <div class="col py-3">
+                    <div layout:fragment="content" />
+                </div>
+            </div>
+        </div>
+        <footer th:insert="~{fragments/footer.html}"> </footer>
+    </body>
+</html>
