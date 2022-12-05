@@ -1,6 +1,6 @@
 package com.a5lab.tabr.domain.rings;
 
-import com.a5lab.tabr.domain.common.AbstractAuditable;
+import com.a5lab.tabr.domain.AbstractAuditable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
