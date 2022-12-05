@@ -1,10 +1,14 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a th:if="${#strings.startsWith(servletPath,'/dashboard')}" class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
-        <a th:unless="${#strings.startsWith(servletPath,'/dashboard')}" class="nav-link" href="/dashboard">Dashboard</a>
+        <a th:if="${#strings.startsWith(servletPath,'/dashboard')}" class="nav-link active" a
+           ria-current="page" href="/dashboard">Dashboard</a>
+        <a th:unless="${#strings.startsWith(servletPath,'/dashboard')}" class="nav-link"
+           href="/dashboard">Dashboard</a>
     </li>
     <li class="nav-item">
-        <a th:if="${#strings.startsWith(servletPath,'/settings')}" class="nav-link active" aria-current="page" href="/settings/tenants">Settings</a>
-        <a th:unless="${#strings.startsWith(servletPath,'/settings')}" class="nav-link" href="/settings/tenants">Settings</a>
+        <a th:if="${#strings.startsWith(servletPath,'/settings')}" class="nav-link active"
+           aria-current="page" href="/settings/tenants">Settings</a>
+        <a th:unless="${#strings.startsWith(servletPath,'/settings')}" class="nav-link"
+           href="/settings/tenants">Settings</a>
     </li>
 </ul>
