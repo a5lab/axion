@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html layout:decorate="~{layouts/_error}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="base :: welcome_head(~{::title})">
+  <head th:replace="base :: main_head(~{::title})">
     <title th:text="#{home.index.error} + ', ' + ${status} + ' - ' + ${error}"/>
   </head>
   <body>
