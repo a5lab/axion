@@ -1,5 +1,12 @@
-<head>
-  <div th:replace="~{fragments/meta_info.html}"></div>
+<head th:fragment="welcome_head(title)">
+  <title th:replace="${title}">N/A</title>
+
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta name="description" th:content="#{app.description}">
+  <meta name="author" th:content="#{app.author}">
+
   <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
   <link rel="stylesheet" th:href="@{/css/app.css}"/>
   <script defer th:src="@{/js/bootstrap.bundle.min.js}"></script>
