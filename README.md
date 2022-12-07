@@ -39,4 +39,14 @@ Technical and business radar. Spring boot based application
 * run sonarqube analysis command: mvn sonar:sonar (pre-condition: sonar is running locally using docker-compose
   sonar.yml file)
 
+# Working with embedded H2 DB(In-Memory)
+
+* run application by command: "mvn spring-boot:run -Pdev".
+  Now you can access H2 Console http://localhost:8080/h2-console
+  Enter values
+  JDBC URL "jdbc:h2:mem:tabr"
+  User Name "dev"
+  Password "secret"
+
+
 
