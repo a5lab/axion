@@ -40,7 +40,6 @@ Technical and business radar. Spring boot based application
   sonar.yml file)
 
 # Working with embedded H2 DB(In-Memory)
-
 * run application by command: "mvn spring-boot:run -Pdev".
   Now you can access H2 Console http://localhost:8080/h2-console
   Enter values
