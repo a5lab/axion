@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html layout:decorate="~{layouts/_home}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="base :: home_head(~{::title})">
+  <head th:replace="home_head :: home_head(~{::title})">
     <title th:text="#{index.title}"/>
   </head>
   <body>
