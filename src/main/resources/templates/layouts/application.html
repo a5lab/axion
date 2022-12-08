@@ -2,18 +2,9 @@
 <html th:fragment="home (title, metas, links, scripts, content)" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title th:replace="${title}">Layout title</title>
-
-    <meta charset="utf-8"/>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+    <th:block th:insert="~{fragments/meta_information.html}" />
     <th:block th:replace="${metas}" />
-
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/app.css}"/>
     <th:block th:replace="${links}" />
-
-    <script defer th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script defer th:src="@{/js/app.js}"></script>
     <th:block th:replace="${scripts}" />
   </head>
   <body>
