@@ -52,7 +52,7 @@ spring:
     rollback-on-commit-failure: true
     default-timeout: 30s
   liquibase:
-    change-log: database/changelog/changelog-master.xml
+    change-log: database/changelog-master.xml
     label-filter: locale_en
     contexts: data
   thymeleaf:
