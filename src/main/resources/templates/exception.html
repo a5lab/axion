@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html th:replace="~{layouts/error :: home(~{::title}, ~{::meta}, ~{:: #content})}"
+<html th:replace="~{layouts/exception :: exception(~{::title}, ~{::meta}, ~{:: #content})}"
       xmlns:th="http://www.thymeleaf.org">
   <head>
     <title th:text="#{home.index.error} + ', ' + ${status} + ' - ' + ${error}"/>

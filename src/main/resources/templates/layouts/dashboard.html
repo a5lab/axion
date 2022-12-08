@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:fragment="application (title, metas, content)" xmlns:th="http://www.thymeleaf.org">
+<html th:fragment="dashboard (title, metas, content)" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title th:replace="${title}">Layout title</title>
     <th:block th:insert="~{fragments/meta_information.html}" />
@@ -12,9 +12,10 @@
     <div th:replace="~{fragments/system_flash.html}"></div>
     <div class="container-fluid">
       <div class="row flex-nowrap">
-        <div th:replace="~{fragments/settings_sidebar.html}"></div>
         <div class="col py-3">
           <div th:replace="${content}">
+            <h1>Layout content</h1>
+          </div>
         </div>
       </div>
     </div>
