@@ -6,23 +6,16 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_rings_table" author="tabr">
-        <createTable tableName="rings" remarks="Holds information about rings">
-            <column name="id" type="integer" remarks="Ring ID. Primary key" autoIncrement="true"
+    <changeSet id="create_segments_table" author="tabr">
+        <createTable tableName="segments" remarks="Holds information about segments">
+            <column name="id" type="integer" remarks="Segment ID. Primary key" autoIncrement="true"
                     generationType="ALWAYS">
-                <constraints primaryKey="true" nullable="false" primaryKeyName="pk_rings_id"/>
+                <constraints primaryKey="true" primaryKeyName="pk_segments_id" nullable="false"/>
             </column>
-            <column name="title" type="${ring.title}" remarks="Ring Title. Unique">
-                <constraints unique="true" uniqueConstraintName="uc_rings_title" nullable="false"/>
+            <column name="title" type="${text.type}" remarks="Segment title">
+                <constraints unique="true" uniqueConstraintName="uc_segments_title" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for ring">
-                <constraints nullable="false"/>
-            </column>
-            <column name="info" type="${text.type}" remarks="Holds detailed information about the ring"/>
-            <column name="priority" type="integer"
-                    remarks="Represents ring priority in radar starting from lower to higher value">
-                <constraints nullable="false"/>
-            </column>
+            <column name="description" type="${text.type}" remarks="Description for Segment"/>
             <column name="is_active" type="boolean" remarks="Whenever the row is active" defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
@@ -42,25 +35,21 @@
         </createTable>
         <!-- current Liquibase ignores checkConstraint attribute -->
         <sql>
-            ALTER TABLE rings
-                ADD CONSTRAINT ck_rings_title_upper CHECK (upper(title) = title)
-        </sql>
-        <sql>
-            ALTER TABLE rings
-                ADD CONSTRAINT ck_rings_title_trim CHECK (trim(title) = title)
+            ALTER TABLE segments
+                ADD CONSTRAINT ck_segments_title_trim CHECK (trim(title) = title)
         </sql>
     </changeSet>
 
-    <changeSet id="load_default_rings" author="tabr" context="data" labels="locale_en">
-        <loadData tableName="rings"
+    <changeSet id="load_default_segments" author="tabr" context="data" labels="locale_en">
+        <loadData tableName="segments"
                   separator="|"
-                  file="db/changelog/data/dictionaries/rings_en.csv">
+                  file="database/changelog/data/dictionaries/segments_en.csv">
             <column name="title" type="STRING"/>
             <column name="description" type="STRING"/>
-            <column name="priority" type="INTEGER"/>
             <column name="created_by" type="STRING"/>
             <column name="last_modified_by" type="STRING"/>
         </loadData>
     </changeSet>
+
 
 </databaseChangeLog>
