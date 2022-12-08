@@ -3,6 +3,7 @@ logging:
     console: UTF-8
   level:
     root: info
+  config: "src/main/resources/configs/logback-spring.xml"
 
 server:
   servlet:
