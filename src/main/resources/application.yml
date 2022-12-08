@@ -48,6 +48,8 @@ spring:
       isolate-internal-queries: false
       allow-pool-suspension: false
       login-timeout: 10000
+  messages:
+    basename: locales.messages
   transaction:
     rollback-on-commit-failure: true
     default-timeout: 30s
