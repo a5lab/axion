@@ -1,6 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
-    <head th:insert="~{fragments/main_head.html}"></head>
+<html th:fragment="home (title, metas, content)" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:replace="${title}">Layout title</title>
+
+        <meta charset="utf-8"/>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+        <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+        <th:block th:replace="${metas}" />
+
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" th:href="@{/css/app.css}"/>
+
+        <script defer th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <script defer th:src="@{/js/app.js}"></script>
+    </head>
     <body>
         <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
         <header th:insert="~{fragments/main_header.html}"></header>
@@ -8,7 +21,9 @@
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 <div class="col py-3">
-                    <div layout:fragment="content"/>
+                    <div th:replace="${content}">
+                        <h1>Layout content</h1>
+                    </div>
                 </div>
             </div>
         </div>
