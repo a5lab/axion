@@ -1,16 +1,28 @@
 # Repo tabr
+
 Technical and business radar. Spring boot based application
 
 # Installation antora
+
 * install nvm by command: brew install nvm and make post configuration
 * install nodejs by command: nvm install --lts
 * install nvm by command: brew install asciidoctor
 
-# Installation checkstyle-ide
+# Idea configuration
+
+## Java checkstyle
+
 * see overview https://plugins.jetbrains.com/plugin/1065-checkstyle-idea
 * see GitHub https://github.com/jshiell/checkstyle-idea/blob/main/README.md
+* import google_checkstyle.xml into idea java import schema at java code style
+
+## HTML checkstyle
+
+* setup ident 2 at html code style
+* remove all items from "do not indent child of" field
 
 # Useful commands:
+
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
 * obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
 * build package by command: mvnw clean package -Dmaven.test.skip
