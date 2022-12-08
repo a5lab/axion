@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
-<html layout:decorate="~{layouts/_application2l}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html th:replace="~{layouts/application2l :: application(~{::title}, ~{::meta}, ~{:: #content})}"
       xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title th:text="#{home.index.headline}"/>
+        <title>Dashboard title</title>
+        <meta name="description" content="Page description"/>
+        <meta name="keywords" content="HTML, CSS, JavaScript">
     </head>
     <body>
-        <div layout:fragment="content">
+        <div id="content">
             <h1>Tenants</h1>
         </div>
     </body>
