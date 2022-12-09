@@ -3,7 +3,7 @@ spring:
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
     url: jdbc:tc:postgresql:14.6:///tabr?TC_DAEMON=true&TC_TMPFS=/testtmpfs:rw
   liquibase:
-    change-log: db/changelog/changelog-master.xml
+    change-log: database/changelog-master.xml
     label-filter: test
     contexts: test
   jpa:

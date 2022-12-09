@@ -1,7 +1,7 @@
 logging:
   charset:
   level:
-    root: debug
+    root: info
 
 spring:
   devtools:
