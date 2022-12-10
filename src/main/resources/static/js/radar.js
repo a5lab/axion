@@ -21,6 +21,15 @@
 // THE SOFTWARE.
 
 
+// jQuery
+// $(document).ready( function () {
+//   alert('Hello from jQuery on load');
+// });
+
+document.addEventListener('DOMContentLoaded', () => {
+  alert('Hello from load function');
+});
+
 function radar_visualization(config) {
 
   // custom random number generator, to make random sequence reproducible
@@ -373,13 +382,13 @@ function radar_visualization(config) {
   function highlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
     // arufanov legendItem.setAttribute("filter", "url(#solid)");
-    legendItem.setAttribute("fill", "white");
+    // legendItem.setAttribute("fill", "white");
   }
 
   function unhighlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
     // arufanov legendItem.removeAttribute("filter");
-    legendItem.removeAttribute("fill");
+    // legendItem.removeAttribute("fill");
   }
 
   // draw blips on radar
