@@ -10,7 +10,7 @@ spring:
       enabled: true
   datasource:
     url: jdbc:h2:mem:tabr;MODE=PostgreSQL
-    username: dev
+    username: tabr
     password: secret
   h2:
     console:
