@@ -10,6 +10,8 @@
   </head>
   <body>
     <div id="content">
+      <h1 th:text="${radar.title}"></h1>
+      <p th:text="${radar.description}"></p>
       <svg id="radar"></svg>
       <script>
           radar_visualization({
