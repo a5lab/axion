@@ -43,6 +43,7 @@ Technical and business radar. Spring boot based application
 * minify css by command: uglifycss application.css --output application.min.css 
 
 # Inspired by 
+
 * https://github.com/thoughtworks/build-your-own-radar
 * https://github.com/zalando/tech-radar
 
