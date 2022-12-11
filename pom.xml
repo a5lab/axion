@@ -26,6 +26,7 @@
         <spotbug.plugin.version>4.7.3.0</spotbug.plugin.version>
         <findsecbug.plugin.version>1.12.0</findsecbug.plugin.version>
         <sonar.plugin.version>3.9.1.2184</sonar.plugin.version>
+        <exec.plugin.version>3.1.0</exec.plugin.version>
         <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
         <dependency.check.plugin.version>7.4.0</dependency.check.plugin.version>
         <maven.site.plugin.version>3.12.1</maven.site.plugin.version>
@@ -290,6 +291,83 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>${maven.project.info.reports.plugin.version}</version>
+            </plugin>
+            <plugin>
+                <artifactId>exec-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <version>${exec.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>Minimize application.css files</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>uglifycss</executable>
+                            <workingDirectory>${basedir}/src/main/resources/static/css/</workingDirectory>
+                            <arguments>
+                                <argument>application.css</argument>
+                                <argument>--output</argument>
+                                <argument>application.min.css</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>Minimize application.js files</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>uglifyjs</executable>
+                            <workingDirectory>${basedir}/src/main/resources/static/js/</workingDirectory>
+                            <arguments>
+                                <argument>application.js</argument>
+                                <argument>-o</argument>
+                                <argument>application.min.js</argument>
+                                <argument>-c</argument>
+                                <argument>-m</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>Minimize home.js files</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>uglifyjs</executable>
+                            <workingDirectory>${basedir}/src/main/resources/static/js/</workingDirectory>
+                            <arguments>
+                                <argument>home.js</argument>
+                                <argument>-o</argument>
+                                <argument>home.min.js</argument>
+                                <argument>-c</argument>
+                                <argument>-m</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>Minimize radar.js files</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>uglifyjs</executable>
+                            <workingDirectory>${basedir}/src/main/resources/static/js/</workingDirectory>
+                            <arguments>
+                                <argument>radar.js</argument>
+                                <argument>-o</argument>
+                                <argument>radar.min.js</argument>
+                                <argument>-c</argument>
+                                <argument>-m</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
