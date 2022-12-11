@@ -38,6 +38,6 @@ public class Radar extends AbstractAuditable {
   @Column(name = "description", nullable = false)
   private String description;
 
-  @Column(name = "default", nullable = false)
+  @Column(name = "is_default", nullable = false)
   private boolean active = true;
 }
