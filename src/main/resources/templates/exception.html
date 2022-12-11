@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html th:replace="~{layouts/exception :: exception(~{::title}, ~{::meta}, ~{:: #content})}"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{home.index.error} + ', ' + ${status} + ' - ' + ${error}"/>
+    <meta name="description" content="Page description"/>
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+  </head>
+  <body>
+    <div id="content">
+      <h1 class="mb-4" th:text="${status} + ' - ' + ${error}"/>
+      <p th:utext="#{error.message}"/>
+    </div>
+  </body>
+</html>

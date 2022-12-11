@@ -35,9 +35,12 @@ Technical and business radar. Spring boot based application
 * create cross reference source by command: mvn jxr:jxr
 * create site by command: mvn site
 * obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
-* run spotbugs GUI command: mvn spotbugs:gui
-* run sonarqube analysis command: mvn sonar:sonar (pre-condition: sonar is running locally using docker-compose
-  sonar.yml file)
+* run spotbugs GUI by command: mvn spotbugs:gui
+* run sonarqube analysis by command: mvn sonar:sonar
+* install js minifier by command: npm install uglify-js -g t
+* minify jscript by command: uglifyjs application.js -o application.min.js -c -m
+* install css minifier by command: npm install -g uglifycss
+* minify css by command: uglifycss application.css --output application.min.css 
 
 # Working with embedded H2 DB(In-Memory)
 * run application by command: "mvn spring-boot:run -Pdev".
@@ -48,4 +51,7 @@ Technical and business radar. Spring boot based application
   Password "secret"
 
 
+# Inspired by 
+* https://github.com/thoughtworks/build-your-own-radar
+* https://github.com/zalando/tech-radar
 
