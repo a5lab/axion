@@ -38,7 +38,7 @@ Technical and business radar. Spring boot based application
 * run spotbugs GUI by command: mvn spotbugs:gui
 * run sonarqube analysis by command: mvn sonar:sonar
 * install js minifier by command: npm install uglify-js -g t
-* minify jscript by command: uglifyjs application.js -o application1.min.js -c -m
+* minify jscript by command: uglifyjs application.js -o application.min.js -c -m
 * install css minifier by command: npm install -g uglifycss
 * minify css by command: uglifycss application.css --output application.min.css 
 
