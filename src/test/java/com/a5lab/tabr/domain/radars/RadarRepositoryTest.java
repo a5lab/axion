@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.segments;
+package com.a5lab.tabr.domain.radars;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -8,19 +8,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class SegmentRepositoryTest extends AbstractRepositoryTest {
+class RadarRepositoryTest extends AbstractRepositoryTest {
 
   @Autowired
-  private SegmentRepository segmentRepository;
+  private RadarRepository radarRepository;
 
   @Test
-  void shouldSaveSegmentWithTitleAndDescription() {
-    final Segment s = new Segment();
-    s.setTitle("My new test Segment");
+  void shouldSaveRadarWithTitleAndDescription() {
+    final Radar s = new Radar();
+    s.setTitle("My new test Radar");
     s.setDescription("My awesome description");
 
     Assertions.assertNull(s.getId());
-    segmentRepository.saveAndFlush(s);
+    radarRepository.saveAndFlush(s);
     Assertions.assertNotNull(s.getId());
     Assertions.assertNotNull(s.getCreatedBy());
     Assertions.assertNotNull(s.getCreatedDate());
@@ -30,65 +30,65 @@ class SegmentRepositoryTest extends AbstractRepositoryTest {
 
   @Test
   void shouldFailOnNullTitle() {
-    final Segment s = new Segment();
+    final Radar s = new Radar();
     s.setDescription("My awesome description");
 
     Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnNullDescription() {
-    final Segment s = new Segment();
-    s.setTitle("My new test Segment");
+    final Radar s = new Radar();
+    s.setTitle("My new test Radar");
 
     Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnEmptyTitle() {
-    final Segment s = new Segment();
+    final Radar s = new Radar();
     s.setTitle("");
     s.setDescription("My awesome description");
 
     Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnWhiteSpaceTitle() {
-    final Segment s = new Segment();
+    final Radar s = new Radar();
     s.setTitle(" ");
     s.setDescription("My awesome description");
 
     Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnEmptyDescription() {
-    final Segment s = new Segment();
+    final Radar s = new Radar();
     s.setTitle("Hello");
     s.setDescription("");
 
     Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnWhiteSpaceDescription() {
-    final Segment s = new Segment();
+    final Radar s = new Radar();
     s.setTitle("Hello");
     s.setDescription(" ");
 
     Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
         .isInstanceOf(ValidationException.class);
   }
 

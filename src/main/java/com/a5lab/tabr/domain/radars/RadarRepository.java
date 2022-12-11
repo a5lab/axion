@@ -1,8 +1,8 @@
-package com.a5lab.tabr.domain.segments;
+package com.a5lab.tabr.domain.radars;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SegmentRepository extends JpaRepository<Segment, Integer> {
+public interface RadarRepository extends JpaRepository<Radar, Integer> {
 }
