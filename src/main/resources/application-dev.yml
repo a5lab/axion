@@ -1,5 +1,4 @@
 logging:
-  charset:
   level:
     root: info
 
@@ -11,6 +10,8 @@ spring:
       enabled: true
   datasource:
     url: jdbc:h2:mem:tabr;MODE=PostgreSQL
+    username: tabr
+    password: secret
   h2:
     console:
       enabled: true
