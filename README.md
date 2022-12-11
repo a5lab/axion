@@ -42,6 +42,15 @@ Technical and business radar. Spring boot based application
 * install css minifier by command: npm install -g uglifycss
 * minify css by command: uglifycss application.css --output application.min.css 
 
+# Working with embedded H2 DB(In-Memory)
+
+* run application by command: "mvn spring-boot:run -Pdev".
+  Now you can access H2 Console http://localhost:8080/h2-console
+  Enter values
+  JDBC URL "jdbc:h2:mem:tabr"
+  User Name "tabr"
+  Password "secret"
+
 # Inspired by 
 * https://github.com/thoughtworks/build-your-own-radar
 * https://github.com/zalando/tech-radar
