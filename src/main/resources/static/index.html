@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Tech radar to debug java scripts</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="Zalando Tech Radar: a tool to visualize technology choices, inspire and support Engineering teams at Zalando to pick the best technologies for new projects">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="js/d3.js"></script>
+    <script src="js/radar.js"></script>
+    <script src="js/home.js"></script>
+  </head>
+  <body>
+    <h1>Tech and business radar</h1>
+    <p1 th:text="${radar.title}"></p1>
+    <p th:text="${radar.description}"></p>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Ring</th>
+        <th>Segment</th>
+        <th>Desciption</th>
+      </tr>
+      <tr>
+        <td>Docker</td>
+        <td>Adopt</td>
+        <td>Tools</td>
+        <td>Docker is </td>
+      </tr>
+      <tr>
+        <td>Java</td>
+        <td>Adopt</td>
+        <td>Languages</td>
+        <td>Java language is</td>
+      </tr>
+    </table>
+  </body>
+</html>
