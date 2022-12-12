@@ -52,6 +52,7 @@ Technical and business radar. Spring boot based application
   Password "secret"
 
 # Inspired by 
+
 * https://github.com/thoughtworks/build-your-own-radar
 * https://github.com/zalando/tech-radar
 

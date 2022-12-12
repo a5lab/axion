@@ -9,6 +9,6 @@
 
     <include file="migrations/2022_11_0000_create_rings_table.xml" relativeToChangelogFile="true"/>
     <include file="migrations/2022_11_0000_create_segments_table.xml" relativeToChangelogFile="true"/>
-
+    <include file="migrations/2022_12_0000_create_radars_table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
