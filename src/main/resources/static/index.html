@@ -15,38 +15,38 @@
     <canvas height="500" width="960"></canvas>
     <svg></svg>
     <h1>Tech and business radar</h1>
-    <p1 th:text="${radar.title}"></p1>
-    <p th:text="${radar.description}"></p>
+    <p id="name">Radar name</p>
+    <p id="description">Radar description</p>
 
     <h2>Segments</h2>
-    <table>
+    <table id="segments">
       <tr>
         <th>Title</th>
         <th>Desciption</th>
       </tr>
-      <tr>
-        <td>Languages</td>
-        <td>Programming languages we use</td>
+      <tr class="data">
+        <td class="title">Languages</td>
+        <td class="description">Programming languages we use</td>
       </tr>
-      <tr>
-        <td>Data Management</td>
+      <tr class="data">
+        <td class="title">Data Management</td>
         <td>Tools for data management</td>
       </tr>
-      <tr>
-        <td>Infrastructure</td>
+      <tr class="data">
+        <td class="title">Infrastructure</td>
         <td>Where we can deploy or run our applications</td>
       </tr>
-      <tr>
-        <td>Datastores</td>
+      <tr class="data">
+        <td class="title">Datastores</td>
         <td>Where we can store our data</td>
       </tr>
-      <tr>
-        <td>Frameworks</td>
+      <tr class="data">
+        <td class="title">Frameworks</td>
         <td>Frameworks we use</td>
       </tr>
     </table>
     <h2>Rings</h2>
-    <table>
+    <table id="rings">
       <tr>
         <th>Title</th>
         <th>Desciption</th>
@@ -76,7 +76,7 @@
       </tr>
     </table>
     <h2>Entities</h2>
-    <table>
+    <table id="entities">
       <tr>
         <th>Name</th>
         <th>Ring</th>
