@@ -2,23 +2,27 @@
 // Handler for home page
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Extract radar properties
-  // console.log(  d3.select("h1").text());
-  // console.log(  d3.select("p#name").text());
-  // console.log(  d3.select("p#description").text());
+  let config = {
+    svg_id: "radar",
+    width: 1450,
+    height: 1000,
+    colors: {
+      background: "#fff",
+      grid: "#bbb",
+      inactive: "#ddd"
+    }
+  }
+
 
   // Extract all segments
-  let segments = d3.selectAll("table#segments tr.data");
-
-  const arr = Array.from(segments._groups[0]);
-
-  const result = arr.map(function (segment, j) {
+  let html_segments = d3.selectAll("table#segments tbody tr");
+  const segments = Array.from(html_segments._groups[0]).map(function (segment, j) {
     const children = Array.from(segment.children);
     return {
       title: children[0].innerHTML,
       desciption: children[1].innerHTML
     }
   });
-  console.log('result>>>>>>>', result)
+  console.log('segmets are:', segments)
 
 });
