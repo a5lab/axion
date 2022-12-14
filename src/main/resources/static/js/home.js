@@ -8,14 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // console.log(  d3.select("p#description").text());
 
   // Extract all segments
-  let segments = d3.selectAll("table#segments tr.data td.title");
-  console.log(  d3.selectAll("table#segments tr.data td.title"));
+  let segments = d3.selectAll("table#segments tr.data");
 
-  segments.each(function (segments, j) {
-    // console.log("segment:" + segments[j]);
-    // console.log("segment:" + d3.select(this).select("td.title").text());
-    // console.log("j" + j);
+  const arr = Array.from(segments._groups[0]);
+
+  const result = arr.map(function (segment, j) {
+    const children = Array.from(segment.children);
+    return {
+      title: children[0].innerHTML,
+      desciption: children[1].innerHTML
+    }
   });
+  console.log('result>>>>>>>', result)
 
 });
-
