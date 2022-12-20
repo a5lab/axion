@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 
-function radar_visualization(config) {
+function radar_visualization1(config) {
 
   // custom random number generator, to make random sequence reproducible
   // source: https://stackoverflow.com/questions/521295

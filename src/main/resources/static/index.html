@@ -16,28 +16,46 @@
     <h1>Tech and business radar</h1>
     <p>Radar name is:<span id="name">Radar name</span></p>
     <p>Radar description is: <span id="description">Radar description</span></p>
-    <h2>Blips</h2>
-    <table id="blips">
+    <h2>Entries</h2>
+    <table id="entries">
       <thead>
         <tr>
           <th>Title</th>
+          <th>Quadrant</th>
           <th>Ring</th>
-          <th>Segment</th>
+          <th>Active</th>
+          <th>Moved</th>
+          <th>Link</th>
           <th>Description</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Docker</td>
-          <td>Adopt</td>
-          <td>Tools</td>
-          <td>Docker is</td>
+          <td>AWS Athena</td>
+          <td>3</td>
+          <td>2</td>
+          <td>true</td>
+          <td>0</td>
+          <td>N/A</td>
+          <td>AWS Athena</td>
         </tr>
         <tr>
-          <td>Java</td>
-          <td>Adopt</td>
-          <td>Languages</td>
-          <td>Java language is</td>
+          <td>AWS Data Pipeline</td>
+          <td>3</td>
+          <td>3</td>
+          <td>true</td>
+          <td>0</td>
+          <td>N/A</td>
+          <td>AWS Data Pipeline</td>
+        </tr>
+        <tr>
+          <td>Flink</td>
+          <td>3</td>
+          <td>1</td>
+          <td>true</td>
+          <td>0</td>
+          <td>https://engineering.zalando.com/tags/apache-flink.html</td>
+          <td>Flink</td>
         </tr>
       </tbody>
     </table>
@@ -67,10 +85,6 @@
           <td>Datastores</td>
           <td>Where we can store our data</td>
         </tr>
-        <tr>
-          <td>Frameworks</td>
-          <td>Frameworks we use</td>
-        </tr>
       </tbody>
     </table>
     <h2>Rings</h2>
@@ -80,6 +94,7 @@
           <th>Title</th>
           <th>Description</th>
           <th>Priority</th>
+          <th>Color</th>
         </tr>
       </thead>
       <tbody>
@@ -87,11 +102,13 @@
           <td>ADOPT</td>
           <td>Represents blips that we think you should seriously consider using</td>
           <td>0</td>
+          <td>#93c47d</td>
         </tr>
         <tr>
           <td>TRIAL</td>
           <td>For blips that we think are ready for use but not as completely proven as those in the Adopt ring</td>
           <td>1</td>
+          <td>#93d2c2</td>
         </tr>
         <tr>
           <td>ASSESS</td>
@@ -99,11 +116,13 @@
             fit for you
           </td>
           <td>2</td>
+          <td>#fbdb84</td>
         </tr>
         <tr>
           <td>HOLD</td>
           <td>For things (that even though they are accepted in the industry) we haven't had a good experience with</td>
           <td>3</td>
+          <td>#efafa9</td>
         </tr>
       </tbody>
     </table>
