@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const segments = Array.from(html_segments._groups[0]).map(function (segment, j) {
     const children = Array.from(segment.children);
     return {
-      title: children[0].innerHTML,
-      desciption: children[1].innerHTML
+      name: children[0].innerHTML,
+      description: children[1].innerHTML
     }
   });
   config['quadrants'] = segments;
@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const rings = Array.from(html_rings._groups[0]).map(function (ring, j) {
     const children = Array.from(ring.children);
     return {
-      title: children[0].innerHTML,
-      desciption: children[1].innerHTML,
-      priority: children[2].innerHTML,
+      name: children[0].innerHTML,
+      description: children[1].innerHTML,
+      priority: Number(children[2].innerHTML),
       color: children[3].innerHTML
     }
   });
@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const children = Array.from(entry.children);
     return {
       label: children[0].innerHTML,
-      quadrant: children[1].innerHTML,
-      ring: children[2].innerHTML,
-      active: children[3].innerHTML,
-      moved: children[4].innerHTML,
+      quadrant: Number(children[1].innerHTML),
+      ring: Number(children[2].innerHTML),
+      active: Number(children[3].innerHTML),
+      moved: Number(children[4].innerHTML),
       link: children[5].innerHTML
     }
   });
@@ -415,14 +415,18 @@ function radar_visualization(config) {
 
   function highlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
-    legendItem.setAttribute("filter", "url(#solid)");
-    legendItem.setAttribute("fill", "white");
+    if(legendItem){
+      legendItem.setAttribute("filter", "url(#solid)");
+      legendItem.setAttribute("fill", "white");
+    }
   }
 
   function unhighlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
-    legendItem.removeAttribute("filter");
-    legendItem.removeAttribute("fill");
+    if(legendItem){
+      legendItem.removeAttribute("filter");
+      legendItem.removeAttribute("fill");
+    }
   }
 
   // draw blips on radar
