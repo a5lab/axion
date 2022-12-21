@@ -58,14 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   config['entries'] = entries;
-  console.log('config is:', config)
 
   // Visualize
+  // console.log('config is:', config)
   radar_visualization(config);
 });
 
 
 function radar_visualization(config) {
+  console.log('config is:', config)
+
+
   // custom random number generator, to make random sequence reproducible
   // source: https://stackoverflow.com/questions/521295
   var seed = 42;
@@ -355,7 +358,7 @@ function radar_visualization(config) {
           .append("text")
           .attr("transform", function(d, i) { return legend_transform(quadrant, ring, i); })
           .attr("class", "legend" + quadrant + ring)
-          .attr("id", function(d, i) { return "legendItem" + d.id; })
+          .attr("id", function(d, i) { console.log('fuunction d.id, i:', d.id); return "legendItem" + d.id; })
           .text(function(d, i) { return d.id + ". " + d.label; })
           .style("font-family", "Arial, Helvetica")
           .style("font-size", "11px")
@@ -390,6 +393,7 @@ function radar_visualization(config) {
     .style("fill", "#333");
 
   function showBubble(d) {
+    // fuck console.log('showBubble:', d);
     if (d.active || config.print_layout) {
       var tooltip = d3.select("#bubble text")
         .text(d.label);
@@ -414,30 +418,29 @@ function radar_visualization(config) {
   }
 
   function highlightLegendItem(d) {
+    console.log('highlightLegendItem:', d);
+
     var legendItem = document.getElementById("legendItem" + d.id);
-    // fuck if(legendItem){
-      legendItem.setAttribute("filter", "url(#solid)");
-      legendItem.setAttribute("fill", "white");
-    // }
+    legendItem.setAttribute("filter", "url(#solid)");
+    legendItem.setAttribute("fill", "white");
   }
 
   function unhighlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
-    // fuck if(legendItem){
-      legendItem.removeAttribute("filter");
-      legendItem.removeAttribute("fill");
-    // }
+    legendItem.removeAttribute("filter");
+    legendItem.removeAttribute("fill");
   }
 
   // draw blips on radar
+  console.log('blips entries:', config.entries);
   var blips = rink.selectAll(".blip")
     .data(config.entries)
     .enter()
-    .append("g")
-    .attr("class", "blip")
-    .attr("transform", function(d, i) { return legend_transform(d.quadrant, d.ring, i); })
-    .on("mouseover", function(d) { showBubble(d); highlightLegendItem(d); })
-    .on("mouseout", function(d) { hideBubble(d); unhighlightLegendItem(d); });
+      .append("g")
+        .attr("class", "blip")
+        .attr("transform", function(d, i) { return legend_transform(d.quadrant, d.ring, i); })
+        .on("mouseover", function(d) { console.log('blip select:', d); showBubble(d); highlightLegendItem(d); })
+        .on("mouseout", function(d) { hideBubble(d); unhighlightLegendItem(d); });
 
   // configure each blip
   blips.each(function(d) {
