@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
       label: children[0].innerHTML,
       quadrant: Number(children[1].innerHTML),
       ring: Number(children[2].innerHTML),
-      active: Number(children[3].innerHTML),
+      active: (children[3].innerHTML === 'true'),
       moved: Number(children[4].innerHTML),
       link: children[5].innerHTML
     }
@@ -415,18 +415,18 @@ function radar_visualization(config) {
 
   function highlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
-    if(legendItem){
+    // fuck if(legendItem){
       legendItem.setAttribute("filter", "url(#solid)");
       legendItem.setAttribute("fill", "white");
-    }
+    // }
   }
 
   function unhighlightLegendItem(d) {
     var legendItem = document.getElementById("legendItem" + d.id);
-    if(legendItem){
+    // fuck if(legendItem){
       legendItem.removeAttribute("filter");
       legendItem.removeAttribute("fill");
-    }
+    // }
   }
 
   // draw blips on radar
