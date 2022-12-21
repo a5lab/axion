@@ -48,14 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const html_entries = d3.selectAll("table#entries tbody tr");
   const entries = Array.from(html_entries._groups[0]).map(function (entry, j) {
     const children = Array.from(entry.children);
-    return {
+    let result = {
       label: children[0].innerHTML,
       quadrant: Number(children[1].innerHTML),
       ring: Number(children[2].innerHTML),
       active: (children[3].innerHTML === 'true'),
       moved: Number(children[4].innerHTML),
-      link: children[5].innerHTML
+    };
+    if(children[5].innerHTML){
+      return {...result, ...{link: children[5].innerHTML}};
     }
+    return result;
   });
   config['entries'] = entries;
 
