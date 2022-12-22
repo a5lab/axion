@@ -349,24 +349,6 @@
                             </arguments>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>Minimize radar.js files</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>uglifyjs</executable>
-                            <workingDirectory>${basedir}/src/main/resources/static/js/</workingDirectory>
-                            <arguments>
-                                <argument>radar.js</argument>
-                                <argument>-o</argument>
-                                <argument>radar.min.js</argument>
-                                <argument>-c</argument>
-                                <argument>-m</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
         </plugins>

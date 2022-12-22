@@ -16,6 +16,10 @@ Technical and business radar. Spring boot based application
 * see GitHub https://github.com/jshiell/checkstyle-idea/blob/main/README.md
 * import google_checkstyle.xml into idea java import schema at java code style
 
+## JavaScript checkstyle
+
+* setup ident 2 at JavaScript code style
+
 ## HTML checkstyle
 
 * setup ident 2 at html code style
