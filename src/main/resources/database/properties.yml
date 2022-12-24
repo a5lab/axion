@@ -1,5 +1,15 @@
 databaseChangeLog:
-  -
+  # ring
+  - property:
+      name: ring.title
+      value: text
+      dbms: postgresql
+  - property:
+      name: ring.title
+      value: varchar(512)
+      dbms: h2
+
+  # auto increment
   - property:
       name: autoIncrement
       value: true
@@ -18,17 +28,6 @@ databaseChangeLog:
       name: bigint.type
       value: BIGINT
       dbms: h2
-
-  # ring
-  - property:
-      name: ring.title
-      value: text
-      dbms: postgresql
-  - property:
-      name: ring.title
-      value: varchar(255)
-      dbms: h2
-
 
   # sequence
   - property:
@@ -76,7 +75,7 @@ databaseChangeLog:
       name: uuid.string
       value: char(36)
 
-  #Decimal type
+  # Decimal type
   - property:
       name: decimal.type
       value: NUMERIC
@@ -86,7 +85,7 @@ databaseChangeLog:
       value: decimal(1000, 6)
       dbms: h2
 
-  #Text type
+  # Text type
   - property:
       name: text.type
       value: text
