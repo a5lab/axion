@@ -25,13 +25,13 @@
               <tr th:each="tenant : ${tenants}">
                 <td th:text="${tenant.title}"></td>
                 <td th:text="${tenant.description}"></td>
-                <td><a th:href="@{/edit/{id}(id=${tenant.id})}">Edit</a></td>
-                <td><a th:href="@{/delete/{id}(id=${tenant.id})}">Delete</a></td>
+                <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenant.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/tenants/{id}(id=${tenant.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p><a href="/signup">Add a new tenant</a></p>
+        <p><a href="/settings/tenants/new">Add a new tenant</a></p>
       </div>
     </div>
   </body>

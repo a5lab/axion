@@ -1,7 +1,6 @@
 package com.a5lab.tabr.controllers;
 
 
-import com.a5lab.tabr.domain.tenants.TenantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+import com.a5lab.tabr.domain.tenants.TenantService;
+import com.a5lab.tabr.domain.tenants.TenantRecord;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,8 +22,16 @@ public class TenantsController {
   public ModelAndView index() {
     ModelAndView modelAndView = new ModelAndView("/settings/tenants/index");
     // We need to replace it with proper values for PageRequest.of() coming from ui
+    // See https://github.com/a5lab/tabr/issues/112
     modelAndView.addObject("tenants",
         tenantService.findAll(Pageable.ofSize(100)).getContent());
+    return modelAndView;
+  }
+
+  @GetMapping("/settings/tenants/add")
+  public ModelAndView add() {
+    ModelAndView modelAndView = new ModelAndView("/settings/tenants/new");
+    modelAndView.addObject("tenant", new TenantRecord(0L, "", ""));
     return modelAndView;
   }
 

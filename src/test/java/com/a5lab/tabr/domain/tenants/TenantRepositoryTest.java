@@ -116,6 +116,4 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
 
     Assertions.assertTrue(tenantRepository.findById(id).isPresent());
   }
-
-
 }
