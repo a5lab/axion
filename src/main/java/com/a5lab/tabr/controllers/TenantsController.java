@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.BindingResult;
 import com.a5lab.tabr.domain.tenants.TenantService;
 import com.a5lab.tabr.domain.tenants.TenantRecord;
 
@@ -35,11 +37,29 @@ public class TenantsController {
     return modelAndView;
   }
 
+  @PostMapping("/settings/tenants/create")
+  public String create(@Valid TenantRecord tenant, BindingResult result) {
+    if (result.hasErrors()) {
+      return "/settings/tenants/add";
+    }
+    tenantService.saveAndFlush(tenant);
+    return "redirect:/settings/tenants/";
+  }
+
   @RequestMapping(value = "/settings/tenants/edit/{id}", method = RequestMethod.GET)
   public ModelAndView edit(@PathVariable("id") long id) {
     ModelAndView modelAndView = new ModelAndView("/settings/tenants/edit");
     modelAndView.addObject("tenant", tenantService.findById(id));
     return modelAndView;
+  }
+
+  @PostMapping("/settings/tenants/update")
+  public String update(@Valid TenantRecord tenant, BindingResult result) {
+    if (result.hasErrors()) {
+      return "/settings/tenants/add";
+    }
+    tenantService.saveAndFlush(tenant);
+    return "redirect:/settings/tenants/";
   }
 
   @RequestMapping(value = "/settings/tenants/{id}", method = RequestMethod.DELETE)

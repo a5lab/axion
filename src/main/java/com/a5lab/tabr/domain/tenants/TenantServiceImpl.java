@@ -28,6 +28,12 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional
+  public TenantRecord saveAndFlush(TenantRecord entity){
+    return tenantRepository.saveAndFlush(entity).map(tenantMapper::toDto);
+  }
+
+  @Override
+  @Transactional
   public void deleteById(Long id) {
     tenantRepository.deleteById(id);
   }
