@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.rings;
+package com.a5lab.tabr.domain.tenants;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class RingRepositoryTest extends AbstractRepositoryTest {
+class TenantRepositoryTest extends AbstractRepositoryTest {
 
   @Autowired
-  private RingRepository ringRepository;
+  private TenantRepository ringRepository;
 
   @Test
-  void shouldSaveRingWithTitleAndDescr() {
-    final Ring r = new Ring();
+  void shouldSaveTenantWithTitleAndDescr() {
+    final Tenant r = new Tenant();
     r.setTitle("TEST");
-    r.setDescription("Very good description for Ring");
+    r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
     ringRepository.saveAndFlush(r);
@@ -30,8 +30,8 @@ class RingRepositoryTest extends AbstractRepositoryTest {
 
   @Test
   void shouldFailOnNullTitle() {
-    final Ring r = new Ring();
-    r.setDescription("Very good description for Ring");
+    final Tenant r = new Tenant();
+    r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
     assertThatThrownBy(() -> ringRepository.saveAndFlush(r))
@@ -40,9 +40,9 @@ class RingRepositoryTest extends AbstractRepositoryTest {
 
   @Test
   void shouldFailOnEmptyTitle() {
-    final Ring r = new Ring();
+    final Tenant r = new Tenant();
     r.setTitle("");
-    r.setDescription("Very good description for Ring");
+    r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
     assertThatThrownBy(() -> ringRepository.saveAndFlush(r))
@@ -51,9 +51,9 @@ class RingRepositoryTest extends AbstractRepositoryTest {
 
   @Test
   void shouldFailOnWhiteSpaceTitle() {
-    final Ring r = new Ring();
+    final Tenant r = new Tenant();
     r.setTitle(" ");
-    r.setDescription("Very good description for Ring");
+    r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
     assertThatThrownBy(() -> ringRepository.saveAndFlush(r))
@@ -62,7 +62,7 @@ class RingRepositoryTest extends AbstractRepositoryTest {
 
   @Test
   void shouldFailOnNullDescription() {
-    final Ring r = new Ring();
+    final Tenant r = new Tenant();
     r.setTitle("TEST");
 
     Assertions.assertNull(r.getId());
@@ -72,7 +72,7 @@ class RingRepositoryTest extends AbstractRepositoryTest {
 
   @Test
   void shouldFailOnEmptyDescription() {
-    final Ring r = new Ring();
+    final Tenant r = new Tenant();
     r.setTitle("TEST");
     r.setDescription("");
 
@@ -83,7 +83,7 @@ class RingRepositoryTest extends AbstractRepositoryTest {
 
   @Test
   void shouldFailOnWhiteSpaceDescription() {
-    final Ring r = new Ring();
+    final Tenant r = new Tenant();
     r.setTitle("TEST");
     r.setDescription(" ");
 
@@ -94,9 +94,9 @@ class RingRepositoryTest extends AbstractRepositoryTest {
 
   @Test
   void shouldFailOnLowerTitle() {
-    final Ring r = new Ring();
+    final Tenant r = new Tenant();
     r.setTitle("test");
-    r.setDescription("Very good description for Ring");
+    r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
     assertThatThrownBy(() -> ringRepository.saveAndFlush(r))
@@ -104,10 +104,10 @@ class RingRepositoryTest extends AbstractRepositoryTest {
   }
 
   @Test
-  void shouldFindSavedRingById() {
-    final Ring r = new Ring();
+  void shouldFindSavedTenantById() {
+    final Tenant r = new Tenant();
     r.setTitle("MY");
-    r.setDescription("Very good description for Ring");
+    r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
     ringRepository.saveAndFlush(r);
@@ -118,17 +118,17 @@ class RingRepositoryTest extends AbstractRepositoryTest {
   }
 
   @Test
-  void shouldFindSavedRingByTitle() {
+  void shouldFindSavedTenantByTitle() {
     String title = "SUPER";
-    final Ring r = new Ring();
+    final Tenant r = new Tenant();
     r.setTitle(title);
-    r.setDescription("Very good description for Ring");
+    r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
     ringRepository.saveAndFlush(r);
     Assertions.assertNotNull(r.getId());
 
-    Assertions.assertTrue(ringRepository.findRingByTitle(title).isPresent());
+    Assertions.assertTrue(ringRepository.findTenantByTitle(title).isPresent());
   }
 
 }

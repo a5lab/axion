@@ -1,11 +1,11 @@
-package com.a5lab.tabr.domain.rings;
+package com.a5lab.tabr.domain.tenants;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
 
 
-public class RingTitleValidator implements ConstraintValidator<RingTitleConstraint, String> {
+public class TenantTitleValidator implements ConstraintValidator<TenantTitleConstraint, String> {
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
