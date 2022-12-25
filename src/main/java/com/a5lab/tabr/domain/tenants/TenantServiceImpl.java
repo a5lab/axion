@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain.tenants;
 
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +21,14 @@ public class TenantServiceImpl implements TenantService {
   }
 
   @Override
+  @Transactional(readOnly = true)
+  public Optional<TenantRecord> findById(Long id) {
+    return tenantRepository.findById(id).map(tenantMapper::toDto);
+  }
+
+  @Override
   @Transactional
-  public void deleteById(long id){
+  public void deleteById(Long id) {
     tenantRepository.deleteById(id);
   }
 }

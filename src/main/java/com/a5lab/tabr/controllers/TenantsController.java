@@ -30,13 +30,20 @@ public class TenantsController {
 
   @GetMapping("/settings/tenants/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("/settings/tenants/new");
+    ModelAndView modelAndView = new ModelAndView("/settings/tenants/add");
     modelAndView.addObject("tenant", new TenantRecord(0L, "", ""));
     return modelAndView;
   }
 
+  @RequestMapping(value = "/settings/tenants/edit/{id}", method = RequestMethod.GET)
+  public ModelAndView edit(@PathVariable("id") long id) {
+    ModelAndView modelAndView = new ModelAndView("/settings/tenants/edit");
+    modelAndView.addObject("tenant", tenantService.findById(id));
+    return modelAndView;
+  }
+
   @RequestMapping(value = "/settings/tenants/{id}", method = RequestMethod.DELETE)
-  public String deleteUser(@PathVariable("id") long id) {
+  public String delete(@PathVariable("id") long id) {
     tenantService.deleteById(id);
     return "redirect:/settings/tenants";
   }
