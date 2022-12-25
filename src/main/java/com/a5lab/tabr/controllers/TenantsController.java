@@ -8,13 +8,13 @@ import com.a5lab.tabr.domain.tenants.TenantRepository;
 @Controller
 public class TenantsController {
 
-  private final TenantRepository tenantRepository;
+  // private final TenantRepository tenantRepository;
 
   @GetMapping("/settings/tenants")
   public ModelAndView index() {
 
     ModelAndView modelAndView = new ModelAndView("/settings/tenants");
-    modelAndView.addObject(tenantRepository.findAll());
+    // modelAndView.addObject(tenantRepository.findAll());
     return modelAndView;
   }
 
