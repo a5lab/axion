@@ -18,4 +18,10 @@ public class TenantServiceImpl implements TenantService {
   public Page<TenantRecord> findAll(Pageable pageable) {
     return tenantRepository.findAll(pageable).map(tenantMapper::toDto);
   }
+
+  @Override
+  @Transactional
+  public void deleteById(long id){
+    tenantRepository.deleteById(id);
+  }
 }

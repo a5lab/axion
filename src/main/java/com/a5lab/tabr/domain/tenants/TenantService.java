@@ -8,4 +8,5 @@ public interface TenantService {
 
   Page<TenantRecord> findAll(Pageable pageable);
 
+  void deleteById(long id);
 }
