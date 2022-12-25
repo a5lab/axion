@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.rings;
+package com.a5lab.tabr.domain.tenants;
 
 import com.a5lab.tabr.domain.AbstractAuditable;
 import jakarta.persistence.Column;
@@ -22,7 +22,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Setter
 @NoArgsConstructor
 @ToString
-public class Ring extends AbstractAuditable {
+public class Tenant extends AbstractAuditable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Ring extends AbstractAuditable {
   private Integer id;
 
   @NotBlank
-  @RingTitleConstraint
+  @TenantTitleConstraint
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 
