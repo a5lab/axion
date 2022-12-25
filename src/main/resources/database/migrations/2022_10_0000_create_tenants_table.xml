@@ -6,17 +6,17 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_radars_table" author="tabr">
-        <createTable tableName="radars" remarks="Holds information about radars">
-            <column name="id" type="integer" remarks="Radar ID. Primary key" autoIncrement="true"
+    <changeSet id="create_tenants_table" author="tabr">
+        <createTable tableName="tenants" remarks="Holds information about tenants">
+            <column name="id" type="integer" remarks="Tenant ID. Primary key" autoIncrement="true"
                     generationType="ALWAYS">
-                <constraints primaryKey="true" primaryKeyName="pk_radars_id" nullable="false"/>
+                <constraints primaryKey="true" primaryKeyName="pk_tenants_id" nullable="false"/>
             </column>
-            <column name="title" type="${text.type}" remarks="Radar title">
-                <constraints unique="true" uniqueConstraintName="uc_radars_title" nullable="false"/>
+            <column name="title" type="${text.type}" remarks="Tenant title">
+                <constraints unique="true" uniqueConstraintName="uc_tenants_title" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for Radar"/>
-            <column name="is_default" type="boolean" remarks="Whenever the radar is default" defaultValueBoolean="false">
+            <column name="description" type="${text.type}" remarks="Description for Tenant"/>
+            <column name="is_default" type="boolean" remarks="Whenever the tenant is default" defaultValueBoolean="false">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="${user.type}" remarks="user who created the record">
@@ -35,15 +35,15 @@
         </createTable>
         <!-- current Liquibase ignores checkConstraint attribute -->
         <sql>
-            ALTER TABLE radars
-                ADD CONSTRAINT ck_radars_title_trim CHECK (trim(title) = title)
+            ALTER TABLE tenants
+                ADD CONSTRAINT ck_tenants_title_trim CHECK (trim(title) = title)
         </sql>
     </changeSet>
 
-    <changeSet id="load_default_radars" author="tabr" context="data" labels="locale_en">
-        <loadData tableName="radars"
+    <changeSet id="load_default_tenants" author="tabr" context="data" labels="locale_en">
+        <loadData tableName="tenants"
                   separator="|"
-                  file="database/data/dictionaries/radars_en.csv">
+                  file="database/data/dictionaries/tenants_en.csv">
             <column name="title" type="STRING"/>
             <column name="description" type="STRING"/>
             <column name="created_by" type="STRING"/>
