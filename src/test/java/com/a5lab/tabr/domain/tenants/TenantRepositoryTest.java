@@ -20,7 +20,7 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
     r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
-    // fuck tenantRepository.saveAndFlush(r);
+    tenantRepository.saveAndFlush(r);
     Assertions.assertNotNull(r.getId());
     Assertions.assertNotNull(r.getCreatedBy());
     Assertions.assertNotNull(r.getCreatedDate());
@@ -34,8 +34,8 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
     r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
-    // fuck assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
-        // .isInstanceOf(ValidationException.class);
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+        .isInstanceOf(ValidationException.class);
   }
 
   @Test
@@ -45,8 +45,8 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
     r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
-    //fuckassertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
-        // .isInstanceOf(ValidationException.class);
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+        .isInstanceOf(ValidationException.class);
   }
 
   @Test
@@ -56,8 +56,8 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
     r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
-    //fuckassertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
-        // .isInstanceOf(ValidationException.class);
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+        .isInstanceOf(ValidationException.class);
   }
 
   @Test
@@ -66,8 +66,8 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
     r.setTitle("TEST");
 
     Assertions.assertNull(r.getId());
-    // fuck assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
-        //.isInstanceOf(ValidationException.class);
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+        .isInstanceOf(ValidationException.class);
   }
 
   @Test
@@ -77,8 +77,8 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
     r.setDescription("");
 
     Assertions.assertNull(r.getId());
-    // fuck assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
-        //.isInstanceOf(ValidationException.class);
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+        .isInstanceOf(ValidationException.class);
   }
 
   @Test
@@ -88,8 +88,8 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
     r.setDescription(" ");
 
     Assertions.assertNull(r.getId());
-    // fuck assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
-        //.isInstanceOf(ValidationException.class);
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+        .isInstanceOf(ValidationException.class);
   }
 
   @Test
@@ -99,8 +99,8 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
     r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
-    // fuckassertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
-        // .isInstanceOf(ValidationException.class);
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+        .isInstanceOf(ValidationException.class);
   }
 
   @Test
@@ -110,25 +110,12 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
     r.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(r.getId());
-    // fucktenantRepository.saveAndFlush(r);
+    tenantRepository.saveAndFlush(r);
     Assertions.assertNotNull(r.getId());
     var id = r.getId();
 
     Assertions.assertTrue(tenantRepository.findById(id).isPresent());
   }
 
-  @Test
-  void shouldFindSavedTenantByTitle() {
-    String title = "SUPER";
-    final Tenant r = new Tenant();
-    r.setTitle(title);
-    r.setDescription("Very good description for Tenant");
-
-    Assertions.assertNull(r.getId());
-    // fucktenantRepository.saveAndFlush(r);
-    Assertions.assertNotNull(r.getId());
-
-    // fuckAssertions.assertTrue(tenantRepository.findTenantByTitle(title).isPresent());
-  }
 
 }

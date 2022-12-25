@@ -16,7 +16,7 @@ import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@Table(name = "rings")
+@Table(name = "tenants")
 @DynamicUpdate
 @Getter
 @Setter
@@ -28,7 +28,7 @@ public class Tenant extends AbstractAuditable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false, unique = true)
   @Setter(AccessLevel.NONE)
-  private Integer id;
+  private Long id;
 
   @NotBlank
   @TenantTitleConstraint
@@ -38,14 +38,5 @@ public class Tenant extends AbstractAuditable {
   @NotBlank
   @Column(name = "description", nullable = false)
   private String description;
-
-  @Column(name = "info")
-  private String info;
-
-  @Column(name = "priority", nullable = false)
-  private int priority;
-
-  @Column(name = "is_active", nullable = false)
-  private boolean active = true;
 
 }

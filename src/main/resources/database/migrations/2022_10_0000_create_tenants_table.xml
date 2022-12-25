@@ -16,9 +16,6 @@
                 <constraints unique="true" uniqueConstraintName="uc_tenants_title" nullable="false"/>
             </column>
             <column name="description" type="${text.type}" remarks="Description for Tenant"/>
-            <column name="is_default" type="boolean" remarks="Whenever the tenant is default" defaultValueBoolean="false">
-                <constraints nullable="false"/>
-            </column>
             <column name="created_by" type="${user.type}" remarks="user who created the record">
                 <constraints nullable="false"/>
             </column>

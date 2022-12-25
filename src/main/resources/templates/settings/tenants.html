@@ -23,8 +23,8 @@
             </thead>
             <tbody>
               <tr th:each="tenant : ${tenants}">
-                <td th:text="${tenant.name}"></td>
-                <td th:text="${tenant.email}"></td>
+                <td th:text="${tenant.title}"></td>
+                <td th:text="${tenant.description}"></td>
                 <td><a th:href="@{/edit/{id}(id=${tenant.id})}">Edit</a></td>
                 <td><a th:href="@{/delete/{id}(id=${tenant.id})}">Delete</a></td>
               </tr>
