@@ -3,12 +3,13 @@
   <head>
     <title>Tech radar to debug java scripts</title>
     <meta content="text/html; charset=utf-8" http-equiv="Content-type">
-    <meta content="Zalando Tech Radar: a tool to visualize technology choices, inspire and support Engineering teams at Zalando to pick the best technologies for new projects"
-          name="description">
+    <meta
+      content="Zalando Tech Radar: a tool to visualize technology choices, inspire and support Engineering teams at Zalando to pick the best technologies for new projects"
+      name="description">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
-    <link href="css/bootstrap.css" rel="stylesheet" >
-    <link href="css/application.css" rel="stylesheet" >
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/application.css" rel="stylesheet">
 
     <script src="js/d3.js"></script>
     <script src="js/application.js"></script>
@@ -16,11 +17,10 @@
   </head>
   <body>
     <svg id="radar"></svg>
-    <h1>Tech and business radar</h1>
-    <p>Radar name is:<span id="name">Radar name</span></p>
-    <p>Radar description is: <span id="description">Radar description</span></p>
+    <h1 id="name">Radar name</h1>
+    <p id="description">Radar description</p>
     <h2>Entries</h2>
-    <table id="entries" class="table">
+    <table class="table" id="entries">
       <thead>
         <tr>
           <th>Title</th>
@@ -73,7 +73,7 @@
     </table>
 
     <h2>Segments</h2>
-    <table id="segments" class="table">
+    <table class="table" id="segments">
       <thead>
         <tr>
           <th>Title</th>
@@ -100,7 +100,7 @@
       </tbody>
     </table>
     <h2>Rings</h2>
-    <table id="rings" class="table">
+    <table class="table" id="rings">
       <thead>
         <tr>
           <th>Title</th>
@@ -112,27 +112,39 @@
       <tbody>
         <tr>
           <td>ADOPT</td>
-          <td>Represents blips that we think you should seriously consider using</td>
+          <td>Technologies we have high confidence in to serve our purpose, also in large scale. Technologies with
+            a usage culture in production environment, low risk and recommended to be widely used.
+          </td>
           <td>0</td>
           <td>#93c47d</td>
         </tr>
         <tr>
           <td>TRIAL</td>
-          <td>For blips that we think are ready for use but not as completely proven as those in the Adopt ring</td>
+          <td>Technologies that we have seen work with success in project work to
+            solve a real problem; first serious usage experience that confirm benefits and can uncover limitations.
+            TRIAL technologies are slightly more risky; some engineers in our organization walked this path and
+            will share knowledge and experiences.
+          </td>
           <td>1</td>
           <td>#93d2c2</td>
         </tr>
         <tr>
           <td>ASSESS</td>
-          <td>Things to look at closely but not necessarily trial yet - unless you think they would be a particularly good
-            fit for you
+          <td>Technologies that are promising and have clear potential value-add for us; technologies worth to
+            invest some research and prototyping efforts in to see if it has impact. ASSESS technologies have
+            higher risks; they are often brand new and highly unproven in our organisation. You will find some
+            engineers that have knowledge in the technology and promote it, you may even find teams that have
+            started a prototyping effort.
           </td>
           <td>2</td>
           <td>#fbdb84</td>
         </tr>
         <tr>
           <td>HOLD</td>
-          <td>For things (that even though they are accepted in the industry) we haven't had a good experience with</td>
+          <td>Technologies not recommended to be used for new projects. Technologies that we think are not (yet)
+            worth to (further) invest in. HOLD technologies should not be used for new projects, but usually can
+            be continued for existing projects.
+          </td>
           <td>3</td>
           <td>#efafa9</td>
         </tr>
