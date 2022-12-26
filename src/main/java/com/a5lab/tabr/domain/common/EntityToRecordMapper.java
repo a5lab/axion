@@ -4,11 +4,13 @@ import java.util.Collection;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.NullValueMappingStrategy;
 
-public interface EntityToDtoMapper<E, D> {
+public interface EntityToRecordMapper<Entity, Record> {
 
   @IterableMapping(nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
-  Collection<D> toDtoCollection(final Collection<E> entityCollection);
+  Collection<Record> toDtoCollection(final Collection<Entity> entityCollection);
 
-  D toDto(final E entity);
+  Record toRecord(final Entity entity);
+
+  Entity toEntity(final Record record);
 
 }

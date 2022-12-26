@@ -11,7 +11,7 @@ class TenantMapperTest {
 
   @Test
   void testToDtoWithNull() {
-    final var result = mapper.toDto(null);
+    final var result = mapper.toRecord(null);
 
     Assertions.assertNull(result);
   }
@@ -25,7 +25,7 @@ class TenantMapperTest {
     t.setTitle("my title");
     t.setDescription("my description");
 
-    final var result = mapper.toDto(t);
+    final var result = mapper.toRecord(t);
 
     Assertions.assertEquals(result.id(), t.getId());
     Assertions.assertEquals(result.title(), t.getTitle());
@@ -38,7 +38,7 @@ class TenantMapperTest {
     t.setTitle("my title1");
     t.setDescription("my description1");
 
-    final var result = mapper.toDto(t);
+    final var result = mapper.toRecord(t);
 
     Assertions.assertNull(result.id());
     Assertions.assertEquals(result.title(), t.getTitle());

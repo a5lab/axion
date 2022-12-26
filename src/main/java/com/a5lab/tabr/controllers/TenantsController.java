@@ -3,6 +3,7 @@ package com.a5lab.tabr.controllers;
 
 import com.a5lab.tabr.domain.tenants.TenantRecord;
 import com.a5lab.tabr.domain.tenants.TenantService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
