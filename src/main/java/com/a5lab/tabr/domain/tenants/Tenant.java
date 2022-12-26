@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.radars;
+package com.a5lab.tabr.domain.tenants;
 
 import com.a5lab.tabr.domain.AbstractAuditable;
 import jakarta.persistence.Column;
@@ -16,13 +16,13 @@ import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@Table(name = "radars")
+@Table(name = "tenants")
 @DynamicUpdate
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class Radar extends AbstractAuditable {
+public class Tenant extends AbstractAuditable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,7 @@ public class Radar extends AbstractAuditable {
   private Long id;
 
   @NotBlank
+  @TenantTitleConstraint
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 
@@ -38,6 +39,4 @@ public class Radar extends AbstractAuditable {
   @Column(name = "description", nullable = false)
   private String description;
 
-  @Column(name = "is_default", nullable = false)
-  private boolean active = true;
 }

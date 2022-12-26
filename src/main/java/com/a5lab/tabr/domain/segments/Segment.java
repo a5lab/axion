@@ -28,7 +28,7 @@ public class Segment extends AbstractAuditable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false, unique = true)
   @Setter(AccessLevel.NONE)
-  private Integer id;
+  private Long id;
 
   @NotBlank
   @Column(name = "title", unique = true, nullable = false)
