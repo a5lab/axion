@@ -1,7 +1,7 @@
 package com.a5lab.tabr.domain.tenants;
 
-import com.a5lab.tabr.domain.common.CommonMapperConfig;
-import com.a5lab.tabr.domain.common.EntityToRecordMapper;
+import com.a5lab.tabr.domain.CommonMapperConfig;
+import com.a5lab.tabr.domain.EntityToRecordMapper;
 import org.mapstruct.Mapper;
 
 @Mapper(config = CommonMapperConfig.class)

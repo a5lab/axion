@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.common;
+package com.a5lab.tabr.domain;
 
 import java.util.Collection;
 import org.mapstruct.IterableMapping;
