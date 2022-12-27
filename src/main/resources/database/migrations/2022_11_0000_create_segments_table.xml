@@ -43,7 +43,7 @@
     <changeSet id="load_default_segments" author="tabr" context="data" labels="locale_en">
         <loadData tableName="segments"
                   separator="|"
-                  file="database/data/dictionaries/segments_en.csv">
+                  file="database/data/segments_en.csv">
             <column name="title" type="STRING"/>
             <column name="description" type="STRING"/>
             <column name="created_by" type="STRING"/>
