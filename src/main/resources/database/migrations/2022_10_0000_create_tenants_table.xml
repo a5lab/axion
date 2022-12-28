@@ -40,7 +40,7 @@
     <changeSet id="load_default_tenants" author="tabr" context="data" labels="locale_en">
         <loadData tableName="tenants"
                   separator="|"
-                  file="database/data/dictionaries/tenants_en.csv">
+                  file="database/data/tenants_en.csv">
             <column name="title" type="STRING"/>
             <column name="description" type="STRING"/>
             <column name="created_by" type="STRING"/>

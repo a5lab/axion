@@ -54,7 +54,7 @@
     <changeSet id="load_default_rings" author="tabr" context="data" labels="locale_en">
         <loadData tableName="rings"
                   separator="|"
-                  file="database/data/dictionaries/rings_en.csv">
+                  file="database/data/rings_en.csv">
             <column name="title" type="STRING"/>
             <column name="description" type="STRING"/>
             <column name="priority" type="INTEGER"/>
