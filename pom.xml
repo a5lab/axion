@@ -116,12 +116,6 @@
         </dependencies>
     </dependencyManagement>
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -391,7 +385,6 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
                 <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
             </properties>
             <dependencies>
@@ -424,6 +417,15 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <profiles>
+                                <profile>dev</profile>
+                            </profiles>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -432,9 +434,44 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <properties>
-                <spring.profiles.active>prod</spring.profiles.active>
-            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                        <excludes>
+                            <exclude>**/*dev.yml</exclude>
+                            <exclude>/static/index.html</exclude>
+                            <exclude>/static/css/application.css</exclude>
+                            <exclude>/static/css/bootstrap.css</exclude>
+                            <exclude>/static/css/bootstrap.css.map</exclude>
+                            <exclude>/static/js/application.js</exclude>
+                            <exclude>/static/js/bootstrap.bundle.js</exclude>
+                            <exclude>/static/js/bootstrap.bundle.js.map</exclude>
+                            <exclude>/static/js/d3.js</exclude>
+                            <exclude>/static/js/home.js</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <profiles>
+                                <profile>prod</profile>
+                            </profiles>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>build-info</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
     <reporting>
