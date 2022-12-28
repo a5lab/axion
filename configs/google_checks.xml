@@ -267,7 +267,8 @@
     <module name="CustomImportOrder">
       <property name="customImportOrderRules"
                 value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS"/>
-      <property name="standardPackageRegExp" value="^(java|javax|jakarta)\."/>
+      <property name="standardPackageRegExp" value="^(jakarta|java|javax)\."/>
+      <property name="thirdPartyPackageRegExp" value=".*"/>
       <property name="specialImportsRegExp" value="^com\.a5lab\."/>
       <property name="sortImportsInGroupAlphabetically" value="true"/>
       <property name="separateLineBetweenGroups" value="true"/>
