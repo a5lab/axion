@@ -10,14 +10,27 @@ class TenantMapperTest {
   private final TenantMapper mapper = Mappers.getMapper(TenantMapper.class);
 
   @Test
-  void testToDtoWithNull() {
+  void testToRecordWithNull() {
     final var result = mapper.toRecord(null);
 
     Assertions.assertNull(result);
   }
 
   @Test
-  void testAllFields() throws NoSuchFieldException {
+  void testToRecordIdIsNull() {
+    final Tenant t = new Tenant();
+    t.setTitle("my title1");
+    t.setDescription("my description1");
+
+    final var result = mapper.toRecord(t);
+
+    Assertions.assertNull(result.id());
+    Assertions.assertEquals(result.title(), t.getTitle());
+    Assertions.assertEquals(result.description(), t.getDescription());
+  }
+
+  @Test
+  void testToRecordAllFields() throws NoSuchFieldException {
     final Tenant t = new Tenant();
     var field = Tenant.class.getDeclaredField("id");
     ReflectionUtils.makeAccessible(field);
@@ -33,16 +46,31 @@ class TenantMapperTest {
   }
 
   @Test
-  void testIdIsNull() throws NoSuchFieldException {
-    final Tenant t = new Tenant();
-    t.setTitle("my title1");
-    t.setDescription("my description1");
+  void testToEntityWithNull() {
+    final var result = mapper.toEntity(null);
 
-    final var result = mapper.toRecord(t);
-
-    Assertions.assertNull(result.id());
-    Assertions.assertEquals(result.title(), t.getTitle());
-    Assertions.assertEquals(result.description(), t.getDescription());
+    Assertions.assertNull(result);
   }
 
+  @Test
+  void testToEntityIdIsNull() {
+    final TenantRecord record = new TenantRecord(null, "my title1", "my description1");
+
+    final var result = mapper.toEntity(record);
+
+    Assertions.assertNull(result.getId());
+    Assertions.assertEquals(result.getTitle(), record.title());
+    Assertions.assertEquals(result.getDescription(), record.description());
+  }
+
+  @Test
+  void testToEntityAllFields() {
+    final TenantRecord record = new TenantRecord(1L, "my title1", "my description1");
+
+    final var result = mapper.toEntity(record);
+
+    Assertions.assertNull(result.getId());
+    Assertions.assertEquals(result.getTitle(), record.title());
+    Assertions.assertEquals(result.getDescription(), record.description());
+  }
 }
