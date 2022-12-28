@@ -1,22 +1,21 @@
 package com.a5lab.tabr.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.a5lab.tabr.controllers.HomeController;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
-import com.a5lab.tabr.domain.radars.Radar;
+@RunWith(SpringRunner.class)
+@WebMvcTest(HomeController.class)
+class HomeControllerTests {
+  @Autowired
+  private MockMvc mockMvc;
 
-@Controller
-public class HomeController {
-
-  @GetMapping({"/", "home.html"})
-  public ModelAndView index() {
-    Radar radar = new Radar();
-    radar.setTitle("myTitle");
-    radar.setDescription("myDescriptions");
-
-    ModelAndView modelAndView = new ModelAndView("home");
-    modelAndView.addObject(radar);
-    return modelAndView;
+  @Test
+  void index() throws Exception {
+    mockMvc.perform(get("/home")).andExpect(status().isOk());
   }
 }
