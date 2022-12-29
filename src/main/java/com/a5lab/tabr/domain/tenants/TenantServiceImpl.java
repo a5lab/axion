@@ -1,6 +1,7 @@
 package com.a5lab.tabr.domain.tenants;
 
 import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,8 +29,7 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional
-  public TenantRecord saveAndFlush(TenantRecord entity){
-    // Optional.ofNullable(entity).map(tenantMapper::toEntity).map(tenantRepository::saveAndFlush).map(tenantMapper::toRecord);
+  public TenantRecord saveAndFlush(TenantRecord entity) {
     return tenantMapper.toRecord(tenantRepository.saveAndFlush(tenantMapper.toEntity(entity)));
   }
 
