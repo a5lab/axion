@@ -1,16 +1,17 @@
 package com.a5lab.tabr.domain;
 
 import java.util.Collection;
+
 import org.mapstruct.IterableMapping;
 import org.mapstruct.NullValueMappingStrategy;
 
-public interface EntityToRecordMapper<Entity, Record> {
+public interface EntityToRecordMapper<E, R> {
 
   @IterableMapping(nullValueMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
-  Collection<Record> toDtoCollection(final Collection<Entity> entityCollection);
+  Collection<R> toDtoCollection(final Collection<E> entityCollection);
 
-  Record toRecord(final Entity entity);
+  R toRecord(final E entity);
 
-  Entity toEntity(final Record record);
+  E toEntity(final R record);
 
 }
