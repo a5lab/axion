@@ -34,7 +34,7 @@ public class TenantsController {
   @GetMapping("/settings/tenants/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("/settings/tenants/add");
-    modelAndView.addObject("tenant", new TenantRecord(0L, "", ""));
+    modelAndView.addObject("tenant", new TenantRecord(0L, "this title", "this description"));
     return modelAndView;
   }
 
