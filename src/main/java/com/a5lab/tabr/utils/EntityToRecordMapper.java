@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain;
+package com.a5lab.tabr.utils;
 
 import java.util.Collection;
 

@@ -1,4 +1,4 @@
-package com.a5lab.tabr.controllers;
+package com.a5lab.tabr.domain.tenants;
 
 import jakarta.validation.Valid;
 
