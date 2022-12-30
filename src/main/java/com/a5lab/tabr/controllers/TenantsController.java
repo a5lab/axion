@@ -34,11 +34,11 @@ public class TenantsController {
     return modelAndView;
   }
 
-  @GetMapping("/settings/tenants/{id}")
+  @GetMapping("/settings/tenants/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id) {
     TenantRecord record = new TenantRecord(0L, "this title", "this description");
     ModelAndView modelAndView = new ModelAndView("/settings/tenants/show");
-    modelAndView.addObject("tenant",record);
+    modelAndView.addObject("tenant", record);
     return modelAndView;
   }
 

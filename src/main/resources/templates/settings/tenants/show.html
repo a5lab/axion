@@ -8,27 +8,18 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${tenants}">
-        <h1 th:case="null">No tenants yet!</h1>
-        <div th:case="*">
-          <h1>Tenant</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td th:text="${tenant.title}"></td>
-                <td th:text="${tenant.description}"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p><a href="/settings/tenants">All tenants</a></p>
+        <h1>Tenant</h1>
+        <ul class="html-view">
+          <li>
+            <p>Title</p>
+            <p th:text="${tenant.title}"></p>
+          </li>
+          <li>
+            <p>Description</p>
+            <p th:text="${tenant.description}"></p>
+          </li>
+        </ul>
       </div>
-    </div>
+      <p><a href="/settings/tenants">All tenants</a></p>
   </body>
 </html>
