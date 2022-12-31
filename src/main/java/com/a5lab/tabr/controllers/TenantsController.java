@@ -82,7 +82,7 @@ public class TenantsController {
     return "redirect:/settings/tenants/";
   }
 
-  @GetMapping(value = "/settings/tenants/{id}")
+  @GetMapping(value = "/settings/tenants/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     tenantService.deleteById(id);
     redirectAttributes.addFlashAttribute("msg_info", "The tenant has been deleted successfully. ");

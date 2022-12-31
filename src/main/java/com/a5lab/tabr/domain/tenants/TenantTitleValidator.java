@@ -11,7 +11,6 @@ public class TenantTitleValidator implements ConstraintValidator<TenantTitleCons
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
     return true;
-    // return StringUtils.isAllUpperCase(value);
   }
 
 }
