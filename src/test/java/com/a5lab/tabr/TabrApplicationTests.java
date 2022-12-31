@@ -15,8 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 class TabrApplicationTests {
 
-  @Autowired
-  private MockMvc mockMvc;
+  // @Autowired
+  // private MockMvc mockMvc;
 
   @Test
   void getHomePage() throws Exception {
