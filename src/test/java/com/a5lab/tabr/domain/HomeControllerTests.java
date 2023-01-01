@@ -1,4 +1,4 @@
-package com.a5lab.tabr.controllers;
+package com.a5lab.tabr.domain;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -14,7 +14,7 @@ import com.a5lab.tabr.controllers.HomeController;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(HomeController.class)
-public class HomeControllerTest {
+public class HomeControllerTests {
   @Autowired
   private MockMvc mockMvc;
 

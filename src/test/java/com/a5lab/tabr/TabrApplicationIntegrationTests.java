@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-class TabrApplicationIntTests {
+class TabrApplicationIntegrationTests {
 
   @Autowired
   private MockMvc mockMvc;
