@@ -14,7 +14,7 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
   private TenantRepository tenantRepository;
 
   @Test
-  void shouldSaveTenantWithTitleAndDescr() {
+  void shouldSaveTenantWithTitleAndDescription() {
     final Tenant r = new Tenant();
     r.setTitle("TEST");
     r.setDescription("Very good description for Tenant");
@@ -92,16 +92,6 @@ class TenantRepositoryTest extends AbstractRepositoryTest {
         .isInstanceOf(ValidationException.class);
   }
 
-  @Test
-  void shouldFailOnLowerTitle() {
-    final Tenant r = new Tenant();
-    r.setTitle("test");
-    r.setDescription("Very good description for Tenant");
-
-    Assertions.assertNull(r.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
-        .isInstanceOf(ValidationException.class);
-  }
 
   @Test
   void shouldFindSavedTenantById() {

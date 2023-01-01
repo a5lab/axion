@@ -1,16 +1,16 @@
 package com.a5lab.tabr.controllers;
 
 import jakarta.validation.Valid;
-
 import java.util.Optional;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5lab.tabr.domain.tenants.TenantRecord;
@@ -33,11 +33,16 @@ public class TenantsController {
   }
 
   @GetMapping("/settings/tenants/show/{id}")
-  public ModelAndView show(@PathVariable("id") Long id) {
-    TenantRecord tenantRecord = new TenantRecord(0L, "this title", "this description");
-    ModelAndView modelAndView = new ModelAndView("/settings/tenants/show");
-    modelAndView.addObject("tenant", tenantRecord);
-    return modelAndView;
+  public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+    Optional<TenantRecord> tenantRecord = tenantService.findById(id);
+    if (tenantRecord.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("/settings/tenants/show");
+      modelAndView.addObject("tenant", tenantRecord.get());
+      return modelAndView;
+    } else {
+      redirectAttributes.addFlashAttribute("msg_error", "Invalid tenant id. ");
+      return new ModelAndView("redirect:/settings/tenants/");
+    }
   }
 
   @GetMapping("/settings/tenants/add")
