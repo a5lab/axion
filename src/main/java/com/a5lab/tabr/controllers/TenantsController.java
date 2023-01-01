@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -17,12 +18,13 @@ import com.a5lab.tabr.domain.tenants.TenantRecord;
 import com.a5lab.tabr.domain.tenants.TenantService;
 
 @Controller
+@RequestMapping("/settings/tenants")
 @RequiredArgsConstructor
 public class TenantsController {
 
   private final TenantService tenantService;
 
-  @GetMapping("/settings/tenants")
+  @GetMapping("")
   public ModelAndView index() {
     ModelAndView modelAndView = new ModelAndView("/settings/tenants/index");
     // We need to replace it with proper values for PageRequest.of() coming from ui
@@ -32,7 +34,7 @@ public class TenantsController {
     return modelAndView;
   }
 
-  @GetMapping("/settings/tenants/show/{id}")
+  @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TenantRecord> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
@@ -45,14 +47,14 @@ public class TenantsController {
     }
   }
 
-  @GetMapping("/settings/tenants/add")
+  @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("/settings/tenants/add");
     modelAndView.addObject("tenant", new TenantRecord(0L, "this title", "this description"));
     return modelAndView;
   }
 
-  @PostMapping(value = "/settings/tenants/create")
+  @PostMapping(value = "/create")
   public String create(@Valid TenantRecord tenantRecord, BindingResult result,
                        RedirectAttributes redirectAttributes) {
     if (result.hasErrors()) { // Doesn't work
@@ -63,7 +65,7 @@ public class TenantsController {
     return "redirect:/settings/tenants";
   }
 
-  @GetMapping(value = "/settings/tenants/edit/{id}")
+  @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TenantRecord> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
@@ -76,7 +78,7 @@ public class TenantsController {
     }
   }
 
-  @PostMapping("/settings/tenants/update/{id}")
+  @PostMapping("/update/{id}")
   public String update(@PathVariable("id") Long id, @Valid TenantRecord tenantRecord,
                        BindingResult result, RedirectAttributes redirectAttributes) {
     if (result.hasErrors()) {
@@ -87,7 +89,7 @@ public class TenantsController {
     return "redirect:/settings/tenants";
   }
 
-  @GetMapping(value = "/settings/tenants/delete/{id}")
+  @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     tenantService.deleteById(id);
     redirectAttributes.addFlashAttribute("msg_info", "The tenant has been deleted successfully. ");
