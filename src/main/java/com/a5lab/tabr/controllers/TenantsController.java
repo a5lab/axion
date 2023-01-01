@@ -60,7 +60,7 @@ public class TenantsController {
     if (result.hasErrors()) { // Doesn't work
       return "/settings/tenants/add";
     }
-    tenantService.saveAndFlush(tenantRecord);
+    tenantService.save(tenantRecord);
     redirectAttributes.addFlashAttribute("msg_info", "The tenant has been created successfully. ");
     return "redirect:/settings/tenants";
   }
@@ -84,7 +84,7 @@ public class TenantsController {
     if (result.hasErrors()) {
       return "/settings/tenants/edit/{id}";
     }
-    tenantService.saveAndFlush(tenantRecord); // !!! a new insert? constraint failure
+    tenantService.save(tenantRecord); // !!! a new insert? constraint failure
     redirectAttributes.addFlashAttribute("msg_info", "The tenant has been updated successfully. ");
     return "redirect:/settings/tenants";
   }

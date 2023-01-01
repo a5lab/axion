@@ -11,7 +11,7 @@ public interface TenantService {
 
   Optional<TenantRecord> findById(Long id);
 
-  TenantRecord saveAndFlush(TenantRecord entity);
+  TenantRecord save(TenantRecord entity);
 
   void deleteById(Long id);
 }
