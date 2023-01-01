@@ -8,9 +8,9 @@
         <th:block th:replace="${scripts}" />
     </head>
     <body>
-        <div th:replace="~{fragments/system_flash.html}"></div>
         <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
         <header th:insert="~{fragments/main_header.html}"></header>
+        <div th:replace="~{fragments/system_flash.html}"></div>
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 <div class="col py-3">
