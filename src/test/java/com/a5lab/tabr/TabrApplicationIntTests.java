@@ -1,5 +1,8 @@
 package com.a5lab.tabr;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +12,16 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = DEFINED_PORT)
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
-class TabrApplicationTests {
+class TabrApplicationIntTests {
 
-  // @Autowired
-  // private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
   @Test
-  void getHomePage() throws Exception {
-    // mockMvc.perform(get("/")).andExpect(status().isOk());
+  void index() throws Exception {
+    mockMvc.perform(get("/")).andExpect(status().isOk());
   }
 }
