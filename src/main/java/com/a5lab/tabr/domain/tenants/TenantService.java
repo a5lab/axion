@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain.tenants;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface TenantService {
 
-  List<Tenant> findAll();
+  Collection<Tenant> findAll();
 
   Page<TenantRecord> findAll(Pageable pageable);
 

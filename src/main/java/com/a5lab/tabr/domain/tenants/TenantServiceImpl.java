@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain.tenants;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional(readOnly = true)
-  public List<Tenant> findAll() {
+  public Collection<Tenant> findAll() {
     return tenantRepository.findAll();
   }
 
