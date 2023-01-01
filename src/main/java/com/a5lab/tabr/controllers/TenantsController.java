@@ -41,7 +41,7 @@ public class TenantsController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute("msg_error", "Invalid tenant id. ");
-      return new ModelAndView("redirect:/settings/tenants/");
+      return new ModelAndView("redirect:/settings/tenants");
     }
   }
 
@@ -72,7 +72,7 @@ public class TenantsController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute("msg_error", "Invalid tenant id. ");
-      return new ModelAndView("redirect:/settings/tenants/");
+      return new ModelAndView("redirect:/settings/tenants");
     }
   }
 
@@ -84,7 +84,7 @@ public class TenantsController {
     }
     tenantService.saveAndFlush(tenantRecord); // !!! a new insert? constraint failure
     redirectAttributes.addFlashAttribute("msg_info", "The tenant has been updated successfully. ");
-    return "redirect:/settings/tenants/";
+    return "redirect:/settings/tenants";
   }
 
   @GetMapping(value = "/settings/tenants/delete/{id}")
