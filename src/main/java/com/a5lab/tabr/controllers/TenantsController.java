@@ -50,7 +50,7 @@ public class TenantsController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("/settings/tenants/add");
-    modelAndView.addObject("tenant", new TenantRecord(0L, "this title", "this description"));
+    modelAndView.addObject("tenant", new TenantRecord());
     return modelAndView;
   }
 
