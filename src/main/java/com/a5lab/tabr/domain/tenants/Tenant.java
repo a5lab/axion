@@ -33,7 +33,6 @@ public class Tenant extends AbstractAuditable {
   private Long id;
 
   @NotBlank
-  @TenantTitleConstraint
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 

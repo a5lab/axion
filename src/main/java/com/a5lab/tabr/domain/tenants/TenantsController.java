@@ -1,4 +1,4 @@
-package com.a5lab.tabr.controllers;
+package com.a5lab.tabr.domain.tenants;
 
 import jakarta.validation.Valid;
 import java.util.Optional;
@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.a5lab.tabr.domain.tenants.TenantRecord;
-import com.a5lab.tabr.domain.tenants.TenantService;
 
 @Controller
 @RequestMapping("/settings/tenants")
