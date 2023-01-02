@@ -1,4 +1,4 @@
-package com.a5lab.tabr.notifications;
+package com.a5lab.tabr.domain.notifications;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
