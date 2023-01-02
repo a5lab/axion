@@ -29,8 +29,8 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional
-  public TenantRecord saveAndFlush(TenantRecord entity) {
-    return tenantMapper.toRecord(tenantRepository.saveAndFlush(tenantMapper.toEntity(entity)));
+  public TenantRecord save(TenantRecord entity) {
+    return tenantMapper.toRecord(tenantRepository.save(tenantMapper.toEntity(entity)));
   }
 
   @Override

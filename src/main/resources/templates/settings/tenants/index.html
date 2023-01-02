@@ -17,6 +17,7 @@
               <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -25,6 +26,7 @@
               <tr th:each="tenant : ${tenants}">
                 <td th:text="${tenant.title}"></td>
                 <td th:text="${tenant.description}"></td>
+                <td><a th:href="@{/settings/tenants/show/{id}(id=${tenant.id})}">Show</a></td>
                 <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenant.id})}">Edit</a></td>
                 <td><a th:href="@{/settings/tenants/{id}(id=${tenant.id})}">Delete</a></td>
               </tr>
