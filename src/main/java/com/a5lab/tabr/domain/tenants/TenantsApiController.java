@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/tenants")
 @RequiredArgsConstructor
 public class TenantsApiController {
 
   private final TenantService tenantService;
 
-  @GetMapping("/tenants")
+  @GetMapping("/")
   public Collection<Tenant> index() {
     return tenantService.findAll();
   }
