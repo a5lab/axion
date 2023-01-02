@@ -15,7 +15,7 @@ postgresql__conf_dir_map:
 
 # Input type is [], example "host all tabr all md5"
 postgresql__ipv4_pg_hba:
-  - "host    all             tabr       all                     md5"
+  - "host    tabr            tabr             127.0.0.1/32            md5"
 
 #
 postgresql__ipv6_pg_hba: []
