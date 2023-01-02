@@ -1,14 +1,14 @@
-package com.a5lab.tabr.controllers;
+package com.a5lab.tabr.profile;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class DashboardController {
+public class ProfileController {
 
-  @GetMapping("/dashboard")
+  @GetMapping("/account/profile")
   public String index() {
-    return "dashboard";
+    return "account/profile";
   }
 
 }

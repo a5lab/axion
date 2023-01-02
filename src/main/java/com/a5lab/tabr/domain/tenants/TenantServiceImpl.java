@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain.tenants;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,13 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional(readOnly = true)
+  public Collection<Tenant> findAll() {
+    return tenantRepository.findAll();
+  }
+
+
+  @Override
+  @Transactional(readOnly = true)
   public Page<TenantRecord> findAll(Pageable pageable) {
     return tenantRepository.findAll(pageable).map(tenantMapper::toRecord);
   }
@@ -29,8 +37,8 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional
-  public TenantRecord saveAndFlush(TenantRecord entity) {
-    return tenantMapper.toRecord(tenantRepository.saveAndFlush(tenantMapper.toEntity(entity)));
+  public TenantRecord save(TenantRecord entity) {
+    return tenantMapper.toRecord(tenantRepository.save(tenantMapper.toEntity(entity)));
   }
 
   @Override

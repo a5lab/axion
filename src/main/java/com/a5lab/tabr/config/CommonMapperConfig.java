@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain;
+package com.a5lab.tabr.config;
 
 import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.InjectionStrategy;

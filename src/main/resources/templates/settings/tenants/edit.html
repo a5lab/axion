@@ -10,9 +10,9 @@
     <div id="content">
       <h1>Edit tenant</h1>
       <form action="#" th:action="@{/settings/tenants/update/{id}(id=${tenant.id})}" th:object="${tenant}" method="post">
-        <label for="name">Name</label>
-        <input type="text" th:field="*{name}" id="name" placeholder="Name">
-        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <label for="title">Title</label>
+        <input type="text" th:field="*{title}" id="title" placeholder="Title">
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
         <label for="email">Description</label>
         <input type="text" th:field="*{description}" id="email" placeholder="Description">
         <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
