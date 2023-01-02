@@ -14,7 +14,7 @@ public class TenantsApiController {
 
   private final TenantService tenantService;
 
-  @GetMapping("/")
+  @GetMapping("")
   public Collection<Tenant> index() {
     return tenantService.findAll();
   }
