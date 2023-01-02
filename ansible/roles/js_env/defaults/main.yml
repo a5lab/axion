@@ -26,4 +26,6 @@ js_env__package_map:
 js_env__npm_map:
   - esbuild
   - jpm
+  - uglifycss
+  - uglifyjs
   - yarn
