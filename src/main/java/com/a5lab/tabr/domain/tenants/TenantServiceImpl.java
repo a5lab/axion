@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain.tenants;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class TenantServiceImpl implements TenantService {
   private final TenantRepository tenantRepository;
   private final TenantMapper tenantMapper;
+
+  @Override
+  @Transactional(readOnly = true)
+  public Collection<Tenant> findAll() {
+    return tenantRepository.findAll();
+  }
+
 
   @Override
   @Transactional(readOnly = true)
