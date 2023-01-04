@@ -14,7 +14,6 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
-        cache: npm
     - name: Install uglifycss
       shell: bash
       run: npm install uglifycss -g
