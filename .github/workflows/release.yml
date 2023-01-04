@@ -1,0 +1,50 @@
+#
+# Build and release plugin
+#
+name: Release plugin
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'Release version'
+        required: true
+        default: '1.0.0'
+        type: string
+      development_version:
+        description: 'Development version'
+        required: true
+        default: '1.0.1-SNAPSHOT'
+        type: string
+      tag:
+        description: 'Tag'
+        required: true
+        default: 'ssp-1.0.0'
+        type: string
+      email:
+        description: 'Email for git'
+        required: true
+        default: 'arufanov@gmail.com'
+        type: string
+      username:
+        description: 'Username for git'
+        required: true
+        default: 'Artem.Rufanov'
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+      - name: Install JDK
+        uses: ./.github/actions/jdk
+      - name: Install Atlassin SDK
+        uses: ./.github/actions/atlas
+      - name: Show version
+        run: atlas-version
+      - name: Congigure git
+        run: git config user.email ${{ inputs.email }} && git config user.name  ${{ inputs.username }}
+      #- name: Release a new version
+      #  run: atlas-release -DreleaseVersion=${{ inputs.release_version }} -DdevelopmentVersion=${{ inputs.development_version }} -Dtag=${{ inputs.tag }}

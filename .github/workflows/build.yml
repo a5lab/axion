@@ -1,0 +1,29 @@
+#
+# Build and test plugin
+#
+name: Build and test plugin
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v3
+    - name: Install JDK
+      uses: ./.github/actions/jdk
+    - name: Install Atlassin SDK
+      uses: ./.github/actions/atlas
+    - name: Show version
+      run: atlas-version
+    - name: Build package
+      run: atlas-package
+    - name: Run unit tests
+      run: atlas-unit-test
+    - name: Run integration tests
+      run: atlas-integration-test
