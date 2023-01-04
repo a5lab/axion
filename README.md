@@ -54,10 +54,10 @@ Technical and business radar. Spring boot based application
 # Working with embedded H2 DB(In-Memory)
 
 * run application by command: "mvn spring-boot:run -Pdev"
-* Enter http://localhost:8080/h2-console to browser
-* Enter "jdbc:h2:mem:tabr" into JDBC URL field
-* Enter "tabr" into User Name field
-* Enter "secret" into Password field
+* enter http://localhost:8080/h2-console to browser
+* enter "jdbc:h2:mem:tabr" into JDBC URL field
+* enter "tabr" into User Name field
+* enter "secret" into Password field
 
 # Inspired by 
 
