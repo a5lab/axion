@@ -20,4 +20,5 @@ jobs:
       - name: Install NodeJS
         uses: ./.github/actions/nodejs
       - name: Build package
+        shell: bash
         run: mvn package
