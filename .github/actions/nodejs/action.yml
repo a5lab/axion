@@ -1,0 +1,16 @@
+#
+# Install NodeJS
+#
+name: 'Install NodeJS'
+author: ARufanov
+description: 'Download NodeJS and install it'
+branding:
+  icon: server
+  color: blue
+runs:
+  using: "composite"
+  steps:
+    - name: Set up NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
