@@ -36,9 +36,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
       - name: Install JDK
         uses: ./.github/actions/jdk
       - name: Install NodeJS
         uses: ./.github/actions/nodejs
-      - name: Checkout sources
-        uses: actions/checkout@v3
