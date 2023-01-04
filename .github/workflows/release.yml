@@ -6,30 +6,10 @@ name: Release application
 on:
   workflow_dispatch:
     inputs:
-      release_version:
-        description: 'Release version'
-        required: true
-        default: '1.0.0'
-        type: string
-      development_version:
-        description: 'Development version'
-        required: true
-        default: '1.0.1-SNAPSHOT'
-        type: string
       tag:
         description: 'Tag'
         required: true
-        default: 'ssp-1.0.0'
-        type: string
-      email:
-        description: 'Email for git'
-        required: true
-        default: 'arufanov@gmail.com'
-        type: string
-      username:
-        description: 'Username for git'
-        required: true
-        default: 'Artem.Rufanov'
+        default: '1.0.0'
         type: string
 
 jobs:
@@ -38,6 +18,35 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
-      - name: Release package
+        with:
+          ref: ${{ inputs.tag }}
+      - name: Install JDK
+        uses: ./.github/actions/jdk
+      - name: Install NodeJS
+        uses: ./.github/actions/nodejs
+      - name: Build package
         shell: bash
-        run: echo hello from release!
+        run: mvn package
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: true
+          prerelease: false
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./path/to/asset.zip
+          asset_name: asset.zip
+          asset_content_type: application/zip
