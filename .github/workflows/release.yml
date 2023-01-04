@@ -1,7 +1,7 @@
 #
-# Build and release plugin
+# Build and release application
 #
-name: Release plugin
+name: Release application
 
 on:
   workflow_dispatch:

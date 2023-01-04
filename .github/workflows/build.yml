@@ -1,7 +1,7 @@
 #
-# Build and test plugin
+# Build and test application
 #
-name: Build and test plugin
+name: Build and test application
 
 on:
   push:
