@@ -49,6 +49,8 @@ spring:
       login-timeout: 10000
   messages:
     basename: locales.messages
+    encoding: UTF-8
+    use-code-as-default-message: true
   transaction:
     rollback-on-commit-failure: true
     default-timeout: 30s
