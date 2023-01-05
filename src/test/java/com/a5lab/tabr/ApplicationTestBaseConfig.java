@@ -16,5 +16,5 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-public @interface TabrTestBaseConfig {
+public @interface ApplicationTestBaseConfig {
 }
