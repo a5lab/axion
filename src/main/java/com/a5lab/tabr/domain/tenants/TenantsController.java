@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.tabr.utils.FlashMessages;
+
+
 @Controller
 @RequestMapping("/settings/tenants")
 @RequiredArgsConstructor
@@ -39,7 +42,8 @@ public class TenantsController {
       modelAndView.addObject("tenant", tenantRecord.get());
       return modelAndView;
     } else {
-      redirectAttributes.addFlashAttribute("msg_error", "Invalid tenant id. ");
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
+          "Invalid tenant id. ");
       return new ModelAndView("redirect:/settings/tenants");
     }
   }
@@ -58,7 +62,8 @@ public class TenantsController {
       return "/settings/tenants/add";
     }
     tenantService.save(tenantRecord);
-    redirectAttributes.addFlashAttribute("msg_info", "The tenant has been created successfully. ");
+    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+        "The tenant has been created successfully. ");
     return "redirect:/settings/tenants";
   }
 
@@ -70,7 +75,8 @@ public class TenantsController {
       modelAndView.addObject("tenant", tenantRecord.get());
       return modelAndView;
     } else {
-      redirectAttributes.addFlashAttribute("msg_error", "Invalid tenant id. ");
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
+          "Invalid tenant id. ");
       return new ModelAndView("redirect:/settings/tenants");
     }
   }
@@ -82,14 +88,16 @@ public class TenantsController {
       return "/settings/tenants/edit/{id}";
     }
     tenantService.save(tenantRecord); // !!! a new insert? constraint failure
-    redirectAttributes.addFlashAttribute("msg_info", "The tenant has been updated successfully. ");
+    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+        "The tenant has been updated successfully. ");
     return "redirect:/settings/tenants";
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     tenantService.deleteById(id);
-    redirectAttributes.addFlashAttribute("msg_info", "The tenant has been deleted successfully. ");
+    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+        "The tenant has been deleted successfully. ");
     return "redirect:/settings/tenants";
   }
 }

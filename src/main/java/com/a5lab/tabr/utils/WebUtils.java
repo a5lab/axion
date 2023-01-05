@@ -12,10 +12,6 @@ import org.springframework.web.servlet.LocaleResolver;
 
 @Component
 public class WebUtils {
-
-  public static final String MSG_SUCCESS = "MSG_SUCCESS";
-  public static final String MSG_INFO = "MSG_INFO";
-  public static final String MSG_ERROR = "MSG_ERROR";
   private static MessageSource messageSource;
   private static LocaleResolver localeResolver;
 
