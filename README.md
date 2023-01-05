@@ -2,11 +2,13 @@
 
 Technical and business radar. Spring boot based application
 
-# Installation antora
-
-* install nvm by command: brew install nvm and make post configuration
-* install nodejs by command: nvm install --lts
-* install nvm by command: brew install asciidoctor
+# Release application
+* update version at antora.yml file
+* run command mvn release and provide information
+* commit changes and create a new git tag
+* run manual release actions at GitHub action with a new tag
+* provide information about release at GitHub
+* press button publish release at GitHub
 
 # Idea configuration
 
@@ -45,18 +47,19 @@ Technical and business radar. Spring boot based application
 * minify jscript by command: uglifyjs application.js -o application.min.js -c -m
 * install css minifier by command: npm install -g uglifycss
 * minify css by command: uglifycss application.css --output application.min.css 
+* install nvm by command: brew install nvm and make post configuration
+* install nodejs by command: nvm install --lts
+* install asciidoctor by command: brew install asciidoctor
 
 # Working with embedded H2 DB(In-Memory)
 
-* run application by command: "mvn spring-boot:run -Pdev".
-  Now you can access H2 Console http://localhost:8080/h2-console
-  Enter values
-  JDBC URL "jdbc:h2:mem:tabr"
-  User Name "tabr"
-  Password "secret"
+* run application by command: "mvn spring-boot:run -Pdev"
+* enter http://localhost:8080/h2-console to browser
+* enter "jdbc:h2:mem:tabr" into JDBC URL field
+* enter "tabr" into User Name field
+* enter "secret" into Password field
 
 # Inspired by 
 
 * https://github.com/thoughtworks/build-your-own-radar
 * https://github.com/zalando/tech-radar
-

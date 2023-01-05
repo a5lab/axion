@@ -1,0 +1,18 @@
+#
+# Install Java SDK
+#
+name: 'Install Java SDK'
+author: ARufanov
+description: 'Download Java SDK and install it'
+branding:
+  icon: server
+  color: blue
+runs:
+  using: "composite"
+  steps:
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'liberica'
+        cache: maven
