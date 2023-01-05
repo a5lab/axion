@@ -46,9 +46,9 @@ public class TenantsController {
       modelAndView.addObject("tenant", tenantRecord.get());
       return modelAndView;
     } else {
-      Locale locale = LocaleContextHolder.getLocale();
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("tenant.flash.error.invalid_id", null, locale));
+          messageSource.getMessage("tenant.flash.error.invalid_id", null,
+              LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/tenants");
     }
   }
@@ -68,7 +68,8 @@ public class TenantsController {
     }
     tenantService.save(tenantRecord);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        "The tenant has been created successfully. ");
+        messageSource.getMessage("tenant.flash.info.created", null,
+            LocaleContextHolder.getLocale()));
     return "redirect:/settings/tenants";
   }
 
@@ -81,7 +82,8 @@ public class TenantsController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          "Invalid tenant id. ");
+          messageSource.getMessage("tenant.flash.error.invalid_id", null,
+              LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/tenants");
     }
   }
@@ -94,7 +96,8 @@ public class TenantsController {
     }
     tenantService.save(tenantRecord); // !!! a new insert? constraint failure
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        "The tenant has been updated successfully. ");
+        messageSource.getMessage("tenant.flash.info.updated", null,
+            LocaleContextHolder.getLocale()));
     return "redirect:/settings/tenants";
   }
 
@@ -102,7 +105,8 @@ public class TenantsController {
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     tenantService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        "The tenant has been deleted successfully. ");
+        messageSource.getMessage("tenant.flash.info.deleted", null,
+            LocaleContextHolder.getLocale()));
     return "redirect:/settings/tenants";
   }
 }
