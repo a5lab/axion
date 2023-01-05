@@ -48,7 +48,7 @@ public class TenantsController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("tenant.flash.invalid_id", null, Locale.GERMAN));
+          messageSource.getMessage("tenant.flash.error.invalid_id", null, Locale.GERMAN));
       return new ModelAndView("redirect:/settings/tenants");
     }
   }
