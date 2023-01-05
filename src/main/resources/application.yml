@@ -120,3 +120,7 @@ management:
       base-path: /actuator
       exposure:
         include: "health,info,metrics,prometheus"
+
+application:
+  keys:
+    google_analytics: N/A
