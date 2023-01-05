@@ -7,6 +7,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 public class ApplicationConfiguration {
   @Bean
   public MessageSource messageSource() {
+    // Doest' work
     ReloadableResourceBundleMessageSource messageSource =
         new ReloadableResourceBundleMessageSource();
     messageSource.setBasenames(
