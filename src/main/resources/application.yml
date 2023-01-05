@@ -48,7 +48,7 @@ spring:
       allow-pool-suspension: false
       login-timeout: 10000
   messages:
-    basename: locales.tenant
+    basename: messages
     encoding: UTF-8
     use-code-as-default-message: true
   transaction:
