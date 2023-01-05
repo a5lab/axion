@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -45,8 +46,9 @@ public class TenantsController {
       modelAndView.addObject("tenant", tenantRecord.get());
       return modelAndView;
     } else {
+      Locale locale = LocaleContextHolder.getLocale();
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("tenant.flash.error.invalid_id", null, Locale.GERMAN));
+          messageSource.getMessage("tenant.flash.error.invalid_id", null, locale));
       return new ModelAndView("redirect:/settings/tenants");
     }
   }

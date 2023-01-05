@@ -18,7 +18,6 @@ public class MessageConfiguration implements WebMvcConfigurer {
 
   @Bean
   public MessageSource messageSource() {
-    // Doest' work
     ReloadableResourceBundleMessageSource messageSource =
         new ReloadableResourceBundleMessageSource();
     messageSource.setBasenames(
