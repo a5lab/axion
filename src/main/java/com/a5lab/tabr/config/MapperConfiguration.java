@@ -21,5 +21,5 @@ import org.mapstruct.ReportingPolicy;
     mappingInheritanceStrategy = MappingInheritanceStrategy.EXPLICIT,
     unmappedSourcePolicy = ReportingPolicy.IGNORE
 )
-public interface CommonMapperConfiguration {
+public interface MapperConfiguration {
 }
