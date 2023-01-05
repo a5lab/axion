@@ -1,7 +1,6 @@
 package com.a5lab.tabr.domain.tenants;
 
 import jakarta.validation.Valid;
-import java.util.Locale;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
