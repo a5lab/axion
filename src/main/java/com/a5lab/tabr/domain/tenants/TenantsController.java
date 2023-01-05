@@ -1,9 +1,12 @@
 package com.a5lab.tabr.domain.tenants;
 
 import jakarta.validation.Valid;
+import java.util.Locale;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,6 +26,8 @@ import com.a5lab.tabr.utils.FlashMessages;
 public class TenantsController {
 
   private final TenantService tenantService;
+  @Autowired
+  private MessageSource messageSource;
 
   @GetMapping("")
   public ModelAndView index() {
@@ -43,7 +48,7 @@ public class TenantsController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          "Invalid tenant id. ");
+          messageSource.getMessage("tenant.flash.invalid_id", null, Locale.GERMAN));
       return new ModelAndView("redirect:/settings/tenants");
     }
   }
