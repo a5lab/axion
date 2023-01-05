@@ -1,16 +1,12 @@
 package com.a5lab.tabr.utils;
 
-
 import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-@Getter
-public enum FlashMessages {
-  INFO("msg_info"),
-  ERROR("msg_error"),
-  WARNING("msg_warning");
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class FlashMessages {
+  public static final String INFO = "msg_info";
+  public static final String ERROR = "msg_error";
+  public static final String WARNING = "msg_warning";
 
-  private final String text;
 }

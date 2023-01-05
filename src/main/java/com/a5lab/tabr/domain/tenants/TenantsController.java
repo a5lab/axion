@@ -42,7 +42,7 @@ public class TenantsController {
       modelAndView.addObject("tenant", tenantRecord.get());
       return modelAndView;
     } else {
-      redirectAttributes.addFlashAttribute(FlashMessages.ERROR.getText(),
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           "Invalid tenant id. ");
       return new ModelAndView("redirect:/settings/tenants");
     }
@@ -62,7 +62,7 @@ public class TenantsController {
       return "/settings/tenants/add";
     }
     tenantService.save(tenantRecord);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO.getText(),
+    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         "The tenant has been created successfully. ");
     return "redirect:/settings/tenants";
   }
@@ -75,7 +75,7 @@ public class TenantsController {
       modelAndView.addObject("tenant", tenantRecord.get());
       return modelAndView;
     } else {
-      redirectAttributes.addFlashAttribute(FlashMessages.ERROR.getText(),
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           "Invalid tenant id. ");
       return new ModelAndView("redirect:/settings/tenants");
     }
@@ -88,7 +88,7 @@ public class TenantsController {
       return "/settings/tenants/edit/{id}";
     }
     tenantService.save(tenantRecord); // !!! a new insert? constraint failure
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO.getText(),
+    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         "The tenant has been updated successfully. ");
     return "redirect:/settings/tenants";
   }
@@ -96,7 +96,7 @@ public class TenantsController {
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     tenantService.deleteById(id);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO.getText(),
+    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         "The tenant has been deleted successfully. ");
     return "redirect:/settings/tenants";
   }
