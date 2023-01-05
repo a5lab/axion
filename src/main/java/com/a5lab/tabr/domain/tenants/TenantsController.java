@@ -5,7 +5,6 @@ import java.util.Locale;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -26,8 +25,7 @@ import com.a5lab.tabr.utils.FlashMessages;
 public class TenantsController {
 
   private final TenantService tenantService;
-  @Autowired
-  private MessageSource messageSource;
+  private final MessageSource messageSource;
 
   @GetMapping("")
   public ModelAndView index() {
