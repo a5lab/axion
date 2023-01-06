@@ -32,6 +32,7 @@ Technical and business radar. Spring boot based application
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
 * obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
 * build package by command: mvnw clean package -Dmaven.test.skip
+* build prod package by command: mvn clean package -Dactive.profile=prod
 * run application by command: mvnw spring-boot:run
 * run application with profile by command: mvnw spring-boot:run -Pdev
 * run database migration by command: mvnw liquibase:update

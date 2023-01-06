@@ -58,6 +58,8 @@ spring:
     label-filter: locale_en
     contexts: data
   thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
     cache: true
   data:
     jpa:
