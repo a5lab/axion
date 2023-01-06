@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.springframework.util.ReflectionUtils;
 
-class TenantMapperTest {
+class TenantMapperTests {
 
   private final TenantMapper mapper = Mappers.getMapper(TenantMapper.class);
 
