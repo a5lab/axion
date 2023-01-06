@@ -1,0 +1,24 @@
+#
+# Deploy application
+#
+name: Deploy application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+      - name: Install JDK
+        uses: ./.github/actions/jdk
+      - name: Install NodeJS
+        uses: ./.github/actions/nodejs
+      - name: Build package
+        shell: bash
+        run: mvn package
