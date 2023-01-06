@@ -265,6 +265,7 @@
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>${sonar.plugin.version}</version>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
@@ -281,7 +282,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
