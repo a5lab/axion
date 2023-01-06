@@ -54,7 +54,7 @@ class TenantMapperTests {
 
   @Test
   void testToEntityIdIsNull() {
-    final TenantRecord record = new TenantRecord(null, "my title1", "my description1");
+    final TenantDTO record = new TenantDTO(null, "my title1", "my description1");
 
     final var result = mapper.toEntity(record);
 
@@ -65,7 +65,7 @@ class TenantMapperTests {
 
   @Test
   void testToEntityAllFields() {
-    final TenantRecord record = new TenantRecord(1L, "my title1", "my description1");
+    final TenantDTO record = new TenantDTO(1L, "my title1", "my description1");
 
     final var result = mapper.toEntity(record);
 
