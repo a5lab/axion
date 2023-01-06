@@ -63,7 +63,7 @@ public class TenantsController {
   public String create(@Valid TenantRecord tenantRecord, BindingResult result,
                        RedirectAttributes redirectAttributes) {
     if (result.hasErrors()) { // Doesn't work
-      return "/settings/tenants/add.html";
+      return "/settings/tenants/add";
     }
     tenantService.save(tenantRecord);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
@@ -91,7 +91,7 @@ public class TenantsController {
   public String update(@PathVariable("id") Long id, @Valid TenantRecord tenantRecord,
                        BindingResult result, RedirectAttributes redirectAttributes) {
     if (result.hasErrors()) {
-      return "/settings/tenants/edit.html/{id}";
+      return "/settings/tenants/edit/{id}";
     }
     tenantService.save(tenantRecord); // !!! a new insert? constraint failure
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
