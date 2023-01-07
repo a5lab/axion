@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain;
+package com.a5lab.tabr.utils;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

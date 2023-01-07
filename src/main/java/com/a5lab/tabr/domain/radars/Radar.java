@@ -15,7 +15,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.a5lab.tabr.domain.AbstractAuditable;
+import com.a5lab.tabr.utils.AbstractAuditable;
 
 @Entity
 @Table(name = "radars")
