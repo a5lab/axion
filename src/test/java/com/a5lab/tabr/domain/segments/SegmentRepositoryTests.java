@@ -2,13 +2,13 @@ package com.a5lab.tabr.domain.segments;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.a5lab.tabr.AbstractRepositoryTest;
+import com.a5lab.tabr.AbstractRepositoryTests;
 import jakarta.validation.ValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class SegmentRepositoryTest extends AbstractRepositoryTest {
+class SegmentRepositoryTests extends AbstractRepositoryTests {
 
   @Autowired
   private SegmentRepository segmentRepository;

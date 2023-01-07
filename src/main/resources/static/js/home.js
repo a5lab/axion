@@ -362,8 +362,8 @@ function radar_visualization(config) {
           .text(function(d, i) { return d.id + ". " + d.label; })
           .style("font-family", "Arial, Helvetica")
           .style("font-size", "11px")
-          .on("mouseover", function(d) { showBubble(d); highlightLegendItem(d); })
-          .on("mouseout", function(d) { hideBubble(d); unhighlightLegendItem(d); });
+          .on("mouseover", function(event, d) { showBubble(d); highlightLegendItem(d); })
+          .on("mouseout", function(event, d) { hideBubble(d); unhighlightLegendItem(d); });
       }
     }
   }
@@ -435,8 +435,8 @@ function radar_visualization(config) {
       .append("g")
         .attr("class", "blip")
         .attr("transform", function(d, i) { return legend_transform(d.quadrant, d.ring, i); })
-        .on("mouseover", function(d) { showBubble(d); highlightLegendItem(d); })
-        .on("mouseout", function(d) { hideBubble(d); unhighlightLegendItem(d); });
+        .on("mouseover", function(event, d) { showBubble(d); highlightLegendItem(d); })
+        .on("mouseout", function(event, d) { hideBubble(d); unhighlightLegendItem(d); });
 
   // configure each blip
   blips.each(function(d) {

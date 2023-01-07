@@ -7,18 +7,18 @@
       class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarToggle">
       <ul class="navbar-nav ms-auto">
-        <li class="navbar-item"><a class="nav-link" th:href="@{/}" th:text="#{navigation.home}"/></li>
-        <li class="navbar-item"><a class="nav-link" th:href="@{/dashboard}" th:text="#{navigation.dashboard}"/></li>
+        <li class="navbar-item"><a class="nav-link" th:href="@{/}" th:text="#{metamenu.home}"/></li>
+        <li class="navbar-item"><a class="nav-link" th:href="@{/dashboard}" th:text="#{metamenu.dashboard}"/></li>
         <li class="navbar-item dropdown">
           <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-             id="navbarEntitiesLink" role="button" th:text="#{navigation.account}"/>
+             id="navbarEntitiesLink" role="button" th:text="#{metamenu.account}"/>
           <ul aria-labelledby="navbarEntitiesLink" class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" th:href="@{/account/profile}" th:text="#{navigation.signin}"/></li>
-            <li><a class="dropdown-item" th:href="@{/account/profile}" th:text="#{navigation.profile}"/></li>
-            <li><a class="dropdown-item" th:href="@{/account/profile}" th:text="#{navigation.settings}"/></li>
-            <li><a class="dropdown-item" th:href="@{/account/profile}" th:text="#{navigation.signout}"/></li>
+            <li><a class="dropdown-item" th:href="@{/account/profile}" th:text="#{metamenu.signin}"/></li>
+            <li><a class="dropdown-item" th:href="@{/account/profile}" th:text="#{metamenu.profile}"/></li>
+            <li><a class="dropdown-item" th:href="@{/account/profile}" th:text="#{metamenu.settings}"/></li>
+            <li><a class="dropdown-item" th:href="@{/account/profile}" th:text="#{metamenu.signout}"/></li>
             <li><a class="dropdown-item" th:href="@{https://docs.a5lab.com}" th:target="_blank"
-                   th:text="#{navigation.docs}"/></li>
+                   th:text="#{metamenu.docs}"/></li>
           </ul>
         </li>
       </ul>

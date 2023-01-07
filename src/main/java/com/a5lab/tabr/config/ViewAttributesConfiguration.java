@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class CommonViewAttributesConfiguration implements WebMvcConfigurer {
+public class ViewAttributesConfiguration implements WebMvcConfigurer {
 
   private static final String VIEW_SERVLET_PATH_ATTRIBUTE = "servletPath";
 

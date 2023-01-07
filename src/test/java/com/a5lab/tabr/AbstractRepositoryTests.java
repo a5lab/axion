@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Import;
 @Import({
     JpaAuditingConfiguration.class
 })
-@TabrTestBaseConfig
-public abstract class AbstractRepositoryTest {
+@ApplicationTestBaseConfig
+public abstract class AbstractRepositoryTests {
 }
