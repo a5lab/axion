@@ -15,94 +15,94 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
 
   @Test
   void shouldSaveTenantWithTitleAndDescription() {
-    final Tenant r = new Tenant();
-    r.setTitle("TEST");
-    r.setDescription("Very good description for Tenant");
+    final Tenant tenant = new Tenant();
+    tenant.setTitle("TEST");
+    tenant.setDescription("Very good description for Tenant");
 
-    Assertions.assertNull(r.getId());
-    tenantRepository.saveAndFlush(r);
-    Assertions.assertNotNull(r.getId());
-    Assertions.assertNotNull(r.getCreatedBy());
-    Assertions.assertNotNull(r.getCreatedDate());
-    Assertions.assertNotNull(r.getLastModifiedBy());
-    Assertions.assertNotNull(r.getLastModifiedDate());
+    Assertions.assertNull(tenant.getId());
+    tenantRepository.saveAndFlush(tenant);
+    Assertions.assertNotNull(tenant.getId());
+    Assertions.assertNotNull(tenant.getCreatedBy());
+    Assertions.assertNotNull(tenant.getCreatedDate());
+    Assertions.assertNotNull(tenant.getLastModifiedBy());
+    Assertions.assertNotNull(tenant.getLastModifiedDate());
   }
 
   @Test
   void shouldFailOnNullTitle() {
-    final Tenant r = new Tenant();
-    r.setDescription("Very good description for Tenant");
+    final Tenant tenant = new Tenant();
+    tenant.setDescription("Very good description for Tenant");
 
-    Assertions.assertNull(r.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+    Assertions.assertNull(tenant.getId());
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnEmptyTitle() {
-    final Tenant r = new Tenant();
-    r.setTitle("");
-    r.setDescription("Very good description for Tenant");
+    final Tenant tenant = new Tenant();
+    tenant.setTitle("");
+    tenant.setDescription("Very good description for Tenant");
 
-    Assertions.assertNull(r.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+    Assertions.assertNull(tenant.getId());
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnWhiteSpaceTitle() {
-    final Tenant r = new Tenant();
-    r.setTitle(" ");
-    r.setDescription("Very good description for Tenant");
+    final Tenant tenant = new Tenant();
+    tenant.setTitle(" ");
+    tenant.setDescription("Very good description for Tenant");
 
-    Assertions.assertNull(r.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+    Assertions.assertNull(tenant.getId());
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnNullDescription() {
-    final Tenant r = new Tenant();
-    r.setTitle("TEST");
+    final Tenant tenant = new Tenant();
+    tenant.setTitle("TEST");
 
-    Assertions.assertNull(r.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+    Assertions.assertNull(tenant.getId());
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnEmptyDescription() {
-    final Tenant r = new Tenant();
-    r.setTitle("TEST");
-    r.setDescription("");
+    final Tenant tenant = new Tenant();
+    tenant.setTitle("TEST");
+    tenant.setDescription("");
 
-    Assertions.assertNull(r.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+    Assertions.assertNull(tenant.getId());
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnWhiteSpaceDescription() {
-    final Tenant r = new Tenant();
-    r.setTitle("TEST");
-    r.setDescription(" ");
+    final Tenant tenant = new Tenant();
+    tenant.setTitle("TEST");
+    tenant.setDescription(" ");
 
-    Assertions.assertNull(r.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(r))
+    Assertions.assertNull(tenant.getId());
+    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
         .isInstanceOf(ValidationException.class);
   }
 
 
   @Test
   void shouldFindSavedTenantById() {
-    final Tenant r = new Tenant();
-    r.setTitle("MY");
-    r.setDescription("Very good description for Tenant");
+    final Tenant tenant = new Tenant();
+    tenant.setTitle("MY");
+    tenant.setDescription("Very good description for Tenant");
 
-    Assertions.assertNull(r.getId());
-    tenantRepository.saveAndFlush(r);
-    Assertions.assertNotNull(r.getId());
-    var id = r.getId();
+    Assertions.assertNull(tenant.getId());
+    tenantRepository.saveAndFlush(tenant);
+    Assertions.assertNotNull(tenant.getId());
+    var id = tenant.getId();
 
     Assertions.assertTrue(tenantRepository.findById(id).isPresent());
   }
