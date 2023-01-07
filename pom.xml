@@ -399,24 +399,6 @@
                 </dependency>
             </dependencies>
             <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-                        <includes>
-                            <include>**/*dev.yml</include>
-                            <include>/static/index.html</include>
-                            <include>/static/css/application.css</include>
-                            <include>/static/css/bootstrap.css</include>
-                            <include>/static/css/bootstrap.css.map</include>
-                            <include>/static/js/application.js</include>
-                            <include>/static/js/bootstrap.bundle.js</include>
-                            <include>/static/js/bootstrap.bundle.js.map</include>
-                            <include>/static/js/d3.js</include>
-                            <include>/static/js/home.js</include>
-                        </includes>
-                    </resource>
-                </resources>
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
