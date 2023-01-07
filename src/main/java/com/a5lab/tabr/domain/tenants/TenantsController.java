@@ -60,12 +60,12 @@ public class TenantsController {
   }
 
   @PostMapping(value = "/create")
-  public String create(@Valid TenantDto tenantDto, BindingResult result,
+  public String create(@Valid TenantDto tenantDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
-    if (result.hasErrors()) { // Doesn't work
+    if (bindingResult.hasErrors()) {
       return "/settings/tenants/add";
     }
-    tenantService.save(tenantDto);
+    tenantService.create(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.created", null,
             LocaleContextHolder.getLocale()));
@@ -89,11 +89,11 @@ public class TenantsController {
 
   @PostMapping("/update/{id}")
   public String update(@PathVariable("id") Long id, @Valid TenantDto tenantDto,
-                       BindingResult result, RedirectAttributes redirectAttributes) {
-    if (result.hasErrors()) {
+                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    if (bindingResult.hasErrors()) {
       return "/settings/tenants/edit/{id}";
     }
-    tenantService.save(tenantDto); // !!! a new insert? constraint failure
+    tenantService.update(id, tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.updated", null,
             LocaleContextHolder.getLocale()));

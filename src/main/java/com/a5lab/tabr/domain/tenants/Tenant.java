@@ -29,7 +29,6 @@ public class Tenant extends AbstractAuditable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false, unique = true)
-  @Setter(AccessLevel.NONE)
   private Long id;
 
   @NotBlank

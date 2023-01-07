@@ -37,8 +37,16 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional
-  public TenantDto save(TenantDto entity) {
-    return tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(entity)));
+  public TenantDto create(TenantDto tenantDto) {
+    return tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(tenantDto)));
+  }
+
+  @Override
+  @Transactional
+  public TenantDto update(Long id, TenantDto tenantDto) {
+    Tenant tenant = tenantMapper.toEntity(tenantDto);
+    tenant.setId(id);
+    return tenantMapper.toDto(tenantRepository.save(tenant));
   }
 
   @Override
