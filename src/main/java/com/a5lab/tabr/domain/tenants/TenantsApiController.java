@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/tenants")
 @RequiredArgsConstructor
-public class TenantsAPIController {
+public class TenantsApiController {
 
   private final TenantService tenantService;
 
