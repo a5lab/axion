@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.a5lab.tabr.domain.ApplicationController;
 import com.a5lab.tabr.utils.FlashMessages;
 
 
 @Controller
 @RequestMapping("/settings/tenants")
 @RequiredArgsConstructor
-public class TenantsController extends ApplicationController {
+public class TenantsController {
 
   private final TenantService tenantService;
   private final MessageSource messageSource;

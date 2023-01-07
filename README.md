@@ -34,6 +34,7 @@ Technical and business radar. Spring boot based application
 * build package by command: ./mvnw clean package -Dmaven.test.skip
 * run application by command: ./mvnw spring-boot:run
 * run application with profile by command: ./mvnw spring-boot:run -Pdev
+* run application with by command: java -jar tabr-x.y.z.jar --application.keys.google_analytics=123
 * run database migration by command: ./mvnw liquibase:update
 * create checkstyle report by command: ./mvnw checkstyle:checkstyle
 * get coverage report by command: ./mvnw jacoco:report -Pdev
