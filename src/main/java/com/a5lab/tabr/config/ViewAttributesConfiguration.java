@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,7 +14,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class ViewAttributesConfiguration implements WebMvcConfigurer {
 
+  @Value("")
+  public String googleAnalytics;
+
+
   private static final String VIEW_SERVLET_PATH_ATTRIBUTE = "servletPath";
+
+  private static final String VIEW_GOOGLE_ANALYTICS_ATTRIBUTE = "googleAnalytics";
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {

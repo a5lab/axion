@@ -125,4 +125,4 @@ management:
 
 application:
   keys:
-    google_analytics: N/A
+    google_analytics:
