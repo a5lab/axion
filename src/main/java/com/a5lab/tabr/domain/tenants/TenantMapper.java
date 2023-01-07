@@ -6,5 +6,5 @@ import com.a5lab.tabr.config.MapperConfiguration;
 import com.a5lab.tabr.utils.EntityToRecordMapper;
 
 @Mapper(config = MapperConfiguration.class)
-public interface TenantMapper extends EntityToRecordMapper<Tenant, TenantDTO> {
+public interface TenantMapper extends EntityToRecordMapper<Tenant, TenantDto> {
 }

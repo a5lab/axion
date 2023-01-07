@@ -39,7 +39,7 @@ public class TenantsController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TenantDTO> tenantRecord = tenantService.findById(id);
+    Optional<TenantDto> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("/settings/tenants/show");
       modelAndView.addObject("tenant", tenantRecord.get());
@@ -55,12 +55,12 @@ public class TenantsController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("/settings/tenants/add");
-    modelAndView.addObject("tenant", new TenantDTO());
+    modelAndView.addObject("tenant", new TenantDto());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public String create(@Valid TenantDTO tenantDTO, BindingResult result,
+  public String create(@Valid TenantDto tenantDTO, BindingResult result,
                        RedirectAttributes redirectAttributes) {
     if (result.hasErrors()) { // Doesn't work
       return "/settings/tenants/add";
@@ -74,7 +74,7 @@ public class TenantsController {
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TenantDTO> tenantRecord = tenantService.findById(id);
+    Optional<TenantDto> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("/settings/tenants/edit");
       modelAndView.addObject("tenant", tenantRecord.get());
@@ -88,7 +88,7 @@ public class TenantsController {
   }
 
   @PostMapping("/update/{id}")
-  public String update(@PathVariable("id") Long id, @Valid TenantDTO tenantDTO,
+  public String update(@PathVariable("id") Long id, @Valid TenantDto tenantDTO,
                        BindingResult result, RedirectAttributes redirectAttributes) {
     if (result.hasErrors()) {
       return "/settings/tenants/edit/{id}";
