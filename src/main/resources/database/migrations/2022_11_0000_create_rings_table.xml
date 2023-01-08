@@ -51,7 +51,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_en_rings" author="tabr" context="data" labels="locale_en">
+    <changeSet id="load_default_rings" author="tabr" context="data" labels="locale_en">
         <loadData tableName="rings"
                   separator="|"
                   file="database/data/rings_en.csv">
