@@ -40,7 +40,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_default_radars" author="tabr" context="data" labels="locale_en">
+    <changeSet id="load_en_radars" author="tabr" context="data" labels="locale_en">
         <loadData tableName="radars"
                   separator="|"
                   file="database/data/radars_en.csv">
@@ -50,6 +50,5 @@
             <column name="last_modified_by" type="STRING"/>
         </loadData>
     </changeSet>
-
 
 </databaseChangeLog>
