@@ -23,6 +23,7 @@ public class TenantsApiControllerTests {
 
   @Test
   public void index() throws Exception {
+    // How to seed database for all tests
     String result = mockMvc.perform(get("/api/v1/tenants")
             .contentType(APPLICATION_JSON)
         )
