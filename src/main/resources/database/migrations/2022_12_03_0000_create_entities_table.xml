@@ -33,11 +33,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <!-- current Liquibase ignores checkConstraint attribute -->
-        <sql>
-            ALTER TABLE entities
-                ADD CONSTRAINT ck_entities_title_trim CHECK (trim(title) = title)
-        </sql>
     </changeSet>
 
     <changeSet id="load_en_entities" author="tabr" context="data" labels="locale_en">

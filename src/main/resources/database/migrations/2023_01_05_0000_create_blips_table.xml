@@ -6,17 +6,25 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_radars_table" author="tabr">
-        <createTable tableName="radars" remarks="Holds information about radars">
+    <changeSet id="create_blips_table" author="tabr">
+        <createTable tableName="blips" remarks="Holds information about blips">
             <column name="id" type="integer" remarks="Radar ID. Primary key" autoIncrement="true"
                     generationType="ALWAYS">
-                <constraints primaryKey="true" primaryKeyName="pk_radars_id" nullable="false"/>
+                <constraints primaryKey="true" primaryKeyName="pk_blips_id" nullable="false"/>
             </column>
             <column name="title" type="${text.type}" remarks="Radar title">
-                <constraints unique="true" uniqueConstraintName="uc_radars_title" nullable="false"/>
+                <constraints unique="true" uniqueConstraintName="uc_blips_title" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for Radar"/>
-            <column name="is_default" type="boolean" remarks="Whenever the radar is default" defaultValueBoolean="false">
+            <column name="segment_id" type="${bigint.type}" remarks="Reference to segment">
+                <constraints nullable="false"/>
+            </column>
+            <column name="segment_no" type="${bigint.type}" remarks="Segment position">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ring_id" type="${bigint.type}" remarks="Reference to ring">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ring_no" type="${bigint.type}" remarks="Ring position">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="${user.type}" remarks="user who created the record">
@@ -33,23 +41,17 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <!-- current Liquibase ignores checkConstraint attribute -->
-        <sql>
-            ALTER TABLE radars
-                ADD CONSTRAINT ck_radars_title_trim CHECK (trim(title) = title)
-        </sql>
     </changeSet>
 
-    <changeSet id="load_default_radars" author="tabr" context="data" labels="locale_en">
-        <loadData tableName="radars"
+    <!--changeSet id="load_default_blips" author="tabr" context="data" labels="locale_en">
+        <loadData tableName="blips"
                   separator="|"
-                  file="database/data/radars_en.csv">
+                  file="database/data/blips_en.csv">
             <column name="title" type="STRING"/>
             <column name="description" type="STRING"/>
             <column name="created_by" type="STRING"/>
             <column name="last_modified_by" type="STRING"/>
         </loadData>
-    </changeSet>
-
+    </changeSet-->
 
 </databaseChangeLog>

@@ -30,11 +30,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <!-- current Liquibase ignores checkConstraint attribute -->
-        <sql>
-            ALTER TABLE tenants
-                ADD CONSTRAINT ck_tenants_title_trim CHECK (trim(title) = title)
-        </sql>
     </changeSet>
 
     <changeSet id="load_default_tenants" author="tabr" context="data" labels="locale_en">
