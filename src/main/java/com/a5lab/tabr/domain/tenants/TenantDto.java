@@ -2,6 +2,7 @@ package com.a5lab.tabr.domain.tenants;
 
 import jakarta.validation.constraints.NotBlank;
 
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,9 +13,11 @@ import lombok.ToString;
 public class TenantDto {
 
   @NotBlank
+  @Size(min=1, max=64)
   private String title;
 
   @NotBlank
+  @Size(min=1, max=512)
   private String description;
 
   public TenantDto() {
