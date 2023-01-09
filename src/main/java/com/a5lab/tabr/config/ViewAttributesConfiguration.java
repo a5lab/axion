@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class ViewAttributesConfiguration implements WebMvcConfigurer {
 
   @Value("${application.keys.google_analytics}")
-  public String googleAnalytics;
+  private String googleAnalytics;
 
   private static final String VIEW_SERVLET_PATH_ATTRIBUTE = "servletPath";
 
