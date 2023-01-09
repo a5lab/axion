@@ -43,7 +43,7 @@
         </createTable>
     </changeSet>
 
-    <!--changeSet id="load_default_blips" author="tabr" context="data" labels="locale_en">
+    <!--changeSet id="load_en_blips" author="tabr" context="data" labels="locale_en">
         <loadData tableName="blips"
                   separator="|"
                   file="database/data/blips_en.csv">

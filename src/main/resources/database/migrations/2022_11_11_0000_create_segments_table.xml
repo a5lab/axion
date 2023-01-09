@@ -33,9 +33,14 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <!-- current Liquibase ignores checkConstraint attribute -->
+        <sql>
+            ALTER TABLE rings
+                ADD CONSTRAINT ck_segments_title_trim CHECK (trim(title) = title)
+        </sql>
     </changeSet>
 
-    <changeSet id="load_default_segments" author="tabr" context="data" labels="locale_en">
+    <changeSet id="load_en_segments" author="tabr" context="data" labels="locale_en">
         <loadData tableName="segments"
                   separator="|"
                   file="database/data/segments_en.csv">
