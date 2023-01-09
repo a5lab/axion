@@ -15,7 +15,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.a5lab.tabr.utils.AbstractAuditable;
+import com.a5lab.tabr.domain.AbstractAuditable;
 
 @Entity
 @Table(name = "tenants")
