@@ -12,8 +12,11 @@
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_blips_id" nullable="false"/>
             </column>
-            <column name="title" type="${text.type}" remarks="Radar title">
-                <constraints unique="true" uniqueConstraintName="uc_blips_title" nullable="false"/>
+            <column name="radar_id" type="${bigint.type}" remarks="Reference to segment">
+                <constraints nullable="false"/>
+            </column>
+            <column name="entity_id" type="${bigint.type}" remarks="Reference to segment">
+                <constraints nullable="false"/>
             </column>
             <column name="segment_id" type="${bigint.type}" remarks="Reference to segment">
                 <constraints nullable="false"/>
