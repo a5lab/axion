@@ -35,7 +35,7 @@
         </createTable>
         <!-- current Liquibase ignores checkConstraint attribute -->
         <sql>
-            ALTER TABLE rings
+            ALTER TABLE radars
                 ADD CONSTRAINT ck_radars_title_trim CHECK (trim(title) = title)
         </sql>
     </changeSet>
