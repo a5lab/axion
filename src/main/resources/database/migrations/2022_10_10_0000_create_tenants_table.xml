@@ -32,7 +32,18 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="load_default_tenants" author="tabr" context="data" labels="locale_en">
+    <changeSet id="load_de_tenants" author="tabr" context="data" labels="locale_de">
+        <loadData tableName="tenants"
+                  separator="|"
+                  file="database/data/tenants_de.csv">
+            <column name="title" type="STRING"/>
+            <column name="description" type="STRING"/>
+            <column name="created_by" type="STRING"/>
+            <column name="last_modified_by" type="STRING"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="load_en_tenants" author="tabr" context="data" labels="locale_en">
         <loadData tableName="tenants"
                   separator="|"
                   file="database/data/tenants_en.csv">
@@ -42,6 +53,5 @@
             <column name="last_modified_by" type="STRING"/>
         </loadData>
     </changeSet>
-
 
 </databaseChangeLog>
