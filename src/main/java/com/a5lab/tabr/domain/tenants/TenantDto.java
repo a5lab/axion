@@ -12,6 +12,8 @@ import lombok.ToString;
 @ToString
 public class TenantDto {
 
+  private Long id;
+
   @NotBlank
   @Size(min = 1, max = 64)
   private String title;
