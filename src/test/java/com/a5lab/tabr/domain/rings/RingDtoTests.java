@@ -4,14 +4,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.a5lab.tabr.AbstractRepositoryTests;
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ValidationException;
 import jakarta.validation.Validator;
 import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class RingTests extends AbstractRepositoryTests {
+class RingDtoTests {
 
   @Autowired
   private Validator validator;
