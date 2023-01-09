@@ -2,6 +2,7 @@
 <html th:fragment="account (title, metas, content)" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title th:replace="${title}">Layout title</title>
+    <th:block th:insert="~{fragments/google_analytics.html}" />
     <th:block th:insert="~{fragments/meta_information.html}" />
     <th:block th:replace="${metas}" />
   </head>

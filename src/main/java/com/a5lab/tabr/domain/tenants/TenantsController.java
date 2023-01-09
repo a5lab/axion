@@ -29,7 +29,7 @@ public class TenantsController {
 
   @GetMapping("")
   public ModelAndView index() {
-    ModelAndView modelAndView = new ModelAndView("/settings/tenants/index");
+    ModelAndView modelAndView = new ModelAndView("settings/tenants/index");
     // We need to replace it with proper values for PageRequest.of() coming from ui
     // See https://github.com/a5lab/tabr/issues/112
     modelAndView.addObject("tenants",
@@ -41,7 +41,7 @@ public class TenantsController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TenantDto> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("/settings/tenants/show");
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/show");
       modelAndView.addObject("tenant", tenantRecord.get());
       return modelAndView;
     } else {
@@ -54,7 +54,7 @@ public class TenantsController {
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("/settings/tenants/add");
+    ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
     modelAndView.addObject("tenant", new TenantDto());
     return modelAndView;
   }
@@ -63,7 +63,7 @@ public class TenantsController {
   public String create(@Valid TenantDto tenantDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      return "/settings/tenants/add";
+      return "settings/tenants/add";
     }
     tenantService.create(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
@@ -76,7 +76,7 @@ public class TenantsController {
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TenantDto> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("/settings/tenants/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
       modelAndView.addObject("tenant", tenantRecord.get());
       return modelAndView;
     } else {
@@ -91,7 +91,7 @@ public class TenantsController {
   public String update(@PathVariable("id") Long id, @Valid TenantDto tenantDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      return "/settings/tenants/edit/{id}";
+      return "settings/tenants/edit/{id}"; //I think we must provide value for ID
     }
     tenantService.update(id, tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
