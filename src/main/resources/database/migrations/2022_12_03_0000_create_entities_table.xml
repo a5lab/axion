@@ -15,7 +15,7 @@
             <column name="title" type="${text.type}" remarks="Entity title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_entities_title" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for segment."/>
+            <column name="description" type="${text.type}" remarks="Description for entity."/>
             <column name="is_active" type="boolean" remarks="Whenever the row is active" defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
