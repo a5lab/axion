@@ -19,16 +19,16 @@
             <column name="is_active" type="boolean" remarks="Whenever the row is active" defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_by" type="${user.type}" remarks="user who created the record">
+            <column name="created_by" type="${user.type}" remarks="User who created the record.">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_date" type="${datetime.type}" defaultValue="now()" remarks="when record was created">
+            <column name="created_date" type="${datetime.type}" defaultValue="now()" remarks="When record was created.">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_modified_by" type="${user.type}" remarks="user who modified the record">
+            <column name="last_modified_by" type="${user.type}" remarks="User who modified the record.">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_modified_date" type="${datetime.type}" remarks="when record was modified"
+            <column name="last_modified_date" type="${datetime.type}" remarks="When record was modified."
                     defaultValue="now()">
                 <constraints nullable="false"/>
             </column>
