@@ -8,11 +8,11 @@
 
     <changeSet id="create_entities_table" author="tabr">
         <createTable tableName="entities" remarks="Holds information about entities.">
-            <column name="id" type="integer" remarks="Segment id, primary key." autoIncrement="true"
+            <column name="id" type="integer" remarks="Entity id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_entities_id" nullable="false"/>
             </column>
-            <column name="title" type="${text.type}" remarks="Segment title, unique.">
+            <column name="title" type="${text.type}" remarks="Entity title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_entities_title" nullable="false"/>
             </column>
             <column name="description" type="${text.type}" remarks="Description for segment."/>
