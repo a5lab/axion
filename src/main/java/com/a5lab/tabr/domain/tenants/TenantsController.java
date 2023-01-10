@@ -60,24 +60,26 @@ public class TenantsController {
   }
 
   @PostMapping(value = "/create")
-  public String create(@Valid TenantDto tenantDto, BindingResult bindingResult,
+  public ModelAndView create(@Valid TenantDto tenantDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      return "settings/tenants/add";
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
+      modelAndView.addObject("tenant", tenantDto);
+      return modelAndView;
     }
     tenantService.save(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/tenants";
+    return new ModelAndView("redirect:/settings/tenants");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TenantDto> tenantRecord = tenantService.findById(id);
-    if (tenantRecord.isPresent()) {
+    Optional<TenantDto> tenantDto = tenantService.findById(id);
+    if (tenantDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
-      modelAndView.addObject("tenant", tenantRecord.get());
+      modelAndView.addObject("tenant", tenantDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -88,16 +90,18 @@ public class TenantsController {
   }
 
   @PostMapping("/update")
-  public String update(@Valid TenantDto tenantDto,
+  public ModelAndView update(@Valid TenantDto tenantDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      return "settings/tenants/edit/{id}"; //I think we must provide value for ID
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
+      modelAndView.addObject("tenant", tenantDto);
+      return modelAndView;
     }
     tenantService.save(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/tenants";
+    return new ModelAndView("redirect:/settings/tenants");
   }
 
   @GetMapping(value = "/delete/{id}")

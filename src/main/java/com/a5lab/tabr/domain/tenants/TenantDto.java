@@ -17,7 +17,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class TenantDto {
 
-  @NotEmpty
   private Long id;
 
   @NotBlank
