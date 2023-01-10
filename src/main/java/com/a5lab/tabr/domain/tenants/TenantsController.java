@@ -65,7 +65,7 @@ public class TenantsController {
     if (bindingResult.hasErrors()) {
       return "settings/tenants/add";
     }
-    tenantService.create(tenantDto);
+    tenantService.save(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.created", null,
             LocaleContextHolder.getLocale()));
@@ -87,13 +87,13 @@ public class TenantsController {
     }
   }
 
-  @PostMapping("/update/{id}")
-  public String update(@PathVariable("id") Long id, @Valid TenantDto tenantDto,
+  @PostMapping("/update")
+  public String update(@Valid TenantDto tenantDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       return "settings/tenants/edit/{id}"; //I think we must provide value for ID
     }
-    tenantService.update(id, tenantDto);
+    tenantService.save(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.updated", null,
             LocaleContextHolder.getLocale()));

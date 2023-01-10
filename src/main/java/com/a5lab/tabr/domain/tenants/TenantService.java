@@ -14,9 +14,7 @@ public interface TenantService {
 
   Optional<TenantDto> findById(Long id);
 
-  TenantDto create(TenantDto tenantDto);
-
-  TenantDto update(Long id, TenantDto tenantDto);
+  TenantDto save(TenantDto tenantDto);
 
   void deleteById(Long id);
 }
