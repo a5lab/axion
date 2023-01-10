@@ -7,15 +7,15 @@
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
     <changeSet id="create_segments_table" author="tabr">
-        <createTable tableName="segments" remarks="Holds information about segments">
-            <column name="id" type="integer" remarks="Segment ID. Primary key" autoIncrement="true"
+        <createTable tableName="segments" remarks="Holds information about segments.">
+            <column name="id" type="integer" remarks="Segment id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_segments_id" nullable="false"/>
             </column>
-            <column name="title" type="${text.type}" remarks="Segment title">
+            <column name="title" type="${text.type}" remarks="Segment title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_segments_title" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for Segment"/>
+            <column name="description" type="${text.type}" remarks="Description for segment."/>
             <column name="is_active" type="boolean" remarks="Whenever the row is active" defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>

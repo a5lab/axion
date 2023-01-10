@@ -7,23 +7,23 @@
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
     <changeSet id="create_rings_table" author="tabr">
-        <createTable tableName="rings" remarks="Holds information about rings">
-            <column name="id" type="integer" remarks="Ring ID. Primary key" autoIncrement="true"
+        <createTable tableName="rings" remarks="Holds information about rings.">
+            <column name="id" type="integer" remarks="Ring id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_rings_id"/>
             </column>
-            <column name="title" type="${ring.title}" remarks="Ring Title. Unique">
+            <column name="title" type="${ring.title}" remarks="Ring title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_rings_title" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for ring">
+            <column name="description" type="${text.type}" remarks="Description for ring.">
                 <constraints nullable="false"/>
             </column>
-            <column name="info" type="${text.type}" remarks="Holds detailed information about the ring"/>
+            <column name="info" type="${text.type}" remarks="Holds detailed information about the ring."/>
             <column name="priority" type="integer"
-                    remarks="Represents ring priority in radar starting from lower to higher value">
+                    remarks="Represents ring priority in radar starting from lower to higher value.">
                 <constraints nullable="false"/>
             </column>
-            <column name="is_active" type="boolean" remarks="Whenever the row is active" defaultValueBoolean="true">
+            <column name="is_active" type="boolean" remarks="Whenever the row is active." defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="${user.type}" remarks="User who created the record.">

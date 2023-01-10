@@ -7,16 +7,16 @@
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
     <changeSet id="create_radars_table" author="tabr">
-        <createTable tableName="radars" remarks="Holds information about radars">
-            <column name="id" type="integer" remarks="Radar ID. Primary key" autoIncrement="true"
+        <createTable tableName="radars" remarks="Holds information about radars.">
+            <column name="id" type="integer" remarks="Radar id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_radars_id" nullable="false"/>
             </column>
-            <column name="title" type="${text.type}" remarks="Radar title">
+            <column name="title" type="${text.type}" remarks="Radar title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_radars_title" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for Radar"/>
-            <column name="is_default" type="boolean" remarks="Whenever the radar is default" defaultValueBoolean="false">
+            <column name="description" type="${text.type}" remarks="Description for radar."/>
+            <column name="is_default" type="boolean" remarks="Whenever the radar is default." defaultValueBoolean="false">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="${user.type}" remarks="User who created the record.">

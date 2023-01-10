@@ -7,27 +7,27 @@
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
     <changeSet id="create_blips_table" author="tabr">
-        <createTable tableName="blips" remarks="Holds information about blips">
-            <column name="id" type="integer" remarks="Radar ID. Primary key" autoIncrement="true"
+        <createTable tableName="blips" remarks="Holds information about blips.">
+            <column name="id" type="integer" remarks="Radar id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_blips_id" nullable="false"/>
             </column>
-            <column name="radar_id" type="${bigint.type}" remarks="Reference to segment">
+            <column name="radar_id" type="${bigint.type}" remarks="Reference to radar.">
+                <constraints nullable="false" foreignKeyName="fk_radar_id_radars" references="radars(id)"/>
+            </column>
+            <column name="entity_id" type="${bigint.type}" remarks="Reference to entity.">
+                <constraints nullable="false" foreignKeyName="fk_entity_id_entities" references="entities(id)"/>
+            </column>
+            <column name="segment_id" type="${bigint.type}" remarks="Reference to segment.">
+                <constraints nullable="false" foreignKeyName="fk_segment_id_segments" references="segments(id)"/>
+            </column>
+            <column name="segment_no" type="${bigint.type}" remarks="Segment position in radar.">
                 <constraints nullable="false"/>
             </column>
-            <column name="entity_id" type="${bigint.type}" remarks="Reference to segment">
-                <constraints nullable="false"/>
+            <column name="ring_id" type="${bigint.type}" remarks="Reference to ring.">
+                <constraints nullable="false" foreignKeyName="fk_ring_id_rings" references="rings(id)"/>
             </column>
-            <column name="segment_id" type="${bigint.type}" remarks="Reference to segment">
-                <constraints nullable="false"/>
-            </column>
-            <column name="segment_no" type="${bigint.type}" remarks="Segment position">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ring_id" type="${bigint.type}" remarks="Reference to ring">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ring_no" type="${bigint.type}" remarks="Ring position">
+            <column name="ring_no" type="${bigint.type}" remarks="Ring position in radar.">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="${user.type}" remarks="User who created the record.">
