@@ -32,7 +32,7 @@ public class DecoratedThymeleafViewResolver extends ThymeleafViewResolver {
     //Better to remove this logic to controllers
     final String alreadyProcessedView = cachedViews.get(viewKey);
     if (alreadyProcessedView != null) {
-      super.resolveViewName(alreadyProcessedView, locale);
+      return super.resolveViewName(alreadyProcessedView, locale);
     }
 
     if (StringUtils.endsWith(thymeleafProperties.getPrefix(), SLASH)) {
