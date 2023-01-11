@@ -399,9 +399,9 @@
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>
                     <commitIdGenerationMode>full</commitIdGenerationMode>
                     <excludeProperties>
-                        <excludeProperty>git.user.*</excludeProperty>
-                        <excludeProperty>git.build.host</excludeProperty>
+                        <excludeProperty>git.commit.user.*</excludeProperty>
                         <excludeProperty>git.build.user.*</excludeProperty>
+                        <excludeProperty>git.build.host</excludeProperty>
                     </excludeProperties>
                 </configuration>
             </plugin>

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class VersionApiController {
 
 
-  @RequestMapping("/show")
+  @GetMapping("/show")
   public Map<String, String> show() {
     Map<String, String> result = new HashMap<>();
     result.put("version", "x.y.z");
