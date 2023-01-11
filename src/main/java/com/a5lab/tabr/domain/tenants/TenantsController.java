@@ -64,7 +64,6 @@ public class TenantsController {
   public ModelAndView create(@Valid TenantDto tenantDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      bindingResult.addError(error);
       ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
       modelAndView.addObject("tenantDto", tenantDto);
       return modelAndView;
