@@ -42,7 +42,7 @@ public class TenantsController {
     Optional<TenantDto> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/tenants/show");
-      modelAndView.addObject("tenant", tenantRecord.get());
+      modelAndView.addObject("tenantDto", tenantRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -55,7 +55,7 @@ public class TenantsController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
-    modelAndView.addObject("tenant", new TenantDto());
+    modelAndView.addObject("tenantDto", new TenantDto());
     return modelAndView;
   }
 
@@ -64,7 +64,7 @@ public class TenantsController {
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
-      modelAndView.addObject("tenant", tenantDto);
+      modelAndView.addObject("tenantDto", tenantDto);
       return modelAndView;
     }
     tenantService.save(tenantDto);
@@ -79,7 +79,7 @@ public class TenantsController {
     Optional<TenantDto> tenantDto = tenantService.findById(id);
     if (tenantDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
-      modelAndView.addObject("tenant", tenantDto.get());
+      modelAndView.addObject("tenantDto", tenantDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -94,7 +94,7 @@ public class TenantsController {
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
-      modelAndView.addObject("tenant", tenantDto);
+      modelAndView.addObject("tenantDto", tenantDto);
       return modelAndView;
     }
     tenantService.save(tenantDto);
