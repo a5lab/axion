@@ -32,6 +32,7 @@
         <properties.plugin.version>1.1.0</properties.plugin.version>
         <dependency_check.plugin.version>7.4.0</dependency_check.plugin.version>
         <project_info_reports.plugin.version>3.4.1</project_info_reports.plugin.version>
+        <git_commit.plugin.version>4.9.10</git_commit.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -375,6 +376,11 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git_commit.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
