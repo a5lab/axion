@@ -7,28 +7,28 @@
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
     <changeSet id="create_radars_table" author="tabr">
-        <createTable tableName="radars" remarks="Holds information about radars">
-            <column name="id" type="integer" remarks="Radar ID. Primary key" autoIncrement="true"
+        <createTable tableName="radars" remarks="Holds information about radars.">
+            <column name="id" type="integer" remarks="Radar id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_radars_id" nullable="false"/>
             </column>
-            <column name="title" type="${text.type}" remarks="Radar title">
+            <column name="title" type="${text.type}" remarks="Radar title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_radars_title" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for Radar"/>
-            <column name="is_default" type="boolean" remarks="Whenever the radar is default" defaultValueBoolean="false">
+            <column name="description" type="${text.type}" remarks="Description for radar."/>
+            <column name="is_default" type="boolean" remarks="Whenever the radar is default." defaultValueBoolean="false">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_by" type="${user.type}" remarks="user who created the record">
+            <column name="created_by" type="${user.type}" remarks="User who created the record.">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_date" type="${datetime.type}" defaultValue="now()" remarks="when record was created">
+            <column name="created_date" type="${datetime.type}" defaultValue="now()" remarks="When record was created.">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_modified_by" type="${user.type}" remarks="user who modified the record">
+            <column name="last_modified_by" type="${user.type}" remarks="User who modified the record.">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_modified_date" type="${datetime.type}" remarks="when record was modified"
+            <column name="last_modified_date" type="${datetime.type}" remarks="When record was modified."
                     defaultValue="now()">
                 <constraints nullable="false"/>
             </column>
@@ -40,7 +40,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_default_radars" author="tabr" context="data" labels="locale_en">
+    <changeSet id="load_eb_radars" author="tabr" context="data" labels="locale_en">
         <loadData tableName="radars"
                   separator="|"
                   file="database/data/radars_en.csv">
@@ -50,6 +50,5 @@
             <column name="last_modified_by" type="STRING"/>
         </loadData>
     </changeSet>
-
 
 </databaseChangeLog>
