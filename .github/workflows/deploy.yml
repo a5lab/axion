@@ -6,11 +6,6 @@ name: Deploy application
 on:
   workflow_dispatch:
     inputs:
-      sha:
-        description: 'SHA'
-        required: true
-        default: '1.0.0'
-        type: string
 
 jobs:
   build:
@@ -30,3 +25,6 @@ jobs:
       - name: Deploy package
         shell: bash
         run: echo deploy
+      - name: Show git info
+        shell: bash
+        run: git branch && git show
