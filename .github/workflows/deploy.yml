@@ -8,13 +8,11 @@ on:
     inputs:
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.sha }}
       - name: Install JDK
         uses: ./.github/actions/jdk
       - name: Install NodeJS
