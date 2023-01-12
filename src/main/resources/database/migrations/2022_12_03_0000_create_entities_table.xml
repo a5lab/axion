@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="../properties.yml" relativeToChangelogFile="true"/>
+
+    <changeSet id="create_entities_table" author="tabr">
+        <createTable tableName="entities" remarks="Holds information about entities.">
+            <column name="id" type="integer" remarks="Entity id, primary key." autoIncrement="true"
+                    generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="pk_entities_id" nullable="false"/>
+            </column>
+            <column name="title" type="${text.type}" remarks="Entity title, unique.">
+                <constraints unique="true" uniqueConstraintName="uc_entities_title" nullable="false"/>
+            </column>
+            <column name="description" type="${text.type}" remarks="Description for entity."/>
+            <column name="is_active" type="boolean" remarks="Whenever the row is active" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="${user.type}" remarks="User who created the record.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="${datetime.type}" defaultValue="now()" remarks="When record was created.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="${user.type}" remarks="User who modified the record.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="${datetime.type}" remarks="When record was modified."
+                    defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!-- current Liquibase ignores checkConstraint attribute -->
+        <sql>
+            ALTER TABLE entities
+                ADD CONSTRAINT ck_entities_title_trim CHECK (trim(title) = title)
+        </sql>
+    </changeSet>
+
+    <changeSet id="load_en_entities" author="tabr" context="data" labels="locale_en">
+        <loadData tableName="entities"
+                  separator="|"
+                  file="database/data/entities_en.csv">
+            <column name="title" type="STRING"/>
+            <column name="description" type="STRING"/>
+            <column name="created_by" type="STRING"/>
+            <column name="last_modified_by" type="STRING"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

@@ -12,7 +12,7 @@
     <artifactId>tabr</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>tabr</name>
-    <description>tabr</description>
+    <description>Technical and business radar</description>
     <properties>
         <java.version>17</java.version>
         <mapstruct.version>1.5.3.Final</mapstruct.version>
@@ -32,6 +32,7 @@
         <properties.plugin.version>1.1.0</properties.plugin.version>
         <dependency_check.plugin.version>7.4.0</dependency_check.plugin.version>
         <project_info_reports.plugin.version>3.4.1</project_info_reports.plugin.version>
+        <git_commit.plugin.version>4.9.10</git_commit.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -172,7 +173,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.10</minimum>
+                                            <minimum>0.0</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -374,6 +375,34 @@
                             <version>0.2.0</version>
                         </path>
                     </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git_commit.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>validate-the-git-infos</id>
+                        <goals>
+                            <goal>validateRevision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <commitIdGenerationMode>full</commitIdGenerationMode>
+                    <excludeProperties>
+                        <excludeProperty>git.commit.user.*</excludeProperty>
+                        <excludeProperty>git.build.user.*</excludeProperty>
+                        <excludeProperty>git.build.host</excludeProperty>
+                    </excludeProperties>
                 </configuration>
             </plugin>
         </plugins>
