@@ -39,10 +39,10 @@ public class TenantsController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TenantRecord> tenantRecord = tenantService.findById(id);
+    Optional<TenantDto> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/tenants/show");
-      modelAndView.addObject("tenant", tenantRecord.get());
+      modelAndView.addObject("tenantDto", tenantRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -55,29 +55,31 @@ public class TenantsController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
-    modelAndView.addObject("tenant", new TenantRecord());
+    modelAndView.addObject("tenantDto", new TenantDto());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public String create(@Valid TenantRecord tenantRecord, BindingResult result,
+  public ModelAndView create(@Valid TenantDto tenantDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
-    if (result.hasErrors()) { // Doesn't work
-      return "settings/tenants/add";
+    if (bindingResult.hasErrors()) {
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
+      modelAndView.addObject("tenantDto", tenantDto);
+      return modelAndView;
     }
-    tenantService.save(tenantRecord);
+    tenantService.save(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/tenants";
+    return new ModelAndView("redirect:/settings/tenants");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TenantRecord> tenantRecord = tenantService.findById(id);
-    if (tenantRecord.isPresent()) {
+    Optional<TenantDto> tenantDto = tenantService.findById(id);
+    if (tenantDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
-      modelAndView.addObject("tenant", tenantRecord.get());
+      modelAndView.addObject("tenantDto", tenantDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -87,17 +89,19 @@ public class TenantsController {
     }
   }
 
-  @PostMapping("/update/{id}")
-  public String update(@PathVariable("id") Long id, @Valid TenantRecord tenantRecord,
-                       BindingResult result, RedirectAttributes redirectAttributes) {
-    if (result.hasErrors()) {
-      return "settings/tenants/edit/{id}"; //I think we must provide value for ID
+  @PostMapping("/update")
+  public ModelAndView update(@Valid TenantDto tenantDto,
+                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    if (bindingResult.hasErrors()) {
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
+      modelAndView.addObject("tenantDto", tenantDto);
+      return modelAndView;
     }
-    tenantService.save(tenantRecord); // !!! a new insert? constraint failure
+    tenantService.save(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/tenants";
+    return new ModelAndView("redirect:/settings/tenants");
   }
 
   @GetMapping(value = "/delete/{id}")

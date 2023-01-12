@@ -25,20 +25,20 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<TenantRecord> findAll(Pageable pageable) {
-    return tenantRepository.findAll(pageable).map(tenantMapper::toRecord);
+  public Page<TenantDto> findAll(Pageable pageable) {
+    return tenantRepository.findAll(pageable).map(tenantMapper::toDto);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<TenantRecord> findById(Long id) {
-    return tenantRepository.findById(id).map(tenantMapper::toRecord);
+  public Optional<TenantDto> findById(Long id) {
+    return tenantRepository.findById(id).map(tenantMapper::toDto);
   }
 
   @Override
   @Transactional
-  public TenantRecord save(TenantRecord entity) {
-    return tenantMapper.toRecord(tenantRepository.save(tenantMapper.toEntity(entity)));
+  public TenantDto save(TenantDto tenantDto) {
+    return tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(tenantDto)));
   }
 
   @Override
