@@ -28,7 +28,7 @@
                 <td th:text="${tenant.description}"></td>
                 <td><a th:href="@{/settings/tenants/show/{id}(id=${tenant.id})}">Show</a></td>
                 <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenant.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/tenants/{id}(id=${tenant.id})}">Delete</a></td>
+                <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenant.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>

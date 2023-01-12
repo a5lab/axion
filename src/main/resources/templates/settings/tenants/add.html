@@ -9,7 +9,12 @@
   <body>
     <div id="content">
       <h1>Add tenant</h1>
-      <form action="#" th:action="@{/settings/tenants/create}" th:object="${tenant}" method="post">
+      <form action="#" th:action="@{/settings/tenants/create}" th:object="${tenantDto}" method="post">
+        <div th:if="${#fields.hasAnyErrors()}">
+          <ul>
+            <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
+          </ul>
+        </div>
         <label for="title">Title</label>
         <input type="text" th:field="*{title}" id="title" placeholder="Title">
         <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
