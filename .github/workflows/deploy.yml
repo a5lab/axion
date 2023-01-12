@@ -5,7 +5,6 @@ name: Deploy application
 
 on:
   workflow_dispatch:
-    inputs:
 
 jobs:
   deploy:
