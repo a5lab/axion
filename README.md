@@ -31,18 +31,19 @@ Technical and business radar. Spring boot based application
 
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
 * obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
-* build package by command: mvnw clean package -Dmaven.test.skip
-* run application by command: mvnw spring-boot:run
-* run application with profile by command: mvnw spring-boot:run -Pdev
-* run database migration by command: mvnw liquibase:update
-* create checkstyle report by command: mvn checkstyle:checkstyle
-* get coverage report by command: mvn jacoco:report -Pdev
-* create javadoc by command: mvn javadoc:javadoc
-* create cross reference source by command: mvn jxr:jxr
-* create site by command: mvn site
-* obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
-* run spotbugs GUI by command: mvn spotbugs:gui
-* run sonarqube analysis by command: mvn sonar:sonar
+* build package by command: ./mvnw clean package -Dmaven.test.skip
+* run application by command: ./mvnw spring-boot:run
+* run application with profile by command: ./mvnw spring-boot:run -Pdev
+* run application with by command: java -jar tabr-x.y.z.jar --application.keys.google_analytics=123
+* run application with by command: java -jar tabr-x.y.z.jar --spring.liquibase.label-filter=de
+* run database migration by command: ./mvnw liquibase:update
+* create checkstyle report by command: ./mvnw checkstyle:checkstyle
+* get coverage report by command: ./mvnw jacoco:report -Pdev
+* create javadoc by command: ./mvnw javadoc:javadoc
+* create cross reference source by command: ./mvnw jxr:jxr
+* create site by command: ./mvnw site
+* run spotbugs GUI by command: ./mvnw spotbugs:gui
+* run sonarqube analysis by command: ./mvnw sonar:sonar
 * install js minifier by command: npm install uglify-js -g t
 * minify jscript by command: uglifyjs application.js -o application.min.js -c -m
 * install css minifier by command: npm install -g uglifycss

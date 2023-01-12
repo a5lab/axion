@@ -10,11 +10,11 @@ public interface TenantService {
 
   Collection<Tenant> findAll();
 
-  Page<TenantRecord> findAll(Pageable pageable);
+  Page<TenantDto> findAll(Pageable pageable);
 
-  Optional<TenantRecord> findById(Long id);
+  Optional<TenantDto> findById(Long id);
 
-  TenantRecord save(TenantRecord entity);
+  TenantDto save(TenantDto tenantDto);
 
   void deleteById(Long id);
 }

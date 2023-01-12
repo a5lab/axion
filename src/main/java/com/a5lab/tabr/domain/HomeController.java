@@ -9,7 +9,7 @@ import com.a5lab.tabr.domain.radars.Radar;
 @Controller
 public class HomeController {
 
-  @GetMapping({"/", "home.html"})
+  @GetMapping({"/", "home"})
   public ModelAndView index() {
     Radar radar = new Radar();
     radar.setTitle("myTitle");

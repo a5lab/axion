@@ -1,7 +1,7 @@
 #
 # Deploy application
 #
-name: Deploy application
+name: Verify application
 
 on:
   workflow_dispatch:
@@ -26,4 +26,4 @@ jobs:
         uses: ./.github/actions/nodejs
       - name: Build package
         shell: bash
-        run: mvn package
+        run: mvn verify

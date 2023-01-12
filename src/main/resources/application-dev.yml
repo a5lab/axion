@@ -23,3 +23,5 @@ spring:
   resources:
     static-locations: file:src/main/resources/static/
     cache-period: 0
+  jpa:
+    show-sql: true
