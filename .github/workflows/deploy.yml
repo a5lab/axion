@@ -27,3 +27,6 @@ jobs:
       - name: Build package
         shell: bash
         run: mvn package
+      - name: Deploy package
+        shell: bash
+        run: echo deploy
