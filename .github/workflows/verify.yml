@@ -5,21 +5,13 @@ name: Verify application
 
 on:
   workflow_dispatch:
-    inputs:
-      sha:
-        description: 'SHA'
-        required: true
-        default: '1.0.0'
-        type: string
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.sha }}
       - name: Install JDK
         uses: ./.github/actions/jdk
       - name: Install NodeJS
