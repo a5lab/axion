@@ -126,5 +126,10 @@ management:
         include: "health,info,metrics,prometheus"
 
 application:
+  group_id: @project.groupId@
+  artifact_id: @project.artifactId@
+  version: @project.version@
+  name: @project.name@
+  description: @project.description@
   keys:
     google_analytics:
