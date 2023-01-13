@@ -22,6 +22,9 @@ jobs:
       - name: Verify package
         shell: bash
         run: mvn verify
+      - name: Create archive
+        shell: bash
+        run: cd ./target && tar -zcvf tabr.tar.gz tabr*.jar
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -38,6 +41,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./path/to/asset.zip
-          asset_name: asset.zip
-          asset_content_type: application/zip
+          asset_path: ./target/to/tabr.tar.gz
+          asset_name: tabr.tar.gz
+          asset_content_type: application/gzip
