@@ -52,6 +52,7 @@ Technical and business radar. Spring boot based application
 * install nodejs by command: nvm install --lts
 * install asciidoctor by command: brew install asciidoctor
 * setup tag by command: git tag -v0.1.0 && git push origin --tags
+* prune tags by command: git fetch --prune --prune-tags
 
 # Working with embedded H2 DB(In-Memory)
 
