@@ -5,9 +5,9 @@ Technical and business radar. Spring boot based application
 # Release application
 * update version at antora.yml file
 * run command mvn release and provide information
+* create archive by command: tar -zcvf Binaries.tar.gz tabr*.jar
 * commit changes and create a new git tag
-* run manual release actions at GitHub action with a new tag
-* provide information about release at GitHub
+* create a new release at GitHub and provide information
 * press button publish release at GitHub
 
 # Idea configuration
