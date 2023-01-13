@@ -51,6 +51,7 @@ Technical and business radar. Spring boot based application
 * install nvm by command: brew install nvm and make post configuration
 * install nodejs by command: nvm install --lts
 * install asciidoctor by command: brew install asciidoctor
+* setup tag by command: git tag -v0.1.0 && git push origin --tags
 
 # Working with embedded H2 DB(In-Memory)
 
