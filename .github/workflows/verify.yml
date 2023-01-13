@@ -16,6 +16,6 @@ jobs:
         uses: ./.github/actions/jdk
       - name: Install NodeJS
         uses: ./.github/actions/nodejs
-      - name: Build package
+      - name: Verify package
         shell: bash
         run: mvn verify

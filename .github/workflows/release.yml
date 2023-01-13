@@ -19,9 +19,6 @@ jobs:
       - name: Build package
         shell: bash
         run: mvn package
-      - name: Verify package
-        shell: bash
-        run: mvn verify
       - name: Create archive
         shell: bash
         run: cd ./target && tar -zcvf tabr.tar.gz tabr*.jar
