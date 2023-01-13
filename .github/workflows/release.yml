@@ -24,20 +24,12 @@ jobs:
         run: cd ./target && tar -zcvf tabr.tar.gz tabr*.jar
       - name: Create release
         id: create_release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
+          files: ./target/tabr.tar.gz
           draft: true
           prerelease: false
-      - name: Upload release asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./target/tabr.tar.gz
-          asset_name: tabr.tar.gz
-          asset_content_type: application/gzip
