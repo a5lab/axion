@@ -17,6 +17,7 @@
               <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Prime</th>
                 <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -26,6 +27,7 @@
               <tr th:each="radar : ${radars}">
                 <td th:text="${radar.title}"></td>
                 <td th:text="${radar.description}"></td>
+                <td th:text="${radar.prime}"></td>
                 <td><a th:href="@{/settings/radars/show/{id}(id=${radar.id})}">Show</a></td>
                 <td><a th:href="@{/settings/radars/edit/{id}(id=${radar.id})}">Edit</a></td>
                 <td><a th:href="@{/settings/radars/delete/{id}(id=${radar.id})}">Delete</a></td>

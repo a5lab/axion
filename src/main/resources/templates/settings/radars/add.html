@@ -21,6 +21,9 @@
         <label for="email">Description</label>
         <input type="text" th:field="*{description}" id="email" placeholder="Description">
         <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        <label for="email">Prime</label>
+        <input type="checkbox" th:field="*{prime}" id="prime">
+        <span th:if="${#fields.hasErrors('prime')}" th:errors="*{prime}"></span>
         <input type="submit" value="Add radar">
       </form>
     </div>

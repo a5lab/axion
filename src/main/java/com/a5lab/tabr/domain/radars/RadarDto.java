@@ -26,6 +26,5 @@ public class RadarDto {
   @Size(min = 1, max = 512)
   private String description;
 
-  @NotBlank
   private boolean prime;
 }
