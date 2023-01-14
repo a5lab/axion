@@ -22,7 +22,7 @@ public class RadarsApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void index() throws Exception {
-    final Radar radar = new Radar(10L, "my title", "my description");
+    final Radar radar = new Radar(10L, "my title", "my description", true);
     List<Radar> radarList = Arrays.asList(radar);
     Mockito.when(radarService.findAll()).thenReturn(radarList);
 
@@ -32,7 +32,7 @@ public class RadarsApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$", hasSize(radarList.size())))
         .andExpect(jsonPath("$[0].id", equalTo(radar.getId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(radar.getTitle())))
-        .andExpect(jsonPath("$[0].description", equalTo(radar.getDescription())));
-
+        .andExpect(jsonPath("$[0].description", equalTo(radar.getDescription())))
+        .andExpect(jsonPath("$[0].prime", equalTo(radar.isPrime())));
   }
 }
