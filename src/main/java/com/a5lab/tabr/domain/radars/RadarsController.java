@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.radars;
 
 import jakarta.validation.Valid;
 import java.util.Optional;
@@ -20,96 +20,96 @@ import com.a5lab.tabr.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/tenants")
+@RequestMapping("/settings/radars")
 @RequiredArgsConstructor
-public class TenantsController {
+public class RadarsController {
 
-  private final TenantService tenantService;
+  private final RadarService radarService;
   private final MessageSource messageSource;
 
   @GetMapping("")
   public ModelAndView index() {
-    ModelAndView modelAndView = new ModelAndView("settings/tenants/index");
+    ModelAndView modelAndView = new ModelAndView("settings/radars/index");
     // We need to replace it with proper values for PageRequest.of() coming from ui
     // See https://github.com/a5lab/tabr/issues/112
-    modelAndView.addObject("tenants",
-        tenantService.findAll(Pageable.ofSize(100)).getContent());
+    modelAndView.addObject("radars",
+        radarService.findAll(Pageable.ofSize(100)).getContent());
     return modelAndView;
   }
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TenantDto> tenantRecord = tenantService.findById(id);
-    if (tenantRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/show");
-      modelAndView.addObject("tenantDto", tenantRecord.get());
+    Optional<RadarDto> radarRecord = radarService.findById(id);
+    if (radarRecord.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/radars/show");
+      modelAndView.addObject("radarDto", radarRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("tenant.flash.error.invalid_id", null,
+          messageSource.getMessage("radar.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/tenants");
+      return new ModelAndView("redirect:/settings/radars");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
-    modelAndView.addObject("tenantDto", new TenantDto());
+    ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+    modelAndView.addObject("radarDto", new RadarDto());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid TenantDto tenantDto, BindingResult bindingResult,
+  public ModelAndView create(@Valid RadarDto radarDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
-      modelAndView.addObject("tenantDto", tenantDto);
+      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      modelAndView.addObject("radarDto", radarDto);
       return modelAndView;
     }
-    tenantService.save(tenantDto);
+    radarService.save(radarDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.flash.info.created", null,
+        messageSource.getMessage("radar.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenants");
+    return new ModelAndView("redirect:/settings/radars");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TenantDto> tenantDto = tenantService.findById(id);
-    if (tenantDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
-      modelAndView.addObject("tenantDto", tenantDto.get());
+    Optional<RadarDto> radarDto = radarService.findById(id);
+    if (radarDto.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
+      modelAndView.addObject("radarDto", radarDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("tenant.flash.error.invalid_id", null,
+          messageSource.getMessage("radar.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/tenants");
+      return new ModelAndView("redirect:/settings/radars");
     }
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid TenantDto tenantDto,
+  public ModelAndView update(@Valid RadarDto radarDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
-      modelAndView.addObject("tenantDto", tenantDto);
+      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
+      modelAndView.addObject("radarDto", radarDto);
       return modelAndView;
     }
-    tenantService.save(tenantDto);
+    radarService.save(radarDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.flash.info.updated", null,
+        messageSource.getMessage("radar.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenants");
+    return new ModelAndView("redirect:/settings/radars");
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    tenantService.deleteById(id);
+    radarService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.flash.info.deleted", null,
+        messageSource.getMessage("radar.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/tenants";
+    return "redirect:/settings/radars";
   }
 }

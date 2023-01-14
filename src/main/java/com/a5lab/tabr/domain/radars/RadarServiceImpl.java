@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.radars;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,38 +12,38 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class TenantServiceImpl implements TenantService {
-  private final TenantRepository tenantRepository;
-  private final TenantMapper tenantMapper;
+public class RadarServiceImpl implements RadarService {
+  private final RadarRepository radarRepository;
+  private final RadarMapper radarMapper;
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Tenant> findAll() {
-    return tenantRepository.findAll();
+  public Collection<Radar> findAll() {
+    return radarRepository.findAll();
   }
 
 
   @Override
   @Transactional(readOnly = true)
-  public Page<TenantDto> findAll(Pageable pageable) {
-    return tenantRepository.findAll(pageable).map(tenantMapper::toDto);
+  public Page<RadarDto> findAll(Pageable pageable) {
+    return radarRepository.findAll(pageable).map(radarMapper::toDto);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<TenantDto> findById(Long id) {
-    return tenantRepository.findById(id).map(tenantMapper::toDto);
+  public Optional<RadarDto> findById(Long id) {
+    return radarRepository.findById(id).map(radarMapper::toDto);
   }
 
   @Override
   @Transactional
-  public TenantDto save(TenantDto tenantDto) {
-    return tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(tenantDto)));
+  public RadarDto save(RadarDto radarDto) {
+    return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
   }
 
   @Override
   @Transactional
   public void deleteById(Long id) {
-    tenantRepository.deleteById(id);
+    radarRepository.deleteById(id);
   }
 }

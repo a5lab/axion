@@ -1,43 +1,43 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.radars;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-class TenantMapperTests {
+class RadarMapperTests {
 
-  private final TenantMapper mapper = Mappers.getMapper(TenantMapper.class);
+  private final RadarMapper mapper = Mappers.getMapper(RadarMapper.class);
 
   @Test
   void testToDtoWithNull() {
-    final var tenantDto = mapper.toDto(null);
+    final var radarDto = mapper.toDto(null);
 
-    Assertions.assertNull(tenantDto);
+    Assertions.assertNull(radarDto);
   }
 
   @Test
   void testToDtoAllFields() {
-    final Tenant tenant = new Tenant(0L, "title", "desciption");
-    final var tenantDto = mapper.toDto(tenant);
+    final Radar radar = new Radar(0L, "title", "desciption");
+    final var radarDto = mapper.toDto(radar);
 
-    Assertions.assertEquals(tenantDto.getTitle(), tenant.getTitle());
-    Assertions.assertEquals(tenantDto.getDescription(), tenant.getDescription());
+    Assertions.assertEquals(radarDto.getTitle(), radar.getTitle());
+    Assertions.assertEquals(radarDto.getDescription(), radar.getDescription());
   }
 
   @Test
   void testToEntityWithNull() {
-    final var tenant = mapper.toEntity(null);
+    final var radar = mapper.toEntity(null);
 
-    Assertions.assertNull(tenant);
+    Assertions.assertNull(radar);
   }
 
   @Test
   void testToEntityAllFields() {
-    final TenantDto tenantDto = new TenantDto(0L, "my title1", "my description1");
-    final var tenant = mapper.toEntity(tenantDto);
+    final RadarDto radarDto = new RadarDto(0L, "my title1", "my description1");
+    final var radar = mapper.toEntity(radarDto);
 
-    Assertions.assertEquals(tenant.getId(), tenantDto.getId());
-    Assertions.assertEquals(tenant.getTitle(), tenantDto.getTitle());
-    Assertions.assertEquals(tenant.getDescription(), tenantDto.getDescription());
+    Assertions.assertEquals(radar.getId(), radarDto.getId());
+    Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
+    Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
   }
 }

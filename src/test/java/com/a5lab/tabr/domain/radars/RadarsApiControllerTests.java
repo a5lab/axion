@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.radars;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -16,23 +16,23 @@ import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-public class TenantsApiControllerTests extends AbstractControllerTests {
+public class RadarsApiControllerTests extends AbstractControllerTests {
   @MockBean
-  private TenantService tenantService;
+  private RadarService radarService;
 
   @Test
   public void index() throws Exception {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
-    List<Tenant> tenantList = Arrays.asList(tenant);
-    Mockito.when(tenantService.findAll()).thenReturn(tenantList);
+    final Radar radar = new Radar(10L, "my title", "my description");
+    List<Radar> radarList = Arrays.asList(radar);
+    Mockito.when(radarService.findAll()).thenReturn(radarList);
 
-    mockMvc.perform(get("/api/v1/tenants").contentType(APPLICATION_JSON))
+    mockMvc.perform(get("/api/v1/radars").contentType(APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$").isArray())
-        .andExpect(jsonPath("$", hasSize(tenantList.size())))
-        .andExpect(jsonPath("$[0].id", equalTo(tenant.getId()), Long.class))
-        .andExpect(jsonPath("$[0].title", equalTo(tenant.getTitle())))
-        .andExpect(jsonPath("$[0].description", equalTo(tenant.getDescription())));
+        .andExpect(jsonPath("$", hasSize(radarList.size())))
+        .andExpect(jsonPath("$[0].id", equalTo(radar.getId()), Long.class))
+        .andExpect(jsonPath("$[0].title", equalTo(radar.getTitle())))
+        .andExpect(jsonPath("$[0].description", equalTo(radar.getDescription())));
 
   }
 }

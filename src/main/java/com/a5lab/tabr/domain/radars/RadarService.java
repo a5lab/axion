@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.radars;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -6,15 +6,15 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface TenantService {
+public interface RadarService {
 
-  Collection<Tenant> findAll();
+  Collection<Radar> findAll();
 
-  Page<TenantDto> findAll(Pageable pageable);
+  Page<RadarDto> findAll(Pageable pageable);
 
-  Optional<TenantDto> findById(Long id);
+  Optional<RadarDto> findById(Long id);
 
-  TenantDto save(TenantDto tenantDto);
+  RadarDto save(RadarDto radarDto);
 
   void deleteById(Long id);
 }
