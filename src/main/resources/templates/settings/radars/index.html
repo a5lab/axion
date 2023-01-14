@@ -8,10 +8,10 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${tenants}">
-        <h1 th:case="null">No tenants yet!</h1>
+      <div th:switch="${radars}">
+        <h1 th:case="null">No radars yet!</h1>
         <div th:case="*">
-          <h1>Tenants</h1>
+          <h1>Radars</h1>
           <table>
             <thead>
               <tr>
@@ -23,17 +23,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="tenant : ${tenants}">
-                <td th:text="${tenant.title}"></td>
-                <td th:text="${tenant.description}"></td>
-                <td><a th:href="@{/settings/tenants/show/{id}(id=${tenant.id})}">Show</a></td>
-                <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenant.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenant.id})}">Delete</a></td>
+              <tr th:each="radar : ${radars}">
+                <td th:text="${radar.title}"></td>
+                <td th:text="${radar.description}"></td>
+                <td><a th:href="@{/settings/radars/show/{id}(id=${radar.id})}">Show</a></td>
+                <td><a th:href="@{/settings/radars/edit/{id}(id=${radar.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/radars/delete/{id}(id=${radar.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p><a href="/settings/tenants/add">Add a new tenant</a></p>
+        <p><a href="/settings/radars/add">Add a new radar</a></p>
       </div>
     </div>
   </body>

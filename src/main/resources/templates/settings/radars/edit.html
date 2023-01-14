@@ -8,8 +8,8 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit tenant</h1>
-      <form action="#" th:action="@{/settings/tenants/update}" th:object="${tenantDto}" method="post">
+      <h1>Edit radar</h1>
+      <form action="#" th:action="@{/settings/radars/update}" th:object="${radarDto}" method="post">
         <div th:if="${#fields.hasAnyErrors()}">
           <ul>
             <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
@@ -22,7 +22,7 @@
         <label for="email">Description</label>
         <input type="text" th:field="*{description}" id="email" placeholder="Description">
         <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-        <input type="submit" value="Update tenant">
+        <input type="submit" value="Update radar">
       </form>      
     </div>
   </body>
