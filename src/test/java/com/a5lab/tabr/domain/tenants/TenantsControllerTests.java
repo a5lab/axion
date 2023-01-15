@@ -10,6 +10,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.web.servlet.MvcResult;
 
 @WebMvcTest(TenantsController.class)
@@ -19,16 +22,15 @@ public class TenantsControllerTests extends AbstractControllerTests {
 
   @Test
   public void index() throws Exception {
-    /*
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
-    List<Tenant> tenantList = Arrays.asList(tenant);
-    Mockito.when(tenantService.findAll()).thenReturn(tenantList);
+    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    List<TenantDto> tenantList = Arrays.asList(tenantDto);
+    Page<TenantDto> page = new PageImpl<>(tenantList);
+    Mockito.when(tenantService.findAll(Pageable.ofSize(100))).thenReturn(page);
 
     MvcResult result = mockMvc.perform(get("/settings/tenants"))
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
     System.out.println(content);
-     */
   }
 }

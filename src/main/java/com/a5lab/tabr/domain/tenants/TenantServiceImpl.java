@@ -18,10 +18,18 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Tenant> findAll() {
-    return tenantRepository.findAll();
-  }
+  public Collection<TenantDto> findAll() {
+    return null;
+    /*
+    List<Tenant> tenantList = tenantRepository.findAll();
+    Type listType = new TypeToken<List<TenantDto>>(){}.getType();
+    List<TenantDto> TenantDtoList = tenantMapper.map(tenantList, listType);
+    return TenantDtoList;
 
+    // https://stackoverflow.com/questions/47929674/modelmapper-mapping-list-of-entites-to-list-of-dto-objects
+    return tenantRepository.findAll().map(tenantMapper::toDto);
+     */
+  }
 
   @Override
   @Transactional(readOnly = true)
