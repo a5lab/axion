@@ -14,8 +14,10 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+@WebMvcTest(TenantsApiController.class)
 public class TenantsApiControllerTests extends AbstractControllerTests {
   @MockBean
   private TenantService tenantService;
