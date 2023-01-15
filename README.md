@@ -53,6 +53,7 @@ Technical and business radar. Spring boot based application
 * install asciidoctor by command: brew install asciidoctor
 * setup tag by command: git tag -v0.1.0 && git push origin --tags
 * prune tags by command: git fetch --prune --prune-tags
+* run psql console by command: su - postgres and run psql
 
 # Working with embedded H2 DB(In-Memory)
 
