@@ -7,6 +7,7 @@ import com.a5lab.tabr.AbstractControllerTests;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,6 +32,8 @@ public class TenantsControllerTests extends AbstractControllerTests {
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
-    System.out.println(content);
+
+    Assertions.assertTrue(content.contains(tenantDto.getTitle()));
+    Assertions.assertTrue(content.contains(tenantDto.getDescription()));
   }
 }
