@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html th:replace="~{layouts/settings :: settings(~{::title}, ~{::meta}, ~{:: #content})}"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Dashboard title</title>
+    <meta content="Page description" title="description"/>
+    <meta content="HTML, CSS, JavaScript" title="keywords">
+  </head>
+  <body>
+    <div id="content">
+      <h1>Add radar</h1>
+      <form action="#" th:action="@{/settings/radars/create}" th:object="${radarDto}" method="post">
+        <div th:if="${#fields.hasAnyErrors()}">
+          <ul>
+            <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
+          </ul>
+        </div>
+        <label for="title">Title</label>
+        <input type="text" th:field="*{title}" id="title" placeholder="Title">
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+        <label for="email">Description</label>
+        <input type="text" th:field="*{description}" id="email" placeholder="Description">
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        <label for="email">Prime</label>
+        <input type="checkbox" th:field="*{prime}" id="prime">
+        <span th:if="${#fields.hasErrors('prime')}" th:errors="*{prime}"></span>
+        <input type="submit" value="Add radar">
+      </form>
+    </div>
+  </body>
+</html>
