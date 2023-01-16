@@ -29,13 +29,6 @@ app__domain: "{{ inventory_hostname }}"
 app__protocol: 'https'
 app__google_analytics: '{{ lookup("env", ci_environment_name + "_google_analytics") or "G-PHDDVDXL29"}}'
 
-
-#
-# Settings section
-#
-app__domain: "{{ inventory_hostname }}"
-
-
 #
 # Deploy section
 #
