@@ -5,9 +5,9 @@ Technical and business radar. Spring boot based application
 # Release application
 * update version at antora.yml file
 * run command mvn release and provide information
+* create archive by command: tar -zcvf Binaries.tar.gz tabr*.jar
 * commit changes and create a new git tag
-* run manual release actions at GitHub action with a new tag
-* provide information about release at GitHub
+* create a new release at GitHub and provide information
 * press button publish release at GitHub
 
 # Idea configuration
@@ -51,6 +51,9 @@ Technical and business radar. Spring boot based application
 * install nvm by command: brew install nvm and make post configuration
 * install nodejs by command: nvm install --lts
 * install asciidoctor by command: brew install asciidoctor
+* setup tag by command: git tag -v0.1.0 && git push origin --tags
+* prune tags by command: git fetch --prune --prune-tags
+* run psql console by command: su - postgres and run psql
 
 # Working with embedded H2 DB(In-Memory)
 

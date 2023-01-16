@@ -5,25 +5,26 @@ name: Verify application
 
 on:
   workflow_dispatch:
-    inputs:
-      sha:
-        description: 'SHA'
-        required: true
-        default: '1.0.0'
-        type: string
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
         with:
-          ref: ${{ inputs.sha }}
-      - name: Install JDK
-        uses: ./.github/actions/jdk
-      - name: Install NodeJS
-        uses: ./.github/actions/nodejs
-      - name: Build package
+          java-version: '17'
+          distribution: 'liberica'
+          cache: maven
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install npm packages
+        shell: bash
+        run: npm install uglifycss uglify-js -g
+      - name: Verify package
         shell: bash
         run: mvn verify

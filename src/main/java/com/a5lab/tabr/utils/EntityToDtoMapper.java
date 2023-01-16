@@ -12,6 +12,6 @@ public interface EntityToDtoMapper<E, D> {
 
   D toDto(final E entity);
 
-  E toEntity(final D record);
+  E toEntity(final D dto);
 
 }
