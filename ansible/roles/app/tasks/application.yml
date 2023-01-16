@@ -18,6 +18,7 @@
     - "{{ app__root_path }}/releases"
     - "{{ app__release_path }}"
 
+# Before was '--exclude=.*/', but .git required for git-commit-it plugin
 - name: upload the app to remote release path
   synchronize:
     src: '../../../../'
@@ -25,7 +26,9 @@
     delete: yes
     recursive: yes
     rsync_opts:
-      - '--exclude=.*/'
+      - '--exclude=.github/'
+      - '--exclude=.idea/'
+      - '--exclude=.mvn/'
       - '--exclude=/ansible'
       - '--exclude=/docker'
       - '--exclude=/docs'
