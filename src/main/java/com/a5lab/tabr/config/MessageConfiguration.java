@@ -21,6 +21,7 @@ public class MessageConfiguration implements WebMvcConfigurer {
         new ReloadableResourceBundleMessageSource();
     messageSource.setBasenames(
         "classpath:/messages/application",
+        "classpath:/messages/radar",
         "classpath:/messages/tenant"
     );
     messageSource.setDefaultEncoding("UTF-8");
