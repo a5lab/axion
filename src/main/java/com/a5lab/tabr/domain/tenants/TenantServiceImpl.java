@@ -2,8 +2,8 @@ package com.a5lab.tabr.domain.tenants;
 
 import java.util.Collection;
 import java.util.Optional;
-
 import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +20,8 @@ public class TenantServiceImpl implements TenantService {
   @Override
   @Transactional(readOnly = true)
   public Collection<TenantDto> findAll() {
-    return tenantRepository.findAll().stream().map(tenantMapper::toDto).collect(Collectors.toList());
+    return tenantRepository.findAll().stream().map(tenantMapper::toDto)
+        .collect(Collectors.toList());
   }
 
   @Override
