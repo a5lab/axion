@@ -3,6 +3,7 @@ package com.a5lab.tabr.domain.tenants;
 import java.util.Collection;
 import java.util.Optional;
 
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,16 +20,7 @@ public class TenantServiceImpl implements TenantService {
   @Override
   @Transactional(readOnly = true)
   public Collection<TenantDto> findAll() {
-    return null;
-    /*
-    List<Tenant> tenantList = tenantRepository.findAll();
-    Type listType = new TypeToken<List<TenantDto>>(){}.getType();
-    List<TenantDto> TenantDtoList = tenantMapper.map(tenantList, listType);
-    return TenantDtoList;
-
-    // https://stackoverflow.com/questions/47929674/modelmapper-mapping-list-of-entites-to-list-of-dto-objects
-    return tenantRepository.findAll().map(tenantMapper::toDto);
-     */
+    return tenantRepository.findAll().stream().map(tenantMapper::toDto).collect(Collectors.toList());
   }
 
   @Override
