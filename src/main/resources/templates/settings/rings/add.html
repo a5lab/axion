@@ -18,9 +18,15 @@
         <label for="title">Title</label>
         <input type="text" th:field="*{title}" id="title" placeholder="Title">
         <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-        <label for="email">Description</label>
-        <input type="text" th:field="*{description}" id="email" placeholder="Description">
+        <label for="description">Description</label>
+        <input type="text" th:field="*{description}" id="description" placeholder="Description">
         <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        <label for="priority">Priority</label>
+        <input type="text" th:field="*{priority}" id="priority" placeholder="100">
+        <span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}"></span>
+        <label for="active">Active</label>
+        <input type="text" th:field="*{active}" id="active" placeholder="true">
+        <span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>
         <input type="submit" value="Add ring">
       </form>
     </div>
