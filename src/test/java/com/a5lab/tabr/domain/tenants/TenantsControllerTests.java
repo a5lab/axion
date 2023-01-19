@@ -23,7 +23,7 @@ public class TenantsControllerTests extends AbstractControllerTests {
   private TenantService tenantService;
 
   @Test
-  public void shouldGetIndex() throws Exception {
+  public void shouldGetTenants() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
     List<TenantDto> tenantList = Arrays.asList(tenantDto);
     Page<TenantDto> page = new PageImpl<>(tenantList);
@@ -39,7 +39,7 @@ public class TenantsControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldGetShow() throws Exception {
+  public void shouldShowTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
     Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
 
@@ -54,14 +54,14 @@ public class TenantsControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldGetShowRedirect() throws Exception {
+  public void shouldRedirectShowTenant() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/tenants/show/1"))
         .andExpect(status().is3xxRedirection())
         .andReturn();
   }
 
   @Test
-  public void shouldGetAdd() throws Exception {
+  public void shouldAddTentant() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/tenants/add"))
         .andExpect(status().isOk())
         .andReturn();
@@ -72,12 +72,12 @@ public class TenantsControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldPostCreate() throws Exception {
+  public void shouldCreateTenant() throws Exception {
     // TODO
   }
 
   @Test
-  public void shouldGetEdit() throws Exception {
+  public void shouldEditTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
     Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
 
@@ -92,19 +92,19 @@ public class TenantsControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldGetRedirect() throws Exception {
+  public void shouldRedirectEditTenant() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/tenants/edit/1"))
         .andExpect(status().is3xxRedirection())
         .andReturn();
   }
 
   @Test
-  public void shouldPostUpdate() throws Exception {
+  public void shouldUpdateTenant() throws Exception {
     // TODO
   }
 
   @Test
-  public void shouldGetDelete() throws Exception {
+  public void shouldDeleteTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
 
     String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());

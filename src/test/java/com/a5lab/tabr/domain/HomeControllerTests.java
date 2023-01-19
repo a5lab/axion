@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(HomeController.class)
 public class HomeControllerTests extends AbstractControllerTests {
   @Test
-  public void index() throws Exception {
+  public void shouldGetHome() throws Exception {
     mockMvc.perform(get("/")).andExpect(status().isOk());
   }
 }

@@ -23,7 +23,7 @@ public class TenantsApiControllerTests extends AbstractControllerTests {
   private TenantService tenantService;
 
   @Test
-  public void shouldGetIndex() throws Exception {
+  public void shouldGetTenants() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
     List<TenantDto> tenantDtoList = Arrays.asList(tenantDto);
     Mockito.when(tenantService.findAll()).thenReturn(tenantDtoList);
