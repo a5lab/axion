@@ -33,6 +33,6 @@ public class RadarsApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$[0].id", equalTo(radar.getId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(radar.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(radar.getDescription())))
-        .andExpect(jsonPath("$[0].prime", equalTo(radar.isPrime())));
+        .andExpect(jsonPath("$[0].prime", equalTo(radar.isPrimary())));
   }
 }

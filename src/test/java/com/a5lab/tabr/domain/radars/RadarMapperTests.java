@@ -23,7 +23,7 @@ class RadarMapperTests {
     Assertions.assertEquals(radarDto.getId(), radar.getId());
     Assertions.assertEquals(radarDto.getTitle(), radar.getTitle());
     Assertions.assertEquals(radarDto.getDescription(), radar.getDescription());
-    Assertions.assertEquals(radarDto.isPrime(), radar.isPrime());
+    Assertions.assertEquals(radarDto.isPrimary(), radar.isPrimary());
   }
 
   @Test
@@ -41,6 +41,6 @@ class RadarMapperTests {
     Assertions.assertEquals(radar.getId(), radarDto.getId());
     Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
-    Assertions.assertEquals(radarDto.isPrime(), radar.isPrime());
+    Assertions.assertEquals(radarDto.isPrimary(), radar.isPrimary());
   }
 }
