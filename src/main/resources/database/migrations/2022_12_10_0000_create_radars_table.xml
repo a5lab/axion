@@ -16,7 +16,7 @@
                 <constraints unique="true" uniqueConstraintName="uc_radars_title" nullable="false"/>
             </column>
             <column name="description" type="${text.type}" remarks="Description for radar."/>
-            <column name="prime" type="boolean" remarks="Whenever the radar is primary." defaultValueBoolean="false">
+            <column name="is_primary" type="boolean" remarks="Whenever the radar is primary." defaultValueBoolean="false">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="${user.type}" remarks="User who created the record.">

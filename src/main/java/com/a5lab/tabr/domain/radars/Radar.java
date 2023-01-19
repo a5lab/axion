@@ -40,6 +40,6 @@ public class Radar extends AbstractAuditable {
   @Column(name = "description", nullable = false)
   private String description;
 
-  @Column(name = "prime", nullable = false)
-  private boolean prime = true;
+  @Column(name = "is_primary", nullable = false)
+  private boolean primary = true;
 }
