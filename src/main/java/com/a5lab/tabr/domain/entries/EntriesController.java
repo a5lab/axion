@@ -20,7 +20,7 @@ import com.a5lab.tabr.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/entities")
+@RequestMapping("/settings/entries")
 @RequiredArgsConstructor
 public class EntriesController {
 
@@ -29,10 +29,10 @@ public class EntriesController {
 
   @GetMapping("")
   public ModelAndView index() {
-    ModelAndView modelAndView = new ModelAndView("settings/entities/index");
+    ModelAndView modelAndView = new ModelAndView("settings/entries/index");
     // We need to replace it with proper values for PageRequest.of() coming from ui
     // See https://github.com/a5lab/tabr/issues/112
-    modelAndView.addObject("entities",
+    modelAndView.addObject("entries",
         entityService.findAll(Pageable.ofSize(100)).getContent());
     return modelAndView;
   }
@@ -41,20 +41,20 @@ public class EntriesController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<EntryDto> entityRecord = entityService.findById(id);
     if (entityRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entities/show");
+      ModelAndView modelAndView = new ModelAndView("settings/entries/show");
       modelAndView.addObject("entityDto", entityRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("entity.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/entities");
+      return new ModelAndView("redirect:/settings/entries");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/entities/add");
+    ModelAndView modelAndView = new ModelAndView("settings/entries/add");
     modelAndView.addObject("entityDto", new EntryDto());
     return modelAndView;
   }
@@ -63,7 +63,7 @@ public class EntriesController {
   public ModelAndView create(@Valid EntryDto entryDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entities/add");
+      ModelAndView modelAndView = new ModelAndView("settings/entries/add");
       modelAndView.addObject("entityDto", entryDto);
       return modelAndView;
     }
@@ -71,21 +71,21 @@ public class EntriesController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entity.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/entities");
+    return new ModelAndView("redirect:/settings/entries");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<EntryDto> entityDto = entityService.findById(id);
     if (entityDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entities/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/entries/edit");
       modelAndView.addObject("entityDto", entityDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("entity.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/entities");
+      return new ModelAndView("redirect:/settings/entries");
     }
   }
 
@@ -93,7 +93,7 @@ public class EntriesController {
   public ModelAndView update(@Valid EntryDto entryDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entities/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/entries/edit");
       modelAndView.addObject("entityDto", entryDto);
       return modelAndView;
     }
@@ -101,7 +101,7 @@ public class EntriesController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entity.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/entities");
+    return new ModelAndView("redirect:/settings/entries");
   }
 
   @GetMapping(value = "/delete/{id}")
@@ -110,6 +110,6 @@ public class EntriesController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entity.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/entities";
+    return "redirect:/settings/entries";
   }
 }

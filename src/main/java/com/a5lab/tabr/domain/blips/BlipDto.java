@@ -1,8 +1,5 @@
 package com.a5lab.tabr.domain.blips;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,13 +14,4 @@ import lombok.ToString;
 public class BlipDto {
 
   private Long id;
-
-  @NotBlank
-  @Size(min = 1, max = 64)
-  private String title;
-
-  @NotBlank
-  @Size(min = 1, max = 512)
-  private String description;
-
 }
