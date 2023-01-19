@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemDto {
+public class EntryDto {
 
   private Long id;
 

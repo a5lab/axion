@@ -26,7 +26,7 @@ import com.a5lab.tabr.domain.AbstractAuditable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item extends AbstractAuditable {
+public class Entry extends AbstractAuditable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

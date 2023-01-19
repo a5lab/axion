@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain.rings;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -25,5 +26,11 @@ public class RingDto {
   @NotBlank
   @Size(min = 1, max = 512)
   private String description;
+
+  private String info;
+
+  private int priority;
+
+  private boolean active = true;
 
 }

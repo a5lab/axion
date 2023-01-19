@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/entities")
 @RequiredArgsConstructor
-public class ItemsApiController {
+public class EntriesApiController {
 
-  private final ItemService entityService;
+  private final EntryService entityService;
 
   @GetMapping("")
-  public Collection<Item> index() {
+  public Collection<Entry> index() {
     return entityService.findAll();
   }
 

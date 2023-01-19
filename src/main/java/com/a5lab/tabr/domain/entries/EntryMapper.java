@@ -6,5 +6,5 @@ import com.a5lab.tabr.config.MapperConfiguration;
 import com.a5lab.tabr.utils.EntityToDtoMapper;
 
 @Mapper(config = MapperConfiguration.class)
-public interface ItemMapper extends EntityToDtoMapper<Item, ItemDto> {
+public interface EntryMapper extends EntityToDtoMapper<Entry, EntryDto> {
 }

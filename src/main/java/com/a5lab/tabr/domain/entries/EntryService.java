@@ -6,15 +6,15 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface ItemService {
+public interface EntryService {
 
-  Collection<Item> findAll();
+  Collection<Entry> findAll();
 
-  Page<ItemDto> findAll(Pageable pageable);
+  Page<EntryDto> findAll(Pageable pageable);
 
-  Optional<ItemDto> findById(Long id);
+  Optional<EntryDto> findById(Long id);
 
-  ItemDto save(ItemDto itemDto);
+  EntryDto save(EntryDto entryDto);
 
   void deleteById(Long id);
 }
