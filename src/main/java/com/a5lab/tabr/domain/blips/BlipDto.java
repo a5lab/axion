@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.blips;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class TenantDto {
+public class BlipDto {
 
   private Long id;
 

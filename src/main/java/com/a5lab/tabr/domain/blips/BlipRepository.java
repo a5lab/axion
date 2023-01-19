@@ -1,8 +1,8 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.blips;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TenantRepository extends JpaRepository<Tenant, Long> {
+public interface BlipRepository extends JpaRepository<Blip, Long> {
 }

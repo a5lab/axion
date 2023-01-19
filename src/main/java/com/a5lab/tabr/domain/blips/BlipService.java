@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.blips;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -6,15 +6,15 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface TenantService {
+public interface BlipService {
 
-  Collection<Tenant> findAll();
+  Collection<Blip> findAll();
 
-  Page<TenantDto> findAll(Pageable pageable);
+  Page<BlipDto> findAll(Pageable pageable);
 
-  Optional<TenantDto> findById(Long id);
+  Optional<BlipDto> findById(Long id);
 
-  TenantDto save(TenantDto tenantDto);
+  BlipDto save(BlipDto blipDto);
 
   void deleteById(Long id);
 }

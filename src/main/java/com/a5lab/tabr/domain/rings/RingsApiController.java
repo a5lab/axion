@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.rings;
 
 import java.util.Collection;
 
@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/tenants")
+@RequestMapping("/api/v1/rings")
 @RequiredArgsConstructor
-public class TenantsApiController {
+public class RingsApiController {
 
-  private final TenantService tenantService;
+  private final RingService ringService;
 
   @GetMapping("")
-  public Collection<Tenant> index() {
-    return tenantService.findAll();
+  public Collection<Ring> index() {
+    return ringService.findAll();
   }
 
   // todo: implement based on https://spring.io/guides/tutorials/rest/

@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.rings;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,38 +12,38 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class TenantServiceImpl implements TenantService {
-  private final TenantRepository tenantRepository;
-  private final TenantMapper tenantMapper;
+public class RingServiceImpl implements RingService {
+  private final RingRepository ringRepository;
+  private final RingMapper ringMapper;
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Tenant> findAll() {
-    return tenantRepository.findAll();
+  public Collection<Ring> findAll() {
+    return ringRepository.findAll();
   }
 
 
   @Override
   @Transactional(readOnly = true)
-  public Page<TenantDto> findAll(Pageable pageable) {
-    return tenantRepository.findAll(pageable).map(tenantMapper::toDto);
+  public Page<RingDto> findAll(Pageable pageable) {
+    return ringRepository.findAll(pageable).map(ringMapper::toDto);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<TenantDto> findById(Long id) {
-    return tenantRepository.findById(id).map(tenantMapper::toDto);
+  public Optional<RingDto> findById(Long id) {
+    return ringRepository.findById(id).map(ringMapper::toDto);
   }
 
   @Override
   @Transactional
-  public TenantDto save(TenantDto tenantDto) {
-    return tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(tenantDto)));
+  public RingDto save(RingDto ringDto) {
+    return ringMapper.toDto(ringRepository.save(ringMapper.toEntity(ringDto)));
   }
 
   @Override
   @Transactional
   public void deleteById(Long id) {
-    tenantRepository.deleteById(id);
+    ringRepository.deleteById(id);
   }
 }

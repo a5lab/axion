@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.rings;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -6,15 +6,15 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface TenantService {
+public interface RingService {
 
-  Collection<Tenant> findAll();
+  Collection<Ring> findAll();
 
-  Page<TenantDto> findAll(Pageable pageable);
+  Page<RingDto> findAll(Pageable pageable);
 
-  Optional<TenantDto> findById(Long id);
+  Optional<RingDto> findById(Long id);
 
-  TenantDto save(TenantDto tenantDto);
+  RingDto save(RingDto ringDto);
 
   void deleteById(Long id);
 }

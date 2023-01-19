@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.segments;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,38 +12,38 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class TenantServiceImpl implements TenantService {
-  private final TenantRepository tenantRepository;
-  private final TenantMapper tenantMapper;
+public class SegmentServiceImpl implements SegmentService {
+  private final SegmentRepository segmentRepository;
+  private final SegmentMapper segmentMapper;
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Tenant> findAll() {
-    return tenantRepository.findAll();
+  public Collection<Segment> findAll() {
+    return segmentRepository.findAll();
   }
 
 
   @Override
   @Transactional(readOnly = true)
-  public Page<TenantDto> findAll(Pageable pageable) {
-    return tenantRepository.findAll(pageable).map(tenantMapper::toDto);
+  public Page<SegmentDto> findAll(Pageable pageable) {
+    return segmentRepository.findAll(pageable).map(segmentMapper::toDto);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<TenantDto> findById(Long id) {
-    return tenantRepository.findById(id).map(tenantMapper::toDto);
+  public Optional<SegmentDto> findById(Long id) {
+    return segmentRepository.findById(id).map(segmentMapper::toDto);
   }
 
   @Override
   @Transactional
-  public TenantDto save(TenantDto tenantDto) {
-    return tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(tenantDto)));
+  public SegmentDto save(SegmentDto segmentDto) {
+    return segmentMapper.toDto(segmentRepository.save(segmentMapper.toEntity(segmentDto)));
   }
 
   @Override
   @Transactional
   public void deleteById(Long id) {
-    tenantRepository.deleteById(id);
+    segmentRepository.deleteById(id);
   }
 }
