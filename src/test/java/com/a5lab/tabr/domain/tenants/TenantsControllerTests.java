@@ -43,8 +43,8 @@ public class TenantsControllerTests extends AbstractControllerTests {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
     Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
 
-    MvcResult result =
-        mockMvc.perform(get(String.format("/settings/tenants/show/%d", tenantDto.getId())))
+    String url = String.format("/settings/tenants/show/%d", tenantDto.getId());
+    MvcResult result = mockMvc.perform(get(url))
             .andExpect(status().isOk())
             .andReturn();
     String content = result.getResponse().getContentAsString();
@@ -78,20 +78,24 @@ public class TenantsControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetEdit() throws Exception {
-    /*
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
-    List<TenantDto> tenantList = Arrays.asList(tenantDto);
-    Page<TenantDto> page = new PageImpl<>(tenantList);
-    Mockito.when(tenantService.findAll(Pageable.ofSize(100))).thenReturn(page);
+    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
 
-    MvcResult result = mockMvc.perform(get("/settings/tenants/edit/10"))
+    String url = String.format("/settings/tenants/edit/%d", tenantDto.getId());
+    MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains("Title"));
-    Assertions.assertTrue(content.contains("Description"));
-    */
+    Assertions.assertTrue(content.contains(tenantDto.getTitle()));
+    Assertions.assertTrue(content.contains(tenantDto.getDescription()));
+  }
+
+  @Test
+  public void shouldGetRedirect() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/tenants/edit/1"))
+        .andExpect(status().is3xxRedirection())
+        .andReturn();
   }
 
   @Test
@@ -99,20 +103,13 @@ public class TenantsControllerTests extends AbstractControllerTests {
     // TODO
   }
 
+  @Test
   public void shouldGetDelete() throws Exception {
-    /*
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
-    List<TenantDto> tenantList = Arrays.asList(tenantDto);
-    Page<TenantDto> page = new PageImpl<>(tenantList);
-    Mockito.when(tenantService.findAll(Pageable.ofSize(100))).thenReturn(page);
 
-    MvcResult result = mockMvc.perform(get("/settings/tenants/delete/10"))
-        .andExpect(status().isOk())
+    String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());
+    MvcResult result = mockMvc.perform(get(url))
+        .andExpect(status().is3xxRedirection())
         .andReturn();
-    String content = result.getResponse().getContentAsString();
-
-    Assertions.assertTrue(content.contains(tenantDto.getTitle()));
-    Assertions.assertTrue(content.contains(tenantDto.getDescription()));
-     */
   }
 }
