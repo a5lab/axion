@@ -8,32 +8,36 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${tenants}">
-        <h1 th:case="null">No tenants yet!</h1>
+      <div th:switch="${rings}">
+        <h1 th:case="null">No rings yet!</h1>
         <div th:case="*">
-          <h1>Tenants</h1>
+          <h1>Rings</h1>
           <table>
             <thead>
               <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Priority</th>
+                <th>Active</th>
                 <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr th:each="tenant : ${tenants}">
-                <td th:text="${tenant.title}"></td>
-                <td th:text="${tenant.description}"></td>
-                <td><a th:href="@{/settings/tenants/show/{id}(id=${tenant.id})}">Show</a></td>
-                <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenant.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenant.id})}">Delete</a></td>
+              <tr th:each="ring : ${rings}">
+                <td th:text="${ring.title}"></td>
+                <td th:text="${ring.description}"></td>
+                <td th:text="${ring.priority}"></td>
+                <td th:text="${ring.active}"></td>
+                <td><a th:href="@{/settings/rings/show/{id}(id=${ring.id})}">Show</a></td>
+                <td><a th:href="@{/settings/rings/edit/{id}(id=${ring.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/rings/delete/{id}(id=${ring.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p><a href="/settings/tenants/add">Add a new tenant</a></p>
+        <p><a href="/settings/rings/add">Add a new ring</a></p>
       </div>
     </div>
   </body>

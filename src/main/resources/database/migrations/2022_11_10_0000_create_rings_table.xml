@@ -18,7 +18,6 @@
             <column name="description" type="${text.type}" remarks="Description for ring.">
                 <constraints nullable="false"/>
             </column>
-            <column name="info" type="${text.type}" remarks="Holds detailed information about the ring."/>
             <column name="priority" type="integer"
                     remarks="Represents ring priority in radar starting from lower to higher value.">
                 <constraints nullable="false"/>
