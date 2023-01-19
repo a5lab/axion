@@ -8,18 +8,22 @@
   </head>
   <body>
     <div id="content">
-        <h1>Tenant</h1>
+        <h1>Segment</h1>
         <ul class="html-view">
           <li>
             <p>Title</p>
-            <p th:text="${tenantDto.title}"></p>
+            <p th:text="${segmentDto.title}"></p>
           </li>
           <li>
             <p>Description</p>
-            <p th:text="${tenantDto.description}"></p>
+            <p th:text="${segmentDto.description}"></p>
+          </li>
+          <li>
+            <p>Active</p>
+            <p th:text="${segmentDto.active}"></p>
           </li>
         </ul>
-      <p><a href="/settings/tenants">View all tenants</a></p>
+      <p><a href="/settings/segments">View all segments</a></p>
     </div>
   </body>
 </html>
