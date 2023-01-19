@@ -15,8 +15,8 @@
             <column name="radar_id" type="${bigint.type}" remarks="Reference to radar.">
                 <constraints nullable="false" foreignKeyName="fk_radar_id_radars" references="radars(id)"/>
             </column>
-            <column name="entity_id" type="${bigint.type}" remarks="Reference to entity.">
-                <constraints nullable="false" foreignKeyName="fk_entity_id_entities" references="entities(id)"/>
+            <column name="entry_id" type="${bigint.type}" remarks="Reference to entry.">
+                <constraints nullable="false" foreignKeyName="fk_entry_id_entries" references="entries(id)"/>
             </column>
             <column name="segment_id" type="${bigint.type}" remarks="Reference to segment.">
                 <constraints nullable="false" foreignKeyName="fk_segment_id_segments" references="segments(id)"/>
