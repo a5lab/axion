@@ -1,6 +1,5 @@
 package com.a5lab.tabr.domain.segments;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

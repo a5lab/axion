@@ -1,6 +1,5 @@
 package com.a5lab.tabr.domain.rings;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
