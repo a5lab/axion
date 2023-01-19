@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.entities;
+package com.a5lab.tabr.domain.items;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class EntityDto {
+public class ItemDto {
 
   private Long id;
 

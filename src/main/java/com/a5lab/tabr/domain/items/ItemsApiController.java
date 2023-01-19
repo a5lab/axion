@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.entities;
+package com.a5lab.tabr.domain.items;
 
 import java.util.Collection;
 
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/entities")
 @RequiredArgsConstructor
-public class EntitiesApiController {
+public class ItemsApiController {
 
-  private final EntityService entityService;
+  private final ItemService entityService;
 
   @GetMapping("")
-  public Collection<Entity> index() {
+  public Collection<Item> index() {
     return entityService.findAll();
   }
 

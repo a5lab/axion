@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.entities;
+package com.a5lab.tabr.domain.items;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ import com.a5lab.tabr.domain.AbstractAuditable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Entity extends AbstractAuditable {
+public class Item extends AbstractAuditable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.entities;
+package com.a5lab.tabr.domain.items;
 
 import jakarta.validation.Valid;
 import java.util.Optional;
@@ -22,9 +22,9 @@ import com.a5lab.tabr.utils.FlashMessages;
 @Controller
 @RequestMapping("/settings/entities")
 @RequiredArgsConstructor
-public class EntitiesController {
+public class ItemsController {
 
-  private final EntityService entityService;
+  private final ItemService entityService;
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -39,7 +39,7 @@ public class EntitiesController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<EntityDto> entityRecord = entityService.findById(id);
+    Optional<ItemDto> entityRecord = entityService.findById(id);
     if (entityRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/entities/show");
       modelAndView.addObject("entityDto", entityRecord.get());
@@ -55,19 +55,19 @@ public class EntitiesController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/entities/add");
-    modelAndView.addObject("entityDto", new EntityDto());
+    modelAndView.addObject("entityDto", new ItemDto());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid EntityDto entityDto, BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes) {
+  public ModelAndView create(@Valid ItemDto itemDto, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/entities/add");
-      modelAndView.addObject("entityDto", entityDto);
+      modelAndView.addObject("entityDto", itemDto);
       return modelAndView;
     }
-    entityService.save(entityDto);
+    entityService.save(itemDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entity.flash.info.created", null,
             LocaleContextHolder.getLocale()));
@@ -76,7 +76,7 @@ public class EntitiesController {
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<EntityDto> entityDto = entityService.findById(id);
+    Optional<ItemDto> entityDto = entityService.findById(id);
     if (entityDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/entities/edit");
       modelAndView.addObject("entityDto", entityDto.get());
@@ -90,14 +90,14 @@ public class EntitiesController {
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid EntityDto entityDto,
+  public ModelAndView update(@Valid ItemDto itemDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/entities/edit");
-      modelAndView.addObject("entityDto", entityDto);
+      modelAndView.addObject("entityDto", itemDto);
       return modelAndView;
     }
-    entityService.save(entityDto);
+    entityService.save(itemDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entity.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
