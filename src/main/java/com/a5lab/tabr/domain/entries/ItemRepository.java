@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.items;
+package com.a5lab.tabr.domain.entries;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

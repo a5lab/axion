@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.items;
+package com.a5lab.tabr.domain.entries;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
