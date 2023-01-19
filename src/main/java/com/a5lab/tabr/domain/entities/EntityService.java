@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.entities;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -6,15 +6,15 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface TenantService {
+public interface EntityService {
 
-  Collection<Tenant> findAll();
+  Collection<Entity> findAll();
 
-  Page<TenantDto> findAll(Pageable pageable);
+  Page<EntityDto> findAll(Pageable pageable);
 
-  Optional<TenantDto> findById(Long id);
+  Optional<EntityDto> findById(Long id);
 
-  TenantDto save(TenantDto tenantDto);
+  EntityDto save(EntityDto entityDto);
 
   void deleteById(Long id);
 }

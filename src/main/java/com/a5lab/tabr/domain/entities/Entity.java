@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,14 +19,14 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.a5lab.tabr.domain.AbstractAuditable;
 
 @Entity
-@Table(name = "tenants")
+@Table(name = "entities")
 @DynamicUpdate
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tenant extends AbstractAuditable {
+public class Entity extends AbstractAuditable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

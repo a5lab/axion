@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.tenants;
+package com.a5lab.tabr.domain.entities;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,38 +12,38 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class TenantServiceImpl implements TenantService {
-  private final TenantRepository tenantRepository;
-  private final TenantMapper tenantMapper;
+public class EntityServiceImpl implements EntityService {
+  private final EntityRepository entityRepository;
+  private final EntityMapper entityMapper;
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Tenant> findAll() {
-    return tenantRepository.findAll();
+  public Collection<Entity> findAll() {
+    return entityRepository.findAll();
   }
 
 
   @Override
   @Transactional(readOnly = true)
-  public Page<TenantDto> findAll(Pageable pageable) {
-    return tenantRepository.findAll(pageable).map(tenantMapper::toDto);
+  public Page<EntityDto> findAll(Pageable pageable) {
+    return entityRepository.findAll(pageable).map(entityMapper::toDto);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<TenantDto> findById(Long id) {
-    return tenantRepository.findById(id).map(tenantMapper::toDto);
+  public Optional<EntityDto> findById(Long id) {
+    return entityRepository.findById(id).map(entityMapper::toDto);
   }
 
   @Override
   @Transactional
-  public TenantDto save(TenantDto tenantDto) {
-    return tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(tenantDto)));
+  public EntityDto save(EntityDto entityDto) {
+    return entityMapper.toDto(entityRepository.save(entityMapper.toEntity(entityDto)));
   }
 
   @Override
   @Transactional
   public void deleteById(Long id) {
-    tenantRepository.deleteById(id);
+    entityRepository.deleteById(id);
   }
 }
