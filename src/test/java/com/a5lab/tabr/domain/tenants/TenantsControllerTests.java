@@ -1,7 +1,9 @@
 package com.a5lab.tabr.domain.tenants;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import com.a5lab.tabr.AbstractControllerTests;
 import java.util.Arrays;
@@ -15,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 @WebMvcTest(TenantsController.class)
@@ -57,6 +60,7 @@ public class TenantsControllerTests extends AbstractControllerTests {
   public void shouldRedirectShowTenant() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/tenants/show/1"))
         .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/tenants"))
         .andReturn();
   }
 
@@ -73,7 +77,33 @@ public class TenantsControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldCreateTenant() throws Exception {
-    // TODO
+    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+
+    MvcResult result = mockMvc.perform(post("/settings/tenants/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", tenantDto.getTitle())
+            .param("description", tenantDto.getDescription())
+            .sessionAttr("tenantDto", tenantDto))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/tenants"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+  }
+
+  @Test
+  public void shouldFailToCreateTenant() throws Exception {
+    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+
+    MvcResult result = mockMvc.perform(post("/settings/tenants/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", tenantDto.getTitle())
+            .sessionAttr("tenantDto", tenantDto))
+        .andExpect(status().isOk())
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("must not be blank"));
   }
 
   @Test
@@ -95,12 +125,39 @@ public class TenantsControllerTests extends AbstractControllerTests {
   public void shouldRedirectEditTenant() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/tenants/edit/1"))
         .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/tenants"))
         .andReturn();
   }
 
   @Test
   public void shouldUpdateTenant() throws Exception {
-    // TODO
+    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+
+    MvcResult result = mockMvc.perform(post("/settings/tenants/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", tenantDto.getTitle())
+            .param("description", tenantDto.getDescription())
+            .sessionAttr("tenantDto", tenantDto))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/tenants"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+  }
+
+  @Test
+  public void shouldFailToUpdateTenant() throws Exception {
+    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+
+    MvcResult result = mockMvc.perform(post("/settings/tenants/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", tenantDto.getTitle())
+            .sessionAttr("tenantDto", tenantDto))
+        .andExpect(status().isOk())
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("must not be blank"));
   }
 
   @Test
@@ -110,6 +167,7 @@ public class TenantsControllerTests extends AbstractControllerTests {
     String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/tenants"))
         .andReturn();
   }
 }
