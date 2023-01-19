@@ -8,10 +8,10 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${tenants}">
-        <h1 th:case="null">No tenants yet!</h1>
+      <div th:switch="${blips}">
+        <h1 th:case="null">No blips yet!</h1>
         <div th:case="*">
-          <h1>Tenants</h1>
+          <h1>Blips</h1>
           <table>
             <thead>
               <tr>
@@ -23,17 +23,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="tenant : ${tenants}">
-                <td th:text="${tenant.title}"></td>
-                <td th:text="${tenant.description}"></td>
-                <td><a th:href="@{/settings/tenants/show/{id}(id=${tenant.id})}">Show</a></td>
-                <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenant.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenant.id})}">Delete</a></td>
+              <tr th:each="blip : ${blips}">
+                <td th:text="${blip.title}"></td>
+                <td th:text="${blip.description}"></td>
+                <td><a th:href="@{/settings/blips/show/{id}(id=${blip.id})}">Show</a></td>
+                <td><a th:href="@{/settings/blips/edit/{id}(id=${blip.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/blips/delete/{id}(id=${blip.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p><a href="/settings/tenants/add">Add a new tenant</a></p>
+        <p><a href="/settings/blips/add">Add a new blip</a></p>
       </div>
     </div>
   </body>
