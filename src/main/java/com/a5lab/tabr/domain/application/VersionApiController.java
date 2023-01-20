@@ -32,6 +32,7 @@ public class VersionApiController {
     Version version = new Version();
     version.setGroupId(this.groupId);
     version.setArtifactId(this.artifactId);
+    version.setVersion(this.version);
     version.setName(this.name);
     version.setDescription(this.description);
     return version;
