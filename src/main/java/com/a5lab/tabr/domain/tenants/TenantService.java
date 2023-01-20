@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface TenantService {
 
-  Collection<Tenant> findAll();
+  Collection<TenantDto> findAll();
 
   Page<TenantDto> findAll(Pageable pageable);
 

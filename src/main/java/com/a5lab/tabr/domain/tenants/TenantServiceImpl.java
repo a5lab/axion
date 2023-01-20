@@ -2,6 +2,7 @@ package com.a5lab.tabr.domain.tenants;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,10 +19,10 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Tenant> findAll() {
-    return tenantRepository.findAll();
+  public Collection<TenantDto> findAll() {
+    return tenantRepository.findAll().stream().map(tenantMapper::toDto)
+        .collect(Collectors.toList());
   }
-
 
   @Override
   @Transactional(readOnly = true)

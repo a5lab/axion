@@ -14,25 +14,27 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+@WebMvcTest(TenantsApiController.class)
 public class TenantsApiControllerTests extends AbstractControllerTests {
   @MockBean
   private TenantService tenantService;
 
   @Test
-  public void index() throws Exception {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
-    List<Tenant> tenantList = Arrays.asList(tenant);
-    Mockito.when(tenantService.findAll()).thenReturn(tenantList);
+  public void shouldGetTenants() throws Exception {
+    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    List<TenantDto> tenantDtoList = Arrays.asList(tenantDto);
+    Mockito.when(tenantService.findAll()).thenReturn(tenantDtoList);
 
     mockMvc.perform(get("/api/v1/tenants").contentType(APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$").isArray())
-        .andExpect(jsonPath("$", hasSize(tenantList.size())))
-        .andExpect(jsonPath("$[0].id", equalTo(tenant.getId()), Long.class))
-        .andExpect(jsonPath("$[0].title", equalTo(tenant.getTitle())))
-        .andExpect(jsonPath("$[0].description", equalTo(tenant.getDescription())));
+        .andExpect(jsonPath("$", hasSize(tenantDtoList.size())))
+        .andExpect(jsonPath("$[0].id", equalTo(tenantDto.getId()), Long.class))
+        .andExpect(jsonPath("$[0].title", equalTo(tenantDto.getTitle())))
+        .andExpect(jsonPath("$[0].description", equalTo(tenantDto.getDescription())));
 
   }
 }
