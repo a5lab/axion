@@ -1,9 +1,6 @@
 package com.a5lab.tabr.domain.application;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,18 +44,18 @@ public class CommitApiController {
   private String tags;
 
   @GetMapping("/show")
-  public Map<String, String> show() {
-    Map<String, String> result = new HashMap<>();
-    result.put("Git branch", branch);
-    result.put("Git build time", buildTime);
-    result.put("Git build version", buildVersion);
-    result.put("Git commit id abbrev", commitIdAbbrev);
-    result.put("Git commit id full", commitIdFull);
-    result.put("Git commit message full", commitMessageFull);
-    result.put("Git commit message short", commitMessageShort);
-    result.put("Git commit time", commitTime);
-    result.put("Git dirty", dirty);
-    result.put("Git tags", tags);
-    return result;
+  public Commit show() {
+    Commit commit = new Commit();
+    commit.setBranch(this.branch);
+    commit.setBuildTime(this.buildTime);
+    commit.setBuildVersion(this.buildVersion);
+    commit.setCommitIdAbbrev(this.commitIdAbbrev);
+    commit.setCommitIdFull(this.commitIdFull);
+    commit.setCommitMessageFull(this.commitMessageFull);
+    commit.setCommitMessageShort(this.commitMessageShort);
+    commit.setCommitTime(this.commitTime);
+    commit.setDirty(this.dirty);
+    commit.setTags(this.tags);
+    return commit;
   }
 }

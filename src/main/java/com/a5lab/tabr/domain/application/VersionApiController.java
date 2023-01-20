@@ -1,8 +1,5 @@
 package com.a5lab.tabr.domain.application;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,13 +28,12 @@ public class VersionApiController {
   private String description;
 
   @GetMapping("/show")
-  public Map<String, String> show() {
-    Map<String, String> result = new HashMap<>();
-    result.put("groupId", groupId);
-    result.put("artifactId", artifactId);
-    result.put("version", version);
-    result.put("name", name);
-    result.put("description", description);
-    return result;
+  public Version show() {
+    Version version = new Version();
+    version.setGroupId(this.groupId);
+    version.setArtifactId(this.artifactId);
+    version.setName(this.name);
+    version.setDescription(this.description);
+    return version;
   }
 }
