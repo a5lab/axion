@@ -26,8 +26,6 @@ public class RingDto {
   @Size(min = 1, max = 512)
   private String description;
 
-  private String info;
-
   private int priority;
 
   private boolean active = true;

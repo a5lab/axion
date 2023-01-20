@@ -8,10 +8,10 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${tenants}">
-        <h1 th:case="null">No tenants yet!</h1>
+      <div th:switch="${entries}">
+        <h1 th:case="null">No entries yet!</h1>
         <div th:case="*">
-          <h1>Tenants</h1>
+          <h1>Entries</h1>
           <table>
             <thead>
               <tr>
@@ -23,17 +23,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="tenant : ${tenants}">
-                <td th:text="${tenant.title}"></td>
-                <td th:text="${tenant.description}"></td>
-                <td><a th:href="@{/settings/tenants/show/{id}(id=${tenant.id})}">Show</a></td>
-                <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenant.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenant.id})}">Delete</a></td>
+              <tr th:each="entry : ${entries}">
+                <td th:text="${entry.title}"></td>
+                <td th:text="${entry.description}"></td>
+                <td><a th:href="@{/settings/entries/show/{id}(id=${entry.id})}">Show</a></td>
+                <td><a th:href="@{/settings/entries/edit/{id}(id=${entry.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/entries/delete/{id}(id=${entry.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p><a href="/settings/tenants/add">Add a new tenant</a></p>
+        <p><a href="/settings/entries/add">Add a new entry</a></p>
       </div>
     </div>
   </body>

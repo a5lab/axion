@@ -8,32 +8,34 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${tenants}">
-        <h1 th:case="null">No tenants yet!</h1>
+      <div th:switch="${segments}">
+        <h1 th:case="null">No segments yet!</h1>
         <div th:case="*">
-          <h1>Tenants</h1>
+          <h1>Segments</h1>
           <table>
             <thead>
               <tr>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Active</th>
                 <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr th:each="tenant : ${tenants}">
-                <td th:text="${tenant.title}"></td>
-                <td th:text="${tenant.description}"></td>
-                <td><a th:href="@{/settings/tenants/show/{id}(id=${tenant.id})}">Show</a></td>
-                <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenant.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenant.id})}">Delete</a></td>
+              <tr th:each="segment : ${segments}">
+                <td th:text="${segment.title}"></td>
+                <td th:text="${segment.description}"></td>
+                <td th:text="${segment.active}"></td>
+                <td><a th:href="@{/settings/segments/show/{id}(id=${segment.id})}">Show</a></td>
+                <td><a th:href="@{/settings/segments/edit/{id}(id=${segment.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/segments/delete/{id}(id=${segment.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p><a href="/settings/tenants/add">Add a new tenant</a></p>
+        <p><a href="/settings/segments/add">Add a new segment</a></p>
       </div>
     </div>
   </body>
