@@ -78,6 +78,10 @@ public class BlipsController {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/blips/add");
       modelAndView.addObject("blipDto", blipDto);
+      modelAndView.addObject("radars", this.radarService.findAll());
+      modelAndView.addObject("entries", this.entryService.findAll());
+      modelAndView.addObject("segments", this.segmentService.findAll());
+      modelAndView.addObject("rings", this.ringService.findAll());
       return modelAndView;
     }
     blipService.save(blipDto);

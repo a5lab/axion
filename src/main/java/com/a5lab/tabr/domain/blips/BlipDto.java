@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain.blips;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,9 +22,11 @@ public class BlipDto {
 
   private Long segmentId;
 
+  @NotNull
   private Long segmentNo;
 
   private Long ringId;
 
+  @NotNull
   private Long ringNo;
 }
