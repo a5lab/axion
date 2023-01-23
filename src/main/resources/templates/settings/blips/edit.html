@@ -16,12 +16,9 @@
           </ul>
         </div>
         <input type="hidden" th:field="*{id}" id="id">
-        <label for="title">Title</label>
-        <input type="text" th:field="*{title}" id="title" placeholder="Title">
-        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-        <label for="email">Description</label>
-        <input type="text" th:field="*{description}" id="email" placeholder="Description">
-        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        <label for="segment_no">Segment number</label>
+        <input type="text" th:field="*{segment_no}" id="segment_no" placeholder="0">
+        <span th:if="${#fields.hasErrors('segment_no')}" th:errors="*{segment_no}"></span>
         <input type="submit" value="Update blip">
       </form>      
     </div>

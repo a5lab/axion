@@ -14,4 +14,16 @@ import lombok.ToString;
 public class BlipDto {
 
   private Long id;
+
+  private Long radarId;
+
+  private Long entryId;
+
+  private Long segmentId;
+
+  private Long segmentNo;
+
+  private Long ringId;
+
+  private Long ringNo;
 }

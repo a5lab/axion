@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.tabr.domain.entries.EntryService;
+import com.a5lab.tabr.domain.radars.RadarService;
+import com.a5lab.tabr.domain.rings.RingService;
+import com.a5lab.tabr.domain.segments.SegmentService;
 import com.a5lab.tabr.utils.FlashMessages;
+
 
 
 @Controller
@@ -25,6 +30,10 @@ import com.a5lab.tabr.utils.FlashMessages;
 public class BlipsController {
 
   private final BlipService blipService;
+  private final RadarService radarService;
+  private final EntryService entryService;
+  private final SegmentService segmentService;
+  private final RingService ringService;
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -56,6 +65,10 @@ public class BlipsController {
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/blips/add");
     modelAndView.addObject("blipDto", new BlipDto());
+    modelAndView.addObject("radars", this.radarService.findAll());
+    modelAndView.addObject("entries", this.entryService.findAll());
+    modelAndView.addObject("segments", this.segmentService.findAll());
+    modelAndView.addObject("rings", this.ringService.findAll());
     return modelAndView;
   }
 

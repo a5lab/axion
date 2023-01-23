@@ -30,4 +30,23 @@ public class Blip extends AbstractAuditable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false, unique = true)
   private Long id;
+
+  @Column(name = "radar_id", nullable = false, updatable = false)
+  private Long radarId;
+
+  @Column(name = "entry_id", nullable = false, updatable = false)
+  private Long entryId;
+  
+  @Column(name = "segment_id", nullable = false, updatable = false)
+  private Long segmentId;
+
+  @Column(name = "segment_no", nullable = false, updatable = false)
+  private Long segmentNo;
+
+  @Column(name = "ring_id", nullable = false, updatable = false)
+  private Long ringId;
+
+  @Column(name = "ring_no", nullable = false, updatable = false)
+  private Long ringNo;
+
 }

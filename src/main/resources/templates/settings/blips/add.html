@@ -15,13 +15,28 @@
             <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
           </ul>
         </div>
-        <label for="title">Title</label>
-        <input type="text" th:field="*{title}" id="title" placeholder="Title">
-        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-        <label for="email">Description</label>
-        <input type="text" th:field="*{description}" id="email" placeholder="Description">
-        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-        <input type="submit" value="Add blip">
+        <label for="radar_id">Radar</label>
+        <select  id="radar_id" name="radar_id" th:field="*{radar_id}" >
+          <option th:each="radar : ${radars}" th:value="${radar.id}" th:utext="${radar.title}"/>
+        </select>
+        <label for="entry_id">Entry</label>
+        <select  id="entry_id" name="entry_id" th:field="*{entry_id}" >
+          <option th:each="entry : ${entries}" th:value="${entry.id}" th:utext="${entry.title}"/>
+        </select>
+        <label for="segment_id">Segment</label>
+        <select  id="segment_id" name="segment_id" th:field="*{segment_id}" >
+          <option th:each="segment : ${segments}" th:value="${segment.id}" th:utext="${segment.title}"/>
+        </select>
+        <label for="segment_no">Segment number</label>
+        <input type="text" th:field="*{segment_no}" id="segment_no" placeholder="0">
+        <span th:if="${#fields.hasErrors('segment_no')}" th:errors="*{segment_no}"></span>
+        <label for="ring_id">Ring</label>
+        <select  id="ring_id" name="ring_id" th:field="*{ring_id}" >
+          <option th:each="ring : ${rings}" th:value="${ring.id}" th:utext="${ring.title}"/>
+        </select>
+        <label for="ring_no">Ring number</label>
+        <input type="text" th:field="*{ring_no}" id="ring_no" placeholder="0">
+        <span th:if="${#fields.hasErrors('ring_no')}" th:errors="*{ring_no}"></span>
       </form>
     </div>
   </body>
