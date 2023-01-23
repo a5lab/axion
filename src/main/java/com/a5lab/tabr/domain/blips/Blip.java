@@ -1,11 +1,13 @@
 package com.a5lab.tabr.domain.blips;
 
-import com.a5lab.tabr.domain.radars.Radar;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -17,6 +19,7 @@ import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.tabr.domain.AbstractAuditable;
+import com.a5lab.tabr.domain.radars.Radar;
 
 @Entity
 @Table(name = "blips")
@@ -33,12 +36,14 @@ public class Blip extends AbstractAuditable {
   @Column(name = "id", nullable = false, updatable = false, unique = true)
   private Long id;
 
-  @Column(name = "radar_id", nullable = false, updatable = false)
+  //  @Column(name = "radar_id", nullable = false, updatable = false)
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "radar_id", nullable = false, updatable = false)
   private Radar radar;
 
   @Column(name = "entry_id", nullable = false, updatable = false)
   private Long entryId;
-  
+
   @Column(name = "segment_id", nullable = false, updatable = false)
   private Long segmentId;
 

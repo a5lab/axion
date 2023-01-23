@@ -16,7 +16,7 @@
           </ul>
         </div>
         <label for="radar_id">Radar</label>
-        <select  id="radar_id" name="radarId" th:field="*{radarId}" >
+        <select id="radar_id" name="radarId" th:field="*{radar.id}">
           <option th:each="radar : ${radars}" th:value="${radar.id}" th:utext="${radar.title}"/>
         </select>
         <label for="entry_id">Entry</label>

@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import com.a5lab.tabr.domain.radars.RadarDto;
+
 @Getter
 @Setter
 @ToString
@@ -17,7 +19,7 @@ public class BlipDto {
 
   private Long id;
 
-  private Long radarId;
+  private RadarDto radar;
 
   private Long entryId;
 

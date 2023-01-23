@@ -18,6 +18,7 @@
                 <th>Entry</th>
                 <th>Segment no</th>
                 <th>Ring no</th>
+                <th>Radar title</th>
                 <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -28,6 +29,7 @@
                 <td th:text="${blip.entryId}"></td>
                 <td th:text="${blip.segmentNo}"></td>
                 <td th:text="${blip.ringNo}"></td>
+                <td th:text="${blip.radar.title}"></td>
                 <td><a th:href="@{/settings/blips/show/{id}(id=${blip.id})}">Show</a></td>
                 <td><a th:href="@{/settings/blips/edit/{id}(id=${blip.id})}">Edit</a></td>
                 <td><a th:href="@{/settings/blips/delete/{id}(id=${blip.id})}">Delete</a></td>
