@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain.blips;
 
+import com.a5lab.tabr.domain.radars.Radar;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Blip extends AbstractAuditable {
   private Long id;
 
   @Column(name = "radar_id", nullable = false, updatable = false)
-  private Long radarId;
+  private Radar radar;
 
   @Column(name = "entry_id", nullable = false, updatable = false)
   private Long entryId;
