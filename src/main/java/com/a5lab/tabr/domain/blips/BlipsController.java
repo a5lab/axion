@@ -97,6 +97,10 @@ public class BlipsController {
     if (blipDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/blips/edit");
       modelAndView.addObject("blipDto", blipDto.get());
+      modelAndView.addObject("radars", this.radarService.findAll());
+      modelAndView.addObject("entries", this.entryService.findAll());
+      modelAndView.addObject("segments", this.segmentService.findAll());
+      modelAndView.addObject("rings", this.ringService.findAll());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -112,6 +116,10 @@ public class BlipsController {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/blips/edit");
       modelAndView.addObject("blipDto", blipDto);
+      modelAndView.addObject("radars", this.radarService.findAll());
+      modelAndView.addObject("entries", this.entryService.findAll());
+      modelAndView.addObject("segments", this.segmentService.findAll());
+      modelAndView.addObject("rings", this.ringService.findAll());
       return modelAndView;
     }
     blipService.save(blipDto);

@@ -15,6 +15,7 @@
           <table>
             <thead>
               <tr>
+                <th>Entry</th>
                 <th>Segment no</th>
                 <th>Ring no</th>
                 <th>Show</th>
@@ -24,6 +25,7 @@
             </thead>
             <tbody>
               <tr th:each="blip : ${blips}">
+                <td th:text="${blip.entryId}"></td>
                 <td th:text="${blip.segmentNo}"></td>
                 <td th:text="${blip.ringNo}"></td>
                 <td><a th:href="@{/settings/blips/show/{id}(id=${blip.id})}">Show</a></td>
