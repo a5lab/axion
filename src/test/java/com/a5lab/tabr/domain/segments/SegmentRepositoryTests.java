@@ -14,7 +14,7 @@ class SegmentRepositoryTests extends AbstractRepositoryTests {
   private SegmentRepository segmentRepository;
 
   @Test
-  void shouldSaveSegmentWithTitleAndDescription() {
+  void shouldSaveSegmentWithAllFields() {
     final Segment s = new Segment();
     s.setTitle("My new test Segment");
     s.setDescription("My awesome description");

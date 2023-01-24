@@ -3,11 +3,19 @@ package com.a5lab.tabr.domain.radars;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class RadarPrimaryValidator implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
+public class RadarPrimaryValidator extends RadarPrimaryValidatorBase
+    implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
-    // https://docs.jboss.org/hibernate/validator/5.1/reference/en-US/html/validator-customconstraints.html#validator-customconstraints-validator
+    if (this.isPrimaryValid(radar.getId(), radar.isPrimary())) {
+      return true;
+    }
+
+    // Attach error to primary fields
+    context.disableDefaultConstraintViolation();
+    context.buildConstraintViolationWithTemplate("can be only one primary")
+        .addPropertyNode("primary").addConstraintViolation();
     return false;
   }
 }
