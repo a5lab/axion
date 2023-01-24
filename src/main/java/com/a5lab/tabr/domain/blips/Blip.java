@@ -19,7 +19,11 @@ import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.tabr.domain.AbstractAuditable;
+import com.a5lab.tabr.domain.entries.Entry;
 import com.a5lab.tabr.domain.radars.Radar;
+import com.a5lab.tabr.domain.rings.Ring;
+import com.a5lab.tabr.domain.segments.Segment;
+
 
 @Entity
 @Table(name = "blips")
@@ -36,26 +40,27 @@ public class Blip extends AbstractAuditable {
   @Column(name = "id", nullable = false, updatable = false, unique = true)
   private Long id;
 
-  //  @Column(name = "radar_id", nullable = false, updatable = false)
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @JoinColumn(name = "radar_id", nullable = false, updatable = false)
   private Radar radar;
 
-  @Column(name = "entry_id", nullable = false, updatable = false)
-  private Long entryId;
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "entry_id", nullable = false, updatable = false)
+  private Entry entry;
 
-  @Column(name = "segment_id", nullable = false, updatable = false)
-  private Long segmentId;
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "segment_id", nullable = false, updatable = false)
+  private Segment segment;
 
   @NotNull
   @Column(name = "segment_no", nullable = false, updatable = false)
   private Long segmentNo;
 
-  @Column(name = "ring_id", nullable = false, updatable = false)
-  private Long ringId;
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "ring_id", nullable = false, updatable = false)
+  private Ring ring;
 
   @NotNull
   @Column(name = "ring_no", nullable = false, updatable = false)
   private Long ringNo;
-
 }
