@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@RadarPrimaryConstraint
+@RadarDtoPrimaryConstraint
 public class RadarDto {
 
   private Long id;
