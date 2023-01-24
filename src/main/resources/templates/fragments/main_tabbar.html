@@ -1,9 +1,9 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a aria-current="page" class="nav-link active" href="/dashboard"
-       th:if="${#strings.startsWith(servletPath,'/dashboard')}">Dashboard</a>
-    <a class="nav-link" href="/dashboard"
-       th:unless="${#strings.startsWith(servletPath,'/dashboard')}">Dashboard</a>
+    <a aria-current="page" class="nav-link active" href="/radars"
+       th:if="${#strings.startsWith(servletPath,'/radars')}">Radars</a>
+    <a class="nav-link" href="/radars"
+       th:unless="${#strings.startsWith(servletPath,'/radars')}">Radars</a>
   </li>
   <li class="nav-item">
     <a aria-current="page" class="nav-link active" href="/settings/tenants"
