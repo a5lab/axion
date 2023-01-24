@@ -20,20 +20,10 @@ public class HomeController {
   public ModelAndView index() {
 
     Optional<RadarDto> radarDtoOptional = radarService.findByPrimary(true);
-    ModelAndView modelAndView = new ModelAndView("home");
+    ModelAndView modelAndView = new ModelAndView("home/index");
     if (radarDtoOptional.isPresent()) {
       modelAndView.addObject("radarDto", radarDtoOptional.get());
     }
     return modelAndView;
-
-    /* todo remove it
-    Radar radar = new Radar();
-    radar.setTitle("myTitle");
-    radar.setDescription("myDescriptions");
-
-    ModelAndView modelAndView = new ModelAndView("home");
-    modelAndView.addObject(radar);
-    return modelAndView;
-     */
   }
 }
