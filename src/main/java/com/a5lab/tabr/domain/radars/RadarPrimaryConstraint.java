@@ -10,10 +10,10 @@ import java.lang.annotation.Target;
 
 @Documented
 @Constraint(validatedBy = RadarPrimaryValidator.class)
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RadarPrimaryConstraint {
-  String message() default "should be only one primary";
+  String message() default "can be only one primary";
 
   Class<?>[] groups() default {};
 
