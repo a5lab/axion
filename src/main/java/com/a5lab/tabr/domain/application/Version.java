@@ -13,21 +13,21 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ConfigurationProperties
+@ConfigurationProperties(prefix = "application")
 public class Version {
 
-  @Value("${application.group_id}")
+  @Value("${group_id}")
   private String groupId;
 
-  @Value("${application.artifact_id}")
+  @Value("${artifact_id}")
   private String artifactId;
 
-  @Value("${application.version}")
+  @Value("${version}")
   private String version;
 
-  @Value("${application.name}")
+  @Value("${name}")
   private String name;
 
-  @Value("${application.description}")
+  @Value("${description}")
   private String description;
 }
