@@ -1,18 +1,24 @@
 package com.a5lab.tabr.domain.entries;
 
 import jakarta.validation.Valid;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,12 +34,23 @@ public class EntriesController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index() {
+  public ModelAndView index(@RequestParam(defaultValue = "1") int page,
+                            @RequestParam(defaultValue = "10") int size,
+                            @RequestParam(defaultValue = "title,asc") String[] sort) {
+    Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+    Sort.Order order = new Sort.Order(direction, sort[0]);
+
     ModelAndView modelAndView = new ModelAndView("settings/entries/index");
-    // We need to replace it with proper values for PageRequest.of() coming from ui
-    // See https://github.com/a5lab/tabr/issues/112
-    modelAndView.addObject("entries",
-        entryService.findAll(Pageable.ofSize(100)).getContent());
+    Page<EntryDto> entryDtoPage =
+        entryService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    modelAndView.addObject("entryDtoPage", entryDtoPage);
+
+    int totalPages = entryDtoPage.getTotalPages();
+    if (totalPages > 0) {
+      List<Integer> pageNumbers =
+          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      modelAndView.addObject("pageNumbers", pageNumbers);
+    }
     return modelAndView;
   }
 
@@ -91,7 +108,7 @@ public class EntriesController {
 
   @PostMapping("/update")
   public ModelAndView update(@Valid EntryDto entryDto,
-                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/entries/edit");
       modelAndView.addObject("entryDto", entryDto);
