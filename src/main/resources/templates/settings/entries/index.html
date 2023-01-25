@@ -8,10 +8,16 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${entries}">
-        <h1 th:case="null">No entries yet!</h1>
+      <div th:switch="${entryDtoPage.getTotalElements()}">
+        <h1 th:case="0">No entries yet!</h1>
         <div th:case="*">
           <h1>Entries</h1>
+          <div th:if="${entryDtoPage.totalPages > 0}" class="pagination"
+               th:each="pageNumber : ${pageNumbers}">
+            <a th:href="@{/settings/entries(size=${entryDtoPage.size}, page=${pageNumber})}"
+               th:text=${pageNumber}
+               th:class="${pageNumber==entryDtoPage.number + 1} ? active"></a>
+          </div>
           <table>
             <thead>
               <tr>
@@ -23,12 +29,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="entry : ${entries}">
-                <td th:text="${entry.title}"></td>
-                <td th:text="${entry.description}"></td>
-                <td><a th:href="@{/settings/entries/show/{id}(id=${entry.id})}">Show</a></td>
-                <td><a th:href="@{/settings/entries/edit/{id}(id=${entry.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/entries/delete/{id}(id=${entry.id})}">Delete</a></td>
+              <tr th:each="entryDto : ${entryDtoPage.getContent()}">
+                <td th:text="${entryDto.title}"></td>
+                <td th:text="${entryDto.description}"></td>
+                <td><a th:href="@{/settings/entries/show/{id}(id=${entryDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/entries/edit/{id}(id=${entryDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/entries/delete/{id}(id=${entryDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
