@@ -14,6 +14,8 @@ public interface RadarService {
 
   Optional<RadarDto> findById(Long id);
 
+  Optional<RadarDto> findByPrimary(boolean primary);
+
   RadarDto save(RadarDto radarDto);
 
   void deleteById(Long id);

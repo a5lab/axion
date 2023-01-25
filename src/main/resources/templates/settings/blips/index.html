@@ -15,8 +15,12 @@
           <table>
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Description</th>
+                <th>Radar title</th>
+                <th>Segment title</th>
+                <th>Segment number</th>
+                <th>Ring title</th>
+                <th>Ring number</th>
+                <th>Entry title</th>
                 <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -24,8 +28,12 @@
             </thead>
             <tbody>
               <tr th:each="blip : ${blips}">
-                <td th:text="${blip.title}"></td>
-                <td th:text="${blip.description}"></td>
+                <td th:text="${blip.radar.title}"></td>
+                <td th:text="${blip.segment.title}"></td>
+                <td th:text="${blip.segmentNo}"></td>
+                <td th:text="${blip.ring.title}"></td>
+                <td th:text="${blip.ringNo}"></td>
+                <td th:text="${blip.entry.title}"></td>
                 <td><a th:href="@{/settings/blips/show/{id}(id=${blip.id})}">Show</a></td>
                 <td><a th:href="@{/settings/blips/edit/{id}(id=${blip.id})}">Edit</a></td>
                 <td><a th:href="@{/settings/blips/delete/{id}(id=${blip.id})}">Delete</a></td>
