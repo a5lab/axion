@@ -12,7 +12,6 @@
         <h1 th:case="0">No entries yet!</h1>
         <div th:case="*">
           <h1>Entries</h1>
-          <div th:replace="fragments/paging :: paging('/settings/entries', ${entryDtoPage}, ${pageNumbers})"></div>
           <div>
             <span th:if="${entryDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
               <a th:href="@{/settings/entries(size=${entryDtoPage.size}, page=${pageNumber})}"
