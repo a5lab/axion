@@ -25,6 +25,7 @@ import com.a5lab.tabr.domain.AbstractAuditable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@RadarPrimaryConstraint
 public class Radar extends AbstractAuditable {
 
   @Id
