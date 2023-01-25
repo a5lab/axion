@@ -36,12 +36,13 @@ public class EntriesController {
   @GetMapping("")
   public ModelAndView index(@RequestParam(defaultValue = "1") int page,
                             @RequestParam(defaultValue = "10") int size,
-                            @RequestParam(defaultValue = "title,asc") String[] sort   ) {
+                            @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/entries/index");
-    Page<EntryDto> entryDtoPage = entryService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<EntryDto> entryDtoPage =
+        entryService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("entryDtoPage", entryDtoPage);
 
     int totalPages = entryDtoPage.getTotalPages();
