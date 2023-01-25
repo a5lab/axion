@@ -3,12 +3,13 @@ package com.a5lab.tabr.domain.radars;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class RadarDtoPrimaryValidator extends RadarPrimaryValidatorBase
+public class RadarDtoPrimaryValidator
     implements ConstraintValidator<RadarDtoPrimaryConstraint, RadarDto> {
 
   @Override
   public boolean isValid(RadarDto radarDto, ConstraintValidatorContext context) {
-    if (this.isPrimaryValid(radarDto.getId(), radarDto.isPrimary())) {
+    // TODO: implement it
+    if (radarDto.isPrimary() == false) {
       return true;
     }
 
