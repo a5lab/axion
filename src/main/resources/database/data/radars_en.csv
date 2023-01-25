@@ -1,2 +1,2 @@
-title|description|created_by|last_modified_by
-The primary radar|The primary radar for organization|tabr|tabr
+title|description|is_primary|created_by|last_modified_by
+The primary radar|The primary radar for organization|true|tabr|tabr

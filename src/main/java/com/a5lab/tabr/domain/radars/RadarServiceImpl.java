@@ -1,6 +1,7 @@
 package com.a5lab.tabr.domain.radars;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,18 @@ public class RadarServiceImpl implements RadarService {
   public Optional<RadarDto> findById(Long id) {
     return radarRepository.findById(id).map(radarMapper::toDto);
   }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Optional<RadarDto> findByPrimary(boolean primary) {
+    List<Radar> radarList = radarRepository.findByPrimary(primary);
+    if (radarList.isEmpty()) {
+      return Optional.ofNullable(null);
+    } else {
+      return Optional.of(radarList.get(0)).map(radarMapper::toDto);
+    }
+  }
+
 
   @Override
   @Transactional

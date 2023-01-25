@@ -14,7 +14,7 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
   private TenantRepository tenantRepository;
 
   @Test
-  void shouldSaveTenantWithTitleAndDescription() {
+  void shouldSaveTenantWithAllFields() {
     final Tenant tenant = new Tenant();
     tenant.setTitle("TEST");
     tenant.setDescription("Very good description for Tenant");

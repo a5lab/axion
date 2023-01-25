@@ -14,81 +14,83 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
   private RadarRepository radarRepository;
 
   @Test
-  void shouldSaveRadarWithTitleAndDescription() {
-    final Radar s = new Radar();
-    s.setTitle("My new test Radar");
-    s.setDescription("My awesome description");
+  void shouldSaveRadarWithAllFields() {
+    final Radar radar = new Radar();
+    radar.setTitle("My new test Radar");
+    radar.setDescription("My awesome description");
+    radar.setPrimary(false);
+    
 
-    Assertions.assertNull(s.getId());
-    radarRepository.saveAndFlush(s);
-    Assertions.assertNotNull(s.getId());
-    Assertions.assertNotNull(s.getCreatedBy());
-    Assertions.assertNotNull(s.getCreatedDate());
-    Assertions.assertNotNull(s.getLastModifiedBy());
-    Assertions.assertNotNull(s.getLastModifiedDate());
+    Assertions.assertNull(radar.getId());
+    radarRepository.saveAndFlush(radar);
+    Assertions.assertNotNull(radar.getId());
+    Assertions.assertNotNull(radar.getCreatedBy());
+    Assertions.assertNotNull(radar.getCreatedDate());
+    Assertions.assertNotNull(radar.getLastModifiedBy());
+    Assertions.assertNotNull(radar.getLastModifiedDate());
   }
 
   @Test
   void shouldFailOnNullTitle() {
-    final Radar s = new Radar();
-    s.setDescription("My awesome description");
+    final Radar radar = new Radar();
+    radar.setDescription("My awesome description");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
+    Assertions.assertNull(radar.getId());
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnNullDescription() {
-    final Radar s = new Radar();
-    s.setTitle("My new test Radar");
+    final Radar radar = new Radar();
+    radar.setTitle("My new test Radar");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
+    Assertions.assertNull(radar.getId());
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnEmptyTitle() {
-    final Radar s = new Radar();
-    s.setTitle("");
-    s.setDescription("My awesome description");
+    final Radar radar = new Radar();
+    radar.setTitle("");
+    radar.setDescription("My awesome description");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
+    Assertions.assertNull(radar.getId());
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnWhiteSpaceTitle() {
-    final Radar s = new Radar();
-    s.setTitle(" ");
-    s.setDescription("My awesome description");
+    final Radar radar = new Radar();
+    radar.setTitle(" ");
+    radar.setDescription("My awesome description");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
+    Assertions.assertNull(radar.getId());
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnEmptyDescription() {
-    final Radar s = new Radar();
-    s.setTitle("Hello");
-    s.setDescription("");
+    final Radar radar = new Radar();
+    radar.setTitle("Hello");
+    radar.setDescription("");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
+    Assertions.assertNull(radar.getId());
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
         .isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnWhiteSpaceDescription() {
-    final Radar s = new Radar();
-    s.setTitle("Hello");
-    s.setDescription(" ");
+    final Radar radar = new Radar();
+    radar.setTitle("Hello");
+    radar.setDescription(" ");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> radarRepository.saveAndFlush(s))
+    Assertions.assertNull(radar.getId());
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
         .isInstanceOf(ValidationException.class);
   }
 

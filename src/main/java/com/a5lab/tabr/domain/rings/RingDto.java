@@ -20,6 +20,7 @@ public class RingDto {
 
   @NotBlank
   @Size(min = 1, max = 64)
+  @RingTitleConstraint
   private String title;
 
   @NotBlank

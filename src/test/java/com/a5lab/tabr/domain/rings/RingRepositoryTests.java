@@ -14,7 +14,7 @@ class RingRepositoryTests extends AbstractRepositoryTests {
   private RingRepository ringRepository;
 
   @Test
-  void shouldSaveRingWithTitleAndDescr() {
+  void shouldSaveRingWithAllFields() {
     final Ring r = new Ring();
     r.setTitle("TEST");
     r.setDescription("Very good description for Ring");

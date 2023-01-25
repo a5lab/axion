@@ -12,5 +12,4 @@ public class RingTitleValidator implements ConstraintValidator<RingTitleConstrai
   public boolean isValid(String value, ConstraintValidatorContext context) {
     return StringUtils.isAllUpperCase(value);
   }
-
 }
