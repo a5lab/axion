@@ -1,4 +1,0 @@
-<th:block th:if="${googleAnalytics}">
-  <script async th:src="@{https://www.googletagmanager.com/gtag/js?id={googleAnalytics}(googleAnalytics=${googleAnalytics})}"></script>
-  <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','[[${googleAnalytics}]]')</script>
-</th:block>

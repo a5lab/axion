@@ -1,6 +1,0 @@
-<div th:fragment="sorting(page)>
-  <span th:if="${page.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/settings/entries(size=${page.size}, page=${pageNumber})}"
-       th:text=${pageNumber} th:class="${pageNumber==page.number + 1} ? active"></a>
-  </span>
-</div>
