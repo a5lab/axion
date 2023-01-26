@@ -1,18 +1,24 @@
 package com.a5lab.tabr.domain.radars;
 
 import jakarta.validation.Valid;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,12 +34,23 @@ public class RadarsCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index() {
-    // We need to replace it with proper values for PageRequest.of() coming from ui
-    // See https://github.com/a5lab/tabr/issues/112
+  public ModelAndView index(@RequestParam(defaultValue = "1") int page,
+                            @RequestParam(defaultValue = "10") int size,
+                            @RequestParam(defaultValue = "title,asc") String[] sort) {
+    Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+    Sort.Order order = new Sort.Order(direction, sort[0]);
+
     ModelAndView modelAndView = new ModelAndView("settings/radars/index");
-    modelAndView.addObject("radars",
-        radarService.findAll(Pageable.ofSize(100)).getContent());
+    Page<RadarDto> radarDtoPage =
+        radarService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    modelAndView.addObject("radarDtoPage", radarDtoPage);
+
+    int totalPages = radarDtoPage.getTotalPages();
+    if (totalPages > 0) {
+      List<Integer> pageNumbers =
+          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      modelAndView.addObject("pageNumbers", pageNumbers);
+    }
     return modelAndView;
   }
 
