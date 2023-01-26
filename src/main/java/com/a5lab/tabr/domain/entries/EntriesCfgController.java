@@ -28,7 +28,7 @@ import com.a5lab.tabr.utils.FlashMessages;
 @Controller
 @RequestMapping("/settings/entries")
 @RequiredArgsConstructor
-public class EntriesController {
+public class EntriesCfgController {
 
   private final EntryService entryService;
   private final MessageSource messageSource;

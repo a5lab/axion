@@ -8,10 +8,16 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${tenants}">
-        <h1 th:case="null">No tenants yet!</h1>
+      <div th:switch="${tenantDtoPage.getTotalElements()}">
+        <h1 th:case="0">No tentants yet!</h1>
         <div th:case="*">
-          <h1>Tenants</h1>
+          <h1>Tentants</h1>
+          <div>
+            <span th:if="${tenantDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/entries(size=${tenantDtoPage.size}, page=${pageNumber})}"
+                 th:text=${pageNumber} th:class="${pageNumber==tenantDtoPage.number + 1} ? active"></a>
+            </span>
+          </div>
           <table>
             <thead>
               <tr>

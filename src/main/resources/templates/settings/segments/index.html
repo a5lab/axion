@@ -8,10 +8,16 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${segments}">
-        <h1 th:case="null">No segments yet!</h1>
+      <div th:switch="${segmentDtoPage.getTotalElements()}">
+        <h1 th:case="0">No segments yet!</h1>
         <div th:case="*">
           <h1>Segments</h1>
+          <div>
+            <span th:if="${segmentDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/entries(size=${segmentDtoPage.size}, page=${pageNumber})}"
+                 th:text=${pageNumber} th:class="${pageNumber==segmentDtoPage.number + 1} ? active"></a>
+            </span>
+          </div>
           <table>
             <thead>
               <tr>

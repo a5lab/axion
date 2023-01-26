@@ -22,7 +22,7 @@ import com.a5lab.tabr.utils.FlashMessages;
 @Controller
 @RequestMapping("/settings/tenants")
 @RequiredArgsConstructor
-public class TenantsController {
+public class TenantsCfgController {
 
   private final TenantService tenantService;
   private final MessageSource messageSource;

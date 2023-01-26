@@ -27,7 +27,7 @@ import com.a5lab.tabr.utils.FlashMessages;
 @Controller
 @RequestMapping("/settings/blips")
 @RequiredArgsConstructor
-public class BlipsController {
+public class BlipsCfgController {
 
   private final BlipService blipService;
   private final RadarService radarService;

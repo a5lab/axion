@@ -8,10 +8,16 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${blips}">
-        <h1 th:case="null">No blips yet!</h1>
+      <div th:switch="${blipDtoPage.getTotalElements()}">
+        <h1 th:case="0">No blips yet!</h1>
         <div th:case="*">
           <h1>Blips</h1>
+          <div>
+            <span th:if="${blipDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/entries(size=${blipDtoPage.size}, page=${pageNumber})}"
+                 th:text=${pageNumber} th:class="${pageNumber==blipDtoPage.number + 1} ? active"></a>
+            </span>
+          </div>
           <table>
             <thead>
               <tr>
