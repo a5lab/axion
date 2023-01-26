@@ -14,7 +14,7 @@
           <h1>Segments</h1>
           <div>
             <span th:if="${segmentDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/settings/entries(size=${segmentDtoPage.size}, page=${pageNumber})}"
+              <a th:href="@{/settings/segments(size=${segmentDtoPage.size}, page=${pageNumber})}"
                  th:text=${pageNumber} th:class="${pageNumber==segmentDtoPage.number + 1} ? active"></a>
             </span>
           </div>
@@ -30,13 +30,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="segment : ${segments}">
-                <td th:text="${segment.title}"></td>
-                <td th:text="${segment.description}"></td>
-                <td th:text="${segment.active}"></td>
-                <td><a th:href="@{/settings/segments/show/{id}(id=${segment.id})}">Show</a></td>
-                <td><a th:href="@{/settings/segments/edit/{id}(id=${segment.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/segments/delete/{id}(id=${segment.id})}">Delete</a></td>
+              <tr th:each="segmentDto : ${segmentDtoPage.getContent()}">
+                <td th:text="${segmentDto.title}"></td>
+                <td th:text="${segmentDto.description}"></td>
+                <td th:text="${segmentDto.active}"></td>
+                <td><a th:href="@{/settings/segments/show/{id}(id=${segmentDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/segments/edit/{id}(id=${segmentDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/segments/delete/{id}(id=${segmentDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
