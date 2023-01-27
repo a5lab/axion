@@ -2,10 +2,12 @@ package com.a5lab.tabr.domain.entries;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +20,9 @@ public class EntryServiceImpl implements EntryService {
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Entry> findAll() {
-    return entryRepository.findAll();
+  public Collection<EntryDto> findAll() {
+    return entryRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
+        .stream().map(entryMapper::toDto).collect(Collectors.toList());
   }
 
 

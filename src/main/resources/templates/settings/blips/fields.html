@@ -5,23 +5,23 @@
 </div>
 <label for="radar_id">Radar</label>
 <select id="radar_id" name="radarId" th:field="*{radar.id}">
-  <option th:each="radar : ${radars}" th:value="${radar.id}" th:utext="${radar.title}"/>
+  <option th:each="radarDto : ${radarDtos}" th:value="${radarDto.id}" th:utext="${radarDto.title}"/>
 </select>
 <label for="segment_id">Segment</label>
 <select  id="segment_id" name="segment_id" th:field="*{segment.id}" >
-  <option th:each="segment : ${segments}" th:value="${segment.id}" th:utext="${segment.title}"/>
+  <option th:each="segmentDto : ${segmentDtos}" th:value="${segmentDto.id}" th:utext="${segmentDto.title}"/>
 </select>
 <label for="segment_no">Segment number</label>
 <input type="text" th:field="*{segmentNo}" id="segment_no" placeholder="1">
 <span th:if="${#fields.hasErrors('segmentNo')}" th:errors="*{segmentNo}"></span>
 <label for="ring_id">Ring</label>
 <select  id="ring_id" name="ring_id" th:field="*{ring.id}" >
-  <option th:each="ring : ${rings}" th:value="${ring.id}" th:utext="${ring.title}"/>
+  <option th:each="ringDto : ${ringDtos}" th:value="${ringDto.id}" th:utext="${ringDto.title}"/>
 </select>
 <label for="ring_no">Ring number</label>
 <input type="text" th:field="*{ringNo}" id="ring_no" placeholder="0">
 <span th:if="${#fields.hasErrors('ringNo')}" th:errors="*{ringNo}"></span>
 <label for="entry_id">Entry</label>
 <select  id="entry_id" name="entry_id" th:field="*{entry.id}" >
-  <option th:each="entry : ${entries}" th:value="${entry.id}" th:utext="${entry.title}"/>
+  <option th:each="entryDto : ${entryDtos}" th:value="${entryDto.id}" th:utext="${entryDto.title}"/>
 </select>

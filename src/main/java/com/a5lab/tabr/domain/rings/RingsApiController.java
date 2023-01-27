@@ -15,10 +15,7 @@ public class RingsApiController {
   private final RingService ringService;
 
   @GetMapping("")
-  public Collection<Ring> index() {
+  public Collection<RingDto> index() {
     return ringService.findAll();
   }
-
-  // todo: implement based on https://spring.io/guides/tutorials/rest/
-
 }

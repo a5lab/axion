@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface SegmentService {
 
-  Collection<Segment> findAll();
+  Collection<SegmentDto> findAll();
 
   Page<SegmentDto> findAll(Pageable pageable);
 

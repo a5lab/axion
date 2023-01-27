@@ -10,19 +10,45 @@ Technical and business radar. Spring boot based application
 * create a new release at GitHub and provide information
 * press button publish release at GitHub
 
-# Idea configuration
+# Setup environment
 
-## Java checkstyle
+## Windows environment
+* download and install java, at least jdk-18
+* create JAVA_HOME environment variable with value C:\Program Files\Java\jdk-19
+* exit and run console again to apply environment variables
+* download and install maven, at least 3.8.7
+* create JAVA_HOME environment variable with value C:\apache-maven-3.8.7
+* exit and run console again to apply environment variables
+* download and setup nodeJS, at least 18
+* install uglifycss by command: npm install -g uglifycss
+* install uglifyjs by command: npm install uglify-js -gt
+* setup GitHub account and add ssh keys to GitHub profile
+* clone repo by command git clone: git@github.com:a5lab/tabr.git
+* build application by command: mvn clean package -Pdev -Dmaven.test.skip from root folder
+* run application by command: mvn spring-boot:run -Pdev from root folder
+* open browser with url http://127.0.0.1:8080 to view application
+
+## Working with embedded H2 DB(In-Memory)
+
+* run application by command: "mvn spring-boot:run -Pdev"
+* enter http://localhost:8080/h2-console to browser
+* enter "jdbc:h2:mem:tabr" into JDBC URL field
+* enter "tabr" into User Name field
+* enter "secret" into Password field
+
+## Idea configuration
+
+### Java checkstyle
 
 * see overview https://plugins.jetbrains.com/plugin/1065-checkstyle-idea
 * see GitHub https://github.com/jshiell/checkstyle-idea/blob/main/README.md
 * import google_checkstyle.xml into idea java import schema at java code style
 
-## JavaScript checkstyle
+### JavaScript checkstyle
 
 * setup ident 2 at JavaScript code style
 
-## HTML checkstyle
+### HTML checkstyle
 
 * setup ident 2 at html code style
 * remove all items from "do not indent child of" field
@@ -54,14 +80,6 @@ Technical and business radar. Spring boot based application
 * setup tag by command: git tag -v0.1.0 && git push origin --tags
 * prune tags by command: git fetch --prune --prune-tags
 * run psql console by command: su - postgres and run psql
-
-# Working with embedded H2 DB(In-Memory)
-
-* run application by command: "mvn spring-boot:run -Pdev"
-* enter http://localhost:8080/h2-console to browser
-* enter "jdbc:h2:mem:tabr" into JDBC URL field
-* enter "tabr" into User Name field
-* enter "secret" into Password field
 
 # Inspired by 
 
