@@ -33,32 +33,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>AWS Athena</td>
-                <td>3</td>
-                <td>2</td>
+              <tr th:each="blip : ${radarDto.blipList}">
+                <td th:text="${blip.entry.title}"></td>
+                <td th:text="${blip.segment_no}"></td>
+                <td th:text="${blip.ring_no}"></td>
                 <td>true</td>
                 <td>0</td>
                 <td></td>
-                <td>AWS Athena</td>
-              </tr>
-              <tr>
-                <td>AWS Data Pipeline</td>
-                <td>3</td>
-                <td>3</td>
-                <td>true</td>
-                <td>0</td>
-                <td></td>
-                <td>AWS Data Pipeline</td>
-              </tr>
-              <tr>
-                <td>AWS EMR</td>
-                <td>0</td>
-                <td>0</td>
-                <td>true</td>
-                <td>0</td>
-                <td></td>
-                <td>AWS EMR</td>
+                <td th:text="${blip.entry.description}"></td>
               </tr>
               <tr>
                 <td>Flink</td>

@@ -22,7 +22,7 @@ public class RadarsApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetRadars() throws Exception {
-    final Radar radar = new Radar(10L, "my title", "my description", true);
+    final Radar radar = new Radar(10L, "my title", "my description", true, null);
     List<Radar> radarList = Arrays.asList(radar);
     Mockito.when(radarService.findAll()).thenReturn(radarList);
 
