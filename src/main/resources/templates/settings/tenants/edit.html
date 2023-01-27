@@ -10,7 +10,7 @@
     <div id="content">
       <h1>Edit tenant</h1>
       <form action="#" th:action="@{/settings/tenants/update}" th:object="${tenantDto}" method="post">
-        <th:block th:replace="~{settings/tenants/fieldset.html}" />
+        <th:block th:replace="~{settings/tenants/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
         <input type="submit" value="Update tenant">
       </form>      

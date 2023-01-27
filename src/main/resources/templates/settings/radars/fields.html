@@ -1,0 +1,14 @@
+<div th:if="${#fields.hasAnyErrors()}">
+  <ul>
+    <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
+  </ul>
+</div>
+<label for="title">Title</label>
+<input type="text" th:field="*{title}" id="title" placeholder="Title">
+<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+<label for="email">Description</label>
+<input type="text" th:field="*{description}" id="email" placeholder="Description">
+<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+<label for="email">Prime</label>
+<input type="checkbox" th:field="*{primary}" id="primary">
+<span th:if="${#fields.hasErrors('primary')}" th:errors="*{primary}"></span>
