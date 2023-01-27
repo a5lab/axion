@@ -15,10 +15,7 @@ public class BlipsApiController {
   private final BlipService blipService;
 
   @GetMapping("")
-  public Collection<Blip> index() {
+  public Collection<BlipDto> index() {
     return blipService.findAll();
   }
-
-  // todo: implement based on https://spring.io/guides/tutorials/rest/
-
 }

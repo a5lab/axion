@@ -2,6 +2,7 @@ package com.a5lab.tabr.domain.blips;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,8 +19,9 @@ public class BlipServiceImpl implements BlipService {
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Blip> findAll() {
-    return blipRepository.findAll();
+  public Collection<BlipDto> findAll() {
+    return blipRepository.findAll().stream().map(blipMapper::toDto)
+        .collect(Collectors.toList());
   }
 
 

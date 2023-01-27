@@ -15,10 +15,7 @@ public class EntriesApiController {
   private final EntryService entityService;
 
   @GetMapping("")
-  public Collection<Entry> index() {
+  public Collection<EntryDto> index() {
     return entityService.findAll();
   }
-
-  // todo: implement based on https://spring.io/guides/tutorials/rest/
-
 }
