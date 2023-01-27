@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,13 @@ public class BlipServiceImpl implements BlipService {
   @Override
   @Transactional(readOnly = true)
   public Collection<BlipDto> findAll() {
-    return blipRepository.findAll().stream().map(blipMapper::toDto)
-        .collect(Collectors.toList());
+    return blipRepository.findAll(
+            Sort.by(Sort.Direction.ASC, "radar.title")
+                .and(Sort.by(Sort.Direction.ASC, "segment.title"))
+                .and(Sort.by(Sort.Direction.ASC, "ring.title"))
+                .and(Sort.by(Sort.Direction.ASC, "entry.title"))
+        )
+        .stream().map(blipMapper::toDto).collect(Collectors.toList());
   }
 
 
