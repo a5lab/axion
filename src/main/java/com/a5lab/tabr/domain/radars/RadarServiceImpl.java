@@ -3,10 +3,12 @@ package com.a5lab.tabr.domain.radars;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +21,9 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Radar> findAll() {
-    return radarRepository.findAll();
+  public Collection<RadarDto> findAll() {
+    return radarRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
+        .stream().map(radarMapper::toDto).collect(Collectors.toList());
   }
 
 

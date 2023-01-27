@@ -15,10 +15,7 @@ public class SegmentsApiController {
   private final SegmentService segmentService;
 
   @GetMapping("")
-  public Collection<Segment> index() {
+  public Collection<SegmentDto> index() {
     return segmentService.findAll();
   }
-
-  // todo: implement based on https://spring.io/guides/tutorials/rest/
-
 }

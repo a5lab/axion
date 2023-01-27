@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,8 @@ public class TenantServiceImpl implements TenantService {
   @Override
   @Transactional(readOnly = true)
   public Collection<TenantDto> findAll() {
-    return tenantRepository.findAll().stream().map(tenantMapper::toDto)
-        .collect(Collectors.toList());
+    return tenantRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
+        .stream().map(tenantMapper::toDto).collect(Collectors.toList());
   }
 
   @Override

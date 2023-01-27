@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface BlipService {
 
-  Collection<Blip> findAll();
+  Collection<BlipDto> findAll();
 
   Page<BlipDto> findAll(Pageable pageable);
 

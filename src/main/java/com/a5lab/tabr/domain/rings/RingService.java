@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface RingService {
 
-  Collection<Ring> findAll();
+  Collection<RingDto> findAll();
 
   Page<RingDto> findAll(Pageable pageable);
 

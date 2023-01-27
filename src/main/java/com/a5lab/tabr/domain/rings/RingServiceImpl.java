@@ -2,10 +2,12 @@ package com.a5lab.tabr.domain.rings;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +20,9 @@ public class RingServiceImpl implements RingService {
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Ring> findAll() {
-    return ringRepository.findAll();
+  public Collection<RingDto> findAll() {
+    return ringRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
+        .stream().map(ringMapper::toDto).collect(Collectors.toList());
   }
 
 

@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface EntryService {
 
-  Collection<Entry> findAll();
+  Collection<EntryDto> findAll();
 
   Page<EntryDto> findAll(Pageable pageable);
 
