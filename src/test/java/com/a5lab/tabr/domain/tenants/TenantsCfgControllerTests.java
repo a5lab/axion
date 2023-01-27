@@ -20,8 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
-@WebMvcTest(TenantsController.class)
-public class TenantsControllerTests extends AbstractControllerTests {
+@WebMvcTest(TenantsCfgController.class)
+public class TenantsCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private TenantService tenantService;
 

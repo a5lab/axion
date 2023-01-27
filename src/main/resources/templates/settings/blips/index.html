@@ -8,10 +8,16 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${blips}">
-        <h1 th:case="null">No blips yet!</h1>
+      <div th:switch="${blipDtoPage.getTotalElements()}">
+        <h1 th:case="0">No blips yet!</h1>
         <div th:case="*">
           <h1>Blips</h1>
+          <div>
+            <span th:if="${blipDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/blips(size=${blipDtoPage.size}, page=${pageNumber})}"
+                 th:text=${pageNumber} th:class="${pageNumber==blipDtoPage.number + 1} ? active"></a>
+            </span>
+          </div>
           <table>
             <thead>
               <tr>
@@ -27,16 +33,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="blip : ${blips}">
-                <td th:text="${blip.radar.title}"></td>
-                <td th:text="${blip.segment.title}"></td>
-                <td th:text="${blip.segmentNo}"></td>
-                <td th:text="${blip.ring.title}"></td>
-                <td th:text="${blip.ringNo}"></td>
-                <td th:text="${blip.entry.title}"></td>
-                <td><a th:href="@{/settings/blips/show/{id}(id=${blip.id})}">Show</a></td>
-                <td><a th:href="@{/settings/blips/edit/{id}(id=${blip.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/blips/delete/{id}(id=${blip.id})}">Delete</a></td>
+              <tr th:each="blipDto : ${blipDtoPage.getContent()}">
+                <td th:text="${blipDto.radar.title}"></td>
+                <td th:text="${blipDto.segment.title}"></td>
+                <td th:text="${blipDto.segmentNo}"></td>
+                <td th:text="${blipDto.ring.title}"></td>
+                <td th:text="${blipDto.ringNo}"></td>
+                <td th:text="${blipDto.entry.title}"></td>
+                <td><a th:href="@{/settings/blips/show/{id}(id=${blipDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/blips/edit/{id}(id=${blipDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/blips/delete/{id}(id=${blipDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>

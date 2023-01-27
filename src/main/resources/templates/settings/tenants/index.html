@@ -8,10 +8,16 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${tenants}">
-        <h1 th:case="null">No tenants yet!</h1>
+      <div th:switch="${tenantDtoPage.getTotalElements()}">
+        <h1 th:case="0">No tentants yet!</h1>
         <div th:case="*">
-          <h1>Tenants</h1>
+          <h1>Tentants</h1>
+          <div>
+            <span th:if="${tenantDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/tenants(size=${tenantDtoPage.size}, page=${pageNumber})}"
+                 th:text=${pageNumber} th:class="${pageNumber==tenantDtoPage.number + 1} ? active"></a>
+            </span>
+          </div>
           <table>
             <thead>
               <tr>
@@ -23,12 +29,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="tenant : ${tenants}">
-                <td th:text="${tenant.title}"></td>
-                <td th:text="${tenant.description}"></td>
-                <td><a th:href="@{/settings/tenants/show/{id}(id=${tenant.id})}">Show</a></td>
-                <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenant.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenant.id})}">Delete</a></td>
+              <tr th:each="tenantDto : ${tenantDtoPage.getContent()}">
+                <td th:text="${tenantDto.title}"></td>
+                <td th:text="${tenantDto.description}"></td>
+                <td><a th:href="@{/settings/tenants/show/{id}(id=${tenantDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenantDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenantDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>

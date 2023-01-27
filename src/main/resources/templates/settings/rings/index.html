@@ -8,10 +8,16 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${rings}">
-        <h1 th:case="null">No rings yet!</h1>
+      <div th:switch="${ringDtoPage.getTotalElements()}">
+        <h1 th:case="0">No rings yet!</h1>
         <div th:case="*">
           <h1>Rings</h1>
+          <div>
+            <span th:if="${ringDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/rings(size=${ringDtoPage.size}, page=${pageNumber})}"
+                 th:text=${pageNumber} th:class="${pageNumber==ringDtoPage.number + 1} ? active"></a>
+            </span>
+          </div>
           <table>
             <thead>
               <tr>
@@ -25,14 +31,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="ring : ${rings}">
-                <td th:text="${ring.title}"></td>
-                <td th:text="${ring.description}"></td>
-                <td th:text="${ring.priority}"></td>
-                <td th:text="${ring.active}"></td>
-                <td><a th:href="@{/settings/rings/show/{id}(id=${ring.id})}">Show</a></td>
-                <td><a th:href="@{/settings/rings/edit/{id}(id=${ring.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/rings/delete/{id}(id=${ring.id})}">Delete</a></td>
+              <tr th:each="ringDto : ${ringDtoPage.getContent()}">
+                <td th:text="${ringDto.title}"></td>
+                <td th:text="${ringDto.description}"></td>
+                <td th:text="${ringDto.priority}"></td>
+                <td th:text="${ringDto.active}"></td>
+                <td><a th:href="@{/settings/rings/show/{id}(id=${ringDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/rings/edit/{id}(id=${ringDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/rings/delete/{id}(id=${ringDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>

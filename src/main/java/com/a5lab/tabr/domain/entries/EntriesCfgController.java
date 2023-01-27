@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.radars;
+package com.a5lab.tabr.domain.entries;
 
 import jakarta.validation.Valid;
 import java.util.List;
@@ -26,11 +26,11 @@ import com.a5lab.tabr.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/radars")
+@RequestMapping("/settings/entries")
 @RequiredArgsConstructor
-public class RadarsCfgController {
+public class EntriesCfgController {
 
-  private final RadarService radarService;
+  private final EntryService entryService;
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -40,12 +40,12 @@ public class RadarsCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/radars/index");
-    Page<RadarDto> radarDtoPage =
-        radarService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
-    modelAndView.addObject("radarDtoPage", radarDtoPage);
+    ModelAndView modelAndView = new ModelAndView("settings/entries/index");
+    Page<EntryDto> entryDtoPage =
+        entryService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    modelAndView.addObject("entryDtoPage", entryDtoPage);
 
-    int totalPages = radarDtoPage.getTotalPages();
+    int totalPages = entryDtoPage.getTotalPages();
     if (totalPages > 0) {
       List<Integer> pageNumbers =
           IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
@@ -56,77 +56,77 @@ public class RadarsCfgController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<RadarDto> radarRecord = radarService.findById(id);
-    if (radarRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/show");
-      modelAndView.addObject("radarDto", radarRecord.get());
+    Optional<EntryDto> entryRecord = entryService.findById(id);
+    if (entryRecord.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/entries/show");
+      modelAndView.addObject("entryDto", entryRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("radar.flash.error.invalid_id", null,
+          messageSource.getMessage("entry.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/radars");
+      return new ModelAndView("redirect:/settings/entries");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-    modelAndView.addObject("radarDto", new RadarDto());
+    ModelAndView modelAndView = new ModelAndView("settings/entries/add");
+    modelAndView.addObject("entryDto", new EntryDto());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid RadarDto radarDto, BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes) {
+  public ModelAndView create(@Valid EntryDto entryDto, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-      modelAndView.addObject("radarDto", radarDto);
+      ModelAndView modelAndView = new ModelAndView("settings/entries/add");
+      modelAndView.addObject("entryDto", entryDto);
       return modelAndView;
     }
-    radarService.save(radarDto);
+    entryService.save(entryDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("radar.flash.info.created", null,
+        messageSource.getMessage("entry.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/radars");
+    return new ModelAndView("redirect:/settings/entries");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<RadarDto> radarDto = radarService.findById(id);
-    if (radarDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
-      modelAndView.addObject("radarDto", radarDto.get());
+    Optional<EntryDto> entryDto = entryService.findById(id);
+    if (entryDto.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/entries/edit");
+      modelAndView.addObject("entryDto", entryDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("radar.flash.error.invalid_id", null,
+          messageSource.getMessage("entry.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/radars");
+      return new ModelAndView("redirect:/settings/entries");
     }
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid RadarDto radarDto,
-                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+  public ModelAndView update(@Valid EntryDto entryDto,
+                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
-      modelAndView.addObject("radarDto", radarDto);
+      ModelAndView modelAndView = new ModelAndView("settings/entries/edit");
+      modelAndView.addObject("entryDto", entryDto);
       return modelAndView;
     }
-    radarService.save(radarDto);
+    entryService.save(entryDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("radar.flash.info.updated", null,
+        messageSource.getMessage("entry.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/radars");
+    return new ModelAndView("redirect:/settings/entries");
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    radarService.deleteById(id);
+    entryService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("radar.flash.info.deleted", null,
+        messageSource.getMessage("entry.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/radars";
+    return "redirect:/settings/entries";
   }
 }

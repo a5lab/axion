@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.entries;
+package com.a5lab.tabr.domain.segments;
 
 import jakarta.validation.Valid;
 import java.util.List;
@@ -26,11 +26,11 @@ import com.a5lab.tabr.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/entries")
+@RequestMapping("/settings/segments")
 @RequiredArgsConstructor
-public class EntriesController {
+public class SegmentsCfgController {
 
-  private final EntryService entryService;
+  private final SegmentService segmentService;
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -40,12 +40,12 @@ public class EntriesController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/entries/index");
-    Page<EntryDto> entryDtoPage =
-        entryService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
-    modelAndView.addObject("entryDtoPage", entryDtoPage);
+    ModelAndView modelAndView = new ModelAndView("settings/segments/index");
+    Page<SegmentDto> segmentDtoPage =
+        segmentService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    modelAndView.addObject("segmentDtoPage", segmentDtoPage);
 
-    int totalPages = entryDtoPage.getTotalPages();
+    int totalPages = segmentDtoPage.getTotalPages();
     if (totalPages > 0) {
       List<Integer> pageNumbers =
           IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
@@ -56,77 +56,77 @@ public class EntriesController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<EntryDto> entryRecord = entryService.findById(id);
-    if (entryRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entries/show");
-      modelAndView.addObject("entryDto", entryRecord.get());
+    Optional<SegmentDto> segmentRecord = segmentService.findById(id);
+    if (segmentRecord.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/segments/show");
+      modelAndView.addObject("segmentDto", segmentRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("entry.flash.error.invalid_id", null,
+          messageSource.getMessage("segment.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/entries");
+      return new ModelAndView("redirect:/settings/segments");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/entries/add");
-    modelAndView.addObject("entryDto", new EntryDto());
+    ModelAndView modelAndView = new ModelAndView("settings/segments/add");
+    modelAndView.addObject("segmentDto", new SegmentDto());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid EntryDto entryDto, BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes) {
+  public ModelAndView create(@Valid SegmentDto segmentDto, BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entries/add");
-      modelAndView.addObject("entryDto", entryDto);
+      ModelAndView modelAndView = new ModelAndView("settings/segments/add");
+      modelAndView.addObject("segmentDto", segmentDto);
       return modelAndView;
     }
-    entryService.save(entryDto);
+    segmentService.save(segmentDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("entry.flash.info.created", null,
+        messageSource.getMessage("segment.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/entries");
+    return new ModelAndView("redirect:/settings/segments");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<EntryDto> entryDto = entryService.findById(id);
-    if (entryDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entries/edit");
-      modelAndView.addObject("entryDto", entryDto.get());
+    Optional<SegmentDto> segmentDto = segmentService.findById(id);
+    if (segmentDto.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
+      modelAndView.addObject("segmentDto", segmentDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("entry.flash.error.invalid_id", null,
+          messageSource.getMessage("segment.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/entries");
+      return new ModelAndView("redirect:/settings/segments");
     }
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid EntryDto entryDto,
-                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+  public ModelAndView update(@Valid SegmentDto segmentDto,
+                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entries/edit");
-      modelAndView.addObject("entryDto", entryDto);
+      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
+      modelAndView.addObject("segmentDto", segmentDto);
       return modelAndView;
     }
-    entryService.save(entryDto);
+    segmentService.save(segmentDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("entry.flash.info.updated", null,
+        messageSource.getMessage("segment.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/entries");
+    return new ModelAndView("redirect:/settings/segments");
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    entryService.deleteById(id);
+    segmentService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("entry.flash.info.deleted", null,
+        messageSource.getMessage("segment.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/entries";
+    return "redirect:/settings/segments";
   }
 }
