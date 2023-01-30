@@ -13,7 +13,7 @@ public class RadarDtoPrimaryValidator
 
   @Override
   public boolean isValid(RadarDto radarDto, ConstraintValidatorContext context) {
-    // TODO: implement it
+    // TODO: implement it (base class?)
     if (radarDto.isPrimary() == false) {
       return true;
     }
