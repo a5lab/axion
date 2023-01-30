@@ -24,6 +24,8 @@ server:
   shutdown: graceful
 
 spring:
+  profiles:
+    active: @spring.profiles.active@
   application:
     name: TABR
   jmx:

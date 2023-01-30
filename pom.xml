@@ -418,6 +418,7 @@
             </activation>
             <properties>
                 <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+                <spring.profiles.active>dev</spring.profiles.active>
             </properties>
             <dependencies>
                 <dependency>
@@ -472,6 +473,9 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>
