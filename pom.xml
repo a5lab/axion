@@ -67,7 +67,10 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -407,18 +410,25 @@
             </activation>
             <properties>
                 <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+                <spring.profiles.active>dev</spring.profiles.active>
             </properties>
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-devtools</artifactId>
                 </dependency>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
             </dependencies>
             <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                        <excludes>
+                            <exclude>/configs/liquibase.properties</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
@@ -455,6 +465,9 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>
@@ -462,6 +475,7 @@
                         <filtering>true</filtering>
                         <excludes>
                             <exclude>**/*dev.yml</exclude>
+                            <exclude>/configs/liquibase.properties</exclude>
                             <exclude>/static/index.html</exclude>
                             <exclude>/static/css/application.css</exclude>
                             <exclude>/static/css/bootstrap.css</exclude>
