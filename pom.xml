@@ -26,7 +26,6 @@
         <micrometer.plugin.version>1.10.2</micrometer.plugin.version>
         <pmd.plugin.version>3.19.0</pmd.plugin.version>
         <spotbug.plugin.version>4.7.3.0</spotbug.plugin.version>
-        <findsecbug.plugin.version>1.12.0</findsecbug.plugin.version>
         <sonar.plugin.version>3.9.1.2184</sonar.plugin.version>
         <exec.plugin.version>3.1.0</exec.plugin.version>
         <properties.plugin.version>1.1.0</properties.plugin.version>
@@ -244,13 +243,6 @@
                     <xmlOutput>true</xmlOutput>
                     <includeFilterFile>configs/spotbugs-security-include.xml</includeFilterFile>
                     <excludeFilterFile>configs/spotbugs-security-exclude.xml</excludeFilterFile>
-                    <plugins>
-                        <plugin>
-                            <groupId>com.h3xstream.findsecbugs</groupId>
-                            <artifactId>findsecbugs-plugin</artifactId>
-                            <version>${findsecbug.plugin.version}</version>
-                        </plugin>
-                    </plugins>
                 </configuration>
                 <executions>
                     <execution>
