@@ -44,7 +44,7 @@ public class BlipsCfgController {
 
   @GetMapping("")
   public ModelAndView index(@RequestParam(defaultValue = "1") int page,
-                            @RequestParam(defaultValue = "10") int size,
+                            @RequestParam(defaultValue = "${management.server.port}") int size,
                             @RequestParam(defaultValue = "ring.title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
