@@ -44,7 +44,7 @@ public class RadarServiceImpl implements RadarService {
   public Optional<RadarDto> findByPrimary(boolean primary) {
     List<Radar> radarList = radarRepository.findByPrimary(primary);
     if (radarList.isEmpty()) {
-      return Optional.ofNullable(null);
+      return Optional.empty();
     } else {
       return Optional.of(radarList.get(0)).map(radarMapper::toDto);
     }
