@@ -11,15 +11,18 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.tabr.domain.AbstractAuditable;
 import com.a5lab.tabr.domain.blips.Blip;
+import com.a5lab.tabr.utils.JpaConstants;
 
 @Entity
 @Table(name = "radars")
@@ -48,6 +51,8 @@ public class Radar extends AbstractAuditable {
   @Column(name = "is_primary", nullable = false)
   private boolean primary = true;
 
+  @Setter(AccessLevel.NONE)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "radar")
+  @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<Blip> blipList;
 }
