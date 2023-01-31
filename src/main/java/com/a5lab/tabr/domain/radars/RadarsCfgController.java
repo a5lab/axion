@@ -34,8 +34,8 @@ public class RadarsCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "1") int page,
-                            @RequestParam(defaultValue = "10") int size,
+  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+                            @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
