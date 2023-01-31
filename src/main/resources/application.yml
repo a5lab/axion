@@ -24,6 +24,8 @@ server:
   shutdown: graceful
 
 spring:
+  profiles:
+    active: @spring.profiles.active@
   application:
     name: TABR
   jmx:
@@ -133,3 +135,6 @@ application:
   description: @project.description@
   keys:
     google_analytics:
+  paging:
+    page: 1
+    size: 10
