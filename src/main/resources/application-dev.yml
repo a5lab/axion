@@ -18,10 +18,8 @@ spring:
   messages:
     use-code-as-default-message: false
   thymeleaf:
-    prefix: file:src/main/resources/templates/
     cache: false
   resources:
-    static-locations: file:src/main/resources/static/
     cache-period: 0
   jpa:
     show-sql: true

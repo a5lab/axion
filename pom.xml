@@ -26,7 +26,6 @@
         <micrometer.plugin.version>1.10.2</micrometer.plugin.version>
         <pmd.plugin.version>3.19.0</pmd.plugin.version>
         <spotbug.plugin.version>4.7.3.0</spotbug.plugin.version>
-        <findsecbug.plugin.version>1.12.0</findsecbug.plugin.version>
         <sonar.plugin.version>3.9.1.2184</sonar.plugin.version>
         <exec.plugin.version>3.1.0</exec.plugin.version>
         <properties.plugin.version>1.1.0</properties.plugin.version>
@@ -68,7 +67,10 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -244,13 +246,6 @@
                     <xmlOutput>true</xmlOutput>
                     <includeFilterFile>configs/spotbugs-security-include.xml</includeFilterFile>
                     <excludeFilterFile>configs/spotbugs-security-exclude.xml</excludeFilterFile>
-                    <plugins>
-                        <plugin>
-                            <groupId>com.h3xstream.findsecbugs</groupId>
-                            <artifactId>findsecbugs-plugin</artifactId>
-                            <version>${findsecbug.plugin.version}</version>
-                        </plugin>
-                    </plugins>
                 </configuration>
                 <executions>
                     <execution>
@@ -415,18 +410,25 @@
             </activation>
             <properties>
                 <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+                <spring.profiles.active>dev</spring.profiles.active>
             </properties>
             <dependencies>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-devtools</artifactId>
                 </dependency>
-                <dependency>
-                    <groupId>com.h2database</groupId>
-                    <artifactId>h2</artifactId>
-                </dependency>
             </dependencies>
             <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                        <excludes>
+                            <exclude>/configs/liquibase.properties</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
@@ -463,6 +465,9 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>
@@ -470,6 +475,7 @@
                         <filtering>true</filtering>
                         <excludes>
                             <exclude>**/*dev.yml</exclude>
+                            <exclude>/configs/liquibase.properties</exclude>
                             <exclude>/static/index.html</exclude>
                             <exclude>/static/css/application.css</exclude>
                             <exclude>/static/css/bootstrap.css</exclude>
