@@ -19,37 +19,26 @@
           <svg id="radar"></svg>
           <h1 th:text="${radarDto.title}" th:id="name"></h1>
           <p th:text="${radarDto.description}" th:id="description"></p>
-          <h2>Entries</h2>
-          <table id="entries" class="table">
+          <h2>Blips</h2>
+          <table id="blips" class="table">
             <thead>
               <tr>
                 <th>Title</th>
+                <th>Website</th>
                 <th>Quadrant</th>
                 <th>Ring</th>
-                <th>Active</th>
                 <th>Moved</th>
-                <th>Link</th>
-                <th>Description</th>
+                <th>Active</th>
               </tr>
             </thead>
             <tbody>
               <tr th:each="blip : ${radarDto.blipList}">
                 <td th:text="${blip.entry.title}"></td>
+                <td th:text="${blip.entry.website}"></td>
                 <td th:text="${blip.segmentNo}"></td>
                 <td th:text="${blip.ringNo}"></td>
-                <td th:text="${blip.entry.active}"></td>
                 <td th:text="${blip.entry.moved}"></td>
-                <td th:text="${blip.entry.website}"></td>
-                <td th:text="${blip.entry.description}"></td>
-              </tr>
-              <tr>
-                <td>Flink</td>
-                <td>3</td>
-                <td>1</td>
-                <td>true</td>
-                <td>0</td>
-                <td>https://flink.apache.org/</td>
-                <td>Flink</td>
+                <td th:text="${blip.entry.active}"></td>
               </tr>
             </tbody>
           </table>
