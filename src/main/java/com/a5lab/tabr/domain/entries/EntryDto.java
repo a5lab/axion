@@ -22,7 +22,6 @@ public class EntryDto {
   @Size(min = 1, max = 64)
   private String title;
 
-  @NotBlank
   @Size(min = 0, max = 64)
   private String website;
 
