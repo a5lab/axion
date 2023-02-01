@@ -38,9 +38,19 @@ public class Entry extends AbstractAuditable {
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 
+  @Size(min = 0, max = 64)
+  @Column(name = "website", nullable = true)
+  private String website;
+
   @NotBlank
   @Size(min = 1, max = 512)
   @Column(name = "description", nullable = false)
   private String description;
+
+  @Column(name = "moved", nullable = false)
+  private int moved = 0;
+
+  @Column(name = "is_active", nullable = false)
+  private boolean active = true;
 
 }

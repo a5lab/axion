@@ -23,7 +23,15 @@ public class EntryDto {
   private String title;
 
   @NotBlank
+  @Size(min = 0, max = 64)
+  private String website;
+
+  @NotBlank
   @Size(min = 1, max = 512)
   private String description;
+
+  private int moved;
+
+  private boolean active;
 
 }

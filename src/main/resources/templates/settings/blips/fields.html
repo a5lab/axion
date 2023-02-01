@@ -12,7 +12,7 @@
   <option th:each="segmentDto : ${segmentDtos}" th:value="${segmentDto.id}" th:utext="${segmentDto.title}"/>
 </select>
 <label for="segment_no">Segment number</label>
-<input type="text" th:field="*{segmentNo}" id="segment_no" placeholder="1">
+<input type="text" th:field="*{segmentNo}" id="segment_no" placeholder="0">
 <span th:if="${#fields.hasErrors('segmentNo')}" th:errors="*{segmentNo}"></span>
 <label for="ring_id">Ring</label>
 <select  id="ring_id" name="ring_id" th:field="*{ring.id}" >
