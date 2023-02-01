@@ -1,13 +1,16 @@
-= Welcome to Component B!
-:navtitle: Welcome
+= Technical and business radar
+:navtitle: Technical and business radar
 
-This is the automatic start page for version *{page-component-display-version}* of Component B.
+Technical and business radar (*tabr*) is irreplaceable when working on many products, and many tools, frameworks and programming languages are used for development. *tabr* creates a complete map of the technology stack, down to the designation of the selected landscape, which makes it indispensable for developers, architects and managers. 
 
-Component B is one of two documentation components in the Antora Demo.
-The other docs component, Component A, can be accessed using the component selector menu (aka component drawer) at the bottom of the menu on the left side of the page.
+See how to xref:installation:pages/overview.adoc[install] and start xref:installation:pages/overview.adoc[using] *tabr*.
 
-== Page source
+We have also gathered some of our xref:best_practices:pages/overview.adoc[best practices] for better understanding on how to use
 
+
+
+
+//// 
 This page is sourced from the AsciiDoc file named [.path]_index.adoc_ that is located at [.path]_demo-component-b/docs/modules/ROOT/pages_.
 
 === Why is this the home page of Component B?
@@ -31,3 +34,4 @@ To create a cross reference *to the latest version of this page from a page in C
 === Target a specific version of this page
 
 To create a cross reference *to version 1.0 of this page from a page in Component A*, the xref syntax would be `\xref:1.0@component-b::index.adoc[]`.
+//// 

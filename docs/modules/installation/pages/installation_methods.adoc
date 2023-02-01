@@ -1,21 +1,18 @@
-= Installation methods
+= Deploy
 
-This is version *{page-component-display-version}* of Module One in Component B.
-
-== Page source
-
-This page is sourced from [.path]_demo-component-b/docs/modules/module-one/pages/overview.adoc_.
-
-== Cross reference syntax to target this page
-
-To create a cross reference *to this page from another page in Module One*, the xref syntax would be `\xref:overview.adoc[]`.
-
-To create a cross reference *to this page from a page in the ROOT module of Component B*, the xref syntax would be `\xref:module-one:overview.adoc[]`.
-
-=== Always target the latest version of this page
-
-To create a cross reference *to the latest version of this page from a page in Component A*, the xref syntax would be `\xref:component-b:module-one:overview.adoc[]`.
-
-=== Target a specific version of this page
-
-To create a cross reference *to version 1.0 of this page from a page in Component A*, the xref syntax would be `\xref:1.0@component-b:module-one:overview.adoc[]`.
+. Download the latest version from https://github.com/a5lab/tabr/releases[GitHub].
+. Make sure that you have installed all the required packages that are mentioned in the xref:system_requirements.adoc[System requirements] section.
+. Unpack the archive.
+. Open the terminal and move to the root folder of *tabr*.
+. Run the command to build the application:
++
+....
+mvn clean package -Pdev -Dmaven.test.skip 
+....
+. Run th command to run the application:
++
+....
+run application by command: mvn spring-boot:run -Pdev 
+....
+. After the application was launched, enter  http://127.0.0.1:8080 in your internet browser.
+. *tabr* is now open and ready to use.
