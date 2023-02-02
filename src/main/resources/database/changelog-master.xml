@@ -9,7 +9,9 @@
 
     <include file="migrations/2022_10_10_0000_create_tenants_table.xml" relativeToChangelogFile="true"/>
     <include file="migrations/2022_10_15_0000_create_entries_table.xml" relativeToChangelogFile="true"/>
-    <include file="migrations/2022_10_15_0000_create_radars_table.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/2022_10_16_0000_create_capabilities_table.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/2022_10_20_0000_create_radar_types_table.xml" relativeToChangelogFile="true"/>
+    <include file="migrations/2022_10_25_0000_create_radars_table.xml" relativeToChangelogFile="true"/>
     <include file="migrations/2022_11_10_0000_create_rings_table.xml" relativeToChangelogFile="true"/>
     <include file="migrations/2022_11_11_0000_create_segments_table.xml" relativeToChangelogFile="true"/>
     <include file="migrations/2023_01_05_0000_create_blips_table.xml" relativeToChangelogFile="true"/>
