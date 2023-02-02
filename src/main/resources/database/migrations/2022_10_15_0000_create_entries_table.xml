@@ -52,6 +52,7 @@
                   separator="|"
                   file="database/data/entries_en.csv">
             <column name="title" type="STRING"/>
+            <column name="website" type="STRING"/>
             <column name="description" type="STRING"/>
             <column name="created_by" type="STRING"/>
             <column name="last_modified_by" type="STRING"/>

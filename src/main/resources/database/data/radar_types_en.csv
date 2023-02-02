@@ -1,0 +1,18 @@
+title|code|description|created_by|last_modified_by
+Capability radar|capability|Capability radar|tabr|tabr
+Practice radar|practice|Practice radar|tabr|tabr
+Process radar|process|Process radar|tabr|tabr
+
+
+ufanov  staff    84 Feb  2 17:39 capabilities_en.csv
+-rw-r--r--  1 arufanov  staff  2218 Feb  2 13:44 entries_en.csv
+-rw-r--r--  1 arufanov  staff   116 Feb  2 17:39 practices_en.csv
+-rw-r--r--  1 arufanov  staff    80 Feb  2 17:39 processes_en.csv
+-rw-r--r--  1 arufanov  staff    78 Feb  2 17:22 products_en.csv
+-rw-r--r--  1 arufanov  staff    86 Feb  2 17:50 radar_types_en.csv
+-rw-r--r--  1 arufanov  staff   123 Feb  2 17:39 radars_en.csv
+-rw-r--r--  1 arufanov  staff  1283 Dec 28 11:16 rings_en.csv
+-rw-r--r--  1 arufanov  staff   382 Jan 13 01:07 segments_en.csv
+-rw-r--r--  1 arufanov  staff    72 Feb  2 17:29 teams_en.csv
+-rw-r--r--  1 arufanov  staff    94 Jan 13 01:07 tenants_de.csv
+-rw-r--r--  1 arufanov  staff    82 Feb  2 17:22 tenants_en.csv

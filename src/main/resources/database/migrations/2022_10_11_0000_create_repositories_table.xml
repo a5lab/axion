@@ -37,26 +37,4 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_de_repositories" author="tabr" context="data" labels="locale_de">
-        <loadData tableName="repositories"
-                  separator="|"
-                  file="database/data/repositories_de.csv">
-            <column name="title" type="STRING"/>
-            <column name="description" type="STRING"/>
-            <column name="created_by" type="STRING"/>
-            <column name="last_modified_by" type="STRING"/>
-        </loadData>
-    </changeSet>
-
-    <changeSet id="load_en_repositories" author="tabr" context="data" labels="locale_en">
-        <loadData tableName="repositories"
-                  separator="|"
-                  file="database/data/repositories_en.csv">
-            <column name="title" type="STRING"/>
-            <column name="description" type="STRING"/>
-            <column name="created_by" type="STRING"/>
-            <column name="last_modified_by" type="STRING"/>
-        </loadData>
-    </changeSet>
-
 </databaseChangeLog>
