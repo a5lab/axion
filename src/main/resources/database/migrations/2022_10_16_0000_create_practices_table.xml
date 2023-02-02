@@ -6,26 +6,19 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_entries_table" author="tabr">
-        <createTable tableName="entries" remarks="Holds information about entries.">
-            <column name="id" type="integer" remarks="Entry id, primary key." autoIncrement="true"
+    <changeSet id="create_practices_table" author="tabr">
+        <createTable tableName="practices" remarks="Holds information about practices.">
+            <column name="id" type="integer" remarks="Practice id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
-                <constraints primaryKey="true" primaryKeyName="pk_entries_id" nullable="false"/>
+                <constraints primaryKey="true" primaryKeyName="pk_practices_id" nullable="false"/>
             </column>
-            <column name="title" type="${text.type}" remarks="Entry title, unique.">
-                <constraints unique="true" uniqueConstraintName="uc_entries_title" nullable="false"/>
+            <column name="title" type="${text.type}" remarks="Practice title, unique.">
+                <constraints unique="true" uniqueConstraintName="uc_practices_title" nullable="false"/>
             </column>
-            <column name="website" type="${text.type}" remarks="Website for entry.">
-                <constraints nullable="true"/>
-            </column>
-            <column name="description" type="${text.type}" remarks="Description for entry."/>
-            <column name="moved" type="int" remarks="Direction of movements (up - greater than 0; down - less than 0)" defaultValue="0">
-                <constraints nullable="false"/>
-            </column>
+            <column name="description" type="${text.type}" remarks="Description for practice."/>
             <column name="is_active" type="boolean" remarks="Whenever the row is active." defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
-
             <column name="created_by" type="${user.type}" remarks="User who created the record.">
                 <constraints nullable="false"/>
             </column>
@@ -42,15 +35,15 @@
         </createTable>
         <!-- current Liquibase ignores checkConstraint attribute -->
         <sql>
-            ALTER TABLE entries
-                ADD CONSTRAINT ck_entries_title_trim CHECK (trim(title) = title)
+            ALTER TABLE practices
+                ADD CONSTRAINT ck_practices_title_trim CHECK (trim(title) = title)
         </sql>
     </changeSet>
 
-    <changeSet id="load_en_entries" author="tabr" context="data" labels="locale_en">
-        <loadData tableName="entries"
+    <changeSet id="load_en_practices" author="tabr" context="data" labels="locale_en">
+        <loadData tableName="practices"
                   separator="|"
-                  file="database/data/entries_en.csv">
+                  file="database/data/practices_en.csv">
             <column name="title" type="STRING"/>
             <column name="description" type="STRING"/>
             <column name="created_by" type="STRING"/>
