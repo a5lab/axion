@@ -59,7 +59,7 @@
                   file="database/data/rings_en.csv">
             <column name="title" type="STRING"/>
             <column name="description" type="STRING"/>
-            <column name="priority" type="INTEGER"/>
+            <column name="position" type="INTEGER"/>
             <column name="created_by" type="STRING"/>
             <column name="last_modified_by" type="STRING"/>
         </loadData>
