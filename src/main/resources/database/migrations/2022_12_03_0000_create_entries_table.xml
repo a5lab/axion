@@ -15,10 +15,17 @@
             <column name="title" type="${text.type}" remarks="Entry title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_entries_title" nullable="false"/>
             </column>
+            <column name="website" type="${text.type}" remarks="Website for entry.">
+                <constraints nullable="true"/>
+            </column>
             <column name="description" type="${text.type}" remarks="Description for entry."/>
-            <column name="is_active" type="boolean" remarks="Whenever the row is active" defaultValueBoolean="true">
+            <column name="moved" type="int" remarks="Direction of movements (up - greater than 0; down - less than 0)" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
+            <column name="is_active" type="boolean" remarks="Whenever the row is active." defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="created_by" type="${user.type}" remarks="User who created the record.">
                 <constraints nullable="false"/>
             </column>

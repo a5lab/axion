@@ -16,6 +16,26 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link align-middle px-0 active" href="/settings/entries"
+           th:if="${#strings.startsWith(servletPath,'/settings/entries')}">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Entries</span>
+        </a>
+        <a class="nav-link align-middle px-0" href="/settings/entries"
+           th:unless="${#strings.startsWith(servletPath,'/settings/entries')}">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Entries</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link align-middle px-0 active" href="/settings/radars"
+           th:if="${#strings.startsWith(servletPath,'/settings/radars')}">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Radars</span>
+        </a>
+        <a class="nav-link align-middle px-0" href="/settings/radars"
+           th:unless="${#strings.startsWith(servletPath,'/settings/radars')}">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Radars</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link align-middle px-0 active" href="/settings/rings"
            th:if="${#strings.startsWith(servletPath,'/settings/rings')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Rings</span>
@@ -33,26 +53,6 @@
         <a class="nav-link align-middle px-0" href="/settings/segments"
            th:unless="${#strings.startsWith(servletPath,'/settings/segments')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Segments</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link align-middle px-0 active" href="/settings/radars"
-           th:if="${#strings.startsWith(servletPath,'/settings/radars')}">
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Radars</span>
-        </a>
-        <a class="nav-link align-middle px-0" href="/settings/radars"
-           th:unless="${#strings.startsWith(servletPath,'/settings/radars')}">
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Radars</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link align-middle px-0 active" href="/settings/entries"
-           th:if="${#strings.startsWith(servletPath,'/settings/entries')}">
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Entries</span>
-        </a>
-        <a class="nav-link align-middle px-0" href="/settings/entries"
-           th:unless="${#strings.startsWith(servletPath,'/settings/entries')}">
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Entries</span>
         </a>
       </li>
       <li class="nav-item">

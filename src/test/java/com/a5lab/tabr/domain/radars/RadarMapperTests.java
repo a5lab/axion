@@ -17,7 +17,7 @@ class RadarMapperTests {
 
   @Test
   void testToDtoAllFields() {
-    final Radar radar = new Radar(0L, "title", "desciption", false);
+    final Radar radar = new Radar(0L, "title", "desciption", false, null);
     final var radarDto = mapper.toDto(radar);
 
     Assertions.assertEquals(radarDto.getId(), radar.getId());
@@ -35,7 +35,7 @@ class RadarMapperTests {
 
   @Test
   void testToEntityAllFields() {
-    final RadarDto radarDto = new RadarDto(0L, "my title1", "my description1", false);
+    final RadarDto radarDto = new RadarDto(0L, "my title1", "my description1", false, null);
     final var radar = mapper.toEntity(radarDto);
 
     Assertions.assertEquals(radar.getId(), radarDto.getId());

@@ -22,7 +22,10 @@
             <thead>
               <tr>
                 <th>Title</th>
+                <th>Website</th>
                 <th>Description</th>
+                <th>Moved</th>
+                <th>Active</th>
                 <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -31,7 +34,10 @@
             <tbody>
               <tr th:each="entryDto : ${entryDtoPage.getContent()}">
                 <td th:text="${entryDto.title}"></td>
+                <td th:text="${entryDto.website}"></td>
                 <td th:text="${entryDto.description}"></td>
+                <td th:text="${entryDto.moved}"></td>
+                <td th:text="${entryDto.active}"></td>
                 <td><a th:href="@{/settings/entries/show/{id}(id=${entryDto.id})}">Show</a></td>
                 <td><a th:href="@{/settings/entries/edit/{id}(id=${entryDto.id})}">Edit</a></td>
                 <td><a th:href="@{/settings/entries/delete/{id}(id=${entryDto.id})}">Delete</a></td>
