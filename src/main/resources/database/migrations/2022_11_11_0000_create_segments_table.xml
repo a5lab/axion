@@ -12,10 +12,17 @@
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_segments_id" nullable="false"/>
             </column>
+            <column name="radar_id" type="${bigint.type}" remarks="Reference to radar.">
+                <constraints nullable="false" foreignKeyName="fk_radar_id_radars" references="radars(id)"/>
+            </column>
             <column name="title" type="${text.type}" remarks="Segment title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_segments_title" nullable="false"/>
             </column>
             <column name="description" type="${text.type}" remarks="Description for segment."/>
+            <column name="position" type="integer"
+                    remarks="Represents segment position in radar starting from lower to higher value.">
+                <constraints nullable="false"/>
+            </column>
             <column name="is_active" type="boolean" remarks="Whenever the row is active" defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>

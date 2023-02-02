@@ -12,14 +12,17 @@
                     generationType="ALWAYS">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_rings_id"/>
             </column>
+            <column name="radar_id" type="${bigint.type}" remarks="Reference to radar.">
+                <constraints nullable="false" foreignKeyName="fk_radar_id_radars" references="radars(id)"/>
+            </column>
             <column name="title" type="${ring.title}" remarks="Ring title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_rings_title" nullable="false"/>
             </column>
             <column name="description" type="${text.type}" remarks="Description for ring.">
                 <constraints nullable="false"/>
             </column>
-            <column name="priority" type="integer"
-                    remarks="Represents ring priority in radar starting from lower to higher value.">
+            <column name="position" type="integer"
+                    remarks="Represents ring position in radar starting from lower to higher value.">
                 <constraints nullable="false"/>
             </column>
             <column name="is_active" type="boolean" remarks="Whenever the row is active." defaultValueBoolean="true">
