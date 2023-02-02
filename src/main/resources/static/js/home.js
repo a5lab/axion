@@ -44,19 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   config['rings'] = rings;
 
-  // Extract all entries
-  const html_entries = d3.selectAll("table#entries tbody tr");
+  // Extract all blips
+  const html_entries = d3.selectAll("table#blips tbody tr");
   const entries = Array.from(html_entries._groups[0]).map(function (entry, j) {
     const children = Array.from(entry.children);
     let result = {
       label: children[0].innerHTML,
-      quadrant: Number(children[1].innerHTML),
-      ring: Number(children[2].innerHTML),
-      active: (children[3].innerHTML === 'true'),
+      quadrant: Number(children[2].innerHTML),
+      ring: Number(children[3].innerHTML),
       moved: Number(children[4].innerHTML),
+      active: (children[5].innerHTML === 'true'),
     };
-    if(children[5].innerHTML){
-      return {...result, ...{link: children[5].innerHTML}};
+    if(children[1].innerHTML){
+      return {...result, ...{link: children[1].innerHTML}};
     }
     return result;
   });
