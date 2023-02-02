@@ -25,7 +25,6 @@
             <column name="is_active" type="boolean" remarks="Whenever the row is active." defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
-
             <column name="created_by" type="${user.type}" remarks="User who created the record.">
                 <constraints nullable="false"/>
             </column>
