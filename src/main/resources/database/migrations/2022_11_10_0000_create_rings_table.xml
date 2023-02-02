@@ -53,7 +53,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_en_rings" author="tabr" context="data" labels="locale_en">
+    <!--changeSet id="load_en_rings" author="tabr" context="data" labels="locale_en">
         <loadData tableName="rings"
                   separator="|"
                   file="database/data/rings_en.csv">
@@ -63,6 +63,6 @@
             <column name="created_by" type="STRING"/>
             <column name="last_modified_by" type="STRING"/>
         </loadData>
-    </changeSet>
+    </changeSet-->
 
 </databaseChangeLog>

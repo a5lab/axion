@@ -47,7 +47,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_en_segments" author="tabr" context="data" labels="locale_en">
+    <!--changeSet id="load_en_segments" author="tabr" context="data" labels="locale_en">
         <loadData tableName="segments"
                   separator="|"
                   file="database/data/segments_en.csv">
@@ -56,6 +56,6 @@
             <column name="created_by" type="STRING"/>
             <column name="last_modified_by" type="STRING"/>
         </loadData>
-    </changeSet>
+    </changeSet-->
 
 </databaseChangeLog>
