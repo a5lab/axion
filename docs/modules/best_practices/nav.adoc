@@ -1,4 +1,3 @@
 * xref:overview.adoc[Best practices]
-** xref:administration_best_practicesd.adoc[Administration]
-** xref:infrastructure_best_practices.adoc[Infrastructure]
-
+** xref:administration_best_practices.adoc[Administration best practices]
+** xref:infrastructure_best_practices.adoc[Infrastructure best practices]
