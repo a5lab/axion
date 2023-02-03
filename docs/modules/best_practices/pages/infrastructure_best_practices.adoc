@@ -4,13 +4,6 @@ Some advise on how to maintain your app.
 
 == Application Maintenance
 
-=== Audit your storage requirements regularly to track growth predictions
-
-* Without aggressive cleanup, storage will quickly grow, especially for container repositories
-* Use high-performance/fast storage 
-* The blob stores can be configured on a slower network or object storage
-* Consider using a mix of storage types (file vs object) to balance cost savings with critical performance
-
 === Regularly backup your database and components
 
 * Create internal documentation on backup and failover action plans
@@ -25,11 +18,6 @@ Some advise on how to maintain your app.
 * Test upgrades in a test environment before deploying to production
 * Backup your database and installation before upgrading
 
-=== Document your repository configuration and process for making changes
-
-* Configure the runtime environment to the deployed instance to maintain the stability, performance, and overall health of the application
-* Document any changes to this configuration in an internal wiki
-*
 === Configure *tabr* to run as a service on the production server
 
 * Create a service user to start and run the application, avoid using the root user

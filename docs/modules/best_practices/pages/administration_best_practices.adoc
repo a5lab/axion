@@ -16,11 +16,7 @@ Some advise on how to keep your work alive.
 * The audit log is to track configuration changes
 * This log is useful when troubleshooting/investigating issues
 
-=== Use a test environment for running reports
-* Use a recent backup to avoid putting strain on your production environment
-
-=== Mine the log files 
+=== Mine the log files
 
 * Learn about the logging options
-* Use the nexus and request logs to track activity
-* Details about each log file
+* Review log files to find errors
