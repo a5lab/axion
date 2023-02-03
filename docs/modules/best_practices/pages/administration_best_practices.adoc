@@ -1,21 +1,22 @@
-= Administration best practices
+= Administration
 
-This is version *{page-component-display-version}* of Module One in Component B.
+== Monitoring
 
-== Page source
+Some advise on how to keep your work alive.
 
-This page is sourced from [.path]_demo-component-b/docs/modules/module-one/pages/overview.adoc_.
+=== Use external tools to monitor the *tabr* health 
 
-== Cross reference syntax to target this page
+* Monitoring and reporting are expensive operations that can negatively affect your repository
+* Offload reporting to external tools to minimize the impact on production servers
+* Use these endpoints for the real-time status of the server
+* Consider using the xref:https://prometheus.io/[Prometheus] endpoint as a data source for other tools like Grafana or Elastic
 
-To create a cross reference *to this page from another page in Module One*, the xref syntax would be `\xref:overview.adoc[]`.
+==== Keep the audit log enabled
 
-To create a cross reference *to this page from a page in the ROOT module of Component B*, the xref syntax would be `\xref:module-one:overview.adoc[]`.
+* The audit log is to track configuration changes
+* This log is useful when troubleshooting/investigating issues
 
-=== Always target the latest version of this page
+=== Mine the log files
 
-To create a cross reference *to the latest version of this page from a page in Component A*, the xref syntax would be `\xref:component-b:module-one:overview.adoc[]`.
-
-=== Target a specific version of this page
-
-To create a cross reference *to version 1.0 of this page from a page in Component A*, the xref syntax would be `\xref:1.0@component-b:module-one:overview.adoc[]`.
+* Learn about the logging options
+* Review log files to find errors
