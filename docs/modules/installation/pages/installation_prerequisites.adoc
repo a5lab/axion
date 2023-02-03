@@ -1,0 +1,17 @@
+= Installation prerequisites
+
+== for all methods
+* java (how to install java)
+* database (postgresql for production or h2 in memory)
+
+Make sure that you have installed next pakages:
+
+[cols="1,2",options="header"]
+|===
+|Package |Version
+|jdk |18
+|===
+
+
+== to build from open sources
+* node js and uglify pacakges

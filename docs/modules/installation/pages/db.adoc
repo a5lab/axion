@@ -1,2 +1,0 @@
-= Database 
-Describes how to deploy and configure a database for *tabr*.
