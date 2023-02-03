@@ -1,9 +1,6 @@
 = Best practices
 
-For a better understanding on how *tabr* can help you, we wrote some use cases for the main roles.
+We have some advise on how to administrate and manage infrastructure described in:
 
-Have a look at them:
-
-* xref:soft_end.adoc[software engineer]
-* xref:arch.adoc[architect]
-* xref:manager.adoc[manager]
+* xref:administration_best_practices.adoc[Administration]
+* xref:infrastructure_best_practices.adoc[Infrastructure]

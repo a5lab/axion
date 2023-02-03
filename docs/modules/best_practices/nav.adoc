@@ -1,4 +1,4 @@
 * xref:overview.adoc[Best practices]
-** xref:soft_end.adoc[Software engineer]
-** xref:arch.adoc[Architect]
-** xref:manager.adoc[Manager]
+** xref:administration_best_practicesd.adoc[Administration]
+** xref:infrastructure_best_practices.adoc[Infrastructure]
+

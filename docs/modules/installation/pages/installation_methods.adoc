@@ -4,15 +4,10 @@
 . Make sure that you have installed all the required packages that are mentioned in the xref:system_requirements.adoc[System requirements] section.
 . Unpack the archive.
 . Open the terminal and move to the root folder of *tabr*.
-. Run the command to build the application:
+. Run th command to start the application:
 +
 ....
-mvn clean package -Pdev -Dmaven.test.skip 
-....
-. Run th command to run the application:
-+
-....
-run application by command: mvn spring-boot:run -Pdev 
+run java -jar tabr-0.1.0.jar
 ....
 . After the application was launched, enter  http://127.0.0.1:8080 in your internet browser.
 . *tabr* is now open and ready to use.

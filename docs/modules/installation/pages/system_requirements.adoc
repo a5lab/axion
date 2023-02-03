@@ -6,16 +6,4 @@ Make sure that you have installed next pakages:
 |===
 |Package |Version
 |jdk |18
-|maven |3.8.7
-|nodeJS |18
 |===
-
-Also, make sure when you installed nodeJS, you will need packages from npm repository:
-
-* _uglifycss_ 
-* _uglifyjs_
-
-Use the command:
-====
-npm install <needed package>
-====

@@ -1,21 +1,42 @@
-= Administration best practices
+= Infrastructure
 
-This is version *{page-component-display-version}* of Module One in Component B.
+Some advise on how to maintain your app.
 
-== Page source
+== Application Maintenance
 
-This page is sourced from [.path]_demo-component-b/docs/modules/module-one/pages/overview.adoc_.
+=== Audit your storage requirements regularly to track growth predictions
 
-== Cross reference syntax to target this page
+* Without aggressive cleanup, storage will quickly grow, especially for container repositories
+* Use high-performance/fast storage 
+* The blob stores can be configured on a slower network or object storage
+* Consider using a mix of storage types (file vs object) to balance cost savings with critical performance
 
-To create a cross reference *to this page from another page in Module One*, the xref syntax would be `\xref:overview.adoc[]`.
+=== Regularly backup your database and components
 
-To create a cross reference *to this page from a page in the ROOT module of Component B*, the xref syntax would be `\xref:module-one:overview.adoc[]`.
+* Create internal documentation on backup and failover action plans
+* Testing your backup and recovery process at least once a year; quarterly is highly recommended
 
-=== Always target the latest version of this page
+=== Stay up-to-date on upgrading *tabr*
 
-To create a cross reference *to the latest version of this page from a page in Component A*, the xref syntax would be `\xref:component-b:module-one:overview.adoc[]`.
+* Find the latest version on the download and compatibility and read the release notes
+* Plan to upgrade your deployment at least once a quarter
+* The product team typically releases once a month or sooner for critical patch releases
+* Avoid upgrading production immediately after a new release
+* Test upgrades in a test environment before deploying to production
+* Backup your database and installation before upgrading
 
-=== Target a specific version of this page
+=== Document your repository configuration and process for making changes
 
-To create a cross reference *to version 1.0 of this page from a page in Component A*, the xref syntax would be `\xref:1.0@component-b:module-one:overview.adoc[]`.
+* Configure the runtime environment to the deployed instance to maintain the stability, performance, and overall health of the application
+* Document any changes to this configuration in an internal wiki
+*
+=== Configure *tabr* to run as a service on the production server
+
+* Create a service user to start and run the application, avoid using the root user
+
+=== Configure your server behind a reverse proxy or a load balancer
+
+* Offload configuration and workload for SSL termination
+* Easier to failover to another system
+* Redirect when implementing a new architecture
+* Improve server performance
