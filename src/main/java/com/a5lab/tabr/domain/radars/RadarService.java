@@ -8,15 +8,15 @@ import org.springframework.data.domain.Pageable;
 
 public interface RadarService {
 
-  Collection<RadarDto> findAll();
+  Collection<Radar> findAll();
 
-  Page<RadarDto> findAll(Pageable pageable);
+  Page<Radar> findAll(Pageable pageable);
 
-  Optional<RadarDto> findById(Long id);
+  Optional<Radar> findById(Long id);
 
-  Optional<RadarDto> findByPrimary(boolean primary);
+  Optional<Radar> findByPrimary(boolean primary);
 
-  RadarDto save(RadarDto radarDto);
+  Radar save(Radar radarDto);
 
   void deleteById(Long id);
 }
