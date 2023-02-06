@@ -1,21 +1,30 @@
-= Administration best practices
+= Infrastructure
 
-This is version *{page-component-display-version}* of Module One in Component B.
+Some advise on how to maintain your app.
 
-== Page source
+== Application Maintenance
 
-This page is sourced from [.path]_demo-component-b/docs/modules/module-one/pages/overview.adoc_.
+=== Regularly backup your database and components
 
-== Cross reference syntax to target this page
+* Create internal documentation on backup and failover action plans
+* Testing your backup and recovery process at least once a year; quarterly is highly recommended
 
-To create a cross reference *to this page from another page in Module One*, the xref syntax would be `\xref:overview.adoc[]`.
+=== Stay up-to-date on upgrading *tabr*
 
-To create a cross reference *to this page from a page in the ROOT module of Component B*, the xref syntax would be `\xref:module-one:overview.adoc[]`.
+* Find the latest version on the download and compatibility and read the release notes
+* Plan to upgrade your deployment at least once a quarter
+* The product team typically releases once a month or sooner for critical patch releases
+* Avoid upgrading production immediately after a new release
+* Test upgrades in a test environment before deploying to production
+* Backup your database and installation before upgrading
 
-=== Always target the latest version of this page
+=== Configure *tabr* to run as a service on the production server
 
-To create a cross reference *to the latest version of this page from a page in Component A*, the xref syntax would be `\xref:component-b:module-one:overview.adoc[]`.
+* Create a service user to start and run the application, avoid using the root user
 
-=== Target a specific version of this page
+=== Configure your server behind a reverse proxy or a load balancer
 
-To create a cross reference *to version 1.0 of this page from a page in Component A*, the xref syntax would be `\xref:1.0@component-b:module-one:overview.adoc[]`.
+* Offload configuration and workload for SSL termination
+* Easier to failover to another system
+* Redirect when implementing a new architecture
+* Improve server performance

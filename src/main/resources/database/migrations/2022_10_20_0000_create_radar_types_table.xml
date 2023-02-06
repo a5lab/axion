@@ -6,26 +6,19 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_segments_table" author="tabr">
-        <createTable tableName="segments" remarks="Holds information about segments.">
-            <column name="id" type="integer" remarks="Segment id, primary key." autoIncrement="true"
+    <changeSet id="create_radar_types_table" author="tabr">
+        <createTable tableName="radar_types" remarks="Holds information about radar_types.">
+            <column name="id" type="integer" remarks="Radar type id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
-                <constraints primaryKey="true" primaryKeyName="pk_segments_id" nullable="false"/>
+                <constraints primaryKey="true" primaryKeyName="pk_radar_types_id" nullable="false"/>
             </column>
-            <column name="radar_id" type="${bigint.type}" remarks="Reference to radar.">
-                <constraints nullable="false" foreignKeyName="fk_segments_radar_id_2_radars" references="radars(id)"/>
+            <column name="title" type="${text.type}" remarks="Radar type title, unique.">
+                <constraints unique="true" uniqueConstraintName="uc_radar_types_title" nullable="false"/>
             </column>
-            <column name="title" type="${text.type}" remarks="Segment title, unique.">
-                <constraints unique="true" uniqueConstraintName="uc_segments_title" nullable="false"/>
+            <column name="code" type="${text.type}" remarks="Radar type code, unique.">
+                <constraints unique="true" uniqueConstraintName="uc_radar_types_code" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for segment."/>
-            <column name="position" type="integer"
-                    remarks="Represents segment position in radar starting from lower to higher value.">
-                <constraints nullable="false"/>
-            </column>
-            <column name="is_active" type="boolean" remarks="Whenever the row is active" defaultValueBoolean="true">
-                <constraints nullable="false"/>
-            </column>
+            <column name="description" type="${text.type}" remarks="Description for Radar type."/>
             <column name="created_by" type="${user.type}" remarks="User who created the record.">
                 <constraints nullable="false"/>
             </column>
@@ -42,20 +35,21 @@
         </createTable>
         <!-- current Liquibase ignores checkConstraint attribute -->
         <sql>
-            ALTER TABLE segments
-                ADD CONSTRAINT ck_segments_title_trim CHECK (trim(title) = title)
+            ALTER TABLE radar_types
+                ADD CONSTRAINT ck_radar_types_title_trim CHECK (trim(title) = title)
         </sql>
     </changeSet>
 
-    <!--changeSet id="load_en_segments" author="tabr" context="data" labels="locale_en">
-        <loadData tableName="segments"
+    <changeSet id="load_en_radar_types" author="tabr" context="data" labels="locale_en">
+        <loadData tableName="radar_types"
                   separator="|"
-                  file="database/data/segments_en.csv">
+                  file="database/data/radar_types_en.csv">
             <column name="title" type="STRING"/>
-            <column name="position" type="STRING"/>
+            <column name="code" type="STRING"/>
+            <column name="description" type="STRING"/>
             <column name="created_by" type="STRING"/>
             <column name="last_modified_by" type="STRING"/>
         </loadData>
-    </changeSet-->
+    </changeSet>
 
 </databaseChangeLog>

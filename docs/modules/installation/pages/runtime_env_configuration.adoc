@@ -1,0 +1,3 @@
+= Runtime env configuration
+
+Could you review https://help.sonatype.com/repomanager3/installation-and-upgrades/configuring-the-runtime-environment sections "Changing the HTTP Port" & "Changing the Context Path"

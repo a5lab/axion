@@ -1,0 +1,11 @@
+= System requirements
+
+Requirements are:
+* hardware
+* host operation system
+* "Dedicated Operating System User Account
+"
+
+
+Could you review https://help.sonatype.com/repomanager3/product-information/system-requirements we are interested at sections "Host Operating System" & "Dedicated Operating System User Account
+" & " Java". Also could you add "hardware requirements" based on cpu, memory and storage section. Could you put it first.

@@ -22,17 +22,20 @@ public class BlipDto {
 
   private Long id;
 
+  @NotNull
   private RadarDto radar;
 
   private EntryDto entry;
 
   private SegmentDto segment;
 
-  @NotNull
-  private Long segmentNo;
+  // todo: remove
+  // @NotNull
+  // private Long segmentNo;
 
   private RingDto ring;
 
-  @NotNull
-  private Long ringNo;
+  // todo: remove
+  // @NotNull
+  // private Long ringNo;
 }

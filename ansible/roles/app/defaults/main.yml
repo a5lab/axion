@@ -27,7 +27,7 @@ app__smtp_user_password: '{{ lookup("env", ci_environment_name + "_support_mail_
 #
 app__domain: "{{ inventory_hostname }}"
 app__protocol: 'https'
-app__google_analytics: '{{ lookup("env", ci_environment_name + "_google_analytics") or "G-PHDDVDXL29"}}'
+app__google_analytics: '{{ lookup("env", ci_environment_name + "_google_analytics") or "G-2QGTYHX1N6"}}'
 
 #
 # Deploy section
