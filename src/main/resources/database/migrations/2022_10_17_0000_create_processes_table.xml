@@ -6,17 +6,23 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_radars_table" author="tabr">
-        <createTable tableName="radars" remarks="Holds information about radars.">
-            <column name="id" type="integer" remarks="Radar id, primary key." autoIncrement="true"
+    <changeSet id="create_processes_table" author="tabr">
+        <createTable tableName="processes" remarks="Holds information about processes.">
+            <column name="id" type="integer" remarks="Process id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
-                <constraints primaryKey="true" primaryKeyName="pk_radars_id" nullable="false"/>
+                <constraints primaryKey="true" primaryKeyName="pk_processes_id" nullable="false"/>
             </column>
-            <column name="title" type="${text.type}" remarks="Radar title, unique.">
-                <constraints unique="true" uniqueConstraintName="uc_radars_title" nullable="false"/>
+            <column name="title" type="${text.type}" remarks="Process title, unique.">
+                <constraints unique="true" uniqueConstraintName="uc_processes_title" nullable="false"/>
             </column>
-            <column name="description" type="${text.type}" remarks="Description for radar."/>
-            <column name="is_primary" type="boolean" remarks="Whenever the radar is primary." defaultValueBoolean="false">
+            <column name="website" type="${text.type}" remarks="Website for process.">
+                <constraints nullable="true"/>
+            </column>
+            <column name="description" type="${text.type}" remarks="Description for process."/>
+            <column name="moved" type="int" remarks="Direction of movements (up - greater than 0; down - less than 0)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_active" type="boolean" remarks="Whenever the row is active." defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>
             <column name="created_by" type="${user.type}" remarks="User who created the record.">
@@ -35,15 +41,15 @@
         </createTable>
         <!-- current Liquibase ignores checkConstraint attribute -->
         <sql>
-            ALTER TABLE radars
-                ADD CONSTRAINT ck_radars_title_trim CHECK (trim(title) = title)
+            ALTER TABLE processes
+                ADD CONSTRAINT ck_processes_title_trim CHECK (trim(title) = title)
         </sql>
     </changeSet>
 
-    <changeSet id="load_eb_radars" author="tabr" context="data" labels="locale_en">
-        <loadData tableName="radars"
+    <changeSet id="load_en_processes" author="tabr" context="data" labels="locale_en">
+        <loadData tableName="processes"
                   separator="|"
-                  file="database/data/radars_en.csv">
+                  file="database/data/processes_en.csv">
             <column name="title" type="STRING"/>
             <column name="description" type="STRING"/>
             <column name="created_by" type="STRING"/>

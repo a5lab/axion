@@ -39,7 +39,7 @@ public class Ring extends AbstractAuditable {
   @Column(name = "description", nullable = false)
   private String description;
 
-  @Column(name = "priority", nullable = false)
+  @Column(name = "position", nullable = false)
   private int priority;
 
   @Column(name = "is_active", nullable = false)

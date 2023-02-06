@@ -26,7 +26,7 @@ import com.a5lab.tabr.domain.segments.Segment;
 
 
 @Entity
-@Table(name = "blips")
+@Table(name = "technology_blips")
 @DynamicUpdate
 @Getter
 @Setter
@@ -40,27 +40,30 @@ public class Blip extends AbstractAuditable {
   @Column(name = "id", nullable = false, updatable = false, unique = true)
   private Long id;
 
+  @NotNull
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @JoinColumn(name = "radar_id", nullable = false, updatable = false)
   private Radar radar;
 
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  @JoinColumn(name = "entry_id", nullable = false, updatable = false)
+  @JoinColumn(name = "technology_id", nullable = false, updatable = false)
   private Entry entry;
 
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @JoinColumn(name = "segment_id", nullable = false, updatable = false)
   private Segment segment;
 
-  @NotNull
-  @Column(name = "segment_no", nullable = false, updatable = false)
-  private Long segmentNo;
+  // TODO: hast been moved to segment
+  // @NotNull
+  // @Column(name = "segment_no", nullable = false, updatable = false)
+  // private Long segmentNo;
 
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @JoinColumn(name = "ring_id", nullable = false, updatable = false)
   private Ring ring;
 
-  @NotNull
-  @Column(name = "ring_no", nullable = false, updatable = false)
-  private Long ringNo;
+  // TODO: remove column, has been moved to ring
+  // @NotNull
+  // @Column(name = "ring_no", nullable = false, updatable = false)
+  // private Long ringNo;
 }

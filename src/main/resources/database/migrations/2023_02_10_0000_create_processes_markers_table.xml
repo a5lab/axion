@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="../properties.yml" relativeToChangelogFile="true"/>
+
+    <changeSet id="create_processes_markers_table" author="tabr">
+        <createTable tableName="processes_markers" remarks="Holds information about markers.">
+            <column name="id" type="integer" remarks="Radar id, primary key." autoIncrement="true"
+                    generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="pk_processes_markers_id" nullable="false"/>
+            </column>
+            <column name="radar_id" type="${bigint.type}" remarks="Reference to radar.">
+                <constraints nullable="false" foreignKeyName="fk_radar_id_radars" references="radars(id)"/>
+            </column>
+            <column name="segment_id" type="${bigint.type}" remarks="Reference to segment.">
+                <constraints nullable="false" foreignKeyName="fk_segment_id_segments" references="segments(id)"/>
+            </column>
+            <column name="ring_id" type="${bigint.type}" remarks="Reference to ring.">
+                <constraints nullable="false" foreignKeyName="fk_ring_id_rings" references="rings(id)"/>
+            </column>
+            <column name="process_id" type="${bigint.type}" remarks="Reference to processes.">
+                <constraints nullable="false" foreignKeyName="fk_process_id_processes" references="processes(id)"/>
+            </column>
+            <column name="created_by" type="${user.type}" remarks="User who created the record.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="${datetime.type}" defaultValue="now()" remarks="When record was created.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="${user.type}" remarks="User who modified the record.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="${datetime.type}" remarks="When record was modified."
+                    defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
