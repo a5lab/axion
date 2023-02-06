@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain;
 
+import java.util.List;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
@@ -18,11 +19,10 @@ public class HomeController {
 
   @GetMapping({"/", "home"})
   public ModelAndView index() {
-
-    Optional<Radar> radarOptional = radarService.findByPrimary(true);
+    List<Radar> radarList = radarService.findByPrimaryAndActive(true, true);
     ModelAndView modelAndView = new ModelAndView("home/index");
-    if (radarOptional.isPresent()) {
-      modelAndView.addObject("radar", radarOptional.get());
+    if (!radarList.isEmpty()) {
+      modelAndView.addObject("radar", radarList.get(0));
     }
     return modelAndView;
   }

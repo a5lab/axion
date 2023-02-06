@@ -47,6 +47,12 @@ public class RadarServiceImpl implements RadarService {
     }
   }
 
+  @Override
+  @Transactional(readOnly = true)
+  public List<Radar> findByPrimaryAndActive(boolean primary, boolean active){
+    return radarRepository.findByPrimaryAndActive(primary, active);
+  }
+
 
   @Override
   @Transactional
