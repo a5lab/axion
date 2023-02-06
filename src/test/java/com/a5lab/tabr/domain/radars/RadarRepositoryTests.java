@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 class RadarRepositoryTests extends AbstractRepositoryTests {
-
   @Autowired
   private RadarRepository radarRepository;
 

@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,7 +35,6 @@ import com.a5lab.tabr.utils.JpaConstants;
 @AllArgsConstructor
 @RadarPrimaryConstraint
 public class Radar extends AbstractAuditable {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false, unique = true)
