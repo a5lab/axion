@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain;
+package com.a5lab.tabr.domain.radars;
 
 import java.util.List;
 
@@ -7,12 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.a5lab.tabr.domain.radars.Radar;
-import com.a5lab.tabr.domain.radars.RadarService;
-
 @Controller
 @RequiredArgsConstructor
-public class HomeController {
+public class RadarsHomeController {
 
   private final RadarService radarService;
 
