@@ -11,16 +11,10 @@
 <select  id="segment_id" name="segment_id" th:field="*{segment.id}" >
   <option th:each="segmentDto : ${segmentDtos}" th:value="${segmentDto.id}" th:utext="${segmentDto.title}"/>
 </select>
-<label for="segment_no">Segment number</label>
-<input type="text" th:field="*{segmentNo}" id="segment_no" placeholder="0">
-<span th:if="${#fields.hasErrors('segmentNo')}" th:errors="*{segmentNo}"></span>
 <label for="ring_id">Ring</label>
 <select  id="ring_id" name="ring_id" th:field="*{ring.id}" >
   <option th:each="ringDto : ${ringDtos}" th:value="${ringDto.id}" th:utext="${ringDto.title}"/>
 </select>
-<label for="ring_no">Ring number</label>
-<input type="text" th:field="*{ringNo}" id="ring_no" placeholder="0">
-<span th:if="${#fields.hasErrors('ringNo')}" th:errors="*{ringNo}"></span>
 <label for="entry_id">Entry</label>
 <select  id="entry_id" name="entry_id" th:field="*{entry.id}" >
   <option th:each="entryDto : ${entryDtos}" th:value="${entryDto.id}" th:utext="${entryDto.title}"/>

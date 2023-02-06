@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.tabr.domain.radars.RadarService;
 import com.a5lab.tabr.utils.FlashMessages;
+
 
 
 @Controller
@@ -31,6 +33,8 @@ import com.a5lab.tabr.utils.FlashMessages;
 public class RingsCfgController {
 
   private final RingService ringService;
+
+  private final RadarService radarService;
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -73,6 +77,7 @@ public class RingsCfgController {
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/rings/add");
     modelAndView.addObject("ringDto", new RingDto());
+    modelAndView.addObject("radarDtos", this.radarService.findAll());
     return modelAndView;
   }
 
@@ -82,6 +87,7 @@ public class RingsCfgController {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/rings/add");
       modelAndView.addObject("ringDto", ringDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
     ringService.save(ringDto);
@@ -97,6 +103,7 @@ public class RingsCfgController {
     if (ringDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
       modelAndView.addObject("ringDto", ringDto.get());
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -112,6 +119,7 @@ public class RingsCfgController {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
       modelAndView.addObject("ringDto", ringDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
     ringService.save(ringDto);

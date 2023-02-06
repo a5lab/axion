@@ -10,15 +10,15 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${radarDto}">
+      <div th:switch="${radar}">
         <div th:case="null">
           <h1>No primary radar yet!</h1>
           <p1>Create the primary radar to view it at home page.</p1>
         </div>
         <div th:case="*">
           <svg id="radar"></svg>
-          <h1 th:text="${radarDto.title}" th:id="name"></h1>
-          <p th:text="${radarDto.description}" th:id="description"></p>
+          <h1 th:text="${radar.title}" th:id="name"></h1>
+          <p th:text="${radar.description}" th:id="description"></p>
           <h2>Blips</h2>
           <table id="blips" class="table">
             <thead>
@@ -32,7 +32,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="blip : ${radarDto.blipList}">
+              <tr th:each="blip : ${radar.blipList}">
                 <td th:text="${blip.entry.title}"></td>
                 <td th:text="${blip.entry.website}"></td>
                 <td th:text="${blip.segmentNo}"></td>
