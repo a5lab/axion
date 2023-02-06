@@ -28,7 +28,7 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
     Assertions.assertNotNull(radar.getCreatedBy());
     Assertions.assertNotNull(radar.getCreatedDate());
     Assertions.assertNotNull(radar.getLastModifiedBy());
-    Assertions.assertNotNull(radar.getLastModifiedDate()); */
+    Assertions.assertNotNull(radar.getLastModifiedDate());*/
   }
 
   @Test

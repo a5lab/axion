@@ -12,3 +12,6 @@
 <label for="primary">Primary</label>
 <input type="checkbox" th:field="*{primary}" id="primary">
 <span th:if="${#fields.hasErrors('primary')}" th:errors="*{primary}"></span>
+<label for="active">Active</label>
+<input type="checkbox" th:field="*{active}" id="active">
+<span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>

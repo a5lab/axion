@@ -55,7 +55,7 @@ public class Radar extends AbstractAuditable {
   private boolean active = true;
 
   @Setter(AccessLevel.NONE)
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "radar")
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar")
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<Blip> blipList;
 }
