@@ -37,6 +37,5 @@ public class SegmentDto {
   @Max(512)
   private String position;
 
-
   private boolean active = true;
 }

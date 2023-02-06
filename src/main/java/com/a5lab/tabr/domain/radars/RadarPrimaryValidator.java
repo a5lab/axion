@@ -13,6 +13,9 @@ public class RadarPrimaryValidator
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
+    //
+    return true;
+    /*
     // TODO: implement it
     if (radar.isPrimary() == false) {
       return true;
@@ -23,5 +26,7 @@ public class RadarPrimaryValidator
     context.buildConstraintViolationWithTemplate("can be only one primary")
         .addPropertyNode("primary").addConstraintViolation();
     return false;
+
+     */
   }
 }

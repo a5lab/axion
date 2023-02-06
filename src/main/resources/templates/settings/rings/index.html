@@ -21,8 +21,9 @@
           <table>
             <thead>
               <tr>
+                <th>Radar</th>
                 <th>Title</th>
-                <th>Desciption</th>
+                <th>Description</th>
                 <th>Priority</th>
                 <th>Active</th>
                 <th>Show</th>
@@ -32,9 +33,10 @@
             </thead>
             <tbody>
               <tr th:each="ringDto : ${ringDtoPage.getContent()}">
+                <td th:text="${ringDto.radar.title}"></td>
                 <td th:text="${ringDto.title}"></td>
                 <td th:text="${ringDto.description}"></td>
-                <td th:text="${ringDto.priority}"></td>
+                <td th:text="${ringDto.position}"></td>
                 <td th:text="${ringDto.active}"></td>
                 <td><a th:href="@{/settings/rings/show/{id}(id=${ringDto.id})}">Show</a></td>
                 <td><a th:href="@{/settings/rings/edit/{id}(id=${ringDto.id})}">Edit</a></td>
