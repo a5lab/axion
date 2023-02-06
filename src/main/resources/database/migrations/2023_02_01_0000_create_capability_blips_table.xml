@@ -13,16 +13,16 @@
                 <constraints primaryKey="true" primaryKeyName="pk_capability_blips_id" nullable="false"/>
             </column>
             <column name="radar_id" type="${bigint.type}" remarks="Reference to radar.">
-                <constraints nullable="false" foreignKeyName="fk_radar_id_radars" references="radars(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_capability_blips_radar_id_2_radars" references="radars(id)"/>
             </column>
             <column name="segment_id" type="${bigint.type}" remarks="Reference to segment.">
-                <constraints nullable="false" foreignKeyName="fk_segment_id_segments" references="segments(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_capability_blips_segment_id_2_segments" references="segments(id)"/>
             </column>
             <column name="ring_id" type="${bigint.type}" remarks="Reference to ring.">
-                <constraints nullable="false" foreignKeyName="fk_ring_id_rings" references="rings(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_capability_blips_ring_id_2_rings" references="rings(id)"/>
             </column>
             <column name="capability_id" type="${bigint.type}" remarks="Reference to capabilities.">
-                <constraints nullable="false" foreignKeyName="fk_capability_id_capabilities" references="capabilities(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_capability_blips_capability_id_2_capabilities" references="capabilities(id)"/>
             </column>
             <column name="created_by" type="${user.type}" remarks="User who created the record.">
                 <constraints nullable="false"/>

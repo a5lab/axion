@@ -13,7 +13,7 @@
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_rings_id"/>
             </column>
             <column name="radar_id" type="${bigint.type}" remarks="Reference to radar.">
-                <constraints nullable="false" foreignKeyName="fk_radar_id_radars" references="radars(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_rings_radar_id_2_radars" references="radars(id)"/>
             </column>
             <column name="title" type="${ring.title}" remarks="Ring title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_rings_title" nullable="false"/>

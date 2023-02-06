@@ -13,10 +13,10 @@
                 <constraints primaryKey="true" primaryKeyName="pk_repositories_id" nullable="false"/>
             </column>
             <column name="product_id" type="${bigint.type}" remarks="Reference to product.">
-                <constraints nullable="true" foreignKeyName="fk_product_id_products" references="products(id)"/>
+                <constraints nullable="true" foreignKeyName="fk_repositories_product_id_2_products" references="products(id)"/>
             </column>
             <column name="team_id" type="${bigint.type}" remarks="Reference to team.">
-                <constraints nullable="true" foreignKeyName="fk_team_id_teams" references="teams(id)"/>
+                <constraints nullable="true" foreignKeyName="fk_repositories_team_id_2_teams" references="teams(id)"/>
             </column>
             <column name="title" type="${text.type}" remarks="Repository title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_repositories_title" nullable="false"/>

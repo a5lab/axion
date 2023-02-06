@@ -13,13 +13,13 @@
                 <constraints primaryKey="true" primaryKeyName="pk_radars_id" nullable="false"/>
             </column>
             <column name="product_id" type="${bigint.type}" remarks="Reference to product.">
-                <constraints nullable="true" foreignKeyName="fk_product_id_products" references="products(id)"/>
+                <constraints nullable="true" foreignKeyName="fk_radars_product_id_2_products" references="products(id)"/>
             </column>
             <column name="team_id" type="${bigint.type}" remarks="Reference to team.">
-                <constraints nullable="true" foreignKeyName="fk_team_id_teams" references="teams(id)"/>
+                <constraints nullable="true" foreignKeyName="fk_radars_team_id_2_teams" references="teams(id)"/>
             </column>
             <column name="repository_id" type="${bigint.type}" remarks="Reference to repository.">
-                <constraints nullable="true" foreignKeyName="fk_repository_id_teams" references="repositories(id)"/>
+                <constraints nullable="true" foreignKeyName="fk_radars_repository_id_2_teams" references="repositories(id)"/>
             </column>
             <column name="title" type="${text.type}" remarks="Radar title, unique.">
                 <constraints unique="true" uniqueConstraintName="uc_radars_title" nullable="false"/>
