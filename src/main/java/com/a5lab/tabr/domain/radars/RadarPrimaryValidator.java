@@ -9,7 +9,8 @@ import lombok.RequiredArgsConstructor;
 public class RadarPrimaryValidator
     implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
 
-  private final RadarService radarService;
+  // private final RadarService radarService;
+  // private final RadarRepository radarService;
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
