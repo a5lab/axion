@@ -15,7 +15,6 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
 
   @Test
   void shouldSaveRadarWithAllFields() {
-    /* TODO:  problem in this line RadarPrimaryValidator private final RadarService radarService;
     final Radar radar = new Radar();
     radar.setTitle("My new test Radar");
     radar.setDescription("My awesome description");
@@ -28,7 +27,7 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
     Assertions.assertNotNull(radar.getCreatedBy());
     Assertions.assertNotNull(radar.getCreatedDate());
     Assertions.assertNotNull(radar.getLastModifiedBy());
-    Assertions.assertNotNull(radar.getLastModifiedDate());*/
+    Assertions.assertNotNull(radar.getLastModifiedDate());
   }
 
   @Test

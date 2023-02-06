@@ -21,8 +21,10 @@
           <table>
             <thead>
               <tr>
+                <th>Radar</th>
                 <th>Title</th>
                 <th>Description</th>
+                <th>Position</th>
                 <th>Active</th>
                 <th>Show</th>
                 <th>Edit</th>
@@ -31,8 +33,10 @@
             </thead>
             <tbody>
               <tr th:each="segmentDto : ${segmentDtoPage.getContent()}">
+                <td th:text="${segmentDto.radar.title}"></td>
                 <td th:text="${segmentDto.title}"></td>
                 <td th:text="${segmentDto.description}"></td>
+                <td th:text="${segmentDto.position}"></td>
                 <td th:text="${segmentDto.active}"></td>
                 <td><a th:href="@{/settings/segments/show/{id}(id=${segmentDto.id})}">Show</a></td>
                 <td><a th:href="@{/settings/segments/edit/{id}(id=${segmentDto.id})}">Edit</a></td>

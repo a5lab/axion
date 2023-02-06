@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,6 +38,11 @@ public class Segment extends AbstractAuditable {
   @NotBlank
   @Column(name = "description", nullable = false)
   private String description;
+
+  @NotBlank
+  @Size(min = 1, max = 512)
+  @Column(name = "position", nullable = false)
+  private int position;
 
   @Column(name = "is_active", nullable = false)
   private boolean active = true;

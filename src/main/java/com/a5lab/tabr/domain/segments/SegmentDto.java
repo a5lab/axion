@@ -23,8 +23,12 @@ public class SegmentDto {
   private String title;
 
   @NotBlank
-  @Size(min = 1, max = 512)
   private String description;
+
+  @NotBlank
+  @Size(min = 1, max = 512)
+  private String position;
+
 
   private boolean active = true;
 }
