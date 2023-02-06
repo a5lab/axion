@@ -1,6 +1,5 @@
 package com.a5lab.tabr.domain.segments;
 
-import com.a5lab.tabr.domain.radars.RadarService;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.tabr.domain.radars.RadarService;
 import com.a5lab.tabr.utils.FlashMessages;
 
 

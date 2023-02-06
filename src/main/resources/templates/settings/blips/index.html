@@ -15,7 +15,7 @@
           <div>
             <span th:if="${blipDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
               <a th:href="@{/settings/blips(size=${blipDtoPage.size}, page=${pageNumber})}"
-                 th:text=${pageNumber} th:class="${pageNumber==blipDtoPage.number + 1} ? active"></a>
+                 th:text="${pageNumber}" th:class="${pageNumber==blipDtoPage.number + 1} ? active"></a>
             </span>
           </div>
           <table>

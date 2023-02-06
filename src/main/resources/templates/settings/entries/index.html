@@ -15,7 +15,7 @@
           <div>
             <span th:if="${entryDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
               <a th:href="@{/settings/entries(size=${entryDtoPage.size}, page=${pageNumber})}"
-                 th:text=${pageNumber} th:class="${pageNumber==entryDtoPage.number + 1} ? active"></a>
+                 th:text="${pageNumber}" th:class="${pageNumber==entryDtoPage.number + 1} ? active"></a>
             </span>
           </div>
           <table>

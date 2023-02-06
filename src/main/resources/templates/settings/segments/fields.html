@@ -17,5 +17,5 @@
 <input type="text" th:field="*{position}" id="position" placeholder="0">
 <span th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
 <label for="active">Active</label>
-<input type="text" th:field="*{active}" id="active" placeholder="true">
+<input type="checkbox" th:field="*{active}" id="active">
 <span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>

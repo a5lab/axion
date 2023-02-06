@@ -15,7 +15,7 @@
           <div>
             <span th:if="${ringDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
               <a th:href="@{/settings/rings(size=${ringDtoPage.size}, page=${pageNumber})}"
-                 th:text=${pageNumber} th:class="${pageNumber==ringDtoPage.number + 1} ? active"></a>
+                 th:text="${pageNumber}" th:class="${pageNumber==ringDtoPage.number + 1} ? active"></a>
             </span>
           </div>
           <table>
