@@ -3,7 +3,6 @@ package com.a5lab.tabr.domain.radars;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
