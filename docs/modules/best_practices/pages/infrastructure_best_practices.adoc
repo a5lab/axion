@@ -9,7 +9,7 @@ Some advise on how to maintain your app.
 * Create internal documentation on backup and failover action plans
 * Testing your backup and recovery process at least once a year; quarterly is highly recommended
 
-=== Stay up-to-date on upgrading *tabr*
+=== Stay up-to-date on upgrading *axion*
 
 * Find the latest version on the download and compatibility and read the release notes
 * Plan to upgrade your deployment at least once a quarter
@@ -18,7 +18,7 @@ Some advise on how to maintain your app.
 * Test upgrades in a test environment before deploying to production
 * Backup your database and installation before upgrading
 
-=== Configure *tabr* to run as a service on the production server
+=== Configure *axion* to run as a service on the production server
 
 * Create a service user to start and run the application, avoid using the root user
 
