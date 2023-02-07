@@ -2,8 +2,6 @@ package com.a5lab.tabr.domain.radar_types;
 
 import java.util.Collection;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
