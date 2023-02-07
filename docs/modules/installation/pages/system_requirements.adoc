@@ -48,7 +48,7 @@ When multiple JDK or JRE versions are installed, you need to ensure the correct 
 
 In the event you have a non-standard location you need to update the configuration to specify a specific JDK or JRE installation path. 
 
-The startup script verifies the runtime environment by checking for the existence of the nested java command  as well as major and minor version of the runtime to be the required 1.8. If the configured runtime is not suitable, it will proceed with a best effort to locate a suitable runtime configured on the path or via the JAVA_HOME environment variable. If successful, it will start up the radar with this JVM. This allows you to have a dedicated runtime environment for the repository manager installed that is not on the path and not used by other installed applications. Further, you can separate upgrades of the Java runtime used by the radar from upgrades of the runtime used by other applications.
+The startup script verifies the runtime environment by checking for the existence of the nested java command  as well as major and minor version of the runtime to be the required 1.8. If the configured runtime is not suitable, it will proceed with a best effort to locate a suitable runtime configured on the path or via the JAVA_HOME environment variable. If successful, it will start up the radar with this JVM. This allows you to have a dedicated runtime environment for the radar installed that is not on the path and not used by other installed applications. Further, you can separate upgrades of the Java runtime used by the radar from upgrades of the runtime used by other applications.
 
 === Web browser
 
