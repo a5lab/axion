@@ -4,15 +4,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.a5lab.tabr.AbstractControllerTests;
+import com.a5lab.tabr.domain.radars.RadarsHomeController;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(HomeController.class)
-public class HomeControllerTests extends AbstractControllerTests {
+@WebMvcTest(RadarsHomeController.class)
+public class RadarsHomeControllerTests extends AbstractControllerTests {
   @Test
   public void shouldGetHome() throws Exception {
     mockMvc.perform(get("/")).andExpect(status().isOk());

@@ -12,6 +12,9 @@
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_radars_id" nullable="false"/>
             </column>
+            <column name="radar_type_id" type="${bigint.type}" remarks="Reference to radar type.">
+                <constraints nullable="true" foreignKeyName="fk_radar_types_radar_type_id_2_radar_types" references="radar_types(id)"/>
+            </column>
             <column name="product_id" type="${bigint.type}" remarks="Reference to product.">
                 <constraints nullable="true" foreignKeyName="fk_radars_product_id_2_products" references="products(id)"/>
             </column>
@@ -51,16 +54,4 @@
                 ADD CONSTRAINT ck_radars_title_trim CHECK (trim(title) = title)
         </sql>
     </changeSet>
-
-    <changeSet id="load_eb_radars" author="axion" context="data" labels="locale_en">
-        <loadData tableName="radars"
-                  separator="|"
-                  file="database/data/radars_en.csv">
-            <column name="title" type="STRING"/>
-            <column name="description" type="STRING"/>
-            <column name="created_by" type="STRING"/>
-            <column name="last_modified_by" type="STRING"/>
-        </loadData>
-    </changeSet>
-
 </databaseChangeLog>

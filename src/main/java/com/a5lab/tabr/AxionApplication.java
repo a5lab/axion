@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TabrApplication {
+public class AxionApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(TabrApplication.class, args);
+    SpringApplication.run(AxionApplication.class, args);
   }
 
 }
