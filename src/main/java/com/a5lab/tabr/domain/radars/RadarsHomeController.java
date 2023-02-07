@@ -31,7 +31,7 @@ public class RadarsHomeController {
     List<Radar> radarList = radarService.findByPrimaryAndActive(true, true);
     ModelAndView modelAndView = new ModelAndView("home/index");
     if (radarList.isEmpty()) {
-      // modelAndView.addObject("radar", new Radar());
+      modelAndView.addObject("radar", new Radar());
       modelAndView.addObject("radar_types", this.radarTypeService.findAll());
     } else {
       modelAndView.addObject("radar", radarList.get(0));
