@@ -15,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.a5lab.tabr.AbstractControllerTests;
-import com.a5lab.tabr.domain.radars.RadarDto;
+import com.a5lab.tabr.domain.radars.Radar;
 import com.a5lab.tabr.domain.radars.RadarService;
 
 @WebMvcTest(HomeController.class)
@@ -25,23 +25,26 @@ public class HomeControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetHome() throws Exception {
-    final RadarDto dto =
-        RadarDto.builder().id(1L).title("my title").description("my description").primary(true)
-            .build();
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("my title");
+    radar.setDescription("my description");
+    radar.setPrimary(true);
+    radar.setActive(true);
 
-    Mockito.when(radarService.findByPrimary(true)).thenReturn(Optional.of(dto));
+    Mockito.when(radarService.findByPrimary(true)).thenReturn(Optional.of(radar));
 
     MvcResult result = mockMvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(view().name("home/index"))
-        .andExpect(model().attributeExists("radarDto"))
+        .andExpect(model().attributeExists("radar"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains(dto.getId().toString()));
-    Assertions.assertTrue(content.contains(dto.getTitle()));
-    Assertions.assertTrue(content.contains(dto.getDescription()));
+    Assertions.assertTrue(content.contains(radar.getId().toString()));
+    Assertions.assertTrue(content.contains(radar.getTitle()));
+    Assertions.assertTrue(content.contains(radar.getDescription()));
   }
 
   @Test
