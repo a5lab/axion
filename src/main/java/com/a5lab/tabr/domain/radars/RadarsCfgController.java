@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.tabr.domain.radar_types.RadarTypeService;
 import com.a5lab.tabr.utils.FlashMessages;
 
 
@@ -31,6 +32,9 @@ import com.a5lab.tabr.utils.FlashMessages;
 public class RadarsCfgController {
 
   private final RadarService radarService;
+
+  private final RadarTypeService radarTypeService;
+
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -72,6 +76,7 @@ public class RadarsCfgController {
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/radars/add");
     modelAndView.addObject("radar", new Radar());
+    modelAndView.addObject("radar_types", radarTypeService.findAll());
     return modelAndView;
   }
 
@@ -81,6 +86,7 @@ public class RadarsCfgController {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar", radar);
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
     radarService.save(radar);
@@ -96,6 +102,7 @@ public class RadarsCfgController {
     if (radar.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radar", radar.get());
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -111,6 +118,7 @@ public class RadarsCfgController {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radar", radar);
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
     radarService.save(radar);

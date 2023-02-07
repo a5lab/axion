@@ -41,7 +41,7 @@ public class RadarType extends AbstractAuditable {
 
   @Size(min = 0, max = 64)
   @Column(name = "code", nullable = true)
-  private String website;
+  private String code;
 
   @NotBlank
   @Size(min = 1, max = 512)

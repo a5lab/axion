@@ -3,6 +3,10 @@
     <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
   </ul>
 </div>
+<label for="radar_type_id">Radar type</label>
+<select id="radar_type_id" name="radar_type_id" th:field="*{radar_type.id}">
+  <option th:each="radar_type : ${radar_types}" th:value="${radar_type.id}" th:utext="${radar_type.title}"/>
+</select>
 <label for="title">Title</label>
 <input type="text" th:field="*{title}" id="title" placeholder="Title">
 <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
