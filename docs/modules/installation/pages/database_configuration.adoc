@@ -1,0 +1,8 @@
+= Database configuration
+
+Supported databases are:
+.PostgreSQL for production
+.h2 in memory db fro review app
+
+Default database is axion, username is axion, password is secret.
+

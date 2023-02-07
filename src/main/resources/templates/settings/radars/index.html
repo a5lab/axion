@@ -8,14 +8,14 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${radarDtoPage.getTotalElements()}">
+      <div th:switch="${radarPage.getTotalElements()}">
         <h1 th:case="0">No radars yet!</h1>
         <div th:case="*">
           <h1>Radars</h1>
           <div>
-            <span th:if="${radarDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/settings/radars(size=${radarDtoPage.size}, page=${pageNumber})}"
-                 th:text=${pageNumber} th:class="${pageNumber==radarDtoPage.number + 1} ? active"></a>
+            <span th:if="${radarPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/radars(size=${radarPage.size}, page=${pageNumber})}"
+                 th:text="${pageNumber}" th:class="${pageNumber==radarPage.number + 1} ? active"></a>
             </span>
           </div>
           <table>
@@ -24,16 +24,18 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Primary</th>
+                <th>Active</th>
                 <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr th:each="radarDto : ${radarDtoPage.getContent()}">
+              <tr th:each="radarDto : ${radarPage.getContent()}">
                 <td th:text="${radarDto.title}"></td>
                 <td th:text="${radarDto.description}"></td>
                 <td th:text="${radarDto.primary}"></td>
+                <td th:text="${radarDto.active}"></td>
                 <td><a th:href="@{/settings/radars/show/{id}(id=${radarDto.id})}">Show</a></td>
                 <td><a th:href="@{/settings/radars/edit/{id}(id=${radarDto.id})}">Edit</a></td>
                 <td><a th:href="@{/settings/radars/delete/{id}(id=${radarDto.id})}">Delete</a></td>

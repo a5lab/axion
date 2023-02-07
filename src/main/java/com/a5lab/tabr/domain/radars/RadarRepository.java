@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface RadarRepository extends JpaRepository<Radar, Long> {
   @Query("SELECT r FROM Radar r WHERE r.primary = ?1")
   List<Radar> findByPrimary(boolean primary);
+
+  @Query("SELECT r FROM Radar r WHERE r.primary = ?1 AND r.active = ?2")
+  List<Radar> findByPrimaryAndActive(boolean primary, boolean active);
 }

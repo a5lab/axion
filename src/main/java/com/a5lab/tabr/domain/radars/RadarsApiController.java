@@ -15,7 +15,7 @@ public class RadarsApiController {
   private final RadarService radarService;
 
   @GetMapping("")
-  public Collection<RadarDto> index() {
+  public Collection<Radar> index() {
     return radarService.findAll();
   }
 }

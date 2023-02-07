@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.tabr.domain.radars.RadarService;
 import com.a5lab.tabr.utils.FlashMessages;
 
 
@@ -31,6 +32,9 @@ import com.a5lab.tabr.utils.FlashMessages;
 public class SegmentsCfgController {
 
   private final SegmentService segmentService;
+
+  private final RadarService radarService;
+
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -73,6 +77,7 @@ public class SegmentsCfgController {
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/segments/add");
     modelAndView.addObject("segmentDto", new SegmentDto());
+    modelAndView.addObject("radarDtos", this.radarService.findAll());
     return modelAndView;
   }
 
@@ -82,6 +87,7 @@ public class SegmentsCfgController {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/segments/add");
       modelAndView.addObject("segmentDto", segmentDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
     segmentService.save(segmentDto);
@@ -97,6 +103,7 @@ public class SegmentsCfgController {
     if (segmentDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
       modelAndView.addObject("segmentDto", segmentDto.get());
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -112,6 +119,7 @@ public class SegmentsCfgController {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
       modelAndView.addObject("segmentDto", segmentDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
     segmentService.save(segmentDto);

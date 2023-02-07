@@ -9,7 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import com.a5lab.tabr.domain.entries.EntryDto;
-import com.a5lab.tabr.domain.radars.RadarDto;
+import com.a5lab.tabr.domain.radars.Radar;
 import com.a5lab.tabr.domain.rings.RingDto;
 import com.a5lab.tabr.domain.segments.SegmentDto;
 
@@ -22,17 +22,20 @@ public class BlipDto {
 
   private Long id;
 
-  private RadarDto radar;
+  @NotNull
+  private Radar radar;
 
   private EntryDto entry;
 
   private SegmentDto segment;
 
-  @NotNull
-  private Long segmentNo;
+  // todo: remove
+  // @NotNull
+  // private Long segmentNo;
 
   private RingDto ring;
 
-  @NotNull
-  private Long ringNo;
+  // todo: remove
+  // @NotNull
+  // private Long ringNo;
 }

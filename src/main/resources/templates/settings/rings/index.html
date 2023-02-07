@@ -15,12 +15,13 @@
           <div>
             <span th:if="${ringDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
               <a th:href="@{/settings/rings(size=${ringDtoPage.size}, page=${pageNumber})}"
-                 th:text=${pageNumber} th:class="${pageNumber==ringDtoPage.number + 1} ? active"></a>
+                 th:text="${pageNumber}" th:class="${pageNumber==ringDtoPage.number + 1} ? active"></a>
             </span>
           </div>
           <table>
             <thead>
               <tr>
+                <th>Radar</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Priority</th>
@@ -32,9 +33,10 @@
             </thead>
             <tbody>
               <tr th:each="ringDto : ${ringDtoPage.getContent()}">
+                <td th:text="${ringDto.radar.title}"></td>
                 <td th:text="${ringDto.title}"></td>
                 <td th:text="${ringDto.description}"></td>
-                <td th:text="${ringDto.priority}"></td>
+                <td th:text="${ringDto.position}"></td>
                 <td th:text="${ringDto.active}"></td>
                 <td><a th:href="@{/settings/rings/show/{id}(id=${ringDto.id})}">Show</a></td>
                 <td><a th:href="@{/settings/rings/edit/{id}(id=${ringDto.id})}">Edit</a></td>

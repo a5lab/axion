@@ -3,7 +3,6 @@ package com.a5lab.tabr.domain.radars;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,44 +16,48 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class RadarServiceImpl implements RadarService {
   private final RadarRepository radarRepository;
-  private final RadarMapper radarMapper;
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<RadarDto> findAll() {
-    return radarRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
-        .stream().map(radarMapper::toDto).collect(Collectors.toList());
+  public Collection<Radar> findAll() {
+    return radarRepository.findAll(Sort.by(Sort.Direction.ASC, "title"));
   }
 
 
   @Override
   @Transactional(readOnly = true)
-  public Page<RadarDto> findAll(Pageable pageable) {
-    return radarRepository.findAll(pageable).map(radarMapper::toDto);
+  public Page<Radar> findAll(Pageable pageable) {
+    return radarRepository.findAll(pageable);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<RadarDto> findById(Long id) {
-    return radarRepository.findById(id).map(radarMapper::toDto);
+  public Optional<Radar> findById(Long id) {
+    return radarRepository.findById(id);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<RadarDto> findByPrimary(boolean primary) {
+  public Optional<Radar> findByPrimary(boolean primary) {
     List<Radar> radarList = radarRepository.findByPrimary(primary);
     if (radarList.isEmpty()) {
-      return Optional.ofNullable(null);
+      return Optional.empty();
     } else {
-      return Optional.of(radarList.get(0)).map(radarMapper::toDto);
+      return Optional.of(radarList.get(0));
     }
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<Radar> findByPrimaryAndActive(boolean primary, boolean active) {
+    return radarRepository.findByPrimaryAndActive(primary, active);
   }
 
 
   @Override
   @Transactional
-  public RadarDto save(RadarDto radarDto) {
-    return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
+  public Radar save(Radar radar) {
+    return radarRepository.save(radar);
   }
 
   @Override

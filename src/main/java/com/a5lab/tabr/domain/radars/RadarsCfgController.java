@@ -41,11 +41,10 @@ public class RadarsCfgController {
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/radars/index");
-    Page<RadarDto> radarDtoPage =
-        radarService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
-    modelAndView.addObject("radarDtoPage", radarDtoPage);
+    Page<Radar> radarPage = radarService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    modelAndView.addObject("radarPage", radarPage);
 
-    int totalPages = radarDtoPage.getTotalPages();
+    int totalPages = radarPage.getTotalPages();
     if (totalPages > 0) {
       List<Integer> pageNumbers =
           IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
@@ -56,10 +55,10 @@ public class RadarsCfgController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<RadarDto> radarRecord = radarService.findById(id);
+    Optional<Radar> radarRecord = radarService.findById(id);
     if (radarRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/show");
-      modelAndView.addObject("radarDto", radarRecord.get());
+      modelAndView.addObject("radar", radarRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -72,19 +71,19 @@ public class RadarsCfgController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-    modelAndView.addObject("radarDto", new RadarDto());
+    modelAndView.addObject("radar", new Radar());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid RadarDto radarDto, BindingResult bindingResult,
+  public ModelAndView create(@Valid Radar radar, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-      modelAndView.addObject("radarDto", radarDto);
+      modelAndView.addObject("radar", radar);
       return modelAndView;
     }
-    radarService.save(radarDto);
+    radarService.save(radar);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("radar.flash.info.created", null,
             LocaleContextHolder.getLocale()));
@@ -93,10 +92,10 @@ public class RadarsCfgController {
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<RadarDto> radarDto = radarService.findById(id);
-    if (radarDto.isPresent()) {
+    Optional<Radar> radar = radarService.findById(id);
+    if (radar.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
-      modelAndView.addObject("radarDto", radarDto.get());
+      modelAndView.addObject("radar", radar.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -107,14 +106,14 @@ public class RadarsCfgController {
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid RadarDto radarDto,
+  public ModelAndView update(@Valid Radar radar,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
-      modelAndView.addObject("radarDto", radarDto);
+      modelAndView.addObject("radar", radar);
       return modelAndView;
     }
-    radarService.save(radarDto);
+    radarService.save(radar);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("radar.flash.info.updated", null,
             LocaleContextHolder.getLocale()));

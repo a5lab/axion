@@ -1,13 +1,13 @@
 package com.a5lab.tabr.domain;
 
-import java.util.Optional;
+import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.a5lab.tabr.domain.radars.RadarDto;
+import com.a5lab.tabr.domain.radars.Radar;
 import com.a5lab.tabr.domain.radars.RadarService;
 
 @Controller
@@ -18,11 +18,10 @@ public class HomeController {
 
   @GetMapping({"/", "home"})
   public ModelAndView index() {
-
-    Optional<RadarDto> radarDtoOptional = radarService.findByPrimary(true);
+    List<Radar> radarList = radarService.findByPrimaryAndActive(true, true);
     ModelAndView modelAndView = new ModelAndView("home/index");
-    if (radarDtoOptional.isPresent()) {
-      modelAndView.addObject("radarDto", radarDtoOptional.get());
+    if (!radarList.isEmpty()) {
+      modelAndView.addObject("radar", radarList.get(0));
     }
     return modelAndView;
   }

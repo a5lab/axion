@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="../properties.yml" relativeToChangelogFile="true"/>
+
+    <changeSet id="create_radar_types_table" author="axion">
+        <createTable tableName="radar_types" remarks="Holds information about radar_types.">
+            <column name="id" type="integer" remarks="Radar type id, primary key." autoIncrement="true"
+                    generationType="ALWAYS">
+                <constraints primaryKey="true" primaryKeyName="pk_radar_types_id" nullable="false"/>
+            </column>
+            <column name="title" type="${text.type}" remarks="Radar type title, unique.">
+                <constraints unique="true" uniqueConstraintName="uc_radar_types_title" nullable="false"/>
+            </column>
+            <column name="code" type="${text.type}" remarks="Radar type code, unique.">
+                <constraints unique="true" uniqueConstraintName="uc_radar_types_code" nullable="false"/>
+            </column>
+            <column name="description" type="${text.type}" remarks="Description for Radar type."/>
+            <column name="created_by" type="${user.type}" remarks="User who created the record.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="${datetime.type}" defaultValue="now()" remarks="When record was created.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="${user.type}" remarks="User who modified the record.">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="${datetime.type}" remarks="When record was modified."
+                    defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!-- current Liquibase ignores checkConstraint attribute -->
+        <sql>
+            ALTER TABLE radar_types
+                ADD CONSTRAINT ck_radar_types_title_trim CHECK (trim(title) = title)
+        </sql>
+    </changeSet>
+
+    <changeSet id="load_en_radar_types" author="axion" context="data" labels="locale_en">
+        <loadData tableName="radar_types"
+                  separator="|"
+                  file="database/data/radar_types_en.csv">
+            <column name="title" type="STRING"/>
+            <column name="code" type="STRING"/>
+            <column name="description" type="STRING"/>
+            <column name="created_by" type="STRING"/>
+            <column name="last_modified_by" type="STRING"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>
