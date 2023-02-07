@@ -37,15 +37,4 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_en_products" author="axion" context="data" labels="locale_en">
-        <loadData tableName="products"
-                  separator="|"
-                  file="database/data/products_en.csv">
-            <column name="title" type="STRING"/>
-            <column name="description" type="STRING"/>
-            <column name="created_by" type="STRING"/>
-            <column name="last_modified_by" type="STRING"/>
-        </loadData>
-    </changeSet>
-
 </databaseChangeLog>
