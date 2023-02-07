@@ -1,5 +1,6 @@
 package com.a5lab.tabr.domain.tenants;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -9,15 +10,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -27,15 +26,13 @@ import com.a5lab.tabr.AbstractControllerTests;
 public class TenantsCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private TenantService tenantService;
-  @Autowired
-  private TenantsCfgController tenantsCfgController;
 
   @Test
   public void shouldGetTenants() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
     List<TenantDto> tenantList = List.of(tenantDto);
     Page<TenantDto> page = new PageImpl<>(tenantList);
-    Mockito.when(tenantService.findAll(Pageable.ofSize(100))).thenReturn(page);
+    Mockito.when(tenantService.findAll(any())).thenReturn(page);
 
     MvcResult result = mockMvc.perform(get("/settings/tenants"))
         .andExpect(status().isOk())
@@ -57,8 +54,8 @@ public class TenantsCfgControllerTests extends AbstractControllerTests {
 
     String url = String.format("/settings/tenants/show/%d", tenantDto.getId());
     MvcResult result = mockMvc.perform(get(url))
-            .andExpect(status().isOk())
-            .andReturn();
+        .andExpect(status().isOk())
+        .andReturn();
     String content = result.getResponse().getContentAsString();
 
     Assertions.assertTrue(content.contains(tenantDto.getTitle()));

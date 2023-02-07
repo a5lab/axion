@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5lab.tabr.utils.FlashMessages;
 
-
 @Controller
 @RequestMapping("/settings/tenants")
 @RequiredArgsConstructor
@@ -78,7 +77,7 @@ public class TenantsCfgController {
 
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid TenantDto tenantDto, BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
       modelAndView.addObject("tenantDto", tenantDto);
@@ -108,7 +107,7 @@ public class TenantsCfgController {
 
   @PostMapping("/update")
   public ModelAndView update(@Valid TenantDto tenantDto,
-                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
       modelAndView.addObject("tenantDto", tenantDto);
