@@ -6,7 +6,7 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_practices_markers_table" author="tabr">
+    <changeSet id="create_practices_markers_table" author="axion">
         <createTable tableName="practices_markers" remarks="Holds information about markers.">
             <column name="id" type="integer" remarks="Radar id, primary key." autoIncrement="true"
                     generationType="ALWAYS">

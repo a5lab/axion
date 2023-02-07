@@ -6,7 +6,7 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_radar_types_table" author="tabr">
+    <changeSet id="create_radar_types_table" author="axion">
         <createTable tableName="radar_types" remarks="Holds information about radar_types.">
             <column name="id" type="integer" remarks="Radar type id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
@@ -40,7 +40,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_en_radar_types" author="tabr" context="data" labels="locale_en">
+    <changeSet id="load_en_radar_types" author="axion" context="data" labels="locale_en">
         <loadData tableName="radar_types"
                   separator="|"
                   file="database/data/radar_types_en.csv">

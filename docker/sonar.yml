@@ -1,7 +1,7 @@
 # This configuration is intended for development purpose, it's **your** responsibility to harden it for production
 version: '3.8'
 services:
-  tabr-sonar:
+  axion-sonar:
     image: sonarqube:latest
     # Authentication is turned off for out of the box experience while trying out SonarQube
     environment:

@@ -1,11 +1,11 @@
-# Repo tabr
+# Repo axion
 
 Technical and business radar. Spring boot based application
 
 # Release application
 * update version at antora.yml file
 * run command mvn release and provide information
-* create archive by command: tar -zcvf Binaries.tar.gz tabr*.jar
+* create archive by command: tar -zcvf Binaries.tar.gz axion*.jar
 * commit changes and create a new git tag
 * create a new release at GitHub and provide information
 * press button publish release at GitHub
@@ -23,7 +23,7 @@ Technical and business radar. Spring boot based application
 * install uglifycss by command: npm install -g uglifycss
 * install uglifyjs by command: npm install uglify-js -gt
 * setup GitHub account and add ssh keys to GitHub profile
-* clone repo by command git clone: git@github.com:a5lab/tabr.git
+* clone repo by command git clone: git@github.com:a5lab/axion.git
 * build application by command: mvn clean package -Pdev -Dmaven.test.skip from root folder
 * run application by command: mvn spring-boot:run -Pdev from root folder
 * open browser with url http://127.0.0.1:8080 to view application
@@ -32,8 +32,8 @@ Technical and business radar. Spring boot based application
 
 * run application by command: "mvn spring-boot:run -Pdev"
 * enter http://localhost:8080/h2-console to browser
-* enter "jdbc:h2:mem:tabr" into JDBC URL field
-* enter "tabr" into User Name field
+* enter "jdbc:h2:mem:axion" into JDBC URL field
+* enter "axion" into User Name field
 * enter "secret" into Password field
 
 ## Idea configuration
@@ -60,8 +60,8 @@ Technical and business radar. Spring boot based application
 * build package by command: ./mvnw clean package -Dmaven.test.skip
 * run application by command: ./mvnw spring-boot:run
 * run application with profile by command: ./mvnw spring-boot:run -Pdev
-* run application with by command: java -jar tabr-x.y.z.jar --application.keys.google_analytics=123
-* run application with by command: java -jar tabr-x.y.z.jar --spring.liquibase.label-filter=de
+* run application with by command: java -jar axion-x.y.z.jar --application.keys.google_analytics=123
+* run application with by command: java -jar axion-x.y.z.jar --spring.liquibase.label-filter=de
 * run database migration by command: ./mvnw liquibase:update
 * create checkstyle report by command: ./mvnw checkstyle:checkstyle
 * get coverage report by command: ./mvnw jacoco:report -Pdev
