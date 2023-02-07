@@ -1,7 +1,6 @@
 package com.a5lab.tabr.domain.radars;
 
 import jakarta.validation.Valid;
-import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -37,7 +36,7 @@ public class RadarsWizardController {
   }
 
 
-  @PostMapping(value = "/home/create")
+  @PostMapping(value = "/create")
   public ModelAndView create(@Valid Radar radar, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
