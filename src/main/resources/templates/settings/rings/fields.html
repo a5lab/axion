@@ -4,7 +4,7 @@
   </ul>
 </div>
 <label for="radar_id">Radar</label>
-<select id="radar_id" name="radarId" th:field="*{radar.id}">
+<select id="radar_id" name="radar_id" th:field="*{radar.id}">
   <option th:each="radarDto : ${radarDtos}" th:value="${radarDto.id}" th:utext="${radarDto.title}"/>
 </select>
 <label for="title">Title</label>
