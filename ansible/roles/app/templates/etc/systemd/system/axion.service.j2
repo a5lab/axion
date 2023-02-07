@@ -1,6 +1,6 @@
 #{{ ansible_managed }}
 [Unit]
-Description=tabr
+Description=axion
 Wants=postgresql.service
 After=network.target local-fs.target postgresql.service
 
@@ -8,12 +8,12 @@ After=network.target local-fs.target postgresql.service
 Type=simple
 User={{ app__user }}
 WorkingDirectory={{ app__current_path }}
-SyslogIdentifier=tabr
+SyslogIdentifier=axion
 TimeoutSec=5min
 Restart=on-failure
 RestartSec=5s
 SuccessExitStatus=143
-ExecStart=java -jar {{ app__current_path }}/target/tabr-0.1.0-SNAPSHOT.jar --application.keys.google_analytics={{ app__google_analytics }}
+ExecStart=java -jar {{ app__current_path }}/target/axion-0.1.0-SNAPSHOT.jar --application.keys.google_analytics={{ app__google_analytics }}
 ExecStop=/bin/kill -15 $MAINPID
 
 [Install]

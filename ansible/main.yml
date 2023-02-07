@@ -1,7 +1,7 @@
 ---
 
 - name: deploy app
-  hosts: tabr_server
+  hosts: axion_server
   become: yes
   become_user: root
   roles:

@@ -1,72 +1,72 @@
 title|website|description|created_by|last_modified_by
-Aerospike|https://aerospike.com/|Aerospike|tabr|tabr
-Airflow|https://airflow.apache.org/|Airflow|tabr|tabr
-Amazon MemoryDB||Amazon MemoryDB|tabr|tabr
-Amazon Redshift||Amazon Redshift|tabr|tabr
-Amazon SageMaker Feature Store||Amazon SageMaker Feature Store|tabr|tabr
-Amazon SageMaker||Amazon SageMaker|tabr|tabr
-Apache Cassandra||Apache Cassandra|tabr|tabr
-AWS Athena||AWS Athena|tabr|tabr
-AWS CloudFormation||AWS CloudFormation|tabr|tabr
-AWS CloudFront||AWS CloudFront|tabr|tabr
-AWS Data Pipeline||AWS Data Pipeline|tabr|tabr
-AWS DynamoDB||AWS DynamoDB|tabr|tabr
-AWS EMR||AWS EMR|tabr|tabr
-AWS Glue||AWS Glue|tabr|tabr
-AWS Kinesis||AWS Kinesis|tabr|tabr
-AWS Lambda||AWS Lambda|tabr|tabr
-AWS S3||AWS S3|tabr|tabr
-AWS SNS||AWS SNS|tabr|tabr
-AWS SQS||AWS SQS|tabr|tabr
-Clojure||Clojure|tabr|tabr
-Consul||Consul|tabr|tabr
-CouchBase||CouchBase|tabr|tabr
-Dart||Dart|tabr|tabr
-Databricks||Databricks|tabr|tabr
-dbt||dbt|tabr|tabr
-Docker||Docker|tabr|tabr
-Druid||Druid|tabr|tabr
-Elasticsearch||Elasticsearch|tabr|tabr
-etcd||etcd|tabr|tabr
-Exasol||Exasol|tabr|tabr
-Flink||Flink|tabr|tabr
-Go||Go|tabr|tabr
-Google BigQuery||Google BigQuery|tabr|tabr
-GraphQL||GraphQL|tabr|tabr
-Hadoop||Hadoop|tabr|tabr
-Haskell||Haskell|tabr|tabr
-Hazelcast||Hazelcast|tabr|tabr
-HBase||HBase|tabr|tabr
-HDFS||HDFS|tabr|tabr
-Java||Java|tabr|tabr
-JavaScript||JavaScript|tabr|tabr
-Kafka||Kafka|tabr|tabr
-Kotlin||Kotlin|tabr|tabr
-Kubernetes||Kubernetes|tabr|tabr
-Memcached||Memcached|tabr|tabr
-MongoDB||MongoDB|tabr|tabr
-MySQL||MySQL|tabr|tabr
-Nakadi|https://nakadi.io|Nakadi|tabr|tabr
-OpenAPI (Swagger)||OpenAPI (Swagger)|tabr|tabr
-OpenTracing||OpenTracing|tabr|tabr
-Oracle DB||Oracle DB|tabr|tabr
-PostgreSQL||PostgreSQL|tabr|tabr
-Presto||Presto|tabr|tabr
-Python||Python|tabr|tabr
-R|R||tabr|tabr
-RabbitMQ||RabbitMQ|tabr|tabr
-Redis||Redis|tabr|tabr
-RocksDB||RocksDB|tabr|tabr
-Rust||Rust|tabr|tabr
-Scala||Scala|tabr|tabr
-Skipper||Skipper|tabr|tabr
-Slurm||Slurm|tabr|tabr
-Solr||Solr|tabr|tabr
-Spark||Spark|tabr|tabr
-STUPS||STUPS|tabr|tabr
-Swift||Swift|tabr|tabr
-TypeScript||TypeScript|tabr|tabr
-WebAssembly||WebAssembly|tabr|tabr
-YARN||YARN|tabr|tabr
-ZMON||ZMON|tabr|tabr
-ZooKeeper||ZooKeeper|tabr|tabr
+Aerospike|https://aerospike.com/|Aerospike|axion|axion
+Airflow|https://airflow.apache.org/|Airflow|axion|axion
+Amazon MemoryDB||Amazon MemoryDB|axion|axion
+Amazon Redshift||Amazon Redshift|axion|axion
+Amazon SageMaker Feature Store||Amazon SageMaker Feature Store|axion|axion
+Amazon SageMaker||Amazon SageMaker|axion|axion
+Apache Cassandra||Apache Cassandra|axion|axion
+AWS Athena||AWS Athena|axion|axion
+AWS CloudFormation||AWS CloudFormation|axion|axion
+AWS CloudFront||AWS CloudFront|axion|axion
+AWS Data Pipeline||AWS Data Pipeline|axion|axion
+AWS DynamoDB||AWS DynamoDB|axion|axion
+AWS EMR||AWS EMR|axion|axion
+AWS Glue||AWS Glue|axion|axion
+AWS Kinesis||AWS Kinesis|axion|axion
+AWS Lambda||AWS Lambda|axion|axion
+AWS S3||AWS S3|axion|axion
+AWS SNS||AWS SNS|axion|axion
+AWS SQS||AWS SQS|axion|axion
+Clojure||Clojure|axion|axion
+Consul||Consul|axion|axion
+CouchBase||CouchBase|axion|axion
+Dart||Dart|axion|axion
+Daaxionicks||Daaxionicks|axion|axion
+dbt||dbt|axion|axion
+Docker||Docker|axion|axion
+Druid||Druid|axion|axion
+Elasticsearch||Elasticsearch|axion|axion
+etcd||etcd|axion|axion
+Exasol||Exasol|axion|axion
+Flink||Flink|axion|axion
+Go||Go|axion|axion
+Google BigQuery||Google BigQuery|axion|axion
+GraphQL||GraphQL|axion|axion
+Hadoop||Hadoop|axion|axion
+Haskell||Haskell|axion|axion
+Hazelcast||Hazelcast|axion|axion
+HBase||HBase|axion|axion
+HDFS||HDFS|axion|axion
+Java||Java|axion|axion
+JavaScript||JavaScript|axion|axion
+Kafka||Kafka|axion|axion
+Kotlin||Kotlin|axion|axion
+Kubernetes||Kubernetes|axion|axion
+Memcached||Memcached|axion|axion
+MongoDB||MongoDB|axion|axion
+MySQL||MySQL|axion|axion
+Nakadi|https://nakadi.io|Nakadi|axion|axion
+OpenAPI (Swagger)||OpenAPI (Swagger)|axion|axion
+OpenTracing||OpenTracing|axion|axion
+Oracle DB||Oracle DB|axion|axion
+PostgreSQL||PostgreSQL|axion|axion
+Presto||Presto|axion|axion
+Python||Python|axion|axion
+R|R||axion|axion
+RabbitMQ||RabbitMQ|axion|axion
+Redis||Redis|axion|axion
+RocksDB||RocksDB|axion|axion
+Rust||Rust|axion|axion
+Scala||Scala|axion|axion
+Skipper||Skipper|axion|axion
+Slurm||Slurm|axion|axion
+Solr||Solr|axion|axion
+Spark||Spark|axion|axion
+STUPS||STUPS|axion|axion
+Swift||Swift|axion|axion
+TypeScript||TypeScript|axion|axion
+WebAssembly||WebAssembly|axion|axion
+YARN||YARN|axion|axion
+ZMON||ZMON|axion|axion
+ZooKeeper||ZooKeeper|axion|axion

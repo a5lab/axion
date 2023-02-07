@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.a5lab</groupId>
-    <artifactId>tabr</artifactId>
+    <artifactId>axion</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <name>tabr</name>
+    <name>axion</name>
     <description>Technical and business radar</description>
     <properties>
         <java.version>17</java.version>

@@ -6,7 +6,7 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_processes_table" author="tabr">
+    <changeSet id="create_processes_table" author="axion">
         <createTable tableName="processes" remarks="Holds information about processes.">
             <column name="id" type="integer" remarks="Process id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
@@ -46,7 +46,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_en_processes" author="tabr" context="data" labels="locale_en">
+    <changeSet id="load_en_processes" author="axion" context="data" labels="locale_en">
         <loadData tableName="processes"
                   separator="|"
                   file="database/data/processes_en.csv">

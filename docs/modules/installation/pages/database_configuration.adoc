@@ -4,5 +4,5 @@ Supported databases are:
 .PostgreSQL for production
 .h2 in memory db fro review app
 
-Default database is tabr, username is tabr, password is secret.
+Default database is axion, username is axion, password is secret.
 

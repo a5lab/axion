@@ -9,8 +9,8 @@ spring:
     livereload:
       enabled: true
   datasource:
-    url: jdbc:h2:mem:tabr;MODE=PostgreSQL
-    username: tabr
+    url: jdbc:h2:mem:axion;MODE=PostgreSQL
+    username: axion
     password: secret
   h2:
     console:

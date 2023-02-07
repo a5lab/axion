@@ -6,7 +6,7 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_repositories_table" author="tabr">
+    <changeSet id="create_repositories_table" author="axion">
         <createTable tableName="repositories" remarks="Holds information about repositories.">
             <column name="id" type="integer" remarks="Repository id, primary key." autoIncrement="true"
                     generationType="ALWAYS">

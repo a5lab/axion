@@ -1,8 +1,8 @@
 = Technical and business radar
 :navtitle: Product overview
 
-Technical and business radar (*tabr*) is irreplaceable when working on many products, and many tools, frameworks and programming languages are used for development. *tabr* creates a complete map of the technology stack, down to the designation of the selected landscape, which makes it indispensable for developers, architects and managers. 
+Technical and business radar (*axion*) is irreplaceable when working on many products, and many tools, frameworks and programming languages are used for development. *axion* creates a complete map of the technology stack, down to the designation of the selected landscape, which makes it indispensable for developers, architects and managers.
 
-See how to xref:installation:overview.adoc[install] and start xref:usage:overview.adoc[using] *tabr*.
+See how to xref:installation:overview.adoc[install] and start xref:usage:overview.adoc[using] *axion*.
 
-We also have some  recommendations on how to work with *tabr* in our xref:best_practices:overview.adoc[best practice] section.
+We also have some  recommendations on how to work with *axion* in our xref:best_practices:overview.adoc[best practice] section.

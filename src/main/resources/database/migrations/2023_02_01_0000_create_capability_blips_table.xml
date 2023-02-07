@@ -6,7 +6,7 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_capability_blips_table" author="tabr">
+    <changeSet id="create_capability_blips_table" author="axion">
         <createTable tableName="capability_blips" remarks="Holds information about blips.">
             <column name="id" type="integer" remarks="Radar id, primary key." autoIncrement="true"
                     generationType="ALWAYS">

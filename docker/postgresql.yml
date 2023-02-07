@@ -1,10 +1,10 @@
 # This configuration is intended for development purpose
 version: '3.8'
 services:
-  tabr-postgresql:
+  axion-postgresql:
     image: postgres:14.6
     environment:
-      - POSTGRES_USER=tabr
+      - POSTGRES_USER=axion
       - POSTGRES_PASSWORD=secret
       - POSTGRES_HOST_AUTH_METHOD=trust
     # If you want to expose these ports outside your dev PC,
