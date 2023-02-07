@@ -21,11 +21,7 @@ public class RadarTypeServiceImpl implements RadarTypeService {
   @Transactional(readOnly = true)
   public Collection<RadarType> findAll() {
     return radarTypeRepository.findAll(
-        Sort.by(Sort.Direction.ASC, "radar.title")
-            .and(Sort.by(Sort.Direction.ASC, "segment.title"))
-            .and(Sort.by(Sort.Direction.ASC, "ring.title"))
-            .and(Sort.by(Sort.Direction.ASC, "entry.title"))
-    );
+        Sort.by(Sort.Direction.ASC, "title"));
   }
 
 
