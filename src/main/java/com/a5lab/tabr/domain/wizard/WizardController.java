@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.radars;
+package com.a5lab.tabr.domain.wizard;
 
 import jakarta.validation.Valid;
 
@@ -14,12 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5lab.tabr.domain.radar_types.RadarTypeService;
+import com.a5lab.tabr.domain.radars.Radar;
+import com.a5lab.tabr.domain.radars.RadarService;
 import com.a5lab.tabr.utils.FlashMessages;
 
 @Controller
 @RequestMapping("/wizard")
 @RequiredArgsConstructor
-public class RadarsWizardController {
+public class WizardController {
 
   private final RadarService radarService;
 
@@ -45,7 +47,11 @@ public class RadarsWizardController {
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
+
+    // Create all data
     radarService.save(radar);
+
+    // Redirect
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("radar.flash.info.created", null,
             LocaleContextHolder.getLocale()));

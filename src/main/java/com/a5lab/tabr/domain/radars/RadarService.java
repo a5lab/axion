@@ -20,7 +20,7 @@ public interface RadarService {
 
   List<Radar> findByPrimaryAndActive(boolean primary, boolean active);
 
-  Radar save(Radar radarDto);
+  Radar save(Radar radar);
 
   void deleteById(Long id);
 }
