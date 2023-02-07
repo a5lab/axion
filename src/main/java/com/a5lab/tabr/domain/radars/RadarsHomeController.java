@@ -3,8 +3,6 @@ package com.a5lab.tabr.domain.radars;
 import jakarta.validation.Valid;
 import java.util.List;
 
-
-import com.a5lab.tabr.utils.FlashMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -15,11 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.tabr.domain.radar_types.RadarTypeService;
+import com.a5lab.tabr.utils.FlashMessages;
+
 @Controller
 @RequiredArgsConstructor
 public class RadarsHomeController {
 
   private final RadarService radarService;
+
+  private final RadarTypeService radarTypeService;
 
   private final MessageSource messageSource;
 
