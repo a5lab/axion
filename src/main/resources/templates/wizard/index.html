@@ -13,7 +13,12 @@
       <div th:switch="${radar}">
         <div th:case="null">
           <h1>No primary radar yet!</h1>
-          <p1><a href="/wizard/add">Create</a> the primary radar to view it at home page.</p1>
+          <p1>Create the primary radar to view it at home page.</p1>
+          <form action="#" th:action="@{/home/create}" th:object="${radar}" method="post">
+            <th:block th:replace="~{settings/segments/fields.html}" />
+            <input type="submit" value="Add segment">
+          </form>
+
         </div>
         <div th:case="*">
           <svg id="radar"></svg>

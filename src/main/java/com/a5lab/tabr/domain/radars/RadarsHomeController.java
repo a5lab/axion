@@ -22,36 +22,14 @@ public class RadarsHomeController {
 
   private final RadarService radarService;
 
-  private final RadarTypeService radarTypeService;
-
-  private final MessageSource messageSource;
-
   @GetMapping({"/", "/home"})
   public ModelAndView index() {
     List<Radar> radarList = radarService.findByPrimaryAndActive(true, true);
     ModelAndView modelAndView = new ModelAndView("home/index");
-    if (radarList.isEmpty()) {
-      modelAndView.addObject("radar", new Radar());
-      modelAndView.addObject("radar_types", this.radarTypeService.findAll());
-    } else {
+    if (!radarList.isEmpty()) {
       modelAndView.addObject("radar", radarList.get(0));
     }
     return modelAndView;
-  }
-
-  @PostMapping(value = "/home/create")
-  public ModelAndView create(@Valid Radar radar, BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("home/index");
-      modelAndView.addObject("radar", radar);
-      return modelAndView;
-    }
-    radarService.save(radar);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("radar.flash.info.created", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/home");
   }
 
 }
