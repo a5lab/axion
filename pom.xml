@@ -163,19 +163,6 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>pre-integration-tests</id>
-                        <goals>
-                            <goal>prepare-agent-integration</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>post-integration-tests</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>report-integration</goal>
-                        </goals>
-                    </execution>
-                    <execution>
                         <id>jacoco-check</id>
                         <goals>
                             <goal>check</goal>

@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -32,7 +33,8 @@ public class HomeControllerTests extends AbstractControllerTests {
     radar.setPrimary(true);
     radar.setActive(true);
 
-    Mockito.when(radarService.findByPrimary(true)).thenReturn(Optional.of(radar));
+    Mockito.when(radarService.findByPrimaryAndActive(true, true))
+        .thenReturn(List.of(radar));
 
     MvcResult result = mockMvc.perform(get("/"))
         .andExpect(status().isOk())
