@@ -32,11 +32,11 @@ spring:
     enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/tabr
-    username: tabr
+    url: jdbc:postgresql://localhost:5432/axion
+    username: axion
     password: secret
     hikari:
-      poolName: tabr-pool
+      poolName: axion-pool
       auto-commit: false
       minimum-idle: 10
       maximum-pool-size: 100
