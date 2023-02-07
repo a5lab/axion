@@ -6,7 +6,7 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_tenants_table" author="tabr">
+    <changeSet id="create_tenants_table" author="axion">
         <createTable tableName="tenants" remarks="Holds information about tenants.">
             <column name="id" type="integer" remarks="Tenant id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
@@ -37,7 +37,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_de_tenants" author="tabr" context="data" labels="locale_de">
+    <changeSet id="load_de_tenants" author="axion" context="data" labels="locale_de">
         <loadData tableName="tenants"
                   separator="|"
                   file="database/data/tenants_de.csv">
@@ -48,7 +48,7 @@
         </loadData>
     </changeSet>
 
-    <changeSet id="load_en_tenants" author="tabr" context="data" labels="locale_en">
+    <changeSet id="load_en_tenants" author="axion" context="data" labels="locale_en">
         <loadData tableName="tenants"
                   separator="|"
                   file="database/data/tenants_en.csv">

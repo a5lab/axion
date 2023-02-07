@@ -6,7 +6,7 @@
 
     <include file="../properties.yml" relativeToChangelogFile="true"/>
 
-    <changeSet id="create_technologies_table" author="tabr">
+    <changeSet id="create_technologies_table" author="axion">
         <createTable tableName="technologies" remarks="Holds information about technologies.">
             <column name="id" type="integer" remarks="Technology id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
@@ -46,7 +46,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="load_en_technologies" author="tabr" context="data" labels="locale_en">
+    <changeSet id="load_en_technologies" author="axion" context="data" labels="locale_en">
         <loadData tableName="technologies"
                   separator="|"
                   file="database/data/technologies_en.csv">
