@@ -48,4 +48,9 @@ public class RadarType extends AbstractAuditable {
   @Column(name = "description", nullable = false)
   private String description;
 
+  /*
+  @Setter(AccessLevel.NONE)
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar_type")
+  @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
+  private List<RadarType> radarTypeList; */
 }
