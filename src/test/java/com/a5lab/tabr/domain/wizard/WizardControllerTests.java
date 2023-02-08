@@ -12,7 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.a5lab.tabr.AbstractControllerTests;
+import com.a5lab.tabr.domain.AbstractControllerTests;
 import com.a5lab.tabr.domain.radar_types.RadarType;
 import com.a5lab.tabr.domain.radar_types.RadarTypeService;
 import com.a5lab.tabr.domain.radars.Radar;

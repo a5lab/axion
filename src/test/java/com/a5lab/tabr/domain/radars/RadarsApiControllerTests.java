@@ -7,16 +7,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.a5lab.tabr.AbstractControllerTests;
 import java.util.Arrays;
 import java.util.List;
 
-
 import com.a5lab.tabr.domain.radar_types.RadarType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import com.a5lab.tabr.domain.AbstractControllerTests;
 
 @WebMvcTest(RadarsApiController.class)
 public class RadarsApiControllerTests extends AbstractControllerTests {

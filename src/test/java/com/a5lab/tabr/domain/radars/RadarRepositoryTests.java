@@ -2,14 +2,16 @@ package com.a5lab.tabr.domain.radars;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.a5lab.tabr.AbstractRepositoryTests;
 import jakarta.validation.ValidationException;
 
 
 import com.a5lab.tabr.domain.radar_types.RadarType;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.a5lab.tabr.domain.AbstractRepositoryTests;
 
 class RadarRepositoryTests extends AbstractRepositoryTests {
   @Autowired
