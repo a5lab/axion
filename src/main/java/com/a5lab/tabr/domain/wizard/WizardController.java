@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5lab.tabr.domain.radar_types.RadarTypeService;
 import com.a5lab.tabr.domain.radars.Radar;
-import com.a5lab.tabr.domain.radars.RadarService;
 import com.a5lab.tabr.utils.FlashMessages;
 
 @Controller
@@ -23,7 +22,7 @@ import com.a5lab.tabr.utils.FlashMessages;
 @RequiredArgsConstructor
 public class WizardController {
 
-  private final RadarService radarService;
+  private final WizardService wizardService;
 
   private final RadarTypeService radarTypeService;
 
@@ -49,7 +48,7 @@ public class WizardController {
     }
 
     try {
-      radarService.createRadarEnv(radar);
+      wizardService.createRadar(radar);
 
       // Redirect
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
