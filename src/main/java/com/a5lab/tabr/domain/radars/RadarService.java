@@ -23,4 +23,6 @@ public interface RadarService {
   Radar save(Radar radar);
 
   void deleteById(Long id);
+
+  Radar createRadarEnv(Radar radar);
 }
