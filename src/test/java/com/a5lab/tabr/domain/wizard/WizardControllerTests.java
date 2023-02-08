@@ -5,30 +5,26 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import com.a5lab.tabr.AbstractControllerTests;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-
-import com.a5lab.tabr.domain.radars.Radar;
-import com.a5lab.tabr.domain.wizard.WizardController;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+
+import com.a5lab.tabr.AbstractControllerTests;
+import com.a5lab.tabr.domain.radar_types.RadarType;
+import com.a5lab.tabr.domain.radar_types.RadarTypeService;
+import com.a5lab.tabr.domain.radars.Radar;
 
 @WebMvcTest(WizardController.class)
 public class WizardControllerTests extends AbstractControllerTests {
 
-  // @MockBean
-  // private WizardService wizardService;
+  @MockBean
+  private WizardService wizardService;
+
+  @MockBean
+  private RadarTypeService radarTypeService;
 
   @Test
   public void shouldAddTentant() throws Exception {
@@ -43,13 +39,24 @@ public class WizardControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldCreateTenant() throws Exception {
+    final RadarType radarType = new RadarType();
+    radarType.setId(10L);
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
+
     final Radar radar = new Radar();
-    // final Radar radar = new Radar(10L, "my title", "my description");
+    radar.setRadarType(radarType);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar desciption");
+    radar.setPrimary(true);
+    radar.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarType.id", String.valueOf(radar.getRadarType().getId()))
             .param("title", radar.getTitle())
             .param("description", radar.getDescription())
+            .param("primary", String.valueOf(radar.isPrimary()))
+            .param("active", String.valueOf(radar.isActive()))
             .sessionAttr("tenantDto", radar))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenants"))
