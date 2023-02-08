@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
-import com.a5lab.tabr.domain.radar_types.RadarType;
 import com.a5lab.tabr.domain.radars.Radar;
 import com.a5lab.tabr.domain.radars.RadarService;
 import com.a5lab.tabr.domain.rings.Ring;
@@ -32,32 +31,33 @@ public class WizardServiceImpl implements WizardService {
 
   @Override
   @Transactional
-  public Radar createRadar(Radar radar) {
-    try {
-      radarService.save(radar);
-      switch (radar.getRadarType().getCode()) {
-        case RadarType.CAPABILITY_RADAR:
-          throw new IllegalArgumentException(
-              "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
-        case RadarType.PRACTICE_RADAR:
-          throw new IllegalArgumentException(
-              "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
-        case RadarType.PROCESS_RADAR:
-          throw new IllegalArgumentException(
-              "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
-        case RadarType.TECHNOLOGY_RADAR:
-          this.createRings(radar);
-          this.createSegments(radar);
-          this.createTechnologyBlips(radar);
-          break;
-        default:
-          throw new IllegalArgumentException(
-              "Unknown radar type: " + radar.getRadarType().getCode());
-      }
-      return radar;
-    } catch (Exception e) {
-      return null;
+  public void createRadar(Radar radar) throws Exception {
+    radarService.save(radar);
+    this.createRings(radar);
+    this.createSegments(radar);
+    this.createTechnologyBlips(radar);
+
+    /*
+    switch (radar.getRadarType().getCode()) {
+      case RadarType.CAPABILITY_RADAR:
+        throw new IllegalArgumentException(
+            "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
+      case RadarType.PRACTICE_RADAR:
+        throw new IllegalArgumentException(
+            "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
+      case RadarType.PROCESS_RADAR:
+        throw new IllegalArgumentException(
+            "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
+      case RadarType.TECHNOLOGY_RADAR:
+        this.createRings(radar);
+        this.createSegments(radar);
+        this.createTechnologyBlips(radar);
+        break;
+      default:
+        throw new IllegalArgumentException(
+            "Unknown radar type: " + radar.getRadarType().getCode());
     }
+    */
   }
 
   public void createRings(Radar radar) throws Exception {
