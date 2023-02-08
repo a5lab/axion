@@ -13,8 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.MessageSource;
 import org.springframework.test.web.servlet.MvcResult;
 
+import com.a5lab.tabr.domain.radar_types.RadarTypeService;
 import com.a5lab.tabr.domain.radars.Radar;
 import com.a5lab.tabr.domain.radars.RadarService;
 import com.a5lab.tabr.domain.radars.RadarsHomeController;
@@ -23,6 +25,10 @@ import com.a5lab.tabr.domain.radars.RadarsHomeController;
 public class RadarsHomeControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
+  @MockBean
+  private RadarTypeService radarTypeService;
+  @MockBean
+  private MessageSource messageSource;
 
   @Test
   public void shouldGetHome() throws Exception {
