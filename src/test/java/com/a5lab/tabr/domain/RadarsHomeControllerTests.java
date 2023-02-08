@@ -5,6 +5,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import com.a5lab.tabr.AbstractControllerTests;
+import com.a5lab.tabr.domain.radars.RadarsHomeController;
+import org.junit.Test;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +21,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.a5lab.tabr.domain.radars.Radar;
 import com.a5lab.tabr.domain.radars.RadarService;
 
-@WebMvcTest(HomeController.class)
-public class HomeControllerTests extends AbstractControllerTests {
+@WebMvcTest(RadarsHomeController.class)
+public class RadarsHomeControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
-
   @Test
   public void shouldGetHome() throws Exception {
     final Radar radar = new Radar();

@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.List;
 
+import com.a5lab.tabr.domain.radar_types.RadarType;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -25,7 +26,8 @@ public class RadarsApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetRadars() throws Exception {
-    final Radar radar = new Radar(10L, "my title", "my description", true, false, null);
+    final RadarType radarType = new RadarType();
+    final Radar radar = new Radar(10L, radarType, "my title", "my description", true, false, null);
     List<Radar> radarList = Arrays.asList(radar);
     Mockito.when(radarService.findAll()).thenReturn(radarList);
 
