@@ -5,8 +5,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -27,7 +27,7 @@ public class WizardControllerTests extends AbstractControllerTests {
   private RadarTypeService radarTypeService;
 
   @Test
-  public void shouldAddTentant() throws Exception {
+  public void shouldAddRadar() throws Exception {
     MvcResult result = mockMvc.perform(get("/wizard/add"))
         .andExpect(status().isOk())
         .andReturn();
@@ -38,7 +38,7 @@ public class WizardControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldCreateTenant() throws Exception {
+  public void shouldCreateRadar() throws Exception {
     final RadarType radarType = new RadarType();
     radarType.setId(10L);
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
@@ -59,7 +59,7 @@ public class WizardControllerTests extends AbstractControllerTests {
             .param("active", String.valueOf(radar.isActive()))
             .sessionAttr("tenantDto", radar))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(view().name("redirect:/home"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
