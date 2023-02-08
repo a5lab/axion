@@ -1,9 +1,11 @@
-package com.a5lab.tabr;
+package com.a5lab.tabr.domain;
 
-import com.a5lab.tabr.config.JpaAuditingConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+
+import com.a5lab.tabr.config.ApplicationTestBaseConfig;
+import com.a5lab.tabr.config.JpaAuditingConfiguration;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

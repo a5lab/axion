@@ -1,4 +1,4 @@
-package com.a5lab.tabr;
+package com.a5lab.tabr.config;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

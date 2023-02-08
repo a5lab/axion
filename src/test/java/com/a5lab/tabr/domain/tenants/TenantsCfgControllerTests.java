@@ -20,7 +20,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.a5lab.tabr.AbstractControllerTests;
+import com.a5lab.tabr.domain.AbstractControllerTests;
 
 @WebMvcTest(TenantsCfgController.class)
 public class TenantsCfgControllerTests extends AbstractControllerTests {

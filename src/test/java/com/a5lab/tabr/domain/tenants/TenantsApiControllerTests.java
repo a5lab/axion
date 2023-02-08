@@ -15,7 +15,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.a5lab.tabr.AbstractControllerTests;
+import com.a5lab.tabr.domain.AbstractControllerTests;
 
 @WebMvcTest(TenantsApiController.class)
 public class TenantsApiControllerTests extends AbstractControllerTests {

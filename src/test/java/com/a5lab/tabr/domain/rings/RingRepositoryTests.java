@@ -2,11 +2,13 @@ package com.a5lab.tabr.domain.rings;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.a5lab.tabr.AbstractRepositoryTests;
 import jakarta.validation.ValidationException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.a5lab.tabr.domain.AbstractRepositoryTests;
 
 class RingRepositoryTests extends AbstractRepositoryTests {
 

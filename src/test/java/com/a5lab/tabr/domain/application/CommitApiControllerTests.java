@@ -9,7 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
-import com.a5lab.tabr.AbstractControllerTests;
+import com.a5lab.tabr.domain.AbstractControllerTests;
 
 @WebMvcTest(CommitApiController.class)
 public class CommitApiControllerTests extends AbstractControllerTests {
