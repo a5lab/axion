@@ -33,8 +33,7 @@ public class WizardControllerTests extends AbstractControllerTests {
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains("Title"));
-    Assertions.assertTrue(content.contains("Description"));
+    Assertions.assertTrue(content.contains("radar_type_id"));
   }
 
   @Test

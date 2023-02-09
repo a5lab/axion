@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <h1>Add radar</h1>
-      <form action="#" method="post" th:action="@{/wizard/create}" th:object="${radar}">
+      <form action="#" method="post" th:action="@{/wizard/create}" th:object="${wizard}">
         <th:block th:replace="~{wizard/fields.html}"/>
         <input type="submit" value="Add radar">
       </form>

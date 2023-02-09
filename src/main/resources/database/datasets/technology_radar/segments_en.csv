@@ -1,7 +1,5 @@
-title|description|created_by|last_modified_by
-Data Management|Tools for data management|axion|axion
-Datastores|Where we can store our data|axion|axion
-Frameworks|Frameworks we use|axion|axion
-Infrastructure|Where we can deploy or run our applications|axion|axion
-Languages|Programming languages we use|axion|axion
-Languages and Framewrork|Programming languages and framework we use|axion|axion
+title|description|position|created_by|last_modified_by
+Languages|Programming languages we use|0|axion|axion
+Infrastructure|Where we can deploy or run our applications|1|axion|axion
+Datastores|Where we can store our data|2|axion|axion
+Data Management|Tools for data management|3|axion|axion

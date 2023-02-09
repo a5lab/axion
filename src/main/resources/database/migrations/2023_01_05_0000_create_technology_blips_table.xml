@@ -15,11 +15,11 @@
             <column name="radar_id" type="${bigint.type}" remarks="Reference to radar.">
                 <constraints nullable="false" foreignKeyName="fk_technology_blips_radar_id_2_radars" references="radars(id)"/>
             </column>
-            <column name="segment_id" type="${bigint.type}" remarks="Reference to segment.">
-                <constraints nullable="false" foreignKeyName="fk_technology_blips_segment_id_2_segments" references="segments(id)"/>
-            </column>
             <column name="ring_id" type="${bigint.type}" remarks="Reference to ring.">
                 <constraints nullable="false" foreignKeyName="fk_technology_blips_ring_id_2_rings" references="rings(id)"/>
+            </column>
+            <column name="segment_id" type="${bigint.type}" remarks="Reference to segment.">
+                <constraints nullable="false" foreignKeyName="fk_technology_blips_segment_id_2_segments" references="segments(id)"/>
             </column>
             <column name="technology_id" type="${bigint.type}" remarks="Reference to technologies.">
                 <constraints nullable="false" foreignKeyName="fk_technology_blips_technology_id_2_technologies" references="technologies(id)"/>

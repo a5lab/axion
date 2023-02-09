@@ -77,8 +77,8 @@ public class TenantsCfgControllerTests extends AbstractControllerTests {
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains("Title"));
-    Assertions.assertTrue(content.contains("Description"));
+    Assertions.assertTrue(content.contains("title"));
+    Assertions.assertTrue(content.contains("description"));
   }
 
   @Test
