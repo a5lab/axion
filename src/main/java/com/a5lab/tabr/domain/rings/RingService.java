@@ -14,6 +14,8 @@ public interface RingService {
 
   Optional<RingDto> findById(Long id);
 
+  Optional<Ring> findByTitle(String title);
+
   RingDto save(RingDto ringDto);
 
   void deleteById(Long id);

@@ -53,17 +53,7 @@ public class Blip extends AbstractAuditable {
   @JoinColumn(name = "segment_id", nullable = false, updatable = false)
   private Segment segment;
 
-  // TODO: hast been moved to segment
-  // @NotNull
-  // @Column(name = "segment_no", nullable = false, updatable = false)
-  // private Long segmentNo;
-
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @JoinColumn(name = "ring_id", nullable = false, updatable = false)
   private Ring ring;
-
-  // TODO: remove column, has been moved to ring
-  // @NotNull
-  // @Column(name = "ring_no", nullable = false, updatable = false)
-  // private Long ringNo;
 }

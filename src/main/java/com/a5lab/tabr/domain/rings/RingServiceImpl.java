@@ -39,6 +39,12 @@ public class RingServiceImpl implements RingService {
   }
 
   @Override
+  @Transactional(readOnly = true)
+  public Optional<Ring> findByTitle(String title) {
+    return ringRepository.findByTitle(title);
+  }
+
+  @Override
   @Transactional
   public RingDto save(RingDto ringDto) {
     return ringMapper.toDto(ringRepository.save(ringMapper.toEntity(ringDto)));

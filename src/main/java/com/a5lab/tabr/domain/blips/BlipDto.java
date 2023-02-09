@@ -29,13 +29,5 @@ public class BlipDto {
 
   private SegmentDto segment;
 
-  // todo: remove
-  // @NotNull
-  // private Long segmentNo;
-
   private RingDto ring;
-
-  // todo: remove
-  // @NotNull
-  // private Long ringNo;
 }

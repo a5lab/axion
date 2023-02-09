@@ -51,6 +51,12 @@ public class BlipServiceImpl implements BlipService {
 
   @Override
   @Transactional
+  public Blip save(Blip blip) {
+    return blipRepository.save(blip);
+  }
+
+  @Override
+  @Transactional
   public void deleteById(Long id) {
     blipRepository.deleteById(id);
   }

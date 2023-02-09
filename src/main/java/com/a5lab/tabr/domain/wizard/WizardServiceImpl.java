@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
+import com.a5lab.tabr.domain.blips.Blip;
+import com.a5lab.tabr.domain.blips.BlipService;
+import com.a5lab.tabr.domain.entries.EntryService;
 import com.a5lab.tabr.domain.radars.Radar;
 import com.a5lab.tabr.domain.radars.RadarService;
 import com.a5lab.tabr.domain.rings.RingDto;
@@ -29,13 +32,16 @@ public class WizardServiceImpl implements WizardService {
 
   private final RadarService radarService;
   private final RingService ringService;
-
   private final SegmentService segmentService;
+
+  private final EntryService entryService;
+  private final BlipService blipService;
 
   private Radar radar;
 
   @Override
-  @Transactional
+  // how to do for debug 1000 and for production default. Use applicatin.yml?
+  @Transactional(timeout = 100)
   public void createRadarEnv(Wizard wizard) throws Exception {
     this.createRadar(wizard);
     this.createRings();
@@ -68,7 +74,7 @@ public class WizardServiceImpl implements WizardService {
   public void createRadar(Wizard wizard) throws Exception {
     // Read rings
     File file =
-        ResourceUtils.getFile("classpath:database/datasets/technology_radar/radar_en.csv");
+        ResourceUtils.getFile("classpath:database/datasets/technology_radar/radars_en.csv");
     Path path = file.toPath();
     Stream<String> lines = Files.lines(path);
     String fileContent = lines.collect(Collectors.joining("\n"));
@@ -134,8 +140,32 @@ public class WizardServiceImpl implements WizardService {
     }
   }
 
-  private void createTechnologyBlips() {
-    System.out.println(radar);
+  private void createTechnologyBlips() throws Exception {
+    // Read technology_blips_en
+    File file =
+        ResourceUtils.getFile(
+            "classpath:database/datasets/technology_radar/technology_blips_en.csv");
+    Path path = file.toPath();
+    Stream<String> lines = Files.lines(path);
+    String fileContent = lines.collect(Collectors.joining("\n"));
+
+    String[] record = null;
+    CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))
+        .withCSVParser(new CSVParserBuilder().withSeparator('|').build())
+        .withSkipLines(1).build();
+    while ((record = csvReader.readNext()) != null) {
+      // final String radarTitle = record[0];
+      final String ringTitle = record[1];
+      final String segmentTitle = record[2];
+      final String entryTitle = record[3];
+
+      Blip blip = new Blip();
+      blip.setRadar(this.radar);
+      blip.setRing(ringService.findByTitle(ringTitle).get());
+      blip.setSegment(segmentService.findByTitle(segmentTitle).get());
+      blip.setEntry(entryService.findByTitle(entryTitle).get());
+      blipService.save(blip);
+    }
   }
 
 
