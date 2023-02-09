@@ -47,6 +47,8 @@ public class WizardServiceImpl implements WizardService {
     this.createRings();
     this.createSegments();
     this.createTechnologyBlips();
+    this.radar.setActive(true);
+    this.radarService.save(this.radar);
 
     /*
     switch (radar.getRadarType().getCode()) {

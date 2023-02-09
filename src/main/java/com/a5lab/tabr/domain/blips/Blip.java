@@ -41,19 +41,19 @@ public class Blip extends AbstractAuditable {
   private Long id;
 
   @NotNull
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "radar_id", nullable = false, updatable = false)
   private Radar radar;
 
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "technology_id", nullable = false, updatable = false)
   private Entry entry;
 
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "segment_id", nullable = false, updatable = false)
   private Segment segment;
 
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "ring_id", nullable = false, updatable = false)
   private Ring ring;
 }

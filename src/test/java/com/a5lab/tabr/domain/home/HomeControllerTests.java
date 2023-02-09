@@ -1,4 +1,4 @@
-package com.a5lab.tabr.domain.radars;
+package com.a5lab.tabr.domain.home;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -8,6 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 import java.util.Optional;
 
+import com.a5lab.tabr.domain.home.HomeController;
+import com.a5lab.tabr.domain.radars.Radar;
+import com.a5lab.tabr.domain.radars.RadarService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,8 +23,8 @@ import com.a5lab.tabr.domain.AbstractControllerTests;
 import com.a5lab.tabr.domain.radar_types.RadarTypeService;
 
 
-@WebMvcTest(RadarsHomeController.class)
-public class RadarsHomeControllerTests extends AbstractControllerTests {
+@WebMvcTest(HomeController.class)
+public class HomeControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
   @MockBean
