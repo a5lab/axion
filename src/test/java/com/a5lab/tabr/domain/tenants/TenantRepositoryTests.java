@@ -1,11 +1,15 @@
 package com.a5lab.tabr.domain.tenants;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 
 import com.a5lab.tabr.AbstractRepositoryTests;
 
+import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
+
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,37 +35,35 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
   }
 
   @Test
+  void shouldFindSavedTenantById() {
+    final Tenant tenant = new Tenant();
+    tenant.setTitle("MY");
+    tenant.setDescription("Very good description for Tenant");
+
+    Assertions.assertNull(tenant.getId());
+    tenantRepository.saveAndFlush(tenant);
+    Assertions.assertNotNull(tenant.getId());
+    var id = tenant.getId();
+
+    Assertions.assertTrue(tenantRepository.findById(id).isPresent());
+  }
+
+  @Test
   void shouldFailOnNullTitle() {
     final Tenant tenant = new Tenant();
     tenant.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(tenant.getId());
+    ConstraintViolationException exception =
+        catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
+            ConstraintViolationException.class);
 
-
-    try{
-      tenantRepository.saveAndFlush(tenant);
-    } catch (ConstraintViolationException e){
-      System.out.println(e.toString());
-      System.out.println(e.toString());
-
-      log.error(ErrorStatus.ILLEGAL_DATA.getMessage() + ":" + e.getMessage());
-      List<Map<String, Object>> fields = new ArrayList<>();
-      for (ConstraintViolation<?> cv : e.getConstraintViolations()) {
-        String fieldName = ((PathImpl) cv.getPropertyPath()).getLeafNode().asString();
-        String message = cv.getMessage();
-        Map<String, Object> field = new HashMap<>();
-        field.put("field", fieldName);
-        field.put("message", message);
-        fields.add(field);
-      }
+    Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
+    for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+      Assertions.assertEquals(
+          ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "title");
+      Assertions.assertEquals(constraintViolation.getMessage(), "must not be blank");
     }
-    } catch (Exception e){
-      System.out.println(e.toString());
-    }
-    /*
-    https://stackoverflow.com/questions/64541192/assertthatthrownby-check-field-on-custom-exception
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
-        .isInstanceOf(ConstraintViolationException.class);*/
   }
 
   @Test
@@ -118,18 +120,4 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
         .isInstanceOf(ValidationException.class);
   }
 
-
-  @Test
-  void shouldFindSavedTenantById() {
-    final Tenant tenant = new Tenant();
-    tenant.setTitle("MY");
-    tenant.setDescription("Very good description for Tenant");
-
-    Assertions.assertNull(tenant.getId());
-    tenantRepository.saveAndFlush(tenant);
-    Assertions.assertNotNull(tenant.getId());
-    var id = tenant.getId();
-
-    Assertions.assertTrue(tenantRepository.findById(id).isPresent());
-  }
 }
