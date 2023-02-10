@@ -1,12 +1,9 @@
 package com.a5lab.tabr.domain.tenants;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
-
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.ValidationException;
 
 import org.hibernate.validator.internal.engine.path.PathImpl;
 
@@ -75,8 +72,17 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     tenant.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(tenant.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
-        .isInstanceOf(ValidationException.class);
+    ConstraintViolationException exception =
+        catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
+            ConstraintViolationException.class);
+
+    Assertions.assertEquals(exception.getConstraintViolations().size(), 2);
+    for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+      Assertions.assertEquals(
+          ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "title");
+      Assertions.assertTrue(constraintViolation.getMessage().equals("must not be blank") ||
+          constraintViolation.getMessage().equals("size must be between 1 and 64"));
+    }
   }
 
   @Test
@@ -86,8 +92,16 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     tenant.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(tenant.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
-        .isInstanceOf(ValidationException.class);
+    ConstraintViolationException exception =
+        catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
+            ConstraintViolationException.class);
+
+    Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
+    for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+      Assertions.assertEquals(
+          ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "title");
+      Assertions.assertEquals(constraintViolation.getMessage(), "must not be blank");
+    }
   }
 
   @Test
@@ -96,8 +110,17 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     tenant.setTitle("TEST");
 
     Assertions.assertNull(tenant.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
-        .isInstanceOf(ValidationException.class);
+    ConstraintViolationException exception =
+        catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
+            ConstraintViolationException.class);
+
+    Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
+    for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+      Assertions.assertEquals(
+          ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(),
+          "description");
+      Assertions.assertEquals(constraintViolation.getMessage(), "must not be blank");
+    }
   }
 
   @Test
@@ -107,8 +130,17 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     tenant.setDescription("");
 
     Assertions.assertNull(tenant.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
-        .isInstanceOf(ValidationException.class);
+    ConstraintViolationException exception =
+        catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
+            ConstraintViolationException.class);
+
+    Assertions.assertEquals(exception.getConstraintViolations().size(), 2);
+    for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+      Assertions.assertEquals(
+          ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "description");
+      Assertions.assertTrue(constraintViolation.getMessage().equals("must not be blank") ||
+          constraintViolation.getMessage().equals("size must be between 1 and 512"));
+    }
   }
 
   @Test
@@ -118,8 +150,16 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     tenant.setDescription(" ");
 
     Assertions.assertNull(tenant.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
-        .isInstanceOf(ValidationException.class);
-  }
+    ConstraintViolationException exception =
+        catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
+            ConstraintViolationException.class);
 
+    Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
+    for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+      Assertions.assertEquals(
+          ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(),
+          "description");
+      Assertions.assertEquals(constraintViolation.getMessage(), "must not be blank");
+    }
+  }
 }
