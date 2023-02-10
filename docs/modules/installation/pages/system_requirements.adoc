@@ -1,0 +1,65 @@
+= System requirements
+
+Make sure that your system meets our recommended hardware and software requirements.
+
+== Hardware requirements
+
+Description of recommended hardware for *Axion*.
+
+=== CPU
+
+Available CPUs will impact longer running operations.
+ 
+|===
+|Minimum CPUs |Recommended CPUs
+|2 |4+
+|===
+
+=== Memory
+
+The requirements assume there are no other significant memory hungry processes running on the same host.
+|===
+|Minimum RAM | 2GB
+|===
+
+=== Disk space
+
+The size of this directory varies slightly each release. It currently around 100 MB.
+
+== Software requirements
+
+Description of recommended software for *Axion*.
+
+=== Host operating system
+Any Windows, Linux or Macintosh operating system that can run a supported Java version will work. Other operating systems may work, but they are not tested.
+
+=== Java
+*Axion* requires a Java 17 Runtime Environment (JRE). The distributions for OSX and Windows include suitable runtime environments for the specific operating system. The distributions for Unix do not include the runtime environment. If you prefer to use an external runtime or use a Unix operating system, you can choose to install the full JDK or the JRE only.
+
+You can confirm the installed Java version with the java -version  command, for example:
+....
+$ java -version
+openjdk 17.0.5 2022-10-18
+OpenJDK Runtime Environment Homebrew (build 17.0.5+0)
+OpenJDK 64-Bit Server VM Homebrew (build 17.0.5+0, mixed mode, sharing)
+....
+
+When multiple JDK or JRE versions are installed, you need to ensure the correct version is configured by running the above command as the operating system user that is used to run the *Axion*.
+
+In the event you have a non-standard location you need to update the configuration to specify a specific JDK or JRE installation path. 
+
+The startup script verifies the runtime environment by checking for the existence of the nested java command  as well as major and minor version of the runtime to be the required 17. If the configured runtime is not suitable, it will proceed with a best effort to locate a suitable runtime configured on the path or via the JAVA_HOME environment variable. If successful, it will start up the radar with this JVM. This allows you to have a dedicated runtime environment for the radar installed that is not on the path and not used by other installed applications. Further, you can separate upgrades of the Java runtime used by the radar from upgrades of the runtime used by other applications.
+
+=== Web browser
+
+Our general policy is to support the most recent modern browser version for your supported OS at time of *Axion* release date.
+
+Supported browsers:
+
+* Google Chrome
+* Mozilla Firefox
+* Apple Safari
+* Microsoft Edge
+
+=== Dedicated operating system user account
+Unless you are just testing the radar or running it only for personal use, a dedicated operating system user account is strongly recommended to run each unique process on a given host.

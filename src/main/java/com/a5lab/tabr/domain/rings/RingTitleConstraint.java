@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RingTitleConstraint {
-  String message() default "Invalid Ring Title";
+  String message() default "should be uppercase";
 
   Class<?>[] groups() default {};
 

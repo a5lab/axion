@@ -12,15 +12,19 @@
         <ul class="html-view">
           <li>
             <p>Title</p>
-            <p th:text="${radarDto.title}"></p>
+            <p th:text="${radar.title}"></p>
           </li>
           <li>
             <p>Description</p>
-            <p th:text="${radarDto.description}"></p>
+            <p th:text="${radar.description}"></p>
           </li>
           <li>
-            <p>Prime</p>
-            <p th:text="${radarDto.prime}"></p>
+            <p>Primary</p>
+            <p th:text="${radar.primary}"></p>
+          </li>
+          <li>
+            <p>Active</p>
+            <p th:text="${radar.active}"></p>
           </li>
         </ul>
       <p><a href="/settings/radars">View all radars</a></p>

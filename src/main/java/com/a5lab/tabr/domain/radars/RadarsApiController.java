@@ -18,7 +18,4 @@ public class RadarsApiController {
   public Collection<Radar> index() {
     return radarService.findAll();
   }
-
-  // todo: implement based on https://spring.io/guides/tutorials/rest/
-
 }

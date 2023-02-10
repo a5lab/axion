@@ -9,8 +9,8 @@ spring:
     livereload:
       enabled: true
   datasource:
-    url: jdbc:h2:mem:tabr;MODE=PostgreSQL
-    username: tabr
+    url: jdbc:h2:mem:axion;MODE=PostgreSQL
+    username: axion
     password: secret
   h2:
     console:
@@ -18,10 +18,8 @@ spring:
   messages:
     use-code-as-default-message: false
   thymeleaf:
-    prefix: file:src/main/resources/templates/
     cache: false
   resources:
-    static-locations: file:src/main/resources/static/
     cache-period: 0
   jpa:
     show-sql: true

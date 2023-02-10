@@ -8,8 +8,8 @@ app__no_log: false
 # App adapter can be: postgresql, mysql2, sqlite
 #
 app__db_adapter: "postgresql"
-app__db_name: "tabr"
-app__db_user: "tabr"
+app__db_name: "axion"
+app__db_user: "axion"
 app__db_password: '{{ lookup("env", ci_environment_name + "_database_password") or "secret"}}'
 app__db_host: "{{ hostvars[groups.demo_server.0].ansible_host }}"
 
@@ -27,20 +27,20 @@ app__smtp_user_password: '{{ lookup("env", ci_environment_name + "_support_mail_
 #
 app__domain: "{{ inventory_hostname }}"
 app__protocol: 'https'
-app__google_analytics: '{{ lookup("env", ci_environment_name + "_google_analytics") or "G-PHDDVDXL29"}}'
+app__google_analytics: '{{ lookup("env", ci_environment_name + "_google_analytics") or "G-2QGTYHX1N6"}}'
 
 #
 # Deploy section
 #
-app__user: "tabr"
-app__group: "tabr"
+app__user: "axion"
+app__group: "axion"
 app__root_path: '/home/{{ app__user }}'
 app__current_path: "{{ app__root_path }}/current"
 app__release_path: "{{ app__root_path }}/releases/{{ ansible_date_time.iso8601_basic_short }}"
 app__keep_releases: 5
 app__tomcat_port: 8080
 app__web_servers:
-  - tabr
+  - axion
 
 #
 # Service configuration

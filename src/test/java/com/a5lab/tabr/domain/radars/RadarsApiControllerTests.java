@@ -7,22 +7,27 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.a5lab.tabr.AbstractControllerTests;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+
+import com.a5lab.tabr.domain.radar_types.RadarType;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.a5lab.tabr.domain.AbstractControllerTests;
+
+@WebMvcTest(RadarsApiController.class)
 public class RadarsApiControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
 
+
   @Test
-  public void index() throws Exception {
-    final Radar radar = new Radar(10L, "my title", "my description", true);
+  public void shouldGetRadars() throws Exception {
+    final RadarType radarType = new RadarType();
+    final Radar radar = new Radar(10L, radarType, "my title", "my description", true, false, null);
     List<Radar> radarList = Arrays.asList(radar);
     Mockito.when(radarService.findAll()).thenReturn(radarList);
 
@@ -33,6 +38,6 @@ public class RadarsApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$[0].id", equalTo(radar.getId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(radar.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(radar.getDescription())))
-        .andExpect(jsonPath("$[0].prime", equalTo(radar.isPrime())));
+        .andExpect(jsonPath("$[0].primary", equalTo(radar.isPrimary())));
   }
 }

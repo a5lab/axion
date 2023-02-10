@@ -3,16 +3,18 @@ package com.a5lab.tabr.domain.tenants;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 
-import com.a5lab.tabr.AbstractRepositoryTests;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 
 import org.hibernate.validator.internal.engine.path.PathImpl;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.a5lab.tabr.domain.AbstractRepositoryTests;
 
 class TenantRepositoryTests extends AbstractRepositoryTests {
 
@@ -20,7 +22,7 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
   private TenantRepository tenantRepository;
 
   @Test
-  void shouldSaveTenantWithTitleAndDescription() {
+  void shouldSaveTenantWithAllFields() {
     final Tenant tenant = new Tenant();
     tenant.setTitle("TEST");
     tenant.setDescription("Very good description for Tenant");

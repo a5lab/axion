@@ -1,8 +1,8 @@
 ---
 
-- name: configure apache sites tabr
+- name: configure apache sites axion
   template:
-    src: "etc/httpd/conf.d/tabr.a5lab.com.conf.j2"
+    src: "etc/httpd/conf.d/axion.a5lab.com.conf.j2"
     dest: "/etc/{{ app__apache_conf_map[ansible_os_family] }}/{{ app__domain }}.conf"
     owner: 'root'
     group: 'root'
@@ -10,7 +10,7 @@
   notify:
     - reload apache
 
-- name: enable tabr website
+- name: enable axion website
   shell: "{{ item }}"
   with_items:
     - "a2dissite 000-default.conf"

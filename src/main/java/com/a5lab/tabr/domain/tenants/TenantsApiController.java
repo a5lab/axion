@@ -15,10 +15,7 @@ public class TenantsApiController {
   private final TenantService tenantService;
 
   @GetMapping("")
-  public Collection<Tenant> index() {
+  public Collection<TenantDto> index() {
     return tenantService.findAll();
   }
-
-  // todo: implement based on https://spring.io/guides/tutorials/rest/
-
 }

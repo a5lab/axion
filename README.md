@@ -1,28 +1,54 @@
-# Repo tabr
+# Repo axion
 
 Technical and business radar. Spring boot based application
 
 # Release application
 * update version at antora.yml file
 * run command mvn release and provide information
-* create archive by command: tar -zcvf Binaries.tar.gz tabr*.jar
+* create archive by command: tar -zcvf Binaries.tar.gz axion*.jar
 * commit changes and create a new git tag
 * create a new release at GitHub and provide information
 * press button publish release at GitHub
 
-# Idea configuration
+# Setup environment
 
-## Java checkstyle
+## Windows environment
+* download and install java, at least jdk-18
+* create JAVA_HOME environment variable with value C:\Program Files\Java\jdk-19
+* exit and run console again to apply environment variables
+* download and install maven, at least 3.8.7
+* create JAVA_HOME environment variable with value C:\apache-maven-3.8.7
+* exit and run console again to apply environment variables
+* download and setup nodeJS, at least 18
+* install uglifycss by command: npm install -g uglifycss
+* install uglifyjs by command: npm install uglify-js -gt
+* setup GitHub account and add ssh keys to GitHub profile
+* clone repo by command git clone: git@github.com:a5lab/axion.git
+* build application by command: mvn clean package -Pdev -Dmaven.test.skip from root folder
+* run application by command: mvn spring-boot:run -Pdev from root folder
+* open browser with url http://127.0.0.1:8080 to view application
+
+## Working with embedded H2 DB(In-Memory)
+
+* run application by command: "mvn spring-boot:run -Pdev"
+* enter http://localhost:8080/h2-console to browser
+* enter "jdbc:h2:mem:axion" into JDBC URL field
+* enter "axion" into User Name field
+* enter "secret" into Password field
+
+## Idea configuration
+
+### Java checkstyle
 
 * see overview https://plugins.jetbrains.com/plugin/1065-checkstyle-idea
 * see GitHub https://github.com/jshiell/checkstyle-idea/blob/main/README.md
 * import google_checkstyle.xml into idea java import schema at java code style
 
-## JavaScript checkstyle
+### JavaScript checkstyle
 
 * setup ident 2 at JavaScript code style
 
-## HTML checkstyle
+### HTML checkstyle
 
 * setup ident 2 at html code style
 * remove all items from "do not indent child of" field
@@ -34,8 +60,8 @@ Technical and business radar. Spring boot based application
 * build package by command: ./mvnw clean package -Dmaven.test.skip
 * run application by command: ./mvnw spring-boot:run
 * run application with profile by command: ./mvnw spring-boot:run -Pdev
-* run application with by command: java -jar tabr-x.y.z.jar --application.keys.google_analytics=123
-* run application with by command: java -jar tabr-x.y.z.jar --spring.liquibase.label-filter=de
+* run application with by command: java -jar axion-x.y.z.jar --application.keys.google_analytics=123
+* run application with by command: java -jar axion-x.y.z.jar --spring.liquibase.label-filter=de
 * run database migration by command: ./mvnw liquibase:update
 * create checkstyle report by command: ./mvnw checkstyle:checkstyle
 * get coverage report by command: ./mvnw jacoco:report -Pdev
@@ -54,14 +80,6 @@ Technical and business radar. Spring boot based application
 * setup tag by command: git tag -v0.1.0 && git push origin --tags
 * prune tags by command: git fetch --prune --prune-tags
 * run psql console by command: su - postgres and run psql
-
-# Working with embedded H2 DB(In-Memory)
-
-* run application by command: "mvn spring-boot:run -Pdev"
-* enter http://localhost:8080/h2-console to browser
-* enter "jdbc:h2:mem:tabr" into JDBC URL field
-* enter "tabr" into User Name field
-* enter "secret" into Password field
 
 # Inspired by 
 

@@ -1,0 +1,13 @@
+= Application configuration
+
+Supported 2 way to configure app:
+.By command line parameres
+.By application yml
+
+
+== The first one
+Based on:
+ExecStart=java -jar {{ app__current_path }}/target/axion-0.1.0-SNAPSHOT.jar --application.keys.google_analytics={{ app__google_analytics }}
+
+== The second one
+Put aplicatoin.yml at axion and edit application.yml

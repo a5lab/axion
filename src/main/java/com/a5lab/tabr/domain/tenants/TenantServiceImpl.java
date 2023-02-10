@@ -2,10 +2,12 @@ package com.a5lab.tabr.domain.tenants;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +20,10 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Tenant> findAll() {
-    return tenantRepository.findAll();
+  public Collection<TenantDto> findAll() {
+    return tenantRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
+        .stream().map(tenantMapper::toDto).collect(Collectors.toList());
   }
-
 
   @Override
   @Transactional(readOnly = true)

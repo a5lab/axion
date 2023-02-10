@@ -1,0 +1,21 @@
+<div th:if="${#fields.hasAnyErrors()}">
+  <ul>
+    <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
+  </ul>
+</div>
+<label for="radar_id">Radar</label>
+<select id="radar_id" name="radarId" th:field="*{radar.id}">
+  <option th:each="radarDto : ${radarDtos}" th:value="${radarDto.id}" th:utext="${radarDto.title}"/>
+</select>
+<label for="title">Title</label>
+<input type="text" th:field="*{title}" id="title" placeholder="Title">
+<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+<label for="description">Description</label>
+<input type="text" th:field="*{description}" id="description" placeholder="Description">
+<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+<label for="position">Position</label>
+<input type="text" th:field="*{position}" id="position" placeholder="0">
+<span th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></span>
+<label for="active">Active</label>
+<input type="checkbox" th:field="*{active}" id="active">
+<span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>

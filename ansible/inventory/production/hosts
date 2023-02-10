@@ -1,8 +1,8 @@
-[tabr_server]
-tabr.a5lab.com ansible_host=65.109.133.229
+[axion_server]
+axion.a5lab.com ansible_host=65.109.133.229
 
 [all:children]
-tabr_server
+axion_server
 
 [all:vars]
 ansible_user=ansible
