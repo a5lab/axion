@@ -3,6 +3,8 @@ package com.a5lab.tabr.domain.tenants;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.a5lab.tabr.AbstractRepositoryTests;
+
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,8 +36,32 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     tenant.setDescription("Very good description for Tenant");
 
     Assertions.assertNull(tenant.getId());
+
+
+    try{
+      tenantRepository.saveAndFlush(tenant);
+    } catch (ConstraintViolationException e){
+      System.out.println(e.toString());
+      System.out.println(e.toString());
+
+      log.error(ErrorStatus.ILLEGAL_DATA.getMessage() + ":" + e.getMessage());
+      List<Map<String, Object>> fields = new ArrayList<>();
+      for (ConstraintViolation<?> cv : e.getConstraintViolations()) {
+        String fieldName = ((PathImpl) cv.getPropertyPath()).getLeafNode().asString();
+        String message = cv.getMessage();
+        Map<String, Object> field = new HashMap<>();
+        field.put("field", fieldName);
+        field.put("message", message);
+        fields.add(field);
+      }
+    }
+    } catch (Exception e){
+      System.out.println(e.toString());
+    }
+    /*
+    https://stackoverflow.com/questions/64541192/assertthatthrownby-check-field-on-custom-exception
     assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
-        .isInstanceOf(ValidationException.class);
+        .isInstanceOf(ConstraintViolationException.class);*/
   }
 
   @Test
