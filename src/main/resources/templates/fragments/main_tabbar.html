@@ -1,14 +1,14 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a aria-current="page" class="nav-link active" href="/radars"
-       th:if="${#strings.startsWith(servletPath,'/radars')}">Radars</a>
-    <a class="nav-link" href="/radars"
-       th:unless="${#strings.startsWith(servletPath,'/radars')}">Radars</a>
+    <a aria-current="page" class="nav-link active" href="/radar"
+       th:if="${#strings.startsWith(servletPath,'/radar')}">Radars</a>
+    <a class="nav-link" href="/radar"
+       th:unless="${#strings.startsWith(servletPath,'/radar')}">Radars</a>
   </li>
   <li class="nav-item">
-    <a aria-current="page" class="nav-link active" href="/settings/tenants"
+    <a aria-current="page" class="nav-link active" href="/settings/tenant"
        th:if="${#strings.startsWith(servletPath,'/settings')}">Settings</a>
-    <a class="nav-link" href="/settings/tenants"
+    <a class="nav-link" href="/settings/tenant"
        th:unless="${#strings.startsWith(servletPath,'/settings')}">Settings</a>
   </li>
 </ul>

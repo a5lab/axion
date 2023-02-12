@@ -171,7 +171,7 @@
     <!--Axion.
       Regex has been changed from value="^[a-z]+(\.[a-z][a-z0-9]*)*$"
       to value="^[a-z]+(\.[a-z][a-z0-9_]*)*$" in order to support _
-      at package names, for example radar_types.
+      at package names, for example radar_type.
     -->
     <module name="PackageName">
       <property name="format" value="^[a-z]+(\.[a-z][a-z0-9_]*)*$"/>
