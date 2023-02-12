@@ -134,6 +134,6 @@ public class RadarCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("radar.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/radars";
+    return "redirect:/settings/radar";
   }
 }
