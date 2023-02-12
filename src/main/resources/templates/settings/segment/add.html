@@ -9,8 +9,8 @@
   <body>
     <div id="content">
       <h1>Add segment</h1>
-      <form action="#" th:action="@{/settings/segments/create}" th:object="${segmentDto}" method="post">
-        <th:block th:replace="~{settings/segments/fields.html}" />
+      <form action="#" th:action="@{/templates/settings/segment/create}" th:object="${segmentDto}" method="post">
+        <th:block th:replace="~{settings/segment/fields.html}" />
         <input type="submit" value="Add segment">
       </form>
     </div>

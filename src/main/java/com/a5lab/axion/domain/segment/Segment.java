@@ -24,7 +24,7 @@ import com.a5lab.axion.domain.AbstractAuditable;
 import com.a5lab.axion.domain.radar.Radar;
 
 @Entity
-@Table(name = "segments")
+@Table(name = "segment")
 @DynamicUpdate
 @Getter
 @Setter

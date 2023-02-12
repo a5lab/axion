@@ -25,7 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.a5lab.axion.utils.FlashMessages;
 
 @Controller
-@RequestMapping("/settings/tenants")
+@RequestMapping("/settings/tenant")
 @RequiredArgsConstructor
 public class TenantCfgController {
 
@@ -39,7 +39,7 @@ public class TenantCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/tenants/index");
+    ModelAndView modelAndView = new ModelAndView("settings/tenant/index");
     Page<TenantDto> tenantDtoPage =
         tenantService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("tenantDtoPage", tenantDtoPage);
@@ -57,20 +57,20 @@ public class TenantCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TenantDto> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/show");
+      ModelAndView modelAndView = new ModelAndView("settings/tenant/show");
       modelAndView.addObject("tenantDto", tenantRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("tenant.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/tenants");
+      return new ModelAndView("redirect:/settings/tenant");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
+    ModelAndView modelAndView = new ModelAndView("settings/tenant/add");
     modelAndView.addObject("tenantDto", new TenantDto());
     return modelAndView;
   }
@@ -79,7 +79,7 @@ public class TenantCfgController {
   public ModelAndView create(@Valid TenantDto tenantDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
+      ModelAndView modelAndView = new ModelAndView("settings/tenant/add");
       modelAndView.addObject("tenantDto", tenantDto);
       return modelAndView;
     }
@@ -87,21 +87,21 @@ public class TenantCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenants");
+    return new ModelAndView("redirect:/settings/tenant");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TenantDto> tenantDto = tenantService.findById(id);
     if (tenantDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/tenant/edit");
       modelAndView.addObject("tenantDto", tenantDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("tenant.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/tenants");
+      return new ModelAndView("redirect:/settings/tenant");
     }
   }
 
@@ -109,7 +109,7 @@ public class TenantCfgController {
   public ModelAndView update(@Valid TenantDto tenantDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/tenant/edit");
       modelAndView.addObject("tenantDto", tenantDto);
       return modelAndView;
     }
@@ -117,7 +117,7 @@ public class TenantCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenants");
+    return new ModelAndView("redirect:/settings/tenant");
   }
 
   @GetMapping(value = "/delete/{id}")
@@ -126,6 +126,6 @@ public class TenantCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/tenants";
+    return "redirect:/settings/tenant";
   }
 }

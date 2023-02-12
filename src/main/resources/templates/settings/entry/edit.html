@@ -9,8 +9,8 @@
   <body>
     <div id="content">
       <h1>Edit entry</h1>
-      <form action="#" th:action="@{/settings/entries/update}" th:object="${entryDto}" method="post">
-        <th:block th:replace="~{settings/entries/fields.html}" />
+      <form action="#" th:action="@{/templates/settings/entry/update}" th:object="${entryDto}" method="post">
+        <th:block th:replace="~{settings/entry/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
         <input type="submit" value="Update entry">
       </form>      

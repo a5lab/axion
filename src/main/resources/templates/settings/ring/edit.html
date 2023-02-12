@@ -8,11 +8,11 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit radar</h1>
-      <form action="#" th:action="@{/settings/radars/update}" th:object="${radar}" method="post">
-        <th:block th:replace="~{settings/radars/fields.html}" />
+      <h1>Edit ring</h1>
+      <form action="#" th:action="@{/templates/settings/ring/update}" th:object="${ringDto}" method="post">
+        <th:block th:replace="~{settings/ring/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update radar">
+        <input type="submit" value="Update ring">
       </form>      
     </div>
   </body>

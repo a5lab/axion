@@ -34,7 +34,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
     Page<TenantDto> page = new PageImpl<>(tenantList);
     Mockito.when(tenantService.findAll(any())).thenReturn(page);
 
-    MvcResult result = mockMvc.perform(get("/settings/tenants"))
+    MvcResult result = mockMvc.perform(get("/settings/tenant"))
         .andExpect(status().isOk())
         .andExpect(view().name("settings/tenant/index"))
         .andExpect(model().attributeExists("tenantDtoPage"))
@@ -64,7 +64,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectShowTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/show/1"))
+    MvcResult result = mockMvc.perform(get("/settings/tenant/show/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenant"))
         .andReturn();
@@ -72,7 +72,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldAddTentant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/add"))
+    MvcResult result = mockMvc.perform(get("/settings/tenant/add"))
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
@@ -85,7 +85,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   public void shouldCreateTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/create")
+    MvcResult result = mockMvc.perform(post("/settings/tenant/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("title", tenantDto.getTitle())
             .param("description", tenantDto.getDescription())
@@ -101,7 +101,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   public void shouldFailToCreateTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/create")
+    MvcResult result = mockMvc.perform(post("/settings/tenant/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("title", tenantDto.getTitle())
             .sessionAttr("tenantDto", tenantDto))
@@ -129,7 +129,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectEditTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/edit/1"))
+    MvcResult result = mockMvc.perform(get("/settings/tenant/edit/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenant"))
         .andReturn();
@@ -139,7 +139,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   public void shouldUpdateTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/update")
+    MvcResult result = mockMvc.perform(post("/settings/tenant/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("title", tenantDto.getTitle())
             .param("description", tenantDto.getDescription())
@@ -155,7 +155,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   public void shouldFailToUpdateTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/update")
+    MvcResult result = mockMvc.perform(post("/settings/tenant/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("title", tenantDto.getTitle())
             .sessionAttr("tenantDto", tenantDto))
