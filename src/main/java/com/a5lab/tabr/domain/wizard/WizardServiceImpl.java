@@ -40,8 +40,7 @@ public class WizardServiceImpl implements WizardService {
   private Radar radar;
 
   @Override
-  // how to do for debug 1000 and for production default. Use applicatin.yml?
-  @Transactional(timeout = 100)
+  @Transactional
   public void createRadarEnv(Wizard wizard) throws Exception {
     this.createRadar(wizard);
     this.createRings();
