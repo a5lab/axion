@@ -6411,7 +6411,7 @@ function Contours() {
     return tz.map(value => contour(values, value));
   }
 
-  // Accumulate, smooth contour ring, assign holes to exterior ring.
+  // Accumulate, smooth contour rings, assign holes to exterior rings.
   // Based on https://github.com/mbostock/shapefile/blob/v0.6.2/shp/polygon.js
   function contour(values, value) {
     var polygons = [],
@@ -6439,7 +6439,7 @@ function Contours() {
     };
   }
 
-  // Marching squares with isolines stitched into ring.
+  // Marching squares with isolines stitched into rings.
   // Based on https://github.com/topojson/topojson-client/blob/v3.0.0/src/stitch.js
   function isorings(values, value, callback) {
     var fragmentByStart = new Array,
@@ -10501,7 +10501,7 @@ function Intersection(point, points, other, entry) {
 }
 
 // A generalized polygon clipping algorithm: given a polygon that has been cut
-// into its visible line segment, and rejoins the segment by interpolating
+// into its visible line segments, and rejoins the segments by interpolating
 // along the clip edge.
 function clipRejoin(segments, compareIntersection, startInside, interpolate, stream) {
   var subject = [],
@@ -10767,7 +10767,7 @@ function clip(pointVisible, clipLine, interpolate, start) {
         return;
       }
 
-      // Rejoin connected segment.
+      // Rejoin connected segments.
       // TODO reuse ringBuffer.rejoin()?
       if (n > 1 && clean & 2) ringSegments.push(ringSegments.pop().concat(ringSegments.shift()));
 
@@ -10796,9 +10796,9 @@ var clipAntimeridian = clip(
   [-pi$1, -halfPi$1]
 );
 
-// Takes a line and cuts into visible segment. Return values: 0 - there were
+// Takes a line and cuts into visible segments. Return values: 0 - there were
 // intersections or the line was empty; 1 - no intersections; 2 - there were
-// intersections, and the first and last segment should be rejoined.
+// intersections, and the first and last segments should be rejoined.
 function clipAntimeridianLine(stream) {
   var lambda0 = NaN,
       phi0 = NaN,
@@ -10839,7 +10839,7 @@ function clipAntimeridianLine(stream) {
       lambda0 = phi0 = NaN;
     },
     clean: function() {
-      return 2 - clean; // if intersections, rejoin first and last segment
+      return 2 - clean; // if intersections, rejoin first and last segments
     }
   };
 }
@@ -10893,9 +10893,9 @@ function clipCircle(radius) {
     return cos$1(lambda) * cos$1(phi) > cr;
   }
 
-  // Takes a line and cuts into visible segment. Return values used for polygon
+  // Takes a line and cuts into visible segments. Return values used for polygon
   // clipping: 0 - there were intersections or the line was empty; 1 - no
-  // intersections 2 - there were intersections, and the first and last segment
+  // intersections 2 - there were intersections, and the first and last segments
   // should be rejoined.
   function clipLine(stream) {
     var point0, // previous point
@@ -10963,7 +10963,7 @@ function clipCircle(radius) {
         if (v0) stream.lineEnd();
         point0 = null;
       },
-      // Rejoin first and last segment if there were intersections and the first
+      // Rejoin first and last segments if there were intersections and the first
       // and last points were visible.
       clean: function() {
         return clean | ((v00 && v0) << 1);

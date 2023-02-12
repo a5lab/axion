@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
   config['print_layout'] = true;
   // config['zoomed_quadrant'] = 0;
 
-  // Extract all segment
-  const html_segments = d3.selectAll("table#segment tbody tr");
+  // Extract all segments
+  const html_segments = d3.selectAll("table#segments tbody tr");
   const segments = Array.from(html_segments._groups[0]).map(function (segment, j) {
     const children = Array.from(segment.children);
     return {
@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   config['quadrants'] = segments;
 
-  // Extract all ring
-  const html_rings = d3.selectAll("table#ring tbody tr");
+  // Extract all rings
+  const html_rings = d3.selectAll("table#rings tbody tr");
   const rings = Array.from(html_rings._groups[0]).map(function (ring, j) {
     const children = Array.from(ring.children);
     return {
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   config['rings'] = rings;
 
-  // Extract all blip
-  const html_entries = d3.selectAll("table#blip tbody tr");
+  // Extract all blips
+  const html_entries = d3.selectAll("table#blips tbody tr");
   const entries = Array.from(html_entries._groups[0]).map(function (entry, j) {
     const children = Array.from(entry.children);
     let result = {
@@ -199,7 +199,7 @@ function radar_visualization(config) {
       config.rings[entry.ring].color : config.colors.inactive;
   }
 
-  // partition entry according to segment
+  // partition entries according to segments
   var segmented = new Array(4);
   for (var quadrant = 0; quadrant < 4; quadrant++) {
     segmented[quadrant] = new Array(4);
@@ -277,7 +277,7 @@ function radar_visualization(config) {
   filter.append("feComposite")
     .attr("in", "SourceGraphic");
 
-  // draw ring
+  // draw rings
   for (var i = 0; i < rings.length; i++) {
     grid.append("circle")
       .attr("cx", 0)
@@ -368,7 +368,7 @@ function radar_visualization(config) {
     }
   }
 
-  // layer for entry
+  // layer for entries
   var rink = radar.append("g")
     .attr("id", "rink");
 
@@ -428,7 +428,7 @@ function radar_visualization(config) {
     legendItem.removeAttribute("fill");
   }
 
-  // draw blip on radar
+  // draw blips on radar
   var blips = rink.selectAll(".blip")
     .data(config.entries)
     .enter()
@@ -478,14 +478,14 @@ function radar_visualization(config) {
     }
   });
 
-  // make sure that blip stay inside their segment
+  // make sure that blips stay inside their segment
   function ticked() {
     blips.attr("transform", function(d) {
       return translate(d.segment.clipx(d), d.segment.clipy(d));
     })
   }
 
-  // distribute blip, while avoiding collisions
+  // distribute blips, while avoiding collisions
   d3.forceSimulation()
     .nodes(config.entries)
     .velocityDecay(0.19) // magic number (found by experimentation)
