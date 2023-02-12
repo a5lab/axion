@@ -18,8 +18,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 
-@WebMvcTest(RadarsApiController.class)
-public class RadarsApiControllerTests extends AbstractControllerTests {
+@WebMvcTest(RadarApiController.class)
+public class RadarApiControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
 

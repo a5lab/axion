@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.rings;
+package com.a5lab.axion.domain.segments;
 
 import jakarta.validation.Valid;
 import java.util.List;
@@ -26,15 +26,15 @@ import com.a5lab.axion.domain.radars.RadarService;
 import com.a5lab.axion.utils.FlashMessages;
 
 
-
 @Controller
-@RequestMapping("/settings/rings")
+@RequestMapping("/settings/segments")
 @RequiredArgsConstructor
-public class RingsCfgController {
+public class SegmentCfgController {
 
-  private final RingService ringService;
+  private final SegmentService segmentService;
 
   private final RadarService radarService;
+
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -44,12 +44,12 @@ public class RingsCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/rings/index");
-    Page<RingDto> ringDtoPage =
-        ringService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
-    modelAndView.addObject("ringDtoPage", ringDtoPage);
+    ModelAndView modelAndView = new ModelAndView("settings/segments/index");
+    Page<SegmentDto> segmentDtoPage =
+        segmentService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    modelAndView.addObject("segmentDtoPage", segmentDtoPage);
 
-    int totalPages = ringDtoPage.getTotalPages();
+    int totalPages = segmentDtoPage.getTotalPages();
     if (totalPages > 0) {
       List<Integer> pageNumbers =
           IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
@@ -60,81 +60,81 @@ public class RingsCfgController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<RingDto> ringRecord = ringService.findById(id);
-    if (ringRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/show");
-      modelAndView.addObject("ringDto", ringRecord.get());
+    Optional<SegmentDto> segmentRecord = segmentService.findById(id);
+    if (segmentRecord.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/segments/show");
+      modelAndView.addObject("segmentDto", segmentRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("ring.flash.error.invalid_id", null,
+          messageSource.getMessage("segment.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/rings");
+      return new ModelAndView("redirect:/settings/segments");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/rings/add");
-    modelAndView.addObject("ringDto", new RingDto());
+    ModelAndView modelAndView = new ModelAndView("settings/segments/add");
+    modelAndView.addObject("segmentDto", new SegmentDto());
     modelAndView.addObject("radarDtos", this.radarService.findAll());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid RingDto ringDto, BindingResult bindingResult,
+  public ModelAndView create(@Valid SegmentDto segmentDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/add");
-      modelAndView.addObject("ringDto", ringDto);
+      ModelAndView modelAndView = new ModelAndView("settings/segments/add");
+      modelAndView.addObject("segmentDto", segmentDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
-    ringService.save(ringDto);
+    segmentService.save(segmentDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("ring.flash.info.created", null,
+        messageSource.getMessage("segment.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/rings");
+    return new ModelAndView("redirect:/settings/segments");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<RingDto> ringDto = ringService.findById(id);
-    if (ringDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
-      modelAndView.addObject("ringDto", ringDto.get());
+    Optional<SegmentDto> segmentDto = segmentService.findById(id);
+    if (segmentDto.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
+      modelAndView.addObject("segmentDto", segmentDto.get());
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("ring.flash.error.invalid_id", null,
+          messageSource.getMessage("segment.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/rings");
+      return new ModelAndView("redirect:/settings/segments");
     }
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid RingDto ringDto,
+  public ModelAndView update(@Valid SegmentDto segmentDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
-      modelAndView.addObject("ringDto", ringDto);
+      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
+      modelAndView.addObject("segmentDto", segmentDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
-    ringService.save(ringDto);
+    segmentService.save(segmentDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("ring.flash.info.updated", null,
+        messageSource.getMessage("segment.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/rings");
+    return new ModelAndView("redirect:/settings/segments");
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    ringService.deleteById(id);
+    segmentService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("ring.flash.info.deleted", null,
+        messageSource.getMessage("segment.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/rings";
+    return "redirect:/settings/segments";
   }
 }

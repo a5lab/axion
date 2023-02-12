@@ -22,8 +22,8 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 
-@WebMvcTest(TenantsCfgController.class)
-public class TenantsCfgControllerTests extends AbstractControllerTests {
+@WebMvcTest(TenantCfgController.class)
+public class TenantCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private TenantService tenantService;
 

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/radars")
 @RequiredArgsConstructor
-public class RadarsController {
+public class RadarController {
 
   private final RadarService radarService;
 

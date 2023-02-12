@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/rings")
 @RequiredArgsConstructor
-public class RingsApiController {
+public class RingApiController {
 
   private final RingService ringService;
 

@@ -17,8 +17,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 
-@WebMvcTest(TenantsApiController.class)
-public class TenantsApiControllerTests extends AbstractControllerTests {
+@WebMvcTest(TenantApiController.class)
+public class TenantApiControllerTests extends AbstractControllerTests {
   @MockBean
   private TenantService tenantService;
 

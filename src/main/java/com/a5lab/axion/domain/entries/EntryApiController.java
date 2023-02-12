@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/entries")
 @RequiredArgsConstructor
-public class EntriesApiController {
+public class EntryApiController {
 
   private final EntryService entityService;
 

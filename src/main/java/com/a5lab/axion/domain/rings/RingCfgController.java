@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.tenants;
+package com.a5lab.axion.domain.rings;
 
 import jakarta.validation.Valid;
 import java.util.List;
@@ -22,14 +22,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.axion.domain.radars.RadarService;
 import com.a5lab.axion.utils.FlashMessages;
 
-@Controller
-@RequestMapping("/settings/tenants")
-@RequiredArgsConstructor
-public class TenantsCfgController {
 
-  private final TenantService tenantService;
+
+@Controller
+@RequestMapping("/settings/rings")
+@RequiredArgsConstructor
+public class RingCfgController {
+
+  private final RingService ringService;
+
+  private final RadarService radarService;
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -39,12 +44,12 @@ public class TenantsCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/tenants/index");
-    Page<TenantDto> tenantDtoPage =
-        tenantService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
-    modelAndView.addObject("tenantDtoPage", tenantDtoPage);
+    ModelAndView modelAndView = new ModelAndView("settings/rings/index");
+    Page<RingDto> ringDtoPage =
+        ringService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    modelAndView.addObject("ringDtoPage", ringDtoPage);
 
-    int totalPages = tenantDtoPage.getTotalPages();
+    int totalPages = ringDtoPage.getTotalPages();
     if (totalPages > 0) {
       List<Integer> pageNumbers =
           IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
@@ -55,77 +60,81 @@ public class TenantsCfgController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TenantDto> tenantRecord = tenantService.findById(id);
-    if (tenantRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/show");
-      modelAndView.addObject("tenantDto", tenantRecord.get());
+    Optional<RingDto> ringRecord = ringService.findById(id);
+    if (ringRecord.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/rings/show");
+      modelAndView.addObject("ringDto", ringRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("tenant.flash.error.invalid_id", null,
+          messageSource.getMessage("ring.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/tenants");
+      return new ModelAndView("redirect:/settings/rings");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
-    modelAndView.addObject("tenantDto", new TenantDto());
+    ModelAndView modelAndView = new ModelAndView("settings/rings/add");
+    modelAndView.addObject("ringDto", new RingDto());
+    modelAndView.addObject("radarDtos", this.radarService.findAll());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid TenantDto tenantDto, BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes) {
+  public ModelAndView create(@Valid RingDto ringDto, BindingResult bindingResult,
+                       RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
-      modelAndView.addObject("tenantDto", tenantDto);
+      ModelAndView modelAndView = new ModelAndView("settings/rings/add");
+      modelAndView.addObject("ringDto", ringDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
-    tenantService.save(tenantDto);
+    ringService.save(ringDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.flash.info.created", null,
+        messageSource.getMessage("ring.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenants");
+    return new ModelAndView("redirect:/settings/rings");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TenantDto> tenantDto = tenantService.findById(id);
-    if (tenantDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
-      modelAndView.addObject("tenantDto", tenantDto.get());
+    Optional<RingDto> ringDto = ringService.findById(id);
+    if (ringDto.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
+      modelAndView.addObject("ringDto", ringDto.get());
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("tenant.flash.error.invalid_id", null,
+          messageSource.getMessage("ring.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/tenants");
+      return new ModelAndView("redirect:/settings/rings");
     }
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid TenantDto tenantDto,
-                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+  public ModelAndView update(@Valid RingDto ringDto,
+                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
-      modelAndView.addObject("tenantDto", tenantDto);
+      ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
+      modelAndView.addObject("ringDto", ringDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
-    tenantService.save(tenantDto);
+    ringService.save(ringDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.flash.info.updated", null,
+        messageSource.getMessage("ring.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenants");
+    return new ModelAndView("redirect:/settings/rings");
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    tenantService.deleteById(id);
+    ringService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.flash.info.deleted", null,
+        messageSource.getMessage("ring.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/tenants";
+    return "redirect:/settings/rings";
   }
 }

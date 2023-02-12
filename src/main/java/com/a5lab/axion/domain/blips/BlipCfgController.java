@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.segments;
+package com.a5lab.axion.domain.blips;
 
 import jakarta.validation.Valid;
 import java.util.List;
@@ -22,34 +22,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.axion.domain.entries.EntryService;
 import com.a5lab.axion.domain.radars.RadarService;
+import com.a5lab.axion.domain.rings.RingService;
+import com.a5lab.axion.domain.segments.SegmentService;
 import com.a5lab.axion.utils.FlashMessages;
 
 
+
 @Controller
-@RequestMapping("/settings/segments")
+@RequestMapping("/settings/blips")
 @RequiredArgsConstructor
-public class SegmentsCfgController {
+public class BlipCfgController {
 
-  private final SegmentService segmentService;
-
+  private final BlipService blipService;
   private final RadarService radarService;
-
+  private final EntryService entryService;
+  private final SegmentService segmentService;
+  private final RingService ringService;
   private final MessageSource messageSource;
 
   @GetMapping("")
   public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
-                            @RequestParam(defaultValue = "title,asc") String[] sort) {
+                            @RequestParam(defaultValue = "ring.title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/segments/index");
-    Page<SegmentDto> segmentDtoPage =
-        segmentService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
-    modelAndView.addObject("segmentDtoPage", segmentDtoPage);
+    ModelAndView modelAndView = new ModelAndView("settings/blips/index");
+    Page<BlipDto> blipDtoPage =
+        blipService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    modelAndView.addObject("blipDtoPage", blipDtoPage);
 
-    int totalPages = segmentDtoPage.getTotalPages();
+    int totalPages = blipDtoPage.getTotalPages();
     if (totalPages > 0) {
       List<Integer> pageNumbers =
           IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
@@ -60,81 +65,93 @@ public class SegmentsCfgController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<SegmentDto> segmentRecord = segmentService.findById(id);
-    if (segmentRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/show");
-      modelAndView.addObject("segmentDto", segmentRecord.get());
+    Optional<BlipDto> blipRecord = blipService.findById(id);
+    if (blipRecord.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/blips/show");
+      modelAndView.addObject("blipDto", blipRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("segment.flash.error.invalid_id", null,
+          messageSource.getMessage("blip.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/segments");
+      return new ModelAndView("redirect:/settings/blips");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/segments/add");
-    modelAndView.addObject("segmentDto", new SegmentDto());
+    ModelAndView modelAndView = new ModelAndView("settings/blips/add");
+    modelAndView.addObject("blipDto", new BlipDto());
     modelAndView.addObject("radarDtos", this.radarService.findAll());
+    modelAndView.addObject("entryDtos", this.entryService.findAll());
+    modelAndView.addObject("segmentDtos", this.segmentService.findAll());
+    modelAndView.addObject("ringDtos", this.ringService.findAll());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid SegmentDto segmentDto, BindingResult bindingResult,
+  public ModelAndView create(@Valid BlipDto blipDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/add");
-      modelAndView.addObject("segmentDto", segmentDto);
+      ModelAndView modelAndView = new ModelAndView("settings/blips/add");
+      modelAndView.addObject("blipDto", blipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
+      modelAndView.addObject("entryDtos", this.entryService.findAll());
+      modelAndView.addObject("segmentDtos", this.segmentService.findAll());
+      modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
     }
-    segmentService.save(segmentDto);
+    blipService.save(blipDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("segment.flash.info.created", null,
+        messageSource.getMessage("blip.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/segments");
+    return new ModelAndView("redirect:/settings/blips");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<SegmentDto> segmentDto = segmentService.findById(id);
-    if (segmentDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
-      modelAndView.addObject("segmentDto", segmentDto.get());
+    Optional<BlipDto> blipDto = blipService.findById(id);
+    if (blipDto.isPresent()) {
+      ModelAndView modelAndView = new ModelAndView("settings/blips/edit");
+      modelAndView.addObject("blipDto", blipDto.get());
       modelAndView.addObject("radarDtos", this.radarService.findAll());
+      modelAndView.addObject("entryDtos", this.entryService.findAll());
+      modelAndView.addObject("segmentDtos", this.segmentService.findAll());
+      modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("segment.flash.error.invalid_id", null,
+          messageSource.getMessage("blip.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/segments");
+      return new ModelAndView("redirect:/settings/blips");
     }
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid SegmentDto segmentDto,
+  public ModelAndView update(@Valid BlipDto blipDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
-      modelAndView.addObject("segmentDto", segmentDto);
+      ModelAndView modelAndView = new ModelAndView("settings/blips/edit");
+      modelAndView.addObject("blipDto", blipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
+      modelAndView.addObject("entryDtos", this.entryService.findAll());
+      modelAndView.addObject("segmentDtos", this.segmentService.findAll());
+      modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
     }
-    segmentService.save(segmentDto);
+    blipService.save(blipDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("segment.flash.info.updated", null,
+        messageSource.getMessage("blip.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/segments");
+    return new ModelAndView("redirect:/settings/blips");
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    segmentService.deleteById(id);
+    blipService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("segment.flash.info.deleted", null,
+        messageSource.getMessage("blip.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/segments";
+    return "redirect:/settings/blips";
   }
 }

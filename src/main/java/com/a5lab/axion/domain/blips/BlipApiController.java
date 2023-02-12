@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.tenants;
+package com.a5lab.axion.domain.blips;
 
 import java.util.Collection;
 
@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/tenants")
+@RequestMapping("/api/v1/blips")
 @RequiredArgsConstructor
-public class TenantsApiController {
+public class BlipApiController {
 
-  private final TenantService tenantService;
+  private final BlipService blipService;
 
   @GetMapping("")
-  public Collection<TenantDto> index() {
-    return tenantService.findAll();
+  public Collection<BlipDto> index() {
+    return blipService.findAll();
   }
 }

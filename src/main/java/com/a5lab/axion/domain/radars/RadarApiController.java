@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/radars")
 @RequiredArgsConstructor
-public class RadarsApiController {
+public class RadarApiController {
 
   private final RadarService radarService;
 
