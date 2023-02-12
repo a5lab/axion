@@ -44,7 +44,7 @@ public class RadarCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/radars/index");
+    ModelAndView modelAndView = new ModelAndView("settings/radar/index");
     Page<Radar> radarPage = radarService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("radarPage", radarPage);
 
@@ -61,20 +61,20 @@ public class RadarCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<Radar> radarRecord = radarService.findById(id);
     if (radarRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/show");
+      ModelAndView modelAndView = new ModelAndView("settings/radar/show");
       modelAndView.addObject("radar", radarRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("radar.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/radars");
+      return new ModelAndView("redirect:/settings/radar");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+    ModelAndView modelAndView = new ModelAndView("settings/radar/add");
     modelAndView.addObject("radar", new Radar());
     modelAndView.addObject("radar_types", radarTypeService.findAll());
     return modelAndView;
@@ -84,7 +84,7 @@ public class RadarCfgController {
   public ModelAndView create(@Valid Radar radar, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      ModelAndView modelAndView = new ModelAndView("settings/radar/add");
       modelAndView.addObject("radar", radar);
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
@@ -93,14 +93,14 @@ public class RadarCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("radar.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/radars");
+    return new ModelAndView("redirect:/settings/radar");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<Radar> radar = radarService.findById(id);
     if (radar.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/radar/edit");
       modelAndView.addObject("radar", radar.get());
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
@@ -108,7 +108,7 @@ public class RadarCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("radar.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/radars");
+      return new ModelAndView("redirect:/settings/radar");
     }
   }
 
@@ -116,7 +116,7 @@ public class RadarCfgController {
   public ModelAndView update(@Valid Radar radar,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/radar/edit");
       modelAndView.addObject("radar", radar);
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
@@ -125,7 +125,7 @@ public class RadarCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("radar.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/radars");
+    return new ModelAndView("redirect:/settings/radar");
   }
 
   @GetMapping(value = "/delete/{id}")

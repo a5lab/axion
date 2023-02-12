@@ -40,7 +40,7 @@ public class EntryCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/entries/index");
+    ModelAndView modelAndView = new ModelAndView("settings/entry/index");
     Page<EntryDto> entryDtoPage =
         entryService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("entryDtoPage", entryDtoPage);
@@ -58,20 +58,20 @@ public class EntryCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<EntryDto> entryRecord = entryService.findById(id);
     if (entryRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entries/show");
+      ModelAndView modelAndView = new ModelAndView("settings/entry/show");
       modelAndView.addObject("entryDto", entryRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("entry.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/entries");
+      return new ModelAndView("redirect:/settings/entry");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/entries/add");
+    ModelAndView modelAndView = new ModelAndView("settings/entry/add");
     modelAndView.addObject("entryDto", new EntryDto());
     return modelAndView;
   }
@@ -80,7 +80,7 @@ public class EntryCfgController {
   public ModelAndView create(@Valid EntryDto entryDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entries/add");
+      ModelAndView modelAndView = new ModelAndView("settings/entry/add");
       modelAndView.addObject("entryDto", entryDto);
       return modelAndView;
     }
@@ -88,21 +88,21 @@ public class EntryCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/entries");
+    return new ModelAndView("redirect:/settings/entry");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<EntryDto> entryDto = entryService.findById(id);
     if (entryDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entries/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/entry/edit");
       modelAndView.addObject("entryDto", entryDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("entry.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/entries");
+      return new ModelAndView("redirect:/settings/entry");
     }
   }
 
@@ -110,7 +110,7 @@ public class EntryCfgController {
   public ModelAndView update(@Valid EntryDto entryDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entries/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/entry/edit");
       modelAndView.addObject("entryDto", entryDto);
       return modelAndView;
     }
@@ -118,7 +118,7 @@ public class EntryCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/entries");
+    return new ModelAndView("redirect:/settings/entry");
   }
 
   @GetMapping(value = "/delete/{id}")

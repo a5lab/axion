@@ -44,7 +44,7 @@ public class RingCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/rings/index");
+    ModelAndView modelAndView = new ModelAndView("settings/ring/index");
     Page<RingDto> ringDtoPage =
         ringService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("ringDtoPage", ringDtoPage);
@@ -62,20 +62,20 @@ public class RingCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<RingDto> ringRecord = ringService.findById(id);
     if (ringRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/show");
+      ModelAndView modelAndView = new ModelAndView("settings/ring/show");
       modelAndView.addObject("ringDto", ringRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("ring.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/rings");
+      return new ModelAndView("redirect:/settings/ring");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/rings/add");
+    ModelAndView modelAndView = new ModelAndView("settings/ring/add");
     modelAndView.addObject("ringDto", new RingDto());
     modelAndView.addObject("radarDtos", this.radarService.findAll());
     return modelAndView;
@@ -85,7 +85,7 @@ public class RingCfgController {
   public ModelAndView create(@Valid RingDto ringDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/add");
+      ModelAndView modelAndView = new ModelAndView("settings/ring/add");
       modelAndView.addObject("ringDto", ringDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
@@ -94,14 +94,14 @@ public class RingCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("ring.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/rings");
+    return new ModelAndView("redirect:/settings/ring");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<RingDto> ringDto = ringService.findById(id);
     if (ringDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/ring/edit");
       modelAndView.addObject("ringDto", ringDto.get());
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
@@ -109,7 +109,7 @@ public class RingCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("ring.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/rings");
+      return new ModelAndView("redirect:/settings/ring");
     }
   }
 
@@ -117,7 +117,7 @@ public class RingCfgController {
   public ModelAndView update(@Valid RingDto ringDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/ring/edit");
       modelAndView.addObject("ringDto", ringDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
@@ -126,7 +126,7 @@ public class RingCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("ring.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/rings");
+    return new ModelAndView("redirect:/settings/ring");
   }
 
   @GetMapping(value = "/delete/{id}")

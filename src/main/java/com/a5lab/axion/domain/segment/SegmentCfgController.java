@@ -44,7 +44,7 @@ public class SegmentCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/segments/index");
+    ModelAndView modelAndView = new ModelAndView("settings/segment/index");
     Page<SegmentDto> segmentDtoPage =
         segmentService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("segmentDtoPage", segmentDtoPage);
@@ -62,20 +62,20 @@ public class SegmentCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<SegmentDto> segmentRecord = segmentService.findById(id);
     if (segmentRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/show");
+      ModelAndView modelAndView = new ModelAndView("settings/segment/show");
       modelAndView.addObject("segmentDto", segmentRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("segment.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/segments");
+      return new ModelAndView("redirect:/settings/segment");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/segments/add");
+    ModelAndView modelAndView = new ModelAndView("settings/segment/add");
     modelAndView.addObject("segmentDto", new SegmentDto());
     modelAndView.addObject("radarDtos", this.radarService.findAll());
     return modelAndView;
@@ -85,7 +85,7 @@ public class SegmentCfgController {
   public ModelAndView create(@Valid SegmentDto segmentDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/add");
+      ModelAndView modelAndView = new ModelAndView("settings/segment/add");
       modelAndView.addObject("segmentDto", segmentDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
@@ -94,14 +94,14 @@ public class SegmentCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("segment.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/segments");
+    return new ModelAndView("redirect:/settings/segment");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<SegmentDto> segmentDto = segmentService.findById(id);
     if (segmentDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/segment/edit");
       modelAndView.addObject("segmentDto", segmentDto.get());
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
@@ -109,7 +109,7 @@ public class SegmentCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("segment.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/segments");
+      return new ModelAndView("redirect:/settings/segment");
     }
   }
 
@@ -117,7 +117,7 @@ public class SegmentCfgController {
   public ModelAndView update(@Valid SegmentDto segmentDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/segment/edit");
       modelAndView.addObject("segmentDto", segmentDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
@@ -126,7 +126,7 @@ public class SegmentCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("segment.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/segments");
+    return new ModelAndView("redirect:/settings/segment");
   }
 
   @GetMapping(value = "/delete/{id}")
