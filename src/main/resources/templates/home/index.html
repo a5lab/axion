@@ -13,12 +13,7 @@
       <div th:switch="${radar}">
         <div th:case="null">
           <h1>No primary radar yet!</h1>
-          <p1>Create the primary radar to view it at home page.</p1>
-          <form action="#" th:action="@{/home/create}" th:object="${radar}" method="post">
-            <th:block th:replace="~{settings/segments/fields.html}" />
-            <input type="submit" value="Add segment">
-          </form>
-
+          <p1><a href="/wizard/add">Create</a> the primary radar to view it at home page.</p1>
         </div>
         <div th:case="*">
           <svg id="radar"></svg>
@@ -40,8 +35,8 @@
               <tr th:each="blip : ${radar.blipList}">
                 <td th:text="${blip.entry.title}"></td>
                 <td th:text="${blip.entry.website}"></td>
-                <td th:text="${blip.segmentNo}"></td>
-                <td th:text="${blip.ringNo}"></td>
+                <td th:text="${blip.segment.position}"></td>
+                <td th:text="${blip.ring.position}"></td>
                 <td th:text="${blip.entry.moved}"></td>
                 <td th:text="${blip.entry.active}"></td>
               </tr>

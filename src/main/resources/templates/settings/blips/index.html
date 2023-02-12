@@ -23,9 +23,7 @@
               <tr>
                 <th>Radar title</th>
                 <th>Segment title</th>
-                <th>Segment number</th>
                 <th>Ring title</th>
-                <th>Ring number</th>
                 <th>Entry title</th>
                 <th>Show</th>
                 <th>Edit</th>
@@ -36,9 +34,7 @@
               <tr th:each="blipDto : ${blipDtoPage.getContent()}">
                 <td th:text="${blipDto.radar.title}"></td>
                 <td th:text="${blipDto.segment.title}"></td>
-                <td th:text="${blipDto.segmentNo}"></td>
                 <td th:text="${blipDto.ring.title}"></td>
-                <td th:text="${blipDto.ringNo}"></td>
                 <td th:text="${blipDto.entry.title}"></td>
                 <td><a th:href="@{/settings/blips/show/{id}(id=${blipDto.id})}">Show</a></td>
                 <td><a th:href="@{/settings/blips/edit/{id}(id=${blipDto.id})}">Edit</a></td>

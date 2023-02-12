@@ -14,7 +14,9 @@ public interface BlipService {
 
   Optional<BlipDto> findById(Long id);
 
-  BlipDto save(BlipDto blipDto);
+  BlipDto save(BlipDto blipDto); // TODO: remove
+
+  Blip save(Blip blip);
 
   void deleteById(Long id);
 }

@@ -39,6 +39,12 @@ public class EntryServiceImpl implements EntryService {
   }
 
   @Override
+  @Transactional(readOnly = true)
+  public Optional<Entry> findByTitle(String title) {
+    return entryRepository.findByTitle(title);
+  }
+
+  @Override
   @Transactional
   public EntryDto save(EntryDto entryDto) {
     return entryMapper.toDto(entryRepository.save(entryMapper.toEntity(entryDto)));

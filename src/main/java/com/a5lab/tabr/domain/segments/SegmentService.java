@@ -14,6 +14,8 @@ public interface SegmentService {
 
   Optional<SegmentDto> findById(Long id);
 
+  Optional<Segment> findByTitle(String title);
+
   SegmentDto save(SegmentDto segmentDto);
 
   void deleteById(Long id);

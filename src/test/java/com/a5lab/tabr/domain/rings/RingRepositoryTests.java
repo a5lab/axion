@@ -136,7 +136,8 @@ class RingRepositoryTests extends AbstractRepositoryTests {
     ringRepository.saveAndFlush(r);
     Assertions.assertNotNull(r.getId());
 
-    Assertions.assertTrue(ringRepository.findRingByTitle(title).isPresent());
+    // todo: use service (not repository?)
+    Assertions.assertTrue(ringRepository.findByTitle(title).isPresent());
      */
   }
 
