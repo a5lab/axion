@@ -14,6 +14,8 @@ public interface EntryService {
 
   Optional<EntryDto> findById(Long id);
 
+  Optional<Entry> findByTitle(String title);
+
   EntryDto save(EntryDto entryDto);
 
   void deleteById(Long id);

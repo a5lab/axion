@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RingRepository extends JpaRepository<Ring, Long> {
-  Optional<Ring> findRingByTitle(String title);
-
+  Optional<Ring> findByTitle(String title);
 }

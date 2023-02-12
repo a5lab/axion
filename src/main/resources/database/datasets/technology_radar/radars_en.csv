@@ -1,2 +1,2 @@
-title|description|is_primary|created_by|last_modified_by
-Technology radar|Technology radar for organization|true|axion|axion
+title|description|is_primary|is_active_|created_by|last_modified_by
+Technology radar|Technology radar for organization|true|false|axion|axion

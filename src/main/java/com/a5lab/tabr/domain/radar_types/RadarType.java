@@ -29,6 +29,12 @@ import com.a5lab.tabr.domain.AbstractAuditable;
 @AllArgsConstructor
 public class RadarType extends AbstractAuditable {
 
+  public static final String CAPABILITY_RADAR = "capability";
+  public static final String PRACTICE_RADAR = "practice";
+  public static final String PROCESS_RADAR = "process";
+  public static final String TECHNOLOGY_RADAR = "technology";
+
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false, unique = true)

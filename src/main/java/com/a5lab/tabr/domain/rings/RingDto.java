@@ -37,7 +37,7 @@ public class RingDto {
 
   @Min(0)
   @Max(512)
-  private String position;
+  private int position;
 
   private boolean active = true;
 

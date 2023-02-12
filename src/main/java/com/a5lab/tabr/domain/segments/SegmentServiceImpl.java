@@ -39,6 +39,13 @@ public class SegmentServiceImpl implements SegmentService {
   }
 
   @Override
+  @Transactional(readOnly = true)
+  public Optional<Segment> findByTitle(String title) {
+    return segmentRepository.findByTitle(title);
+  }
+
+
+  @Override
   @Transactional
   public SegmentDto save(SegmentDto segmentDto) {
     return segmentMapper.toDto(segmentRepository.save(segmentMapper.toEntity(segmentDto)));

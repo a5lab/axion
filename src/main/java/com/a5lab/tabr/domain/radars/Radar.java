@@ -44,7 +44,7 @@ public class Radar extends AbstractAuditable {
   private Long id;
 
   @NotNull
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "radar_type_id", nullable = false, updatable = false)
   private RadarType radarType;
 
