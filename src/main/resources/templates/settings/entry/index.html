@@ -14,7 +14,7 @@
           <h1>Entries</h1>
           <div>
             <span th:if="${entryDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/templates/settings/entry(size=${entryDtoPage.size}, page=${pageNumber})}"
+              <a th:href="@{/settings/entry(size=${entryDtoPage.size}, page=${pageNumber})}"
                  th:text="${pageNumber}" th:class="${pageNumber==entryDtoPage.number + 1} ? active"></a>
             </span>
           </div>
@@ -38,9 +38,9 @@
                 <td th:text="${entryDto.description}"></td>
                 <td th:text="${entryDto.moved}"></td>
                 <td th:text="${entryDto.active}"></td>
-                <td><a th:href="@{/templates/settings/entry/show/{id}(id=${entryDto.id})}">Show</a></td>
-                <td><a th:href="@{/templates/settings/entry/edit/{id}(id=${entryDto.id})}">Edit</a></td>
-                <td><a th:href="@{/templates/settings/entry/delete/{id}(id=${entryDto.id})}">Delete</a></td>
+                <td><a th:href="@{/settings/entry/show/{id}(id=${entryDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/entry/edit/{id}(id=${entryDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/entry/delete/{id}(id=${entryDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>

@@ -14,7 +14,7 @@
           <h1>Tentants</h1>
           <div>
             <span th:if="${tenantDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/templates/settings/tenant(size=${tenantDtoPage.size}, page=${pageNumber})}"
+              <a th:href="@{/settings/tenant(size=${tenantDtoPage.size}, page=${pageNumber})}"
                  th:text="${pageNumber}" th:class="${pageNumber==tenantDtoPage.number + 1} ? active"></a>
             </span>
           </div>
@@ -32,9 +32,9 @@
               <tr th:each="tenantDto : ${tenantDtoPage.getContent()}">
                 <td th:text="${tenantDto.title}"></td>
                 <td th:text="${tenantDto.description}"></td>
-                <td><a th:href="@{/templates/settings/tenant/show/{id}(id=${tenantDto.id})}">Show</a></td>
-                <td><a th:href="@{/templates/settings/tenant/edit/{id}(id=${tenantDto.id})}">Edit</a></td>
-                <td><a th:href="@{/templates/settings/tenant/delete/{id}(id=${tenantDto.id})}">Delete</a></td>
+                <td><a th:href="@{/settings/tenant/show/{id}(id=${tenantDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/tenant/edit/{id}(id=${tenantDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/tenant/delete/{id}(id=${tenantDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
