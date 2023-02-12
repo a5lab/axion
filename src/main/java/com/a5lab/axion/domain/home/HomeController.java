@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.a5lab.axion.domain.radars.Radar;
-import com.a5lab.axion.domain.radars.RadarService;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarService;
 
 @Controller
 @RequiredArgsConstructor

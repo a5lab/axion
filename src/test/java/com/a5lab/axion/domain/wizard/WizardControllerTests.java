@@ -13,9 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar_types.RadarType;
-import com.a5lab.axion.domain.radar_types.RadarTypeService;
-import com.a5lab.axion.domain.radars.Radar;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeService;
+import com.a5lab.axion.domain.radar.Radar;
 
 @WebMvcTest(WizardController.class)
 public class WizardControllerTests extends AbstractControllerTests {

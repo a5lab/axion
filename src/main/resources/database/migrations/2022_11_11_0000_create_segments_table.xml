@@ -48,7 +48,7 @@
     </changeSet>
 
     <!--changeSet id="load_en_segments" author="axion" context="data" labels="locale_en">
-        <loadData tableName="segments"
+        <loadData tableName="segment"
                   separator="|"
                   file="database/data/segments_en.csv">
             <column name="title" type="STRING"/>

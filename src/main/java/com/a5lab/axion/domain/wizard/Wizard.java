@@ -10,7 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import com.a5lab.axion.domain.AbstractAuditable;
-import com.a5lab.axion.domain.radar_types.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarType;
 
 @Getter
 @Setter

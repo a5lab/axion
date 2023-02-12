@@ -54,7 +54,7 @@
     </changeSet>
 
     <!--changeSet id="load_en_rings" author="axion" context="data" labels="locale_en">
-        <loadData tableName="rings"
+        <loadData tableName="ring"
                   separator="|"
                   file="database/data/rings_en.csv">
             <column name="title" type="STRING"/>
