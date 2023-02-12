@@ -19,7 +19,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.a5lab.axion.domain.AbstractAuditable;
 
 @Entity
-@Table(name = "tenant")
+@Table(name = "tenants")
 @DynamicUpdate
 @Getter
 @Setter

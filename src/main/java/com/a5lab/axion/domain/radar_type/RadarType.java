@@ -20,7 +20,7 @@ import com.a5lab.axion.domain.AbstractAuditable;
 
 
 @Entity
-@Table(name = "radar_type")
+@Table(name = "radar_types")
 @DynamicUpdate
 @Getter
 @Setter
