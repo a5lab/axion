@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <h1>Edit entry</h1>
-      <form action="#" th:action="@{/templates/settings/entry/update}" th:object="${entryDto}" method="post">
+      <form action="#" th:action="@{/settings/entry/update}" th:object="${entryDto}" method="post">
         <th:block th:replace="~{settings/entry/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
         <input type="submit" value="Update entry">

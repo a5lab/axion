@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <h1>Edit radar</h1>
-      <form action="#" th:action="@{/templates/settings/radar/update}" th:object="${radar}" method="post">
+      <form action="#" th:action="@{/settings/radar/update}" th:object="${radar}" method="post">
         <th:block th:replace="~{settings/radar/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
         <input type="submit" value="Update radar">

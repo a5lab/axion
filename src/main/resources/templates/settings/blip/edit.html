@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <h1>Edit blip</h1>
-      <form action="#" th:action="@{/templates/settings/blip/update}" th:object="${blipDto}" method="post">
+      <form action="#" th:action="@{/settings/blip/update}" th:object="${blipDto}" method="post">
         <th:block th:replace="~{settings/blip/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
         <input type="submit" value="Update blip">

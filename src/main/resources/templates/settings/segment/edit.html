@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <h1>Edit segment</h1>
-      <form action="#" th:action="@{/templates/settings/segment/update}" th:object="${segmentDto}" method="post">
+      <form action="#" th:action="@{/settings/segment/update}" th:object="${segmentDto}" method="post">
         <th:block th:replace="~{settings/segment/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
         <input type="submit" value="Update segment">

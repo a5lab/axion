@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <h1>Add radar</h1>
-      <form action="#" th:action="@{/templates/settings/radar/create}" th:object="${radar}" method="post">
+      <form action="#" th:action="@{/settings/radar/create}" th:object="${radar}" method="post">
         <th:block th:replace="~{settings/radar/fields.html}" />
         <input type="submit" value="Add radar">
       </form>
