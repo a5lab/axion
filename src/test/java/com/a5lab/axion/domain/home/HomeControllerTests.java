@@ -8,8 +8,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 import java.util.Optional;
 
-import com.a5lab.axion.domain.radars.Radar;
-import com.a5lab.axion.domain.radars.RadarService;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,7 +19,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar_types.RadarTypeService;
+import com.a5lab.axion.domain.radar_type.RadarTypeService;
 
 
 @WebMvcTest(HomeController.class)

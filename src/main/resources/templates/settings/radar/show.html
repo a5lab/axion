@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html th:replace="~{layouts/settings :: settings(~{::title}, ~{::meta}, ~{:: #content})}"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Dashboard title</title>
+    <meta content="Page description" name="description"/>
+    <meta content="HTML, CSS, JavaScript" name="keywords">
+  </head>
+  <body>
+    <div id="content">
+        <h1>Radar</h1>
+        <ul class="html-view">
+          <li>
+            <p>Title</p>
+            <p th:text="${radar.title}"></p>
+          </li>
+          <li>
+            <p>Description</p>
+            <p th:text="${radar.description}"></p>
+          </li>
+          <li>
+            <p>Primary</p>
+            <p th:text="${radar.primary}"></p>
+          </li>
+          <li>
+            <p>Active</p>
+            <p th:text="${radar.active}"></p>
+          </li>
+        </ul>
+      <p><a href="/settings/radar">View all radars</a></p>
+    </div>
+  </body>
+</html>

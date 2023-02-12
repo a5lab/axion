@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.a5lab.axion.domain.radar_types.RadarTypeService;
+import com.a5lab.axion.domain.radar_type.RadarTypeService;
 import com.a5lab.axion.utils.FlashMessages;
 
 @Controller
