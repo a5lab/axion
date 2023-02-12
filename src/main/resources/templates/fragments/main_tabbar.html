@@ -6,9 +6,9 @@
        th:unless="${#strings.startsWith(servletPath,'/radars')}">Radars</a>
   </li>
   <li class="nav-item">
-    <a aria-current="page" class="nav-link active" href="/settings/tenants"
+    <a aria-current="page" class="nav-link active" href="/settings/tenant"
        th:if="${#strings.startsWith(servletPath,'/settings')}">Settings</a>
-    <a class="nav-link" href="/settings/tenants"
+    <a class="nav-link" href="/settings/tenant"
        th:unless="${#strings.startsWith(servletPath,'/settings')}">Settings</a>
   </li>
 </ul>
