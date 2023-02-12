@@ -10,8 +10,8 @@ port: 8081
 The URL will be _http://localhost:8081/_.
 
 == Changing the Context Path
-To change or update the context path in the instance you want point to a specific webapp or component, locate the _context-path: /_ line in the _src/main/application.yml_. Example for directory named _radar_:
+To change or update the context path in the instance you want point to a specific webapp or component, locate the _context-path: /_ line in the _src/main/application.yml_. Example for directory named _axion_:
 ....
-context-path: /radar/
+context-path: /axion/
 ....
-The URL will be _http://localhost:8081/radar/_.
+The URL will be _http://localhost:8081/axion/_.
