@@ -17,7 +17,7 @@ public class RadarsController {
   @GetMapping("")
   public ModelAndView index() {
     // We need to replace it with proper values for PageRequest.of() coming from ui
-    // See https://github.com/a5lab/tabr/issues/112
+    // See https://github.com/a5lab/axion/issues/112
     ModelAndView modelAndView = new ModelAndView("radars/index");
     modelAndView.addObject("radars",
         radarService.findAll(Pageable.ofSize(100)).getContent());
