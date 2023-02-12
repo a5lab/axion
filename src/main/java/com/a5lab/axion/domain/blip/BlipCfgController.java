@@ -31,7 +31,7 @@ import com.a5lab.axion.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/blips")
+@RequestMapping("/settings/blip")
 @RequiredArgsConstructor
 public class BlipCfgController {
 

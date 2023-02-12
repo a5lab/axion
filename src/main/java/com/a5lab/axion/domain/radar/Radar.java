@@ -29,7 +29,7 @@ import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.utils.JpaConstants;
 
 @Entity
-@Table(name = "radar")
+@Table(name = "radars")
 @DynamicUpdate
 @Getter
 @Setter

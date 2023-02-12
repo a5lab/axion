@@ -27,7 +27,7 @@ import com.a5lab.axion.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/segments")
+@RequestMapping("/settings/segment")
 @RequiredArgsConstructor
 public class SegmentCfgController {
 

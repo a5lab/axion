@@ -26,7 +26,7 @@ import com.a5lab.axion.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/entries")
+@RequestMapping("/settings/entry")
 @RequiredArgsConstructor
 public class EntryCfgController {
 

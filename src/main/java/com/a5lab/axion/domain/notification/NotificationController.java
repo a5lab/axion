@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class NotificationController {
 
-  @GetMapping("/account/notifications")
+  @GetMapping("/account/notification")
   public String index() {
-    return "account/notifications";
+    return "account/notification";
   }
 
 }

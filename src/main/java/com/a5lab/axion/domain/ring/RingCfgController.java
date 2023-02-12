@@ -28,7 +28,7 @@ import com.a5lab.axion.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/rings")
+@RequestMapping("/settings/ring")
 @RequiredArgsConstructor
 public class RingCfgController {
 

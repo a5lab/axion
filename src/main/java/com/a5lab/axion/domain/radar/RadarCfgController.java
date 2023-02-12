@@ -27,7 +27,7 @@ import com.a5lab.axion.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/radars")
+@RequestMapping("/settings/radar")
 @RequiredArgsConstructor
 public class RadarCfgController {
 

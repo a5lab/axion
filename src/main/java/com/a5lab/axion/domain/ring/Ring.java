@@ -25,7 +25,7 @@ import com.a5lab.axion.domain.radar.Radar;
 
 
 @Entity
-@Table(name = "ring")
+@Table(name = "rings")
 @DynamicUpdate
 @Getter
 @Setter
