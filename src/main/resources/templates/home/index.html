@@ -33,12 +33,12 @@
             </thead>
             <tbody>
               <tr th:each="blip : ${radar.blipList}">
-                <td th:text="${blip.entry.title}"></td>
-                <td th:text="${blip.entry.website}"></td>
+                <td th:text="${blip.technology.title}"></td>
+                <td th:text="${blip.technology.website}"></td>
                 <td th:text="${blip.segment.position}"></td>
                 <td th:text="${blip.ring.position}"></td>
-                <td th:text="${blip.entry.moved}"></td>
-                <td th:text="${blip.entry.active}"></td>
+                <td th:text="${blip.technology.moved}"></td>
+                <td th:text="${blip.technology.active}"></td>
               </tr>
             </tbody>
           </table>

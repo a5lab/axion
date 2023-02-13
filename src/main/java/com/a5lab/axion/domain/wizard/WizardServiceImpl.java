@@ -21,7 +21,7 @@ import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
-import com.a5lab.axion.domain.technology.EntryService;
+import com.a5lab.axion.domain.technology.TechnologyService;
 import com.a5lab.axion.domain.technology_blip.Blip;
 import com.a5lab.axion.domain.technology_blip.BlipService;
 
@@ -34,7 +34,7 @@ public class WizardServiceImpl implements WizardService {
   private final RingService ringService;
   private final SegmentService segmentService;
 
-  private final EntryService entryService;
+  private final TechnologyService entryService;
   private final BlipService blipService;
 
   private Radar radar;
@@ -164,7 +164,7 @@ public class WizardServiceImpl implements WizardService {
       blip.setRadar(this.radar);
       blip.setRing(ringService.findByTitle(ringTitle).get());
       blip.setSegment(segmentService.findByTitle(segmentTitle).get());
-      blip.setEntry(entryService.findByTitle(entryTitle).get());
+      blip.setTechnology(entryService.findByTitle(entryTitle).get());
       blipService.save(blip);
     }
   }

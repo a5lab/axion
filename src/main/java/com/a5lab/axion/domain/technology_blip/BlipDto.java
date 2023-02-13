@@ -11,7 +11,7 @@ import lombok.ToString;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.segment.SegmentDto;
-import com.a5lab.axion.domain.technology.EntryDto;
+import com.a5lab.axion.domain.technology.TechnologyDto;
 
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class BlipDto {
   @NotNull
   private Radar radar;
 
-  private EntryDto entry;
+  private TechnologyDto entry;
 
   private SegmentDto segment;
 

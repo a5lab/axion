@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
+import com.a5lab.axion.domain.technology.Technology;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,6 @@ import com.a5lab.axion.domain.AbstractAuditable;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.segment.Segment;
-import com.a5lab.axion.domain.technology.Entry;
 
 
 @Entity
@@ -47,7 +47,7 @@ public class Blip extends AbstractAuditable {
 
   @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "technology_id", nullable = false, updatable = false)
-  private Entry entry;
+  private Technology technology;
 
   @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "segment_id", nullable = false, updatable = false)

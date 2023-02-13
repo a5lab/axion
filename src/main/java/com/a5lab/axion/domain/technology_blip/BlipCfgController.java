@@ -25,7 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentService;
-import com.a5lab.axion.domain.technology.EntryService;
+import com.a5lab.axion.domain.technology.TechnologyService;
 import com.a5lab.axion.utils.FlashMessages;
 
 
@@ -37,7 +37,7 @@ public class BlipCfgController {
 
   private final BlipService blipService;
   private final RadarService radarService;
-  private final EntryService entryService;
+  private final TechnologyService entryService;
   private final SegmentService segmentService;
   private final RingService ringService;
   private final MessageSource messageSource;

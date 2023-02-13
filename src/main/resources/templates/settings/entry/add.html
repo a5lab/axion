@@ -8,10 +8,10 @@
   </head>
   <body>
     <div id="content">
-      <h1>Add entry</h1>
-      <form action="#" th:action="@{/settings/entry/create}" th:object="${entryDto}" method="post">
-        <th:block th:replace="~{settings/entry/fields.html}" />
-        <input type="submit" value="Add entry">
+      <h1>Add technology</h1>
+      <form action="#" th:action="@{/settings/technology/create}" th:object="${technologyDto}" method="post">
+        <th:block th:replace="~{settings/technology/fields.html}" />
+        <input type="submit" value="Add technology">
       </form>
     </div>
   </body>

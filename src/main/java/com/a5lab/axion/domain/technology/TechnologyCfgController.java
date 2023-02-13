@@ -28,9 +28,9 @@ import com.a5lab.axion.utils.FlashMessages;
 @Controller
 @RequestMapping("/settings/entry")
 @RequiredArgsConstructor
-public class EntryCfgController {
+public class TechnologyCfgController {
 
-  private final EntryService entryService;
+  private final TechnologyService entryService;
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -41,7 +41,7 @@ public class EntryCfgController {
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/entry/index");
-    Page<EntryDto> entryDtoPage =
+    Page<TechnologyDto> entryDtoPage =
         entryService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("entryDtoPage", entryDtoPage);
 
@@ -56,7 +56,7 @@ public class EntryCfgController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<EntryDto> entryRecord = entryService.findById(id);
+    Optional<TechnologyDto> entryRecord = entryService.findById(id);
     if (entryRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/entry/show");
       modelAndView.addObject("entryDto", entryRecord.get());
@@ -72,19 +72,19 @@ public class EntryCfgController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/entry/add");
-    modelAndView.addObject("entryDto", new EntryDto());
+    modelAndView.addObject("entryDto", new TechnologyDto());
     return modelAndView;
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid EntryDto entryDto, BindingResult bindingResult,
+  public ModelAndView create(@Valid TechnologyDto technologyDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/entry/add");
-      modelAndView.addObject("entryDto", entryDto);
+      modelAndView.addObject("entryDto", technologyDto);
       return modelAndView;
     }
-    entryService.save(entryDto);
+    entryService.save(technologyDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.created", null,
             LocaleContextHolder.getLocale()));
@@ -93,7 +93,7 @@ public class EntryCfgController {
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<EntryDto> entryDto = entryService.findById(id);
+    Optional<TechnologyDto> entryDto = entryService.findById(id);
     if (entryDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/entry/edit");
       modelAndView.addObject("entryDto", entryDto.get());
@@ -107,14 +107,14 @@ public class EntryCfgController {
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid EntryDto entryDto,
+  public ModelAndView update(@Valid TechnologyDto technologyDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/entry/edit");
-      modelAndView.addObject("entryDto", entryDto);
+      modelAndView.addObject("entryDto", technologyDto);
       return modelAndView;
     }
-    entryService.save(entryDto);
+    entryService.save(technologyDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.updated", null,
             LocaleContextHolder.getLocale()));

@@ -16,6 +16,6 @@
   <option th:each="ringDto : ${ringDtos}" th:value="${ringDto.id}" th:utext="${ringDto.title}"/>
 </select>
 <label for="entry_id">Entry</label>
-<select  id="entry_id" name="entry_id" th:field="*{entry.id}" >
-  <option th:each="entryDto : ${entryDtos}" th:value="${entryDto.id}" th:utext="${entryDto.title}"/>
+<select  id="entry_id" name="entry_id" th:field="*{technology.id}" >
+  <option th:each="technologyDto : ${entryDtos}" th:value="${technologyDto.id}" th:utext="${technologyDto.title}"/>
 </select>

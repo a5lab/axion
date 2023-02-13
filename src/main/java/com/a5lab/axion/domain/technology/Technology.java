@@ -26,7 +26,7 @@ import com.a5lab.axion.domain.AbstractAuditable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Entry extends AbstractAuditable {
+public class Technology extends AbstractAuditable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
