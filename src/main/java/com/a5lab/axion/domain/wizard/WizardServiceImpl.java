@@ -158,13 +158,13 @@ public class WizardServiceImpl implements WizardService {
       // final String radarTitle = record[0];
       final String ringTitle = record[1];
       final String segmentTitle = record[2];
-      final String entryTitle = record[3];
+      final String technologyTitle = record[3];
 
       TechnologyBlip technologyBlip = new TechnologyBlip();
       technologyBlip.setRadar(this.radar);
       technologyBlip.setRing(ringService.findByTitle(ringTitle).get());
       technologyBlip.setSegment(segmentService.findByTitle(segmentTitle).get());
-      technologyBlip.setTechnology(technologyService.findByTitle(entryTitle).get());
+      technologyBlip.setTechnology(technologyService.findByTitle(technologyTitle).get());
       technologyBlipService.save(technologyBlip);
     }
   }

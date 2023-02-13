@@ -16,26 +16,26 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TechnologyServiceImpl implements TechnologyService {
   private final TechnologyRepository technologyRepository;
-  private final TechnologyMapper entryMapper;
+  private final TechnologyMapper technologyMapper;
 
   @Override
   @Transactional(readOnly = true)
   public Collection<TechnologyDto> findAll() {
     return technologyRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
-        .stream().map(entryMapper::toDto).collect(Collectors.toList());
+        .stream().map(technologyMapper::toDto).collect(Collectors.toList());
   }
 
 
   @Override
   @Transactional(readOnly = true)
   public Page<TechnologyDto> findAll(Pageable pageable) {
-    return technologyRepository.findAll(pageable).map(entryMapper::toDto);
+    return technologyRepository.findAll(pageable).map(technologyMapper::toDto);
   }
 
   @Override
   @Transactional(readOnly = true)
   public Optional<TechnologyDto> findById(Long id) {
-    return technologyRepository.findById(id).map(entryMapper::toDto);
+    return technologyRepository.findById(id).map(technologyMapper::toDto);
   }
 
   @Override
@@ -47,7 +47,8 @@ public class TechnologyServiceImpl implements TechnologyService {
   @Override
   @Transactional
   public TechnologyDto save(TechnologyDto technologyDto) {
-    return entryMapper.toDto(technologyRepository.save(entryMapper.toEntity(technologyDto)));
+    return technologyMapper.toDto(
+        technologyRepository.save(technologyMapper.toEntity(technologyDto)));
   }
 
   @Override

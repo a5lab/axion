@@ -8,14 +8,14 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${entryDtoPage.getTotalElements()}">
+      <div th:switch="${technologyDtoPage.getTotalElements()}">
         <h1 th:case="0">No entries yet!</h1>
         <div th:case="*">
           <h1>Entries</h1>
           <div>
-            <span th:if="${entryDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/settings/technology(size=${entryDtoPage.size}, page=${pageNumber})}"
-                 th:text="${pageNumber}" th:class="${pageNumber==entryDtoPage.number + 1} ? active"></a>
+            <span th:if="${technologyDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/technology(size=${technologyDtoPage.size}, page=${pageNumber})}"
+                 th:text="${pageNumber}" th:class="${pageNumber==technologyDtoPage.number + 1} ? active"></a>
             </span>
           </div>
           <table>
@@ -32,7 +32,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="technologyDto : ${entryDtoPage.getContent()}">
+              <tr th:each="technologyDto : ${technologyDtoPage.getContent()}">
                 <td th:text="${technologyDto.title}"></td>
                 <td th:text="${technologyDto.website}"></td>
                 <td th:text="${technologyDto.description}"></td>

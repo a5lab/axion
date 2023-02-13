@@ -82,7 +82,7 @@ public class TechnologyBlipCfgController {
     ModelAndView modelAndView = new ModelAndView("settings/technology_blip/add");
     modelAndView.addObject("blipDto", new TechnologyBlipDto());
     modelAndView.addObject("radarDtos", this.radarService.findAll());
-    modelAndView.addObject("entryDtos", this.technologyService.findAll());
+    modelAndView.addObject("technologyDtos", this.technologyService.findAll());
     modelAndView.addObject("segmentDtos", this.segmentService.findAll());
     modelAndView.addObject("ringDtos", this.ringService.findAll());
     return modelAndView;
@@ -96,7 +96,7 @@ public class TechnologyBlipCfgController {
       ModelAndView modelAndView = new ModelAndView("settings/technology_blip/add");
       modelAndView.addObject("blipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
-      modelAndView.addObject("entryDtos", this.technologyService.findAll());
+      modelAndView.addObject("technologyDtos", this.technologyService.findAll());
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
@@ -115,7 +115,7 @@ public class TechnologyBlipCfgController {
       ModelAndView modelAndView = new ModelAndView("settings/technology_blip/edit");
       modelAndView.addObject("blipDto", blipDto.get());
       modelAndView.addObject("radarDtos", this.radarService.findAll());
-      modelAndView.addObject("entryDtos", this.technologyService.findAll());
+      modelAndView.addObject("technologyDtos", this.technologyService.findAll());
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
@@ -134,7 +134,7 @@ public class TechnologyBlipCfgController {
       ModelAndView modelAndView = new ModelAndView("settings/technology_blip/edit");
       modelAndView.addObject("blipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
-      modelAndView.addObject("entryDtos", this.technologyService.findAll());
+      modelAndView.addObject("technologyDtos", this.technologyService.findAll());
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
