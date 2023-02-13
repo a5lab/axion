@@ -44,7 +44,7 @@ public class RadarCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/radar/index");
+    ModelAndView modelAndView = new ModelAndView("settings/radars/index");
     Page<Radar> radarPage = radarService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("radarPage", radarPage);
 
@@ -61,7 +61,7 @@ public class RadarCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<Radar> radarRecord = radarService.findById(id);
     if (radarRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radar/show");
+      ModelAndView modelAndView = new ModelAndView("settings/radars/show");
       modelAndView.addObject("radar", radarRecord.get());
       return modelAndView;
     } else {
@@ -74,7 +74,7 @@ public class RadarCfgController {
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/radar/add");
+    ModelAndView modelAndView = new ModelAndView("settings/radars/add");
     modelAndView.addObject("radar", new Radar());
     modelAndView.addObject("radar_types", radarTypeService.findAll());
     return modelAndView;
@@ -84,7 +84,7 @@ public class RadarCfgController {
   public ModelAndView create(@Valid Radar radar, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radar/add");
+      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar", radar);
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
@@ -100,7 +100,7 @@ public class RadarCfgController {
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<Radar> radar = radarService.findById(id);
     if (radar.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radar/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radar", radar.get());
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
@@ -116,7 +116,7 @@ public class RadarCfgController {
   public ModelAndView update(@Valid Radar radar,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radar/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radar", radar);
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;

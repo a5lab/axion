@@ -40,7 +40,7 @@ public class TechnologyCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/technology/index");
+    ModelAndView modelAndView = new ModelAndView("settings/technologies/index");
     Page<TechnologyDto> technologyDtoPage =
         technologyService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("technologyDtoPage", technologyDtoPage);
@@ -58,7 +58,7 @@ public class TechnologyCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TechnologyDto> technologyRecord = technologyService.findById(id);
     if (technologyRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/technology/show");
+      ModelAndView modelAndView = new ModelAndView("settings/technologies/show");
       modelAndView.addObject("technologyDto", technologyRecord.get());
       return modelAndView;
     } else {
@@ -71,7 +71,7 @@ public class TechnologyCfgController {
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/technology/add");
+    ModelAndView modelAndView = new ModelAndView("settings/technologies/add");
     modelAndView.addObject("technologyDto", new TechnologyDto());
     return modelAndView;
   }
@@ -80,7 +80,7 @@ public class TechnologyCfgController {
   public ModelAndView create(@Valid TechnologyDto technologyDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/technology/add");
+      ModelAndView modelAndView = new ModelAndView("settings/technologies/add");
       modelAndView.addObject("technologyDto", technologyDto);
       return modelAndView;
     }
@@ -95,7 +95,7 @@ public class TechnologyCfgController {
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TechnologyDto> technologyDto = technologyService.findById(id);
     if (technologyDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/technology/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/technologies/edit");
       modelAndView.addObject("technologyDto", technologyDto.get());
       return modelAndView;
     } else {
@@ -110,7 +110,7 @@ public class TechnologyCfgController {
   public ModelAndView update(@Valid TechnologyDto technologyDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/technology/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/technologies/edit");
       modelAndView.addObject("technologyDto", technologyDto);
       return modelAndView;
     }

@@ -44,7 +44,7 @@ public class SegmentCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/segment/index");
+    ModelAndView modelAndView = new ModelAndView("settings/segments/index");
     Page<SegmentDto> segmentDtoPage =
         segmentService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("segmentDtoPage", segmentDtoPage);
@@ -62,7 +62,7 @@ public class SegmentCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<SegmentDto> segmentRecord = segmentService.findById(id);
     if (segmentRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segment/show");
+      ModelAndView modelAndView = new ModelAndView("settings/segments/show");
       modelAndView.addObject("segmentDto", segmentRecord.get());
       return modelAndView;
     } else {
@@ -75,7 +75,7 @@ public class SegmentCfgController {
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/segment/add");
+    ModelAndView modelAndView = new ModelAndView("settings/segments/add");
     modelAndView.addObject("segmentDto", new SegmentDto());
     modelAndView.addObject("radarDtos", this.radarService.findAll());
     return modelAndView;
@@ -85,7 +85,7 @@ public class SegmentCfgController {
   public ModelAndView create(@Valid SegmentDto segmentDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segment/add");
+      ModelAndView modelAndView = new ModelAndView("settings/segments/add");
       modelAndView.addObject("segmentDto", segmentDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
@@ -101,7 +101,7 @@ public class SegmentCfgController {
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<SegmentDto> segmentDto = segmentService.findById(id);
     if (segmentDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segment/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
       modelAndView.addObject("segmentDto", segmentDto.get());
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
@@ -117,7 +117,7 @@ public class SegmentCfgController {
   public ModelAndView update(@Valid SegmentDto segmentDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segment/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
       modelAndView.addObject("segmentDto", segmentDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
