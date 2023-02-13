@@ -11,7 +11,7 @@
       <div th:switch="${technologyDtoPage.getTotalElements()}">
         <h1 th:case="0">No entries yet!</h1>
         <div th:case="*">
-          <h1>Entries</h1>
+          <h1>Technologies</h1>
           <div>
             <span th:if="${technologyDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
               <a th:href="@{/settings/technology(size=${technologyDtoPage.size}, page=${pageNumber})}"
