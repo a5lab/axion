@@ -8,11 +8,11 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit tenant</h1>
-      <form action="#" th:action="@{/settings/tenant/update}" th:object="${tenantDto}" method="post">
-        <th:block th:replace="~{settings/tenant/fields.html}" />
+      <h1>Edit technologyBlip</h1>
+      <form action="#" th:action="@{/templates/settings/technology_blips/update}" th:object="${technologyBlipDto}" method="post">
+        <th:block th:replace="~{settings/technology_blips/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update tenant">
+        <input type="submit" value="Update technology blip">
       </form>      
     </div>
   </body>

@@ -22,10 +22,10 @@ public class TechnologyTechnologyBlipServiceImpl implements TechnologyBlipServic
   @Transactional(readOnly = true)
   public Collection<TechnologyBlipDto> findAll() {
     return technologyBlipRepository.findAll(
-            Sort.by(Sort.Direction.ASC, "radar.title")
-                .and(Sort.by(Sort.Direction.ASC, "segment.title"))
-                .and(Sort.by(Sort.Direction.ASC, "ring.title"))
-                .and(Sort.by(Sort.Direction.ASC, "technology.title"))
+            Sort.by(Sort.Direction.ASC, "radars.title")
+                .and(Sort.by(Sort.Direction.ASC, "segments.title"))
+                .and(Sort.by(Sort.Direction.ASC, "rings.title"))
+                .and(Sort.by(Sort.Direction.ASC, "technologies.title"))
         )
         .stream().map(technologyBlipMapper::toDto).collect(Collectors.toList());
   }

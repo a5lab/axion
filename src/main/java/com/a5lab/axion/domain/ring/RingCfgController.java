@@ -69,7 +69,7 @@ public class RingCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("ring.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/ring");
+      return new ModelAndView("redirect:/settings/rings");
     }
   }
 
@@ -94,7 +94,7 @@ public class RingCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("ring.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/ring");
+    return new ModelAndView("redirect:/settings/rings");
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -109,7 +109,7 @@ public class RingCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("ring.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/ring");
+      return new ModelAndView("redirect:/settings/rings");
     }
   }
 
@@ -126,7 +126,7 @@ public class RingCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("ring.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/ring");
+    return new ModelAndView("redirect:/settings/rings");
   }
 
   @GetMapping(value = "/delete/{id}")

@@ -57,7 +57,7 @@ postgresql__dependent_roles:
 # :ref:`postgresql__ref_roles` for more details.
 postgresql__roles: []
 
-# PostgreSQL user account to which Ansible will switch to perform
+# PostgreSQL user accounts to which Ansible will switch to perform
 # database-related operations. Should be the same on local and remote database
 # servers.
 postgresql__user: 'postgres'

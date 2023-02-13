@@ -44,7 +44,7 @@ public class TechnologyBlipCfgController {
   @GetMapping("")
   public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
-                            @RequestParam(defaultValue = "ring.title,asc") String[] sort) {
+                            @RequestParam(defaultValue = "rings.title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
@@ -71,9 +71,9 @@ public class TechnologyBlipCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blip.flash.error.invalid_id", null,
+          messageSource.getMessage("technology_blips.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/technology_blip");
+      return new ModelAndView("redirect:/settings/technology_blips");
     }
   }
 
@@ -103,9 +103,9 @@ public class TechnologyBlipCfgController {
     }
     technologyBlipService.save(technologyBlipDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blip.flash.info.created", null,
+        messageSource.getMessage("technology_blips.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/technology_blip");
+    return new ModelAndView("redirect:/settings/technology_blips");
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -121,9 +121,9 @@ public class TechnologyBlipCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blip.flash.error.invalid_id", null,
+          messageSource.getMessage("technology_blips.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/technology_blip");
+      return new ModelAndView("redirect:/settings/technology_blips");
     }
   }
 
@@ -141,16 +141,16 @@ public class TechnologyBlipCfgController {
     }
     technologyBlipService.save(technologyBlipDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blip.flash.info.updated", null,
+        messageSource.getMessage("technology_blips.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/technology_blip");
+    return new ModelAndView("redirect:/settings/technology_blips");
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     technologyBlipService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blip.flash.info.deleted", null,
+        messageSource.getMessage("technology_blips.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
     return "redirect:/settings/blips";
   }

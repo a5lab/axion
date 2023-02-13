@@ -65,7 +65,7 @@ public class TechnologyCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("technology.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/technology");
+      return new ModelAndView("redirect:/settings/technologies");
     }
   }
 
@@ -88,7 +88,7 @@ public class TechnologyCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("technology.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/technology");
+    return new ModelAndView("redirect:/settings/technologies");
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -102,7 +102,7 @@ public class TechnologyCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("technology.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/technology");
+      return new ModelAndView("redirect:/settings/technologies");
     }
   }
 
@@ -118,7 +118,7 @@ public class TechnologyCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("technology.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/technology");
+    return new ModelAndView("redirect:/settings/technologies");
   }
 
   @GetMapping(value = "/delete/{id}")
@@ -127,6 +127,6 @@ public class TechnologyCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("technology.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/technology";
+    return "redirect:/settings/technologies";
   }
 }

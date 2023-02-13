@@ -68,7 +68,7 @@ public class RadarCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("radar.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/radar");
+      return new ModelAndView("redirect:/settings/radars");
     }
   }
 
@@ -93,7 +93,7 @@ public class RadarCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("radar.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/radar");
+    return new ModelAndView("redirect:/settings/radars");
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -108,7 +108,7 @@ public class RadarCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("radar.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/radar");
+      return new ModelAndView("redirect:/settings/radars");
     }
   }
 
@@ -125,7 +125,7 @@ public class RadarCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("radar.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/radar");
+    return new ModelAndView("redirect:/settings/radars");
   }
 
   @GetMapping(value = "/delete/{id}")
@@ -134,6 +134,6 @@ public class RadarCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("radar.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/radar";
+    return "redirect:/settings/radars";
   }
 }

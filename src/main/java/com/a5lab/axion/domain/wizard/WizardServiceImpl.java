@@ -50,30 +50,30 @@ public class WizardServiceImpl implements WizardService {
     this.radarService.save(this.radar);
 
     /*
-    switch (radar.getRadarType().getCode()) {
+    switch (radars.getRadarType().getCode()) {
       case RadarType.CAPABILITY_RADAR:
         throw new IllegalArgumentException(
-            "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
+            "Not implemented yes. Radar type:" + radars.getRadarType().getCode());
       case RadarType.PRACTICE_RADAR:
         throw new IllegalArgumentException(
-            "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
+            "Not implemented yes. Radar type:" + radars.getRadarType().getCode());
       case RadarType.PROCESS_RADAR:
         throw new IllegalArgumentException(
-            "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
+            "Not implemented yes. Radar type:" + radars.getRadarType().getCode());
       case RadarType.TECHNOLOGY_RADAR:
-        this.createRings(radar);
-        this.createSegments(radar);
-        this.createTechnologyBlips(radar);
+        this.createRings(radars);
+        this.createSegments(radars);
+        this.createTechnologyBlips(radars);
         break;
       default:
         throw new IllegalArgumentException(
-            "Unknown radar type: " + radar.getRadarType().getCode());
+            "Unknown radars type: " + radars.getRadarType().getCode());
     }
     */
   }
 
   public void createRadar(Wizard wizard) throws Exception {
-    // Read ring
+    // Read rings
     File file =
         ResourceUtils.getFile("classpath:database/datasets/technology_radar/radars_en.csv");
     Path path = file.toPath();
@@ -96,7 +96,7 @@ public class WizardServiceImpl implements WizardService {
   }
 
   public void createRings() throws Exception {
-    // Read ring
+    // Read rings
     File file =
         ResourceUtils.getFile("classpath:database/datasets/technology_radar/rings_en.csv");
     Path path = file.toPath();
@@ -119,7 +119,7 @@ public class WizardServiceImpl implements WizardService {
   }
 
   private void createSegments() throws Exception {
-    // Read ring
+    // Read rings
     File file =
         ResourceUtils.getFile("classpath:database/datasets/technology_radar/segments_en.csv");
     Path path = file.toPath();

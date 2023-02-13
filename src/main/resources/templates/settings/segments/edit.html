@@ -8,11 +8,11 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit ring</h1>
-      <form action="#" th:action="@{/settings/ring/update}" th:object="${ringDto}" method="post">
-        <th:block th:replace="~{settings/ring/fields.html}" />
+      <h1>Edit segment</h1>
+      <form action="#" th:action="@{/templates/settings/segments/update}" th:object="${segmentDto}" method="post">
+        <th:block th:replace="~{settings/segments/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update ring">
+        <input type="submit" value="Update segment">
       </form>      
     </div>
   </body>

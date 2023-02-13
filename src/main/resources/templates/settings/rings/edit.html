@@ -8,11 +8,11 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit technologyBlip</h1>
-      <form action="#" th:action="@{/settings/technology_blip/update}" th:object="${technologyBlipDto}" method="post">
-        <th:block th:replace="~{settings/technology_blip/fields.html}" />
+      <h1>Edit ring</h1>
+      <form action="#" th:action="@{/templates/settings/rings/update}" th:object="${ringDto}" method="post">
+        <th:block th:replace="~{settings/rings/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update technology blip">
+        <input type="submit" value="Update ring">
       </form>      
     </div>
   </body>

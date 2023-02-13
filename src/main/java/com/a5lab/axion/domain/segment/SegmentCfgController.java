@@ -69,7 +69,7 @@ public class SegmentCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("segment.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/segment");
+      return new ModelAndView("redirect:/settings/segments");
     }
   }
 
@@ -94,7 +94,7 @@ public class SegmentCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("segment.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/segment");
+    return new ModelAndView("redirect:/settings/segments");
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -109,7 +109,7 @@ public class SegmentCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("segment.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/segment");
+      return new ModelAndView("redirect:/settings/segments");
     }
   }
 
@@ -126,7 +126,7 @@ public class SegmentCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("segment.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/segment");
+    return new ModelAndView("redirect:/settings/segments");
   }
 
   @GetMapping(value = "/delete/{id}")

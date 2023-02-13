@@ -12,7 +12,7 @@ public class NotificationController {
 
   @GetMapping("")
   public String index() {
-    return "account/notification/index";
+    return "accounts/notification/index";
   }
 
 }

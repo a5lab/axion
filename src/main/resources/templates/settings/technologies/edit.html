@@ -8,11 +8,11 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit segment</h1>
-      <form action="#" th:action="@{/settings/segment/update}" th:object="${segmentDto}" method="post">
-        <th:block th:replace="~{settings/segment/fields.html}" />
+      <h1>Edit technology</h1>
+      <form action="#" th:action="@{/templates/settings/technologies/update}" th:object="${technologyDto}" method="post">
+        <th:block th:replace="~{settings/technologies/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update segment">
+        <input type="submit" value="Update technology">
       </form>      
     </div>
   </body>

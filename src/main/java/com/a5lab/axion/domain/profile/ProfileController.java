@@ -12,7 +12,7 @@ public class ProfileController {
 
   @GetMapping("")
   public String index() {
-    return "account/profile/index";
+    return "accounts/profile/index";
   }
 
 }

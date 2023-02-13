@@ -36,7 +36,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(get("/settings/tenants"))
         .andExpect(status().isOk())
-        .andExpect(view().name("settings/tenant/index"))
+        .andExpect(view().name("settings/tenants/index"))
         .andExpect(model().attributeExists("tenantDtoPage"))
         .andExpect(model().attributeExists("pageNumbers"))
         .andReturn();

@@ -10656,7 +10656,7 @@ function polygonContains(polygon, point) {
   // * the polygon does not (cumulatively) wind around it, but has a negative
   //   (counter-clockwise) area.
   //
-  // Second, count the (signed) number of times a segment crosses a lambda
+  // Second, count the (signed) number of times a segments crosses a lambda
   // from the point to the South pole.  If it is zero, then the point is the
   // same side as the South pole.
 
@@ -10938,7 +10938,7 @@ function clipCircle(radius) {
         } else if (notHemisphere && point0 && smallRadius ^ v) {
           var t;
           // If the codes for two points are different, or are both zero,
-          // and there this segment intersects with the small circle.
+          // and there this segments intersects with the small circle.
           if (!(c & c0) && (t = intersect(point1, point0, true))) {
             clean = 0;
             if (smallRadius) {
@@ -11113,7 +11113,7 @@ function clipLine(a, b, x0, y0, x1, y1) {
 
 var clipMax = 1e9, clipMin = -clipMax;
 
-// TODO Use d3-polygon’s polygonContains here for the ring check?
+// TODO Use d3-polygon’s polygonContains here for the rings check?
 // TODO Eliminate duplicate buffering in clipBuffer and polygon.push?
 
 function clipRectangle(x0, y0, x1, y1) {
@@ -17648,7 +17648,7 @@ function arc() {
       // Is the sector collapsed to a line?
       if (!(da1 > epsilon)) context.moveTo(x01, y01);
 
-      // Does the sector’s outer ring have rounded corners?
+      // Does the sector’s outer rings have rounded corners?
       else if (rc1 > epsilon) {
         t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw);
         t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
@@ -17658,7 +17658,7 @@ function arc() {
         // Have the corners merged?
         if (rc1 < rc) context.arc(t0.cx, t0.cy, rc1, atan2(t0.y01, t0.x01), atan2(t1.y01, t1.x01), !cw);
 
-        // Otherwise, draw the two corners and the ring.
+        // Otherwise, draw the two corners and the rings.
         else {
           context.arc(t0.cx, t0.cy, rc1, atan2(t0.y01, t0.x01), atan2(t0.y11, t0.x11), !cw);
           context.arc(0, 0, r1, atan2(t0.cy + t0.y11, t0.cx + t0.x11), atan2(t1.cy + t1.y11, t1.cx + t1.x11), !cw);
@@ -17666,14 +17666,14 @@ function arc() {
         }
       }
 
-      // Or is the outer ring just a circular arc?
+      // Or is the outer rings just a circular arc?
       else context.moveTo(x01, y01), context.arc(0, 0, r1, a01, a11, !cw);
 
-      // Is there no inner ring, and it’s a circular sector?
+      // Is there no inner rings, and it’s a circular sector?
       // Or perhaps it’s an annular sector collapsed due to padding?
       if (!(r0 > epsilon) || !(da0 > epsilon)) context.lineTo(x10, y10);
 
-      // Does the sector’s inner ring (or point) have rounded corners?
+      // Does the sector’s inner rings (or point) have rounded corners?
       else if (rc0 > epsilon) {
         t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw);
         t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
@@ -17683,7 +17683,7 @@ function arc() {
         // Have the corners merged?
         if (rc0 < rc) context.arc(t0.cx, t0.cy, rc0, atan2(t0.y01, t0.x01), atan2(t1.y01, t1.x01), !cw);
 
-        // Otherwise, draw the two corners and the ring.
+        // Otherwise, draw the two corners and the rings.
         else {
           context.arc(t0.cx, t0.cy, rc0, atan2(t0.y01, t0.x01), atan2(t0.y11, t0.x11), !cw);
           context.arc(0, 0, r0, atan2(t0.cy + t0.y11, t0.cx + t0.x11), atan2(t1.cy + t1.y11, t1.cx + t1.x11), cw);
@@ -17691,7 +17691,7 @@ function arc() {
         }
       }
 
-      // Or is the inner ring just a circular arc?
+      // Or is the inner rings just a circular arc?
       else context.arc(0, 0, r0, a10, a00, cw);
     }
 

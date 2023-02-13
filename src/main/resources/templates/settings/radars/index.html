@@ -14,7 +14,7 @@
           <h1>Radars</h1>
           <div>
             <span th:if="${radarPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/settings/radar(size=${radarPage.size}, page=${pageNumber})}"
+              <a th:href="@{/templates/settings/radars(size=${radarPage.size}, page=${pageNumber})}"
                  th:text="${pageNumber}" th:class="${pageNumber==radarPage.number + 1} ? active"></a>
             </span>
           </div>
@@ -38,9 +38,9 @@
                 <td th:text="${radar.description}"></td>
                 <td th:text="${radar.primary}"></td>
                 <td th:text="${radar.active}"></td>
-                <td><a th:href="@{/settings/radar/show/{id}(id=${radar.id})}">Show</a></td>
-                <td><a th:href="@{/settings/radar/edit/{id}(id=${radar.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/radar/delete/{id}(id=${radar.id})}">Delete</a></td>
+                <td><a th:href="@{/templates/settings/radars/show/{id}(id=${radar.id})}">Show</a></td>
+                <td><a th:href="@{/templates/settings/radars/edit/{id}(id=${radar.id})}">Edit</a></td>
+                <td><a th:href="@{/templates/settings/radars/delete/{id}(id=${radar.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
