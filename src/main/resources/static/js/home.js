@@ -188,7 +188,7 @@ function radar_visualization(config) {
     }
   }
 
-  // position each entry randomly in its segment
+  // position each technology randomly in its segment
   for (var i = 0; i < config.entries.length; i++) {
     var entry = config.entries[i];
     entry.segment = segment(entry.quadrant, entry.ring);
@@ -212,7 +212,7 @@ function radar_visualization(config) {
     segmented[entry.quadrant][entry.ring].push(entry);
   }
 
-  // assign unique sequential id to each entry
+  // assign unique sequential id to each technology
   var id = 1;
   for (var quadrant of [2,3,1,0]) {
     for (var ring = 0; ring < 4; ring++) {
@@ -429,26 +429,26 @@ function radar_visualization(config) {
   }
 
   // draw blips on radar
-  var blips = rink.selectAll(".blip")
+  var blips = rink.selectAll(".technology_blip")
     .data(config.entries)
     .enter()
       .append("g")
-        .attr("class", "blip")
+        .attr("class", "technology_blip")
         .attr("transform", function(d, i) { return legend_transform(d.quadrant, d.ring, i); })
         .on("mouseover", function(event, d) { showBubble(d); highlightLegendItem(d); })
         .on("mouseout", function(event, d) { hideBubble(d); unhighlightLegendItem(d); });
 
-  // configure each blip
+  // configure each technology_blip
   blips.each(function(d) {
     var blip = d3.select(this);
 
-    // blip link
+    // technology_blip link
     if (!config.print_layout && d.active && d.hasOwnProperty("link")) {
       blip = blip.append("a")
         .attr("xlink:href", d.link);
     }
 
-    // blip shape
+    // technology_blip shape
     if (d.moved > 0) {
       blip.append("path")
         .attr("d", "M -11,5 11,5 0,-13 z") // triangle pointing up
@@ -463,7 +463,7 @@ function radar_visualization(config) {
         .attr("fill", d.color);
     }
 
-    // blip text
+    // technology_blip text
     if (d.active || config.print_layout) {
       var blip_text = config.print_layout ? d.id : d.label.match(/[a-z]/i);
       blip.append("text")
