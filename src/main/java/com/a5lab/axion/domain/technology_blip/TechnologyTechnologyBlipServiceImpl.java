@@ -46,7 +46,8 @@ public class TechnologyTechnologyBlipServiceImpl implements TechnologyBlipServic
   @Override
   @Transactional
   public TechnologyBlipDto save(TechnologyBlipDto technologyBlipDto) {
-    return technologyBlipMapper.toDto(technologyBlipRepository.save(technologyBlipMapper.toEntity(technologyBlipDto)));
+    return technologyBlipMapper.toDto(
+        technologyBlipRepository.save(technologyBlipMapper.toEntity(technologyBlipDto)));
   }
 
   @Override

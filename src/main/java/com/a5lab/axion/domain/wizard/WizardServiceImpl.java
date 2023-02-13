@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -23,6 +22,7 @@ import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
 import com.a5lab.axion.domain.technology.TechnologyService;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
 
 @RequiredArgsConstructor

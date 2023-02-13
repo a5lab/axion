@@ -29,7 +29,6 @@ import com.a5lab.axion.domain.technology.TechnologyService;
 import com.a5lab.axion.utils.FlashMessages;
 
 
-
 @Controller
 @RequestMapping("/settings/blip")
 @RequiredArgsConstructor
@@ -90,7 +89,8 @@ public class TechnologyBlipCfgController {
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid TechnologyBlipDto technologyBlipDto, BindingResult bindingResult,
+  public ModelAndView create(@Valid TechnologyBlipDto technologyBlipDto,
+                             BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/blip/add");
@@ -129,7 +129,7 @@ public class TechnologyBlipCfgController {
 
   @PostMapping("/update")
   public ModelAndView update(@Valid TechnologyBlipDto technologyBlipDto,
-                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/blip/edit");
       modelAndView.addObject("blipDto", technologyBlipDto);

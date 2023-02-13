@@ -10,5 +10,6 @@ import com.a5lab.axion.utils.CycleAvoidingEntityToDtoMapper;
 
 @Mapper(config = MapperConfiguration.class,
     uses = {SegmentMapper.class, TechnologyMapper.class, RingMapper.class})
-public abstract class TechnologyBlipMapper extends CycleAvoidingEntityToDtoMapper<TechnologyBlip, TechnologyBlipDto> {
+public abstract class TechnologyBlipMapper
+    extends CycleAvoidingEntityToDtoMapper<TechnologyBlip, TechnologyBlipDto> {
 }
