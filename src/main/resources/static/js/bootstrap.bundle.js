@@ -6096,7 +6096,7 @@
 
       config.selector = false;
       config.trigger = 'manual'; // In the future can be replaced with:
-      // const keysWithDifferentValues = Object.entries(this._config).filter(entry => this.constructor.Default[entry[0]] !== this._config[entry[0]])
+      // const keysWithDifferentValues = Object.entries(this._config).filter(technology => this.constructor.Default[technology[0]] !== this._config[technology[0]])
       // `Object.fromEntries(keysWithDifferentValues)`
 
       return config;

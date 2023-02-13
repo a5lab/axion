@@ -188,7 +188,7 @@ function radar_visualization(config) {
     }
   }
 
-  // position each entry randomly in its segment
+  // position each technology randomly in its segment
   for (var i = 0; i < config.entries.length; i++) {
     var entry = config.entries[i];
     entry.segment = segment(entry.quadrant, entry.ring);
@@ -212,7 +212,7 @@ function radar_visualization(config) {
     segmented[entry.quadrant][entry.ring].push(entry);
   }
 
-  // assign unique sequential id to each entry
+  // assign unique sequential id to each technology
   var id = 1;
   for (var quadrant of [2,3,1,0]) {
     for (var ring = 0; ring < 4; ring++) {

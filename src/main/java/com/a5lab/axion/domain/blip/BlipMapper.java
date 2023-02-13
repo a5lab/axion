@@ -3,9 +3,9 @@ package com.a5lab.axion.domain.blip;
 import org.mapstruct.Mapper;
 
 import com.a5lab.axion.config.MapperConfiguration;
-import com.a5lab.axion.domain.entry.EntryMapper;
 import com.a5lab.axion.domain.ring.RingMapper;
 import com.a5lab.axion.domain.segment.SegmentMapper;
+import com.a5lab.axion.domain.technology.EntryMapper;
 import com.a5lab.axion.utils.CycleAvoidingEntityToDtoMapper;
 
 @Mapper(config = MapperConfiguration.class,

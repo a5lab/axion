@@ -22,7 +22,7 @@ public class MessageConfiguration implements WebMvcConfigurer {
     messageSource.setBasenames(
         "classpath:/messages/application",
         "classpath:/messages/blip",
-        "classpath:/messages/entry",
+        "classpath:/messages/technology",
         "classpath:/messages/radar",
         "classpath:/messages/ring",
         "classpath:/messages/segment",

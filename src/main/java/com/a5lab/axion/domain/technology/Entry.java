@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.entry;
+package com.a5lab.axion.domain.technology;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

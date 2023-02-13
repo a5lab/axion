@@ -25,7 +25,7 @@ public class BlipServiceImpl implements BlipService {
             Sort.by(Sort.Direction.ASC, "radar.title")
                 .and(Sort.by(Sort.Direction.ASC, "segment.title"))
                 .and(Sort.by(Sort.Direction.ASC, "ring.title"))
-                .and(Sort.by(Sort.Direction.ASC, "entry.title"))
+                .and(Sort.by(Sort.Direction.ASC, "technology.title"))
         )
         .stream().map(blipMapper::toDto).collect(Collectors.toList());
   }

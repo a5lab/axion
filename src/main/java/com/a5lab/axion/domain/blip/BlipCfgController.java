@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.a5lab.axion.domain.entry.EntryService;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentService;
+import com.a5lab.axion.domain.technology.EntryService;
 import com.a5lab.axion.utils.FlashMessages;
 
 

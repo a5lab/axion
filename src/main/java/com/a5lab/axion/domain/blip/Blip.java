@@ -19,10 +19,10 @@ import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
-import com.a5lab.axion.domain.entry.Entry;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.segment.Segment;
+import com.a5lab.axion.domain.technology.Entry;
 
 
 @Entity
