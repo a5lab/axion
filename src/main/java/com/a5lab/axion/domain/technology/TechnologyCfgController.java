@@ -26,7 +26,7 @@ import com.a5lab.axion.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/entry")
+@RequestMapping("/settings/technology")
 @RequiredArgsConstructor
 public class TechnologyCfgController {
 
@@ -40,7 +40,7 @@ public class TechnologyCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/entry/index");
+    ModelAndView modelAndView = new ModelAndView("settings/technology/index");
     Page<TechnologyDto> entryDtoPage =
         entryService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("entryDtoPage", entryDtoPage);
@@ -58,20 +58,20 @@ public class TechnologyCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TechnologyDto> entryRecord = entryService.findById(id);
     if (entryRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entry/show");
+      ModelAndView modelAndView = new ModelAndView("settings/technology/show");
       modelAndView.addObject("entryDto", entryRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("entry.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/entry");
+      return new ModelAndView("redirect:/settings/technology");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/entry/add");
+    ModelAndView modelAndView = new ModelAndView("settings/technology/add");
     modelAndView.addObject("entryDto", new TechnologyDto());
     return modelAndView;
   }
@@ -80,7 +80,7 @@ public class TechnologyCfgController {
   public ModelAndView create(@Valid TechnologyDto technologyDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entry/add");
+      ModelAndView modelAndView = new ModelAndView("settings/technology/add");
       modelAndView.addObject("entryDto", technologyDto);
       return modelAndView;
     }
@@ -88,21 +88,21 @@ public class TechnologyCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/entry");
+    return new ModelAndView("redirect:/settings/technology");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TechnologyDto> entryDto = entryService.findById(id);
     if (entryDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entry/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/technology/edit");
       modelAndView.addObject("entryDto", entryDto.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("entry.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/entry");
+      return new ModelAndView("redirect:/settings/technology");
     }
   }
 
@@ -110,7 +110,7 @@ public class TechnologyCfgController {
   public ModelAndView update(@Valid TechnologyDto technologyDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/entry/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/technology/edit");
       modelAndView.addObject("entryDto", technologyDto);
       return modelAndView;
     }
@@ -118,7 +118,7 @@ public class TechnologyCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/entry");
+    return new ModelAndView("redirect:/settings/technology");
   }
 
   @GetMapping(value = "/delete/{id}")
@@ -127,6 +127,6 @@ public class TechnologyCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/entries";
+    return "redirect:/settings/technology";
   }
 }

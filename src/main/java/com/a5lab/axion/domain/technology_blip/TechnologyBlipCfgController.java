@@ -30,7 +30,7 @@ import com.a5lab.axion.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/blip")
+@RequestMapping("/settings/technology_blip")
 @RequiredArgsConstructor
 public class TechnologyBlipCfgController {
 
@@ -48,7 +48,7 @@ public class TechnologyBlipCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/blip/index");
+    ModelAndView modelAndView = new ModelAndView("settings/technology_blip/index");
     Page<TechnologyBlipDto> blipDtoPage =
         technologyBlipService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("blipDtoPage", blipDtoPage);
@@ -66,20 +66,20 @@ public class TechnologyBlipCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TechnologyBlipDto> blipRecord = technologyBlipService.findById(id);
     if (blipRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/blip/show");
+      ModelAndView modelAndView = new ModelAndView("settings/technology_blip/show");
       modelAndView.addObject("blipDto", blipRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("blip.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/blip");
+      return new ModelAndView("redirect:/settings/technology_blip");
     }
   }
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/blip/add");
+    ModelAndView modelAndView = new ModelAndView("settings/technology_blip/add");
     modelAndView.addObject("blipDto", new TechnologyBlipDto());
     modelAndView.addObject("radarDtos", this.radarService.findAll());
     modelAndView.addObject("entryDtos", this.entryService.findAll());
@@ -93,7 +93,7 @@ public class TechnologyBlipCfgController {
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/blip/add");
+      ModelAndView modelAndView = new ModelAndView("settings/technology_blip/add");
       modelAndView.addObject("blipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       modelAndView.addObject("entryDtos", this.entryService.findAll());
@@ -105,14 +105,14 @@ public class TechnologyBlipCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("blip.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/blip");
+    return new ModelAndView("redirect:/settings/technology_blip");
   }
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TechnologyBlipDto> blipDto = technologyBlipService.findById(id);
     if (blipDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/blip/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/technology_blip/edit");
       modelAndView.addObject("blipDto", blipDto.get());
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       modelAndView.addObject("entryDtos", this.entryService.findAll());
@@ -123,7 +123,7 @@ public class TechnologyBlipCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("blip.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/blip");
+      return new ModelAndView("redirect:/settings/technology_blip");
     }
   }
 
@@ -131,7 +131,7 @@ public class TechnologyBlipCfgController {
   public ModelAndView update(@Valid TechnologyBlipDto technologyBlipDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/blip/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/technology_blip/edit");
       modelAndView.addObject("blipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       modelAndView.addObject("entryDtos", this.entryService.findAll());
@@ -143,7 +143,7 @@ public class TechnologyBlipCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("blip.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/blip");
+    return new ModelAndView("redirect:/settings/technology_blip");
   }
 
   @GetMapping(value = "/delete/{id}")
