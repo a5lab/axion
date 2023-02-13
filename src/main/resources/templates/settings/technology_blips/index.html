@@ -31,7 +31,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="technologyBlipDto : ${technologyBliDtoPage.getContent()}">
+              <tr th:each="technologyBlipDto : ${technologyBlipDtoPage.getContent()}">
                 <td th:text="${technologyBlipDto.radar.title}"></td>
                 <td th:text="${technologyBlipDto.segment.title}"></td>
                 <td th:text="${technologyBlipDto.ring.title}"></td>
@@ -43,7 +43,7 @@
             </tbody>
           </table>
         </div>
-        <p><a href="/settings/technology_blip/add">Add a new technology blip</a></p>
+        <p><a href="/settings/technology_blips/add">Add a new technology blip</a></p>
       </div>
     </div>
   </body>
