@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/account/notifications")
+@RequestMapping("/accounts/notifications")
 @RequiredArgsConstructor
 public class NotificationController {
 
   @GetMapping("")
   public String index() {
-    return "accounts/notification/index";
+    return "accounts/notifications/index";
   }
 
 }
