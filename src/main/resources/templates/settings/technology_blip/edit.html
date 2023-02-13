@@ -9,10 +9,10 @@
   <body>
     <div id="content">
       <h1>Edit technologyBlip</h1>
-      <form action="#" th:action="@{/settings/technologyBlip/update}" th:object="${technologyBlipDto}" method="post">
-        <th:block th:replace="~{settings/technologyBlip/fields.html}" />
+      <form action="#" th:action="@{/settings/technology_blip/update}" th:object="${technologyBlipDto}" method="post">
+        <th:block th:replace="~{settings/technology_blip/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update technologyBlip">
+        <input type="submit" value="Update technology blip">
       </form>      
     </div>
   </body>

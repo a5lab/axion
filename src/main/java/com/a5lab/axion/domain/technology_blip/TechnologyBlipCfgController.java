@@ -51,7 +51,7 @@ public class TechnologyBlipCfgController {
     ModelAndView modelAndView = new ModelAndView("settings/technology_blip/index");
     Page<TechnologyBlipDto> blipDtoPage =
         technologyBlipService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
-    modelAndView.addObject("blipDtoPage", blipDtoPage);
+    modelAndView.addObject("technologyBlipDtoPage", blipDtoPage);
 
     int totalPages = blipDtoPage.getTotalPages();
     if (totalPages > 0) {
@@ -67,7 +67,7 @@ public class TechnologyBlipCfgController {
     Optional<TechnologyBlipDto> blipRecord = technologyBlipService.findById(id);
     if (blipRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/technology_blip/show");
-      modelAndView.addObject("blipDto", blipRecord.get());
+      modelAndView.addObject("technologyBlipDto", blipRecord.get());
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -80,7 +80,7 @@ public class TechnologyBlipCfgController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/technology_blip/add");
-    modelAndView.addObject("blipDto", new TechnologyBlipDto());
+    modelAndView.addObject("technologyBlipDto", new TechnologyBlipDto());
     modelAndView.addObject("radarDtos", this.radarService.findAll());
     modelAndView.addObject("technologyDtos", this.technologyService.findAll());
     modelAndView.addObject("segmentDtos", this.segmentService.findAll());
@@ -94,7 +94,7 @@ public class TechnologyBlipCfgController {
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/technology_blip/add");
-      modelAndView.addObject("blipDto", technologyBlipDto);
+      modelAndView.addObject("technologyBlipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       modelAndView.addObject("technologyDtos", this.technologyService.findAll());
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
@@ -113,7 +113,7 @@ public class TechnologyBlipCfgController {
     Optional<TechnologyBlipDto> blipDto = technologyBlipService.findById(id);
     if (blipDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/technology_blip/edit");
-      modelAndView.addObject("blipDto", blipDto.get());
+      modelAndView.addObject("technologyBlipDto", blipDto.get());
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       modelAndView.addObject("technologyDtos", this.technologyService.findAll());
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
@@ -132,7 +132,7 @@ public class TechnologyBlipCfgController {
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/technology_blip/edit");
-      modelAndView.addObject("blipDto", technologyBlipDto);
+      modelAndView.addObject("technologyBlipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       modelAndView.addObject("technologyDtos", this.technologyService.findAll());
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());

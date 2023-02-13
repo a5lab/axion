@@ -8,14 +8,14 @@
   </head>
   <body>
     <div id="content">
-      <div th:switch="${blipDtoPage.getTotalElements()}">
+      <div th:switch="${technologyBlipDtoPage.getTotalElements()}">
         <h1 th:case="0">No blips yet!</h1>
         <div th:case="*">
           <h1>Technology blips</h1>
           <div>
-            <span th:if="${blipDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/settings/technologyBlip(size=${blipDtoPage.size}, page=${pageNumber})}"
-                 th:text="${pageNumber}" th:class="${pageNumber==blipDtoPage.number + 1} ? active"></a>
+            <span th:if="${technologyBlipDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/technologyBlip(size=${technologyBlipDtoPage.size}, page=${pageNumber})}"
+                 th:text="${pageNumber}" th:class="${pageNumber==technologyBlipDtoPage.number + 1} ? active"></a>
             </span>
           </div>
           <table>
@@ -31,19 +31,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="technologyBlipDto : ${blipDtoPage.getContent()}">
+              <tr th:each="technologyBlipDto : ${technologyBliDtoPage.getContent()}">
                 <td th:text="${technologyBlipDto.radar.title}"></td>
                 <td th:text="${technologyBlipDto.segment.title}"></td>
                 <td th:text="${technologyBlipDto.ring.title}"></td>
                 <td th:text="${technologyBlipDto.technology.title}"></td>
-                <td><a th:href="@{/settings/technologyBlip/show/{id}(id=${technologyBlipDto.id})}">Show</a></td>
-                <td><a th:href="@{/settings/technologyBlip/edit/{id}(id=${technologyBlipDto.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/technologyBlip/delete/{id}(id=${technologyBlipDto.id})}">Delete</a></td>
+                <td><a th:href="@{/settings/technology_blip/show/{id}(id=${technologyBlipDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/technology_blip/edit/{id}(id=${technologyBlipDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/technology_blip/delete/{id}(id=${technologyBlipDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p><a href="/settings/technologyBlip/add">Add a new technology blip</a></p>
+        <p><a href="/settings/technology_blip/add">Add a new technology blip</a></p>
       </div>
     </div>
   </body>
