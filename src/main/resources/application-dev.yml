@@ -2,6 +2,11 @@ logging:
   level:
     root: info
 
+server:
+  error:
+    whitelabel:
+      enabled: false
+
 spring:
   devtools:
     restart:
