@@ -64,7 +64,7 @@ public class TenantCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("tenant.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/tenant");
+      return new ModelAndView("redirect:/settings/tenants");
     }
   }
 
@@ -87,7 +87,7 @@ public class TenantCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.created", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenant");
+    return new ModelAndView("redirect:/settings/tenants");
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -101,7 +101,7 @@ public class TenantCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("tenant.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/tenant");
+      return new ModelAndView("redirect:/settings/tenants");
     }
   }
 
@@ -117,7 +117,7 @@ public class TenantCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenant");
+    return new ModelAndView("redirect:/settings/tenants");
   }
 
   @GetMapping(value = "/delete/{id}")
@@ -126,6 +126,6 @@ public class TenantCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("tenant.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/tenant";
+    return "redirect:/settings/tenants";
   }
 }
