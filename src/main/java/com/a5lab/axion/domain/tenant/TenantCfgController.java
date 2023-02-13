@@ -39,7 +39,7 @@ public class TenantCfgController {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
-    ModelAndView modelAndView = new ModelAndView("settings/tenant/index");
+    ModelAndView modelAndView = new ModelAndView("settings/tenants/index");
     Page<TenantDto> tenantDtoPage =
         tenantService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("tenantDtoPage", tenantDtoPage);
@@ -57,7 +57,7 @@ public class TenantCfgController {
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TenantDto> tenantRecord = tenantService.findById(id);
     if (tenantRecord.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenant/show");
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/show");
       modelAndView.addObject("tenantDto", tenantRecord.get());
       return modelAndView;
     } else {
@@ -70,7 +70,7 @@ public class TenantCfgController {
 
   @GetMapping("/add")
   public ModelAndView add() {
-    ModelAndView modelAndView = new ModelAndView("settings/tenant/add");
+    ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
     modelAndView.addObject("tenantDto", new TenantDto());
     return modelAndView;
   }
@@ -79,7 +79,7 @@ public class TenantCfgController {
   public ModelAndView create(@Valid TenantDto tenantDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenant/add");
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
       modelAndView.addObject("tenantDto", tenantDto);
       return modelAndView;
     }
@@ -94,7 +94,7 @@ public class TenantCfgController {
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     Optional<TenantDto> tenantDto = tenantService.findById(id);
     if (tenantDto.isPresent()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenant/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
       modelAndView.addObject("tenantDto", tenantDto.get());
       return modelAndView;
     } else {
@@ -109,7 +109,7 @@ public class TenantCfgController {
   public ModelAndView update(@Valid TenantDto tenantDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/tenant/edit");
+      ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
       modelAndView.addObject("tenantDto", tenantDto);
       return modelAndView;
     }
