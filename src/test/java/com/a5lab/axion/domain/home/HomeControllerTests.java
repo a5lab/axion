@@ -46,7 +46,7 @@ public class HomeControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get("/"))
         .andExpect(status().isOk())
         .andExpect(view().name("home/index"))
-        .andExpect(model().attributeExists("radars"))
+        .andExpect(model().attributeExists("radar"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
