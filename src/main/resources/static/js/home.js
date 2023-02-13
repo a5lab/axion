@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Radar configuration
   const config = {
-    svg_id: "radars",
+    svg_id: "radar",
     width: 1450,
     height: 1000,
     colors: {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Extract radars configuration
+  // Extract radar configuration
   config['title'] = d3.selectAll("h1#name").text();
   config['print_layout'] = true;
   // config['zoomed_quadrant'] = 0;
@@ -188,7 +188,7 @@ function radar_visualization(config) {
     }
   }
 
-  // position each entry randomly in its segments
+  // position each entry randomly in its segment
   for (var i = 0; i < config.entries.length; i++) {
     var entry = config.entries[i];
     entry.segment = segment(entry.quadrant, entry.ring);
@@ -428,7 +428,7 @@ function radar_visualization(config) {
     legendItem.removeAttribute("fill");
   }
 
-  // draw blips on radars
+  // draw blips on radar
   var blips = rink.selectAll(".blip")
     .data(config.entries)
     .enter()
@@ -478,7 +478,7 @@ function radar_visualization(config) {
     }
   });
 
-  // make sure that blips stay inside their segments
+  // make sure that blips stay inside their segment
   function ticked() {
     blips.attr("transform", function(d) {
       return translate(d.segment.clipx(d), d.segment.clipy(d));
