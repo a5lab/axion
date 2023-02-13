@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <h1>Add tenant</h1>
-      <form action="#" th:action="@{/templates/settings/tenants/create}" th:object="${tenantDto}" method="post">
+      <form action="#" th:action="@{/settings/tenants/create}" th:object="${tenantDto}" method="post">
         <th:block th:replace="~{settings/tenants/fields.html}" />
         <input type="submit" value="Add tenant">
       </form>

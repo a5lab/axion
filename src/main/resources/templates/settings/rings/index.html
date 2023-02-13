@@ -14,7 +14,7 @@
           <h1>Rings</h1>
           <div>
             <span th:if="${ringDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/templates/settings/rings(size=${ringDtoPage.size}, page=${pageNumber})}"
+              <a th:href="@{/settings/rings(size=${ringDtoPage.size}, page=${pageNumber})}"
                  th:text="${pageNumber}" th:class="${pageNumber==ringDtoPage.number + 1} ? active"></a>
             </span>
           </div>
@@ -38,9 +38,9 @@
                 <td th:text="${ringDto.description}"></td>
                 <td th:text="${ringDto.position}"></td>
                 <td th:text="${ringDto.active}"></td>
-                <td><a th:href="@{/templates/settings/rings/show/{id}(id=${ringDto.id})}">Show</a></td>
-                <td><a th:href="@{/templates/settings/rings/edit/{id}(id=${ringDto.id})}">Edit</a></td>
-                <td><a th:href="@{/templates/settings/rings/delete/{id}(id=${ringDto.id})}">Delete</a></td>
+                <td><a th:href="@{/settings/rings/show/{id}(id=${ringDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/rings/edit/{id}(id=${ringDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/rings/delete/{id}(id=${ringDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>

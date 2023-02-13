@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <h1>Edit ring</h1>
-      <form action="#" th:action="@{/templates/settings/rings/update}" th:object="${ringDto}" method="post">
+      <form action="#" th:action="@{/settings/rings/update}" th:object="${ringDto}" method="post">
         <th:block th:replace="~{settings/rings/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
         <input type="submit" value="Update ring">

@@ -36,9 +36,9 @@
                 <td th:text="${technologyBlipDto.segment.title}"></td>
                 <td th:text="${technologyBlipDto.ring.title}"></td>
                 <td th:text="${technologyBlipDto.technology.title}"></td>
-                <td><a th:href="@{/templates/settings/technology_blips/show/{id}(id=${technologyBlipDto.id})}">Show</a></td>
-                <td><a th:href="@{/templates/settings/technology_blips/edit/{id}(id=${technologyBlipDto.id})}">Edit</a></td>
-                <td><a th:href="@{/templates/settings/technology_blips/delete/{id}(id=${technologyBlipDto.id})}">Delete</a></td>
+                <td><a th:href="@{/settings/technology_blips/show/{id}(id=${technologyBlipDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/technology_blips/edit/{id}(id=${technologyBlipDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/technology_blips/delete/{id}(id=${technologyBlipDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
