@@ -26,7 +26,7 @@ import com.a5lab.axion.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/technology")
+@RequestMapping("/settings/technologies")
 @RequiredArgsConstructor
 public class TechnologyCfgController {
 

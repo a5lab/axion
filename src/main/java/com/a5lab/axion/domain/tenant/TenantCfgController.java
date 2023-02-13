@@ -25,7 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.a5lab.axion.utils.FlashMessages;
 
 @Controller
-@RequestMapping("/settings/tenant")
+@RequestMapping("/settings/tenants")
 @RequiredArgsConstructor
 public class TenantCfgController {
 

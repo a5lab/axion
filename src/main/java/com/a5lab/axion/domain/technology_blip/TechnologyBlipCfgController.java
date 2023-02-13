@@ -30,7 +30,7 @@ import com.a5lab.axion.utils.FlashMessages;
 
 
 @Controller
-@RequestMapping("/settings/technology_blip")
+@RequestMapping("/settings/technology_blips")
 @RequiredArgsConstructor
 public class TechnologyBlipCfgController {
 

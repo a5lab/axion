@@ -1,14 +1,18 @@
 package com.a5lab.axion.domain.profile;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/account/profile")
+@RequiredArgsConstructor
 public class ProfileController {
 
-  @GetMapping("/account/profile")
+  @GetMapping("")
   public String index() {
-    return "account/profile";
+    return "account/profile/index";
   }
 
 }
