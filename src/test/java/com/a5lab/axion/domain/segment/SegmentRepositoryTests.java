@@ -17,7 +17,7 @@ class SegmentRepositoryTests extends AbstractRepositoryTests {
 
   @Test
   void shouldSaveSegmentWithAllFields() {
-    // TODO: add radar to segment
+    // TODO: add radars to segments
     /*
     final Segment s = new Segment();
     s.setTitle("My new test Segment");

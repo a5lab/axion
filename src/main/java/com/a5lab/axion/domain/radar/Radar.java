@@ -24,8 +24,8 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
-import com.a5lab.axion.domain.blip.Blip;
 import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.a5lab.axion.utils.JpaConstants;
 
 @Entity
@@ -65,5 +65,5 @@ public class Radar extends AbstractAuditable {
   @Setter(AccessLevel.NONE)
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar")
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
-  private List<Blip> blipList;
+  private List<TechnologyBlip> technologyBlipList;
 }

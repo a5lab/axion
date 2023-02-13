@@ -18,7 +18,7 @@ public class RadarPrimaryValidator
     return true;
     /*
     // TODO: implement it
-    if (radar.isPrimary() == false) {
+    if (radars.isPrimary() == false) {
       return true;
     }
 

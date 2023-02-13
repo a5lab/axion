@@ -1,68 +1,68 @@
 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
   <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
     <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-       href="/settings/tenant">
+       href="/settings/tenants">
       <span class="fs-5 d-none d-sm-inline">Settings</span>
     </a>
     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
       <li class="nav-item">
-        <a class="nav-link align-middle px-0 active" href="/settings/tenant"
-           th:if="${#strings.startsWith(servletPath,'/settings/tenant')}">
+        <a class="nav-link align-middle px-0 active" href="/settings/tenants"
+           th:if="${#strings.startsWith(servletPath,'/settings/tenants')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Tenants</span>
         </a>
-        <a class="nav-link align-middle px-0" href="/settings/tenant"
-           th:unless="${#strings.startsWith(servletPath,'/settings/tenant')}">
+        <a class="nav-link align-middle px-0" href="/settings/tenants"
+           th:unless="${#strings.startsWith(servletPath,'/settings/tenants')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Tenants</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link align-middle px-0 active" href="/settings/entry"
-           th:if="${#strings.startsWith(servletPath,'/settings/entry')}">
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Entries</span>
+        <a class="nav-link align-middle px-0 active" href="/settings/technologies"
+           th:if="${#strings.startsWith(servletPath,'/settings/technologies')}">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Technologies</span>
         </a>
-        <a class="nav-link align-middle px-0" href="/settings/entry"
-           th:unless="${#strings.startsWith(servletPath,'/settings/entry')}">
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Entries</span>
+        <a class="nav-link align-middle px-0" href="/settings/technologies"
+           th:unless="${#strings.startsWith(servletPath,'/settings/technologies')}">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Technologies</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link align-middle px-0 active" href="/settings/radar"
-           th:if="${#strings.startsWith(servletPath,'/settings/radar')}">
+        <a class="nav-link align-middle px-0 active" href="/settings/radars"
+           th:if="${#strings.startsWith(servletPath,'/settings/radars')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Radars</span>
         </a>
-        <a class="nav-link align-middle px-0" href="/settings/radar"
-           th:unless="${#strings.startsWith(servletPath,'/settings/radar')}">
+        <a class="nav-link align-middle px-0" href="/settings/radars"
+           th:unless="${#strings.startsWith(servletPath,'/settings/radars')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Radars</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link align-middle px-0 active" href="/settings/ring"
-           th:if="${#strings.startsWith(servletPath,'/settings/ring')}">
+        <a class="nav-link align-middle px-0 active" href="/settings/rings"
+           th:if="${#strings.startsWith(servletPath,'/settings/rings')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Rings</span>
         </a>
-        <a class="nav-link align-middle px-0" href="/settings/ring"
-           th:unless="${#strings.startsWith(servletPath,'/settings/ring')}">
+        <a class="nav-link align-middle px-0" href="/settings/rings"
+           th:unless="${#strings.startsWith(servletPath,'/settings/rings')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Rings</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link align-middle px-0 active" href="/settings/segment"
-           th:if="${#strings.startsWith(servletPath,'/settings/segment')}">
+        <a class="nav-link align-middle px-0 active" href="/settings/segments"
+           th:if="${#strings.startsWith(servletPath,'/settings/segments')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Segments</span>
         </a>
-        <a class="nav-link align-middle px-0" href="/settings/segment"
-           th:unless="${#strings.startsWith(servletPath,'/settings/segment')}">
+        <a class="nav-link align-middle px-0" href="/settings/segments"
+           th:unless="${#strings.startsWith(servletPath,'/settings/segments')}">
           <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Segments</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link align-middle px-0 active" href="/settings/blip"
-           th:if="${#strings.startsWith(servletPath,'/settings/blip')}">
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Blips</span>
+        <a class="nav-link align-middle px-0 active" href="/settings/technology_blips"
+           th:if="${#strings.startsWith(servletPath,'/settings/technology_blips')}">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Technology blips</span>
         </a>
-        <a class="nav-link align-middle px-0" href="/settings/blip"
-           th:unless="${#strings.startsWith(servletPath,'/settings/blip')}">
-          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Blips</span>
+        <a class="nav-link align-middle px-0" href="/settings/technology_blips"
+           th:unless="${#strings.startsWith(servletPath,'/settings/technology_blips')}">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Technology blips</span>
         </a>
       </li>
     </ul>

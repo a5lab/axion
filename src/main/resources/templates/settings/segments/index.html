@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html th:replace="~{layouts/settings :: settings(~{::title}, ~{::meta}, ~{:: #content})}"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Dashboard title</title>
+    <meta content="Page description" name="description"/>
+    <meta content="HTML, CSS, JavaScript" name="keywords">
+  </head>
+  <body>
+    <div id="content">
+      <div th:switch="${segmentDtoPage.getTotalElements()}">
+        <h1 th:case="0">No segments yet!</h1>
+        <div th:case="*">
+          <h1>Segments</h1>
+          <div>
+            <span th:if="${segmentDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a th:href="@{/settings/segments(size=${segmentDtoPage.size}, page=${pageNumber})}"
+                 th:text="${pageNumber}" th:class="${pageNumber==segmentDtoPage.number + 1} ? active"></a>
+            </span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Radar</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Position</th>
+                <th>Active</th>
+                <th>Show</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="segmentDto : ${segmentDtoPage.getContent()}">
+                <td th:text="${segmentDto.radar.title}"></td>
+                <td th:text="${segmentDto.title}"></td>
+                <td th:text="${segmentDto.description}"></td>
+                <td th:text="${segmentDto.position}"></td>
+                <td th:text="${segmentDto.active}"></td>
+                <td><a th:href="@{/settings/segments/show/{id}(id=${segmentDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/segments/edit/{id}(id=${segmentDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/segments/delete/{id}(id=${segmentDto.id})}">Delete</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><a href="/settings/segments/add">Add a new segment</a></p>
+      </div>
+    </div>
+  </body>
+</html>
