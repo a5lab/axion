@@ -33,7 +33,7 @@ import com.a5lab.axion.domain.technology.Technology;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Blip extends AbstractAuditable {
+public class TechnologyBlip extends AbstractAuditable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

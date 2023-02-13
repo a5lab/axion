@@ -14,7 +14,7 @@
           <h1>Blips</h1>
           <div>
             <span th:if="${blipDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/settings/blip(size=${blipDtoPage.size}, page=${pageNumber})}"
+              <a th:href="@{/settings/technologyBlip(size=${blipDtoPage.size}, page=${pageNumber})}"
                  th:text="${pageNumber}" th:class="${pageNumber==blipDtoPage.number + 1} ? active"></a>
             </span>
           </div>
@@ -31,19 +31,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="blipDto : ${blipDtoPage.getContent()}">
-                <td th:text="${blipDto.radar.title}"></td>
-                <td th:text="${blipDto.segment.title}"></td>
-                <td th:text="${blipDto.ring.title}"></td>
-                <td th:text="${blipDto.technology.title}"></td>
-                <td><a th:href="@{/settings/blip/show/{id}(id=${blipDto.id})}">Show</a></td>
-                <td><a th:href="@{/settings/blip/edit/{id}(id=${blipDto.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/blip/delete/{id}(id=${blipDto.id})}">Delete</a></td>
+              <tr th:each="technologyBlipDto : ${blipDtoPage.getContent()}">
+                <td th:text="${technologyBlipDto.radar.title}"></td>
+                <td th:text="${technologyBlipDto.segment.title}"></td>
+                <td th:text="${technologyBlipDto.ring.title}"></td>
+                <td th:text="${technologyBlipDto.technology.title}"></td>
+                <td><a th:href="@{/settings/technologyBlip/show/{id}(id=${technologyBlipDto.id})}">Show</a></td>
+                <td><a th:href="@{/settings/technologyBlip/edit/{id}(id=${technologyBlipDto.id})}">Edit</a></td>
+                <td><a th:href="@{/settings/technologyBlip/delete/{id}(id=${technologyBlipDto.id})}">Delete</a></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p><a href="/settings/blip/add">Add a new blip</a></p>
+        <p><a href="/settings/technologyBlip/add">Add a new technologyBlip</a></p>
       </div>
     </div>
   </body>

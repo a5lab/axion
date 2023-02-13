@@ -18,7 +18,7 @@ import com.a5lab.axion.domain.technology.TechnologyDto;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class BlipDto {
+public class TechnologyBlipDto {
 
   private Long id;
 

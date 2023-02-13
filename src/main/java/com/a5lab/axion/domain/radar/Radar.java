@@ -14,6 +14,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
+import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +26,6 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
 import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.technology_blip.Blip;
 import com.a5lab.axion.utils.JpaConstants;
 
 @Entity
@@ -65,5 +65,5 @@ public class Radar extends AbstractAuditable {
   @Setter(AccessLevel.NONE)
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar")
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
-  private List<Blip> blipList;
+  private List<TechnologyBlip> technologyBlipList;
 }

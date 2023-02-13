@@ -33,9 +33,9 @@ import com.a5lab.axion.utils.FlashMessages;
 @Controller
 @RequestMapping("/settings/blip")
 @RequiredArgsConstructor
-public class BlipCfgController {
+public class TechnologyBlipCfgController {
 
-  private final BlipService blipService;
+  private final TechnologyBlipService technologyBlipService;
   private final RadarService radarService;
   private final TechnologyService entryService;
   private final SegmentService segmentService;
@@ -50,8 +50,8 @@ public class BlipCfgController {
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/blip/index");
-    Page<BlipDto> blipDtoPage =
-        blipService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<TechnologyBlipDto> blipDtoPage =
+        technologyBlipService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("blipDtoPage", blipDtoPage);
 
     int totalPages = blipDtoPage.getTotalPages();
@@ -65,7 +65,7 @@ public class BlipCfgController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<BlipDto> blipRecord = blipService.findById(id);
+    Optional<TechnologyBlipDto> blipRecord = technologyBlipService.findById(id);
     if (blipRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/blip/show");
       modelAndView.addObject("blipDto", blipRecord.get());
@@ -81,7 +81,7 @@ public class BlipCfgController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/blip/add");
-    modelAndView.addObject("blipDto", new BlipDto());
+    modelAndView.addObject("blipDto", new TechnologyBlipDto());
     modelAndView.addObject("radarDtos", this.radarService.findAll());
     modelAndView.addObject("entryDtos", this.entryService.findAll());
     modelAndView.addObject("segmentDtos", this.segmentService.findAll());
@@ -90,18 +90,18 @@ public class BlipCfgController {
   }
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid BlipDto blipDto, BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes) {
+  public ModelAndView create(@Valid TechnologyBlipDto technologyBlipDto, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/blip/add");
-      modelAndView.addObject("blipDto", blipDto);
+      modelAndView.addObject("blipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       modelAndView.addObject("entryDtos", this.entryService.findAll());
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
     }
-    blipService.save(blipDto);
+    technologyBlipService.save(technologyBlipDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("blip.flash.info.created", null,
             LocaleContextHolder.getLocale()));
@@ -110,7 +110,7 @@ public class BlipCfgController {
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<BlipDto> blipDto = blipService.findById(id);
+    Optional<TechnologyBlipDto> blipDto = technologyBlipService.findById(id);
     if (blipDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/blip/edit");
       modelAndView.addObject("blipDto", blipDto.get());
@@ -128,18 +128,18 @@ public class BlipCfgController {
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid BlipDto blipDto,
+  public ModelAndView update(@Valid TechnologyBlipDto technologyBlipDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/blip/edit");
-      modelAndView.addObject("blipDto", blipDto);
+      modelAndView.addObject("blipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       modelAndView.addObject("entryDtos", this.entryService.findAll());
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
     }
-    blipService.save(blipDto);
+    technologyBlipService.save(technologyBlipDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("blip.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
@@ -148,7 +148,7 @@ public class BlipCfgController {
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    blipService.deleteById(id);
+    technologyBlipService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("blip.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));

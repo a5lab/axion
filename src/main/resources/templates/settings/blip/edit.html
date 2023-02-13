@@ -8,11 +8,11 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit blip</h1>
-      <form action="#" th:action="@{/settings/blip/update}" th:object="${blipDto}" method="post">
-        <th:block th:replace="~{settings/blip/fields.html}" />
+      <h1>Edit technologyBlip</h1>
+      <form action="#" th:action="@{/settings/technologyBlip/update}" th:object="${technologyBlipDto}" method="post">
+        <th:block th:replace="~{settings/technologyBlip/fields.html}" />
         <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update blip">
+        <input type="submit" value="Update technologyBlip">
       </form>      
     </div>
   </body>

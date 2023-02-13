@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/blips")
 @RequiredArgsConstructor
-public class BlipApiController {
+public class TechnologyBlipApiController {
 
-  private final BlipService blipService;
+  private final TechnologyBlipService technologyBlipService;
 
   @GetMapping("")
-  public Collection<BlipDto> index() {
-    return blipService.findAll();
+  public Collection<TechnologyBlipDto> index() {
+    return technologyBlipService.findAll();
   }
 }

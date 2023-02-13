@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -22,8 +23,7 @@ import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
 import com.a5lab.axion.domain.technology.TechnologyService;
-import com.a5lab.axion.domain.technology_blip.Blip;
-import com.a5lab.axion.domain.technology_blip.BlipService;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
 
 @RequiredArgsConstructor
 @Service
@@ -35,7 +35,7 @@ public class WizardServiceImpl implements WizardService {
   private final SegmentService segmentService;
 
   private final TechnologyService entryService;
-  private final BlipService blipService;
+  private final TechnologyBlipService technologyBlipService;
 
   private Radar radar;
 
@@ -160,12 +160,12 @@ public class WizardServiceImpl implements WizardService {
       final String segmentTitle = record[2];
       final String entryTitle = record[3];
 
-      Blip blip = new Blip();
-      blip.setRadar(this.radar);
-      blip.setRing(ringService.findByTitle(ringTitle).get());
-      blip.setSegment(segmentService.findByTitle(segmentTitle).get());
-      blip.setTechnology(entryService.findByTitle(entryTitle).get());
-      blipService.save(blip);
+      TechnologyBlip technologyBlip = new TechnologyBlip();
+      technologyBlip.setRadar(this.radar);
+      technologyBlip.setRing(ringService.findByTitle(ringTitle).get());
+      technologyBlip.setSegment(segmentService.findByTitle(segmentTitle).get());
+      technologyBlip.setTechnology(entryService.findByTitle(entryTitle).get());
+      technologyBlipService.save(technologyBlip);
     }
   }
 

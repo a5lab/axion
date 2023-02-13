@@ -14,50 +14,50 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class BlipServiceImpl implements BlipService {
-  private final BlipRepository blipRepository;
-  private final BlipMapper blipMapper;
+public class TechnologyTechnologyBlipServiceImpl implements TechnologyBlipService {
+  private final TechnologyBlipRepository technologyBlipRepository;
+  private final TechnologyBlipMapper technologyBlipMapper;
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<BlipDto> findAll() {
-    return blipRepository.findAll(
+  public Collection<TechnologyBlipDto> findAll() {
+    return technologyBlipRepository.findAll(
             Sort.by(Sort.Direction.ASC, "radar.title")
                 .and(Sort.by(Sort.Direction.ASC, "segment.title"))
                 .and(Sort.by(Sort.Direction.ASC, "ring.title"))
                 .and(Sort.by(Sort.Direction.ASC, "technology.title"))
         )
-        .stream().map(blipMapper::toDto).collect(Collectors.toList());
+        .stream().map(technologyBlipMapper::toDto).collect(Collectors.toList());
   }
 
 
   @Override
   @Transactional(readOnly = true)
-  public Page<BlipDto> findAll(Pageable pageable) {
-    return blipRepository.findAll(pageable).map(blipMapper::toDto);
+  public Page<TechnologyBlipDto> findAll(Pageable pageable) {
+    return technologyBlipRepository.findAll(pageable).map(technologyBlipMapper::toDto);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<BlipDto> findById(Long id) {
-    return blipRepository.findById(id).map(blipMapper::toDto);
+  public Optional<TechnologyBlipDto> findById(Long id) {
+    return technologyBlipRepository.findById(id).map(technologyBlipMapper::toDto);
   }
 
   @Override
   @Transactional
-  public BlipDto save(BlipDto blipDto) {
-    return blipMapper.toDto(blipRepository.save(blipMapper.toEntity(blipDto)));
+  public TechnologyBlipDto save(TechnologyBlipDto technologyBlipDto) {
+    return technologyBlipMapper.toDto(technologyBlipRepository.save(technologyBlipMapper.toEntity(technologyBlipDto)));
   }
 
   @Override
   @Transactional
-  public Blip save(Blip blip) {
-    return blipRepository.save(blip);
+  public TechnologyBlip save(TechnologyBlip technologyBlip) {
+    return technologyBlipRepository.save(technologyBlip);
   }
 
   @Override
   @Transactional
   public void deleteById(Long id) {
-    blipRepository.deleteById(id);
+    technologyBlipRepository.deleteById(id);
   }
 }
