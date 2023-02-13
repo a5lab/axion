@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
-import com.a5lab.axion.domain.blip.Blip;
-import com.a5lab.axion.domain.blip.BlipService;
+import com.a5lab.axion.domain.technology_blip.Blip;
+import com.a5lab.axion.domain.technology_blip.BlipService;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.ring.RingDto;

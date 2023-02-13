@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.blip;
+package com.a5lab.axion.domain.technology_blip;
 
 import jakarta.validation.Valid;
 import java.util.List;

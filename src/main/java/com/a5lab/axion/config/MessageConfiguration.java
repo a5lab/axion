@@ -21,7 +21,7 @@ public class MessageConfiguration implements WebMvcConfigurer {
         new ReloadableResourceBundleMessageSource();
     messageSource.setBasenames(
         "classpath:/messages/application",
-        "classpath:/messages/blip",
+        "classpath:/messages/technology_blip",
         "classpath:/messages/radar",
         "classpath:/messages/ring",
         "classpath:/messages/segment",
