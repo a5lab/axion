@@ -25,7 +25,7 @@ public class TechnologyBlipDto {
   @NotNull
   private Radar radar;
 
-  private TechnologyDto entry;
+  private TechnologyDto technology;
 
   private SegmentDto segment;
 
