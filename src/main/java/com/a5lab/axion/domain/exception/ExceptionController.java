@@ -20,7 +20,7 @@ public class ExceptionController implements ErrorController {
   private String profile;
 
   @RequestMapping("/error")
-  public ModelAndView handleError(HttpServletRequest httpRequest) {
+  public ModelAndView handleError(HttpServletRequest httpRequest, Exception e) {
 
     ModelAndView modelAndView = new ModelAndView("exception/index");
     int statusCode = (Integer) httpRequest.getAttribute("jakarta.servlet.error.status_code");
@@ -51,6 +51,7 @@ public class ExceptionController implements ErrorController {
     if (profile.contains(ProfileConstants.DEV_PROFILE)) {
       String backTrace = (String) httpRequest.getAttribute("jakarta.servlet.error.message");
       modelAndView.addObject("backTrace", backTrace);
+      // modelAndView.addObject("backTrace", e.getStackTrace().toString());
     }
     return modelAndView;
   }
