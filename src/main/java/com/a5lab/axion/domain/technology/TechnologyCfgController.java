@@ -30,7 +30,7 @@ import com.a5lab.axion.utils.FlashMessages;
 @RequiredArgsConstructor
 public class TechnologyCfgController {
 
-  private final TechnologyService entryService;
+  private final TechnologyService technologyService;
   private final MessageSource messageSource;
 
   @GetMapping("")
@@ -42,7 +42,7 @@ public class TechnologyCfgController {
 
     ModelAndView modelAndView = new ModelAndView("settings/technology/index");
     Page<TechnologyDto> entryDtoPage =
-        entryService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+        technologyService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("entryDtoPage", entryDtoPage);
 
     int totalPages = entryDtoPage.getTotalPages();
@@ -56,7 +56,7 @@ public class TechnologyCfgController {
 
   @GetMapping("/show/{id}")
   public ModelAndView show(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TechnologyDto> entryRecord = entryService.findById(id);
+    Optional<TechnologyDto> entryRecord = technologyService.findById(id);
     if (entryRecord.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/technology/show");
       modelAndView.addObject("entryDto", entryRecord.get());
@@ -84,7 +84,7 @@ public class TechnologyCfgController {
       modelAndView.addObject("entryDto", technologyDto);
       return modelAndView;
     }
-    entryService.save(technologyDto);
+    technologyService.save(technologyDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.created", null,
             LocaleContextHolder.getLocale()));
@@ -93,7 +93,7 @@ public class TechnologyCfgController {
 
   @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    Optional<TechnologyDto> entryDto = entryService.findById(id);
+    Optional<TechnologyDto> entryDto = technologyService.findById(id);
     if (entryDto.isPresent()) {
       ModelAndView modelAndView = new ModelAndView("settings/technology/edit");
       modelAndView.addObject("entryDto", entryDto.get());
@@ -114,7 +114,7 @@ public class TechnologyCfgController {
       modelAndView.addObject("entryDto", technologyDto);
       return modelAndView;
     }
-    entryService.save(technologyDto);
+    technologyService.save(technologyDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
@@ -123,7 +123,7 @@ public class TechnologyCfgController {
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    entryService.deleteById(id);
+    technologyService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("entry.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));

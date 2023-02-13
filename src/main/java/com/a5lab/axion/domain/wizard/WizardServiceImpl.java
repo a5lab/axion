@@ -34,7 +34,7 @@ public class WizardServiceImpl implements WizardService {
   private final RingService ringService;
   private final SegmentService segmentService;
 
-  private final TechnologyService entryService;
+  private final TechnologyService technologyService;
   private final TechnologyBlipService technologyBlipService;
 
   private Radar radar;
@@ -164,7 +164,7 @@ public class WizardServiceImpl implements WizardService {
       technologyBlip.setRadar(this.radar);
       technologyBlip.setRing(ringService.findByTitle(ringTitle).get());
       technologyBlip.setSegment(segmentService.findByTitle(segmentTitle).get());
-      technologyBlip.setTechnology(entryService.findByTitle(entryTitle).get());
+      technologyBlip.setTechnology(technologyService.findByTitle(entryTitle).get());
       technologyBlipService.save(technologyBlip);
     }
   }
