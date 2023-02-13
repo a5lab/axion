@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html th:replace="~{layouts/settings :: settings(~{::title}, ~{::meta}, ~{:: #content})}"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Dashboard title</title>
+    <meta content="Page description" title="description"/>
+    <meta content="HTML, CSS, JavaScript" title="keywords">
+  </head>
+  <body>
+    <div id="content">
+      <h1>Add ring</h1>
+      <form action="#" th:action="@{/settings/rings/create}" th:object="${ringDto}" method="post">
+        <th:block th:replace="~{settings/rings/fields.html}" />
+        <input type="submit" value="Add ring">
+      </form>
+    </div>
+  </body>
+</html>

@@ -17,7 +17,7 @@ class RingRepositoryTests extends AbstractRepositoryTests {
 
   @Test
   void shouldSaveRingWithAllFields() {
-    // TODO: fix it, create radar before
+    // TODO: fix it, create radars before
     /*
     final Ring r = new Ring();
     r.setTitle("TEST");
@@ -110,7 +110,7 @@ class RingRepositoryTests extends AbstractRepositoryTests {
 
   @Test
   void shouldFindSavedRingById() {
-    /* TODO: uncomment: radar id should be created
+    /* TODO: uncomment: radars id should be created
     final Ring r = new Ring();
     r.setTitle("MY");
     r.setDescription("Very good description for Ring");
@@ -126,7 +126,7 @@ class RingRepositoryTests extends AbstractRepositoryTests {
 
   @Test
   void shouldFindSavedRingByTitle() {
-    /* TODO: uncomment: radar id should be created
+    /* TODO: uncomment: radars id should be created
     String title = "SUPER";
     final Ring r = new Ring();
     r.setTitle(title);

@@ -15,15 +15,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
-import com.a5lab.axion.domain.blip.Blip;
-import com.a5lab.axion.domain.blip.BlipService;
-import com.a5lab.axion.domain.entry.EntryService;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
+import com.a5lab.axion.domain.technology.TechnologyService;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
 
 @RequiredArgsConstructor
 @Service
@@ -34,8 +34,8 @@ public class WizardServiceImpl implements WizardService {
   private final RingService ringService;
   private final SegmentService segmentService;
 
-  private final EntryService entryService;
-  private final BlipService blipService;
+  private final TechnologyService technologyService;
+  private final TechnologyBlipService technologyBlipService;
 
   private Radar radar;
 
@@ -50,30 +50,30 @@ public class WizardServiceImpl implements WizardService {
     this.radarService.save(this.radar);
 
     /*
-    switch (radar.getRadarType().getCode()) {
+    switch (radars.getRadarType().getCode()) {
       case RadarType.CAPABILITY_RADAR:
         throw new IllegalArgumentException(
-            "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
+            "Not implemented yes. Radar type:" + radars.getRadarType().getCode());
       case RadarType.PRACTICE_RADAR:
         throw new IllegalArgumentException(
-            "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
+            "Not implemented yes. Radar type:" + radars.getRadarType().getCode());
       case RadarType.PROCESS_RADAR:
         throw new IllegalArgumentException(
-            "Not implemented yes. Radar type:" + radar.getRadarType().getCode());
+            "Not implemented yes. Radar type:" + radars.getRadarType().getCode());
       case RadarType.TECHNOLOGY_RADAR:
-        this.createRings(radar);
-        this.createSegments(radar);
-        this.createTechnologyBlips(radar);
+        this.createRings(radars);
+        this.createSegments(radars);
+        this.createTechnologyBlips(radars);
         break;
       default:
         throw new IllegalArgumentException(
-            "Unknown radar type: " + radar.getRadarType().getCode());
+            "Unknown radars type: " + radars.getRadarType().getCode());
     }
     */
   }
 
   public void createRadar(Wizard wizard) throws Exception {
-    // Read ring
+    // Read rings
     File file =
         ResourceUtils.getFile("classpath:database/datasets/technology_radar/radars_en.csv");
     Path path = file.toPath();
@@ -96,7 +96,7 @@ public class WizardServiceImpl implements WizardService {
   }
 
   public void createRings() throws Exception {
-    // Read ring
+    // Read rings
     File file =
         ResourceUtils.getFile("classpath:database/datasets/technology_radar/rings_en.csv");
     Path path = file.toPath();
@@ -119,7 +119,7 @@ public class WizardServiceImpl implements WizardService {
   }
 
   private void createSegments() throws Exception {
-    // Read ring
+    // Read rings
     File file =
         ResourceUtils.getFile("classpath:database/datasets/technology_radar/segments_en.csv");
     Path path = file.toPath();
@@ -158,14 +158,14 @@ public class WizardServiceImpl implements WizardService {
       // final String radarTitle = record[0];
       final String ringTitle = record[1];
       final String segmentTitle = record[2];
-      final String entryTitle = record[3];
+      final String technologyTitle = record[3];
 
-      Blip blip = new Blip();
-      blip.setRadar(this.radar);
-      blip.setRing(ringService.findByTitle(ringTitle).get());
-      blip.setSegment(segmentService.findByTitle(segmentTitle).get());
-      blip.setEntry(entryService.findByTitle(entryTitle).get());
-      blipService.save(blip);
+      TechnologyBlip technologyBlip = new TechnologyBlip();
+      technologyBlip.setRadar(this.radar);
+      technologyBlip.setRing(ringService.findByTitle(ringTitle).get());
+      technologyBlip.setSegment(segmentService.findByTitle(segmentTitle).get());
+      technologyBlip.setTechnology(technologyService.findByTitle(technologyTitle).get());
+      technologyBlipService.save(technologyBlip);
     }
   }
 

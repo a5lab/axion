@@ -44,8 +44,8 @@ public class WizardControllerTests extends AbstractControllerTests {
 
     final Radar radar = new Radar();
     radar.setRadarType(radarType);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar desciption");
+    radar.setTitle("My radars title");
+    radar.setDescription("My radars desciption");
     radar.setPrimary(true);
     radar.setActive(true);
 

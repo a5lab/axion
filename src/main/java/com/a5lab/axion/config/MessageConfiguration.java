@@ -21,11 +21,11 @@ public class MessageConfiguration implements WebMvcConfigurer {
         new ReloadableResourceBundleMessageSource();
     messageSource.setBasenames(
         "classpath:/messages/application",
-        "classpath:/messages/blip",
-        "classpath:/messages/entry",
         "classpath:/messages/radar",
         "classpath:/messages/ring",
         "classpath:/messages/segment",
+        "classpath:/messages/technology",
+        "classpath:/messages/technology_blip",
         "classpath:/messages/tenant"
     );
     messageSource.setDefaultEncoding("UTF-8");

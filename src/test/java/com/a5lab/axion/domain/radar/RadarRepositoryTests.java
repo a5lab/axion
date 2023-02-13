@@ -19,26 +19,26 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
   void shouldSaveRadarWithAllFields() {
     /* TODO: implement
     final RadarType radarType = new RadarType();
-    radarType.setTitle("Technology radar");
+    radarType.setTitle("Technology radars");
     radarType.setCode("technology_radar");
-    radarType.setDescription("Technology radar");
+    radarType.setDescription("Technology radars");
 
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My new test Radar");
-    radar.setDescription("My awesome description");
-    radar.setPrimary(false);
+    final Radar radars = new Radar();
+    radars.setRadarType(radarType);
+    radars.setTitle("My new test Radar");
+    radars.setDescription("My awesome description");
+    radars.setPrimary(false);
 
-    Assertions.assertNull(radar.getId());
-    radarRepository.saveAndFlush(radar);
-    Assertions.assertNotNull(radar.getId());
-    Assertions.assertNotNull(radar.getRadarType());
-    Assertions.assertNotNull(radar.getTitle());
-    Assertions.assertNotNull(radar.getDescription());
-    Assertions.assertNotNull(radar.getCreatedBy());
-    Assertions.assertNotNull(radar.getCreatedDate());
-    Assertions.assertNotNull(radar.getLastModifiedBy());
-    Assertions.assertNotNull(radar.getLastModifiedDate());
+    Assertions.assertNull(radars.getId());
+    radarRepository.saveAndFlush(radars);
+    Assertions.assertNotNull(radars.getId());
+    Assertions.assertNotNull(radars.getRadarType());
+    Assertions.assertNotNull(radars.getTitle());
+    Assertions.assertNotNull(radars.getDescription());
+    Assertions.assertNotNull(radars.getCreatedBy());
+    Assertions.assertNotNull(radars.getCreatedDate());
+    Assertions.assertNotNull(radars.getLastModifiedBy());
+    Assertions.assertNotNull(radars.getLastModifiedDate());
     */
   }
 
