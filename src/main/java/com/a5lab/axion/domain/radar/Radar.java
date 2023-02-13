@@ -24,8 +24,8 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
-import com.a5lab.axion.domain.technology_blip.Blip;
 import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.technology_blip.Blip;
 import com.a5lab.axion.utils.JpaConstants;
 
 @Entity
