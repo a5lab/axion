@@ -17,6 +17,7 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
   @Autowired
   private RadarRepository radarRepository;
 
+  @Autowired
   private RadarTypeRepository radarTypeRepository;
 
   @Test
