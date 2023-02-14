@@ -3,14 +3,15 @@ package com.a5lab.axion.domain.radar;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class RadarPrimaryValidator
     implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
 
-  // private final RadarService radarService;
-  // private final RadarRepository radarService;
+  private final RadarService radarService;
+  // private final RadarRepository radarRepository;
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {

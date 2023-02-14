@@ -8,6 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 @Documented
 @Constraint(validatedBy = RadarPrimaryValidator.class)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})

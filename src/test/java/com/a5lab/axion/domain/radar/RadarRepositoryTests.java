@@ -6,6 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
+import jakarta.validation.Validator;
 
 
 import com.a5lab.axion.domain.radar_type.RadarType;
