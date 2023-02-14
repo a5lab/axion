@@ -33,7 +33,6 @@ import com.a5lab.axion.utils.FlashMessages;
 public class RingCfgController {
 
   private final RingService ringService;
-
   private final RadarService radarService;
   private final MessageSource messageSource;
 
