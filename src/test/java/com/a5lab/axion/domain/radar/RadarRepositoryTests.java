@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import jakarta.validation.ValidationException;
 
 
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,31 +17,35 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
   @Autowired
   private RadarRepository radarRepository;
 
+  private RadarTypeRepository radarTypeRepository;
+
   @Test
   void shouldSaveRadarWithAllFields() {
-    /* TODO: implement
+    // Create a radar type
     final RadarType radarType = new RadarType();
     radarType.setTitle("Technology radars");
     radarType.setCode("technology_radar");
     radarType.setDescription("Technology radars");
+    radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radars = new Radar();
-    radars.setRadarType(radarType);
-    radars.setTitle("My new test Radar");
-    radars.setDescription("My awesome description");
-    radars.setPrimary(false);
+    // Create a radar
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My new test Radar");
+    radar.setDescription("My awesome description");
+    radar.setPrimary(false);
+    radar.setActive(false);
 
-    Assertions.assertNull(radars.getId());
-    radarRepository.saveAndFlush(radars);
-    Assertions.assertNotNull(radars.getId());
-    Assertions.assertNotNull(radars.getRadarType());
-    Assertions.assertNotNull(radars.getTitle());
-    Assertions.assertNotNull(radars.getDescription());
-    Assertions.assertNotNull(radars.getCreatedBy());
-    Assertions.assertNotNull(radars.getCreatedDate());
-    Assertions.assertNotNull(radars.getLastModifiedBy());
-    Assertions.assertNotNull(radars.getLastModifiedDate());
-    */
+    Assertions.assertNull(radar.getId());
+    radarRepository.saveAndFlush(radar);
+    Assertions.assertNotNull(radar.getId());
+    Assertions.assertNotNull(radar.getRadarType());
+    Assertions.assertNotNull(radar.getTitle());
+    Assertions.assertNotNull(radar.getDescription());
+    Assertions.assertNotNull(radar.getCreatedBy());
+    Assertions.assertNotNull(radar.getCreatedDate());
+    Assertions.assertNotNull(radar.getLastModifiedBy());
+    Assertions.assertNotNull(radar.getLastModifiedDate());
   }
 
   @Test
