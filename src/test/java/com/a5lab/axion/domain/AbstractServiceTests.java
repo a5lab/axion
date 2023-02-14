@@ -7,11 +7,6 @@ import org.springframework.context.annotation.Import;
 import com.a5lab.axion.config.ApplicationTestBaseConfig;
 import com.a5lab.axion.config.JpaAuditingConfiguration;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import({
-    JpaAuditingConfiguration.class
-})
 @ApplicationTestBaseConfig
 public abstract class AbstractServiceTests {
 }
