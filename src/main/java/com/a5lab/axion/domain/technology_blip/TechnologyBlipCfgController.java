@@ -71,7 +71,7 @@ public class TechnologyBlipCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blips.flash.error.invalid_id", null,
+          messageSource.getMessage("technology_blip.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     }
@@ -103,7 +103,7 @@ public class TechnologyBlipCfgController {
     }
     technologyBlipService.save(technologyBlipDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blips.flash.info.created", null,
+        messageSource.getMessage("technology_blip.flash.info.created", null,
             LocaleContextHolder.getLocale()));
     return new ModelAndView("redirect:/settings/technology_blips");
   }
@@ -121,7 +121,7 @@ public class TechnologyBlipCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blips.flash.error.invalid_id", null,
+          messageSource.getMessage("technology_blip.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     }
@@ -141,7 +141,7 @@ public class TechnologyBlipCfgController {
     }
     technologyBlipService.save(technologyBlipDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blips.flash.info.updated", null,
+        messageSource.getMessage("technology_blip.flash.info.updated", null,
             LocaleContextHolder.getLocale()));
     return new ModelAndView("redirect:/settings/technology_blips");
   }
@@ -150,7 +150,7 @@ public class TechnologyBlipCfgController {
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     technologyBlipService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blips.flash.info.deleted", null,
+        messageSource.getMessage("technology_blip.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
     return "redirect:/settings/blips";
   }
