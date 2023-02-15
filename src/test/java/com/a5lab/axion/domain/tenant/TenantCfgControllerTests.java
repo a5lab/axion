@@ -71,7 +71,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldAddTentant() throws Exception {
+  public void shouldAddTenant() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/tenants/add"))
         .andExpect(status().isOk())
         .andReturn();
