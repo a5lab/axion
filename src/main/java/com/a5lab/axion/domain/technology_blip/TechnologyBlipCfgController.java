@@ -150,7 +150,7 @@ public class TechnologyBlipCfgController {
       return modelAndView;
     }
 
-    try{
+    try {
       technologyBlipService.save(technologyBlipDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
           messageSource.getMessage("technology_blip.flash.info.updated", null,
