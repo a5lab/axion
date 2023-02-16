@@ -114,7 +114,7 @@ public class TechnologyBlipCfgController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("technology_blip.flash.error.exception", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/home");
+      return new ModelAndView("redirect:/settings/technology_blips");
     }
   }
 
@@ -149,11 +149,20 @@ public class TechnologyBlipCfgController {
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
     }
-    technologyBlipService.save(technologyBlipDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blip.flash.info.updated", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/technology_blips");
+
+    try{
+      technologyBlipService.save(technologyBlipDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("technology_blip.flash.info.updated", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/technology_blips");
+    } catch (DataIntegrityViolationException e) {
+      // Redirect
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
+          messageSource.getMessage("technology_blip.flash.error.exception", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/technology_blips");
+    }
   }
 
   @GetMapping(value = "/delete/{id}")
