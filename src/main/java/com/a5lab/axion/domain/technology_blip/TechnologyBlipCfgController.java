@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -101,11 +102,20 @@ public class TechnologyBlipCfgController {
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
     }
-    technologyBlipService.save(technologyBlipDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blip.flash.info.created", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/technology_blips");
+
+    try {
+      technologyBlipService.save(technologyBlipDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("technology_blip.flash.info.created", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/technology_blips");
+    } catch (DataIntegrityViolationException e) {
+      // Redirect
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
+          messageSource.getMessage("technology_blip.flash.error.exception", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/home");
+    }
   }
 
   @GetMapping(value = "/edit/{id}")
