@@ -38,6 +38,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <addUniqueConstraint columnNames="radar_id, technology_id" constraintName="uc_technology_blips_radar_id_technology_id" tableName="technology_blips"/>
     </changeSet>
 
 </databaseChangeLog>
