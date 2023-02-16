@@ -29,7 +29,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="tenantDto : ${tenantDtoPage1.getContent()}">
+              <tr th:each="tenantDto : ${tenantDtoPage.getContent()}">
                 <td th:text="${tenantDto.title}"></td>
                 <td th:text="${tenantDto.description}"></td>
                 <td><a th:href="@{/settings/tenants/show/{id}(id=${tenantDto.id})}">Show</a></td>
