@@ -9,13 +9,6 @@
   <body>
     <div id="content">
       <h1 th:text="${errorMsg}"/>
-      <div th:switch="${#strings.isEmpty(backTrace)}">
-        <p th:case="true">No backtrace.</p>
-        <div th:case="*">
-          <h2>Backtrace</h2>
-          <p th:text="${backTrace}"/>
-        </div>
-      </div>
     </div>
   </body>
 </html>

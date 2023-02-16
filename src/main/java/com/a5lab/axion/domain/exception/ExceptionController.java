@@ -3,24 +3,18 @@ package com.a5lab.axion.domain.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.a5lab.axion.utils.ProfileConstants;
-
 @Controller
-@ConfigurationProperties
+@Profile("prod")
 public class ExceptionController implements ErrorController {
 
-  @Value("${spring.profiles.active}")
-  private String profile;
-
   @RequestMapping("/error")
-  public ModelAndView handleError(HttpServletRequest httpRequest, Exception e) {
+  public ModelAndView handleError(HttpServletRequest httpRequest) {
 
     ModelAndView modelAndView = new ModelAndView("exception/index");
     int statusCode = (Integer) httpRequest.getAttribute("jakarta.servlet.error.status_code");
@@ -46,12 +40,6 @@ public class ExceptionController implements ErrorController {
         modelAndView.addObject("errorMsg", "Unclassified");
         break;
       }
-    }
-
-    if (profile.contains(ProfileConstants.DEV_PROFILE)) {
-      String backTrace = (String) httpRequest.getAttribute("jakarta.servlet.error.message");
-      modelAndView.addObject("backTrace", backTrace);
-      // modelAndView.addObject("backTrace", e.getStackTrace().toString());
     }
     return modelAndView;
   }
