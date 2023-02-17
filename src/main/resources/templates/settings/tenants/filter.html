@@ -1,0 +1,12 @@
+<div id="filter">
+  <form action="#" th:action="@{/settings/tenants}" th:object="${filter}" method="get">
+    <div th:if="${#fields.hasAnyErrors()}">
+      <ul>
+        <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
+      </ul>
+    </div>
+    <label for="title">Title</label>
+    <input type="text" th:field="*{title}" id="title" placeholder="Title">
+    <input type="submit" value="Filter">
+  </form>
+</div>

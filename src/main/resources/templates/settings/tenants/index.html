@@ -12,6 +12,7 @@
         <h1 th:case="0">No tentants yet!</h1>
         <div th:case="*">
           <h1>Tentants</h1>
+          <th:block th:replace="~{settings/tenants/filter.html}" />
           <div>
             <span th:if="${tenantDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
               <a th:href="@{/settings/tenants(size=${tenantDtoPage.size}, page=${pageNumber})}"
