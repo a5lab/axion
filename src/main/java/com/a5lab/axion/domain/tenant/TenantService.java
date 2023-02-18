@@ -12,6 +12,8 @@ public interface TenantService {
 
   Page<TenantDto> findAll(Pageable pageable);
 
+  Page<TenantDto> findAll(Pageable pageable, TenantFilter tenantFilter);
+
   Optional<TenantDto> findById(Long id);
 
   TenantDto save(TenantDto tenantDto);
