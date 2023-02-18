@@ -162,5 +162,4 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
       Assertions.assertEquals(constraintViolation.getMessage(), "must not be blank");
     }
   }
-
 }
