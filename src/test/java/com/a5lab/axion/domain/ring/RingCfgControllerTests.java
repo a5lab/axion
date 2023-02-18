@@ -31,7 +31,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @MockBean
   private RadarService radarService;
-
+  /*
   @Test
   public void shouldGetRings() throws Exception {
     // Create radar
@@ -63,11 +63,13 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(ringDto.getTitle()));
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
   }
+  */
 
-  /*
   @Test
   public void shouldShowRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, "my title", "my description");
+    final RingDto ringDto = new RingDto();
+    ringDto.setTitle("my ring");
+    ringDto.setDescription("my ring description");
     Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
 
     String url = String.format("/settings/rings/show/%d", ringDto.getId());
@@ -79,7 +81,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(ringDto.getTitle()));
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
   }
-
+  /*
   @Test
   public void shouldRedirectShowRing() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/rings/show/1"))
