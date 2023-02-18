@@ -1,6 +1,6 @@
 <div id="filter">
   <a href="#" id="filter-nav">Filter</a>
-  <form action="#" id="filter-form" method="get" th:action="@{/settings/tenants}" th:object="${filter}">
+  <form action="#" id="filter-form" method="get" th:action="@{/settings/tenants}" th:object="${tenantFilter}">
     <div th:if="${#fields.hasAnyErrors()}">
       <ul>
         <li th:each="error : ${#fields.allErrors()}" th:text="${error}"/>

@@ -43,7 +43,7 @@ public class TenantCfgController {
     Page<TenantDto> tenantDtoPage =
         tenantService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("tenantDtoPage", tenantDtoPage);
-    modelAndView.addObject("filter", new TenantFilter());
+    modelAndView.addObject("tenantFilter", new TenantFilter());
 
     int totalPages = tenantDtoPage.getTotalPages();
     if (totalPages > 0) {
