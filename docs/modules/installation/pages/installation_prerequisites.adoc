@@ -24,3 +24,5 @@ If you desire to deploy the radar from open source make sure that you have insta
 
 [NOTE]
 Make sure, that environment variable are correct in your system.
+
+*Axion* supports different databases, H2 and PostgreSQL. See xref:database_configuration.adoc[database configuration].
