@@ -47,7 +47,6 @@ public class TenantServiceImpl implements TenantService {
       return builder.and(predicateList.toArray(new Predicate[] {}));
     }, pageable);
     return tenantPage.map(tenantMapper::toDto);
-    // return tenantRepository.findAll(pageable).map(tenantMapper::toDto);
   }
 
   @Override

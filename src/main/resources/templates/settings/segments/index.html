@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <div th:switch="${segmentDtoPage.getTotalElements()}">
-        <h1 th:case="0">No segments yet!</h1>
+        <h1 th:case="0">No segments.</h1>
         <div th:case="*">
           <h1>Segments</h1>
           <div>

@@ -9,7 +9,7 @@
   <body>
     <div id="content">
       <div th:switch="${radarPage.getTotalElements()}">
-        <h1 th:case="0">No radars yet!</h1>
+        <h1 th:case="0">No radars.</h1>
         <div th:case="*">
           <h1>Radars</h1>
           <div>

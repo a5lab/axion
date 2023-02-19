@@ -8,11 +8,11 @@
   </head>
   <body>
     <div id="content">
+      <h1>Tentants</h1>
+      <th:block th:replace="~{settings/tenants/filter.html}" />
       <div th:switch="${tenantDtoPage.getTotalElements()}">
-        <h1 th:case="0">No tentants yet!</h1>
+        <p th:case="0">No tentants.</p>
         <div th:case="*">
-          <h1>Tentants</h1>
-          <th:block th:replace="~{settings/tenants/filter.html}" />
           <th:block th:replace="~{settings/tenants/paging.html}" />
           <table>
             <thead>
@@ -34,8 +34,8 @@
               </tr>
             </tbody>
           </table>
-          <p><a href="/settings/tenants/add">Add a new tenant</a></p>
         </div>
+        <p><a href="/settings/tenants/add">Add a new tenant</a></p>
       </div>
     </div>
   </body>
