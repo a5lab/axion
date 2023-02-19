@@ -1,6 +1,6 @@
 <div>
-  <span th:each="pageNumber : ${pageNumbers}" th:if="${tenantDtoPage.totalPages > 0}">
-    <a th:class="${pageNumber==tenantDtoPage.number + 1} ? active"
-       th:href="@{/settings/tenants(size=${tenantDtoPage.size}, page=${pageNumber})}" th:text="${pageNumber}"></a>
+  <span th:if="${technologyBlipDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/settings/technologyBlip(size=${technologyBlipDtoPage.size}, page=${pageNumber})}"
+       th:text="${pageNumber}" th:class="${pageNumber==technologyBlipDtoPage.number + 1} ? active"></a>
   </span>
 </div>

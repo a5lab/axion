@@ -14,12 +14,6 @@
         <p th:case="0">No segments.</p>
         <div th:case="*">
           <th:block th:replace="~{settings/segments/paging.html}" />
-          <div>
-            <span th:if="${segmentDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/settings/segments(size=${segmentDtoPage.size}, page=${pageNumber})}"
-                 th:text="${pageNumber}" th:class="${pageNumber==segmentDtoPage.number + 1} ? active"></a>
-            </span>
-          </div>
           <table>
             <thead>
               <tr>
