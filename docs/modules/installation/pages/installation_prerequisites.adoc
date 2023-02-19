@@ -1,17 +1,28 @@
 = Installation prerequisites
 
-== for all methods
-* java (how to install java)
-* database (postgresql for production or h2 in memory)
-
-Make sure that you have installed next pakages:
+To run *Axion* you need to have next packages installed:
 
 [cols="1,2",options="header"]
 |===
 |Package |Version
-|jdk |18
+|jdk  |19
 |===
 
+[NOTE]
+Latest JAVA version can be found at https://www.java.com/en/download/
 
-== to build from open sources
-* node js and uglify pacakges
+If you desire to deploy the radar from open source make sure that you have installed:
+
+[cols="1,2",options="header"]
+|===
+|Package |Version
+|Apache Maven | 3.8.7 and higher
+|Node.js | 18 and higher
+|uglifycss | 0.0.29 and higher
+|uglifyjs | 3.17.4 and higher
+|===
+
+[NOTE]
+Make sure, that environment variable are correct in your system.
+
+*Axion* supports different databases, H2 and PostgreSQL. See xref:database_configuration.adoc[database configuration].
