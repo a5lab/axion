@@ -11,7 +11,7 @@ To run *Axion* you need to have next packages installed:
 [NOTE]
 Latest JAVA version can be found at https://www.java.com/en/download/
 
-If you desire to deploy the radar from open source make sure that you have installed:
+If you desire to build the radar from sources make sure that you have installed:
 
 [cols="1,2",options="header"]
 |===
