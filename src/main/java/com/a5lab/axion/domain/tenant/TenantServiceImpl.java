@@ -34,7 +34,7 @@ public class TenantServiceImpl implements TenantService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<TenantDto> findAll(Pageable pageable, TenantFilter tenantFilter) {
+  public Page<TenantDto> findAll(TenantFilter tenantFilter, Pageable pageable) {
     return tenantRepository.findAll(pageable).map(tenantMapper::toDto);
   }
 
