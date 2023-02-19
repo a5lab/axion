@@ -21,7 +21,20 @@ ExecStart=java -jar /usr/axion-1.0.0-SNAPSHOT.jar --application.keys.google_anal
 == Configuration file
 Put a file _aplicatoin.yml_ with the required parameters next to axion-1.0.0-SNAPSHOT.jar before executing the jar. 
 
-An example of _aplicatoin.yml_:
+[NOTE]
+====
+It is enough to add a single required parameter with a value in an _aplicatoin.yml_, you do not need to state every parameter.
+
+For example:
+[source, yaml]
+....
+application:
+  paging:
+    size: 10
+....
+====
+
+An example of _aplicatoin.yml_ with different parameters and their values:
 
 [source, yaml]
 ----
