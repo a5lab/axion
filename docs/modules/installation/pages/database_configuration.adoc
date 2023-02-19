@@ -4,5 +4,28 @@ Supported databases are:
 .PostgreSQL for production
 .h2 in memory db fro review app
 
-Default database is axion, username is axion, password is secret.
+Warning:
+* use h2 in order to rewview app or at development mode.
+* use postgreSQL for production.
 
+
+Default database is axion, username is axion, password is secret. If you change these value then change at application.yml or pass correct value as part of the java -jar ... command.
+
+== PostgreSQL configuration
+-1.You need to create user and database. Default username - axion, password - secret, database name -axion. How to create database see https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
+
+```
+CREATE DATABASE axion;
+CREATE USER axion WITH ENCRYPTED PASSWORD 'secret';
+GRANT ALL PRIVILEGES ON DATABASE axion TO axion;
+```
+
+-2.Setup correct value at application.yml or pass by -D..
+
+
+== H2 configuration
+Do nothing. It will configured automaticall after the run application.
+
+
+== Usefull info
+https://help.sonatype.com/repomanager3/installation-and-upgrades/configuring-nexus-repository-pro-for-h2-or-postgresql
