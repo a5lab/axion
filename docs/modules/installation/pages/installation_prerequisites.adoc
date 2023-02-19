@@ -14,4 +14,4 @@ Make sure that you have installed next pakages:
 
 
 == to build from open sources
-* node js and uglify pacakges
+* node js and uglify packages.

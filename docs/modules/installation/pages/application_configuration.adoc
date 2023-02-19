@@ -3,18 +3,18 @@
 
 For *Axion* configuration, use on of the methods described below:
 
-* xref:params[Line parameters] 
+* xref:cmd[Command line parameters]
 * xref:yml[Configuration file]
 
-[#params]
-== Line parameters
+[#cmd]
+== Command line parameters
 
-Use the command _ExecStart_ to pass all required parameters on *Axion* startup.
+Use the command line parameters to pass all required parameters on *Axion* startup.
 
 For example:
 [source, bash]
 ----
-ExecStart=java -jar /usr/axion-1.0.0-SNAPSHOT.jar --application.keys.google_analytics= app__google_analytics
+java -jar /usr/axion-1.0.0-SNAPSHOT.jar --application.keys.google_analytics=G-123456
 ----
 
 [#yml]
