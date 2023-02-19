@@ -40,8 +40,8 @@ public class TenantServiceImpl implements TenantService {
   public Page<TenantDto> findAll(TenantFilter tenantFilter, Pageable pageable) {
     Page<Tenant> tenantPage = tenantRepository.findAll((root, query, builder) -> {
       List<Predicate> predicateList = new ArrayList<>();
-      if (tenantFilter != null && tenantFilter.getTitle() != null &&
-          !tenantFilter.getTitle().isBlank()) {
+      if (tenantFilter != null && tenantFilter.getTitle() != null
+          && !tenantFilter.getTitle().isBlank()) {
         predicateList.add(builder.equal(root.get("title"), tenantFilter.getTitle()));
       }
       return builder.and(predicateList.toArray(new Predicate[] {}));

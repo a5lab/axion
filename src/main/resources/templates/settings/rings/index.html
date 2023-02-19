@@ -8,10 +8,12 @@
   </head>
   <body>
     <div id="content">
+      <h1>Rings</h1>
+      <th:block th:replace="~{settings/rings/filter.html}" />
       <div th:switch="${ringDtoPage.getTotalElements()}">
-        <h1 th:case="0">No rings.</h1>
+        <p th:case="0">No rings.</p>
         <div th:case="*">
-          <h1>Rings</h1>
+          <th:block th:replace="~{settings/rings/paging.html}" />
           <div>
             <span th:if="${ringDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
               <a th:href="@{/settings/rings(size=${ringDtoPage.size}, page=${pageNumber})}"

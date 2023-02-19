@@ -8,10 +8,12 @@
   </head>
   <body>
     <div id="content">
+      <h1>Technologies</h1>
+      <th:block th:replace="~{settings/technologies/filter.html}" />
       <div th:switch="${technologyDtoPage.getTotalElements()}">
-        <h1 th:case="0">No entries.</h1>
+        <p th:case="0">No technologies.</p>
         <div th:case="*">
-          <h1>Technologies</h1>
+          <th:block th:replace="~{settings/technologies/paging.html}" />
           <div>
             <span th:if="${technologyDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
               <a th:href="@{/settings/technologies(size=${technologyDtoPage.size}, page=${pageNumber})}"
