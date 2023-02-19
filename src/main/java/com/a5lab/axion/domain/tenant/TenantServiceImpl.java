@@ -1,6 +1,9 @@
 package com.a5lab.axion.domain.tenant;
 
+import jakarta.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -30,6 +33,20 @@ public class TenantServiceImpl implements TenantService {
   @Transactional(readOnly = true)
   public Page<TenantDto> findAll(Pageable pageable) {
     return tenantRepository.findAll(pageable).map(tenantMapper::toDto);
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Page<TenantDto> findAll(TenantFilter tenantFilter, Pageable pageable) {
+    Page<Tenant> tenantPage = tenantRepository.findAll((root, query, builder) -> {
+      List<Predicate> predicateList = new ArrayList<>();
+      if (tenantFilter != null && tenantFilter.getTitle() != null
+          && !tenantFilter.getTitle().isBlank()) {
+        predicateList.add(builder.equal(root.get("title"), tenantFilter.getTitle()));
+      }
+      return builder.and(predicateList.toArray(new Predicate[] {}));
+    }, pageable);
+    return tenantPage.map(tenantMapper::toDto);
   }
 
   @Override

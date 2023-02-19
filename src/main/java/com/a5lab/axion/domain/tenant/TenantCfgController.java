@@ -33,7 +33,8 @@ public class TenantCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+  public ModelAndView index(@Valid TenantFilter tenantFilter, BindingResult bindingResult,
+                            @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
@@ -41,8 +42,9 @@ public class TenantCfgController {
 
     ModelAndView modelAndView = new ModelAndView("settings/tenants/index");
     Page<TenantDto> tenantDtoPage =
-        tenantService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+        tenantService.findAll(tenantFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("tenantDtoPage", tenantDtoPage);
+    modelAndView.addObject("tenantFilter", tenantFilter);
 
     int totalPages = tenantDtoPage.getTotalPages();
     if (totalPages > 0) {

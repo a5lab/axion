@@ -32,7 +32,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
     List<TenantDto> tenantList = List.of(tenantDto);
     Page<TenantDto> page = new PageImpl<>(tenantList);
-    Mockito.when(tenantService.findAll(any())).thenReturn(page);
+    Mockito.when(tenantService.findAll(any(), any())).thenReturn(page);
 
     MvcResult result = mockMvc.perform(get("/settings/tenants"))
         .andExpect(status().isOk())

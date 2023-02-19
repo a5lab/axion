@@ -8,16 +8,12 @@
   </head>
   <body>
     <div id="content">
+      <h1>Radars</h1>
+      <th:block th:replace="~{settings/radars/filter.html}" />
       <div th:switch="${radarPage.getTotalElements()}">
-        <h1 th:case="0">No radars yet!</h1>
+        <p th:case="0">No radars.</p>
         <div th:case="*">
-          <h1>Radars</h1>
-          <div>
-            <span th:if="${radarPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/settings/radars(size=${radarPage.size}, page=${pageNumber})}"
-                 th:text="${pageNumber}" th:class="${pageNumber==radarPage.number + 1} ? active"></a>
-            </span>
-          </div>
+          <th:block th:replace="~{settings/radars/paging.html}" />
           <table>
             <thead>
               <tr>
