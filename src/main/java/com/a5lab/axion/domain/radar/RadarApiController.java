@@ -26,8 +26,7 @@ public class RadarApiController {
                            @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
-    Page<Radar> radarPage =
-        radarService.findAll(radarFilter, PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<Radar> radarPage = radarService.findAll(radarFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     return radarPage.getContent();
   }
 }

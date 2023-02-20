@@ -53,8 +53,7 @@ public class SegmentCfgController {
 
     int totalPages = segmentDtoPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;
@@ -85,7 +84,7 @@ public class SegmentCfgController {
 
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid SegmentDto segmentDto, BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/segments/add");
       modelAndView.addObject("segmentDto", segmentDto);
@@ -117,7 +116,7 @@ public class SegmentCfgController {
 
   @PostMapping("/update")
   public ModelAndView update(@Valid SegmentDto segmentDto,
-                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
       modelAndView.addObject("segmentDto", segmentDto);

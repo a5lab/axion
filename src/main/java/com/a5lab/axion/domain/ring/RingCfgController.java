@@ -45,15 +45,13 @@ public class RingCfgController {
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/rings/index");
-    Page<RingDto> ringDtoPage =
-        ringService.findAll(ringFilter, PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<RingDto> ringDtoPage = ringService.findAll(ringFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("ringDtoPage", ringDtoPage);
     modelAndView.addObject("ringFilter", ringFilter);
 
     int totalPages = ringDtoPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;

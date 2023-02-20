@@ -41,7 +41,7 @@
   </module>
 
   <!--Axion/axion.
-    Length has been changed from 100 to 120 otherwise "Reforman code" doesn't work.
+    Length has been changed from 100 to 120 otherwise "Reformat code" doesn't work.
   -->
   <module name="LineLength">
     <property name="fileExtensions" value="java"/>

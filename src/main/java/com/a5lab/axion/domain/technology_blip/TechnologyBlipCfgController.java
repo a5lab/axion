@@ -51,15 +51,14 @@ public class TechnologyBlipCfgController {
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/technology_blips/index");
-    Page<TechnologyBlipDto> blipDtoPage = technologyBlipService.findAll(technologyBlipFilter,
-        PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<TechnologyBlipDto> blipDtoPage =
+        technologyBlipService.findAll(technologyBlipFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("technologyBlipDtoPage", blipDtoPage);
     modelAndView.addObject("technologyBlipFilter", technologyBlipFilter);
 
     int totalPages = blipDtoPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;

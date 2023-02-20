@@ -46,15 +46,13 @@ public class RadarCfgController {
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/radars/index");
-    Page<Radar> radarPage =
-        radarService.findAll(radarFilter, PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<Radar> radarPage = radarService.findAll(radarFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("radarPage", radarPage);
     modelAndView.addObject("radarFilter", radarFilter);
 
     int totalPages = radarPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;

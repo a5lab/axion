@@ -41,15 +41,13 @@ public class TenantCfgController {
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/tenants/index");
-    Page<TenantDto> tenantDtoPage =
-        tenantService.findAll(tenantFilter, PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<TenantDto> tenantDtoPage = tenantService.findAll(tenantFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("tenantDtoPage", tenantDtoPage);
     modelAndView.addObject("tenantFilter", tenantFilter);
 
     int totalPages = tenantDtoPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;

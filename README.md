@@ -43,7 +43,7 @@ Technical and business radar. Spring boot based application
 * see overview https://plugins.jetbrains.com/plugin/1065-checkstyle-idea
 * see GitHub https://github.com/jshiell/checkstyle-idea/blob/main/README.md
 * import google_checkstyle.xml into idea java import schema at java code style
-* setup "hard wrat at" to 120
+* setup "hard wrap at" value to 120
 
 ### JavaScript checkstyle
 
