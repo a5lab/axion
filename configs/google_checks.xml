@@ -40,9 +40,12 @@
     <property name="eachLine" value="true"/>
   </module>
 
+  <!--Axion/axion.
+    Length has been changed from 100 to 120 otherwise "Reformat code" doesn't work.
+  -->
   <module name="LineLength">
     <property name="fileExtensions" value="java"/>
-    <property name="max" value="100"/>
+    <property name="max" value="120"/>
     <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
   </module>
 
@@ -168,7 +171,7 @@
       <property name="tokens" value="METHOD_REF"/>
       <property name="option" value="nl"/>
     </module>
-    <!--Axion.
+    <!--Axion/axion.
       Regex has been changed from value="^[a-z]+(\.[a-z][a-z0-9]*)*$"
       to value="^[a-z]+(\.[a-z][a-z0-9_]*)*$" in order to support _
       at package names, for example radar_type.

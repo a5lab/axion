@@ -1,1 +1,13 @@
-<p>Implement filter based on tenants.</p>
+<div id="filter">
+  <a href="#" id="filter-nav">Filter</a>
+  <form action="#" id="filter-form" method="get" th:action="@{/settings/radars}" th:object="${radarFilter}">
+    <div th:if="${#fields.hasAnyErrors()}">
+      <ul>
+        <li th:each="error : ${#fields.allErrors()}" th:text="${error}"/>
+      </ul>
+    </div>
+    <label for="title">Title</label>
+    <input id="title" placeholder="Title" th:field="*{title}" type="text">
+    <input type="submit" value="Filter">
+  </form>
+</div>

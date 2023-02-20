@@ -25,10 +25,9 @@ public class TechnologyServiceImpl implements TechnologyService {
         .stream().map(technologyMapper::toDto).collect(Collectors.toList());
   }
 
-
   @Override
   @Transactional(readOnly = true)
-  public Page<TechnologyDto> findAll(Pageable pageable) {
+  public Page<TechnologyDto> findAll(TechnologyFilter technologyFilter, Pageable pageable) {
     return technologyRepository.findAll(pageable).map(technologyMapper::toDto);
   }
 
