@@ -43,16 +43,19 @@ public class TechnologyBlipCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+  public ModelAndView index(@Valid TechnologyBlipFilter technologyBlipFilter,
+                            BindingResult bindingResult,
+                            @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "ring.title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/technology_blips/index");
-    Page<TechnologyBlipDto> blipDtoPage =
-        technologyBlipService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<TechnologyBlipDto> blipDtoPage = technologyBlipService.findAll(technologyBlipFilter,
+        PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("technologyBlipDtoPage", blipDtoPage);
+    modelAndView.addObject("technologyBlipFilter", technologyBlipFilter);
 
     int totalPages = blipDtoPage.getTotalPages();
     if (totalPages > 0) {

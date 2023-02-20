@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class TechnologyTechnologyBlipServiceImpl implements TechnologyBlipService {
+public class TechnologyBlipServiceImpl implements TechnologyBlipService {
   private final TechnologyBlipRepository technologyBlipRepository;
   private final TechnologyBlipMapper technologyBlipMapper;
 
@@ -33,7 +33,8 @@ public class TechnologyTechnologyBlipServiceImpl implements TechnologyBlipServic
 
   @Override
   @Transactional(readOnly = true)
-  public Page<TechnologyBlipDto> findAll(Pageable pageable) {
+  public Page<TechnologyBlipDto> findAll(TechnologyBlipFilter technologyBlipFilter,
+                                         Pageable pageable) {
     return technologyBlipRepository.findAll(pageable).map(technologyBlipMapper::toDto);
   }
 

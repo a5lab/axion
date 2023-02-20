@@ -28,7 +28,7 @@ public class RingServiceImpl implements RingService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<RingDto> findAll(Pageable pageable) {
+  public Page<RingDto> findAll(RingFilter ringFilter, Pageable pageable) {
     return ringRepository.findAll(pageable).map(ringMapper::toDto);
   }
 

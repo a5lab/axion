@@ -28,7 +28,7 @@ public class SegmentServiceImpl implements SegmentService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<SegmentDto> findAll(Pageable pageable) {
+  public Page<SegmentDto> findAll(SegmentFilter segmentFilter, Pageable pageable) {
     return segmentRepository.findAll(pageable).map(segmentMapper::toDto);
   }
 

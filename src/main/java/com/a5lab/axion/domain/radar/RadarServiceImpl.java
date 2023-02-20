@@ -26,7 +26,7 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<Radar> findAll(Pageable pageable) {
+  public Page<Radar> findAll(RadarFilter radarFilter, Pageable pageable) {
     return radarRepository.findAll(pageable);
   }
 

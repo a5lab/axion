@@ -10,11 +10,11 @@ public interface TechnologyBlipService {
 
   Collection<TechnologyBlipDto> findAll();
 
-  Page<TechnologyBlipDto> findAll(Pageable pageable);
+  Page<TechnologyBlipDto> findAll(TechnologyBlipFilter technologyBlipFilter, Pageable pageable);
 
   Optional<TechnologyBlipDto> findById(Long id);
 
-  TechnologyBlipDto save(TechnologyBlipDto technologyBlipDto); // TODO: remove
+  TechnologyBlipDto save(TechnologyBlipDto technologyBlipDto);
 
   TechnologyBlip save(TechnologyBlip technologyBlip);
 

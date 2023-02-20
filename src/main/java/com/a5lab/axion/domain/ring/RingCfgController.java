@@ -37,7 +37,8 @@ public class RingCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+  public ModelAndView index(@Valid RingFilter ringFilter, BindingResult bindingResult,
+                            @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
@@ -45,8 +46,9 @@ public class RingCfgController {
 
     ModelAndView modelAndView = new ModelAndView("settings/rings/index");
     Page<RingDto> ringDtoPage =
-        ringService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+        ringService.findAll(ringFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("ringDtoPage", ringDtoPage);
+    modelAndView.addObject("ringFilter", ringFilter);
 
     int totalPages = ringDtoPage.getTotalPages();
     if (totalPages > 0) {

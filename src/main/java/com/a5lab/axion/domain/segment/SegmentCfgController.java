@@ -38,7 +38,8 @@ public class SegmentCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+  public ModelAndView index(@Valid SegmentFilter segmentFilter, BindingResult bindingResult,
+                            @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
@@ -46,8 +47,9 @@ public class SegmentCfgController {
 
     ModelAndView modelAndView = new ModelAndView("settings/segments/index");
     Page<SegmentDto> segmentDtoPage =
-        segmentService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+        segmentService.findAll(segmentFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("segmentDtoPage", segmentDtoPage);
+    modelAndView.addObject("segmentFilter", segmentFilter);
 
     int totalPages = segmentDtoPage.getTotalPages();
     if (totalPages > 0) {
