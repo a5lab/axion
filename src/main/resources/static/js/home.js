@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Extract radar configuration
+  console.log(d3.selectAll("h1#name"));
+  console.log("fuck");
+
   config['title'] = d3.selectAll("h1#name").text();
   config['print_layout'] = true;
   // config['zoomed_quadrant'] = 0;
