@@ -29,9 +29,8 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetTenants() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
-    List<TenantDto> tenantList = List.of(tenantDto);
-    Page<TenantDto> page = new PageImpl<>(tenantList);
+    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
+    Page<TenantDto> page = new PageImpl<>(List.of(tenantDto));
     Mockito.when(tenantService.findAll(any(), any())).thenReturn(page);
 
     MvcResult result = mockMvc.perform(get("/settings/tenants"))
@@ -40,7 +39,6 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
         .andExpect(model().attributeExists("tenantDtoPage"))
         .andExpect(model().attributeExists("pageNumbers"))
         .andReturn();
-
     String content = result.getResponse().getContentAsString();
 
     Assertions.assertTrue(content.contains(tenantDto.getTitle()));

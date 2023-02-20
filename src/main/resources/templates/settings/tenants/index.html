@@ -8,9 +8,10 @@
   </head>
   <body>
     <div id="content">
-      <h1>Tentants</h1>
+      <h1>Tenants</h1>
       <th:block th:replace="~{settings/tenants/filter.html}" />
-        <p th:case="0">No tentants.</p>
+      <div th:switch="${tenantDtoPage.getTotalElements()}">
+        <p th:case="0">No tenants.</p>
         <div th:case="*">
           <th:block th:replace="~{settings/tenants/paging.html}" />
           <table>
