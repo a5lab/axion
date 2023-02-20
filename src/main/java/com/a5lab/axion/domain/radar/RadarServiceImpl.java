@@ -23,7 +23,6 @@ public class RadarServiceImpl implements RadarService {
     return radarRepository.findAll(Sort.by(Sort.Direction.ASC, "title"));
   }
 
-
   @Override
   @Transactional(readOnly = true)
   public Page<Radar> findAll(RadarFilter radarFilter, Pageable pageable) {

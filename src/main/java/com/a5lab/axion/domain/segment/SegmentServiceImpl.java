@@ -25,7 +25,6 @@ public class SegmentServiceImpl implements SegmentService {
         .stream().map(segmentMapper::toDto).collect(Collectors.toList());
   }
 
-
   @Override
   @Transactional(readOnly = true)
   public Page<SegmentDto> findAll(SegmentFilter segmentFilter, Pageable pageable) {

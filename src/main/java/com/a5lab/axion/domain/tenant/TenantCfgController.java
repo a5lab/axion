@@ -33,7 +33,7 @@ public class TenantCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@Valid TenantFilter tenantFilter, BindingResult bindingResult,
+  public ModelAndView index(@Valid TenantFilter tenantFilter,
                             @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {

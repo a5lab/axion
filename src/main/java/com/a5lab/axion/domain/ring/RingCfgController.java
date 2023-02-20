@@ -37,7 +37,7 @@ public class RingCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@Valid RingFilter ringFilter, BindingResult bindingResult,
+  public ModelAndView index(@Valid RingFilter ringFilter,
                             @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {

@@ -25,7 +25,6 @@ public class RingServiceImpl implements RingService {
         .stream().map(ringMapper::toDto).collect(Collectors.toList());
   }
 
-
   @Override
   @Transactional(readOnly = true)
   public Page<RingDto> findAll(RingFilter ringFilter, Pageable pageable) {

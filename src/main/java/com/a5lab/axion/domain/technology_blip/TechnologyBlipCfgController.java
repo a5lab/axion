@@ -44,7 +44,6 @@ public class TechnologyBlipCfgController {
 
   @GetMapping("")
   public ModelAndView index(@Valid TechnologyBlipFilter technologyBlipFilter,
-                            BindingResult bindingResult,
                             @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "ring.title,asc") String[] sort) {

@@ -38,11 +38,10 @@ public class RadarCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@Valid RadarFilter radarFilter, BindingResult bindingResult,
+  public ModelAndView index(@Valid RadarFilter radarFilter,
                             @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
-
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
@@ -117,7 +116,8 @@ public class RadarCfgController {
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid Radar radar, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+  public ModelAndView update(@Valid Radar radar, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radar", radar);

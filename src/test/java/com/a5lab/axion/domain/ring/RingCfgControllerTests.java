@@ -50,7 +50,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     List<RingDto> ringList = List.of(ringDto);
     Page<RingDto> page = new PageImpl<>(ringList);
-    Mockito.when(ringService.findAll(any())).thenReturn(page);
+    Mockito.when(ringService.findAll(any(), any())).thenReturn(page);
 
     MvcResult result = mockMvc.perform(get("/settings/rings"))
         .andExpect(status().isOk())
