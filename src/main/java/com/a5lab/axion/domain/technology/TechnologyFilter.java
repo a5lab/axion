@@ -18,4 +18,7 @@ public class TechnologyFilter {
   @Size(min = 0, max = 64)
   private String title;
 
+  @Size(min = 0, max = 64)
+  private String website;
+
 }

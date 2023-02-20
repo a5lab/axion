@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface TenantRepository extends JpaRepository<Tenant, Long>, JpaSpecificationExecutor {
-
+public interface TenantRepository extends JpaRepository<Tenant, Long>,
+    JpaSpecificationExecutor<Tenant> {
 }

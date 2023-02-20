@@ -32,15 +32,14 @@ public class TenantServiceImpl implements TenantService {
   @Override
   @Transactional(readOnly = true)
   public Page<TenantDto> findAll(TenantFilter tenantFilter, Pageable pageable) {
-    Page<Tenant> tenantPage = tenantRepository.findAll((root, query, builder) -> {
+    return tenantRepository.findAll((root, query, builder) -> {
       List<Predicate> predicateList = new ArrayList<>();
       if (tenantFilter != null && tenantFilter.getTitle() != null
           && !tenantFilter.getTitle().isBlank()) {
-        predicateList.add(builder.equal(root.get("title"), tenantFilter.getTitle()));
+        predicateList.add(builder.like(root.get("title"), tenantFilter.getTitle()));
       }
       return builder.and(predicateList.toArray(new Predicate[] {}));
-    }, pageable);
-    return tenantPage.map(tenantMapper::toDto);
+    }, pageable).map(tenantMapper::toDto);
   }
 
   @Override
