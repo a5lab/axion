@@ -29,3 +29,5 @@ Do nothing. It will configured automaticall after the run application.
 
 == Usefull info
 https://help.sonatype.com/repomanager3/installation-and-upgrades/configuring-nexus-repository-pro-for-h2-or-postgresql
+
+just for test
