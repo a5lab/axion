@@ -2,7 +2,6 @@ package com.a5lab.axion.domain.segment;
 
 import jakarta.validation.Valid;
 import java.util.Collection;
-import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
