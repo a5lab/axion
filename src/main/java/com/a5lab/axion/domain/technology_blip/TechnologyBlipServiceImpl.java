@@ -18,7 +18,6 @@ public class TechnologyBlipServiceImpl implements TechnologyBlipService {
   private final TechnologyBlipRepository technologyBlipRepository;
   private final TechnologyBlipMapper technologyBlipMapper;
 
-  /*
   @Override
   @Transactional(readOnly = true)
   public Collection<TechnologyBlipDto> findAll() {
@@ -30,8 +29,6 @@ public class TechnologyBlipServiceImpl implements TechnologyBlipService {
         )
         .stream().map(technologyBlipMapper::toDto).collect(Collectors.toList());
   }
-   */
-
 
   @Override
   @Transactional(readOnly = true)
