@@ -79,7 +79,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(ringDto.getTitle()));
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
   }
-  /*
+
   @Test
   public void shouldRedirectShowRing() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/rings/show/1"))
@@ -98,7 +98,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("title"));
     Assertions.assertTrue(content.contains("description"));
   }
-
+  /*
   @Test
   public void shouldCreateRing() throws Exception {
     final RingDto ringDto = new RingDto(10L, "my title", "my description");
@@ -145,6 +145,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
   }
 
+   */
   @Test
   public void shouldRedirectEditRing() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/rings/edit/1"))
@@ -152,7 +153,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/rings"))
         .andReturn();
   }
-
+ /*
   @Test
   public void shouldUpdateRing() throws Exception {
     final RingDto ringDto = new RingDto(10L, "my title", "my description");
