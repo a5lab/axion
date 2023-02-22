@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html th:fragment="legal (title, metas, content)" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:replace="${title}">Layout title</title>
+        <th:block th:insert="~{fragments/meta_information.html}" />
+        <th:block th:replace="${metas}" />
+    </head>
+    <body>
+        <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
+        <header th:insert="~{fragments/main_header.html}"></header>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col py-3">
+                    <div th:replace="${content}">
+                        <h1>Layout content</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="~{fragments/main_footer.html}"></footer>
+    </body>
+</html>
