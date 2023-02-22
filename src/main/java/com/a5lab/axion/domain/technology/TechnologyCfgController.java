@@ -34,7 +34,8 @@ public class TechnologyCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+  public ModelAndView index(@Valid TechnologyFilter technologyFilter, BindingResult bindingResult,
+                            @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
@@ -42,13 +43,13 @@ public class TechnologyCfgController {
 
     ModelAndView modelAndView = new ModelAndView("settings/technologies/index");
     Page<TechnologyDto> technologyDtoPage =
-        technologyService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+        technologyService.findAll(technologyFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("technologyDtoPage", technologyDtoPage);
+    modelAndView.addObject("technologyFilter", technologyFilter);
 
     int totalPages = technologyDtoPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;

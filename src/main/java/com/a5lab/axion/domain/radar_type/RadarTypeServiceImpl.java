@@ -24,7 +24,6 @@ public class RadarTypeServiceImpl implements RadarTypeService {
         Sort.by(Sort.Direction.ASC, "title"));
   }
 
-
   @Override
   @Transactional(readOnly = true)
   public Page<RadarType> findAll(Pageable pageable) {

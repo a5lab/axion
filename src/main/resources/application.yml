@@ -21,6 +21,7 @@ server:
   error:
     whitelabel:
       enabled: true
+    path: /error
   shutdown: graceful
 
 spring:

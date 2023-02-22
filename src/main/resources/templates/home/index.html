@@ -12,7 +12,7 @@
     <div id="content">
       <div th:switch="${radar}">
         <div th:case="null">
-          <h1>No primary radar yet!</h1>
+          <h1>No primary radar.</h1>
           <p1><a href="/wizard/add">Create</a> the primary radar to view it at home page.</p1>
         </div>
         <div th:case="*">

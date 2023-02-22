@@ -10,7 +10,7 @@ public interface TechnologyService {
 
   Collection<TechnologyDto> findAll();
 
-  Page<TechnologyDto> findAll(Pageable pageable);
+  Page<TechnologyDto> findAll(TechnologyFilter technologyFilter, Pageable pageable);
 
   Optional<TechnologyDto> findById(Long id);
 

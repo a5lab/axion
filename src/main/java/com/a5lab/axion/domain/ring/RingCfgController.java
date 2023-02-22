@@ -33,26 +33,25 @@ import com.a5lab.axion.utils.FlashMessages;
 public class RingCfgController {
 
   private final RingService ringService;
-
   private final RadarService radarService;
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+  public ModelAndView index(@Valid RingFilter ringFilter,
+                            @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/rings/index");
-    Page<RingDto> ringDtoPage =
-        ringService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<RingDto> ringDtoPage = ringService.findAll(ringFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("ringDtoPage", ringDtoPage);
+    modelAndView.addObject("ringFilter", ringFilter);
 
     int totalPages = ringDtoPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;

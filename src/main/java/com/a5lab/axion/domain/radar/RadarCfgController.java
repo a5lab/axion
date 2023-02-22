@@ -38,20 +38,21 @@ public class RadarCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+  public ModelAndView index(@Valid RadarFilter radarFilter,
+                            @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/radars/index");
-    Page<Radar> radarPage = radarService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<Radar> radarPage = radarService.findAll(radarFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("radarPage", radarPage);
+    modelAndView.addObject("radarFilter", radarFilter);
 
     int totalPages = radarPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;
@@ -82,7 +83,7 @@ public class RadarCfgController {
 
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid Radar radar, BindingResult bindingResult,
-                       RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar", radar);
@@ -113,8 +114,8 @@ public class RadarCfgController {
   }
 
   @PostMapping("/update")
-  public ModelAndView update(@Valid Radar radar,
-                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+  public ModelAndView update(@Valid Radar radar, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radar", radar);

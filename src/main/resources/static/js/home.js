@@ -15,6 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Check dom model correctness
+  if(d3.selectAll("h1#name")._groups[0].length == 0
+    || d3.selectAll("table#segments tbody tr")._groups[0].length == 0
+    || d3.selectAll("table#rings tbody tr")._groups[0].length == 0
+    || d3.selectAll("table#blips tbody tr")._groups[0].length == 0){
+    console.log("Invalid DOM model in order to build radar.")
+    return;
+  }
+
   // Extract radar configuration
   config['title'] = d3.selectAll("h1#name").text();
   config['print_layout'] = true;

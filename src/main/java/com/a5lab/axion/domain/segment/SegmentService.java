@@ -10,7 +10,7 @@ public interface SegmentService {
 
   Collection<SegmentDto> findAll();
 
-  Page<SegmentDto> findAll(Pageable pageable);
+  Page<SegmentDto> findAll(SegmentFilter segmentFilter, Pageable pageable);
 
   Optional<SegmentDto> findById(Long id);
 

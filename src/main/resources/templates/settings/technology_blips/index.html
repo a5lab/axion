@@ -8,16 +8,12 @@
   </head>
   <body>
     <div id="content">
+      <h1>Technology blips</h1>
+      <th:block th:replace="~{settings/technology_blips/filter.html}" />
       <div th:switch="${technologyBlipDtoPage.getTotalElements()}">
-        <h1 th:case="0">No blips yet!</h1>
+        <p th:case="0">No technology blips.</p>
         <div th:case="*">
-          <h1>Technology blips</h1>
-          <div>
-            <span th:if="${technologyBlipDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
-              <a th:href="@{/settings/technologyBlip(size=${technologyBlipDtoPage.size}, page=${pageNumber})}"
-                 th:text="${pageNumber}" th:class="${pageNumber==technologyBlipDtoPage.number + 1} ? active"></a>
-            </span>
-          </div>
+          <th:block th:replace="~{settings/technology_blips/paging.html}" />
           <table>
             <thead>
               <tr>

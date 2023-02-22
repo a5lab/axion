@@ -11,7 +11,7 @@ public interface RadarService {
 
   Collection<Radar> findAll();
 
-  Page<Radar> findAll(Pageable pageable);
+  Page<Radar> findAll(RadarFilter radarFilter, Pageable pageable);
 
 
   Optional<Radar> findById(Long id);

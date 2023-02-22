@@ -10,7 +10,7 @@ public interface TenantService {
 
   Collection<TenantDto> findAll();
 
-  Page<TenantDto> findAll(Pageable pageable);
+  Page<TenantDto> findAll(TenantFilter tenantFilter, Pageable pageable);
 
   Optional<TenantDto> findById(Long id);
 

@@ -1,6 +1,9 @@
 package com.a5lab.axion.domain.technology;
 
+import jakarta.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,11 +28,21 @@ public class TechnologyServiceImpl implements TechnologyService {
         .stream().map(technologyMapper::toDto).collect(Collectors.toList());
   }
 
-
   @Override
   @Transactional(readOnly = true)
-  public Page<TechnologyDto> findAll(Pageable pageable) {
-    return technologyRepository.findAll(pageable).map(technologyMapper::toDto);
+  public Page<TechnologyDto> findAll(TechnologyFilter technologyFilter, Pageable pageable) {
+    return technologyRepository.findAll((root, query, builder) -> {
+      List<Predicate> predicateList = new ArrayList<>();
+      if (technologyFilter != null && technologyFilter.getTitle() != null
+          && !technologyFilter.getTitle().isBlank()) {
+        predicateList.add(builder.like(root.get("title"), technologyFilter.getTitle()));
+      }
+      if (technologyFilter != null && technologyFilter.getWebsite() != null
+          && !technologyFilter.getWebsite().isBlank()) {
+        predicateList.add(builder.like(root.get("website"), technologyFilter.getWebsite()));
+      }
+      return builder.and(predicateList.toArray(new Predicate[] {}));
+    }, pageable).map(technologyMapper::toDto);
   }
 
   @Override

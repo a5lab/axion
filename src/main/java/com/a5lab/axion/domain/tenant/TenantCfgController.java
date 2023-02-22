@@ -33,21 +33,21 @@ public class TenantCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+  public ModelAndView index(@Valid TenantFilter tenantFilter,
+                            @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/tenants/index");
-    Page<TenantDto> tenantDtoPage =
-        tenantService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+    Page<TenantDto> tenantDtoPage = tenantService.findAll(tenantFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("tenantDtoPage", tenantDtoPage);
+    modelAndView.addObject("tenantFilter", tenantFilter);
 
     int totalPages = tenantDtoPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;

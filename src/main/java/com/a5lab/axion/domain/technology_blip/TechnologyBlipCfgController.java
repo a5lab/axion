@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -42,7 +43,8 @@ public class TechnologyBlipCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@RequestParam(defaultValue = "${application.paging.page}") int page,
+  public ModelAndView index(@Valid TechnologyBlipFilter technologyBlipFilter,
+                            @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "ring.title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
@@ -50,13 +52,13 @@ public class TechnologyBlipCfgController {
 
     ModelAndView modelAndView = new ModelAndView("settings/technology_blips/index");
     Page<TechnologyBlipDto> blipDtoPage =
-        technologyBlipService.findAll(PageRequest.of(page - 1, size, Sort.by(order)));
+        technologyBlipService.findAll(technologyBlipFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("technologyBlipDtoPage", blipDtoPage);
+    modelAndView.addObject("technologyBlipFilter", technologyBlipFilter);
 
     int totalPages = blipDtoPage.getTotalPages();
     if (totalPages > 0) {
-      List<Integer> pageNumbers =
-          IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+      List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
     }
     return modelAndView;
@@ -71,7 +73,7 @@ public class TechnologyBlipCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blips.flash.error.invalid_id", null,
+          messageSource.getMessage("technology_blip.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     }
@@ -101,11 +103,20 @@ public class TechnologyBlipCfgController {
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
     }
-    technologyBlipService.save(technologyBlipDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blips.flash.info.created", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/technology_blips");
+
+    try {
+      technologyBlipService.save(technologyBlipDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("technology_blip.flash.info.created", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/technology_blips");
+    } catch (DataIntegrityViolationException e) {
+      // Redirect
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
+          messageSource.getMessage("technology_blip.flash.error.exception", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/technology_blips");
+    }
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -121,7 +132,7 @@ public class TechnologyBlipCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blips.flash.error.invalid_id", null,
+          messageSource.getMessage("technology_blip.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     }
@@ -139,18 +150,27 @@ public class TechnologyBlipCfgController {
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
     }
-    technologyBlipService.save(technologyBlipDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blips.flash.info.updated", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/technology_blips");
+
+    try {
+      technologyBlipService.save(technologyBlipDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("technology_blip.flash.info.updated", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/technology_blips");
+    } catch (DataIntegrityViolationException e) {
+      // Redirect
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
+          messageSource.getMessage("technology_blip.flash.error.exception", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/technology_blips");
+    }
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     technologyBlipService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blips.flash.info.deleted", null,
+        messageSource.getMessage("technology_blip.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
     return "redirect:/settings/blips";
   }

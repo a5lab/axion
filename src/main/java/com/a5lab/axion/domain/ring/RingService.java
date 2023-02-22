@@ -10,7 +10,7 @@ public interface RingService {
 
   Collection<RingDto> findAll();
 
-  Page<RingDto> findAll(Pageable pageable);
+  Page<RingDto> findAll(RingFilter ringFilter, Pageable pageable);
 
   Optional<RingDto> findById(Long id);
 
