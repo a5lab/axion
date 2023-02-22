@@ -2,18 +2,28 @@ package com.a5lab.axion.domain.radar;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public class RadarPrimaryValidator
     implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
+  public RadarPrimaryValidator() {
+    radarService = ApplicationContextProvider
+            .getApplicationContext().getBean(RadarService.class);
+  }
 
-  private final RadarService radarService;
+  private RadarService radarService;
+  @Autowired
+  public void setRadarService(RadarService radarService) {
+    this.radarService = radarService;
+  }
+
   // private final RadarRepository radarRepository;
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
+
+    Assert.notNull(radarService);
     //
     return true;
     /*
