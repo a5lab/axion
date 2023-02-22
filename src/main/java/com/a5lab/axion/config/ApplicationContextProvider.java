@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.radar;
+package com.a5lab.axion.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
