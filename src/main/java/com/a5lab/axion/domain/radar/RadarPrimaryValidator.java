@@ -12,7 +12,6 @@ public class RadarPrimaryValidator
   }
 
   private RadarService radarService;
-  // private final RadarRepository radarRepository;
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
