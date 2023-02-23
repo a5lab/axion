@@ -4,13 +4,15 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
+import com.a5lab.axion.AxionApplication;
 import com.a5lab.axion.config.ApplicationTestBaseConfig;
 import com.a5lab.axion.config.JpaAuditingConfiguration;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import({
-    JpaAuditingConfiguration.class
+    JpaAuditingConfiguration.class,
+    AxionApplication.class
 })
 @ApplicationTestBaseConfig
 public abstract class AbstractRepositoryTests {
