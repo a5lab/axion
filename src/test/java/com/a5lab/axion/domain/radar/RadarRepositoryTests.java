@@ -17,8 +17,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.domain.AbstractRepositoryTests;
+import com.a5lab.axion.config.ApplicationTestBaseConfig;
 
-class RadarRepositoryTests extends AbstractRepositoryTests {
+@ApplicationTestBaseConfig
+public class RadarRepositoryTests extends AbstractRepositoryTests {
   @Autowired
   private RadarRepository radarRepository;
 
