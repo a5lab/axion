@@ -38,7 +38,7 @@ public class WizardController {
 
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid Wizard wizard, BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes) throws Exception {
+                             RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("wizard/add");
       modelAndView.addObject("wizard", new Wizard());
