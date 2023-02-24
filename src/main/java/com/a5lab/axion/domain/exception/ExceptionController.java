@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@Profile("dev")
+@Profile("prod")
 public class ExceptionController implements ErrorController {
 
   @RequestMapping("/error")
