@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
-// import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
-// import com.a5lab.axion.utils.FlashMessages;
+import com.a5lab.axion.utils.FlashMessages;
 
 @Controller
 @RequestMapping("/wizard")
@@ -46,10 +46,6 @@ public class WizardController {
       return modelAndView;
     }
 
-    wizardService.createRadarEnv(wizard);
-    return new ModelAndView("redirect:/home");
-
-    /*
     try {
       wizardService.createRadarEnv(wizard);
 
@@ -65,7 +61,7 @@ public class WizardController {
           messageSource.getMessage("radar.flash.error.exception", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/home");
-    }*/
+    }
   }
 
 }
