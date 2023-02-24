@@ -5,11 +5,11 @@
   become: yes
   become_user: root
   roles:
-    - role: maintenance
-    - role: sysinfo
-    - role: firewall
-    - role: workstation
+    #- role: maintenance
+    #- role: sysinfo
+    #- role: firewall
+    #- role: workstation
     - role: postgresql
     - role: app
-    - role: maintenance
-      state: absent
+    #- role: maintenance
+    #  state: absent
