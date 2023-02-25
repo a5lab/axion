@@ -1,16 +1,23 @@
 package com.a5lab.axion.domain.radar;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 import com.a5lab.axion.config.ApplicationContextProvider;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RadarPrimaryValidator
     implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
 
   public RadarPrimaryValidator() {
-    radarService = ApplicationContextProvider
-            .getApplicationContext().getBean(RadarService.class);
+  }
+
+  @PostConstruct
+  public void init(){
+      radarService = ApplicationContextProvider
+          .getApplicationContext().getBean(RadarService.class);
   }
 
   private RadarService radarService;
