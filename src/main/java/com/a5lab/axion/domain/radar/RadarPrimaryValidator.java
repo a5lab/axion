@@ -15,7 +15,7 @@ public class RadarPrimaryValidator
   }
 
   @PostConstruct
-  public void init(){
+  public void init() {
       radarService = ApplicationContextProvider
           .getApplicationContext().getBean(RadarService.class);
   }
