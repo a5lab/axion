@@ -9,6 +9,7 @@ import jakarta.validation.ValidationException;
 import jakarta.validation.Validator;
 
 
+import com.a5lab.axion.AxionApplication;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import org.hibernate.validator.internal.engine.path.PathImpl;
@@ -17,9 +18,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.domain.AbstractRepositoryTests;
-import com.a5lab.axion.config.ApplicationTestBaseConfig;
+import org.springframework.test.context.ContextConfiguration;
 
-@ApplicationTestBaseConfig
+@ContextConfiguration(classes = {
+    AxionApplication.class
+})
 public class RadarRepositoryTests extends AbstractRepositoryTests {
   @Autowired
   private RadarRepository radarRepository;
