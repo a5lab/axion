@@ -53,7 +53,7 @@ Oracle DB||Oracle DB|axion|axion
 PostgreSQL||PostgreSQL|axion|axion
 Presto||Presto|axion|axion
 Python||Python|axion|axion
-R|R||axion|axion
+R||R|axion|axion
 RabbitMQ||RabbitMQ|axion|axion
 Redis||Redis|axion|axion
 RocksDB||RocksDB|axion|axion
