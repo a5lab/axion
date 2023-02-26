@@ -6,10 +6,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
-import jakarta.validation.Validator;
 
-
-import com.a5lab.axion.AxionApplication;
+import com.a5lab.axion.domain.AbstractRepositoryTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import org.hibernate.validator.internal.engine.path.PathImpl;
@@ -17,12 +15,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.a5lab.axion.domain.AbstractRepositoryTests;
-import org.springframework.test.context.ContextConfiguration;
-
-@ContextConfiguration(classes = {
-    AxionApplication.class
-})
 public class RadarRepositoryTests extends AbstractRepositoryTests {
   @Autowired
   private RadarRepository radarRepository;
