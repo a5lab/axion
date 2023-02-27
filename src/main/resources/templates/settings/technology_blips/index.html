@@ -17,10 +17,10 @@
           <table>
             <thead>
               <tr>
-                <th>Radar title</th>
-                <th>Segment title</th>
-                <th>Ring title</th>
-                <th>Entry title</th>
+                <th th:replace="settings/technology_blips/sorting :: sorting('radar.title','Radar')"></th>
+                <th th:replace="settings/technology_blips/sorting :: sorting('segment.title','Segment')"></th>
+                <th th:replace="settings/technology_blips/sorting :: sorting('ring.title','Ring')"></th>
+                <th th:replace="settings/technology_blips/sorting :: sorting('technology.title','Technology')"></th>
                 <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>

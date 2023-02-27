@@ -17,11 +17,11 @@
           <table>
             <thead>
               <tr>
-                <th>Radar type</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Primary</th>
-                <th>Active</th>
+                <th th:replace="settings/radars/sorting :: sorting('radarType.title','Radar type')"></th>
+                <th th:replace="settings/radars/sorting :: sorting('title','Title')"></th>
+                <th th:replace="settings/radars/sorting :: sorting('description','Description')"></th>
+                <th th:replace="settings/radars/sorting :: sorting('primary','Primary')"></th>
+                <th th:replace="settings/radars/sorting :: sorting('active','Active')"></th>
                 <th>Show</th>
                 <th>Edit</th>
                 <th>Delete</th>
