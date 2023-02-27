@@ -12,21 +12,19 @@ public class RadarPrimaryValidator
 
   @Override
   public void initialize(RadarPrimaryConstraint constraintAnnotation) {
-    initRadarService();
-  }
-
-  private void initRadarService() {
-    if (radarService == null) {
-      radarService = ApplicationContextProvider
-          .getApplicationContext().getBean(RadarService.class);
-    }
+    radarService = ApplicationContextProvider.getBean(RadarService.class);
   }
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
-    initRadarService();
-    System.out.println(radarService.findAll().toString());
-    return true;
+    try {
+      System.out.println(radarService.findAll().toString());
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+
     /*
     // TODO: implement it
     if (radars.isPrimary() == false) {

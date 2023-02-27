@@ -7,6 +7,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 
+
 import com.a5lab.axion.domain.AbstractRepositoryTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
@@ -14,7 +15,9 @@ import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class RadarRepositoryTests extends AbstractRepositoryTests {
   @Autowired
   private RadarRepository radarRepository;
@@ -26,8 +29,8 @@ public class RadarRepositoryTests extends AbstractRepositoryTests {
   void shouldSaveRadarWithAllFields() {
     // Create a radar type
     final RadarType radarType = new RadarType();
-    radarType.setTitle("Technology radars");
-    radarType.setCode("technology_radar");
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
     radarType.setDescription("Technology radars");
     radarTypeRepository.saveAndFlush(radarType);
 
@@ -40,15 +43,15 @@ public class RadarRepositoryTests extends AbstractRepositoryTests {
     radar.setActive(false);
 
     Assertions.assertNull(radar.getId());
-    radarRepository.saveAndFlush(radar);
-    Assertions.assertNotNull(radar.getId());
-    Assertions.assertNotNull(radar.getRadarType());
-    Assertions.assertNotNull(radar.getTitle());
-    Assertions.assertNotNull(radar.getDescription());
-    Assertions.assertNotNull(radar.getCreatedBy());
-    Assertions.assertNotNull(radar.getCreatedDate());
-    Assertions.assertNotNull(radar.getLastModifiedBy());
-    Assertions.assertNotNull(radar.getLastModifiedDate());
+    Radar saved = radarRepository.saveAndFlush(radar);
+    Assertions.assertNotNull(saved.getId());
+    Assertions.assertNotNull(saved.getRadarType());
+    Assertions.assertNotNull(saved.getTitle());
+    Assertions.assertNotNull(saved.getDescription());
+    Assertions.assertNotNull(saved.getCreatedBy());
+    Assertions.assertNotNull(saved.getCreatedDate());
+    Assertions.assertNotNull(saved.getLastModifiedBy());
+    Assertions.assertNotNull(saved.getLastModifiedDate());
   }
 
   @Test
@@ -69,15 +72,15 @@ public class RadarRepositoryTests extends AbstractRepositoryTests {
     radar.setActive(false);
 
     Assertions.assertNull(radar.getId());
-    radarRepository.saveAndFlush(radar);
-    Assertions.assertNotNull(radar.getId());
-    Assertions.assertNotNull(radar.getRadarType());
-    Assertions.assertNotNull(radar.getTitle());
-    Assertions.assertNotNull(radar.getDescription());
-    Assertions.assertNotNull(radar.getCreatedBy());
-    Assertions.assertNotNull(radar.getCreatedDate());
-    Assertions.assertNotNull(radar.getLastModifiedBy());
-    Assertions.assertNotNull(radar.getLastModifiedDate());
+    Radar saved = radarRepository.saveAndFlush(radar);
+    Assertions.assertNotNull(saved.getId());
+    Assertions.assertNotNull(saved.getRadarType());
+    Assertions.assertNotNull(saved.getTitle());
+    Assertions.assertNotNull(saved.getDescription());
+    Assertions.assertNotNull(saved.getCreatedBy());
+    Assertions.assertNotNull(saved.getCreatedDate());
+    Assertions.assertNotNull(saved.getLastModifiedBy());
+    Assertions.assertNotNull(saved.getLastModifiedDate());
   }
 
   @Test
@@ -148,8 +151,8 @@ public class RadarRepositoryTests extends AbstractRepositoryTests {
   void shouldFailOnSecondPrimaryRadar() {
     // Create a radar type
     final RadarType radarType = new RadarType();
-    radarType.setTitle("Technology radars");
-    radarType.setCode("technology_radar");
+    radarType.setTitle("Technology radars 2");
+    radarType.setCode("technology_radar_2");
     radarType.setDescription("Technology radars");
     radarTypeRepository.saveAndFlush(radarType);
 
