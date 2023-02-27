@@ -3,11 +3,8 @@ package com.a5lab.axion.domain.radar;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import org.springframework.stereotype.Component;
-
 import com.a5lab.axion.config.ApplicationContextProvider;
 
-@Component
 public class RadarPrimaryValidator
     implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
 
@@ -15,11 +12,19 @@ public class RadarPrimaryValidator
 
   @Override
   public void initialize(RadarPrimaryConstraint constraintAnnotation) {
-    radarService = ApplicationContextProvider.getBean(RadarService.class);
+    initRadarService();
+  }
+
+  private void initRadarService() {
+    if (radarService == null) {
+      radarService = ApplicationContextProvider
+          .getApplicationContext().getBean(RadarService.class);
+    }
   }
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
+    initRadarService();
     System.out.println(radarService.findAll().toString());
     return true;
     /*
