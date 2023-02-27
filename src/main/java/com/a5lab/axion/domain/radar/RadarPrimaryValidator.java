@@ -10,11 +10,12 @@ public class RadarPrimaryValidator
     implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
 
   // private final RadarService radarService;
-  // private final RadarRepository radarService;
+  private final RadarRepository radarRepository;
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
     //
+    System.out.println(radarRepository.toString());
     return true;
     /*
     // TODO: implement it
