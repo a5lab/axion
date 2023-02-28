@@ -98,6 +98,22 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("title"));
     Assertions.assertTrue(content.contains("description"));
   }
+
+  @Test
+  public void shouldFailToCreateRing() throws Exception {
+    final RingDto ringDto = new RingDto(10L, null, "my title", "my description", 1, true);
+
+    MvcResult result = mockMvc.perform(post("/settings/rings/create")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                    .param("description", ringDto.getDescription())
+                    .param("title", ringDto.getTitle())
+                    .sessionAttr("ringDto", ringDto))
+            .andExpect(status().isOk())
+            .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be uppercase"));
+  }
   /*
   @Test
   public void shouldCreateRing() throws Exception {
