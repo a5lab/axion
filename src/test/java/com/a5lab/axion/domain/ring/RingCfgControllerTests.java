@@ -89,9 +89,11 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldAddTentant() throws Exception {
+  public void shouldAddRing() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/rings/add"))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/add"))
+        .andExpect(model().attributeExists("ringDto"))
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
@@ -100,7 +102,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateRing() throws Exception {
+  public void shouldFailToCreateRingOnLowerCaseTitle() throws Exception {
     final RingDto ringDto = new RingDto(10L, null, "my title", "my description", 1, true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
@@ -117,7 +119,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   /*
   @Test
   public void shouldCreateRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, "my title", "my description");
+    final RingDto ringDto = new RingDto(10L, null, "MY TITLE", "MY DESCRIPTION", 1, true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -130,10 +132,11 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
   }
+   */
 
   @Test
-  public void shouldFailToCreateRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, "my title", "my description");
+  public void shouldFailToCreateRingOnBlankDesciption() throws Exception {
+    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -148,7 +151,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldEditRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, "my title", "my description");
+    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
     Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
 
     String url = String.format("/settings/rings/edit/%d", ringDto.getId());
@@ -161,7 +164,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
   }
 
-   */
+
   @Test
   public void shouldRedirectEditRing() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/rings/edit/1"))
@@ -169,10 +172,10 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/rings"))
         .andReturn();
   }
- /*
+  /*
   @Test
   public void shouldUpdateRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, "my title", "my description");
+    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -185,10 +188,10 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
   }
-
+  */
   @Test
   public void shouldFailToUpdateRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, "my title", "my description");
+    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -203,7 +206,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldDeleteRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, "my title", "my description");
+    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
 
     String url = String.format("/settings/rings/delete/%d", ringDto.getId());
     MvcResult result = mockMvc.perform(get(url))
@@ -211,5 +214,5 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/rings"))
         .andReturn();
   }
-   */
+
 }
