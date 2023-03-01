@@ -92,6 +92,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   public void shouldAddRing() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/rings/add"))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/add"))
+        .andExpect(model().attributeExists("ringDto"))
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
