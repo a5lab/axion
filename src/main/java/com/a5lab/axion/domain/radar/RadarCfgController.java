@@ -49,6 +49,11 @@ public class RadarCfgController {
     Page<Radar> radarPage = radarService.findAll(radarFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("radarPage", radarPage);
     modelAndView.addObject("radarFilter", radarFilter);
+    modelAndView.addObject("currentPage", radarPage.getNumber() + 1);
+    modelAndView.addObject("pageSize", size);
+    modelAndView.addObject("sortField", sort[0]);
+    modelAndView.addObject("sortDirection", sort[1]);
+    modelAndView.addObject("reverseSortDirection", sort[1].equals("asc") ? "desc" : "asc");
 
     int totalPages = radarPage.getTotalPages();
     if (totalPages > 0) {

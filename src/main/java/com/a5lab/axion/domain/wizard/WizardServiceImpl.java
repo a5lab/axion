@@ -1,11 +1,10 @@
 package com.a5lab.axion.domain.wizard;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.net.URL;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
@@ -73,12 +72,10 @@ public class WizardServiceImpl implements WizardService {
   }
 
   public void createRadar(Wizard wizard) throws Exception {
-    // Read rings
-    File file =
-        ResourceUtils.getFile("classpath:database/datasets/technology_radar/radars_en.csv");
-    Path path = file.toPath();
-    Stream<String> lines = Files.lines(path);
-    String fileContent = lines.collect(Collectors.joining("\n"));
+    // Read radars
+    URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/radars_en.csv");
+    String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
+        .collect(Collectors.joining("\n"));
 
     String[] record = null;
     CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))
@@ -97,11 +94,9 @@ public class WizardServiceImpl implements WizardService {
 
   public void createRings() throws Exception {
     // Read rings
-    File file =
-        ResourceUtils.getFile("classpath:database/datasets/technology_radar/rings_en.csv");
-    Path path = file.toPath();
-    Stream<String> lines = Files.lines(path);
-    String fileContent = lines.collect(Collectors.joining("\n"));
+    URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/rings_en.csv");
+    String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
+        .collect(Collectors.joining("\n"));
 
     String[] record = null;
     CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))
@@ -119,12 +114,10 @@ public class WizardServiceImpl implements WizardService {
   }
 
   private void createSegments() throws Exception {
-    // Read rings
-    File file =
-        ResourceUtils.getFile("classpath:database/datasets/technology_radar/segments_en.csv");
-    Path path = file.toPath();
-    Stream<String> lines = Files.lines(path);
-    String fileContent = lines.collect(Collectors.joining("\n"));
+    // Read segments
+    URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/segments_en.csv");
+    String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
+        .collect(Collectors.joining("\n"));
 
     String[] record = null;
     CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))
@@ -142,13 +135,10 @@ public class WizardServiceImpl implements WizardService {
   }
 
   private void createTechnologyBlips() throws Exception {
-    // Read technology_blips_en
-    File file =
-        ResourceUtils.getFile(
-            "classpath:database/datasets/technology_radar/technology_blips_en.csv");
-    Path path = file.toPath();
-    Stream<String> lines = Files.lines(path);
-    String fileContent = lines.collect(Collectors.joining("\n"));
+    // Read technology_blips
+    URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/technology_blips_en.csv");
+    String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
+        .collect(Collectors.joining("\n"));
 
     String[] record = null;
     CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))

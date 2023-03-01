@@ -46,6 +46,11 @@ public class TechnologyCfgController {
         technologyService.findAll(technologyFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("technologyDtoPage", technologyDtoPage);
     modelAndView.addObject("technologyFilter", technologyFilter);
+    modelAndView.addObject("currentPage", technologyDtoPage.getNumber() + 1);
+    modelAndView.addObject("pageSize", size);
+    modelAndView.addObject("sortField", sort[0]);
+    modelAndView.addObject("sortDirection", sort[1]);
+    modelAndView.addObject("reverseSortDirection", sort[1].equals("asc") ? "desc" : "asc");
 
     int totalPages = technologyDtoPage.getTotalPages();
     if (totalPages > 0) {

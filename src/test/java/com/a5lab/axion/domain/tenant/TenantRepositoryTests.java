@@ -57,6 +57,7 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
         catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
             ConstraintViolationException.class);
 
+    Assertions.assertNotNull(exception);
     Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(
@@ -76,6 +77,7 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
         catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
             ConstraintViolationException.class);
 
+    Assertions.assertNotNull(exception);
     Assertions.assertEquals(exception.getConstraintViolations().size(), 2);
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(
@@ -96,6 +98,7 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
         catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
             ConstraintViolationException.class);
 
+    Assertions.assertNotNull(exception);
     Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(
@@ -114,6 +117,7 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
         catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
             ConstraintViolationException.class);
 
+    Assertions.assertNotNull(exception);
     Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(
@@ -134,6 +138,7 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
         catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
             ConstraintViolationException.class);
 
+    Assertions.assertNotNull(exception);
     Assertions.assertEquals(exception.getConstraintViolations().size(), 2);
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(
@@ -154,6 +159,7 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
         catchThrowableOfType(() -> tenantRepository.saveAndFlush(tenant),
             ConstraintViolationException.class);
 
+    Assertions.assertNotNull(exception);
     Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(

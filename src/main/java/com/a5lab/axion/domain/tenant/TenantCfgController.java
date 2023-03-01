@@ -44,6 +44,11 @@ public class TenantCfgController {
     Page<TenantDto> tenantDtoPage = tenantService.findAll(tenantFilter, PageRequest.of(page - 1, size, Sort.by(order)));
     modelAndView.addObject("tenantDtoPage", tenantDtoPage);
     modelAndView.addObject("tenantFilter", tenantFilter);
+    modelAndView.addObject("currentPage", tenantDtoPage.getNumber() + 1);
+    modelAndView.addObject("pageSize", size);
+    modelAndView.addObject("sortField", sort[0]);
+    modelAndView.addObject("sortDirection", sort[1]);
+    modelAndView.addObject("reverseSortDirection", sort[1].equals("asc") ? "desc" : "asc");
 
     int totalPages = tenantDtoPage.getTotalPages();
     if (totalPages > 0) {
