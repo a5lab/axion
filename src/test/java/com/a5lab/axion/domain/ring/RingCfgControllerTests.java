@@ -102,7 +102,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateRing() throws Exception {
+  public void shouldFailToCreateRingOnLowerCaseTitle() throws Exception {
     final RingDto ringDto = new RingDto(10L, null, "my title", "my description", 1, true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
@@ -135,7 +135,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
    */
 
   @Test
-  public void shouldFailToCreateRing() throws Exception {
+  public void shouldFailToCreateRingOnBlankDesciption() throws Exception {
     final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
