@@ -1,33 +1,38 @@
 = Database configuration
 
-Supported databases are:
-.PostgreSQL for production
-.h2 in memory db fro review app
+*Axion* supported databases (DB):
 
-Warning:
-* use h2 in order to rewview app or at development mode.
-* use postgreSQL for production.
+* PostgreSQL – use for production
+* H2 – use for review or development
 
-
-Default database is axion, username is axion, password is secret. If you change these value then change at application.yml or pass correct value as part of the java -jar ... command.
+*Axion* is pre-configured for work with DB.
 
 == PostgreSQL configuration
--1.You need to create user and database. Default username - axion, password - secret, database name -axion. How to create database see https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
+ 
+Default DB configurations set in *Axion*:
 
-```
+* DB name – _axion_
+* username – _axion_
+* password – _secret_
+
+Create a PostgreSQL DB with stated configurations and make sure to provide privileges to the user.
+
+=== Usefull commands in PostgreSQL:
+
+DB creation:
+....
 CREATE DATABASE axion;
+....
+User and password creation:
+....
 CREATE USER axion WITH ENCRYPTED PASSWORD 'secret';
+....
+Grant privileges to the user:
+....
 GRANT ALL PRIVILEGES ON DATABASE axion TO axion;
-```
+....
 
--2.Setup correct value at application.yml or pass by -D..
-
+If you desire to use different configurations fo DB make sure to add them to _application.yml_ or pass them with _-D_ key when launching *Axion* (see xref:application_configuration.adoc[Application configuration]).
 
 == H2 configuration
-Do nothing. It will configured automaticall after the run application.
-
-
-== Usefull info
-https://help.sonatype.com/repomanager3/installation-and-upgrades/configuring-nexus-repository-pro-for-h2-or-postgresql
-
-just for test
+H2 is configured automatically when launching *Axion*.
