@@ -90,12 +90,15 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   public void shouldAddSegment() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/segments/add"))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/segments/add"))
+        .andExpect(model().attributeExists("segmentDto"))
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
     Assertions.assertTrue(content.contains("title"));
     Assertions.assertTrue(content.contains("description"));
   }
+
   /*
   @Test
   public void shouldCreateSegment() throws Exception {
@@ -127,6 +130,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
   }
+
   /*
   @Test
   public void shouldEditTenant() throws Exception {
@@ -192,6 +196,5 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/tenants"))
         .andReturn();
   }
-
    */
 }
