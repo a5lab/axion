@@ -6,6 +6,7 @@ import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.segment.SegmentCfgController;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
+import com.a5lab.axion.domain.tenant.TenantDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -76,18 +77,18 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(segmentDto.getTitle()));
     Assertions.assertTrue(content.contains(segmentDto.getDescription()));
   }
-  /*
+
   @Test
-  public void shouldRedirectShowTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/show/1"))
+  public void shouldRedirectShowSegment() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/segments/show/1"))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(view().name("redirect:/settings/segments"))
         .andReturn();
   }
 
   @Test
-  public void shouldAddTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/add"))
+  public void shouldAddSegment() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/segments/add"))
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
@@ -95,38 +96,38 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("title"));
     Assertions.assertTrue(content.contains("description"));
   }
-
+  /*
   @Test
-  public void shouldCreateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+  public void shouldCreateSegment() throws Exception {
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true);
 
     MvcResult result = mockMvc.perform(post("/settings/tenants/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", tenantDto.getTitle())
-            .param("description", tenantDto.getDescription())
-            .sessionAttr("tenantDto", tenantDto))
+            .param("title", segmentDto.getTitle())
+            .param("description", segmentDto.getDescription())
+            .sessionAttr("segmentDto", segmentDto))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(view().name("redirect:/settings/segments"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
   }
-
+  */
   @Test
-  public void shouldFailToCreateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+  public void shouldFailToCreateSegment() throws Exception {
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1 , true);
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/create")
+    MvcResult result = mockMvc.perform(post("/settings/segments/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", tenantDto.getTitle())
-            .sessionAttr("tenantDto", tenantDto))
+            .param("title", segmentDto.getTitle())
+            .sessionAttr("segmentDto", segmentDto))
         .andExpect(status().isOk())
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
   }
-
+  /*
   @Test
   public void shouldEditTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
