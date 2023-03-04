@@ -1,6 +1,9 @@
 package com.a5lab.axion.domain.segment;
 
+import jakarta.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -28,7 +31,14 @@ public class SegmentServiceImpl implements SegmentService {
   @Override
   @Transactional(readOnly = true)
   public Page<SegmentDto> findAll(SegmentFilter segmentFilter, Pageable pageable) {
-    return segmentRepository.findAll(pageable).map(segmentMapper::toDto);
+    return segmentRepository.findAll((root, query, builder) -> {
+      List<Predicate> predicateList = new ArrayList<>();
+      if (segmentFilter != null && segmentFilter.getTitle() != null
+          && !segmentFilter.getTitle().isBlank()) {
+        predicateList.add(builder.like(root.get("title"), segmentFilter.getTitle()));
+      }
+      return builder.and(predicateList.toArray(new Predicate[] {}));
+    }, pageable).map(segmentMapper::toDto);
   }
 
   @Override
