@@ -178,6 +178,6 @@ public class TechnologyBlipCfgController {
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
         messageSource.getMessage("technology_blip.flash.info.deleted", null,
             LocaleContextHolder.getLocale()));
-    return "redirect:/settings/blips";
+    return "redirect:/settings/technology_blips";
   }
 }
