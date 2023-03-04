@@ -24,10 +24,4 @@ public class Version {
 
   @Value("${version}")
   private String version;
-
-  @Value("${name}")
-  private String name;
-
-  @Value("${description}")
-  private String description;
 }

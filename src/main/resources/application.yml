@@ -26,7 +26,7 @@ server:
 
 spring:
   profiles:
-    active: @spring.profiles.active@
+    active: '@spring.profiles.active@'
   application:
     name: Axion
   jmx:
@@ -129,11 +129,9 @@ management:
         include: "health,info,metrics,prometheus"
 
 application:
-  group_id: @project.groupId@
-  artifact_id: @project.artifactId@
-  version: @project.version@
-  name: @project.name@
-  description: @project.description@
+  group_id: '@project.groupId@'
+  artifact_id: '@project.artifactId@'
+  version: '@project.version@'
   keys:
     google_analytics:
   paging:

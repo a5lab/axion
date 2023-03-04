@@ -21,8 +21,6 @@ public class VersionApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$").isMap())
         .andExpect(jsonPath("$").value(hasKey("groupId")))
         .andExpect(jsonPath("$").value(hasKey("artifactId")))
-        .andExpect(jsonPath("$").value(hasKey("version")))
-        .andExpect(jsonPath("$").value(hasKey("name")))
-        .andExpect(jsonPath("$").value(hasKey("description")));
+        .andExpect(jsonPath("$").value(hasKey("version")));
   }
 }
