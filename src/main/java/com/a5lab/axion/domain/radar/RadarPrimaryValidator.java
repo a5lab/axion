@@ -4,12 +4,16 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowire;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 @RequiredArgsConstructor
+@Configurable(autowire = Autowire.BY_TYPE, dependencyCheck = true)
 public class RadarPrimaryValidator
     implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
 
-  // private final RadarService radarService;
+  @Autowired
   private final RadarRepository radarRepository;
 
   @Override
