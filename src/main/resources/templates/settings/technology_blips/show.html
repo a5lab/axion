@@ -11,15 +11,23 @@
         <h1>Blip</h1>
         <ul>
           <li>
-            <p>Segment no</p>
-            <p th:text="${technologyBlipDto.segmentNo}"></p>
+            <p>Radar</p>
+            <p th:text="${technologyBlipDto.radar.title}"></p>
           </li>
           <li>
-            <p>Ring no</p>
-            <p th:text="${technologyBlipDto.ringNo}"></p>
+            <p>Segment</p>
+            <p th:text="${technologyBlipDto.segment.title}"></p>
+          </li>
+          <li>
+            <p>Ring</p>
+            <p th:text="${technologyBlipDto.ring.title}"></p>
+          </li>
+          <li>
+            <p>Technology</p>
+            <p th:text="${technologyBlipDto.technology.title}"></p>
           </li>
         </ul>
-      <p><a href="/settings/technologyBlip">View all blips</a></p>
+      <p><a href="/settings/technology_blips">View all technology blips</a></p>
     </div>
   </body>
 </html>

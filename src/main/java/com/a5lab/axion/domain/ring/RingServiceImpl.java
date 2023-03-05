@@ -1,6 +1,9 @@
 package com.a5lab.axion.domain.ring;
 
+import jakarta.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -28,7 +31,14 @@ public class RingServiceImpl implements RingService {
   @Override
   @Transactional(readOnly = true)
   public Page<RingDto> findAll(RingFilter ringFilter, Pageable pageable) {
-    return ringRepository.findAll(pageable).map(ringMapper::toDto);
+    return ringRepository.findAll((root, query, builder) -> {
+      List<Predicate> predicateList = new ArrayList<>();
+      if (ringFilter != null && ringFilter.getTitle() != null
+          && !ringFilter.getTitle().isBlank()) {
+        predicateList.add(builder.like(root.get("title"), ringFilter.getTitle()));
+      }
+      return builder.and(predicateList.toArray(new Predicate[] {}));
+    }, pageable).map(ringMapper::toDto);
   }
 
   @Override

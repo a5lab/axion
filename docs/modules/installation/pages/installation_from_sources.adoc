@@ -1,3 +1,15 @@
 = Installation from sources
 
-TODO
+When building from source files, make sure that all required packages are installed on your system (see xref:installation_prerequisites.adoc[required software]).
+
+. Run the command from the root directory to build the *Axion* application:
++
+----
+mvn clean package -Pdev -Dmaven.test.skip
+----
+. Launch application with command:
++
+----
+mvn spring-boot:run -Pdev
+----
+If default settings were used, enter _http://127.0.0.1:8080_ in your internet browser to start configuring your radar.
