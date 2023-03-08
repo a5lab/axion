@@ -18,8 +18,10 @@ import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 
 class RadarRepositoryTests extends AbstractRepositoryTests {
+
   @Autowired
   private RadarRepository radarRepository;
+
 
   @Autowired
   private RadarTypeRepository radarTypeRepository;
