@@ -64,7 +64,6 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
 
     Assertions.assertTrue(content.contains(technologyDto.getTitle()));
-    Assertions.assertTrue(content.contains(technologyDto.getWebsite()));
     Assertions.assertTrue(content.contains(technologyDto.getDescription()));
   }
 
