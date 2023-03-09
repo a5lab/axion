@@ -1,11 +1,6 @@
 package com.a5lab.axion.domain.technology;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.ring.RingCfgController;
-
-import com.a5lab.axion.domain.ring.RingService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,92 +19,88 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(RingCfgController.class)
+@WebMvcTest(TechnologyCfgController.class)
 public class TechnologyCfgControllerTests extends AbstractControllerTests {
   @MockBean
-  private RingService ringService;
+  private TechnologyService technologyService;
 
-  @MockBean
-  private RadarService radarService;
-  /*
+
   @Test
-  public void shouldGetRings() throws Exception {
-    // Create radar
-    final Radar radar = new Radar();
-    radar.setTitle("My radar");
-    radar.setDescription("My radar description");
+  public void shouldGetTechnologies() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setWebsite("My website");
+    technologyDto.setTitle("My technology");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(0);
+    technologyDto.setActive(true);
 
-    // Create ring for radar
-    final RingDto ringDto = new RingDto();
-    ringDto.setRadar(radar);
-    ringDto.setTitle("My ring");
-    ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
-    ringDto.setActive(true);
+    List<TechnologyDto> technologyList = List.of(technologyDto);
+    Page<TechnologyDto> page = new PageImpl<>(technologyList);
+    Mockito.when(technologyService.findAll(any(), any())).thenReturn(page);
 
-    List<RingDto> ringList = List.of(ringDto);
-    Page<RingDto> page = new PageImpl<>(ringList);
-    Mockito.when(ringService.findAll(any(), any())).thenReturn(page);
-
-    MvcResult result = mockMvc.perform(get("/settings/rings"))
+    MvcResult result = mockMvc.perform(get("/settings/technologies"))
         .andExpect(status().isOk())
-        .andExpect(view().name("settings/rings/index"))
-        .andExpect(model().attributeExists("ringDtoPage"))
+        .andExpect(view().name("settings/technologies/index"))
+        .andExpect(model().attributeExists("technologyDtoPage"))
         .andExpect(model().attributeExists("pageNumbers"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains(ringDto.getTitle()));
-    Assertions.assertTrue(content.contains(ringDto.getDescription()));
+    Assertions.assertTrue(content.contains(technologyDto.getTitle()));
+    Assertions.assertTrue(content.contains(technologyDto.getWebsite()));
+    Assertions.assertTrue(content.contains(technologyDto.getDescription()));
   }
 
   @Test
-  public void shouldShowRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
-    Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
+  public void shouldShowTechnology() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+    Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
 
-    String url = String.format("/settings/rings/show/%d", ringDto.getId());
+    String url = String.format("/settings/technologies/show/%d", technologyDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains(ringDto.getTitle()));
-    Assertions.assertTrue(content.contains(ringDto.getDescription()));
+    Assertions.assertTrue(content.contains(technologyDto.getTitle()));
+    Assertions.assertTrue(content.contains(technologyDto.getWebsite()));
+    Assertions.assertTrue(content.contains(technologyDto.getDescription()));
   }
 
   @Test
-  public void shouldRedirectShowRing() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/rings/show/1"))
+  public void shouldRedirectShowTechnology() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/technologies/show/1"))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/rings"))
+        .andExpect(view().name("redirect:/settings/technologies"))
         .andReturn();
   }
 
   @Test
-  public void shouldAddRing() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/rings/add"))
+  public void shouldAddTechnology() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/technologies/add"))
         .andExpect(status().isOk())
-        .andExpect(view().name("settings/rings/add"))
-        .andExpect(model().attributeExists("ringDto"))
+        .andExpect(view().name("settings/technologies/add"))
+        .andExpect(model().attributeExists("technologyDto"))
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
     Assertions.assertTrue(content.contains("title"));
+    Assertions.assertTrue(content.contains("website"));
     Assertions.assertTrue(content.contains("description"));
   }
-
+  /*
   @Test
-  public void shouldFailToCreateRingOnLowerCaseTitle() throws Exception {
-    final RingDto ringDto = new RingDto(10L, null, "my title", "my description", 1, true);
+  public void shouldFailToCreateTechnologyOnLowerCaseTitle() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto(10L,  "My title", "My website", "My description", 0, true);
 
-    MvcResult result = mockMvc.perform(post("/settings/rings/create")
+    MvcResult result = mockMvc.perform(post("/settings/technologies/create")
                     .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                    .param("description", ringDto.getDescription())
-                    .param("title", ringDto.getTitle())
-                    .sessionAttr("ringDto", ringDto))
-            .andExpect(status().isOk())
+                    .param("description", technologyDto.getDescription())
+                    .param("title", technologyDto.getTitle())
+                    .param("website", technologyDto.getWebsite())
+                    .sessionAttr("technologyDto", technologyDto))
+            .andExpect(status().is3xxRedirection())
             .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -132,86 +123,87 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
   }
 
-
   @Test
-  public void shouldFailToCreateRingOnBlankDesciption() throws Exception {
-    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
+  public void shouldFailToCreateTechnologyOnBlankDescription() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
 
-    MvcResult result = mockMvc.perform(post("/settings/rings/create")
+    MvcResult result = mockMvc.perform(post("/settings/technologies/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", ringDto.getTitle())
-            .sessionAttr("ringDto", ringDto))
+            .param("title", technologyDto.getTitle())
+            .param("website", technologyDto.getWebsite())
+            .param("description", technologyDto.getDescription())
+            .sessionAttr("technologyDto", technologyDto))
         .andExpect(status().isOk())
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
-  }
-
-  @Test
-  public void shouldEditRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
-    Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
-
-    String url = String.format("/settings/rings/edit/%d", ringDto.getId());
-    MvcResult result = mockMvc.perform(get(url))
-        .andExpect(status().isOk())
-        .andReturn();
-    String content = result.getResponse().getContentAsString();
-
-    Assertions.assertTrue(content.contains(ringDto.getTitle()));
-    Assertions.assertTrue(content.contains(ringDto.getDescription()));
-  }
-
-
-  @Test
-  public void shouldRedirectEditRing() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/rings/edit/1"))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/rings"))
-        .andReturn();
-  }
-  /*
-  @Test
-  public void shouldUpdateRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
-
-    MvcResult result = mockMvc.perform(post("/settings/rings/update")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", ringDto.getTitle())
-            .param("description", ringDto.getDescription())
-            .sessionAttr("ringDto", ringDto))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/rings"))
-        .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-  }
-
-  @Test
-  public void shouldFailToUpdateRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
-
-    MvcResult result = mockMvc.perform(post("/settings/rings/update")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", ringDto.getTitle())
-            .sessionAttr("ringDto", ringDto))
-        .andExpect(status().isOk())
-        .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("must not be blank"));
-  }
-
-  @Test
-  public void shouldDeleteRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
-
-    String url = String.format("/settings/rings/delete/%d", ringDto.getId());
-    MvcResult result = mockMvc.perform(get(url))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/rings"))
-        .andReturn();
   }
    */
+  @Test
+  public void shouldEditTechnology() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+    Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
+
+    String url = String.format("/settings/technologies/edit/%d", technologyDto.getId());
+    MvcResult result = mockMvc.perform(get(url))
+        .andExpect(status().isOk())
+        .andReturn();
+    String content = result.getResponse().getContentAsString();
+
+    Assertions.assertTrue(content.contains(technologyDto.getTitle()));
+    Assertions.assertTrue(content.contains(technologyDto.getDescription()));
+  }
+  @Test
+  public void shouldRedirectEditTechnology() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/technologies/edit/1"))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/technologies"))
+        .andReturn();
+  }
+
+  @Test
+  public void shouldUpdateTechnology() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+
+    MvcResult result = mockMvc.perform(post("/settings/technologies/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", technologyDto.getTitle())
+            .param("website", technologyDto.getWebsite())
+            .param("description", technologyDto.getDescription())
+            .sessionAttr("technologyDto", technologyDto))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/technologies"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+  }
+
+  @Test
+  public void shouldFailToUpdateTechnology() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+
+    MvcResult result = mockMvc.perform(post("/settings/technologies/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", technologyDto.getTitle())
+            .param("website", technologyDto.getWebsite())
+            .sessionAttr("technologyDto", technologyDto))
+        .andExpect(status().isOk())
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("must not be blank"));
+  }
+
+  @Test
+  public void shouldDeleteTechnology() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+
+    String url = String.format("/settings/technologies/delete/%d", technologyDto.getId());
+    MvcResult result = mockMvc.perform(get(url))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/technologies"))
+        .andReturn();
+  }
+
 }
