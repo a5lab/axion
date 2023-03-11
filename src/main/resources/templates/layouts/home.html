@@ -8,8 +8,13 @@
         <th:block th:replace="${scripts}" />
     </head>
     <body>
-        <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
-        <header th:insert="~{fragments/main_header.html}"></header>
+	    <div id="main-header-section">
+          <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
+          <header th:insert="~{fragments/main_header.html}"></header>
+		</div>
+		<div class="container">
+		  <img src="images/laptop_radar_axion.svg" class="promo-image"/>
+		</div>
         <div th:replace="~{fragments/system_flash.html}"></div>
         <div class="container-fluid">
             <div class="row flex-nowrap">
