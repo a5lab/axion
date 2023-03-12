@@ -1,3 +1,8 @@
+<div th:if="${#fields.hasErrors('global')}">
+  <ul>
+    <li th:each="error : ${#fields.errors('global')}" th:text="${error}" />
+  </ul>
+</div>
 <div th:if="${#fields.hasAnyErrors()}">
   <ul>
     <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
