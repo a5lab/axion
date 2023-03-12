@@ -10,7 +10,6 @@ import com.a5lab.axion.config.ApplicationTestBaseConfig;
 import com.a5lab.axion.config.JpaAuditingConfiguration;
 
 @DataJpaTest
-// @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import({
     JpaAuditingConfiguration.class

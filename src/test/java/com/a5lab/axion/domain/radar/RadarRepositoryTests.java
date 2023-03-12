@@ -28,7 +28,7 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
 
   @Test
   void shouldSaveRadarWithAllFields() {
-// Create a radar type
+    // Create a radar type
     final RadarType radarType = new RadarType();
     radarType.setTitle("Technology radars 1");
     radarType.setCode("technology_radar_1");
