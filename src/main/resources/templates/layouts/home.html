@@ -10,12 +10,8 @@
   <body>
     <div id="main-header-section">
       <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
-      <header th:insert="~{fragments/main_header.html}"></header>
+      <div th:replace="~{fragments/system_flash.html}"></div>
     </div>
-    <div class="container">
-      <img class="promo-image" src="images/promos/laptop_radar_axion.svg"/>
-    </div>
-    <div th:replace="~{fragments/system_flash.html}"></div>
     <div class="container-fluid">
       <div class="row flex-nowrap">
         <div class="col py-3">
