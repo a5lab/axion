@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg">
   <div class="container px-5">
     <a class="navbar-brand" href="#!"><img src="images/logos/axion_axion.svg"/></a>
     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -7,11 +7,11 @@
         class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarToggle">
       <ul class="navbar-nav ms-auto">
-        <li class="navbar-item"><a class="nav-link" th:href="@{/}" th:text="#{metamenu.home}"/></li>
-        <li class="navbar-item"><a class="nav-link" th:href="@{/radars}" th:text="#{metamenu.radar}"/></li>
+        <li class="navbar-item"><a class="nav-link text-white" th:href="@{/}" th:text="#{metamenu.home}"/></li>
+        <li class="navbar-item"><a class="nav-link text-white" th:href="@{/radars}" th:text="#{metamenu.radar}"/></li>
         <block th:if="${#arrays.contains(@environment.getActiveProfiles(),'dev')}">
           <li class="navbar-item dropdown">
-            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+            <a aria-expanded="false" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#"
                id="navbarEntitiesLink" role="button" th:text="#{metamenu.account}"/>
             <ul aria-labelledby="navbarEntitiesLink" class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" th:href="@{/accounts/profiles}" th:text="#{metamenu.signin}"/></li>
