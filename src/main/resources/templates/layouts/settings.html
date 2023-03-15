@@ -2,13 +2,12 @@
 <html th:fragment="settings (title, metas, content)" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title th:replace="${title}">Layout title</title>
-    <th:block th:insert="~{fragments/google_analytics.html}" />
-    <th:block th:insert="~{fragments/meta_information.html}" />
-    <th:block th:replace="${metas}" />
+    <th:block th:insert="~{fragments/google_analytics.html}"/>
+    <th:block th:insert="~{fragments/meta_information.html}"/>
+    <th:block th:replace="${metas}"/>
   </head>
   <body>
     <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
-    <header th:insert="~{fragments/main_header.html}"></header>
     <div th:replace="~{fragments/system_flash.html}"></div>
     <div th:replace="~{fragments/main_tabbar.html}"></div>
     <div class="container-fluid">
@@ -16,6 +15,7 @@
         <div th:replace="~{fragments/settings_sidebar.html}"></div>
         <div class="col py-3">
           <div th:replace="${content}">
+          </div>
         </div>
       </div>
     </div>

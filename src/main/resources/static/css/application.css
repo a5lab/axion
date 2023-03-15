@@ -1,0 +1,96 @@
+/* Content list styles
+ *   Common layout styles
+ *   Common primitives styles
+ *   Main header styles
+ *   Main footer styles
+ */
+
+
+/* =Common layout styles
+ * This section contains
+ * X
+ */
+
+/* =Common primitives styles
+ * This section contains
+ * X
+ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rubik:wght@700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.title {
+  font-family: 'Rubik', sans-serif;
+}
+
+.color-blue-primary {
+  color: #0F054C;
+}
+
+.color-green-light {
+  color: #94F3F0;
+}
+
+a.active, a.nav-link:hover{
+  color: #42E8E0 !important;
+}
+
+.btn-primary-basic {
+  background: #42E8E0;
+  border: 2px solid #42E8E0;
+  color: #0F054C;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 8px 24px;
+}
+
+.btn-primary-basic:hover {
+    border: 2px solid #42E8E0;
+    color: #42E8E0;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 8px 24px;
+}
+
+.full-container {
+  padding: 0 !important;
+}
+
+/* =Main header styles
+ * This section contains
+ * X
+ */
+
+.navbar {
+  background: #0F054C;
+}
+
+#header{
+  height: 100%;
+  width: 100%;
+  background-image: url("../images/backgrounds/header_background_axion.svg"), radial-gradient(39.81% 39.81% at 50% 60.19%, #2B237C 0%, #251C72 26.04%, #0F054C 100%);
+  background-position: center;
+  background-size: cover;
+  overflow:hidden;
+  padding: 1.5rem 0 8rem 0;
+}
+
+.lead-banner-text {
+    font-size: 1.1rem;
+}
+
+.promo-image {
+  display:block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+  top: -120px;
+}
+
+/* =Main footer styles
+ * This section contains
+ * X
+ */

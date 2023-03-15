@@ -12,6 +12,23 @@
     <div id="content">
       <div th:switch="${radar}">
         <div th:case="null">
+          <header id="header">
+            <div class="container px-5">
+              <div class="row gx-5 justify-content-center">
+                <div class="col-lg-8">
+                  <div class="text-center my-5">
+                    <h1 class="display-5 fw-bolder text-white mb-4 title">NO TERRA INCOGNITA!</h1>
+                    <h2 class="color-green-light">No primary radar?</h2>
+                    <p class="lead-banner-text text-white mb-4">Create the primary radar to view it at home page.</p>
+                    <a class="btn btn-primary-basic btn-lg px-4 me-sm-3" href="/wizard/add">Create primary radar</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+          <div class="container">
+            <img class="promo-image" src="images/promos/laptop_radar_axion.svg"/>
+          </div>
           <h1>No primary radar.</h1>
           <p1><a href="/wizard/add">Create</a> the primary radar to view it at home page.</p1>
         </div>
