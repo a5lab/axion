@@ -7,10 +7,8 @@
     <th:block th:replace="${metas}"/>
   </head>
   <body>
-    <div id="main-header-section">
-      <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
-      <div th:replace="~{fragments/system_flash.html}"></div>
-    </div>
+    <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
+    <div th:replace="~{fragments/system_flash.html}"></div>
     <div class="container-fluid">
       <div class="row flex-nowrap">
         <div class="col py-3">
