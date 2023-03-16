@@ -35,7 +35,7 @@ Every section is presented with a table of entities, filter and buttons.
 
 Buttons:
 
-* *Add* -- depending on section, where the button is pushed, calls a corresponding form to this section with parameters that need to be filled
+* *Add* -- allow to create a new entity
+* *Edit* –- allow to change the existing entity
 * *Show* -- display entity information
-* *Edit* –- change entered entity parameter values
-* *Delete* -- delete the corresponding entity 
+* *Delete* -- delete the corresponding entity
