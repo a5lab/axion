@@ -1,21 +1,32 @@
 = Concepts
 
-This is version *{page-component-display-version}* of Module One in Component B.
+To start using *Axion* you need to create a radar.
 
-== Page source
+To do so:
 
-This page is sourced from [.path]_demo-component-b/docs/modules/module-one/pages/overview.adoc_.
+. Go to home page and click *Create*.
+. Select the radar type in the corresponding field, for example _Technology radar_.
+. Click the button *Add radar*.
 
-== Cross reference syntax to target this page
+The *Axion* will generate and display a radar.
 
-To create a cross reference *to this page from another page in Module One*, the xref syntax would be `\xref:overview.adoc[]`.
+To add technology blips to your radar:
 
-To create a cross reference *to this page from a page in the ROOT module of Component B*, the xref syntax would be `\xref:module-one:overview.adoc[]`.
+. Navigate to the radar settings.
+. Select Technology blips in the menu.
+. It will open a list of all blips.
+. Click on the *Add a new technology blip*.
+. Fill out the form that opens and click on the *Add technology blip* button.
 
-=== Always target the latest version of this page
+It will add a line with to the selected blip configuration and put it on the created radar.
 
-To create a cross reference *to the latest version of this page from a page in Component A*, the xref syntax would be `\xref:component-b:module-one:overview.adoc[]`.
+== Blip management 
 
-=== Target a specific version of this page
+You can manage blips from radar settings in the technology blips section.
 
-To create a cross reference *to version 1.0 of this page from a page in Component A*, the xref syntax would be `\xref:1.0@component-b:module-one:overview.adoc[]`.
+Available actions:
+
+* Add – create a new blip for the radar
+* Show - display blip information
+* Edit – change blip settings
+* Delete - remove the blip
