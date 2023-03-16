@@ -4,7 +4,7 @@ To start using *Axion* you need to create a radar.
 
 To do so:
 
-. Go to home page and click *Create*.
+. Go to *Axion* home page and click *Create*.
 . Select the radar type in the corresponding field, for example _Technology radar_.
 . Click the button *Add radar*.
 
@@ -20,13 +20,22 @@ To add technology blips to your radar:
 
 It will add a line with to the selected blip configuration and put it on the created radar.
 
-== Blip management 
+== Radar configuration
 
-You can manage blips from radar settings in the technology blips section.
+Use *Settings* to customize your radar. Available sections:
 
-Available actions:
+* Tenants  
+* Technologies
+* Radars
+* Rings
+* Segments 
+* Technology blips 
 
-* Add – create a new blip for the radar
-* Show - display blip information
-* Edit – change blip settings
-* Delete - remove the blip
+Every section is presented with a table of entities, filter and buttons.
+
+Buttons:
+
+* *Add* -- depending on section, where the button is pushed, calls a corresponding form to this section with parameters that need to be filled
+* *Show* -- display entity information
+* *Edit* –- change entered entity parameter values
+* *Delete* -- delete the corresponding entity 
