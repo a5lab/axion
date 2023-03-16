@@ -4,7 +4,7 @@ To start using *Axion* you need to create a radar.
 
 To do so:
 
-. Click *Create*.
+. Go to home page and click *Create*.
 . Select the radar type in the corresponding field, for example _Technology radar_.
 . Click the button *Add radar*.
 
