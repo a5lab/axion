@@ -35,7 +35,7 @@ Every section is presented with a table of entities, filter and buttons.
 
 Buttons:
 
-* *Add* -- allow to create a new entity
-* *Edit* –- allow to change the existing entity
+* *Add* -- create a new entity
+* *Edit* –- change the existing entity
 * *Show* -- display entity information
 * *Delete* -- delete the corresponding entity
