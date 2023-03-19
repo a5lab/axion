@@ -42,109 +42,127 @@
         </div>
         <div th:case="*">
           <svg id="radar"></svg>
-          <h1 th:text="${radar.title}" th:id="name"></h1>
-          <p th:text="${radar.description}" th:id="description"></p>
-          <h2>Blips</h2>
-          <table id="blips" class="table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Website</th>
-                <th>Quadrant</th>
-                <th>Ring</th>
-                <th>Moved</th>
-                <th>Active</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="technologyBlip : ${radar.getTechnologyBlipList}">
-                <td th:text="${technologyBlip.technology.title}"></td>
-                <td th:text="${technologyBlip.technology.website}"></td>
-                <td th:text="${technologyBlip.segment.position}"></td>
-                <td th:text="${technologyBlip.ring.position}"></td>
-                <td th:text="${technologyBlip.technology.moved}"></td>
-                <td th:text="${technologyBlip.technology.active}"></td>
-              </tr>
-            </tbody>
-          </table>
-          <h2>Segments</h2>
-          <table id="segments" class="table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Languages</td>
-                <td>Programming languages we use</td>
-              </tr>
-              <tr>
-                <td>Data Management</td>
-                <td>Tools for data management</td>
-              </tr>
-              <tr>
-                <td>Infrastructure</td>
-                <td>Where we can deploy or run our applications</td>
-              </tr>
-              <tr>
-                <td>Datastores</td>
-                <td>Where we can store our data</td>
-              </tr>
-            </tbody>
-          </table>
-          <h2>Rings</h2>
-          <table class="table" id="rings">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Priority</th>
-                <th>Color</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>ADOPT</td>
-                <td>Technologies we have high confidence in to serve our purpose, also in large scale. Technologies with
-                  a usage culture in production environment, low risk and recommended to be widely used.
-                </td>
-                <td>0</td>
-                <td>#93c47d</td>
-              </tr>
-              <tr>
-                <td>TRIAL</td>
-                <td>Technologies that we have seen work with success in project work to
-                  solve a real problem; first serious usage experience that confirm benefits and can uncover limitations.
-                  TRIAL technologies are slightly more risky; some engineers in our organization walked this path and
-                  will share knowledge and experiences.
-                </td>
-                <td>1</td>
-                <td>#93d2c2</td>
-              </tr>
-              <tr>
-                <td>ASSESS</td>
-                <td>Technologies that are promising and have clear potential value-add for us; technologies worth to
-                  invest some research and prototyping efforts in to see if it has impact. ASSESS technologies have
-                  higher risks; they are often brand new and highly unproven in our organisation. You will find some
-                  engineers that have knowledge in the technology and promote it, you may even find teams that have
-                  started a prototyping effort.
-                </td>
-                <td>2</td>
-                <td>#fbdb84</td>
-              </tr>
-              <tr>
-                <td>HOLD</td>
-                <td>Technologies not recommended to be used for new projects. Technologies that we think are not (yet)
-                  worth to (further) invest in. HOLD technologies should not be used for new projects, but usually can
-                  be continued for existing projects.
-                </td>
-                <td>3</td>
-                <td>#efafa9</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="container py-5">
+            <div class="row justify-content-center">
+              <div class="text-center">
+                <h1 class="title color-blue-primary mb-4" th:text="${radar.title}" th:id="name"></h1>
+                <p class="lead-banner-text grey" th:text="${radar.description}" th:id="description"></p>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <h2 class="title color-blue-primary">Blips</h2>
+              <div class="table-wrap">
+                <table class="table table-home">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Website</th>
+                      <th>Quadrant</th>
+                      <th>Ring</th>
+                      <th>Moved</th>
+                      <th>Active</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="technologyBlip : ${radar.getTechnologyBlipList}">
+                      <td th:text="${technologyBlip.technology.title}"></td>
+                      <td th:text="${technologyBlip.technology.website}"></td>
+                      <td th:text="${technologyBlip.segment.position}"></td>
+                      <td th:text="${technologyBlip.ring.position}"></td>
+                      <td th:text="${technologyBlip.technology.moved}"></td>
+                      <td th:text="${technologyBlip.technology.active}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <h2 class="title color-blue-primary">Segments</h2>
+              <div class="table-wrap">
+                <table class="table table-home">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Languages</td>
+                      <td>Programming languages we use</td>
+                    </tr>
+                    <tr>
+                      <td>Data Management</td>
+                      <td>Tools for data management</td>
+                    </tr>
+                    <tr>
+                      <td>Infrastructure</td>
+                      <td>Where we can deploy or run our applications</td>
+                    </tr>
+                    <tr>
+                      <td>Datastores</td>
+                      <td>Where we can store our data</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <h2 class="title color-blue-primary">Rings</h2>
+              <div class="table-wrap">
+                <table class="table table-home">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Priority</th>
+                      <th>Color</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>ADOPT</td>
+                      <td>Technologies we have high confidence in to serve our purpose, also in large scale. Technologies with
+                          a usage culture in production environment, low risk and recommended to be widely used.
+                      </td>
+                      <td>0</td>
+                      <td>#93c47d</td>
+                    </tr>
+                    <tr>
+                      <td>TRIAL</td>
+                      <td>Technologies that we have seen work with success in project work to
+                          solve a real problem; first serious usage experience that confirm benefits and can uncover limitations.
+                          TRIAL technologies are slightly more risky; some engineers in our organization walked this path and
+                          will share knowledge and experiences.
+                      </td>
+                      <td>1</td>
+                      <td>#93d2c2</td>
+                    </tr>
+                    <tr>
+                      <td>ASSESS</td>
+                      <td>Technologies that are promising and have clear potential value-add for us; technologies worth to
+                          invest some research and prototyping efforts in to see if it has impact. ASSESS technologies have
+                          higher risks; they are often brand new and highly unproven in our organisation. You will find some
+                          engineers that have knowledge in the technology and promote it, you may even find teams that have
+                          started a prototyping effort.
+                      </td>
+                      <td>2</td>
+                      <td>#fbdb84</td>
+                    </tr>
+                    <tr>
+                      <td>HOLD</td>
+                      <td>Technologies not recommended to be used for new projects. Technologies that we think are not (yet)
+                          worth to (further) invest in. HOLD technologies should not be used for new projects, but usually can
+                          be continued for existing projects.
+                      </td>
+                      <td>3</td>
+                      <td>#efafa9</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="maintain" class="py-5">
           <div class="container">
