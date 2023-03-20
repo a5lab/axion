@@ -1,0 +1,2 @@
+= 0.1.0 
+Basic technical radar functionality: creation, configuration and deletion.

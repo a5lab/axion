@@ -1,7 +1,7 @@
 = Installation from sources
 
-When building from source files, make sure that all required packages are installed on your system (see xref:installation_prerequisites.adoc[required software]).
-
+. Download the latest version from https://github.com/a5lab/axion/releases[GitHub].
+. Make sure that you have installed all the required packages that are mentioned in the xref:system_requirements.adoc[System requirements] section and xref:installation_prerequisites.adoc[Installation prerequisites].
 . Run the command from the root directory to build the *Axion* application:
 +
 ----
