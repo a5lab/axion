@@ -6,5 +6,4 @@
 ** xref:installation_from_sources.adoc[]
 ** xref:application_configuration.adoc[]
 ** xref:database_configuration.adoc[]
-** xref:run_as_service.adoc[]
 ** xref:runtime_env_configuration.adoc[]
