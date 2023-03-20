@@ -1,4 +1,5 @@
 = Installation methods
+
 Supported installation methods are
 
 * xref:installation_from_binaries.adoc[Installation from binaries]
