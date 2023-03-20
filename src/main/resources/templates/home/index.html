@@ -3,155 +3,206 @@
       xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Home title</title>
-    <meta name="description" content="Page description"/>
-    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta content="Page description" name="description"/>
+    <meta content="HTML, CSS, JavaScript" name="keywords">
     <script th:src="@{/js/d3.min.js}"></script>
     <script th:src="@{/js/home.min.js}"></script>
   </head>
   <body>
     <div id="content">
-      <div th:switch="${radar}">
-        <div th:case="null">
-          <header id="header">
-            <div class="container px-5">
-              <div class="row gx-5 justify-content-center">
-                <div class="col-lg-8">
-                  <div class="text-center my-5">
-                    <h1 class="display-5 fw-bolder text-white mb-4 title">NO TERRA INCOGNITA!</h1>
-                    <h2 class="color-green-light">No primary radar?</h2>
-                    <p class="lead-banner-text text-white mb-4">Create the primary radar to view it at home page.</p>
-                    <a class="btn btn-primary-basic btn-lg px-4 me-sm-3" href="/wizard/add">Create primary radar</a>
+      <div id="home-page">
+        <div th:switch="${radar}">
+          <div th:case="null">
+            <header id="header">
+              <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                  <div class="col-lg-8">
+                    <div class="text-center my-5">
+                      <h1 class="display-5 fw-bolder text-white mb-4 title">NO TERRA INCOGNITA!</h1>
+                      <h2 class="color-green-light">No primary radar?</h2>
+                      <p class="lead-banner-text text-white mb-4">Create the primary radar to view it at home page.</p>
+                      <a class="btn btn-primary-basic btn-lg px-4 me-sm-3" href="/wizard/add">Create primary radar</a>
+                    </div>
                   </div>
                 </div>
               </div>
+            </header>
+            <div class="container">
+              <img class="promo-img" src="/images/promos/laptop_radar_axion.svg"/>
+              <div class="row justify-content-center">
+                <div class="col-lg-8 text-center promo-text">
+                  <h2 class="title color-blue-primary mb-4">WHAT IS THE PURPOSE?</h2>
+                  <p class="lead-banner-text">
+                    The Tech Radar is a tool to inspire and support Engineering teams to pick the best technologies for
+                    new projects; it provides a platform to share knowledge and experience in technologies, to reflect
+                    on technology decisions and continuously evolve our technology landscape.
+                  </p>
+                </div>
+              </div>
             </div>
-          </header>
-          <div class="container">
-            <img class="promo-image" src="images/promos/laptop_radar_axion.svg"/>
           </div>
-          <h1>No primary radar.</h1>
-          <p1><a href="/wizard/add">Create</a> the primary radar to view it at home page.</p1>
+          <div th:case="*">
+            <svg id="radar"></svg>
+            <div class="container py-5">
+              <div class="row justify-content-center">
+                <div class="text-center">
+                  <h1 class="title color-blue-primary mb-4" th:id="name" th:text="${radar.title}"></h1>
+                  <p class="lead-banner-text grey" th:id="description" th:text="${radar.description}"></p>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <h2 class="title color-blue-primary">Blips</h2>
+                <div class="table-wrap">
+                  <table class="table table-home" id="blips">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Website</th>
+                        <th>Quadrant</th>
+                        <th>Ring</th>
+                        <th>Moved</th>
+                        <th>Active</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="technologyBlip : ${radar.getTechnologyBlipList}">
+                        <td th:text="${technologyBlip.technology.title}"></td>
+                        <td th:text="${technologyBlip.technology.website}"></td>
+                        <td th:text="${technologyBlip.segment.position}"></td>
+                        <td th:text="${technologyBlip.ring.position}"></td>
+                        <td th:text="${technologyBlip.technology.moved}"></td>
+                        <td th:text="${technologyBlip.technology.active}"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <h2 class="title color-blue-primary">Segments</h2>
+                <div class="table-wrap">
+                  <table class="table table-home" id="segments">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Languages</td>
+                        <td>Programming languages we use</td>
+                      </tr>
+                      <tr>
+                        <td>Data Management</td>
+                        <td>Tools for data management</td>
+                      </tr>
+                      <tr>
+                        <td>Infrastructure</td>
+                        <td>Where we can deploy or run our applications</td>
+                      </tr>
+                      <tr>
+                        <td>Datastores</td>
+                        <td>Where we can store our data</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <h2 class="title color-blue-primary">Rings</h2>
+                <div class="table-wrap">
+                  <table class="table table-home" id="rings">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Color</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>ADOPT</td>
+                        <td>Technologies we have high confidence in to serve our purpose, also in large scale.
+                          Technologies with
+                          a usage culture in production environment, low risk and recommended to be widely used.
+                        </td>
+                        <td>0</td>
+                        <td>#93c47d</td>
+                      </tr>
+                      <tr>
+                        <td>TRIAL</td>
+                        <td>Technologies that we have seen work with success in project work to
+                          solve a real problem; first serious usage experience that confirm benefits and can uncover
+                          limitations.
+                          TRIAL technologies are slightly more risky; some engineers in our organization walked this
+                          path and
+                          will share knowledge and experiences.
+                        </td>
+                        <td>1</td>
+                        <td>#93d2c2</td>
+                      </tr>
+                      <tr>
+                        <td>ASSESS</td>
+                        <td>Technologies that are promising and have clear potential value-add for us; technologies
+                          worth to
+                          invest some research and prototyping efforts in to see if it has impact. ASSESS technologies
+                          have
+                          higher risks; they are often brand new and highly unproven in our organisation. You will find
+                          some
+                          engineers that have knowledge in the technology and promote it, you may even find teams that
+                          have
+                          started a prototyping effort.
+                        </td>
+                        <td>2</td>
+                        <td>#fbdb84</td>
+                      </tr>
+                      <tr>
+                        <td>HOLD</td>
+                        <td>Technologies not recommended to be used for new projects. Technologies that we think are not
+                          (yet)
+                          worth to (further) invest in. HOLD technologies should not be used for new projects, but
+                          usually can
+                          be continued for existing projects.
+                        </td>
+                        <td>3</td>
+                        <td>#efafa9</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="py-5" id="maintain">
+            <div class="container">
+              <div class="row">
+                <h2 class="title color-blue-primary text-center mb-4">HOW DO WE MAINTAIN IT?</h2>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6 text-vertical-center px-5">
+                  <p>The Tech Radar is maintained by our <em>Principal Engineers</em> &mdash; who facilitate and drive
+                    the technology selection discussions at company. Assignment of technologies to rings is the outcome
+                    of ring change proposals, which are discussed and voted on.</p>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                  <img class="maintain-img py-3" src="/images/promos/laptop_maintain_axion.svg"/>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6 d-none d-md-block">
+                  <img class="maintain-img py-3" src="/images/promos/engineers_maintain_axion.svg"/>
+                </div>
+                <div class="col-lg-5 col-md-6 text-vertical-center px-5">
+                  <p>The Tech Radar is open for contribution for all engineers and depends on their active
+                    participation to share lessons learned, pitfalls, and contribute to good practices on using
+                    the technologies.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div th:case="*">
-          <svg id="radar"></svg>
-          <h1 th:text="${radar.title}" th:id="name"></h1>
-          <p th:text="${radar.description}" th:id="description"></p>
-          <h2>Blips</h2>
-          <table id="blips" class="table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Website</th>
-                <th>Quadrant</th>
-                <th>Ring</th>
-                <th>Moved</th>
-                <th>Active</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="technologyBlip : ${radar.getTechnologyBlipList}">
-                <td th:text="${technologyBlip.technology.title}"></td>
-                <td th:text="${technologyBlip.technology.website}"></td>
-                <td th:text="${technologyBlip.segment.position}"></td>
-                <td th:text="${technologyBlip.ring.position}"></td>
-                <td th:text="${technologyBlip.technology.moved}"></td>
-                <td th:text="${technologyBlip.technology.active}"></td>
-              </tr>
-            </tbody>
-          </table>
-          <h2>Segments</h2>
-          <table id="segments" class="table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Languages</td>
-                <td>Programming languages we use</td>
-              </tr>
-              <tr>
-                <td>Data Management</td>
-                <td>Tools for data management</td>
-              </tr>
-              <tr>
-                <td>Infrastructure</td>
-                <td>Where we can deploy or run our applications</td>
-              </tr>
-              <tr>
-                <td>Datastores</td>
-                <td>Where we can store our data</td>
-              </tr>
-            </tbody>
-          </table>
-          <h2>Rings</h2>
-          <table class="table" id="rings">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Priority</th>
-                <th>Color</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>ADOPT</td>
-                <td>Technologies we have high confidence in to serve our purpose, also in large scale. Technologies with
-                  a usage culture in production environment, low risk and recommended to be widely used.
-                </td>
-                <td>0</td>
-                <td>#93c47d</td>
-              </tr>
-              <tr>
-                <td>TRIAL</td>
-                <td>Technologies that we have seen work with success in project work to
-                  solve a real problem; first serious usage experience that confirm benefits and can uncover limitations.
-                  TRIAL technologies are slightly more risky; some engineers in our organization walked this path and
-                  will share knowledge and experiences.
-                </td>
-                <td>1</td>
-                <td>#93d2c2</td>
-              </tr>
-              <tr>
-                <td>ASSESS</td>
-                <td>Technologies that are promising and have clear potential value-add for us; technologies worth to
-                  invest some research and prototyping efforts in to see if it has impact. ASSESS technologies have
-                  higher risks; they are often brand new and highly unproven in our organisation. You will find some
-                  engineers that have knowledge in the technology and promote it, you may even find teams that have
-                  started a prototyping effort.
-                </td>
-                <td>2</td>
-                <td>#fbdb84</td>
-              </tr>
-              <tr>
-                <td>HOLD</td>
-                <td>Technologies not recommended to be used for new projects. Technologies that we think are not (yet)
-                  worth to (further) invest in. HOLD technologies should not be used for new projects, but usually can
-                  be continued for existing projects.
-                </td>
-                <td>3</td>
-                <td>#efafa9</td>
-              </tr>
-            </tbody>
-          </table>
       </div>
-      <h2>What is the purpose?</h2>
-      <p>
-        The Tech Radar is a tool to inspire and support Engineering teams to pick the best technologies for new
-        projects; it provides a platform to share knowledge and experience in technologies, to reflect on
-        technology decisions and continuously evolve our technology landscape.
-      </p>
-      <h2>How do we maintain it?</h2>
-      <p>
-        The Tech Radar is maintained by our <em>Principal Engineers</em> &mdash; who facilitate and drive the
-        technology selection discussions at company. Assignment of technologies to rings is the outcome of ring
-        change proposals, which are discussed and voted on. The Tech Radar is open for contribution for all
-        engineers and depends on their active participation to share lessons learned, pitfalls, and contribute
-        to good practices on using the technologies.
-      </p>
     </div>
   </body>
 </html>

@@ -2,6 +2,7 @@
  *   Common layout styles
  *   Common primitives styles
  *   Main header styles
+ *   Home page styles
  *   Main footer styles
  */
 
@@ -33,6 +34,10 @@ body {
   color: #94F3F0;
 }
 
+.grey {
+  color: #888888;
+}
+
 a.active, a.nav-link:hover{
   color: #42E8E0 !important;
 }
@@ -47,11 +52,11 @@ a.active, a.nav-link:hover{
 }
 
 .btn-primary-basic:hover {
-    border: 2px solid #42E8E0;
-    color: #42E8E0;
-    font-weight: 500;
-    border-radius: 8px;
-    padding: 8px 24px;
+  border: 2px solid #42E8E0;
+  color: #42E8E0;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 8px 24px;
 }
 
 .full-container {
@@ -67,7 +72,7 @@ a.active, a.nav-link:hover{
   background: #0F054C;
 }
 
-#header{
+#header {
   height: 100%;
   width: 100%;
   background-image: url("../images/backgrounds/header_background_axion.svg"), radial-gradient(39.81% 39.81% at 50% 60.19%, #2B237C 0%, #251C72 26.04%, #0F054C 100%);
@@ -78,16 +83,74 @@ a.active, a.nav-link:hover{
 }
 
 .lead-banner-text {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
-.promo-image {
+.promo-img {
   display:block;
   width: 100%;
   height: auto;
   margin: 0 auto;
   position: relative;
   top: -120px;
+}
+
+.promo-text {
+  margin-top: -100px;
+  margin-bottom: 3rem;
+}
+
+/* =Home page styles
+ * This section contains
+ * X
+ */
+
+#maintain {
+  height: 100%;
+  width: 100%;
+  background: url("../images/backgrounds/maintain_background_axion.svg") no-repeat, #E6E2FF;
+  background-position: center;
+  background-size: cover;
+  overflow:hidden;
+}
+
+.text-vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+.maintain-img {
+  width: 90%;
+  height: auto;
+  top: 0;
+  left: 0;
+}
+
+@media all and (max-width: 767px) {
+  .maintain-img {
+    min-width: 320px;
+  }
+}
+
+.table-wrap {
+  border: 1px solid #E2E8EB;
+  border-radius: 16px;
+}
+
+.table-home {
+  margin-bottom: -1px !important;
+}
+
+.table-home th {
+  color: #888888;
+}
+
+.table-home thead, tr {
+  border-bottom: 1px solid #E2E8EB !important;
+}
+
+.table-home tbody tr:last-child {
+  border-bottom: none;
 }
 
 /* =Main footer styles
