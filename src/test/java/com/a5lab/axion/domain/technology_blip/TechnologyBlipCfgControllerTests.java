@@ -1,19 +1,15 @@
-package com.a5lab.axion.domain.technologyBlip;
+package com.a5lab.axion.domain.technology_blip;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
-import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
-import com.a5lab.axion.domain.technology.Technology;
 import com.a5lab.axion.domain.technology.TechnologyDto;
 import com.a5lab.axion.domain.technology.TechnologyService;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlipCfgController;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,11 +17,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -38,13 +32,13 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private TechnologyBlipService technologyBlipService;
   @MockBean
-  private  RadarService radarService;
+  private RadarService radarService;
   @MockBean
-  private  TechnologyService technologyService;
+  private TechnologyService technologyService;
   @MockBean
-  private  SegmentService segmentService;
+  private SegmentService segmentService;
   @MockBean
-  private  RingService ringService;
+  private RingService ringService;
 
   @Test
   public void shouldGetTechnologyBlips() throws Exception {
@@ -84,25 +78,23 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     technologyBlipDto.setSegment(segmentDto);
     technologyBlipDto.setRing(ringDto);
 
-
-
-
     Page<TechnologyBlipDto> page = new PageImpl<>(List.of(technologyBlipDto));
     Mockito.when(technologyBlipService.findAll(any(), any())).thenReturn(page);
 
     MvcResult result = mockMvc.perform(get("/settings/technology_blips"))
-            .andExpect(status().isOk())
-            .andExpect(view().name("settings/technology_blips/index"))
-            .andExpect(model().attributeExists("technologyBlipDtoPage"))
-            .andExpect(model().attributeExists("pageNumbers"))
-            .andReturn();
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/technology_blips/index"))
+        .andExpect(model().attributeExists("technologyBlipDtoPage"))
+        .andExpect(model().attributeExists("pageNumbers"))
+        .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains(technologyBlipDto.getRadar()));
-    Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology()));
-
-
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRadar().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getSegment().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
   }
+
   /*
   @Test
   public void shouldShowTenant() throws Exception {
