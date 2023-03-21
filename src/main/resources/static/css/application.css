@@ -157,3 +157,27 @@ a.active, a.nav-link:hover{
  * This section contains
  * X
  */
+
+#footer {
+  background: #050218;
+}
+
+.footer-link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  gap: 8px;
+}
+
+.copyright {
+  text-align: right;
+}
+
+@media all and (max-width: 767px) {
+  .copyright {
+    text-align: left;
+  }
+}
+
+
