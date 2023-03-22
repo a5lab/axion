@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -48,35 +49,14 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setId(10L);
-    technologyDto.setTitle("My technology");
-    technologyDto.setWebsite("My website");
-    technologyDto.setDescription("My radar description");
-    technologyDto.setMoved(1);
-    technologyDto.setActive(true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
 
-    final SegmentDto segmentDto = new SegmentDto();
-    segmentDto.setId(10L);
-    segmentDto.setTitle("My segment title");
-    segmentDto.setDescription("My segment description");
-    segmentDto.setRadar(radar);
-    segmentDto.setPosition(1);
-    segmentDto.setActive(true);
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 0, true);
 
-    final RingDto ringDto = new RingDto();
-    ringDto.setRadar(radar);
-    ringDto.setTitle("My ring title");
-    ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
-    ringDto.setActive(true);
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
 
-    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radar);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
-    technologyBlipDto.setRing(ringDto);
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
 
     Page<TechnologyBlipDto> page = new PageImpl<>(List.of(technologyBlipDto));
     Mockito.when(technologyBlipService.findAll(any(), any())).thenReturn(page);
@@ -95,30 +75,44 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
   }
 
-  /*
-  @Test
-  public void shouldShowTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
 
-    String url = String.format("/settings/tenants/show/%d", tenantDto.getId());
+  @Test
+  public void shouldShowTechnologyBlip() throws Exception {
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
+
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
+    Mockito.when(technologyBlipService.findById(technologyBlipDto.getId())).thenReturn(Optional.of(technologyBlipDto));
+
+    String url = String.format("/settings/technology_blips/show/%d", technologyBlipDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains(tenantDto.getTitle()));
-    Assertions.assertTrue(content.contains(tenantDto.getDescription()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRadar().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getSegment().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
   }
 
   @Test
-  public void shouldRedirectShowTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/show/1"))
+  public void shouldRedirectShowTechnology_blip() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/technology_blips/show/1"))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(view().name("redirect:/settings/technology_blips"))
         .andReturn();
   }
-
+/*
   @Test
   public void shouldAddTenant() throws Exception {
     MvcResult result = mockMvc.perform(get("/settings/tenants/add"))
