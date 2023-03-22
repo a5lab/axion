@@ -4,6 +4,7 @@
  *   Main header styles
  *   Home page styles
  *   Main footer styles
+ *   Tabbar styles
  */
 
 
@@ -180,4 +181,28 @@ a.active, a.nav-link:hover{
   }
 }
 
+/* =Tabbar styles
+ * This section contains
+ * X
+ */
 
+.tabbar {
+  border-bottom: 1px solid #E2E8EB;
+}
+
+a.tab-link {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #888888;
+}
+
+a.tab-link:hover {
+  color: #42e8e0 !important;
+}
+
+a.active-link {
+  border-radius: 0px;
+  background: #0F054C;
+  color: #FFFFFF !important;
+}
