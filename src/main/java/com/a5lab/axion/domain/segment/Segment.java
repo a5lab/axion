@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.segment;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,21 +9,28 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
+
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
 import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+import com.a5lab.axion.utils.JpaConstants;
 
 @Entity
 @Table(name = "segments")
@@ -59,5 +67,10 @@ public class Segment extends AbstractAuditable {
 
   @Column(name = "is_active", nullable = false)
   private boolean active = true;
+
+  @Setter(AccessLevel.NONE)
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "segment", cascade = CascadeType.ALL, orphanRemoval = true)
+  @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
+  private List<TechnologyBlip> technologyBlipList;
 
 }

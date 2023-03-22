@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 
 @Getter
 @Setter
@@ -38,4 +41,7 @@ public class SegmentDto {
   private int position;
 
   private boolean active = true;
+
+  private List<TechnologyBlip> technologyBlipList;
+
 }
