@@ -172,6 +172,7 @@ a.active-link {
 .sidebar-title:hover {
   color: #0F054C !important;
 }
+
 .sidebar-item {
   padding: 8px 0;
 }
@@ -183,7 +184,7 @@ a.sidebar-link {
 }
 
 a.sidebar-link:hover {
-  color: #42e8e0 !important;
+  color: #0F054C !important;
 }
 
 .sidebar-active {
@@ -197,6 +198,10 @@ a.sidebar-link:hover {
   width: 16px;
   height: 16px;
   padding-right: 16px;
+}
+
+.sidebar-active:focus, .sidebar-active:active{
+  padding-right: 0px;
 }
 
 /* =Home page styles
