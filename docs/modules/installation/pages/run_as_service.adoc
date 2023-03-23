@@ -1,0 +1,44 @@
+= Run as service
+
+*Axion* can be set up to run as service. 
+
+For example, in Linux:
+
+. Create a systemd unit file.
++
+....
+sudo nano /lib/systemd/system/axion.service 
+....
+The unit file should contain: 
++
+....
+[Unit]
+Description=axion
+Wants=postgresql.service
+After=network.target local-fs.target postgresql.service
+
+[Service]
+Type=simple
+User=axion
+WorkingDirectory=/axion/
+SyslogIdentifier=axion
+TimeoutSec=5min
+Restart=on-failure
+RestartSec=5s
+SuccessExitStatus=143
+ExecStart=java -jar /axion/axion-0.1.0-SNAPSHOT.jar --application.keys.google_analytics=G-123456
+ExecStop=/bin/kill -15 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+....
+. Your system service has been added to your service. Reload the systemctl daemon to read the new file. Reload command:
++
+....
+sudo systemctl daemon-reload 
+....
+
+Now you can use *Axion* as a service with command:
+....
+sudo systemctl start axion.service 
+....
