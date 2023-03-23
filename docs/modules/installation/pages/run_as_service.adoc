@@ -35,7 +35,7 @@ WantedBy=multi-user.target
 +
 [NOTE]
 ====
-. If you need to use *Axion* in developer mode, remove lines with _postgresql.service_ in the _Unit_ section of the unit file.
+. If you need to use *Axion* in developer mode with H2 DB, remove lines with _postgresql.service_ in the _Unit_ section of the unit file.
 . Make sure that *Axion* version and location directory is mentioned correctly in the unit file.
 ====
 
