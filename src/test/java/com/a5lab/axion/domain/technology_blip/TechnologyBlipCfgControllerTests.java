@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 import com.a5lab.axion.domain.AbstractControllerTests;
 
 @WebMvcTest(TechnologyBlipCfgController.class)
@@ -51,11 +52,12 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
 
     final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 0, true);
 
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
 
@@ -85,11 +87,12 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
 
     final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
 
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
 
@@ -137,11 +140,12 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
 
     final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
 
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
 
@@ -157,6 +161,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
   }
+
   /*
   @Test
   public void shouldRedirectCreateTechnology_blip() throws Exception {
@@ -165,8 +170,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
             .andExpect(view().name("redirect:/settings/technology_blips"))
             .andReturn();
   }
-
-
 
   @Test
   public void shouldFailToCreateTenant() throws Exception {
@@ -261,7 +264,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
   }
-*/
+  */
+
   @Test
   public void shouldFailToUpdateTechnologyBlip() throws Exception {
     final Radar radar = new Radar();
@@ -269,21 +273,22 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
 
     final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
 
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
-                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                    .param("radar", technologyBlipDto.getRadar().getTitle())
-                    .param("technology", technologyBlipDto.getTechnology().getTitle())
-                    .param("segment", technologyBlipDto.getSegment().getTitle())
-                    .param("ring", technologyBlipDto.getRing().getTitle())
-                    .sessionAttr("technologyBlipDto", technologyBlipDto))
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radar", technologyBlipDto.getRadar().getTitle())
+            .param("technology", technologyBlipDto.getTechnology().getTitle())
+            .param("segment", technologyBlipDto.getSegment().getTitle())
+            .param("ring", technologyBlipDto.getRing().getTitle())
+            .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().isOk())
         .andReturn();
 
@@ -298,11 +303,12 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
 
     final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
 
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
 
