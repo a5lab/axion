@@ -7,7 +7,7 @@ For example, in Linux:
 . Create a systemd unit file.
 +
 ....
-sudo nano /lib/systemd/system/axion.service 
+sudo nano /etc/systemd/system/axion.service
 ....
 The unit file should contain: 
 +
@@ -20,13 +20,13 @@ After=network.target local-fs.target postgresql.service
 [Service]
 Type=simple
 User=axion
-WorkingDirectory=/axion/
+WorkingDirectory=/home/axion/
 SyslogIdentifier=axion
 TimeoutSec=5min
 Restart=on-failure
 RestartSec=5s
 SuccessExitStatus=143
-ExecStart=java -jar /axion/axion-0.1.0-SNAPSHOT.jar --application.keys.google_analytics=G-123456
+ExecStart=java -jar /home/axion/axion-0.1.0.jar --application.keys.google_analytics=G-123456
 ExecStop=/bin/kill -15 $MAINPID
 
 [Install]
