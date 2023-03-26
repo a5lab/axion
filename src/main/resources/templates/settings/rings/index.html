@@ -9,40 +9,42 @@
   <body>
     <div id="content">
       <div id="settings-rings-page">
-        <h1>Rings</h1>
-        <th:block th:replace="~{settings/rings/filter.html}" />
-        <div th:switch="${ringDtoPage.getTotalElements()}">
-          <p th:case="0">No rings.</p>
-          <div th:case="*">
-            <th:block th:replace="~{settings/rings/paging.html}" />
-            <table>
-              <thead>
-                <tr>
-                  <th th:replace="settings/rings/sorting :: sorting('radar.title','Radar')"></th>
-                  <th th:replace="settings/rings/sorting :: sorting('title','Title')"></th>
-                  <th th:replace="settings/rings/sorting :: sorting('description','Description')"></th>
-                  <th th:replace="settings/rings/sorting :: sorting('position','Position')"></th>
-                  <th th:replace="settings/rings/sorting :: sorting('active','Active')"></th>
-                  <th>Show</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="ringDto : ${ringDtoPage.getContent()}">
-                  <td th:text="${ringDto.radar.title}"></td>
-                  <td th:text="${ringDto.title}"></td>
-                  <td th:text="${ringDto.description}"></td>
-                  <td th:text="${ringDto.position}"></td>
-                  <td th:text="${ringDto.active}"></td>
-                  <td><a th:href="@{/settings/rings/show/{id}(id=${ringDto.id})}">Show</a></td>
-                  <td><a th:href="@{/settings/rings/edit/{id}(id=${ringDto.id})}">Edit</a></td>
-                  <td><a th:href="@{/settings/rings/delete/{id}(id=${ringDto.id})}">Delete</a></td>
-                </tr>
-              </tbody>
-            </table>
+        <h1 class="wrapper-title">Rings</h1>
+        <div class="wrapper-content">
+          <th:block th:replace="~{settings/rings/filter.html}" />
+          <div th:switch="${ringDtoPage.getTotalElements()}">
+            <p th:case="0">No rings.</p>
+            <div th:case="*">
+              <th:block th:replace="~{settings/rings/paging.html}" />
+              <table>
+                <thead>
+                  <tr>
+                    <th th:replace="settings/rings/sorting :: sorting('radar.title','Radar')"></th>
+                    <th th:replace="settings/rings/sorting :: sorting('title','Title')"></th>
+                    <th th:replace="settings/rings/sorting :: sorting('description','Description')"></th>
+                    <th th:replace="settings/rings/sorting :: sorting('position','Position')"></th>
+                    <th th:replace="settings/rings/sorting :: sorting('active','Active')"></th>
+                    <th>Show</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="ringDto : ${ringDtoPage.getContent()}">
+                    <td th:text="${ringDto.radar.title}"></td>
+                    <td th:text="${ringDto.title}"></td>
+                    <td th:text="${ringDto.description}"></td>
+                    <td th:text="${ringDto.position}"></td>
+                    <td th:text="${ringDto.active}"></td>
+                    <td><a th:href="@{/settings/rings/show/{id}(id=${ringDto.id})}">Show</a></td>
+                    <td><a th:href="@{/settings/rings/edit/{id}(id=${ringDto.id})}">Edit</a></td>
+                    <td><a th:href="@{/settings/rings/delete/{id}(id=${ringDto.id})}">Delete</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p><a href="/settings/rings/add">Add a new ring</a></p>
           </div>
-          <p><a href="/settings/rings/add">Add a new ring</a></p>
         </div>
       </div>
     </div>

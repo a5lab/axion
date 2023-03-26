@@ -9,38 +9,40 @@
   <body>
     <div id="content">
       <div id="settings-technology-blips-page">
-        <h1>Technology blips</h1>
-        <th:block th:replace="~{settings/technology_blips/filter.html}" />
-        <div th:switch="${technologyBlipDtoPage.getTotalElements()}">
-          <p th:case="0">No technology blips.</p>
-          <div th:case="*">
-            <th:block th:replace="~{settings/technology_blips/paging.html}" />
-            <table>
-              <thead>
-                <tr>
-                  <th th:replace="settings/technology_blips/sorting :: sorting('radar.title','Radar')"></th>
-                  <th th:replace="settings/technology_blips/sorting :: sorting('segment.title','Segment')"></th>
-                  <th th:replace="settings/technology_blips/sorting :: sorting('ring.title','Ring')"></th>
-                  <th th:replace="settings/technology_blips/sorting :: sorting('technology.title','Technology')"></th>
-                  <th>Show</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="technologyBlipDto : ${technologyBlipDtoPage.getContent()}">
-                  <td th:text="${technologyBlipDto.radar.title}"></td>
-                  <td th:text="${technologyBlipDto.segment.title}"></td>
-                  <td th:text="${technologyBlipDto.ring.title}"></td>
-                  <td th:text="${technologyBlipDto.technology.title}"></td>
-                  <td><a th:href="@{/settings/technology_blips/show/{id}(id=${technologyBlipDto.id})}">Show</a></td>
-                  <td><a th:href="@{/settings/technology_blips/edit/{id}(id=${technologyBlipDto.id})}">Edit</a></td>
-                  <td><a th:href="@{/settings/technology_blips/delete/{id}(id=${technologyBlipDto.id})}">Delete</a></td>
-                </tr>
-              </tbody>
-            </table>
+        <h1 class="wrapper-title">Technology blips</h1>
+        <div class="wrapper-content">
+          <th:block th:replace="~{settings/technology_blips/filter.html}" />
+          <div th:switch="${technologyBlipDtoPage.getTotalElements()}">
+            <p th:case="0">No technology blips.</p>
+            <div th:case="*">
+              <th:block th:replace="~{settings/technology_blips/paging.html}" />
+              <table>
+                <thead>
+                  <tr>
+                    <th th:replace="settings/technology_blips/sorting :: sorting('radar.title','Radar')"></th>
+                    <th th:replace="settings/technology_blips/sorting :: sorting('segment.title','Segment')"></th>
+                    <th th:replace="settings/technology_blips/sorting :: sorting('ring.title','Ring')"></th>
+                    <th th:replace="settings/technology_blips/sorting :: sorting('technology.title','Technology')"></th>
+                    <th>Show</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="technologyBlipDto : ${technologyBlipDtoPage.getContent()}">
+                    <td th:text="${technologyBlipDto.radar.title}"></td>
+                    <td th:text="${technologyBlipDto.segment.title}"></td>
+                    <td th:text="${technologyBlipDto.ring.title}"></td>
+                    <td th:text="${technologyBlipDto.technology.title}"></td>
+                    <td><a th:href="@{/settings/technology_blips/show/{id}(id=${technologyBlipDto.id})}">Show</a></td>
+                    <td><a th:href="@{/settings/technology_blips/edit/{id}(id=${technologyBlipDto.id})}">Edit</a></td>
+                    <td><a th:href="@{/settings/technology_blips/delete/{id}(id=${technologyBlipDto.id})}">Delete</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p><a href="/settings/technology_blips/add">Add a new technology blip</a></p>
           </div>
-          <p><a href="/settings/technology_blips/add">Add a new technology blip</a></p>
         </div>
       </div>
     </div>

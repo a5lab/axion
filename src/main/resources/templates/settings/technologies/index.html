@@ -9,40 +9,42 @@
   <body>
     <div id="content">
       <div id="settings-technologies-page">
-        <h1>Technologies</h1>
-        <th:block th:replace="~{settings/technologies/filter.html}" />
-        <div th:switch="${technologyDtoPage.getTotalElements()}">
-          <p th:case="0">No technologies.</p>
-          <div th:case="*">
-            <th:block th:replace="~{settings/technologies/paging.html}" />
-            <table>
-              <thead>
-                <tr>
-                  <th th:replace="settings/technologies/sorting :: sorting('title','Title')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('website','Website')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('description','Description')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('moved','Moved')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('active','Active')"></th>
-                  <th>Show</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="technologyDto : ${technologyDtoPage.getContent()}">
-                  <td th:text="${technologyDto.title}"></td>
-                  <td th:text="${technologyDto.website}"></td>
-                  <td th:text="${technologyDto.description}"></td>
-                  <td th:text="${technologyDto.moved}"></td>
-                  <td th:text="${technologyDto.active}"></td>
-                  <td><a th:href="@{/settings/technologies/show/{id}(id=${technologyDto.id})}">Show</a></td>
-                  <td><a th:href="@{/settings/technologies/edit/{id}(id=${technologyDto.id})}">Edit</a></td>
-                  <td><a th:href="@{/settings/technologies/delete/{id}(id=${technologyDto.id})}">Delete</a></td>
-                </tr>
-              </tbody>
-            </table>
+        <h1 class="wrapper-title">Technologies</h1>
+        <div class="wrapper-content">
+          <th:block th:replace="~{settings/technologies/filter.html}" />
+          <div th:switch="${technologyDtoPage.getTotalElements()}">
+            <p th:case="0">No technologies.</p>
+            <div th:case="*">
+              <th:block th:replace="~{settings/technologies/paging.html}" />
+              <table>
+                <thead>
+                  <tr>
+                    <th th:replace="settings/technologies/sorting :: sorting('title','Title')"></th>
+                    <th th:replace="settings/technologies/sorting :: sorting('website','Website')"></th>
+                    <th th:replace="settings/technologies/sorting :: sorting('description','Description')"></th>
+                    <th th:replace="settings/technologies/sorting :: sorting('moved','Moved')"></th>
+                    <th th:replace="settings/technologies/sorting :: sorting('active','Active')"></th>
+                    <th>Show</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="technologyDto : ${technologyDtoPage.getContent()}">
+                    <td th:text="${technologyDto.title}"></td>
+                    <td th:text="${technologyDto.website}"></td>
+                    <td th:text="${technologyDto.description}"></td>
+                    <td th:text="${technologyDto.moved}"></td>
+                    <td th:text="${technologyDto.active}"></td>
+                    <td><a th:href="@{/settings/technologies/show/{id}(id=${technologyDto.id})}">Show</a></td>
+                    <td><a th:href="@{/settings/technologies/edit/{id}(id=${technologyDto.id})}">Edit</a></td>
+                    <td><a th:href="@{/settings/technologies/delete/{id}(id=${technologyDto.id})}">Delete</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p><a href="/settings/technologies/add">Add a new technology</a></p>
           </div>
-          <p><a href="/settings/technologies/add">Add a new technology</a></p>
         </div>
       </div>
     </div>

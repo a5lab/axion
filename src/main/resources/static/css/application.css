@@ -65,6 +65,22 @@ a.active, a.nav-link:hover{
   padding: 0 !important;
 }
 
+.wrapper-block {
+  background: #F0F6FF;
+}
+
+.wrapper-title {
+  font-size: 1.5em;
+  padding: 0.3em 0;
+}
+
+.wrapper-content {
+  background: #FFFFFF;
+  border: 1px solid #E2E8EB;
+  border-radius: 4px;
+  padding: 1em;
+}
+
 .border-grey {
   border-bottom: 1px solid #e2e8eb;
   width: 100%;
