@@ -8,8 +8,8 @@
   </head>
   <body>
     <div id="content">
-      <div id="settings-segments-page">
-        <h1>Segments</h1>
+      <h1 class="wrapper-title">Segments</h1>
+      <div id="settings-segments-page" class="wrapper-content">
         <th:block th:replace="~{settings/segments/filter.html}" />
         <div th:switch="${segmentDtoPage.getTotalElements()}">
           <p th:case="0">No segments.</p>

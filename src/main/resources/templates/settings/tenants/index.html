@@ -8,8 +8,8 @@
   </head>
   <body>
     <div id="content">
-      <div id="settings-tenants-page">
-        <h1>Tenants</h1>
+      <h1 class="wrapper-title">Tenants</h1>
+      <div id="settings-tenants-page" class="wrapper-content">
         <th:block th:replace="~{settings/tenants/filter.html}" />
         <div th:switch="${tenantDtoPage.getTotalElements()}">
           <p th:case="0">No tenants.</p>

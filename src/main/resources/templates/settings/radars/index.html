@@ -8,8 +8,8 @@
   </head>
   <body>
     <div id="content">
-      <div id="settings-radars-page">
-        <h1>Radars</h1>
+      <h1 class="wrapper-title">Radars</h1>
+      <div id="settings-radars-page" class="wrapper-content">
         <th:block th:replace="~{settings/radars/filter.html}" />
         <div th:switch="${radarPage.getTotalElements()}">
           <p th:case="0">No radars.</p>

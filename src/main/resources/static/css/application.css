@@ -5,6 +5,7 @@
  *   Main footer styles
  *   Tabbar styles
  *   Sidebar styles
+ *   Filter styles
  *   Home page styles
  */
 
@@ -63,6 +64,22 @@ a.active, a.nav-link:hover{
 
 .full-container {
   padding: 0 !important;
+}
+
+.wrapper-block {
+  background: #F0F6FF;
+}
+
+.wrapper-title {
+  font-size: 1.5em;
+  padding: 0.3em 0;
+}
+
+.wrapper-content {
+  background: #FFFFFF;
+  border: 1px solid #E2E8EB;
+  border-radius: 4px;
+  padding: 1em;
 }
 
 .border-grey {
@@ -202,6 +219,44 @@ a.sidebar-link:hover {
 
 .sidebar-active:focus, .sidebar-active:active{
   padding-right: 0px;
+}
+
+/* =Filter styles
+ * This section contains
+ * X
+ */
+
+#filter-nav {
+  text-decoration: none;
+  display:inline-block;
+}
+
+#filter-nav:hover {
+  color: #42e8e0 !important;
+}
+
+#filter-nav::after {
+  display: inline-block;
+  margin-left: .255em;
+  vertical-align: .255em;
+  content: '';
+  border-top: .3em solid;
+  border-right: .3em solid transparent;
+  border-bottom: 0;
+  border-left: .3em solid transparent;
+}
+
+.filter-button {
+  background: #0F054C;
+  color: #FFFFFF;
+  border: 1px solid #0F054C;
+  border-radius: 2px;
+  padding: 2px 8px;
+}
+
+.filter-button:hover, .filter-button:focus, .filter-button:active {
+  background:#FFFFFF;
+  color: #0F054C;
 }
 
 /* =Home page styles

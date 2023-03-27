@@ -8,8 +8,8 @@
   </head>
   <body>
     <div id="content">
-      <div id="settings-rings-page">
-        <h1>Rings</h1>
+      <h1 class="wrapper-title">Rings</h1>
+      <div id="settings-rings-page" class="wrapper-content">
         <th:block th:replace="~{settings/rings/filter.html}" />
         <div th:switch="${ringDtoPage.getTotalElements()}">
           <p th:case="0">No rings.</p>

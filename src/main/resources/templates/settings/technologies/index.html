@@ -8,8 +8,8 @@
   </head>
   <body>
     <div id="content">
-      <div id="settings-technologies-page">
-        <h1>Technologies</h1>
+      <h1 class="wrapper-title">Technologies</h1>
+      <div id="settings-technologies-page" class="wrapper-content">
         <th:block th:replace="~{settings/technologies/filter.html}" />
         <div th:switch="${technologyDtoPage.getTotalElements()}">
           <p th:case="0">No technologies.</p>

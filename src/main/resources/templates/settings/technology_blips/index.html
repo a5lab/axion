@@ -8,8 +8,8 @@
   </head>
   <body>
     <div id="content">
-      <div id="settings-technology-blips-page">
-        <h1>Technology blips</h1>
+      <h1 class="wrapper-title">Technology blips</h1>
+      <div id="settings-technology-blips-page" class="wrapper-content">
         <th:block th:replace="~{settings/technology_blips/filter.html}" />
         <div th:switch="${technologyBlipDtoPage.getTotalElements()}">
           <p th:case="0">No technology blips.</p>
