@@ -8,35 +8,37 @@
   </head>
   <body>
     <div id="content">
-      <h1>Tenants</h1>
-      <th:block th:replace="~{settings/tenants/filter.html}" />
-      <div th:switch="${tenantDtoPage.getTotalElements()}">
-        <p th:case="0">No tenants.</p>
-        <div th:case="*">
-          <th:block th:replace="~{settings/tenants/paging.html}" />
-          <table>
-            <thead>
-              <tr>
-              <tr>
-                <th th:replace="settings/tenants/sorting :: sorting('title','Title')"></th>
-                <th th:replace="settings/tenants/sorting :: sorting('description','Description')"></th>
-                <th>Show</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="tenantDto : ${tenantDtoPage.getContent()}">
-                <td th:text="${tenantDto.title}"></td>
-                <td th:text="${tenantDto.description}"></td>
-                <td><a th:href="@{/settings/tenants/show/{id}(id=${tenantDto.id})}">Show</a></td>
-                <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenantDto.id})}">Edit</a></td>
-                <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenantDto.id})}">Delete</a></td>
-              </tr>
-            </tbody>
-          </table>
+      <h1 class="wrapper-title">Tenants</h1>
+      <div id="settings-tenants-page" class="wrapper-content">
+        <th:block th:replace="~{settings/tenants/filter.html}" />
+        <div th:switch="${tenantDtoPage.getTotalElements()}">
+          <p th:case="0">No tenants.</p>
+          <div th:case="*">
+            <th:block th:replace="~{settings/tenants/paging.html}" />
+            <table>
+              <thead>
+                <tr>
+                <tr>
+                  <th th:replace="settings/tenants/sorting :: sorting('title','Title')"></th>
+                  <th th:replace="settings/tenants/sorting :: sorting('description','Description')"></th>
+                  <th>Show</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="tenantDto : ${tenantDtoPage.getContent()}">
+                  <td th:text="${tenantDto.title}"></td>
+                  <td th:text="${tenantDto.description}"></td>
+                  <td><a th:href="@{/settings/tenants/show/{id}(id=${tenantDto.id})}">Show</a></td>
+                  <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenantDto.id})}">Edit</a></td>
+                  <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenantDto.id})}">Delete</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p><a href="/settings/tenants/add">Add a new tenant</a></p>
         </div>
-        <p><a href="/settings/tenants/add">Add a new tenant</a></p>
       </div>
     </div>
   </body>
