@@ -8,11 +8,13 @@
   </head>
   <body>
     <div id="content">
-      <h1>Add technologyBlip</h1>
-      <form action="#" th:action="@{/settings/technology_blips/create}" th:object="${technologyBlipDto}" method="post">
-        <th:block th:replace="~{settings/technology_blips/fields.html}" />
-        <input type="submit" value="Add technology blip">
-      </form>
+      <h1 class="wrapper-title">Add technologyBlip</h1>
+      <div class="wrapper-content">
+        <form action="#" th:action="@{/settings/technology_blips/create}" th:object="${technologyBlipDto}" method="post">
+          <th:block th:replace="~{settings/technology_blips/fields.html}" />
+          <input class="filter-button my-2" type="submit" value="Add technology blip">
+        </form>
+      </div>
     </div>
   </body>
 </html>

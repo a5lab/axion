@@ -3,19 +3,31 @@
     <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
   </ul>
 </div>
-<label for="radar_id">Radar</label>
-<select id="radar_id" name="radar_d" th:field="*{radar.id}">
-  <option th:each="radarDto : ${radarDtos}" th:value="${radarDto.id}" th:utext="${radarDto.title}"/>
-</select>
-<label for="segment_id">Segment</label>
-<select  id="segment_id" name="segment_id" th:field="*{segment.id}" >
-  <option th:each="segmentDto : ${segmentDtos}" th:value="${segmentDto.id}" th:utext="${segmentDto.title}"/>
-</select>
-<label for="ring_id">Ring</label>
-<select  id="ring_id" name="ring_id" th:field="*{ring.id}" >
-  <option th:each="ringDto : ${ringDtos}" th:value="${ringDto.id}" th:utext="${ringDto.title}"/>
-</select>
-<label for="technology_id">Entry</label>
-<select  id="technology_id" name="technology_id" th:field="*{technology.id}" >
-  <option th:each="technologyDto : ${technologyDtos}" th:value="${technologyDto.id}" th:utext="${technologyDto.title}"/>
-</select>
+<div class="row">
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <label for="radar_id" class="label-field">Radar</label>
+    <select id="radar_id" class="field-wrapper" name="radar_d" th:field="*{radar.id}">
+      <option th:each="radarDto : ${radarDtos}" th:value="${radarDto.id}" th:utext="${radarDto.title}"/>
+    </select>
+  </div>
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <label for="segment_id" class="label-field">Segment</label>
+    <select  id="segment_id" class="field-wrapper" name="segment_id" th:field="*{segment.id}" >
+      <option th:each="segmentDto : ${segmentDtos}" th:value="${segmentDto.id}" th:utext="${segmentDto.title}"/>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <label for="ring_id" class="label-field">Ring</label>
+    <select  id="ring_id" class="field-wrapper" name="ring_id" th:field="*{ring.id}" >
+      <option th:each="ringDto : ${ringDtos}" th:value="${ringDto.id}" th:utext="${ringDto.title}"/>
+    </select>
+  </div>
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <label for="technology_id" class="label-field">Entry</label>
+    <select  id="technology_id" class="field-wrapper" name="technology_id" th:field="*{technology.id}" >
+      <option th:each="technologyDto : ${technologyDtos}" th:value="${technologyDto.id}" th:utext="${technologyDto.title}"/>
+    </select>
+  </div>
+</div>
