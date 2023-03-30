@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
@@ -76,7 +77,7 @@ public class Radar extends AbstractAuditable {
   private List<Segment> segmentList;
 
   @Setter(AccessLevel.NONE)
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar"/*, cascade = CascadeType.ALL, orphanRemoval = true*/)
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar", cascade = CascadeType.ALL/* orphanRemoval = true*/)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<TechnologyBlip> technologyBlipList;
 }
