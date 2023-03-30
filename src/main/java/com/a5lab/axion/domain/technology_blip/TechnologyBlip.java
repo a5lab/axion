@@ -58,3 +58,4 @@ public class TechnologyBlip extends AbstractAuditable {
   @JoinColumn(name = "ring_id", nullable = false, updatable = false)
   private Ring ring;
 }
+
