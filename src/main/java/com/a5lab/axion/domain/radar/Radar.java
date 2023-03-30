@@ -22,7 +22,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
