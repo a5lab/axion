@@ -8,8 +8,9 @@
   </head>
   <body>
     <div id="content">
-        <h1>Ring</h1>
-        <ul>
+      <h1 class="wrapper-title">Ring</h1>
+      <div class="wrapper-content">
+        <ul class="ul-show-wrapper">
           <li>
             <p>Title</p>
             <p th:text="${ringDto.title}"></p>
@@ -27,7 +28,8 @@
             <p th:text="${ringDto.active}"></p>
           </li>
         </ul>
-      <p><a href="/settings/rings">View all rings</a></p>
+        <p><a href="/settings/rings" class="btn-blue-wrapper">View all rings</a></p>
+      </div>
     </div>
   </body>
 </html>
