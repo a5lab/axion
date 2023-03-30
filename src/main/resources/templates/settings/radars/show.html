@@ -8,8 +8,9 @@
   </head>
   <body>
     <div id="content">
-        <h1>Radar</h1>
-        <ul>
+      <h1 class="wrapper-title">Radar</h1>
+      <div class="wrapper-content">
+        <ul class="ul-show-wrapper">
           <li>
             <p>Title</p>
             <p th:text="${radar.title}"></p>
@@ -27,7 +28,8 @@
             <p th:text="${radar.active}"></p>
           </li>
         </ul>
-      <p><a href="/settings/radars">View all radars</a></p>
+        <p><a href="/settings/radars" class="btn-blue-wrapper">View all radars</a></p>
+      </div>
     </div>
   </body>
 </html>

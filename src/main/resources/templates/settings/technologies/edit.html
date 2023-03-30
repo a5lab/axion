@@ -8,12 +8,14 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit technology</h1>
-      <form action="#" th:action="@{/settings/technologies/update}" th:object="${technologyDto}" method="post">
-        <th:block th:replace="~{settings/technologies/fields.html}" />
-        <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update technology">
-      </form>      
+      <h1 class="wrapper-title">Edit technology</h1>
+      <div class="wrapper-content">
+        <form action="#" th:action="@{/settings/technologies/update}" th:object="${technologyDto}" method="post">
+          <th:block th:replace="~{settings/technologies/fields.html}" />
+          <input type="hidden" th:field="*{id}" id="id">
+          <input class="filter-button my-2" type="submit" value="Update technology">
+        </form>
+      </div>
     </div>
   </body>
 </html>

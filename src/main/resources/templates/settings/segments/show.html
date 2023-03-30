@@ -8,8 +8,9 @@
   </head>
   <body>
     <div id="content">
-        <h1>Segment</h1>
-        <ul>
+      <h1 class="wrapper-title">Segment</h1>
+      <div class="wrapper-content">
+        <ul class="ul-show-wrapper">
           <li>
             <p>Title</p>
             <p th:text="${segmentDto.title}"></p>
@@ -23,7 +24,8 @@
             <p th:text="${segmentDto.active}"></p>
           </li>
         </ul>
-      <p><a href="/settings/segments">View all segments</a></p>
+        <p><a href="/settings/segments" class="btn-blue-wrapper">View all segments</a></p>
+      </div>
     </div>
   </body>
 </html>

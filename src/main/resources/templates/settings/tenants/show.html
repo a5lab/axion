@@ -8,8 +8,9 @@
   </head>
   <body>
     <div id="content">
-        <h1>Tenant</h1>
-        <ul>
+      <h1 class="wrapper-title">Tenant</h1>
+      <div class="wrapper-content">
+        <ul class="ul-show-wrapper">
           <li>
             <p>Title</p>
             <p th:text="${tenantDto.title}"></p>
@@ -19,7 +20,8 @@
             <p th:text="${tenantDto.description}"></p>
           </li>
         </ul>
-      <p><a href="/settings/tenants">View all tenants</a></p>
+        <p><a href="/settings/tenants" class="btn-blue-wrapper">View all tenants</a></p>
+      </div>
     </div>
   </body>
 </html>
