@@ -152,19 +152,7 @@ public class WizardServiceImpl implements WizardService {
 
       TechnologyBlip technologyBlip = new TechnologyBlip();
       technologyBlip.setRadar(this.radar);
-      // Set ring property
       technologyBlip.setRing(ringService.findByTitle(ringTitle).get());
-      /*
-      Ring ring = ringService.findByTitle(ringTitle).get();
-      technologyBlip.getRing().setId(ring.getId());
-      technologyBlip.getRing().setRadar(this.radar);
-      technologyBlip.getRing().setTitle(ring.getTitle());
-      technologyBlip.getRing().setDescription(ring.getDescription());
-      technologyBlip.getRing().setPosition(ring.getPosition());
-      technologyBlip.getRing().setActive(ring.isActive());*/
-
-      // Set segment property
-      // Segment segment = segmentService.findByTitle(segmentTitle).get();
       technologyBlip.setSegment(segmentService.findByTitle(segmentTitle).get());
       technologyBlip.setTechnology(technologyService.findByTitle(technologyTitle).get());
       technologyBlipService.save(technologyBlip);

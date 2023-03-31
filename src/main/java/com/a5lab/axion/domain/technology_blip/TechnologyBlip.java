@@ -50,11 +50,11 @@ public class TechnologyBlip extends AbstractAuditable {
   @JoinColumn(name = "technology_id", nullable = false, updatable = false)
   private Technology technology;
 
-  @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "segment_id", nullable = false, updatable = false)
   private Segment segment;
 
-  @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinColumn(name = "ring_id", nullable = false, updatable = false)
   private Ring ring;
 }
