@@ -1,5 +1,7 @@
 package com.a5lab.axion.domain.radar;
 
+import jakarta.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -11,11 +13,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.a5lab.axion.domain.ring.RingRepository;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class RadarServiceImpl implements RadarService {
   private final RadarRepository radarRepository;
+
+  private final RingRepository ringRepository;
 
   @Override
   @Transactional(readOnly = true)
@@ -26,7 +32,14 @@ public class RadarServiceImpl implements RadarService {
   @Override
   @Transactional(readOnly = true)
   public Page<Radar> findAll(RadarFilter radarFilter, Pageable pageable) {
-    return radarRepository.findAll(pageable);
+    return radarRepository.findAll((root, query, builder) -> {
+      List<Predicate> predicateList = new ArrayList<>();
+      if (radarFilter != null && radarFilter.getTitle() != null
+          && !radarFilter.getTitle().isBlank()) {
+        predicateList.add(builder.like(root.get("title"), radarFilter.getTitle()));
+      }
+      return builder.and(predicateList.toArray(new Predicate[] {}));
+    }, pageable);
   }
 
   @Override

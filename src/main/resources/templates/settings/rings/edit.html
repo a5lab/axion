@@ -8,12 +8,14 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit ring</h1>
-      <form action="#" th:action="@{/settings/rings/update}" th:object="${ringDto}" method="post">
-        <th:block th:replace="~{settings/rings/fields.html}" />
-        <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update ring">
-      </form>      
+      <h1 class="wrapper-title">Edit ring</h1>
+      <div class="wrapper-content">
+        <form action="#" th:action="@{/settings/rings/update}" th:object="${ringDto}" method="post">
+          <th:block th:replace="~{settings/rings/fields.html}" />
+          <input type="hidden" th:field="*{id}" id="id">
+          <input class="filter-button my-2" type="submit" value="Update ring">
+        </form>
+      </div>
     </div>
   </body>
 </html>

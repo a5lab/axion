@@ -158,6 +158,4 @@ public class WizardServiceImpl implements WizardService {
       technologyBlipService.save(technologyBlip);
     }
   }
-
-
 }

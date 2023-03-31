@@ -1,6 +1,9 @@
 = Installation methods
-supported installation methods are
-. installation from binaries
-. installatino from sources
 
-PUT here general info and lins to appropirate page.
+Supported installation methods are
+
+* xref:installation_from_binaries.adoc[Installation from binaries]
+* xref:installation_from_sources.adoc[Installatino from sources]
+
+[Note]
+Use installation from source files only for radar development and improvement. For productive use, consider installing from binaries.

@@ -8,11 +8,13 @@
   </head>
   <body>
     <div id="content">
-      <h1>Add segment</h1>
-      <form action="#" th:action="@{/settings/segments/create}" th:object="${segmentDto}" method="post">
-        <th:block th:replace="~{settings/segments/fields.html}" />
-        <input type="submit" value="Add segment">
-      </form>
+      <h1 class="wrapper-title">Add segment</h1>
+      <div class="wrapper-content">
+        <form action="#" th:action="@{/settings/segments/create}" th:object="${segmentDto}" method="post">
+          <th:block th:replace="~{settings/segments/fields.html}" />
+          <input class="filter-button my-2" type="submit"  value="Add segment">
+        </form>
+      </div>
     </div>
   </body>
 </html>

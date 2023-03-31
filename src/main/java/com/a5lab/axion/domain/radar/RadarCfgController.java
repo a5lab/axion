@@ -38,7 +38,7 @@ public class RadarCfgController {
   private final MessageSource messageSource;
 
   @GetMapping("")
-  public ModelAndView index(@Valid RadarFilter radarFilter,
+  public ModelAndView index(@Valid RadarFilter radarFilter, BindingResult bindingResult,
                             @RequestParam(defaultValue = "${application.paging.page}") int page,
                             @RequestParam(defaultValue = "${application.paging.size}") int size,
                             @RequestParam(defaultValue = "title,asc") String[] sort) {

@@ -8,8 +8,9 @@
   </head>
   <body>
     <div id="content">
-        <h1>Blip</h1>
-        <ul>
+      <h1 class="wrapper-title">Blip</h1>
+      <div class="wrapper-content">
+        <ul class="ul-show-wrapper">
           <li>
             <p>Radar</p>
             <p th:text="${technologyBlipDto.radar.title}"></p>
@@ -27,7 +28,8 @@
             <p th:text="${technologyBlipDto.technology.title}"></p>
           </li>
         </ul>
-      <p><a href="/settings/technology_blips">View all technology blips</a></p>
+        <p><a href="/settings/technology_blips" class="btn-blue-wrapper">View all technology blips</a></p>
+      </div>
     </div>
   </body>
 </html>

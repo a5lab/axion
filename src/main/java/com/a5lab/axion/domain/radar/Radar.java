@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.radar;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,6 +26,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
 import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.ring.Ring;
+import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.a5lab.axion.utils.JpaConstants;
 
@@ -63,7 +66,17 @@ public class Radar extends AbstractAuditable {
   private boolean active = true;
 
   @Setter(AccessLevel.NONE)
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar")
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar", cascade = CascadeType.ALL)
+  @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
+  private List<Ring> ringList;
+
+  @Setter(AccessLevel.NONE)
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar", cascade = CascadeType.ALL)
+  @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
+  private List<Segment> segmentList;
+
+  @Setter(AccessLevel.NONE)
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<TechnologyBlip> technologyBlipList;
 }

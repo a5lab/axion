@@ -8,8 +8,10 @@
   </head>
   <body>
     <div id="content">
-      <h1 th:text="${errorCode}"/>
-      <p th:text="${errorMsg}"/>
+      <div id="exception-page">
+        <h1 th:text="${errorCode}"/>
+        <p th:text="${errorMsg}"/>
+      </div>
     </div>
   </body>
 </html>
