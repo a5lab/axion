@@ -41,6 +41,10 @@ public class RingDto {
   @Max(512)
   private int position;
 
+  @NotBlank
+  @Size(min = 1, max = 8)
+  private String color;
+
   private boolean active = true;
 
   private List<TechnologyBlip> technologyBlipList;

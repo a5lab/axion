@@ -30,6 +30,11 @@
 </div>
 <div class="row">
   <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <label for="color" class="label-field">Color</label>
+    <input type="text" th:field="*{color}" id="color" class="field-wrapper" placeholder="#fbdb84">
+    <span th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></span>
+  </div>
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
     <input type="checkbox" th:field="*{active}" id="active" class="check-wrapper me-1">
     <label for="active">Active</label>
     <span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>

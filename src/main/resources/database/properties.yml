@@ -1,14 +1,4 @@
 databaseChangeLog:
-  # ring
-  - property:
-      name: ring.title
-      value: text
-      dbms: postgresql
-  - property:
-      name: ring.title
-      value: varchar(512)
-      dbms: h2
-
   # auto increment
   - property:
       name: autoIncrement
@@ -17,16 +7,6 @@ databaseChangeLog:
   - property:
       name: autoIncrement
       value: true
-      dbms: h2
-
-  # BigInt
-  - property:
-      name: bigint.type
-      value: bigint
-      dbms: postgresql
-  - property:
-      name: bigint.type
-      value: BIGINT
       dbms: h2
 
   # sequence
@@ -56,14 +36,14 @@ databaseChangeLog:
       value: varchar(255)
       dbms: h2
 
-  # CLOB
+  # BigInt
   - property:
-      name: clob
-      value: text
+      name: bigint.type
+      value: bigint
       dbms: postgresql
   - property:
-      name: clob
-      value: clob
+      name: bigint.type
+      value: BIGINT
       dbms: h2
 
   # DATETIME
@@ -95,6 +75,16 @@ databaseChangeLog:
       value: varchar(4000)
       dbms: h2
 
+  # CLOB
+  - property:
+      name: clob
+      value: text
+      dbms: postgresql
+  - property:
+      name: clob
+      value: clob
+      dbms: h2
+
   # json
   - property:
       name: json.type
@@ -103,6 +93,26 @@ databaseChangeLog:
   - property:
       name: json.type
       value: clob
+      dbms: h2
+
+  # ring.title
+  - property:
+      name: ring.title
+      value: text
+      dbms: postgresql
+  - property:
+      name: ring.title
+      value: varchar(512)
+      dbms: h2
+
+  # ring.color
+  - property:
+      name: ring.color
+      value: text
+      dbms: postgresql
+  - property:
+      name: ring.color
+      value: varchar(8)
       dbms: h2
 
   # user

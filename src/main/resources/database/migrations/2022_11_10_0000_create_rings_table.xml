@@ -25,6 +25,9 @@
                     remarks="Represents ring position in radar starting from lower to higher value.">
                 <constraints nullable="false"/>
             </column>
+            <column name="color" type="${ring.color}" remarks="Ring color.">
+                <constraints nullable="false"/>
+            </column>
             <column name="is_active" type="boolean" remarks="Whenever the row is active." defaultValueBoolean="true">
                 <constraints nullable="false"/>
             </column>

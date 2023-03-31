@@ -66,6 +66,10 @@ public class Ring extends AbstractAuditable {
   @Column(name = "position", nullable = false)
   private int position;
 
+  @NotBlank
+  @Column(name = "color", nullable = false)
+  private String color;
+
   @Column(name = "is_active", nullable = false)
   private boolean active = true;
 
