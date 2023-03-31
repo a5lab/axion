@@ -6,6 +6,7 @@
  *   Tabbar styles
  *   Sidebar styles
  *   Filter styles
+ *   Wrapper styles
  *   Home page styles
  */
 
@@ -64,22 +65,6 @@ a.active, a.nav-link:hover{
 
 .full-container {
   padding: 0 !important;
-}
-
-.wrapper-block {
-  background: #F0F6FF;
-}
-
-.wrapper-title {
-  font-size: 1.5em;
-  padding: 0.3em 0;
-}
-
-.wrapper-content {
-  background: #FFFFFF;
-  border: 1px solid #E2E8EB;
-  border-radius: 4px;
-  padding: 1em;
 }
 
 .border-grey {
@@ -256,6 +241,86 @@ a.sidebar-link:hover {
 
 .filter-button:hover, .filter-button:focus, .filter-button:active {
   background:#FFFFFF;
+  color: #0F054C;
+}
+
+/* =Wrapper styles
+ * This section contains
+ * X
+ */
+
+.wrapper-block {
+  background: #F0F6FF;
+}
+
+.wrapper-title {
+  font-size: 1.5em;
+  padding: 0.3em 0;
+}
+
+.wrapper-content {
+  background: #FFFFFF;
+  border: 1px solid #E2E8EB;
+  border-radius: 4px;
+  padding: 1em;
+}
+
+.label-field {
+  display: block;
+  font-size: 0.9rem;
+  color: #888888;
+}
+
+.field-wrapper {
+  height: 30px;
+  border: 1px solid #888888;
+  border-radius: 0.1rem;
+  min-width: 200px;
+  width: 100%;
+}
+
+.check-wrapper {
+  height: 1rem;
+  width: 1rem;
+}
+
+.ul-show-wrapper {
+  background: #f0f6ff;
+  border: 1px solid #f0f6ff;
+  border-radius: 4px;
+  padding: 0 1em;
+}
+
+.ul-show-wrapper li {
+  padding: 0.5em 0;
+  border-bottom: 1px solid #e2e8eb;
+  list-style-type: none;
+}
+
+.ul-show-wrapper li:last-child {
+  border-bottom: none;
+}
+
+.ul-show-wrapper li p {
+  margin-bottom: 0.5em;
+}
+
+.ul-show-wrapper li p:first-child {
+  color: #888;
+  font-size: 0.9em;
+}
+
+.btn-blue-wrapper {
+  background: #0F054C;
+  color: #FFFFFF;
+  border: 1px solid #0F054C;
+  border-radius: 2px;
+  padding: 2px 8px;
+  text-decoration: none;
+}
+
+.btn-blue-wrapper:hover {
+  background: #FFFFFF;
   color: #0F054C;
 }
 

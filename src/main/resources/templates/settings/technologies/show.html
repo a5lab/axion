@@ -8,8 +8,9 @@
   </head>
   <body>
     <div id="content">
-        <h1>Entry</h1>
-        <ul>
+      <h1 class="wrapper-title">Entry</h1>
+      <div class="wrapper-content">
+        <ul class="ul-show-wrapper">
           <li>
             <p>Title</p>
             <p th:text="${technologyDto.title}"></p>
@@ -19,7 +20,8 @@
             <p th:text="${technologyDto.description}"></p>
           </li>
         </ul>
-      <p><a href="/settings/technologies">View all technologies</a></p>
+        <p><a href="/settings/technologies" class="btn-blue-wrapper">View all technologies</a></p>
+      </div>
     </div>
   </body>
 </html>

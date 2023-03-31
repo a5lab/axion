@@ -8,12 +8,14 @@
   </head>
   <body>
     <div id="content">
-      <h1>Edit radar</h1>
-      <form action="#" th:action="@{/settings/radars/update}" th:object="${radar}" method="post">
-        <th:block th:replace="~{settings/radars/fields.html}" />
-        <input type="hidden" th:field="*{id}" id="id">
-        <input type="submit" value="Update radar">
-      </form>      
+      <h1 class="wrapper-title">Edit radar</h1>
+      <div class="wrapper-content">
+        <form action="#" th:action="@{/settings/radars/update}" th:object="${radar}" method="post">
+          <th:block th:replace="~{settings/radars/fields.html}" />
+          <input type="hidden" th:field="*{id}" id="id">
+          <input class="filter-button my-2" type="submit" value="Update radar">
+        </form>
+      </div>
     </div>
   </body>
 </html>

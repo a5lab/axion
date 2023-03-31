@@ -1,6 +1,6 @@
 package com.a5lab.axion.domain.technology_blip;
 
-import com.a5lab.axion.domain.AbstractControllerTests;
+
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.ring.RingDto;
@@ -17,14 +17,18 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import com.a5lab.axion.domain.AbstractControllerTests;
 
 @WebMvcTest(TechnologyBlipCfgController.class)
 
@@ -48,35 +52,15 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setId(10L);
-    technologyDto.setTitle("My technology");
-    technologyDto.setWebsite("My website");
-    technologyDto.setDescription("My radar description");
-    technologyDto.setMoved(1);
-    technologyDto.setActive(true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
 
-    final SegmentDto segmentDto = new SegmentDto();
-    segmentDto.setId(10L);
-    segmentDto.setTitle("My segment title");
-    segmentDto.setDescription("My segment description");
-    segmentDto.setRadar(radar);
-    segmentDto.setPosition(1);
-    segmentDto.setActive(true);
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 0, true);
 
-    final RingDto ringDto = new RingDto();
-    ringDto.setRadar(radar);
-    ringDto.setTitle("My ring title");
-    ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
-    ringDto.setActive(true);
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
 
-    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radar);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
-    technologyBlipDto.setRing(ringDto);
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
 
     Page<TechnologyBlipDto> page = new PageImpl<>(List.of(technologyBlipDto));
     Mockito.when(technologyBlipService.findAll(any(), any())).thenReturn(page);
@@ -95,67 +79,120 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
   }
 
-  /*
-  @Test
-  public void shouldShowTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
 
-    String url = String.format("/settings/tenants/show/%d", tenantDto.getId());
+  @Test
+  public void shouldShowTechnologyBlip() throws Exception {
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
+
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
+
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
+    Mockito.when(technologyBlipService.findById(technologyBlipDto.getId())).thenReturn(Optional.of(technologyBlipDto));
+
+    String url = String.format("/settings/technology_blips/show/%d", technologyBlipDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains(tenantDto.getTitle()));
-    Assertions.assertTrue(content.contains(tenantDto.getDescription()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRadar().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getSegment().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
   }
 
   @Test
-  public void shouldRedirectShowTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/show/1"))
+  public void shouldRedirectShowTechnologyBlip() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/technology_blips/show/1"))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(view().name("redirect:/settings/technology_blips"))
         .andReturn();
   }
 
   @Test
-  public void shouldAddTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/add"))
+  public void shouldAddTechnologyBlip() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/technology_blips/add"))
         .andExpect(status().isOk())
-        .andExpect(view().name("settings/tenants/add"))
-        .andExpect(model().attributeExists("tenantDto"))
+        .andExpect(view().name("settings/technology_blips/add"))
+        .andExpect(model().attributeExists("technologyBlipDto"))
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains("title"));
-    Assertions.assertTrue(content.contains("description"));
+    Assertions.assertTrue(content.contains("radar"));
+    Assertions.assertTrue(content.contains("Technology"));
+    Assertions.assertTrue(content.contains("Segment"));
+    Assertions.assertTrue(content.contains("ring"));
   }
 
   @Test
-  public void shouldCreateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+  public void shouldCreateTechnologyBlip() throws Exception {
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/create")
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
+
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
+    MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", tenantDto.getTitle())
-            .param("description", tenantDto.getDescription())
-            .sessionAttr("tenantDto", tenantDto))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+            .param("radar", technologyBlipDto.getRadar().getTitle())
+            .param("technology", technologyBlipDto.getTechnology().getTitle())
+            .param("segment", technologyBlipDto.getSegment().getTitle())
+            .param("ring", technologyBlipDto.getRing().getTitle())
+            .sessionAttr("technologyBlipDto", technologyBlipDto))
+        .andExpect(status().isOk())
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
+  }
+
+  /*
+  @Test
+  public void shouldRedirectCreateTechnology_blip() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/technology_blips/add"))
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/settings/technology_blips"))
+            .andReturn();
   }
 
   @Test
   public void shouldFailToCreateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/create")
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
+    MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", tenantDto.getTitle())
-            .sessionAttr("tenantDto", tenantDto))
+            .param("radar", technologyBlipDto.getRadar().getTitle())
+            .param("technology", technologyBlipDto.getTechnology().getTitle())
+            .param("segment", technologyBlipDto.getSegment().getTitle())
+            .param("ring", technologyBlipDto.getRing().getTitle())
+            .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().isOk())
         .andReturn();
 
@@ -164,69 +201,121 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldEditTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
+  public void shouldEditTechnologyBlip() throws Exception {
+   final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
 
-    String url = String.format("/settings/tenants/edit/%d", tenantDto.getId());
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
+    Mockito.when(technologyBlipService.findById(technologyBlipDto.getId())).thenReturn(Optional.of(technologyBlipDto));
+
+    String url = String.format("/settings/technology_blips/edit/%d", technologyBlipDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains(tenantDto.getTitle()));
-    Assertions.assertTrue(content.contains(tenantDto.getDescription()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRadar().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getSegment().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
   }
 
   @Test
-  public void shouldRedirectEditTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/edit/1"))
+  public void shouldRedirectEditTechnologyBlip() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/technologyBlipDto/edit/1"))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(view().name("redirect:/settings/technologyBlipDto"))
         .andReturn();
   }
 
   @Test
   public void shouldUpdateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/update")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", tenantDto.getTitle())
-            .param("description", tenantDto.getDescription())
-            .sessionAttr("tenantDto", tenantDto))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
-        .andReturn();
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+
+    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology title", "My website", "My technology description", 1, true);
+
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
+    MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                    .param("radar", technologyBlipDto.getRadar().getTitle())
+                    .param("technology", technologyBlipDto.getTechnology().getTitle())
+                    .param("segment", technologyBlipDto.getSegment().getTitle())
+                    .param("ring", technologyBlipDto.getRing().getTitle())
+                    .sessionAttr("technologyBlipDto", technologyBlipDto))
+            .andExpect(status().isOk())
+            .andReturn();
 
     String content = result.getResponse().getContentAsString();
   }
+  */
 
   @Test
-  public void shouldFailToUpdateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+  public void shouldFailToUpdateTechnologyBlip() throws Exception {
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/update")
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
+
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
+    MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", tenantDto.getTitle())
-            .sessionAttr("tenantDto", tenantDto))
+            .param("radar", technologyBlipDto.getRadar().getTitle())
+            .param("technology", technologyBlipDto.getTechnology().getTitle())
+            .param("segment", technologyBlipDto.getSegment().getTitle())
+            .param("ring", technologyBlipDto.getRing().getTitle())
+            .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().isOk())
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("must not be blank"));
+
   }
 
   @Test
-  public void shouldDeleteTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+  public void shouldDeleteTechnologyBlip() throws Exception {
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
 
-    String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
+
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+
+    final TechnologyDto technologyDto =
+        new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+
+    String url = String.format("/settings/technology_blips/delete/%d", technologyBlipDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(view().name("redirect:/settings/technology_blips"))
         .andReturn();
   }
-
-   */
 }

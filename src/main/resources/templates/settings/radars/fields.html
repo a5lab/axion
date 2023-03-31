@@ -3,19 +3,37 @@
     <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
   </ul>
 </div>
-<label for="radar_type_id">Radar type</label>
-<select id="radar_type_id" name="radar_type_id" th:field="*{radarType.id}">
-  <option th:each="radar_type : ${radar_types}" th:value="${radar_type.id}" th:utext="${radar_type.title}"/>
-</select>
-<label for="title">Title</label>
-<input type="text" th:field="*{title}" id="title" placeholder="Title">
-<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-<label for="description">Description</label>
-<input type="text" th:field="*{description}" id="description" placeholder="Description">
-<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-<label for="primary">Primary</label>
-<input type="checkbox" th:field="*{primary}" id="primary">
-<span th:if="${#fields.hasErrors('primary')}" th:errors="*{primary}"></span>
-<label for="active">Active</label>
-<input type="checkbox" th:field="*{active}" id="active">
-<span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>
+<div class="row">
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <label for="radar_type_id" class="label-field">Radar type</label>
+    <select id="radar_type_id" class="field-wrapper" name="radar_type_id" th:field="*{radarType.id}">
+      <option th:each="radar_type : ${radar_types}" th:value="${radar_type.id}" th:utext="${radar_type.title}"/>
+    </select>
+  </div>
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <label for="title" class="label-field">Title</label>
+    <input type="text" th:field="*{title}" id="title" class="field-wrapper" placeholder="Title">
+    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <label for="description" class="label-field">Description</label>
+    <input type="text" th:field="*{description}" id="description" class="field-wrapper" placeholder="Description">
+    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <input type="checkbox" th:field="*{primary}" id="primary" class="check-wrapper me-1">
+    <label for="primary">Primary</label>
+    <span th:if="${#fields.hasErrors('primary')}" th:errors="*{primary}"></span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xl-4 col-lg-5 col-md-6 my-1">
+    <input type="checkbox" th:field="*{active}" id="active" class="check-wrapper me-1">
+    <label for="active">Active</label>
+    <span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>
+  </div>
+</div>
