@@ -52,9 +52,9 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 0, true);
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 0, true, null);
 
     final TechnologyDto technologyDto =
         new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
@@ -87,9 +87,9 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true, null);
 
     final TechnologyDto technologyDto =
         new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
@@ -140,9 +140,9 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true, null);
 
     final TechnologyDto technologyDto =
         new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
@@ -273,9 +273,9 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true, null);
 
     final TechnologyDto technologyDto =
         new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
@@ -303,9 +303,9 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true, null);
 
     final TechnologyDto technologyDto =
         new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);

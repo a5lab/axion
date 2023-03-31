@@ -13,11 +13,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.a5lab.axion.domain.ring.RingRepository;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class RadarServiceImpl implements RadarService {
   private final RadarRepository radarRepository;
+
+  private final RingRepository ringRepository;
 
   @Override
   @Transactional(readOnly = true)
