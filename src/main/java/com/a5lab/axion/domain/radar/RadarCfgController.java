@@ -89,6 +89,12 @@ public class RadarCfgController {
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid Radar radar, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
+    /* Hande primary error
+    // Add errors
+    bindingResult.reject("n.a", "global error");
+    bindingResult.rejectValue("primary", "n.a", "primary error");
+    */
+
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar", radar);
