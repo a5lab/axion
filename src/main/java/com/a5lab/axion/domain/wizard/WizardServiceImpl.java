@@ -108,6 +108,7 @@ public class WizardServiceImpl implements WizardService {
       ringDto.setTitle(record[0]);
       ringDto.setDescription(record[1]);
       ringDto.setPosition(Integer.parseInt(record[2]));
+      ringDto.setColor(record[3]);
       ringDto.setActive(true);
       ringService.save(ringDto);
     }

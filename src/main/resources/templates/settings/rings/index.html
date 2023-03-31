@@ -22,6 +22,7 @@
                   <th th:replace="settings/rings/sorting :: sorting('title','Title')"></th>
                   <th th:replace="settings/rings/sorting :: sorting('description','Description')"></th>
                   <th th:replace="settings/rings/sorting :: sorting('position','Position')"></th>
+                  <th th:replace="settings/rings/sorting :: sorting('color','Color')"></th>
                   <th th:replace="settings/rings/sorting :: sorting('active','Active')"></th>
                   <th>Show</th>
                   <th>Edit</th>
@@ -34,6 +35,7 @@
                   <td th:text="${ringDto.title}"></td>
                   <td th:text="${ringDto.description}"></td>
                   <td th:text="${ringDto.position}"></td>
+                  <td th:text="${ringDto.color}"></td>
                   <td th:text="${ringDto.active}"></td>
                   <td><a th:href="@{/settings/rings/show/{id}(id=${ringDto.id})}">Show</a></td>
                   <td><a th:href="@{/settings/rings/edit/{id}(id=${ringDto.id})}">Edit</a></td>
