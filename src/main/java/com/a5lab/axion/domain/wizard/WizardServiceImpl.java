@@ -1,13 +1,5 @@
 package com.a5lab.axion.domain.wizard;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -24,11 +16,8 @@ import org.springframework.util.ResourceUtils;
 
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
-import com.a5lab.axion.domain.ring.RingTitleConstraint;
-import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
 import com.a5lab.axion.domain.technology.TechnologyService;
@@ -175,12 +164,10 @@ public class WizardServiceImpl implements WizardService {
       technologyBlip.getRing().setActive(ring.isActive());*/
 
       // Set segment property
-      Segment segment = segmentService.findByTitle(segmentTitle).get();
+      // Segment segment = segmentService.findByTitle(segmentTitle).get();
       technologyBlip.setSegment(segmentService.findByTitle(segmentTitle).get());
       technologyBlip.setTechnology(technologyService.findByTitle(technologyTitle).get());
       technologyBlipService.save(technologyBlip);
     }
   }
-
-
 }

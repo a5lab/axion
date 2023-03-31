@@ -3,9 +3,6 @@ package com.a5lab.axion.domain.segment;
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.segment.SegmentCfgController;
-import com.a5lab.axion.domain.segment.SegmentDto;
-import com.a5lab.axion.domain.segment.SegmentService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -64,7 +61,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldShowSegment() throws Exception {
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true, null);
     Mockito.when(segmentService.findById(segmentDto.getId())).thenReturn(Optional.of(segmentDto));
 
     String url = String.format("/settings/segments/show/%d", segmentDto.getId());
@@ -116,7 +113,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
      */
     @Test
   public void shouldFailToCreateSegment() throws Exception {
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1 , true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1 , true, null);
 
     MvcResult result = mockMvc.perform(post("/settings/segments/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -132,7 +129,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldEditSegment() throws Exception {
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true, null);
     Mockito.when(segmentService.findById(segmentDto.getId())).thenReturn(Optional.of(segmentDto));
 
     String url = String.format("/settings/segments/edit/%d", segmentDto.getId());
@@ -170,7 +167,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   */
   @Test
   public void shouldFailToUpdateSegment() throws Exception {
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true, null);
 
     MvcResult result = mockMvc.perform(post("/settings/segments/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -185,7 +182,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldDeleteSegment() throws Exception {
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true);
+    final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true, null);
 
     String url = String.format("/settings/segments/delete/%d", segmentDto.getId());
     MvcResult result = mockMvc.perform(get(url))
