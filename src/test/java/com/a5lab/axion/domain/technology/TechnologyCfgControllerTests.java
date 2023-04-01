@@ -24,7 +24,6 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private TechnologyService technologyService;
 
-
   @Test
   public void shouldGetTechnologies() throws Exception {
     final TechnologyDto technologyDto = new TechnologyDto();
@@ -46,7 +45,6 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-
     Assertions.assertTrue(content.contains(technologyDto.getTitle()));
     Assertions.assertTrue(content.contains(technologyDto.getWebsite()));
     Assertions.assertTrue(content.contains(technologyDto.getDescription()));
@@ -61,14 +59,15 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     technologyDto.setDescription("My technology description");
     technologyDto.setMoved(0);
     technologyDto.setActive(true);
+
     Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
 
     String url = String.format("/settings/technologies/show/%d", technologyDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(technologyDto.getTitle()));
     Assertions.assertTrue(content.contains(technologyDto.getDescription()));
   }
@@ -88,8 +87,8 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("settings/technologies/add"))
         .andExpect(model().attributeExists("technologyDto"))
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("title"));
     Assertions.assertTrue(content.contains("website"));
     Assertions.assertTrue(content.contains("description"));
@@ -145,6 +144,7 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("must not be blank"));
   }
    */
+
   @Test
   public void shouldEditTechnology() throws Exception {
     final TechnologyDto technologyDto = new TechnologyDto();
@@ -160,8 +160,8 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(technologyDto.getTitle()));
     Assertions.assertTrue(content.contains(technologyDto.getDescription()));
   }
@@ -192,7 +192,6 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technologies"))
         .andReturn();
-
     String content = result.getResponse().getContentAsString();
   }
 
