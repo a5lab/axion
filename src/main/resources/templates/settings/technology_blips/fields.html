@@ -1,6 +1,6 @@
-<div th:if="${#fields.hasAnyErrors()}">
+<div th:if="${#fields.hasErrors('global')}">
   <ul>
-    <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
+    <li th:each="error : ${#fields.errors('global')}" th:text="${error}" />
   </ul>
 </div>
 <div class="row">
