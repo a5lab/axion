@@ -52,14 +52,40 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setRadar(null);
+    segmentDto.setTitle("My segment title");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(1);
+    segmentDto.setActive(true);
+    segmentDto.setTechnologyBlipList(null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 0, "#fbdb84", true, null);
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setRadar(null);
+    ringDto.setTitle("My ring title");
+    ringDto.setDescription("My ring description");
+    ringDto.setPosition(0);
+    ringDto.setColor("#fbdb84");
+    ringDto.setActive(true);
+    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
         new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+    technologyDto.setId(10L);
+    technologyDto.setTitle("My technology");
+    technologyDto.setWebsite("My website");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(1);
+    technologyDto.setActive(true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+    technologyBlipDto.setId(10L);
+    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRing(ringDto);
+    technologyBlipDto.setTechnology(technologyDto);
+    technologyBlipDto.setSegment(segmentDto);
 
 
     Page<TechnologyBlipDto> page = new PageImpl<>(List.of(technologyBlipDto));
@@ -87,14 +113,40 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setRadar(null);
+    segmentDto.setTitle("My segment title");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(1);
+    segmentDto.setActive(true);
+    segmentDto.setTechnologyBlipList(null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, "#fbdb84", true, null);
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setRadar(null);
+    ringDto.setTitle("My ring title");
+    ringDto.setDescription("My ring description");
+    ringDto.setPosition(0);
+    ringDto.setColor("#fbdb84");
+    ringDto.setActive(true);
+    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
-        new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+            new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+    technologyDto.setId(10L);
+    technologyDto.setTitle("My technology");
+    technologyDto.setWebsite("My website");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(1);
+    technologyDto.setActive(true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+    technologyBlipDto.setId(10L);
+    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRing(ringDto);
+    technologyBlipDto.setTechnology(technologyDto);
+    technologyBlipDto.setSegment(segmentDto);
 
     Mockito.when(technologyBlipService.findById(technologyBlipDto.getId())).thenReturn(Optional.of(technologyBlipDto));
 
@@ -140,14 +192,40 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setRadar(null);
+    segmentDto.setTitle("My segment title");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(1);
+    segmentDto.setActive(true);
+    segmentDto.setTechnologyBlipList(null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, "#fbdb84", true, null);
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setRadar(null);
+    ringDto.setTitle("My ring title");
+    ringDto.setDescription("My ring description");
+    ringDto.setPosition(0);
+    ringDto.setColor("#fbdb84");
+    ringDto.setActive(true);
+    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
-        new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+            new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+    technologyDto.setId(10L);
+    technologyDto.setTitle("My technology");
+    technologyDto.setWebsite("My website");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(1);
+    technologyDto.setActive(true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+    technologyBlipDto.setId(10L);
+    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRing(ringDto);
+    technologyBlipDto.setTechnology(technologyDto);
+    technologyBlipDto.setSegment(segmentDto);
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -273,14 +351,40 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setRadar(null);
+    segmentDto.setTitle("My segment title");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(1);
+    segmentDto.setActive(true);
+    segmentDto.setTechnologyBlipList(null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, "#fbdb84", true, null);
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setRadar(null);
+    ringDto.setTitle("My ring title");
+    ringDto.setDescription("My ring description");
+    ringDto.setPosition(0);
+    ringDto.setColor("#fbdb84");
+    ringDto.setActive(true);
+    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
-        new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+            new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+    technologyDto.setId(10L);
+    technologyDto.setTitle("My technology");
+    technologyDto.setWebsite("My website");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(1);
+    technologyDto.setActive(true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+    technologyBlipDto.setId(10L);
+    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRing(ringDto);
+    technologyBlipDto.setTechnology(technologyDto);
+    technologyBlipDto.setSegment(segmentDto);
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -303,14 +407,40 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title", "My segment description", 1, true, null);
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setRadar(null);
+    segmentDto.setTitle("My segment title");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(1);
+    segmentDto.setActive(true);
+    segmentDto.setTechnologyBlipList(null);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, "#fbdb84", true, null);
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setRadar(null);
+    ringDto.setTitle("My ring title");
+    ringDto.setDescription("My ring description");
+    ringDto.setPosition(0);
+    ringDto.setColor("#fbdb84");
+    ringDto.setActive(true);
+    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
-        new TechnologyDto(10L, "My technology", "My website", "My description", 1, true);
+            new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+    technologyDto.setId(10L);
+    technologyDto.setTitle("My technology");
+    technologyDto.setWebsite("My website");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(1);
+    technologyDto.setActive(true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+    technologyBlipDto.setId(10L);
+    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRing(ringDto);
+    technologyBlipDto.setTechnology(technologyDto);
+    technologyBlipDto.setSegment(segmentDto);
 
     String url = String.format("/settings/technology_blips/delete/%d", technologyBlipDto.getId());
     MvcResult result = mockMvc.perform(get(url))
