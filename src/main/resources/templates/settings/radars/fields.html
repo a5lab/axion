@@ -3,11 +3,6 @@
     <li th:each="error : ${#fields.errors('global')}" th:text="${error}" />
   </ul>
 </div>
-<div th:if="${#fields.hasAnyErrors()}">
-  <ul>
-    <li th:each="error : ${#fields.allErrors()}" th:text="${error}" />
-  </ul>
-</div>
 <div class="row">
   <div class="col-xl-4 col-lg-5 col-md-6 my-1">
     <label for="radar_type_id" class="label-field">Radar type</label>
