@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.a5lab.axion.domain.ring.RingRepository;
 
 @RequiredArgsConstructor
 @Service
@@ -21,7 +21,8 @@ import com.a5lab.axion.domain.ring.RingRepository;
 public class RadarServiceImpl implements RadarService {
   private final RadarRepository radarRepository;
 
-  private final RingRepository ringRepository;
+  private final RadarMapper radarMapper;
+
 
   @Override
   @Transactional(readOnly = true)
@@ -31,7 +32,7 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<Radar> findAll(RadarFilter radarFilter, Pageable pageable) {
+  public Page<RadarDto> findAll(RadarFilter radarFilter, Pageable pageable) {
     return radarRepository.findAll((root, query, builder) -> {
       List<Predicate> predicateList = new ArrayList<>();
       if (radarFilter != null && radarFilter.getTitle() != null
@@ -39,7 +40,7 @@ public class RadarServiceImpl implements RadarService {
         predicateList.add(builder.like(root.get("title"), radarFilter.getTitle()));
       }
       return builder.and(predicateList.toArray(new Predicate[] {}));
-    }, pageable);
+    }, pageable).map(radarMapper::toDto);
   }
 
   @Override
@@ -61,10 +62,10 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional(readOnly = true)
-  public List<Radar> findByPrimaryAndActive(boolean primary, boolean active) {
-    return radarRepository.findByPrimaryAndActive(primary, active);
+  public List<RadarDto> findByPrimaryAndActive(boolean primary, boolean active) {
+    return radarRepository.findByPrimaryAndActive(primary, active)
+        .stream().map(radarMapper::toDto).collect(Collectors.toList());
   }
-
 
   @Override
   @Transactional

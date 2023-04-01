@@ -46,16 +46,16 @@ public class RadarCfgController {
     Sort.Order order = new Sort.Order(direction, sort[0]);
 
     ModelAndView modelAndView = new ModelAndView("settings/radars/index");
-    Page<Radar> radarPage = radarService.findAll(radarFilter, PageRequest.of(page - 1, size, Sort.by(order)));
-    modelAndView.addObject("radarPage", radarPage);
+    Page<RadarDto> radarDtoPage = radarService.findAll(radarFilter, PageRequest.of(page - 1, size, Sort.by(order)));
+    modelAndView.addObject("radarDtoPage", radarDtoPage);
     modelAndView.addObject("radarFilter", radarFilter);
-    modelAndView.addObject("currentPage", radarPage.getNumber() + 1);
+    modelAndView.addObject("currentPage", radarDtoPage.getNumber() + 1);
     modelAndView.addObject("pageSize", size);
     modelAndView.addObject("sortField", sort[0]);
     modelAndView.addObject("sortDirection", sort[1]);
     modelAndView.addObject("reverseSortDirection", sort[1].equals("asc") ? "desc" : "asc");
 
-    int totalPages = radarPage.getTotalPages();
+    int totalPages = radarDtoPage.getTotalPages();
     if (totalPages > 0) {
       List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
       modelAndView.addObject("pageNumbers", pageNumbers);
@@ -81,7 +81,7 @@ public class RadarCfgController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-    modelAndView.addObject("radar", new Radar());
+    modelAndView.addObject("radarDto", new RadarDto());
     modelAndView.addObject("radar_types", radarTypeService.findAll());
     return modelAndView;
   }
