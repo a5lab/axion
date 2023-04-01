@@ -45,8 +45,8 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<Radar> findById(Long id) {
-    return radarRepository.findById(id);
+  public Optional<RadarDto> findById(Long id) {
+    return radarRepository.findById(id).map(radarMapper::toDto);
   }
 
   @Override
@@ -71,6 +71,12 @@ public class RadarServiceImpl implements RadarService {
   @Transactional
   public Radar save(Radar radar) {
     return radarRepository.save(radar);
+  }
+
+  @Override
+  @Transactional
+  public RadarDto save(RadarDto radarDto) {
+    return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
   }
 
   @Override
