@@ -54,7 +54,13 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldShowTechnology() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(10L);
+    technologyDto.setWebsite("My website");
+    technologyDto.setTitle("My technology");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(0);
+    technologyDto.setActive(true);
     Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
 
     String url = String.format("/settings/technologies/show/%d", technologyDto.getId());
@@ -141,7 +147,13 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
    */
   @Test
   public void shouldEditTechnology() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(10L);
+    technologyDto.setWebsite("My website");
+    technologyDto.setTitle("My technology");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(0);
+    technologyDto.setActive(true);
     Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
 
     String url = String.format("/settings/technologies/edit/%d", technologyDto.getId());
@@ -163,7 +175,13 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldUpdateTechnology() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(10L);
+    technologyDto.setWebsite("My website");
+    technologyDto.setTitle("My technology");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(0);
+    technologyDto.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/settings/technologies/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -180,7 +198,13 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToUpdateTechnology() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(10L);
+    technologyDto.setWebsite("My website");
+    technologyDto.setTitle("My technology");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(0);
+    technologyDto.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/settings/technologies/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -196,7 +220,13 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldDeleteTechnology() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(10L);
+    technologyDto.setWebsite("My website");
+    technologyDto.setTitle("My technology");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(0);
+    technologyDto.setActive(true);
 
     String url = String.format("/settings/technologies/delete/%d", technologyDto.getId());
     MvcResult result = mockMvc.perform(get(url))
