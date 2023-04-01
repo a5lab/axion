@@ -30,17 +30,17 @@ public class RadarApiControllerTests extends AbstractControllerTests {
   @Test
   public void shouldGetRadars() throws Exception {
     final RadarType radarType = new RadarType();
-    final Radar radar = new Radar(10L, radarType, "my title", "my description", true, false, null, null, null);
-    Page<Radar> radarPage = new PageImpl<>(Arrays.asList(radar));
-    Mockito.when(radarService.findAll(any(), any())).thenReturn(radarPage);
+    final RadarDto radarDto = new RadarDto(10L, radarType, "my title", "my description", true, false, null, null, null);
+    Page<RadarDto> radarDtoPage = new PageImpl<>(Arrays.asList(radarDto));
+    Mockito.when(radarService.findAll(any(), any())).thenReturn(radarDtoPage);
 
     mockMvc.perform(get("/api/v1/radars").contentType(APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$").isArray())
-        .andExpect(jsonPath("$", hasSize(radarPage.getContent().size())))
-        .andExpect(jsonPath("$[0].id", equalTo(radar.getId()), Long.class))
-        .andExpect(jsonPath("$[0].title", equalTo(radar.getTitle())))
-        .andExpect(jsonPath("$[0].description", equalTo(radar.getDescription())))
-        .andExpect(jsonPath("$[0].primary", equalTo(radar.isPrimary())));
+        .andExpect(jsonPath("$", hasSize(radarDtoPage.getContent().size())))
+        .andExpect(jsonPath("$[0].id", equalTo(radarDto.getId()), Long.class))
+        .andExpect(jsonPath("$[0].title", equalTo(radarDto.getTitle())))
+        .andExpect(jsonPath("$[0].description", equalTo(radarDto.getDescription())))
+        .andExpect(jsonPath("$[0].primary", equalTo(radarDto.isPrimary())));
   }
 }
