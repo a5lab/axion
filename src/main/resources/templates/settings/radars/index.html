@@ -15,7 +15,7 @@
           <p th:case="0">No radars.</p>
           <div th:case="*">
             <th:block th:replace="~{settings/radars/paging.html}" />
-            <table>
+            <table class="table-wrapper">
               <thead>
                 <tr>
                   <th th:replace="settings/radars/sorting :: sorting('radarType.title','Radar type')"></th>
@@ -23,9 +23,7 @@
                   <th th:replace="settings/radars/sorting :: sorting('description','Description')"></th>
                   <th th:replace="settings/radars/sorting :: sorting('primary','Primary')"></th>
                   <th th:replace="settings/radars/sorting :: sorting('active','Active')"></th>
-                  <th>Show</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -35,14 +33,16 @@
                   <td th:text="${radar.description}"></td>
                   <td th:text="${radar.primary}"></td>
                   <td th:text="${radar.active}"></td>
-                  <td><a th:href="@{/settings/radars/show/{id}(id=${radar.id})}">Show</a></td>
-                  <td><a th:href="@{/settings/radars/edit/{id}(id=${radar.id})}">Edit</a></td>
-                  <td><a th:href="@{/settings/radars/delete/{id}(id=${radar.id})}">Delete</a></td>
+                  <td>
+                    <a th:href="@{/settings/radars/show/{id}(id=${radar.id})}" class="action-show" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show"></a>
+                    <a th:href="@{/settings/radars/edit/{id}(id=${radar.id})}" class="action-edit" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"></a>
+                    <a th:href="@{/settings/radars/delete/{id}(id=${radar.id})}" class="action-delete" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></a>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p><a href="/settings/radars/add">Add a new radar</a></p>
+          <p><a href="/settings/radars/add" class="btn-orange-wrapper">Add a new radar</a></p>
         </div>
       </div>
     </div>

@@ -324,6 +324,100 @@ a.sidebar-link:hover {
   color: #0F054C;
 }
 
+.btn-orange-wrapper {
+  background: #FFFFFF;
+  color: #C65D0C;
+  border: 1px solid #C65D0C;
+  border-radius: 2px;
+  padding: 2px 8px;
+  text-decoration: none;
+}
+
+.btn-orange-wrapper:hover {
+  background: #C65D0C;
+  color: #FFFFFF;
+}
+
+.paging-number-wrapper {
+  display: inline-block;
+  padding-right: 0.5em;
+}
+
+.paging-number-wrapper a {
+  text-decoration: none;
+  font-size: 1em;
+  color: #888888 !important;
+}
+
+.paging-number-wrapper a:hover, .paging-number-wrapper a:focus {
+  color: #0F054C !important;
+}
+
+.paging-number-wrapper a.active {
+  color: #0F054C !important;
+}
+
+.table-wrapper {
+  width: 100%;
+  margin-bottom: 2em;
+  border: 1px solid #e2e8eb;
+  border-collapse: collapse;
+}
+
+.table-wrapper th {
+  font-weight: bold;
+  color: #888888;
+  padding: 0.5em;
+  background: #f0f6ff;
+  border: 1px solid #e2e8eb;
+}
+
+.table-wrapper th a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #888888;
+}
+
+.table-wrapper td {
+  border: 1px solid #e2e8eb;
+  padding: 0.5em;
+  vertical-align:top;
+}
+
+.table-action {
+  display:flex;
+  gap: 0.5em;
+}
+
+a.action-show, a.action-edit, a.action-delete {
+  width: 32px;
+  height: 32px;
+  padding: 0.5em;
+  border: 1px solid #e2e8eb;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+a.action-show {
+  background: url("../images/icons/action_show_axion.svg") no-repeat;
+  background-position: center;
+}
+
+a.action-edit {
+  background: url("../images/icons/action_edit_axion.svg") no-repeat;
+  background-position: center;
+}
+
+a.action-delete {
+  background: url("../images/icons/action_delete_axion.svg") no-repeat;
+  background-position: center;
+}
+
+a.action-show:hover, a.action-edit:hover, a.action-delete:hover {
+  background-color: #42E8E0;
+}
+
+
 /* =Home page styles
  * This section contains
  * X

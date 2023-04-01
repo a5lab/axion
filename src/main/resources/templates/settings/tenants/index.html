@@ -15,29 +15,29 @@
           <p th:case="0">No tenants.</p>
           <div th:case="*">
             <th:block th:replace="~{settings/tenants/paging.html}" />
-            <table>
+            <table class="table-wrapper">
               <thead>
                 <tr>
                 <tr>
                   <th th:replace="settings/tenants/sorting :: sorting('title','Title')"></th>
                   <th th:replace="settings/tenants/sorting :: sorting('description','Description')"></th>
-                  <th>Show</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr th:each="tenantDto : ${tenantDtoPage.getContent()}">
                   <td th:text="${tenantDto.title}"></td>
                   <td th:text="${tenantDto.description}"></td>
-                  <td><a th:href="@{/settings/tenants/show/{id}(id=${tenantDto.id})}">Show</a></td>
-                  <td><a th:href="@{/settings/tenants/edit/{id}(id=${tenantDto.id})}">Edit</a></td>
-                  <td><a th:href="@{/settings/tenants/delete/{id}(id=${tenantDto.id})}">Delete</a></td>
+                  <td>
+                    <a th:href="@{/settings/tenants/show/{id}(id=${tenantDto.id})}" class="action-show" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show"></a>
+                    <a th:href="@{/settings/tenants/edit/{id}(id=${tenantDto.id})}" class="action-edit" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"></a>
+                    <a th:href="@{/settings/tenants/delete/{id}(id=${tenantDto.id})}" class="action-delete" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></a>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p><a href="/settings/tenants/add">Add a new tenant</a></p>
+          <p><a href="/settings/tenants/add" class="btn-orange-wrapper">Add a new tenant</a></p>
         </div>
       </div>
     </div>

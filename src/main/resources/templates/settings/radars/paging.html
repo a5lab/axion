@@ -1,5 +1,5 @@
-<div>
-  <span th:if="${radarPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+<div class="my-2">
+  <span th:if="${radarPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="paging-number-wrapper">
     <a th:href="@{/settings/radars(size=${radarPage.size}, page=${pageNumber})}"
        th:text="${pageNumber}" th:class="${pageNumber==radarPage.number + 1} ? active"></a>
   </span>
