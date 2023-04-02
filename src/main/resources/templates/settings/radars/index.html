@@ -11,7 +11,7 @@
       <h1 class="wrapper-title">Radars</h1>
       <div id="settings-radars-page" class="wrapper-content">
         <th:block th:replace="~{settings/radars/filter.html}" />
-        <div th:switch="${radarPage.getTotalElements()}">
+        <div th:switch="${radarDtoPage.getTotalElements()}">
           <p th:case="0">No radars.</p>
           <div th:case="*">
             <th:block th:replace="~{settings/radars/paging.html}" />
@@ -29,15 +29,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="radar : ${radarPage.getContent()}">
-                  <td th:text="${radar.radarType.title}"></td>
-                  <td th:text="${radar.title}"></td>
-                  <td th:text="${radar.description}"></td>
-                  <td th:text="${radar.primary}"></td>
-                  <td th:text="${radar.active}"></td>
-                  <td><a th:href="@{/settings/radars/show/{id}(id=${radar.id})}">Show</a></td>
-                  <td><a th:href="@{/settings/radars/edit/{id}(id=${radar.id})}">Edit</a></td>
-                  <td><a th:href="@{/settings/radars/delete/{id}(id=${radar.id})}">Delete</a></td>
+                <tr th:each="radarDto : ${radarDtoPage.getContent()}">
+                  <td th:text="${radarDto.radarType.title}"></td>
+                  <td th:text="${radarDto.title}"></td>
+                  <td th:text="${radarDto.description}"></td>
+                  <td th:text="${radarDto.primary}"></td>
+                  <td th:text="${radarDto.active}"></td>
+                  <td><a th:href="@{/settings/radars/show/{id}(id=${radarDto.id})}">Show</a></td>
+                  <td><a th:href="@{/settings/radars/edit/{id}(id=${radarDto.id})}">Edit</a></td>
+                  <td><a th:href="@{/settings/radars/delete/{id}(id=${radarDto.id})}">Delete</a></td>
                 </tr>
               </tbody>
             </table>
