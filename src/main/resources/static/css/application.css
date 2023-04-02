@@ -7,6 +7,7 @@
  *   Sidebar styles
  *   Filter styles
  *   Wrapper styles
+ *   Table and paging styles
  *   Home page styles
  */
 
@@ -338,6 +339,11 @@ a.sidebar-link:hover {
   color: #FFFFFF;
 }
 
+/* =Table and paging styles
+ * This section contains
+ * X
+ */
+
 .paging-number-wrapper {
   display: inline-block;
   padding-right: 0.5em;
@@ -380,8 +386,9 @@ a.sidebar-link:hover {
 
 .table-wrapper td {
   border: 1px solid #e2e8eb;
-  padding: 0.5em;
-  vertical-align:top;
+  padding: 0.5em 0.5em 0.2em 0.5em;
+  vertical-align: top;
+  line-height: 1.3em;
 }
 
 .table-action {
@@ -399,24 +406,23 @@ a.action-show, a.action-edit, a.action-delete {
 }
 
 a.action-show {
-  background: url("../images/icons/action_show_axion.svg") no-repeat;
+  background: url("../images/action/action_show_axion.svg") no-repeat;
   background-position: center;
 }
 
 a.action-edit {
-  background: url("../images/icons/action_edit_axion.svg") no-repeat;
+  background: url("../images/action/action_edit_axion.svg") no-repeat;
   background-position: center;
 }
 
 a.action-delete {
-  background: url("../images/icons/action_delete_axion.svg") no-repeat;
+  background: url("../images/action/action_delete_axion.svg") no-repeat;
   background-position: center;
 }
 
 a.action-show:hover, a.action-edit:hover, a.action-delete:hover {
   background-color: #42E8E0;
 }
-
 
 /* =Home page styles
  * This section contains
