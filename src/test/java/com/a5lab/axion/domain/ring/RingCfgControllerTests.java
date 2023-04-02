@@ -69,13 +69,11 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldShowRing() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
-        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
         ringDto.setPosition(0);
         ringDto.setActive(true);
-        ringDto.setTechnologyBlipList(null);
         Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
 
         String url = String.format("/settings/rings/show/%d", ringDto.getId());
@@ -113,13 +111,11 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToCreateRingOnLowerCaseTitle() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
-        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
         ringDto.setPosition(0);
         ringDto.setActive(true);
-        ringDto.setTechnologyBlipList(null);
 
         MvcResult result = mockMvc.perform(post("/settings/rings/create")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -154,13 +150,11 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToCreateRingOnBlankDescription() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
-        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
         ringDto.setPosition(0);
         ringDto.setActive(true);
-        ringDto.setTechnologyBlipList(null);
 
         MvcResult result = mockMvc.perform(post("/settings/rings/create")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -177,13 +171,11 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldEditRing() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
-        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
         ringDto.setPosition(0);
         ringDto.setActive(true);
-        ringDto.setTechnologyBlipList(null);
 
         Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
 
@@ -227,13 +219,11 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToUpdateRing() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
-        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
         ringDto.setPosition(0);
         ringDto.setActive(true);
-        ringDto.setTechnologyBlipList(null);
 
         MvcResult result = mockMvc.perform(post("/settings/rings/update")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -250,13 +240,11 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldDeleteRing() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
-        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
         ringDto.setPosition(0);
         ringDto.setActive(true);
-        ringDto.setTechnologyBlipList(null);
 
         String url = String.format("/settings/rings/delete/%d", ringDto.getId());
         MvcResult result = mockMvc.perform(get(url))
