@@ -63,12 +63,10 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldShowSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
-        segmentDto.setTechnologyBlipList(null);
         Mockito.when(segmentService.findById(segmentDto.getId())).thenReturn(Optional.of(segmentDto));
 
         String url = String.format("/settings/segments/show/%d", segmentDto.getId());
@@ -122,12 +120,10 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToCreateSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
-        segmentDto.setTechnologyBlipList(null);
 
         MvcResult result = mockMvc.perform(post("/settings/segments/create")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -145,12 +141,10 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldEditSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
-        segmentDto.setTechnologyBlipList(null);
 
         Mockito.when(segmentService.findById(segmentDto.getId())).thenReturn(Optional.of(segmentDto));
 
@@ -193,12 +187,10 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToUpdateSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
-        segmentDto.setTechnologyBlipList(null);
 
         MvcResult result = mockMvc.perform(post("/settings/segments/update")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -215,12 +207,10 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldDeleteSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
-        segmentDto.setTechnologyBlipList(null);
 
         String url = String.format("/settings/segments/delete/%d", segmentDto.getId());
         MvcResult result = mockMvc.perform(get(url))
