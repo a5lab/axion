@@ -1,5 +1,5 @@
-<div>
-  <span th:if="${technologyDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+<div class="my-2">
+  <span th:if="${technologyDtoPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="paging-number-wrapper">
     <a th:href="@{/settings/technologies(size=${technologyDtoPage.size}, page=${pageNumber})}"
        th:text="${pageNumber}" th:class="${pageNumber==technologyDtoPage.number + 1} ? active"></a>
   </span>
