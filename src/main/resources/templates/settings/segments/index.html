@@ -9,12 +9,12 @@
   <body>
     <div id="content">
       <h1 class="wrapper-title">Segments</h1>
-      <div id="settings-segments-page" class="wrapper-content">
-        <th:block th:replace="~{settings/segments/filter.html}" />
+      <div class="wrapper-content" id="settings-segments-page">
+        <th:block th:replace="~{settings/segments/filter.html}"/>
         <div th:switch="${segmentDtoPage.getTotalElements()}">
           <p th:case="0">No segments.</p>
           <div th:case="*">
-            <th:block th:replace="~{settings/segments/paging.html}" />
+            <th:block th:replace="~{settings/segments/paging.html}"/>
             <table class="table-wrapper">
               <thead>
                 <tr>
@@ -34,15 +34,18 @@
                   <td th:text="${segmentDto.position}"></td>
                   <td th:text="${segmentDto.active}"></td>
                   <td>
-                    <a th:href="@{/settings/segments/show/{id}(id=${segmentDto.id})}" class="action-show" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show"></a>
-                    <a th:href="@{/settings/segments/edit/{id}(id=${segmentDto.id})}" class="action-edit" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"></a>
-                    <a th:href="@{/settings/segments/delete/{id}(id=${segmentDto.id})}" class="action-delete" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></a>
+                    <a class="action-show" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/segments/show/{id}(id=${segmentDto.id})}" title="Show"></a>
+                    <a class="action-edit" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/segments/edit/{id}(id=${segmentDto.id})}" title="Edit"></a>
+                    <a class="action-delete" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/segments/delete/{id}(id=${segmentDto.id})}" title="Delete"></a>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p><a href="/settings/segments/add" class="btn-orange-wrapper">Add a new segment</a></p>
+          <p><a class="btn-orange-wrapper" href="/settings/segments/add">Add a new segment</a></p>
         </div>
       </div>
     </div>

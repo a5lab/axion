@@ -9,12 +9,12 @@
   <body>
     <div id="content">
       <h1 class="wrapper-title">Rings</h1>
-      <div id="settings-rings-page" class="wrapper-content">
-        <th:block th:replace="~{settings/rings/filter.html}" />
+      <div class="wrapper-content" id="settings-rings-page">
+        <th:block th:replace="~{settings/rings/filter.html}"/>
         <div th:switch="${ringDtoPage.getTotalElements()}">
           <p th:case="0">No rings.</p>
           <div th:case="*">
-            <th:block th:replace="~{settings/rings/paging.html}" />
+            <th:block th:replace="~{settings/rings/paging.html}"/>
             <table class="table-wrapper">
               <thead>
                 <tr>
@@ -37,16 +37,19 @@
                   <td th:text="${ringDto.active}"></td>
                   <td>
                     <span class="table-action">
-                      <a th:href="@{/settings/rings/show/{id}(id=${ringDto.id})}" class="action-show" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show"></a>
-                      <a th:href="@{/settings/rings/edit/{id}(id=${ringDto.id})}" class="action-edit" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"></a>
-                      <a th:href="@{/settings/rings/delete/{id}(id=${ringDto.id})}" class="action-delete" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></a>
+                      <a class="action-show" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                         th:href="@{/settings/rings/show/{id}(id=${ringDto.id})}" title="Show"></a>
+                      <a class="action-edit" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                         th:href="@{/settings/rings/edit/{id}(id=${ringDto.id})}" title="Edit"></a>
+                      <a class="action-delete" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                         th:href="@{/settings/rings/delete/{id}(id=${ringDto.id})}" title="Delete"></a>
                     </span>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p><a href="/settings/rings/add" class="btn-orange-wrapper">Add a new ring</a></p>
+          <p><a class="btn-orange-wrapper" href="/settings/rings/add">Add a new ring</a></p>
         </div>
       </div>
     </div>

@@ -9,12 +9,12 @@
   <body>
     <div id="content">
       <h1 class="wrapper-title">Technology blips</h1>
-      <div id="settings-technology-blips-page" class="wrapper-content">
-        <th:block th:replace="~{settings/technology_blips/filter.html}" />
+      <div class="wrapper-content" id="settings-technology-blips-page">
+        <th:block th:replace="~{settings/technology_blips/filter.html}"/>
         <div th:switch="${technologyBlipDtoPage.getTotalElements()}">
           <p th:case="0">No technology blips.</p>
           <div th:case="*">
-            <th:block th:replace="~{settings/technology_blips/paging.html}" />
+            <th:block th:replace="~{settings/technology_blips/paging.html}"/>
             <table class="table-wrapper">
               <thead>
                 <tr>
@@ -32,15 +32,18 @@
                   <td th:text="${technologyBlipDto.ring.title}"></td>
                   <td th:text="${technologyBlipDto.technology.title}"></td>
                   <td>
-                    <a th:href="@{/settings/technology_blips/show/{id}(id=${technologyBlipDto.id})}" class="action-show" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show"></a>
-                    <a th:href="@{/settings/technology_blips/edit/{id}(id=${technologyBlipDto.id})}" class="action-edit" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"></a>
-                    <a th:href="@{/settings/technology_blips/delete/{id}(id=${technologyBlipDto.id})}" class="action-delete" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></a>
+                    <a class="action-show" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/technology_blips/show/{id}(id=${technologyBlipDto.id})}" title="Show"></a>
+                    <a class="action-edit" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/technology_blips/edit/{id}(id=${technologyBlipDto.id})}" title="Edit"></a>
+                    <a class="action-delete" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/technology_blips/delete/{id}(id=${technologyBlipDto.id})}" title="Delete"></a>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p><a href="/settings/technology_blips/add" class="btn-orange-wrapper">Add a new technology blip</a></p>
+          <p><a class="btn-orange-wrapper" href="/settings/technology_blips/add">Add a new technology blip</a></p>
         </div>
       </div>
     </div>
