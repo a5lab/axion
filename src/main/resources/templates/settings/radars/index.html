@@ -9,12 +9,12 @@
   <body>
     <div id="content">
       <h1 class="wrapper-title">Radars</h1>
-      <div id="settings-radars-page" class="wrapper-content">
-        <th:block th:replace="~{settings/radars/filter.html}" />
-        <div th:switch="${radarPage.getTotalElements()}">
+      <div class="wrapper-content" id="settings-radars-page">
+        <th:block th:replace="~{settings/radars/filter.html}"/>
+        <div th:switch="${radarDtoPage.getTotalElements()}">
           <p th:case="0">No radars.</p>
           <div th:case="*">
-            <th:block th:replace="~{settings/radars/paging.html}" />
+            <th:block th:replace="~{settings/radars/paging.html}"/>
             <table class="table-wrapper">
               <thead>
                 <tr>
@@ -27,22 +27,25 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="radar : ${radarPage.getContent()}">
-                  <td th:text="${radar.radarType.title}"></td>
-                  <td th:text="${radar.title}"></td>
-                  <td th:text="${radar.description}"></td>
-                  <td th:text="${radar.primary}"></td>
-                  <td th:text="${radar.active}"></td>
+                <tr th:each="radarDto : ${radarDtoPage.getContent()}">
+                  <td th:text="${radarDto.radarType.title}"></td>
+                  <td th:text="${radarDto.title}"></td>
+                  <td th:text="${radarDto.description}"></td>
+                  <td th:text="${radarDto.primary}"></td>
+                  <td th:text="${radarDto.active}"></td>
                   <td>
-                    <a th:href="@{/settings/radars/show/{id}(id=${radar.id})}" class="action-show" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show"></a>
-                    <a th:href="@{/settings/radars/edit/{id}(id=${radar.id})}" class="action-edit" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"></a>
-                    <a th:href="@{/settings/radars/delete/{id}(id=${radar.id})}" class="action-delete" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"></a>
+                    <a class="action-show" data-bs-placement="bottom"
+                       data-bs-toggle="tooltip" th:href="@{/settings/radars/show/{id}(id=${radar.id})}" title="Show"></a>
+                    <a class="action-edit" data-bs-placement="bottom"
+                       data-bs-toggle="tooltip" th:href="@{/settings/radars/edit/{id}(id=${radar.id})}" title="Edit"></a>
+                    <a class="action-delete" data-bs-placement="bottom"
+                       data-bs-toggle="tooltip" th:href="@{/settings/radars/delete/{id}(id=${radar.id})}" title="Delete"></a>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p><a href="/settings/radars/add" class="btn-orange-wrapper">Add a new radar</a></p>
+          <p><a class="btn-orange-wrapper" href="/settings/radars/add">Add a new radar</a></p>
         </div>
       </div>
     </div>

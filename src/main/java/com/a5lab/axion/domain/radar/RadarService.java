@@ -11,16 +11,17 @@ public interface RadarService {
 
   Collection<Radar> findAll();
 
-  Page<Radar> findAll(RadarFilter radarFilter, Pageable pageable);
+  Page<RadarDto> findAll(RadarFilter radarFilter, Pageable pageable);
 
-
-  Optional<Radar> findById(Long id);
+  Optional<RadarDto> findById(Long id);
 
   Optional<Radar> findByPrimary(boolean primary);
 
-  List<Radar> findByPrimaryAndActive(boolean primary, boolean active);
+  List<RadarDto> findByPrimaryAndActive(boolean primary, boolean active);
 
   Radar save(Radar radar);
+
+  RadarDto save(RadarDto radarDto);
 
   void deleteById(Long id);
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 
 @Controller
@@ -18,10 +18,10 @@ public class HomeController {
 
   @GetMapping({"/", "/home"})
   public ModelAndView index() {
-    List<Radar> radarList = radarService.findByPrimaryAndActive(true, true);
+    List<RadarDto> radarDtoList = radarService.findByPrimaryAndActive(true, true);
     ModelAndView modelAndView = new ModelAndView("home/index");
-    if (!radarList.isEmpty()) {
-      modelAndView.addObject("radar", radarList.get(0));
+    if (!radarDtoList.isEmpty()) {
+      modelAndView.addObject("radarDto", radarDtoList.get(0));
     }
     return modelAndView;
   }
