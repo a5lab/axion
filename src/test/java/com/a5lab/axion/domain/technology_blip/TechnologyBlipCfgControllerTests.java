@@ -48,28 +48,23 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   public void shouldGetTechnologyBlips() throws Exception {
 
     final Radar radar = new Radar();
-    radar.setId(10L);
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
     segmentDto.setActive(true);
-    segmentDto.setTechnologyBlipList(null);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
-    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
         new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
@@ -109,28 +104,23 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldShowTechnologyBlip() throws Exception {
     final Radar radar = new Radar();
-    radar.setId(10L);
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
     segmentDto.setActive(true);
-    segmentDto.setTechnologyBlipList(null);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
-    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
             new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
@@ -188,28 +178,23 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldCreateTechnologyBlip() throws Exception {
     final Radar radar = new Radar();
-    radar.setId(10L);
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
     segmentDto.setActive(true);
-    segmentDto.setTechnologyBlipList(null);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
-    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
             new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
@@ -347,28 +332,23 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldFailToUpdateTechnologyBlip() throws Exception {
     final Radar radar = new Radar();
-    radar.setId(10L);
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
     segmentDto.setActive(true);
-    segmentDto.setTechnologyBlipList(null);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
-    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
             new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
@@ -403,28 +383,23 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldDeleteTechnologyBlip() throws Exception {
     final Radar radar = new Radar();
-    radar.setId(10L);
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
     segmentDto.setActive(true);
-    segmentDto.setTechnologyBlipList(null);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
-    ringDto.setTechnologyBlipList(null);
 
     final TechnologyDto technologyDto =
             new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
