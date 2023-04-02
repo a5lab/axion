@@ -46,7 +46,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetTechnologyBlips() throws Exception {
-
     final Radar radar = new Radar();
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
@@ -82,7 +81,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     technologyBlipDto.setTechnology(technologyDto);
     technologyBlipDto.setSegment(segmentDto);
 
-
     Page<TechnologyBlipDto> page = new PageImpl<>(List.of(technologyBlipDto));
     Mockito.when(technologyBlipService.findAll(any(), any())).thenReturn(page);
 
@@ -92,8 +90,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(model().attributeExists("technologyBlipDtoPage"))
         .andExpect(model().attributeExists("pageNumbers"))
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(technologyBlipDto.getRadar().getTitle()));
     Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology().getTitle()));
     Assertions.assertTrue(content.contains(technologyBlipDto.getSegment().getTitle()));
