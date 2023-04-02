@@ -197,7 +197,7 @@ a.sidebar-link:hover {
 
 .sidebar-active::before{
   content: '';
-  background: url("../images/icons/arrow_right_axion.svg") no-repeat;
+  background: url("../images/arrows/right_axion.svg") no-repeat;
   width: 16px;
   height: 16px;
   padding-right: 16px;
@@ -406,17 +406,17 @@ a.action-show, a.action-edit, a.action-delete {
 }
 
 a.action-show {
-  background: url("../images/action/action_show_axion.svg") no-repeat;
+  background: url("../images/actions/show_axion.svg") no-repeat;
   background-position: center;
 }
 
 a.action-edit {
-  background: url("../images/action/action_edit_axion.svg") no-repeat;
+  background: url("../images/actions/edit_axion.svg") no-repeat;
   background-position: center;
 }
 
 a.action-delete {
-  background: url("../images/action/action_delete_axion.svg") no-repeat;
+  background: url("../images/actions/delete_axion.svg") no-repeat;
   background-position: center;
 }
 
