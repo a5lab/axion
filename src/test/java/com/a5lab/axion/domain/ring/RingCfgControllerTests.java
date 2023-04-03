@@ -60,7 +60,6 @@ public class RingCfgControllerTests extends AbstractControllerTests {
                 .andReturn();
 
         String content = result.getResponse().getContentAsString();
-
         Assertions.assertTrue(content.contains(ringDto.getTitle()));
         Assertions.assertTrue(content.contains(ringDto.getDescription()));
     }
