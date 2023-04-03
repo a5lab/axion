@@ -18,10 +18,10 @@
             <table class="table-wrapper">
               <thead>
                 <tr>
-                  <th th:replace="settings/technology_blips/sorting :: sorting('radar.title','Radar')"></th>
-                  <th th:replace="settings/technology_blips/sorting :: sorting('segment.title','Segment')"></th>
-                  <th th:replace="settings/technology_blips/sorting :: sorting('ring.title','Ring')"></th>
-                  <th th:replace="settings/technology_blips/sorting :: sorting('technology.title','Technology')"></th>
+                  <th th:replace="~{settings/technology_blips/sorting :: sorting('radar.title','Radar')}"></th>
+                  <th th:replace="~{settings/technology_blips/sorting :: sorting('segment.title','Segment')}"></th>
+                  <th th:replace="~{settings/technology_blips/sorting :: sorting('ring.title','Ring')}"></th>
+                  <th th:replace="~{settings/technology_blips/sorting :: sorting('technology.title','Technology')}"></th>
                   <th>Actions</th>
                 </tr>
               </thead>
