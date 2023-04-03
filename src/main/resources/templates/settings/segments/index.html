@@ -18,11 +18,11 @@
             <table class="table-wrapper">
               <thead>
                 <tr>
-                  <th th:replace="settings/segments/sorting :: sorting('radar.title','Radar')"></th>
-                  <th th:replace="settings/segments/sorting :: sorting('title','Title')"></th>
-                  <th th:replace="settings/segments/sorting :: sorting('description','Description')"></th>
-                  <th th:replace="settings/segments/sorting :: sorting('position','Position')"></th>
-                  <th th:replace="settings/segments/sorting :: sorting('active','Active')"></th>
+                  <th th:replace="~{settings/segments/sorting :: sorting('radar.title','Radar')}"></th>
+                  <th th:replace="~{settings/segments/sorting :: sorting('title','Title')}"></th>
+                  <th th:replace="~{settings/segments/sorting :: sorting('description','Description')}"></th>
+                  <th th:replace="~{settings/segments/sorting :: sorting('position','Position')}"></th>
+                  <th th:replace="~{settings/segments/sorting :: sorting('active','Active')}"></th>
                   <th>Actions</th>
                 </tr>
               </thead>
