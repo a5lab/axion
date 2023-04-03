@@ -18,11 +18,11 @@
             <table class="table-wrapper">
               <thead>
                 <tr>
-                  <th th:replace="settings/radars/sorting :: sorting('radarType.title','Radar type')"></th>
-                  <th th:replace="settings/radars/sorting :: sorting('title','Title')"></th>
-                  <th th:replace="settings/radars/sorting :: sorting('description','Description')"></th>
-                  <th th:replace="settings/radars/sorting :: sorting('primary','Primary')"></th>
-                  <th th:replace="settings/radars/sorting :: sorting('active','Active')"></th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('radarType.title','Radar type')}"></th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('title','Title')}"></th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('description','Description')}"></th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('primary','Primary')}"></th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('active','Active')}"></th>
                   <th>Actions</th>
                 </tr>
               </thead>

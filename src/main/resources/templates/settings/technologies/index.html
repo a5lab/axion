@@ -18,11 +18,11 @@
             <table class="table-wrapper">
               <thead>
                 <tr>
-                  <th th:replace="settings/technologies/sorting :: sorting('title','Title')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('website','Website')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('description','Description')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('moved','Moved')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('active','Active')"></th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('title','Title')}"></th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('website','Website')}"></th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('description','Description')}"></th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('moved','Moved')}"></th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('active','Active')}"></th>
                   <th>Actions</th>
                 </tr>
               </thead>
