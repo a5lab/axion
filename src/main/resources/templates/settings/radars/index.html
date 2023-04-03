@@ -9,40 +9,43 @@
   <body>
     <div id="content">
       <h1 class="wrapper-title">Radars</h1>
-      <div id="settings-radars-page" class="wrapper-content">
-        <th:block th:replace="~{settings/radars/filter.html}" />
-        <div th:switch="${radarPage.getTotalElements()}">
+      <div class="wrapper-content" id="settings-radars-page">
+        <th:block th:replace="~{settings/radars/filter.html}"/>
+        <div th:switch="${radarDtoPage.getTotalElements()}">
           <p th:case="0">No radars.</p>
           <div th:case="*">
-            <th:block th:replace="~{settings/radars/paging.html}" />
-            <table>
+            <th:block th:replace="~{settings/radars/paging.html}"/>
+            <table class="table-wrapper">
               <thead>
                 <tr>
-                  <th th:replace="settings/radars/sorting :: sorting('radarType.title','Radar type')"></th>
-                  <th th:replace="settings/radars/sorting :: sorting('title','Title')"></th>
-                  <th th:replace="settings/radars/sorting :: sorting('description','Description')"></th>
-                  <th th:replace="settings/radars/sorting :: sorting('primary','Primary')"></th>
-                  <th th:replace="settings/radars/sorting :: sorting('active','Active')"></th>
-                  <th>Show</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('radarType.title','Radar type')}"></th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('title','Title')}"></th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('description','Description')}"></th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('primary','Primary')}"></th>
+                  <th th:replace="~{settings/radars/sorting :: sorting('active','Active')}"></th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="radar : ${radarPage.getContent()}">
-                  <td th:text="${radar.radarType.title}"></td>
-                  <td th:text="${radar.title}"></td>
-                  <td th:text="${radar.description}"></td>
-                  <td th:text="${radar.primary}"></td>
-                  <td th:text="${radar.active}"></td>
-                  <td><a th:href="@{/settings/radars/show/{id}(id=${radar.id})}">Show</a></td>
-                  <td><a th:href="@{/settings/radars/edit/{id}(id=${radar.id})}">Edit</a></td>
-                  <td><a th:href="@{/settings/radars/delete/{id}(id=${radar.id})}">Delete</a></td>
+                <tr th:each="radarDto : ${radarDtoPage.getContent()}">
+                  <td th:text="${radarDto.radarType.title}"></td>
+                  <td th:text="${radarDto.title}"></td>
+                  <td th:text="${radarDto.description}"></td>
+                  <td th:text="${radarDto.primary}"></td>
+                  <td th:text="${radarDto.active}"></td>
+                  <td>
+                    <a class="action-show" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/radars/show/{id}(id=${radarDto.id})}" title="Show"></a>
+                    <a class="action-edit" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/radars/edit/{id}(id=${radarDto.id})}" title="Edit"></a>
+                    <a class="action-delete" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/radars/delete/{id}(id=${radarDto.id})}" title="Delete"></a>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p><a href="/settings/radars/add">Add a new radar</a></p>
+          <p><a class="btn-orange-wrapper" href="/settings/radars/add">Add a new radar</a></p>
         </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 package com.a5lab.axion.domain.technology_blip;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -50,11 +49,11 @@ public class TechnologyBlip extends AbstractAuditable {
   @JoinColumn(name = "technology_id", nullable = false, updatable = false)
   private Technology technology;
 
-  @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "segment_id", nullable = false, updatable = false)
   private Segment segment;
 
-  @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "ring_id", nullable = false, updatable = false)
   private Ring ring;
 }

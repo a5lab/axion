@@ -68,7 +68,7 @@ public class Segment extends AbstractAuditable {
   private boolean active = true;
 
   @Setter(AccessLevel.NONE)
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "segment", cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "segment", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<TechnologyBlip> technologyBlipList;
 

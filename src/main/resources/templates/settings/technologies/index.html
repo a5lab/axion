@@ -9,23 +9,21 @@
   <body>
     <div id="content">
       <h1 class="wrapper-title">Technologies</h1>
-      <div id="settings-technologies-page" class="wrapper-content">
-        <th:block th:replace="~{settings/technologies/filter.html}" />
+      <div class="wrapper-content" id="settings-technologies-page">
+        <th:block th:replace="~{settings/technologies/filter.html}"/>
         <div th:switch="${technologyDtoPage.getTotalElements()}">
           <p th:case="0">No technologies.</p>
           <div th:case="*">
-            <th:block th:replace="~{settings/technologies/paging.html}" />
-            <table>
+            <th:block th:replace="~{settings/technologies/paging.html}"/>
+            <table class="table-wrapper">
               <thead>
                 <tr>
-                  <th th:replace="settings/technologies/sorting :: sorting('title','Title')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('website','Website')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('description','Description')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('moved','Moved')"></th>
-                  <th th:replace="settings/technologies/sorting :: sorting('active','Active')"></th>
-                  <th>Show</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('title','Title')}"></th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('website','Website')}"></th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('description','Description')}"></th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('moved','Moved')}"></th>
+                  <th th:replace="~{settings/technologies/sorting :: sorting('active','Active')}"></th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -35,14 +33,19 @@
                   <td th:text="${technologyDto.description}"></td>
                   <td th:text="${technologyDto.moved}"></td>
                   <td th:text="${technologyDto.active}"></td>
-                  <td><a th:href="@{/settings/technologies/show/{id}(id=${technologyDto.id})}">Show</a></td>
-                  <td><a th:href="@{/settings/technologies/edit/{id}(id=${technologyDto.id})}">Edit</a></td>
-                  <td><a th:href="@{/settings/technologies/delete/{id}(id=${technologyDto.id})}">Delete</a></td>
+                  <td>
+                    <a class="action-show" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/technologies/show/{id}(id=${technologyDto.id})}" title="Show"></a>
+                    <a class="action-edit" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/technologies/edit/{id}(id=${technologyDto.id})}" title="Edit"></a>
+                    <a class="action-delete" data-bs-placement="bottom" data-bs-toggle="tooltip"
+                       th:href="@{/settings/technologies/delete/{id}(id=${technologyDto.id})}" title="Delete"></a>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p><a href="/settings/technologies/add">Add a new technology</a></p>
+          <p><a class="btn-orange-wrapper" href="/settings/technologies/add">Add a new technology</a></p>
         </div>
       </div>
     </div>
