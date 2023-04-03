@@ -10,24 +10,21 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(RadarCfgController.class)
 public class RadarCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
+
   @MockBean
   private RadarTypeService radarTypeService;
-
 
   @Test
   public void shouldGetRadars() throws Exception {
@@ -39,29 +36,31 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarType.setCode("My code");
 
     //Create radar for radarType
-    final Radar radar = new Radar();
-    radar.setId(10L);
-    radar.setTitle("My title");
-    radar.setDescription("My description");
-    radar.setActive(true);
-    radar.setPrimary(true);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarType(radarType);
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
 
-    List<Radar> radarList = List.of(radar);
-    Page<Radar> page = new PageImpl<>(List.of(radar));
+    List<RadarDto> radarDtoList = List.of(radarDto);
+    Page<RadarDto> page = new PageImpl<>(radarDtoList);
     Mockito.when(radarService.findAll(any(), any())).thenReturn(page);
 
     MvcResult result = mockMvc.perform(get("/settings/radars"))
         .andExpect(status().isOk())
         .andExpect(view().name("settings/radars/index"))
-        .andExpect(model().attributeExists("radarPage"))
+        .andExpect(model().attributeExists("radarDtoPage"))
         .andExpect(model().attributeExists("pageNumbers"))
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains(radar.getTitle()));
-    Assertions.assertTrue(content.contains(radar.getDescription()));
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains(radarDto.getTitle()));
+    Assertions.assertTrue(content.contains(radarDto.getDescription()));
   }
-/*
+
+  /*
   @Test
   public void shouldShowTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
