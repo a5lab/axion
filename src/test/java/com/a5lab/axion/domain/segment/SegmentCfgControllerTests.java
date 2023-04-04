@@ -36,6 +36,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         radar.setDescription("My radar description");
 
         final SegmentDto segmentDto = new SegmentDto();
+        segmentDto.setId(10L);
         segmentDto.setRadar(radar);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
@@ -63,6 +64,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldShowSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
+        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
@@ -120,6 +122,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToCreateSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
+        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
@@ -141,6 +144,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldEditSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
+        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
@@ -187,6 +191,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToUpdateSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
+        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
@@ -207,6 +212,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     public void shouldDeleteSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
+        segmentDto.setRadar(null);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);

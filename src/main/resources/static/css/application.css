@@ -85,9 +85,7 @@ a.active, a.nav-link:hover{
 #header {
   height: 100%;
   width: 100%;
-  background-image: url("../images/backgrounds/header_background_axion.svg"), radial-gradient(39.81% 39.81% at 50% 60.19%, #2B237C 0%, #251C72 26.04%, #0F054C 100%);
-  background-position: center;
-  background-size: cover;
+  background: url("../images/backgrounds/header_background_axion.svg") center/cover no-repeat, radial-gradient(39.81% 39.81% at 50% 60.19%, #2B237C 0%, #251C72 26.04%, #0F054C 100%);
   overflow:hidden;
   padding: 1.5rem 0 8rem 0;
 }
@@ -123,7 +121,7 @@ a.active, a.nav-link:hover{
   text-decoration: none;
   display: flex;
   flex-direction: row;
-  padding: 0px;
+  padding: 0;
   gap: 8px;
 }
 
@@ -158,7 +156,7 @@ a.tab-link:hover {
 }
 
 a.active-link {
-  border-radius: 0px;
+  border-radius: 0;
   background: #0F054C;
   color: #FFFFFF !important;
 }
@@ -204,7 +202,7 @@ a.sidebar-link:hover {
 }
 
 .sidebar-active:focus, .sidebar-active:active{
-  padding-right: 0px;
+  padding-right: 0;
 }
 
 /* =Filter styles
@@ -406,18 +404,15 @@ a.action-show, a.action-edit, a.action-delete {
 }
 
 a.action-show {
-  background: url("../images/actions/show_axion.svg") no-repeat;
-  background-position: center;
+  background: url("../images/actions/show_axion.svg") center no-repeat;
 }
 
 a.action-edit {
-  background: url("../images/actions/edit_axion.svg") no-repeat;
-  background-position: center;
+  background: url("../images/actions/edit_axion.svg") center no-repeat;
 }
 
 a.action-delete {
-  background: url("../images/actions/delete_axion.svg") no-repeat;
-  background-position: center;
+  background: url("../images/actions/delete_axion.svg") center no-repeat;
 }
 
 a.action-show:hover, a.action-edit:hover, a.action-delete:hover {
@@ -432,9 +427,7 @@ a.action-show:hover, a.action-edit:hover, a.action-delete:hover {
 #maintain {
   height: 100%;
   width: 100%;
-  background: url("../images/backgrounds/maintain_background_axion.svg") no-repeat, #E6E2FF;
-  background-position: center;
-  background-size: cover;
+  background: url("../images/backgrounds/maintain_background_axion.svg") center/cover no-repeat, #E6E2FF;
   overflow:hidden;
 }
 

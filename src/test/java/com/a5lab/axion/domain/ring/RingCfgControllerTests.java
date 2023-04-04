@@ -68,6 +68,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldShowRing() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
+        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
@@ -110,6 +111,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToCreateRingOnLowerCaseTitle() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
+        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
@@ -156,6 +158,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToCreateRingOnBlankDescription() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
+        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
@@ -177,6 +180,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldEditRing() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
+        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
@@ -231,6 +235,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldFailToUpdateRing() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
+        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
@@ -252,6 +257,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     public void shouldDeleteRing() throws Exception {
         final RingDto ringDto = new RingDto();
         ringDto.setId(10L);
+        ringDto.setRadar(null);
         ringDto.setTitle("My ring");
         ringDto.setDescription("My ring description");
         ringDto.setColor("#fbdb84");
