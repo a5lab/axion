@@ -24,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.radar_type.RadarType;
 
 @WebMvcTest(RingCfgController.class)
 public class RingCfgControllerTests extends AbstractControllerTests {
@@ -74,14 +75,15 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(0);
     ringDto.setActive(true);
+
     Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
 
     String url = String.format("/settings/rings/show/%d", ringDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(ringDto.getTitle()));
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
   }
@@ -101,8 +103,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("settings/rings/add"))
         .andExpect(model().attributeExists("ringDto"))
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("title"));
     Assertions.assertTrue(content.contains("description"));
   }
@@ -132,10 +134,26 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldCreateRing() throws Exception {
+    // Create a radar type
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
+    radarType.setDescription("Technology radars");
+
+    // Create a radar
+    final Radar radar = new Radar();
+    radar.setId(2L);
+    radar.setRadarType(radarType);
+    radar.setTitle("My new test Radar");
+    radar.setDescription("My awesome description");
+    radar.setPrimary(false);
+    radar.setActive(false);
+
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
-    ringDto.setTitle("My ring");
+    ringDto.setRadar(radar);
+    ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(0);
@@ -143,6 +161,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radar.id", String.valueOf(ringDto.getRadar().getId()))
             .param("title", ringDto.getTitle())
             .param("description", ringDto.getDescription())
             .param("color", ringDto.getColor())
@@ -210,9 +229,26 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldUpdateRing() throws Exception {
+    // Create a radar type
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
+    radarType.setDescription("Technology radars");
+
+    // Create a radar
+    final Radar radar = new Radar();
+    radar.setId(2L);
+    radar.setRadarType(radarType);
+    radar.setTitle("My new test Radar");
+    radar.setDescription("My awesome description");
+    radar.setPrimary(false);
+    radar.setActive(false);
+
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setTitle("My ring");
+    ringDto.setRadar(radar);
+    ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(0);
@@ -220,6 +256,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radar.id", String.valueOf(ringDto.getRadar().getId()))
             .param("title", ringDto.getTitle())
             .param("description", ringDto.getDescription())
             .param("color", ringDto.getColor())

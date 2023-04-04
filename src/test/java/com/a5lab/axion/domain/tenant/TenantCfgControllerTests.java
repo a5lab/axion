@@ -39,8 +39,8 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
         .andExpect(model().attributeExists("tenantDtoPage"))
         .andExpect(model().attributeExists("pageNumbers"))
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(tenantDto.getTitle()));
     Assertions.assertTrue(content.contains(tenantDto.getDescription()));
   }
@@ -54,8 +54,8 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(tenantDto.getTitle()));
     Assertions.assertTrue(content.contains(tenantDto.getDescription()));
   }
@@ -75,8 +75,8 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("settings/tenants/add"))
         .andExpect(model().attributeExists("tenantDto"))
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("title"));
     Assertions.assertTrue(content.contains("description"));
   }
@@ -121,8 +121,8 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(tenantDto.getTitle()));
     Assertions.assertTrue(content.contains(tenantDto.getDescription()));
   }
