@@ -204,14 +204,20 @@ public class RingCfgControllerTests extends AbstractControllerTests {
                 .andReturn();
     }
 
-    /*
     @Test
     public void shouldUpdateRing() throws Exception {
-      final RingDto ringDto = new RingDto(10L, null, "My title", "My description", 1, true);
+        final RingDto ringDto = new RingDto();
+        ringDto.setId(10L);
+        ringDto.setTitle("My ring");
+        ringDto.setDescription("My ring description");
+        ringDto.setColor("#fbdb84");
+        ringDto.setPosition(0);
+        ringDto.setActive(true);
 
       MvcResult result = mockMvc.perform(post("/settings/rings/update")
               .contentType(MediaType.APPLICATION_FORM_URLENCODED)
               .param("title", ringDto.getTitle())
+              .param("color", ringDto.getColor())
               .param("description", ringDto.getDescription())
               .sessionAttr("ringDto", ringDto))
           .andExpect(status().is3xxRedirection())
@@ -220,7 +226,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
       String content = result.getResponse().getContentAsString();
     }
-    */
+
     @Test
     public void shouldFailToUpdateRing() throws Exception {
         final RingDto ringDto = new RingDto();
