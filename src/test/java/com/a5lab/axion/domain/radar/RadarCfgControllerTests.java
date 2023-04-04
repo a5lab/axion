@@ -3,6 +3,7 @@ package com.a5lab.axion.domain.radar;
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -80,8 +81,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(radarDto.getTitle()));
     Assertions.assertTrue(content.contains(radarDto.getDescription()));
   }
@@ -101,15 +102,15 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("settings/radars/add"))
         .andExpect(model().attributeExists("radarDto"))
         .andReturn();
+    
     String content = result.getResponse().getContentAsString();
-
     Assertions.assertTrue(content.contains("title"));
     Assertions.assertTrue(content.contains("description"));
   }
-/*
+  /*
   @Test
   public void shouldCreateRadar() throws Exception {
-   final RadarDto radarDto = new RadarDto();
+    final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
     radarDto.setRadarType(null);
     radarDto.setTitle("My title");
