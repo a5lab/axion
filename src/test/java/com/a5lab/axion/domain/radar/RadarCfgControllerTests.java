@@ -10,12 +10,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(RadarCfgController.class)
@@ -60,54 +63,67 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(radarDto.getDescription()));
   }
 
-  /*
-  @Test
-  public void shouldShowTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
 
-    String url = String.format("/settings/tenants/show/%d", tenantDto.getId());
+  @Test
+  public void shouldShowRadar() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarType(null);
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+
+    Mockito.when(radarService.findById(radarDto.getId())).thenReturn(Optional.of(radarDto));
+
+    String url = String.format("/settings/radars/show/%d", radarDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
-    Assertions.assertTrue(content.contains(tenantDto.getTitle()));
-    Assertions.assertTrue(content.contains(tenantDto.getDescription()));
+    Assertions.assertTrue(content.contains(radarDto.getTitle()));
+    Assertions.assertTrue(content.contains(radarDto.getDescription()));
   }
 
   @Test
-  public void shouldRedirectShowTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/show/1"))
+  public void shouldRedirectShowRadar() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/radars/show/1"))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(view().name("redirect:/settings/radars"))
         .andReturn();
   }
 
   @Test
-  public void shouldAddTenant() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/tenants/add"))
+  public void shouldAddRadar() throws Exception {
+    MvcResult result = mockMvc.perform(get("/settings/radars/add"))
         .andExpect(status().isOk())
-        .andExpect(view().name("settings/tenants/add"))
-        .andExpect(model().attributeExists("tenantDto"))
+        .andExpect(view().name("settings/radars/add"))
+        .andExpect(model().attributeExists("radarDto"))
         .andReturn();
     String content = result.getResponse().getContentAsString();
 
     Assertions.assertTrue(content.contains("title"));
     Assertions.assertTrue(content.contains("description"));
   }
-
+/*
   @Test
-  public void shouldCreateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+  public void shouldCreateRadar() throws Exception {
+   final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarType(null);
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
 
-    MvcResult result = mockMvc.perform(post("/settings/tenants/create")
+    MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", tenantDto.getTitle())
-            .param("description", tenantDto.getDescription())
-            .sessionAttr("tenantDto", tenantDto))
+            .param("title", radarDto.getTitle())
+            .param("description", radarDto.getDescription())
+            .sessionAttr("radarDto", radarDto))
         .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(view().name("redirect:/settings/radars"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
