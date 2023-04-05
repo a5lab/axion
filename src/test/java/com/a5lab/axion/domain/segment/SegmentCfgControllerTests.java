@@ -3,6 +3,8 @@ package com.a5lab.axion.domain.segment;
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.radar_type.RadarType;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -96,28 +98,48 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
                 .andExpect(view().name("settings/segments/add"))
                 .andExpect(model().attributeExists("segmentDto"))
                 .andReturn();
-        String content = result.getResponse().getContentAsString();
 
+        String content = result.getResponse().getContentAsString();
         Assertions.assertTrue(content.contains("title"));
         Assertions.assertTrue(content.contains("description"));
     }
 
-    /*
     @Test
     public void shouldCreateSegment() throws Exception {
-      final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true);
-      MvcResult result = mockMvc.perform(post("/settings/segments/create")
-              .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-              .param("title", segmentDto.getTitle())
-              .param("description", segmentDto.getDescription())
-              .sessionAttr("segmentDto", segmentDto))
-          .andExpect(status().is3xxRedirection())
-          .andExpect(view().name("redirect:/settings/segments"))
-          .andReturn();
+        final RadarType radarType = new RadarType();
+        radarType.setId(1L);
+        radarType.setTitle("Technology radars 1");
+        radarType.setCode("technology_radar_1");
+        radarType.setDescription("Technology radars");
 
-      String content = result.getResponse().getContentAsString();
+        final Radar radar = new Radar();
+        radar.setId(2L);
+        radar.setRadarType(radarType);
+        radar.setTitle("My test Radar");
+        radar.setDescription("My description");
+        radar.setPrimary(false);
+        radar.setActive(false);
+
+        final SegmentDto segmentDto = new SegmentDto();
+        segmentDto.setId(10L);
+        segmentDto.setRadar(radar);
+        segmentDto.setTitle("My segment");
+        segmentDto.setDescription("My segment description");
+        segmentDto.setPosition(0);
+        segmentDto.setActive(true);
+        MvcResult result = mockMvc.perform(post("/settings/segments/create")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("radar.id", String.valueOf(segmentDto.getRadar().getId()))
+                        .param("title", segmentDto.getTitle())
+                        .param("description", segmentDto.getDescription())
+                        .sessionAttr("segmentDto", segmentDto))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/settings/segments"))
+                .andReturn();
+
+        String content = result.getResponse().getContentAsString();
     }
-       */
+
     @Test
     public void shouldFailToCreateSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
@@ -156,8 +178,8 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         MvcResult result = mockMvc.perform(get(url))
                 .andExpect(status().isOk())
                 .andReturn();
-        String content = result.getResponse().getContentAsString();
 
+        String content = result.getResponse().getContentAsString();
         Assertions.assertTrue(content.contains(segmentDto.getTitle()));
         Assertions.assertTrue(content.contains(segmentDto.getDescription()));
     }
@@ -170,23 +192,44 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
                 .andReturn();
     }
 
-    /*
+
     @Test
     public void shouldUpdateSegment() throws Exception {
-      final SegmentDto segmentDto = new SegmentDto(10L, null, "my title", "my description", 1, true);
+        final RadarType radarType = new RadarType();
+        radarType.setId(1L);
+        radarType.setTitle("Technology radars 1");
+        radarType.setCode("technology_radar_1");
+        radarType.setDescription("Technology radars");
 
-      MvcResult result = mockMvc.perform(post("/settings/segments/update")
-              .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-              .param("title", segmentDto.getTitle())
-              .param("description", segmentDto.getDescription())
-              .sessionAttr("segmentDto", segmentDto))
-          .andExpect(status().is3xxRedirection())
-          .andExpect(view().name("redirect:/settings/segments"))
-          .andReturn();
+        final Radar radar = new Radar();
+        radar.setId(2L);
+        radar.setRadarType(radarType);
+        radar.setTitle("My test Radar");
+        radar.setDescription("My description");
+        radar.setPrimary(false);
+        radar.setActive(false);
 
-      String content = result.getResponse().getContentAsString();
+        final SegmentDto segmentDto = new SegmentDto();
+        segmentDto.setId(10L);
+        segmentDto.setRadar(radar);
+        segmentDto.setTitle("My segment");
+        segmentDto.setDescription("My segment description");
+        segmentDto.setPosition(0);
+        segmentDto.setActive(true);
+
+        MvcResult result = mockMvc.perform(post("/settings/segments/update")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("radar.id", String.valueOf(segmentDto.getRadar().getId()))
+                        .param("title", segmentDto.getTitle())
+                        .param("description", segmentDto.getDescription())
+                        .sessionAttr("segmentDto", segmentDto))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/settings/segments"))
+                .andReturn();
+
+        String content = result.getResponse().getContentAsString();
     }
-    */
+
     @Test
     public void shouldFailToUpdateSegment() throws Exception {
         final SegmentDto segmentDto = new SegmentDto();
