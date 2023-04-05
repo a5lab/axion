@@ -54,8 +54,8 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
                 .andExpect(model().attributeExists("segmentDtoPage"))
                 .andExpect(model().attributeExists("pageNumbers"))
                 .andReturn();
-        String content = result.getResponse().getContentAsString();
 
+        String content = result.getResponse().getContentAsString();
         Assertions.assertTrue(content.contains(segmentDto.getTitle()));
         Assertions.assertTrue(content.contains(segmentDto.getDescription()));
 
@@ -71,14 +71,15 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
+
         Mockito.when(segmentService.findById(segmentDto.getId())).thenReturn(Optional.of(segmentDto));
 
         String url = String.format("/settings/segments/show/%d", segmentDto.getId());
         MvcResult result = mockMvc.perform(get(url))
                 .andExpect(status().isOk())
                 .andReturn();
-        String content = result.getResponse().getContentAsString();
 
+        String content = result.getResponse().getContentAsString();
         Assertions.assertTrue(content.contains(segmentDto.getTitle()));
         Assertions.assertTrue(content.contains(segmentDto.getDescription()));
     }
@@ -127,6 +128,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
+        
         MvcResult result = mockMvc.perform(post("/settings/segments/create")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("radar.id", String.valueOf(segmentDto.getRadar().getId()))
