@@ -1,6 +1,8 @@
 package com.a5lab.axion.domain.technology;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar_type.RadarType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -93,43 +95,16 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("website"));
     Assertions.assertTrue(content.contains("description"));
   }
-  /*
-  @Test
-  public void shouldFailToCreateTechnologyOnLowerCaseTitle() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto(10L,  "My title", "My website", "My description", 0, true);
-
-    MvcResult result = mockMvc.perform(post("/settings/technologies/create")
-                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                    .param("description", technologyDto.getDescription())
-                    .param("title", technologyDto.getTitle())
-                    .param("website", technologyDto.getWebsite())
-                    .sessionAttr("technologyDto", technologyDto))
-            .andExpect(status().is3xxRedirection())
-            .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("should be uppercase"));
-  }
-
-  @Test
-  public void shouldCreateRing() throws Exception {
-    final RingDto ringDto = new RingDto(10L, null, "MY TITLE", "MY DESCRIPTION", 1, true);
-
-    MvcResult result = mockMvc.perform(post("/settings/rings/create")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", ringDto.getTitle())
-            .param("description", ringDto.getDescription())
-            .sessionAttr("ringDto", ringDto))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/rings"))
-        .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-  }
 
   @Test
   public void shouldFailToCreateTechnologyOnBlankDescription() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My title", "My website", "My description", 0, true);
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(10L);
+    technologyDto.setWebsite(null);
+    technologyDto.setTitle(null);
+    technologyDto.setDescription(null);
+    technologyDto.setMoved(0);
+    technologyDto.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/settings/technologies/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -143,7 +118,29 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
   }
-   */
+
+  @Test
+  public void shouldCreateRing() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(10L);
+    technologyDto.setWebsite("My website");
+    technologyDto.setTitle("My technology");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(0);
+    technologyDto.setActive(true);
+
+    MvcResult result = mockMvc.perform(post("/settings/technologies/create")
+                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                    .param("website", technologyDto.getWebsite())
+                    .param("title", technologyDto.getTitle())
+                    .param("description", technologyDto.getDescription())
+                    .sessionAttr("technologyDto", technologyDto))
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/settings/technologies"))
+            .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+  }
 
   @Test
   public void shouldEditTechnology() throws Exception {
