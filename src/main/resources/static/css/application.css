@@ -337,6 +337,22 @@ a.sidebar-link:hover {
   color: #FFFFFF;
 }
 
+.error-wrapper {
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 0.5em;
+  background: #FFE7E7;
+  margin-bottom: 1em;
+}
+.error-wrapper ul {
+  margin-bottom: 0;
+}
+
+.error-field-wrapper {
+  font-size: 0.9em;
+  color: red;
+}
+
 /* =Table and paging styles
  * This section contains
  * X
