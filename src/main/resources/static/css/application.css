@@ -8,6 +8,7 @@
  *   Filter styles
  *   Wrapper styles
  *   Table and paging styles
+ *   Messages styles
  *   Home page styles
  */
 
@@ -417,6 +418,27 @@ a.action-delete {
 
 a.action-show:hover, a.action-edit:hover, a.action-delete:hover {
   background-color: #42E8E0;
+}
+
+/* =Messages styles
+ * This section contains
+ * X
+ */
+
+.error-wrapper {
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 0.5em;
+  background: #FFE7E7;
+  margin-bottom: 1em;
+}
+.error-wrapper ul {
+  margin-bottom: 0;
+}
+
+.error-field-wrapper {
+  font-size: 0.9em;
+  color: red;
 }
 
 /* =Home page styles

@@ -1,4 +1,4 @@
-<div th:if="${#fields.hasErrors('global')}">
+<div th:if="${#fields.hasErrors('global')}" class="error-wrapper">
   <ul>
     <li th:each="error : ${#fields.errors('global')}" th:text="${error}" />
   </ul>
@@ -13,27 +13,27 @@
   <div class="col-xl-4 col-lg-5 col-md-6 my-1">
     <label for="title" class="label-field">Title</label>
     <input type="text" th:field="*{title}" id="title" class="field-wrapper" placeholder="Title">
-    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-field-wrapper"></span>
   </div>
 </div>
 <div class="row">
   <div class="col-xl-4 col-lg-5 col-md-6 my-1">
     <label for="description" class="label-field">Description</label>
     <input type="text" th:field="*{description}" id="description" class="field-wrapper" placeholder="Description">
-    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error-field-wrapper"></span>
   </div>
 </div>
 <div class="row">
   <div class="col-xl-4 col-lg-5 col-md-6 my-1">
     <input type="checkbox" th:field="*{primary}" id="primary" class="check-wrapper me-1">
     <label for="primary">Primary</label>
-    <span th:if="${#fields.hasErrors('primary')}" th:errors="*{primary}"></span>
+    <span th:if="${#fields.hasErrors('primary')}" th:errors="*{primary}" class="error-field-wrapper"></span>
   </div>
 </div>
 <div class="row">
   <div class="col-xl-4 col-lg-5 col-md-6 my-1">
     <input type="checkbox" th:field="*{active}" id="active" class="check-wrapper me-1">
     <label for="active">Active</label>
-    <span th:if="${#fields.hasErrors('active')}" th:errors="*{active}"></span>
+    <span th:if="${#fields.hasErrors('active')}" th:errors="*{active}" class="error-field-wrapper"></span>
   </div>
 </div>
