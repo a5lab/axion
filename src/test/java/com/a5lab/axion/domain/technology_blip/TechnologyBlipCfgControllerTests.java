@@ -3,6 +3,7 @@ package com.a5lab.axion.domain.technology_blip;
 
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
@@ -297,35 +298,70 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/technologyBlipDto"))
         .andReturn();
   }
-
+*/
   @Test
-  public void shouldUpdateTenant() throws Exception {
-    final Radar radar = new Radar();
-    radar.setId(10L);
-    radar.setTitle("My radar");
-    radar.setDescription("My radar description");
+  public void shouldUpdateTechnologyBlip() throws Exception {
+      final RadarType radarType = new RadarType();
+      radarType.setId(1L);
+      radarType.setTitle("Technology radars 1");
+      radarType.setCode("technology_radar_1");
+      radarType.setDescription("Technology radars");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+      // Create a radar
+      final Radar radar = new Radar();
+      radar.setId(2L);
+      radar.setRadarType(radarType);
+      radar.setTitle("My new test Radar");
+      radar.setDescription("My awesome description");
+      radar.setPrimary(false);
+      radar.setActive(false);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+      final SegmentDto segmentDto = new SegmentDto();
+      segmentDto.setId(10L);
+      segmentDto.setRadar(radar);
+      segmentDto.setTitle("My segment title");
+      segmentDto.setDescription("My segment description");
+      segmentDto.setPosition(1);
+      segmentDto.setActive(true);
 
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology title", "My website", "My technology description", 1, true);
+      final RingDto ringDto = new RingDto();
+      ringDto.setId(10L);
+      ringDto.setRadar(radar);
+      ringDto.setTitle("My ring title");
+      ringDto.setDescription("My ring description");
+      ringDto.setPosition(0);
+      ringDto.setColor("#fbdb84");
+      ringDto.setActive(true);
 
-    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+      final TechnologyDto technologyDto = new TechnologyDto();
+      technologyDto.setId(10L);
+      technologyDto.setTitle("My technology");
+      technologyDto.setWebsite("My website");
+      technologyDto.setDescription("My technology description");
+      technologyDto.setMoved(1);
+      technologyDto.setActive(true);
+
+      final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
+      technologyBlipDto.setId(10L);
+      technologyBlipDto.setRadar(radar);
+      technologyBlipDto.setRing(ringDto);
+      technologyBlipDto.setTechnology(technologyDto);
+      technologyBlipDto.setSegment(segmentDto);
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
                     .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                    .param("radar", technologyBlipDto.getRadar().getTitle())
-                    .param("technology", technologyBlipDto.getTechnology().getTitle())
-                    .param("segment", technologyBlipDto.getSegment().getTitle())
-                    .param("ring", technologyBlipDto.getRing().getTitle())
+                    .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId()))
+                    .param("technology.id", String.valueOf(technologyBlipDto.getTechnology().getId()))
+                    .param("segment.id", String.valueOf(technologyBlipDto.getSegment().getId()))
+                    .param("ring.id", String.valueOf(technologyBlipDto.getRing().getId()))
                     .sessionAttr("technologyBlipDto", technologyBlipDto))
-            .andExpect(status().isOk())
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/settings/technology_blips"))
             .andReturn();
 
     String content = result.getResponse().getContentAsString();
   }
-  */
+
 
     @Test
     public void shouldFailToUpdateTechnologyBlip() throws Exception {
