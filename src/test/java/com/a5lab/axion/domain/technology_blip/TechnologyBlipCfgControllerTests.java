@@ -263,136 +263,136 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   }
 */
 
-  @Test
-  public void shouldEditTechnologyBlip() throws Exception {
-      final RadarType radarType = new RadarType();
-      radarType.setId(1L);
-      radarType.setTitle("Technology radars 1");
-      radarType.setCode("technology_radar_1");
-      radarType.setDescription("Technology radars");
+    @Test
+    public void shouldEditTechnologyBlip() throws Exception {
+        final RadarType radarType = new RadarType();
+        radarType.setId(1L);
+        radarType.setTitle("Technology radars 1");
+        radarType.setCode("technology_radar_1");
+        radarType.setDescription("Technology radars");
 
-      // Create a radar
-      final Radar radar = new Radar();
-      radar.setId(2L);
-      radar.setRadarType(radarType);
-      radar.setTitle("My new test Radar");
-      radar.setDescription("My awesome description");
-      radar.setPrimary(false);
-      radar.setActive(false);
+        // Create a radar
+        final Radar radar = new Radar();
+        radar.setId(2L);
+        radar.setRadarType(radarType);
+        radar.setTitle("My new test Radar");
+        radar.setDescription("My awesome description");
+        radar.setPrimary(false);
+        radar.setActive(false);
 
-      final SegmentDto segmentDto = new SegmentDto();
-      segmentDto.setId(10L);
-      segmentDto.setRadar(radar);
-      segmentDto.setTitle("My segment title");
-      segmentDto.setDescription("My segment description");
-      segmentDto.setPosition(1);
-      segmentDto.setActive(true);
+        final SegmentDto segmentDto = new SegmentDto();
+        segmentDto.setId(10L);
+        segmentDto.setRadar(radar);
+        segmentDto.setTitle("My segment title");
+        segmentDto.setDescription("My segment description");
+        segmentDto.setPosition(1);
+        segmentDto.setActive(true);
 
-      final RingDto ringDto = new RingDto();
-      ringDto.setId(10L);
-      ringDto.setRadar(radar);
-      ringDto.setTitle("My ring title");
-      ringDto.setDescription("My ring description");
-      ringDto.setPosition(0);
-      ringDto.setColor("#fbdb84");
-      ringDto.setActive(true);
+        final RingDto ringDto = new RingDto();
+        ringDto.setId(10L);
+        ringDto.setRadar(radar);
+        ringDto.setTitle("My ring title");
+        ringDto.setDescription("My ring description");
+        ringDto.setPosition(0);
+        ringDto.setColor("#fbdb84");
+        ringDto.setActive(true);
 
-      final TechnologyDto technologyDto = new TechnologyDto();
-      technologyDto.setId(10L);
-      technologyDto.setTitle("My technology");
-      technologyDto.setWebsite("My website");
-      technologyDto.setDescription("My technology description");
-      technologyDto.setMoved(1);
-      technologyDto.setActive(true);
+        final TechnologyDto technologyDto = new TechnologyDto();
+        technologyDto.setId(10L);
+        technologyDto.setTitle("My technology");
+        technologyDto.setWebsite("My website");
+        technologyDto.setDescription("My technology description");
+        technologyDto.setMoved(1);
+        technologyDto.setActive(true);
 
-      final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-      technologyBlipDto.setId(10L);
-      technologyBlipDto.setRadar(radar);
-      technologyBlipDto.setRing(ringDto);
-      technologyBlipDto.setTechnology(technologyDto);
-      technologyBlipDto.setSegment(segmentDto);
+        final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
+        technologyBlipDto.setId(10L);
+        technologyBlipDto.setRadar(radar);
+        technologyBlipDto.setRing(ringDto);
+        technologyBlipDto.setTechnology(technologyDto);
+        technologyBlipDto.setSegment(segmentDto);
 
-    Mockito.when(technologyBlipService.findById(technologyBlipDto.getId())).thenReturn(Optional.of(technologyBlipDto));
+        Mockito.when(technologyBlipService.findById(technologyBlipDto.getId())).thenReturn(Optional.of(technologyBlipDto));
 
-    String url = String.format("/settings/technology_blips/edit/%d", technologyBlipDto.getId());
-    MvcResult result = mockMvc.perform(get(url))
-        .andExpect(status().isOk())
-        .andReturn();
+        String url = String.format("/settings/technology_blips/edit/%d", technologyBlipDto.getId());
+        MvcResult result = mockMvc.perform(get(url))
+                .andExpect(status().isOk())
+                .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+        String content = result.getResponse().getContentAsString();
 
-  }
+    }
 
-  @Test
-  public void shouldRedirectEditTechnologyBlip() throws Exception {
-    MvcResult result = mockMvc.perform(get("/settings/technology_blips/edit/1"))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/technology_blips"))
-        .andReturn();
-  }
+    @Test
+    public void shouldRedirectEditTechnologyBlip() throws Exception {
+        MvcResult result = mockMvc.perform(get("/settings/technology_blips/edit/1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/settings/technology_blips"))
+                .andReturn();
+    }
 
-  @Test
-  public void shouldUpdateTechnologyBlip() throws Exception {
-      final RadarType radarType = new RadarType();
-      radarType.setId(1L);
-      radarType.setTitle("Technology radars 1");
-      radarType.setCode("technology_radar_1");
-      radarType.setDescription("Technology radars");
+    @Test
+    public void shouldUpdateTechnologyBlip() throws Exception {
+        final RadarType radarType = new RadarType();
+        radarType.setId(1L);
+        radarType.setTitle("Technology radars 1");
+        radarType.setCode("technology_radar_1");
+        radarType.setDescription("Technology radars");
 
-      // Create a radar
-      final Radar radar = new Radar();
-      radar.setId(2L);
-      radar.setRadarType(radarType);
-      radar.setTitle("My new test Radar");
-      radar.setDescription("My awesome description");
-      radar.setPrimary(false);
-      radar.setActive(false);
+        // Create a radar
+        final Radar radar = new Radar();
+        radar.setId(2L);
+        radar.setRadarType(radarType);
+        radar.setTitle("My new test Radar");
+        radar.setDescription("My awesome description");
+        radar.setPrimary(false);
+        radar.setActive(false);
 
-      final SegmentDto segmentDto = new SegmentDto();
-      segmentDto.setId(10L);
-      segmentDto.setRadar(radar);
-      segmentDto.setTitle("My segment title");
-      segmentDto.setDescription("My segment description");
-      segmentDto.setPosition(1);
-      segmentDto.setActive(true);
+        final SegmentDto segmentDto = new SegmentDto();
+        segmentDto.setId(10L);
+        segmentDto.setRadar(radar);
+        segmentDto.setTitle("My segment title");
+        segmentDto.setDescription("My segment description");
+        segmentDto.setPosition(1);
+        segmentDto.setActive(true);
 
-      final RingDto ringDto = new RingDto();
-      ringDto.setId(10L);
-      ringDto.setRadar(radar);
-      ringDto.setTitle("My ring title");
-      ringDto.setDescription("My ring description");
-      ringDto.setPosition(0);
-      ringDto.setColor("#fbdb84");
-      ringDto.setActive(true);
+        final RingDto ringDto = new RingDto();
+        ringDto.setId(10L);
+        ringDto.setRadar(radar);
+        ringDto.setTitle("My ring title");
+        ringDto.setDescription("My ring description");
+        ringDto.setPosition(0);
+        ringDto.setColor("#fbdb84");
+        ringDto.setActive(true);
 
-      final TechnologyDto technologyDto = new TechnologyDto();
-      technologyDto.setId(10L);
-      technologyDto.setTitle("My technology");
-      technologyDto.setWebsite("My website");
-      technologyDto.setDescription("My technology description");
-      technologyDto.setMoved(1);
-      technologyDto.setActive(true);
+        final TechnologyDto technologyDto = new TechnologyDto();
+        technologyDto.setId(10L);
+        technologyDto.setTitle("My technology");
+        technologyDto.setWebsite("My website");
+        technologyDto.setDescription("My technology description");
+        technologyDto.setMoved(1);
+        technologyDto.setActive(true);
 
-      final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-      technologyBlipDto.setId(10L);
-      technologyBlipDto.setRadar(radar);
-      technologyBlipDto.setRing(ringDto);
-      technologyBlipDto.setTechnology(technologyDto);
-      technologyBlipDto.setSegment(segmentDto);
+        final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
+        technologyBlipDto.setId(10L);
+        technologyBlipDto.setRadar(radar);
+        technologyBlipDto.setRing(ringDto);
+        technologyBlipDto.setTechnology(technologyDto);
+        technologyBlipDto.setSegment(segmentDto);
 
-    MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
-                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                    .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId()))
-                    .param("technology.id", String.valueOf(technologyBlipDto.getTechnology().getId()))
-                    .param("segment.id", String.valueOf(technologyBlipDto.getSegment().getId()))
-                    .param("ring.id", String.valueOf(technologyBlipDto.getRing().getId()))
-                    .sessionAttr("technologyBlipDto", technologyBlipDto))
-            .andExpect(status().is3xxRedirection())
-            .andExpect(view().name("redirect:/settings/technology_blips"))
-            .andReturn();
+        MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId()))
+                        .param("technology.id", String.valueOf(technologyBlipDto.getTechnology().getId()))
+                        .param("segment.id", String.valueOf(technologyBlipDto.getSegment().getId()))
+                        .param("ring.id", String.valueOf(technologyBlipDto.getRing().getId()))
+                        .sessionAttr("technologyBlipDto", technologyBlipDto))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/settings/technology_blips"))
+                .andReturn();
 
-    String content = result.getResponse().getContentAsString();
-  }
+        String content = result.getResponse().getContentAsString();
+    }
 
 
     @Test
