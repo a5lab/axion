@@ -172,8 +172,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("settings/technology_blips/add"))
         .andExpect(model().attributeExists("technologyBlipDto"))
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("radar"));
     Assertions.assertTrue(content.contains("Technology"));
     Assertions.assertTrue(content.contains("Segment"));
@@ -447,7 +447,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-
   }
 
   @Test
