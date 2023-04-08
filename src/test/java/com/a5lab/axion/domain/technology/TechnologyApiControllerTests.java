@@ -12,9 +12,6 @@ import java.util.Arrays;
 
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.tenant.TenantApiController;
-import com.a5lab.axion.domain.tenant.TenantDto;
-import com.a5lab.axion.domain.tenant.TenantService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
