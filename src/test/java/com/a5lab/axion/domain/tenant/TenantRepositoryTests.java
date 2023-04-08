@@ -62,7 +62,8 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(
           ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "title");
-      Assertions.assertEquals(constraintViolation.getMessage(), "не должно быть пустым");
+      Assertions.assertTrue(constraintViolation.getMessage().equals("не должно быть пустым") ||
+          constraintViolation.getMessage().equals("must not be blank"));
     }
   }
 
@@ -83,7 +84,9 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
       Assertions.assertEquals(
           ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "title");
       Assertions.assertTrue(constraintViolation.getMessage().equals("не должно быть пустым") ||
-          constraintViolation.getMessage().equals("размер должен находиться в диапазоне от 1 до 64"));
+          constraintViolation.getMessage().equals("размер должен находиться в диапазоне от 1 до 64") ||
+          constraintViolation.getMessage().equals("must not be blank") ||
+          constraintViolation.getMessage().equals("size must be between 1 and 64"));
     }
   }
 
@@ -103,7 +106,8 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(
           ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "title");
-      Assertions.assertEquals(constraintViolation.getMessage(), "не должно быть пустым");
+      Assertions.assertTrue(constraintViolation.getMessage().equals("не должно быть пустым") ||
+          constraintViolation.getMessage().equals("must not be blank"));
     }
   }
 
@@ -123,7 +127,8 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
       Assertions.assertEquals(
           ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(),
           "description");
-      Assertions.assertEquals(constraintViolation.getMessage(), "не должно быть пустым");
+      Assertions.assertTrue(constraintViolation.getMessage().equals("не должно быть пустым") ||
+          constraintViolation.getMessage().equals("must not be blank"));
     }
   }
 
@@ -144,7 +149,9 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
       Assertions.assertEquals(
           ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "description");
       Assertions.assertTrue(constraintViolation.getMessage().equals("не должно быть пустым") ||
-          constraintViolation.getMessage().equals("размер должен находиться в диапазоне от 1 до 512"));
+          constraintViolation.getMessage().equals("размер должен находиться в диапазоне от 1 до 512") ||
+          constraintViolation.getMessage().equals("must not be blank") ||
+          constraintViolation.getMessage().equals("size must be between 1 and 512"));
     }
   }
 
@@ -165,7 +172,8 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
       Assertions.assertEquals(
           ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(),
           "description");
-      Assertions.assertEquals(constraintViolation.getMessage(), "не должно быть пустым");
+      Assertions.assertTrue(constraintViolation.getMessage().equals("не должно быть пустым") ||
+          constraintViolation.getMessage().equals("must not be blank"));
     }
   }
 }
