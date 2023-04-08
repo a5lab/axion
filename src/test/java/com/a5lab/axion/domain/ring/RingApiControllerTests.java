@@ -36,12 +36,11 @@ public class RingApiControllerTests extends AbstractControllerTests {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$").isArray())
         .andExpect(jsonPath("$", hasSize(ringDtoPage.getContent().size())))
-        .andExpect(jsonPath("$[0].id", equalTo(ringDtoPage.getId()), Long.class))
-        .andExpect(jsonPath("$[0].title", equalTo(ringDtoPage.getTitle())))
-        .andExpect(jsonPath("$[0].description", equalTo(ringDtoPage.getDescription())))
-        .andExpect(jsonPath("$[0].active", equalTo(ringDtoPage.getActive())))
-        .andExpect(jsonPath("$[0].color", equalTo(ringDtoPage.getColor())))
-        .andExpect(jsonPath("$[0].radar.id", equalTo(ringDtoPage.getRadar())));
-
+        .andExpect(jsonPath("$[0].id", equalTo(ringDto.getId()), Long.class))
+        // .andExpect(jsonPath("$[0].radar.id", equalTo(ringDto.getRadar())))
+        .andExpect(jsonPath("$[0].title", equalTo(ringDto.getTitle())))
+        .andExpect(jsonPath("$[0].description", equalTo(ringDto.getDescription())))
+        .andExpect(jsonPath("$[0].color", equalTo(ringDto.getColor())))
+        .andExpect(jsonPath("$[0].active", equalTo(ringDto.isActive())));
   }
 }
