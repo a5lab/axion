@@ -50,7 +50,7 @@ public class TechnologyBlipApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$").isArray())
         .andExpect(jsonPath("$", hasSize(technologyBlipDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(technologyBlipDto.getId()), Long.class))
-//        .andExpect(jsonPath("$[0].radar.id", equalTo(technologyBlipDto.getRadar().getId()), Long.class))
+        .andExpect(jsonPath("$[0].radar.id", equalTo(technologyBlipDto.getRadar().getId()), Long.class))
         .andExpect(jsonPath("$[0].ring.id", equalTo(technologyBlipDto.getRing().getId()), Long.class))
         .andExpect(jsonPath("$[0].technology.id", equalTo(technologyBlipDto.getTechnology().getId()), Long.class))
         .andExpect(jsonPath("$[0].segment.id", equalTo(technologyBlipDto.getSegment().getId()), Long.class));
