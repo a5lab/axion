@@ -42,16 +42,24 @@ class TenantServiceTests extends AbstractServiceTests {
     List<Tenant> tenantList = List.of(tenant);
     Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(tenantList);
 
-
-
-
   }
-//  @Test
-//  void shouldSaveTenants(){
-//    final Tenant tenant = new Tenant(10L, "my title", "my description");
-//    List<Tenant> tenantList = List.of(tenant);
-//    Mockito.when(tenantRepository.(tenant.getId())).thenReturn(tenantList);
-
-  }
+  /*
+  @Test
+  void delete() {
+    Tenant tenant = new Tenant();
+    tenant.setId(10L);
+    List<Tenant> tenantList = List.of(tenant);
+    Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(Optional(<tenant>);
+    tenantService.deleteById(tenant.getId());
+    Mockito.verify(tenantRepository).delete(tenant);
+    }
+  @Test
+  void shouldSaveTenants(){
+    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    List<Tenant> tenantList = List.of(tenant);
+    Mockito.when(tenantRepository.(tenant.getId())).thenReturn(tenantList);
+    }
+   */
+}
 
 
