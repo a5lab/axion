@@ -43,8 +43,8 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$", hasSize(segmentDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(segmentDto.getId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(segmentDto.getTitle())))
-        .andExpect(jsonPath("$[0].active", equalTo(segmentDto.isActive())))
+        .andExpect(jsonPath("$[0].description", equalTo(segmentDto.getDescription())))
         .andExpect(jsonPath("$[0].position", equalTo(segmentDto.getPosition()), int.class))
-        .andExpect(jsonPath("$[0].description", equalTo(segmentDto.getDescription())));
+        .andExpect(jsonPath("$[0].active", equalTo(segmentDto.isActive())));
   }
 }
