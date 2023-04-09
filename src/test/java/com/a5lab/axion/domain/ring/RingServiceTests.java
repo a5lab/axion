@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -26,8 +27,9 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("My color");
-    ring.setActive(true);
     ring.setPosition(0);
+    ring.setActive(true);
+
     List<Ring> ringList = List.of(ring);
     Mockito.when(ringRepository.findAll(any(Sort.class))).thenReturn(ringList);
 
@@ -37,19 +39,7 @@ class RingServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(ringDtoCollection.iterator().next().getTitle(), ring.getTitle());
     Assertions.assertEquals(ringDtoCollection.iterator().next().getColor(), ring.getColor());
     Assertions.assertEquals(ringDtoCollection.iterator().next().getPosition(), ring.getPosition());
-    Assertions.assertEquals(ringDtoCollection.iterator().next().getDescription(),
-        ring.getDescription());
+    Assertions.assertEquals(ringDtoCollection.iterator().next().getDescription(), ring.getDescription());
 
   }
-//  @Test
-//  void delete() {
-//    final Ring ring = new Ring();
-//    ring.setId(10L);
-//    List<Ring> ringList = List.of(ring);
-//    Mockito.when(ringRepository.findById(ring.getId())).thenReturn(Optional(ringList));
-//    ringService.deleteById(ring.getId());
-//    Mockito.verify(ringRepository).delete(ring);
-//
-//  }
-
 }
