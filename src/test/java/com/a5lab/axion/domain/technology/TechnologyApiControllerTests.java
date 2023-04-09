@@ -30,9 +30,10 @@ public class TechnologyApiControllerTests extends AbstractControllerTests {
     technologyDto.setId(10L);
     technologyDto.setTitle("my title");
     technologyDto.setDescription("my description");
-    technologyDto.setActive(true);
-    technologyDto.setMoved(1);
     technologyDto.setWebsite("my website");
+    technologyDto.setMoved(1);
+    technologyDto.setActive(true);
+
     Page<TechnologyDto> technologyDtoPage = new PageImpl<>(Arrays.asList(technologyDto));
     Mockito.when(technologyService.findAll(any(), any())).thenReturn(technologyDtoPage);
 
@@ -42,9 +43,9 @@ public class TechnologyApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$", hasSize(technologyDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(technologyDto.getId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(technologyDto.getTitle())))
+        .andExpect(jsonPath("$[0].description", equalTo(technologyDto.getDescription())))
         .andExpect(jsonPath("$[0].website", equalTo(technologyDto.getWebsite())))
         .andExpect(jsonPath("$[0].moved", equalTo(technologyDto.getMoved()), int.class))
-        .andExpect(jsonPath("$[0].active", equalTo(technologyDto.isActive())))
-        .andExpect(jsonPath("$[0].description", equalTo(technologyDto.getDescription())));
+        .andExpect(jsonPath("$[0].active", equalTo(technologyDto.isActive())));
   }
 }
