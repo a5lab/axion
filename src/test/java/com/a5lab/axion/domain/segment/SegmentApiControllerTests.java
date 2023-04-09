@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -30,8 +31,8 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
     segmentDto.setId(10L);
     segmentDto.setTitle("my title");
     segmentDto.setDescription("my description");
-    segmentDto.setActive(true);
     segmentDto.setPosition(1);
+    segmentDto.setActive(true);
 
     Page<SegmentDto> segmentDtoPage = new PageImpl<>(Arrays.asList(segmentDto));
     Mockito.when(segmentService.findAll(any(), any())).thenReturn(segmentDtoPage);
