@@ -4,6 +4,8 @@ import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,5 +36,22 @@ class TenantServiceTests extends AbstractServiceTests {
         tenant.getDescription());
 
   }
+  @Test
+  void shouldDeleteTenants() {
+    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    List<Tenant> tenantList = List.of(tenant);
+    Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(tenantList);
 
-}
+
+
+
+  }
+//  @Test
+//  void shouldSaveTenants(){
+//    final Tenant tenant = new Tenant(10L, "my title", "my description");
+//    List<Tenant> tenantList = List.of(tenant);
+//    Mockito.when(tenantRepository.(tenant.getId())).thenReturn(tenantList);
+
+  }
+
+
