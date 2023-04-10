@@ -34,8 +34,11 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(tenantDtoCollection.iterator().next().getDescription(), tenant.getDescription());
 
   }
+
   @Test
-  void shouldFindAllPageTenants() {
+  void shouldFindAllTenantsWithFilter() {
+    // TODO:  See TenantsSerivces:
+    // test Page<TenantDto> findAll(TenantFilter tenantFilter, Pageable pageable);
     /*
     final Tenant tenant = new Tenant(10L, "my title", "my description");
     //TenantFilter tenantFilter = new TenantFilter();
@@ -43,36 +46,46 @@ class TenantServiceTests extends AbstractServiceTests {
     Mockito.when(tenantRepository.findAll(any(tenantFilter))).
      */
   }
-  @Test
-  void shouldSaveTenants() {
-    /*
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
-    Mockito.when(tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(tenantDto)))).thenReturn(Optional.of(tenantDto));
-    tenantService.save(tenantDto);
-    Mockito.verify(tenantRepository).save(tenantMapper.toEntity(tenantDto));
-     */
-  }
 
   @Test
-  void shouldFindByIdTenants(){
+  void shouldFindByIdTenants() {
     final Tenant tenant = new Tenant(10L, "my title", "my description");
-    List<Tenant> tenantList = List.of(tenant);
     Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(Optional.of(tenant));
 
-    tenantService.findById(tenant.getId());
+    Optional<TenantDto> tenantDtoOptional = tenantService.findById(tenant.getId());
+    Assertions.assertTrue(tenantDtoOptional.isPresent());
+    Assertions.assertEquals(tenant.getId(), tenantDtoOptional.get().getId());
+    Assertions.assertEquals(tenant.getTitle(), tenantDtoOptional.get().getTitle());
+    Assertions.assertEquals(tenant.getDescription(), tenantDtoOptional.get().getDescription());
+
     Mockito.verify(tenantRepository).findById(tenant.getId());
+  }
+
+
+  @Test
+  void shouldSaveTenant() {
+    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    Mockito.when(tenantRepository.save(tenant)).thenReturn(tenant);
+
+    TenantDto tenantDto = tenantService.save(tenantMapper.toDto(tenant));
+    /* Why tenantDto is null?
+    Assertions.assertEquals(tenant.getId(), tenantDto.getId());
+    Assertions.assertEquals(tenant.getTitle(), tenantDto.getTitle());
+    Assertions.assertEquals(tenant.getDescription(), tenantDto.getDescription());
+    */
+
+    Mockito.verify(tenantRepository).save(tenantMapper.toEntity(tenantDto));
   }
 
   @Test
   void shouldDeleteTenant() {
     final Tenant tenant = new Tenant(10L, "my title", "my description");
-
-    List<Tenant> tenantList = List.of(tenant);
-    Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(Optional.of(tenant));
+    // How to mock method that return void?
+    // Mockito.when(tenantRepository.deleteById(tenant.getId())).thenReturn();
 
     tenantService.deleteById(tenant.getId());
+    // Why this test is working if we are not mock deleteById?
     Mockito.verify(tenantRepository).deleteById(tenant.getId());
-
   }
 }
 
