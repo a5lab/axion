@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -37,29 +36,44 @@ class TenantServiceTests extends AbstractServiceTests {
 
   }
   @Test
-  void shouldDeleteTenants() {
+  void shouldFindAllPageTenants() {
     final Tenant tenant = new Tenant(10L, "my title", "my description");
+//    TenantFilter tenantFilter = new TenantFilter();
     List<Tenant> tenantList = List.of(tenant);
-    Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(tenantList);
+
+    Mockito.when(tenantRepository.findAll(any(tenantFilter))).
 
   }
-  /*
   @Test
-  void delete() {
-    Tenant tenant = new Tenant();
-    tenant.setId(10L);
-    List<Tenant> tenantList = List.of(tenant);
-    Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(Optional(<tenant>);
-    tenantService.deleteById(tenant.getId());
-    Mockito.verify(tenantRepository).delete(tenant);
-    }
+  void shouldSaveTenants() {
+    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+//    not sure for this
+    Mockito.when(tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(tenantDto)))).thenReturn(Optional.of(tenantDto));
+    tenantService.save(tenantDto);
+    Mockito.verify(tenantRepository).save(tenantMapper.toEntity(tenantDto));
+  }
+
   @Test
-  void shouldSaveTenants(){
+  void shouldFindByIdTenants(){
     final Tenant tenant = new Tenant(10L, "my title", "my description");
     List<Tenant> tenantList = List.of(tenant);
-    Mockito.when(tenantRepository.(tenant.getId())).thenReturn(tenantList);
-    }
-   */
+    Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(Optional.of(tenant));
+
+    tenantService.findById(tenant.getId());
+    Mockito.verify(tenantRepository).findById(tenant.getId());
+  }
+
+  @Test
+  void shouldDeleteTenant() {
+    final Tenant tenant = new Tenant(10L, "my title", "my description");
+
+    List<Tenant> tenantList = List.of(tenant);
+    Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(Optional.of(tenant));
+
+    tenantService.deleteById(tenant.getId());
+    Mockito.verify(tenantRepository).deleteById(tenant.getId());
+
+  }
 }
 
 
