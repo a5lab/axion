@@ -8,4 +8,6 @@ spring:
     contexts: test
   jpa:
     show-sql: true
-
+    mvc:
+      locale: en_EN
+      local-resolver: fixed
