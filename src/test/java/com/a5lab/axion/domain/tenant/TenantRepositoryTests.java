@@ -5,8 +5,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
+import java.util.Locale;
+
 import org.hibernate.validator.internal.engine.path.PathImpl;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,20 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
 
   @Autowired
   private TenantRepository tenantRepository;
+
+
+  static Locale defaultLocale = Locale.getDefault();
+
+  @BeforeClass
+  public static void setDefaultLocale() {
+    Locale.setDefault(Locale.GERMAN);
+  }
+
+  @AfterClass
+  public static void restoreLocale() {
+    Locale.setDefault(defaultLocale);
+  }
+
 
   @Test
   void shouldSaveTenantWithAllFields() {
