@@ -37,14 +37,21 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindAllTenantsWithFilter() {
-    // TODO:  See TenantsSerivces:
-    // test Page<TenantDto> findAll(TenantFilter tenantFilter, Pageable pageable);
     /*
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
-    //TenantFilter tenantFilter = new TenantFilter();
-    List<Tenant> tenantList = List.of(tenant);
-    Mockito.when(tenantRepository.findAll(any(tenantFilter))).
-     */
+    final Tenant tenantDto = new Tenant(10L, "my title", "my description");
+    List<Tenant> tenantDtoList = List.of(tenantDto);
+    Page<Tenant> page = new PageImpl<>(tenantDtoList);
+    Mockito.when(tenantRepository.findAll(any(Sort.class), any())).thenReturn(page);
+
+    TenantFilter tenantFilter = new TenantFilter();
+    Pageable pageable = new Pageable();
+
+    Collection<TenantDto> tenantDtoCollection = tenantService.findAll(tenantFilter, pageable);
+    Assertions.assertEquals(1, tenantDtoCollection.size());
+    Assertions.assertEquals(tenantDtoCollection.iterator().next().getId(), tenant.getId());
+    Assertions.assertEquals(tenantDtoCollection.iterator().next().getTitle(), tenant.getTitle());
+    Assertions.assertEquals(tenantDtoCollection.iterator().next().getDescription(), tenant.getDescription());
+    */
   }
 
   @Test
@@ -65,26 +72,22 @@ class TenantServiceTests extends AbstractServiceTests {
   @Test
   void shouldSaveTenant() {
     final Tenant tenant = new Tenant(10L, "my title", "my description");
-    Mockito.when(tenantRepository.save(tenant)).thenReturn(tenant);
+    Mockito.when(tenantRepository.save(any())).thenReturn(tenant);
 
     TenantDto tenantDto = tenantService.save(tenantMapper.toDto(tenant));
-    /* Why tenantDto is null?
     Assertions.assertEquals(tenant.getId(), tenantDto.getId());
     Assertions.assertEquals(tenant.getTitle(), tenantDto.getTitle());
     Assertions.assertEquals(tenant.getDescription(), tenantDto.getDescription());
-    */
 
-    Mockito.verify(tenantRepository).save(tenantMapper.toEntity(tenantDto));
+    Mockito.verify(tenantRepository).save(any());
   }
 
   @Test
   void shouldDeleteTenant() {
     final Tenant tenant = new Tenant(10L, "my title", "my description");
-    // How to mock method that return void?
-    // Mockito.when(tenantRepository.deleteById(tenant.getId())).thenReturn();
+    Mockito.doAnswer((i) -> null).when(tenantRepository).deleteById(tenant.getId());
 
     tenantService.deleteById(tenant.getId());
-    // Why this test is working if we are not mock deleteById?
     Mockito.verify(tenantRepository).deleteById(tenant.getId());
   }
 }
