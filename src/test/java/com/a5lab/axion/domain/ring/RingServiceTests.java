@@ -45,7 +45,7 @@ class RingServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindByIdRings() {
+  void shouldFindByIdRing() {
     final Ring ring = new Ring();
     ring.setId(10L);
     ring.setTitle("my title");
@@ -66,7 +66,7 @@ class RingServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindByTitleRings() {
+  void shouldFindByTitleRing() {
     final Ring ring = new Ring();
     ring.setId(10L);
     ring.setTitle("my title");
@@ -89,7 +89,7 @@ class RingServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldSaveRings() {
+  void shouldSaveRing() {
     final Ring ring = new Ring();
     ring.setId(10L);
     ring.setTitle("my title");
