@@ -41,7 +41,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
 
 
   @Test
-  void shouldFindByIdTechnologies() {
+  void shouldFindByIdTechnology() {
     final Technology technology = new Technology();
     technology.setId(10L);
     technology.setTitle("My technology");
@@ -62,7 +62,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindByTitleTechnologies() {
+  void shouldFindByTitleTechnology() {
     final Technology technology = new Technology();
     technology.setId(10L);
     technology.setTitle("My technology");
@@ -83,7 +83,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldSaveTechnologies() {
+  void shouldSaveTechnology() {
     final Technology technology = new Technology();
     technology.setId(10L);
     technology.setTitle("My technology");
