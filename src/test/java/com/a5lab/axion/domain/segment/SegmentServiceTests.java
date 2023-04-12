@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-
 import com.a5lab.axion.domain.AbstractServiceTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -37,26 +36,9 @@ class SegmentServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(1, segmentDtoCollection.size());
     Assertions.assertEquals(segmentDtoCollection.iterator().next().getId(), segment.getId());
     Assertions.assertEquals(segmentDtoCollection.iterator().next().getTitle(), segment.getTitle());
-    Assertions.assertEquals(segmentDtoCollection.iterator().next().getDescription(),
-        segment.getDescription());
+    Assertions.assertEquals(segmentDtoCollection.iterator().next().getDescription(), segment.getDescription());
+  }
 
-  }
-  /*
-  @Test
-  void shouldSaveSegments() {
-    final SegmentDto segmentDto = new SegmentDto();
-    segmentDto.setId(10L);
-    segmentDto.setTitle("my title");
-    segmentDto.setDescription("my description");
-    segmentDto.setColor("my color");
-    segmentDto.setPosition(0);
-    segmentDto.setActive(true);
-    //    not sure for this
-    Mockito.when(segmentMapper.toDto(segmentRepository.save(segmentMapper.toEntity(segmentDto)))).thenReturn(Optional.of(segmentDto));
-    segmentService.save(segmentDto);
-    Mockito.verify(segmentRepository).save(segmentMapper.toEntity(segmentDto));
-  }
-   */
 
   @Test
   void shouldFindByIdSegments() {
@@ -67,10 +49,12 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setPosition(0);
     segment.setActive(true);
 
-    List<Segment> segmentList = List.of(segment);
     Mockito.when(segmentRepository.findById(segment.getId())).thenReturn(Optional.of(segment));
-
-    segmentService.findById(segment.getId());
+    Optional<SegmentDto> segmentDtoOptional = segmentService.findById(segment.getId());
+    Assertions.assertEquals(segment.getId(), segmentDtoOptional.get().getId());
+    Assertions.assertEquals(segment.getTitle(), segmentDtoOptional.get().getTitle());
+    Assertions.assertEquals(segment.getDescription(), segmentDtoOptional.get().getDescription());
+    Assertions.assertEquals(segment.getPosition(), segmentDtoOptional.get().getPosition());
     Mockito.verify(segmentRepository).findById(segment.getId());
   }
 
@@ -84,10 +68,32 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setActive(true);
 
     Mockito.when(segmentRepository.findByTitle(segment.getTitle())).thenReturn(Optional.of(segment));
-    segmentService.findByTitle(segment.getTitle());
-
+    Optional<Segment> segmentOptional = segmentService.findByTitle(segment.getTitle());
+    Assertions.assertEquals(segment.getId(), segmentOptional.get().getId());
+    Assertions.assertEquals(segment.getTitle(), segmentOptional.get().getTitle());
+    Assertions.assertEquals(segment.getDescription(), segmentOptional.get().getDescription());
+    Assertions.assertEquals(segment.getPosition(), segmentOptional.get().getPosition());
     Mockito.verify(segmentRepository).findByTitle(segment.getTitle());
+  }
 
+  @Test
+  void shouldSaveSegments() {
+    final Segment segment = new Segment();
+    segment.setId(10L);
+    segment.setTitle("my title");
+    segment.setDescription("my description");
+    segment.setPosition(0);
+    segment.setActive(true);
+
+    Mockito.when(segmentRepository.save(any())).thenReturn(segment);
+
+    SegmentDto segmentDto = segmentService.save(segmentMapper.toDto(segment));
+    Assertions.assertEquals(segment.getId(), segmentDto.getId());
+    Assertions.assertEquals(segment.getTitle(), segmentDto.getTitle());
+    Assertions.assertEquals(segment.getDescription(), segmentDto.getDescription());
+    Assertions.assertEquals(segment.getPosition(), segmentDto.getPosition());
+
+    Mockito.verify(segmentRepository).save(any());
   }
 
   @Test
@@ -99,11 +105,9 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setPosition(0);
     segment.setActive(true);
 
-    List<Segment> segmentList = List.of(segment);
-    Mockito.when(segmentRepository.findById(segment.getId())).thenReturn(Optional.of(segment));
+    Mockito.doAnswer((i) -> null).when(segmentRepository).deleteById(segment.getId());
 
     segmentService.deleteById(segment.getId());
     Mockito.verify(segmentRepository).deleteById(segment.getId());
-
   }
 }
