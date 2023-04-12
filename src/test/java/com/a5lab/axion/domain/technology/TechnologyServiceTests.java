@@ -36,26 +36,9 @@ class TechnologyServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(1, technologyDtoCollection.size());
     Assertions.assertEquals(technologyDtoCollection.iterator().next().getId(), technology.getId());
     Assertions.assertEquals(technologyDtoCollection.iterator().next().getTitle(), technology.getTitle());
-    Assertions.assertEquals(technologyDtoCollection.iterator().next().getDescription(),
-        technology.getDescription());
+    Assertions.assertEquals(technologyDtoCollection.iterator().next().getDescription(),technology.getDescription());
+  }
 
-  }
-  /*
-  @Test
-  void shouldSaveTechnologys() {
-    final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setId(10L);
-    technologyDto.setTitle("my title");
-    technologyDto.setDescription("my description");
-    technologyDto.setColor("my color");
-    technologyDto.setPosition(0);
-    technologyDto.setActive(true);
-    //    not sure for this
-    Mockito.when(technologyMapper.toDto(technologyRepository.save(technologyMapper.toEntity(technologyDto)))).thenReturn(Optional.of(technologyDto));
-    technologyService.save(technologyDto);
-    Mockito.verify(technologyRepository).save(technologyMapper.toEntity(technologyDto));
-  }
-   */
 
   @Test
   void shouldFindByIdTechnologies() {
@@ -66,11 +49,15 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setDescription("My technology description");
     technology.setMoved(0);
     technology.setActive(true);
-
-    List<Technology> technologyList = List.of(technology);
     Mockito.when(technologyRepository.findById(technology.getId())).thenReturn(Optional.of(technology));
 
-    technologyService.findById(technology.getId());
+    Optional<TechnologyDto> technologyDtoOptional = technologyService.findById(technology.getId());
+    Assertions.assertEquals(technology.getId(), technologyDtoOptional.get().getId());
+    Assertions.assertEquals(technology.getTitle(), technologyDtoOptional.get().getTitle());
+    Assertions.assertEquals(technology.getWebsite(), technologyDtoOptional.get().getWebsite());
+    Assertions.assertEquals(technology.getDescription(), technologyDtoOptional.get().getDescription());
+    Assertions.assertEquals(technology.getMoved(), technologyDtoOptional.get().getMoved());
+
     Mockito.verify(technologyRepository).findById(technology.getId());
   }
 
@@ -83,12 +70,37 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setDescription("My technology description");
     technology.setMoved(0);
     technology.setActive(true);
-
     Mockito.when(technologyRepository.findByTitle(technology.getTitle())).thenReturn(Optional.of(technology));
-    technologyService.findByTitle(technology.getTitle());
+
+    Optional<Technology> technologyOptional = technologyService.findByTitle(technology.getTitle());
+    Assertions.assertEquals(technology.getId(), technologyOptional.get().getId());
+    Assertions.assertEquals(technology.getTitle(), technologyOptional.get().getTitle());
+    Assertions.assertEquals(technology.getWebsite(), technologyOptional.get().getWebsite());
+    Assertions.assertEquals(technology.getDescription(), technologyOptional.get().getDescription());
+    Assertions.assertEquals(technology.getMoved(), technologyOptional.get().getMoved());
 
     Mockito.verify(technologyRepository).findByTitle(technology.getTitle());
+  }
 
+  @Test
+  void shouldSaveTechnologies() {
+    final Technology technology = new Technology();
+    technology.setId(10L);
+    technology.setTitle("My technology");
+    technology.setWebsite("My website");
+    technology.setDescription("My technology description");
+    technology.setMoved(0);
+    technology.setActive(true);
+    Mockito.when(technologyRepository.save(any())).thenReturn(technology);
+
+    TechnologyDto technologyDto = technologyService.save(technologyMapper.toDto(technology));
+    Assertions.assertEquals(technology.getId(), technologyDto.getId());
+    Assertions.assertEquals(technology.getTitle(), technologyDto.getTitle());
+    Assertions.assertEquals(technology.getWebsite(), technologyDto.getWebsite());
+    Assertions.assertEquals(technology.getDescription(), technologyDto.getDescription());
+    Assertions.assertEquals(technology.getMoved(), technologyDto.getMoved());
+
+    Mockito.verify(technologyRepository).save(any());
   }
 
   @Test
@@ -100,12 +112,9 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setDescription("My technology description");
     technology.setMoved(0);
     technology.setActive(true);
-
-    List<Technology> technologyList = List.of(technology);
-    Mockito.when(technologyRepository.findById(technology.getId())).thenReturn(Optional.of(technology));
+    Mockito.doAnswer((i) -> null).when(technologyRepository).deleteById(technology.getId());
 
     technologyService.deleteById(technology.getId());
     Mockito.verify(technologyRepository).deleteById(technology.getId());
-
   }
 }
