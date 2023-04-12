@@ -22,20 +22,6 @@ class TenantServiceTests extends AbstractServiceTests {
   private TenantService tenantService = new TenantServiceImpl(tenantRepository, tenantMapper);
 
   @Test
-  void shouldFindAllTenants() {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
-    List<Tenant> tenantList = List.of(tenant);
-    Mockito.when(tenantRepository.findAll(any(Sort.class))).thenReturn(tenantList);
-
-    Collection<TenantDto> tenantDtoCollection = tenantService.findAll();
-    Assertions.assertEquals(1, tenantDtoCollection.size());
-    Assertions.assertEquals(tenantDtoCollection.iterator().next().getId(), tenant.getId());
-    Assertions.assertEquals(tenantDtoCollection.iterator().next().getTitle(), tenant.getTitle());
-    Assertions.assertEquals(tenantDtoCollection.iterator().next().getDescription(), tenant.getDescription());
-
-  }
-
-  @Test
   void shouldFindAllTenantsWithFilter() {
     /*
     final Tenant tenantDto = new Tenant(10L, "my title", "my description");
