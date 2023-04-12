@@ -11,7 +11,9 @@ import org.hibernate.validator.internal.engine.path.PathImpl;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,20 +23,6 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
 
   @Autowired
   private TenantRepository tenantRepository;
-
-
-  static Locale defaultLocale = Locale.getDefault();
-
-  @BeforeClass
-  public static void setDefaultLocale() {
-    Locale.setDefault(Locale.GERMAN);
-  }
-
-  @AfterClass
-  public static void restoreLocale() {
-    Locale.setDefault(defaultLocale);
-  }
-
 
   @Test
   void shouldSaveTenantWithAllFields() {
