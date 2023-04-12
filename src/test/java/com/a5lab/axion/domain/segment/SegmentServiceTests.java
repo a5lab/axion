@@ -41,7 +41,7 @@ class SegmentServiceTests extends AbstractServiceTests {
 
 
   @Test
-  void shouldFindByIdSegments() {
+  void shouldFindByIdSegment() {
     final Segment segment = new Segment();
     segment.setId(10L);
     segment.setTitle("my title");
@@ -59,7 +59,7 @@ class SegmentServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindByTitleSegments() {
+  void shouldFindByTitleSegment() {
     final Segment segment = new Segment();
     segment.setId(10L);
     segment.setTitle("my title");
@@ -77,7 +77,7 @@ class SegmentServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldSaveSegments() {
+  void shouldSaveSegment() {
     final Segment segment = new Segment();
     segment.setId(10L);
     segment.setTitle("my title");
