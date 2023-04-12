@@ -38,30 +38,14 @@ class RingServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(1, ringDtoCollection.size());
     Assertions.assertEquals(ringDtoCollection.iterator().next().getId(), ring.getId());
     Assertions.assertEquals(ringDtoCollection.iterator().next().getTitle(), ring.getTitle());
+    Assertions.assertEquals(ringDtoCollection.iterator().next().getDescription(), ring.getDescription());
     Assertions.assertEquals(ringDtoCollection.iterator().next().getColor(), ring.getColor());
     Assertions.assertEquals(ringDtoCollection.iterator().next().getPosition(), ring.getPosition());
-    Assertions.assertEquals(ringDtoCollection.iterator().next().getDescription(), ring.getDescription());
 
   }
-  /*
-  @Test
-  void shouldSaveRings() {
-    final RingDto ringDto = new RingDto();
-    ringDto.setId(10L);
-    ringDto.setTitle("my title");
-    ringDto.setDescription("my description");
-    ringDto.setColor("my color");
-    ringDto.setPosition(0);
-    ringDto.setActive(true);
-    //    not sure for this
-    Mockito.when(ringMapper.toDto(ringRepository.save(ringMapper.toEntity(ringDto)))).thenReturn(Optional.of(ringDto));
-    ringService.save(ringDto);
-    Mockito.verify(ringRepository).save(ringMapper.toEntity(ringDto));
-  }
-   */
 
   @Test
-  void shouldFindByIdRings(){
+  void shouldFindByIdRings() {
     final Ring ring = new Ring();
     ring.setId(10L);
     ring.setTitle("my title");
@@ -70,15 +54,19 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setPosition(0);
     ring.setActive(true);
 
-    List<Ring> ringList = List.of(ring);
     Mockito.when(ringRepository.findById(ring.getId())).thenReturn(Optional.of(ring));
 
-    ringService.findById(ring.getId());
+    Optional<RingDto> ringDtoOptional = ringService.findById(ring.getId());
+    Assertions.assertTrue(ringDtoOptional.isPresent());
+    Assertions.assertEquals(ring.getId(), ringDtoOptional.get().getId());
+    Assertions.assertEquals(ring.getTitle(), ringDtoOptional.get().getTitle());
+    Assertions.assertEquals(ring.getDescription(), ringDtoOptional.get().getDescription());
+
     Mockito.verify(ringRepository).findById(ring.getId());
   }
 
   @Test
-  void shouldFindByTitleRings(){
+  void shouldFindByTitleRings() {
     final Ring ring = new Ring();
     ring.setId(10L);
     ring.setTitle("my title");
@@ -88,10 +76,36 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setActive(true);
 
     Mockito.when(ringRepository.findByTitle(ring.getTitle())).thenReturn(Optional.of(ring));
-    ringService.findByTitle(ring.getTitle());
+
+    Optional<Ring> ringOptional = ringService.findByTitle(ring.getTitle());
+    Assertions.assertTrue(ringOptional.isPresent());
+    Assertions.assertEquals(ring.getId(), ringOptional.get().getId());
+    Assertions.assertEquals(ring.getTitle(), ringOptional.get().getTitle());
+    Assertions.assertEquals(ring.getDescription(), ringOptional.get().getDescription());
+    Assertions.assertEquals(ring.getColor(), ringOptional.get().getColor());
+    Assertions.assertEquals(ring.getPosition(), ringOptional.get().getPosition());
 
     Mockito.verify(ringRepository).findByTitle(ring.getTitle());
+  }
 
+  @Test
+  void shouldSaveRings() {
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setTitle("my title");
+    ring.setDescription("my description");
+    ring.setColor("my color");
+    ring.setPosition(0);
+    ring.setActive(true);
+
+    Mockito.when(ringRepository.save(any())).thenReturn(ring);
+
+    RingDto ringDto = ringService.save(ringMapper.toDto(ring));
+    Assertions.assertEquals(ring.getId(), ringDto.getId());
+    Assertions.assertEquals(ring.getTitle(), ringDto.getTitle());
+    Assertions.assertEquals(ring.getDescription(), ringDto.getDescription());
+
+    Mockito.verify(ringRepository).save(any());
   }
 
   @Test
@@ -104,11 +118,9 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setPosition(0);
     ring.setActive(true);
 
-    List<Ring> ringList = List.of(ring);
-    Mockito.when(ringRepository.findById(ring.getId())).thenReturn(Optional.of(ring));
+    Mockito.doAnswer((i) -> null).when(ringRepository).deleteById(ring.getId());
 
     ringService.deleteById(ring.getId());
     Mockito.verify(ringRepository).deleteById(ring.getId());
-
   }
 }
