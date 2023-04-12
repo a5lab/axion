@@ -17,7 +17,7 @@ public abstract class AbstractAnyTests {
 
   @BeforeAll
   public static void setDefaultLocale() {
-    Locale.setDefault(Locale.ENGLISH);
+    Locale.setDefault(Locale.US);
   }
 
   @AfterAll

@@ -9,5 +9,5 @@ spring:
   jpa:
     show-sql: true
   web:
-    locale: ru
+    locale: en
     locale-resolver: fixed
