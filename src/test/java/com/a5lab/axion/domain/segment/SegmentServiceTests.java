@@ -14,11 +14,11 @@ import org.mockito.Mockito;
 import org.springframework.data.domain.Sort;
 
 class SegmentServiceTests extends AbstractServiceTests {
-  private SegmentRepository segmentRepository = Mockito.mock(SegmentRepository.class);
+  private final SegmentRepository segmentRepository = Mockito.mock(SegmentRepository.class);
 
-  private SegmentMapper segmentMapper = Mappers.getMapper(SegmentMapper.class);
+  private final SegmentMapper segmentMapper = Mappers.getMapper(SegmentMapper.class);
 
-  private SegmentService segmentService = new SegmentServiceImpl(segmentRepository, segmentMapper);
+  private final SegmentService segmentService = new SegmentServiceImpl(segmentRepository, segmentMapper);
 
   @Test
   void shouldFindAllSegments() {

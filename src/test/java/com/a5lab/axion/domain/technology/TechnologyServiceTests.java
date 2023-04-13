@@ -14,11 +14,11 @@ import org.mockito.Mockito;
 import org.springframework.data.domain.Sort;
 
 class TechnologyServiceTests extends AbstractServiceTests {
-  private TechnologyRepository technologyRepository = Mockito.mock(TechnologyRepository.class);
+  private final TechnologyRepository technologyRepository = Mockito.mock(TechnologyRepository.class);
 
-  private TechnologyMapper technologyMapper = Mappers.getMapper(TechnologyMapper.class);
+  private final TechnologyMapper technologyMapper = Mappers.getMapper(TechnologyMapper.class);
 
-  private TechnologyService technologyService = new TechnologyServiceImpl(technologyRepository, technologyMapper);
+  private final TechnologyService technologyService = new TechnologyServiceImpl(technologyRepository, technologyMapper);
 
   @Test
   void shouldFindAllTechnologies() {

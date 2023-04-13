@@ -15,11 +15,11 @@ import org.springframework.data.domain.Sort;
 import com.a5lab.axion.domain.AbstractServiceTests;
 
 class TenantServiceTests extends AbstractServiceTests {
-  private TenantRepository tenantRepository = Mockito.mock(TenantRepository.class);
+  private final TenantRepository tenantRepository = Mockito.mock(TenantRepository.class);
 
-  private TenantMapper tenantMapper = Mappers.getMapper(TenantMapper.class);
+  private final TenantMapper tenantMapper = Mappers.getMapper(TenantMapper.class);
 
-  private TenantService tenantService = new TenantServiceImpl(tenantRepository, tenantMapper);
+  private final TenantService tenantService = new TenantServiceImpl(tenantRepository, tenantMapper);
 
   @Test
   void shouldFindAllTenants() {
