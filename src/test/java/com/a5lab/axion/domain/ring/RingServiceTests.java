@@ -15,11 +15,11 @@ import org.mockito.Mockito;
 import org.springframework.data.domain.Sort;
 
 class RingServiceTests extends AbstractServiceTests {
-  private RingRepository ringRepository = Mockito.mock(RingRepository.class);
+  private final RingRepository ringRepository = Mockito.mock(RingRepository.class);
 
-  private RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
+  private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
 
-  private RingService ringService = new RingServiceImpl(ringRepository, ringMapper);
+  private final RingService ringService = new RingServiceImpl(ringRepository, ringMapper);
 
   @Test
   void shouldFindAllRings() {
