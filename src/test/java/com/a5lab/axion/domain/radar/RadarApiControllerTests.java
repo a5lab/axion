@@ -30,7 +30,7 @@ public class RadarApiControllerTests extends AbstractControllerTests {
   @Test
   public void shouldGetRadars() throws Exception {
     final RadarType radarType = new RadarType();
-    final RadarDto radarDto = new RadarDto(10L, radarType, "my title", "my description", true, false, null, null, null);
+    final RadarDto radarDto = new RadarDto(10L, radarType, "My title", "My description", true, false, null, null, null);
     Page<RadarDto> radarDtoPage = new PageImpl<>(Arrays.asList(radarDto));
     Mockito.when(radarService.findAll(any(), any())).thenReturn(radarDtoPage);
 

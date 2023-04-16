@@ -27,8 +27,8 @@ public class RingApiControllerTests extends AbstractControllerTests {
   public void shouldGetTenants() throws Exception {
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setTitle("my title");
-    ringDto.setDescription("my description");
+    ringDto.setTitle("My title");
+    ringDto.setDescription("My description");
     Page<RingDto> ringDtoPage = new PageImpl<>(Arrays.asList(ringDto));
     Mockito.when(ringService.findAll(any(), any())).thenReturn(ringDtoPage);
 

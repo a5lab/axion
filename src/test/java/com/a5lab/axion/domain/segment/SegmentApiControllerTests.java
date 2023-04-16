@@ -29,8 +29,8 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
   public void shouldGetTenants() throws Exception {
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setTitle("my title");
-    segmentDto.setDescription("my description");
+    segmentDto.setTitle("My title");
+    segmentDto.setDescription("My description");
     segmentDto.setPosition(1);
     segmentDto.setActive(true);
 

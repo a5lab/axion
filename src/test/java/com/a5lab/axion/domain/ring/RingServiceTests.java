@@ -48,8 +48,8 @@ class RingServiceTests extends AbstractServiceTests {
   void shouldFindByIdRing() {
     final Ring ring = new Ring();
     ring.setId(10L);
-    ring.setTitle("my title");
-    ring.setDescription("my description");
+    ring.setTitle("My title");
+    ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(0);
     ring.setActive(true);
@@ -69,8 +69,8 @@ class RingServiceTests extends AbstractServiceTests {
   void shouldFindByTitleRing() {
     final Ring ring = new Ring();
     ring.setId(10L);
-    ring.setTitle("my title");
-    ring.setDescription("my description");
+    ring.setTitle("My title");
+    ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(0);
     ring.setActive(true);
@@ -92,8 +92,8 @@ class RingServiceTests extends AbstractServiceTests {
   void shouldSaveRing() {
     final Ring ring = new Ring();
     ring.setId(10L);
-    ring.setTitle("my title");
-    ring.setDescription("my description");
+    ring.setTitle("My title");
+    ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(0);
     ring.setActive(true);
@@ -112,8 +112,8 @@ class RingServiceTests extends AbstractServiceTests {
   void shouldDeleteRing() {
     final Ring ring = new Ring();
     ring.setId(10L);
-    ring.setTitle("my title");
-    ring.setDescription("my description");
+    ring.setTitle("My title");
+    ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(0);
     ring.setActive(true);
