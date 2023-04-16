@@ -44,8 +44,8 @@ class SegmentServiceTests extends AbstractServiceTests {
   void shouldFindByIdSegment() {
     final Segment segment = new Segment();
     segment.setId(10L);
-    segment.setTitle("my title");
-    segment.setDescription("my description");
+    segment.setTitle("My title");
+    segment.setDescription("My description");
     segment.setPosition(0);
     segment.setActive(true);
 
@@ -62,8 +62,8 @@ class SegmentServiceTests extends AbstractServiceTests {
   void shouldFindByTitleSegment() {
     final Segment segment = new Segment();
     segment.setId(10L);
-    segment.setTitle("my title");
-    segment.setDescription("my description");
+    segment.setTitle("My title");
+    segment.setDescription("My description");
     segment.setPosition(0);
     segment.setActive(true);
 
@@ -80,8 +80,8 @@ class SegmentServiceTests extends AbstractServiceTests {
   void shouldSaveSegment() {
     final Segment segment = new Segment();
     segment.setId(10L);
-    segment.setTitle("my title");
-    segment.setDescription("my description");
+    segment.setTitle("My title");
+    segment.setDescription("My description");
     segment.setPosition(0);
     segment.setActive(true);
 
@@ -100,8 +100,8 @@ class SegmentServiceTests extends AbstractServiceTests {
   void shouldDeleteSegment() {
     final Segment segment = new Segment();
     segment.setId(10L);
-    segment.setTitle("my title");
-    segment.setDescription("my description");
+    segment.setTitle("My title");
+    segment.setDescription("My description");
     segment.setPosition(0);
     segment.setActive(true);
 

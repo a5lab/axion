@@ -29,7 +29,7 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindAllTenants() {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
     List<Tenant> tenantList = List.of(tenant);
     Mockito.when(tenantRepository.findAll(any(Sort.class))).thenReturn(tenantList);
 
@@ -43,7 +43,7 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindAllTenantsWithFilter() {
-    final Tenant tenantDto = new Tenant(10L, "Ny title", "My description");
+    final Tenant tenantDto = new Tenant(10L, "My title", "My description");
     List<Tenant> tenantDtoList = List.of(tenantDto);
     Page<Tenant> page = new PageImpl<>(tenantDtoList);
     Mockito.when(tenantRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
@@ -63,7 +63,7 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindByIdTenants() {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
     Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(Optional.of(tenant));
 
     Optional<TenantDto> tenantDtoOptional = tenantService.findById(tenant.getId());
@@ -78,7 +78,7 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldSaveTenant() {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
     Mockito.when(tenantRepository.save(any())).thenReturn(tenant);
 
     TenantDto tenantDto = tenantService.save(tenantMapper.toDto(tenant));
@@ -91,7 +91,7 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldDeleteTenant() {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
     Mockito.doAnswer((i) -> null).when(tenantRepository).deleteById(tenant.getId());
 
     tenantService.deleteById(tenant.getId());

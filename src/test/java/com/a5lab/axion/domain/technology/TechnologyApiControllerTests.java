@@ -28,8 +28,8 @@ public class TechnologyApiControllerTests extends AbstractControllerTests {
   public void shouldGetTenants() throws Exception {
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(10L);
-    technologyDto.setTitle("my title");
-    technologyDto.setDescription("my description");
+    technologyDto.setTitle("My title");
+    technologyDto.setDescription("My description");
     technologyDto.setWebsite("my website");
     technologyDto.setMoved(1);
     technologyDto.setActive(true);
