@@ -12,6 +12,7 @@ import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
@@ -41,17 +42,16 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindAllTenantsWithFilter() {
-    final Tenant tenantDto = new Tenant(10L, "my title", "my description");
+    final Tenant tenantDto = new Tenant(10L, "Ny title", "My description");
     List<Tenant> tenantDtoList = List.of(tenantDto);
     Page<Tenant> page = new PageImpl<>(tenantDtoList);
-    Pageable pageable = new Pageable();
-    Mockito.when(tenantRepository.findAll(
-        Specification.allOf((root, query, criteriaBuilder) -> {return null}), (Pageable) any())).thenRturn(page);
+    Mockito.when(tenantRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
 
     TenantFilter tenantFilter = new TenantFilter();
-
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("title,asc"));
     Page<TenantDto> tenantDtoPage = tenantService.findAll(tenantFilter, pageable);
-    Assertions.assertEquals(10, tenantDtoPage.getSize());
+    Assertions.assertEquals(1, tenantDtoPage.getSize());
+    Assertions.assertEquals(0, tenantDtoPage.getNumber());
     Assertions.assertEquals(1, tenantDtoPage.getTotalPages());
     Assertions.assertEquals(tenantDtoPage.iterator().next().getId(), tenantDto.getId());
     Assertions.assertEquals(tenantDtoPage.iterator().next().getTitle(), tenantDto.getTitle());
