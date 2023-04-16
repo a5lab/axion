@@ -10,9 +10,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import org.springframework.data.jpa.domain.Specification;
 
 class TenantServiceTests extends AbstractServiceTests {
   private final TenantRepository tenantRepository = Mockito.mock(TenantRepository.class);
@@ -37,21 +41,21 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindAllTenantsWithFilter() {
-    /*
     final Tenant tenantDto = new Tenant(10L, "my title", "my description");
     List<Tenant> tenantDtoList = List.of(tenantDto);
     Page<Tenant> page = new PageImpl<>(tenantDtoList);
-    Mockito.when(tenantRepository.findAll(any(Sort.class), any())).thenReturn(page);
+    Pageable pageable = new Pageable();
+    Mockito.when(tenantRepository.findAll(
+        Specification.allOf((root, query, criteriaBuilder) -> {return null}), (Pageable) any())).thenRturn(page);
 
     TenantFilter tenantFilter = new TenantFilter();
-    Pageable pageable = new Pageable();
 
-    Collection<TenantDto> tenantDtoCollection = tenantService.findAll(tenantFilter, pageable);
-    Assertions.assertEquals(1, tenantDtoCollection.size());
-    Assertions.assertEquals(tenantDtoCollection.iterator().next().getId(), tenant.getId());
-    Assertions.assertEquals(tenantDtoCollection.iterator().next().getTitle(), tenant.getTitle());
-    Assertions.assertEquals(tenantDtoCollection.iterator().next().getDescription(), tenant.getDescription());
-    */
+    Page<TenantDto> tenantDtoPage = tenantService.findAll(tenantFilter, pageable);
+    Assertions.assertEquals(10, tenantDtoPage.getSize());
+    Assertions.assertEquals(1, tenantDtoPage.getTotalPages());
+    Assertions.assertEquals(tenantDtoPage.iterator().next().getId(), tenantDto.getId());
+    Assertions.assertEquals(tenantDtoPage.iterator().next().getTitle(), tenantDto.getTitle());
+    Assertions.assertEquals(tenantDtoPage.iterator().next().getDescription(), tenantDto.getDescription());
   }
 
   @Test
