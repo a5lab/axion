@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+
 import org.springframework.data.jpa.domain.Specification;
 
 class TenantServiceTests extends AbstractServiceTests {
@@ -56,6 +57,8 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(tenantDtoPage.iterator().next().getId(), tenantDto.getId());
     Assertions.assertEquals(tenantDtoPage.iterator().next().getTitle(), tenantDto.getTitle());
     Assertions.assertEquals(tenantDtoPage.iterator().next().getDescription(), tenantDto.getDescription());
+
+    // Mockito.verify(tenantRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test
@@ -95,5 +98,3 @@ class TenantServiceTests extends AbstractServiceTests {
     Mockito.verify(tenantRepository).deleteById(tenant.getId());
   }
 }
-
-
