@@ -58,7 +58,7 @@ class RadarServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindByIdRadars() {
+  void shouldFindByIdRadar() {
     final Radar radar = new Radar();
     radar.setId(10L);
     radar.setRadarType(null);
@@ -87,7 +87,6 @@ class RadarServiceTests extends AbstractServiceTests {
 
     List<Radar> radarList = List.of(radar);
     Mockito.when(radarRepository.findByPrimary(any(boolean.class))).thenReturn(radarList);
-    // Mockito.when(radarRepository.findByPrimary(boolean)).thenReturn(radarList);
 
     Optional<Radar> radarOptional =  radarService.findByPrimary(radar.isPrimary());
     Assertions.assertTrue(radarOptional.isPresent());
@@ -108,7 +107,6 @@ class RadarServiceTests extends AbstractServiceTests {
     Mockito.when(radarRepository.findByPrimary(any(boolean.class))).thenReturn(radarList);
 
     Optional<Radar> radarOptional = radarService.findByPrimary(radar.isPrimary());
-    // radarList has list any radar primary=false
     Assertions.assertTrue(radarOptional.isPresent());
 
     Mockito.verify(radarRepository).findByPrimary((radar.isPrimary()));
@@ -128,7 +126,6 @@ class RadarServiceTests extends AbstractServiceTests {
     Mockito.when(radarRepository.findByPrimaryAndActive(any(boolean.class), any(boolean.class))).thenReturn(radarList);
 
     List<RadarDto> radarDtoOptional = radarService.findByPrimaryAndActive(radar.isPrimary(), radar.isActive());
-    // Checking for content of primary and active in radarList
     Assertions.assertFalse(radarDtoOptional.isEmpty());
 
     Mockito.verify(radarRepository).findByPrimaryAndActive(radar.isPrimary(), radar.isActive());
