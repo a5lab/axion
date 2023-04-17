@@ -50,15 +50,15 @@ class RingServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindAllTenantsWithFilter() {
-    final Ring ringDto = new Ring();
-    ringDto.setId(10L);
-    ringDto.setTitle("My title");
-    ringDto.setDescription("My description");
-    ringDto.setColor("My color");
-    ringDto.setPosition(0);
-    ringDto.setActive(true);
-    List<Ring> ringDtoList = List.of(ringDto);
+  void shouldFindAllRingsWithFilter() {
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setTitle("My title");
+    ring.setDescription("My description");
+    ring.setColor("My color");
+    ring.setPosition(0);
+    ring.setActive(true);
+    List<Ring> ringDtoList = List.of(ring);
     Page<Ring> page = new PageImpl<>(ringDtoList);
     Mockito.when(ringRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
 
@@ -68,9 +68,9 @@ class RingServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(1, ringDtoPage.getSize());
     Assertions.assertEquals(0, ringDtoPage.getNumber());
     Assertions.assertEquals(1, ringDtoPage.getTotalPages());
-    Assertions.assertEquals(ringDtoPage.iterator().next().getId(), ringDto.getId());
-    Assertions.assertEquals(ringDtoPage.iterator().next().getTitle(), ringDto.getTitle());
-    Assertions.assertEquals(ringDtoPage.iterator().next().getDescription(), ringDto.getDescription());
+    Assertions.assertEquals(ringDtoPage.iterator().next().getId(), ring.getId());
+    Assertions.assertEquals(ringDtoPage.iterator().next().getTitle(), ring.getTitle());
+    Assertions.assertEquals(ringDtoPage.iterator().next().getDescription(), ring.getDescription());
 
     // Mockito.verify(tenantRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
