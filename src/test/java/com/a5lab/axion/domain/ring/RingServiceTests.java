@@ -12,7 +12,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 class RingServiceTests extends AbstractServiceTests {
   private final RingRepository ringRepository = Mockito.mock(RingRepository.class);
@@ -42,6 +47,33 @@ class RingServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(ringDtoCollection.iterator().next().getColor(), ring.getColor());
     Assertions.assertEquals(ringDtoCollection.iterator().next().getPosition(), ring.getPosition());
 
+  }
+
+  @Test
+  void shouldFindAllRingsWithFilter() {
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setTitle("My title");
+    ring.setDescription("My description");
+    ring.setColor("My color");
+    ring.setPosition(0);
+    ring.setActive(true);
+
+    List<Ring> ringList = List.of(ring);
+    Page<Ring> page = new PageImpl<>(ringList);
+    Mockito.when(ringRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
+
+    RingFilter ringFilter = new RingFilter();
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("title,asc"));
+    Page<RingDto> ringDtoPage = ringService.findAll(ringFilter, pageable);
+    Assertions.assertEquals(1, ringDtoPage.getSize());
+    Assertions.assertEquals(0, ringDtoPage.getNumber());
+    Assertions.assertEquals(1, ringDtoPage.getTotalPages());
+    Assertions.assertEquals(ringDtoPage.iterator().next().getId(), ring.getId());
+    Assertions.assertEquals(ringDtoPage.iterator().next().getTitle(), ring.getTitle());
+    Assertions.assertEquals(ringDtoPage.iterator().next().getDescription(), ring.getDescription());
+
+    // Mockito.verify(tenantRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test

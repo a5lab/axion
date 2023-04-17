@@ -43,9 +43,10 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindAllTenantsWithFilter() {
-    final Tenant tenantDto = new Tenant(10L, "My title", "My description");
-    List<Tenant> tenantDtoList = List.of(tenantDto);
-    Page<Tenant> page = new PageImpl<>(tenantDtoList);
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
+
+    List<Tenant> tenantList = List.of(tenant);
+    Page<Tenant> page = new PageImpl<>(tenantList);
     Mockito.when(tenantRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
 
     TenantFilter tenantFilter = new TenantFilter();
@@ -54,9 +55,9 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(1, tenantDtoPage.getSize());
     Assertions.assertEquals(0, tenantDtoPage.getNumber());
     Assertions.assertEquals(1, tenantDtoPage.getTotalPages());
-    Assertions.assertEquals(tenantDtoPage.iterator().next().getId(), tenantDto.getId());
-    Assertions.assertEquals(tenantDtoPage.iterator().next().getTitle(), tenantDto.getTitle());
-    Assertions.assertEquals(tenantDtoPage.iterator().next().getDescription(), tenantDto.getDescription());
+    Assertions.assertEquals(tenantDtoPage.iterator().next().getId(), tenant.getId());
+    Assertions.assertEquals(tenantDtoPage.iterator().next().getTitle(), tenant.getTitle());
+    Assertions.assertEquals(tenantDtoPage.iterator().next().getDescription(), tenant.getDescription());
 
     // Mockito.verify(tenantRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
