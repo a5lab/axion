@@ -27,6 +27,7 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setRadarType(null);
     radar.setTitle("Radar title");
     radar.setDescription("Radar Description");
+
     List<Radar> radarList = List.of(radar);
     Mockito.when(radarRepository.findAll(any(Sort.class))).thenReturn(radarList);
 
@@ -63,6 +64,7 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setRadarType(null);
     radar.setTitle("Radar title");
     radar.setDescription("Radar Description");
+
     Mockito.when(radarRepository.findById(radar.getId())).thenReturn(Optional.of(radar));
 
     Optional<RadarDto> radarDtoOptional = radarService.findById(radar.getId());
@@ -105,7 +107,7 @@ class RadarServiceTests extends AbstractServiceTests {
     List<Radar> radarList = List.of(radar);
     Mockito.when(radarRepository.findByPrimary(any(boolean.class))).thenReturn(radarList);
 
-    Optional<Radar> radarOptional = radarService.findByPrimary(any(boolean.class));
+    Optional<Radar> radarOptional = radarService.findByPrimary(radar.isPrimary());
     // radarList has list any radar primary=false
     Assertions.assertTrue(radarOptional.isPresent());
 
@@ -121,14 +123,15 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setDescription("Radar Description");
     radar.setPrimary(true);
     radar.setActive(true);
+
     List<Radar> radarList = List.of(radar);
     Mockito.when(radarRepository.findByPrimaryAndActive(any(boolean.class), any(boolean.class))).thenReturn(radarList);
 
-    List<RadarDto> radarDtoOptional = radarService.findByPrimaryAndActive(any(boolean.class), any(boolean.class));
+    List<RadarDto> radarDtoOptional = radarService.findByPrimaryAndActive(radar.isPrimary(), radar.isActive());
     // Checking for content of primary and active in radarList
     Assertions.assertFalse(radarDtoOptional.isEmpty());
 
-    Mockito.verify(radarRepository).findByPrimaryAndActive(any(boolean.class), any(boolean.class));
+    Mockito.verify(radarRepository).findByPrimaryAndActive(radar.isPrimary(), radar.isActive());
   }
 
 
@@ -139,6 +142,7 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setRadarType(null);
     radar.setTitle("Radar title");
     radar.setDescription("Radar Description");
+
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
 
     radarService.save(radar);
@@ -156,6 +160,7 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setRadarType(null);
     radar.setTitle("Radar title");
     radar.setDescription("Radar Description");
+
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
 
     RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
