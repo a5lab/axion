@@ -17,6 +17,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -73,6 +74,7 @@ public class Ring extends AbstractAuditable {
   @Column(name = "is_active", nullable = false)
   private boolean active = true;
 
+  @JsonIgnore
   @Setter(AccessLevel.NONE)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "ring", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
