@@ -34,6 +34,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setDescription("My segment description");
     segment.setPosition(0);
     segment.setActive(true);
+
     List<Segment> segmentList = List.of(segment);
     Mockito.when(segmentRepository.findAll(any(Sort.class))).thenReturn(segmentList);
 
@@ -53,8 +54,9 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setDescription("My segment description");
     segment.setPosition(0);
     segment.setActive(true);
-    List<Segment> segmentDtoList = List.of(segment);
-    Page<Segment> page = new PageImpl<>(segmentDtoList);
+
+    List<Segment> segmentList = List.of(segment);
+    Page<Segment> page = new PageImpl<>(segmentList);
     Mockito.when(segmentRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
 
     SegmentFilter segmentFilter = new SegmentFilter();
@@ -80,6 +82,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setActive(true);
 
     Mockito.when(segmentRepository.findById(segment.getId())).thenReturn(Optional.of(segment));
+
     Optional<SegmentDto> segmentDtoOptional = segmentService.findById(segment.getId());
     Assertions.assertTrue(segmentDtoOptional.isPresent());
     Assertions.assertEquals(segment.getId(), segmentDtoOptional.get().getId());
@@ -100,6 +103,7 @@ class SegmentServiceTests extends AbstractServiceTests {
 
     Mockito.when(segmentRepository.findByTitle(segment.getTitle())).thenReturn(Optional.of(segment));
     Optional<Segment> segmentOptional = segmentService.findByTitle(segment.getTitle());
+
     Assertions.assertTrue(segmentOptional.isPresent());
     Assertions.assertEquals(segment.getId(), segmentOptional.get().getId());
     Assertions.assertEquals(segment.getTitle(), segmentOptional.get().getTitle());

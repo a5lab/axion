@@ -34,6 +34,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setDescription("My technology description");
     technology.setMoved(0);
     technology.setActive(true);
+
     List<Technology> technologyList = List.of(technology);
     Mockito.when(technologyRepository.findAll(any(Sort.class))).thenReturn(technologyList);
 
@@ -53,8 +54,9 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setDescription("My technology description");
     technology.setMoved(0);
     technology.setActive(true);
-    List<Technology> technologyDtoList = List.of(technology);
-    Page<Technology> page = new PageImpl<>(technologyDtoList);
+
+    List<Technology> technologyList = List.of(technology);
+    Page<Technology> page = new PageImpl<>(technologyList);
     Mockito.when(technologyRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
 
     TechnologyFilter technologyFilter = new TechnologyFilter();
@@ -79,6 +81,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setDescription("My technology description");
     technology.setMoved(0);
     technology.setActive(true);
+
     Mockito.when(technologyRepository.findById(technology.getId())).thenReturn(Optional.of(technology));
 
     Optional<TechnologyDto> technologyDtoOptional = technologyService.findById(technology.getId());
@@ -101,6 +104,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setDescription("My technology description");
     technology.setMoved(0);
     technology.setActive(true);
+
     Mockito.when(technologyRepository.findByTitle(technology.getTitle())).thenReturn(Optional.of(technology));
 
     Optional<Technology> technologyOptional = technologyService.findByTitle(technology.getTitle());
@@ -123,6 +127,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setDescription("My technology description");
     technology.setMoved(0);
     technology.setActive(true);
+
     Mockito.when(technologyRepository.save(any())).thenReturn(technology);
 
     TechnologyDto technologyDto = technologyService.save(technologyMapper.toDto(technology));
@@ -144,6 +149,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setDescription("My technology description");
     technology.setMoved(0);
     technology.setActive(true);
+
     Mockito.doAnswer((i) -> null).when(technologyRepository).deleteById(technology.getId());
 
     technologyService.deleteById(technology.getId());

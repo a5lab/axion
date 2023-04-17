@@ -44,8 +44,9 @@ class TenantServiceTests extends AbstractServiceTests {
   @Test
   void shouldFindAllTenantsWithFilter() {
     final Tenant tenant = new Tenant(10L, "My title", "My description");
-    List<Tenant> tenantDtoList = List.of(tenant);
-    Page<Tenant> page = new PageImpl<>(tenantDtoList);
+
+    List<Tenant> tenantList = List.of(tenant);
+    Page<Tenant> page = new PageImpl<>(tenantList);
     Mockito.when(tenantRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
 
     TenantFilter tenantFilter = new TenantFilter();

@@ -58,8 +58,9 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setColor("My color");
     ring.setPosition(0);
     ring.setActive(true);
-    List<Ring> ringDtoList = List.of(ring);
-    Page<Ring> page = new PageImpl<>(ringDtoList);
+
+    List<Ring> ringList = List.of(ring);
+    Page<Ring> page = new PageImpl<>(ringList);
     Mockito.when(ringRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
 
     RingFilter ringFilter = new RingFilter();
