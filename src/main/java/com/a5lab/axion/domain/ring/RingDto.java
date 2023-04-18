@@ -19,7 +19,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
 @Getter
 @Setter
@@ -56,5 +56,5 @@ public class RingDto {
 
   private boolean active = true;
 
-  private List<TechnologyBlip> technologyBlipList;
+  private List<TechnologyBlipDto> technologyBlipList;
 }
