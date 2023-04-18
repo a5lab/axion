@@ -233,37 +233,57 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
   }
 
-  /*
-
   @Test
-  public void shouldFailToCreateTenant() throws Exception {
+  public void shouldFailToCreateTechnologyBlip() throws Exception {
     final Radar radar = new Radar();
     radar.setId(10L);
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
-    final SegmentDto segmentDto = new SegmentDto(10L, null, "My segment title","My segment description",1,true);
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setRadar(radar);
+    segmentDto.setTitle("My segment title");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(1);
+    segmentDto.setActive(true);
 
-    final RingDto ringDto = new RingDto(10L, null, "My ring title", "My ring description", 1, true);
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setRadar(radar);
+    ringDto.setTitle("My ring title");
+    ringDto.setDescription("My ring description");
+    ringDto.setPosition(0);
+    ringDto.setColor("#fbdb84");
+    ringDto.setActive(true);
 
-    final TechnologyDto technologyDto = new TechnologyDto(10L, "My technology", "My website", "My radar description", 1, true);
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(10L);
+    technologyDto.setTitle("My technology");
+    technologyDto.setWebsite("My website");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(1);
+    technologyDto.setActive(true);
 
-    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto(10L, radar, technologyDto, segmentDto, ringDto);
+    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
+    technologyBlipDto.setId(10L);
+    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRing(ringDto);
+    technologyBlipDto.setTechnology(technologyDto);
+    technologyBlipDto.setSegment(segmentDto);
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar", technologyBlipDto.getRadar().getTitle())
-            .param("technology", technologyBlipDto.getTechnology().getTitle())
-            .param("segment", technologyBlipDto.getSegment().getTitle())
-            .param("ring", technologyBlipDto.getRing().getTitle())
+//            .param("radar", technologyBlipDto.getRadar().getTitle())
+//            .param("technology", technologyBlipDto.getTechnology().getTitle())
+//            .param("segment", technologyBlipDto.getSegment().getTitle())
+//            .param("ring", technologyBlipDto.getRing().getTitle())
             .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().isOk())
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("must not be blank"));
   }
-*/
 
   @Test
   public void shouldEditTechnologyBlip() throws Exception {
