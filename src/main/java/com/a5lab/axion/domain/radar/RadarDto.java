@@ -12,9 +12,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.ring.Ring;
-import com.a5lab.axion.domain.segment.Segment;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+import com.a5lab.axion.domain.ring.RingDto;
+import com.a5lab.axion.domain.segment.SegmentDto;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
 @Getter
 @Setter
@@ -39,9 +39,9 @@ public class RadarDto {
 
   private boolean active = true;
 
-  private List<Ring> ringList;
+  private List<RingDto> ringList;
 
-  private List<Segment> segmentList;
+  private List<SegmentDto> segmentList;
 
-  private List<TechnologyBlip> technologyBlipList;
+  private List<TechnologyBlipDto> technologyBlipList;
 }
