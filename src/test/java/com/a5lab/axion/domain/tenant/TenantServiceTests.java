@@ -10,9 +10,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+
+import org.springframework.data.jpa.domain.Specification;
 
 class TenantServiceTests extends AbstractServiceTests {
   private final TenantRepository tenantRepository = Mockito.mock(TenantRepository.class);
@@ -23,7 +29,7 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindAllTenants() {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
     List<Tenant> tenantList = List.of(tenant);
     Mockito.when(tenantRepository.findAll(any(Sort.class))).thenReturn(tenantList);
 
@@ -37,26 +43,28 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindAllTenantsWithFilter() {
-    /*
-    final Tenant tenantDto = new Tenant(10L, "my title", "my description");
-    List<Tenant> tenantDtoList = List.of(tenantDto);
-    Page<Tenant> page = new PageImpl<>(tenantDtoList);
-    Mockito.when(tenantRepository.findAll(any(Sort.class), any())).thenReturn(page);
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
+
+    List<Tenant> tenantList = List.of(tenant);
+    Page<Tenant> page = new PageImpl<>(tenantList);
+    Mockito.when(tenantRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
 
     TenantFilter tenantFilter = new TenantFilter();
-    Pageable pageable = new Pageable();
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("title,asc"));
+    Page<TenantDto> tenantDtoPage = tenantService.findAll(tenantFilter, pageable);
+    Assertions.assertEquals(1, tenantDtoPage.getSize());
+    Assertions.assertEquals(0, tenantDtoPage.getNumber());
+    Assertions.assertEquals(1, tenantDtoPage.getTotalPages());
+    Assertions.assertEquals(tenantDtoPage.iterator().next().getId(), tenant.getId());
+    Assertions.assertEquals(tenantDtoPage.iterator().next().getTitle(), tenant.getTitle());
+    Assertions.assertEquals(tenantDtoPage.iterator().next().getDescription(), tenant.getDescription());
 
-    Collection<TenantDto> tenantDtoCollection = tenantService.findAll(tenantFilter, pageable);
-    Assertions.assertEquals(1, tenantDtoCollection.size());
-    Assertions.assertEquals(tenantDtoCollection.iterator().next().getId(), tenant.getId());
-    Assertions.assertEquals(tenantDtoCollection.iterator().next().getTitle(), tenant.getTitle());
-    Assertions.assertEquals(tenantDtoCollection.iterator().next().getDescription(), tenant.getDescription());
-    */
+    // Mockito.verify(tenantRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test
   void shouldFindByIdTenants() {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
     Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(Optional.of(tenant));
 
     Optional<TenantDto> tenantDtoOptional = tenantService.findById(tenant.getId());
@@ -71,7 +79,7 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldSaveTenant() {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
     Mockito.when(tenantRepository.save(any())).thenReturn(tenant);
 
     TenantDto tenantDto = tenantService.save(tenantMapper.toDto(tenant));
@@ -84,12 +92,10 @@ class TenantServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldDeleteTenant() {
-    final Tenant tenant = new Tenant(10L, "my title", "my description");
+    final Tenant tenant = new Tenant(10L, "My title", "My description");
     Mockito.doAnswer((i) -> null).when(tenantRepository).deleteById(tenant.getId());
 
     tenantService.deleteById(tenant.getId());
     Mockito.verify(tenantRepository).deleteById(tenant.getId());
   }
 }
-
-

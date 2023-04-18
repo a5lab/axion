@@ -47,7 +47,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldShowTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
     Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
 
     String url = String.format("/settings/tenants/show/%d", tenantDto.getId());
@@ -83,7 +83,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldCreateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
 
     MvcResult result = mockMvc.perform(post("/settings/tenants/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -99,7 +99,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToCreateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
 
     MvcResult result = mockMvc.perform(post("/settings/tenants/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -114,7 +114,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldEditTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
     Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
 
     String url = String.format("/settings/tenants/edit/%d", tenantDto.getId());
@@ -137,7 +137,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldUpdateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
 
     MvcResult result = mockMvc.perform(post("/settings/tenants/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -153,7 +153,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToUpdateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
 
     MvcResult result = mockMvc.perform(post("/settings/tenants/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -168,7 +168,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldDeleteTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
 
     String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());
     MvcResult result = mockMvc.perform(get(url))

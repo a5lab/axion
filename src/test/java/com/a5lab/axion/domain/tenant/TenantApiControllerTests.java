@@ -27,7 +27,7 @@ public class TenantApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetTenants() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "my title", "my description");
+    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
     Page<TenantDto> tenantPage = new PageImpl<>(Arrays.asList(tenantDto));
     Mockito.when(tenantService.findAll(any(), any())).thenReturn(tenantPage);
 

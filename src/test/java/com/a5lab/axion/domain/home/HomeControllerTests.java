@@ -36,8 +36,8 @@ public class HomeControllerTests extends AbstractControllerTests {
   public void shouldGetHome() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(1L);
-    radarDto.setTitle("my title");
-    radarDto.setDescription("my description");
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
