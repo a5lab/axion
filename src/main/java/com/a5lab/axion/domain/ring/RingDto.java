@@ -27,15 +27,15 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonPropertyOrder({"id", "radar_id","title", "description", "position", "color", "active" })
+@JsonPropertyOrder({"id", "radar_id", "title", "description", "position", "color", "active" })
 public class RingDto {
 
   private Long id;
 
   @NotNull
   @JsonProperty("radar_id")
-  @JsonIdentityReference(alwaysAsId=true)
-  @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+  @JsonIdentityReference(alwaysAsId = true)
+  @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
   private Radar radar;
 
   @NotBlank
