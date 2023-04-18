@@ -15,7 +15,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -66,19 +65,16 @@ public class Radar extends AbstractAuditable {
   @Column(name = "is_active", nullable = false)
   private boolean active = true;
 
-  @JsonIgnore
   @Setter(AccessLevel.NONE)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "radar", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<Ring> ringList;
 
-  @JsonIgnore
   @Setter(AccessLevel.NONE)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "radar", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<Segment> segmentList;
 
-  @JsonIgnore
   @Setter(AccessLevel.NONE)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "radar", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)

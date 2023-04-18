@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -57,6 +56,5 @@ public class RingDto {
 
   private boolean active = true;
 
-  @JsonIgnore
   private List<TechnologyBlip> technologyBlipList;
 }

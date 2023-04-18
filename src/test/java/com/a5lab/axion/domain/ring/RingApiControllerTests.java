@@ -11,6 +11,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.radar.Radar;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -25,8 +27,14 @@ public class RingApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetTenants() throws Exception {
+    final Radar radar = new Radar();
+    radar.setId(12L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
+
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
+    ringDto.setRadar(radar);
     ringDto.setTitle("My title");
     ringDto.setDescription("My description");
     Page<RingDto> ringDtoPage = new PageImpl<>(Arrays.asList(ringDto));
@@ -37,7 +45,7 @@ public class RingApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$").isArray())
         .andExpect(jsonPath("$", hasSize(ringDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(ringDto.getId()), Long.class))
-        // .andExpect(jsonPath("$[0].radar.id", equalTo(ringDto.getRadar())))
+        .andExpect(jsonPath("$[0].radar_id", equalTo(ringDto.getRadar().getId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(ringDto.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(ringDto.getDescription())))
         .andExpect(jsonPath("$[0].color", equalTo(ringDto.getColor())))
