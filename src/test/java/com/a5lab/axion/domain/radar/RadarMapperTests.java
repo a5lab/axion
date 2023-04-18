@@ -16,7 +16,7 @@ class RadarMapperTests {
 
   @Test
   void testToDtoWithNull() {
-    final var radarDto = mapper.toDto(null);
+    final RadarDto radarDto = mapper.toDto(null);
 //    List<Ring> ringList = ringList.getRingList();
 //    List<Segment> segmentList = mapper.toDto(null).getSegmentList();
 //    List<TechnologyBlip> technologyBlipList = mapper.toDto(null).getTechnologyBlipList();
@@ -50,7 +50,7 @@ class RadarMapperTests {
 
   @Test
   void testToEntityWithNull() {
-    final var radar = mapper.toEntity(null);
+    final Radar radar = mapper.toEntity(null);
 
     Assertions.assertNull(radar);
   }
@@ -63,7 +63,7 @@ class RadarMapperTests {
     radarDto.setDescription("My description1");
     radarDto.setPrimary(true);
     radarDto.setActive(true);
-    final var radar = mapper.toEntity(radarDto);
+    final Radar radar = mapper.toEntity(radarDto);
 
     Assertions.assertEquals(radar.getId(), radarDto.getId());
     Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
