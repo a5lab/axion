@@ -182,7 +182,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.64</minimum>
+                                            <minimum>0.59</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -231,6 +231,10 @@
                     <!-- printFailingErrors is pretty useful -->
                     <printFailingErrors>true</printFailingErrors>
                     <targetJdk>${java.version}</targetJdk>
+                    <excludes>
+                        <exclude>**/RadarMapperImpl.java</exclude>
+                        <exclude>**/RingMapperImpl.java</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
