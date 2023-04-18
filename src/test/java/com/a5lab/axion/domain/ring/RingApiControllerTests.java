@@ -26,7 +26,7 @@ public class RingApiControllerTests extends AbstractControllerTests {
   private RingService ringService;
 
   @Test
-  public void shouldGetTenants() throws Exception {
+  public void shouldGetRings() throws Exception {
     final Radar radar = new Radar();
     radar.setId(12L);
     radar.setTitle("My radar");
