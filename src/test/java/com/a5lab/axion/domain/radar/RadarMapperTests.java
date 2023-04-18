@@ -1,5 +1,11 @@
 package com.a5lab.axion.domain.radar;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.a5lab.axion.domain.ring.Ring;
+import com.a5lab.axion.domain.segment.Segment;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -8,38 +14,59 @@ class RadarMapperTests {
 
   private final RadarMapper mapper = Mappers.getMapper(RadarMapper.class);
 
-  /* TODO
   @Test
   void testToDtoWithNull() {
-    final var tenantDto = mapper.toDto(null);
+    final var radarDto = mapper.toDto(null);
+//    List<Ring> ringList = ringList.getRingList();
+//    List<Segment> segmentList = mapper.toDto(null).getSegmentList();
+//    List<TechnologyBlip> technologyBlipList = mapper.toDto(null).getTechnologyBlipList();
 
-    Assertions.assertNull(tenantDto);
+    Assertions.assertNull(radarDto);
+//    Assertions.assertNull(ringList);
+//    Assertions.assertNull(segmentList);
+//    Assertions.assertNull(technologyBlipList);
+
   }
 
   @Test
   void testToDtoAllFields() {
-    final Radar tenant = new Radar(0L, "title", "desciption");
-    final var tenantDto = mapper.toDto(tenant);
+    final Radar radar = new Radar();
+    radar.setId(0L);
+    radar.setTitle("My title");
+    radar.setDescription("My description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    final var radarDto = mapper.toDto(radar);
+    List<Ring> ringList = new ArrayList<>();
+    List<Segment> segmentList = new ArrayList<>();
+    List<TechnologyBlip> technologyBlipList = new ArrayList<>();
 
-    Assertions.assertEquals(tenantDto.getTitle(), tenant.getTitle());
-    Assertions.assertEquals(tenantDto.getDescription(), tenant.getDescription());
+    Assertions.assertEquals(radarDto.getTitle(), radar.getTitle());
+    Assertions.assertEquals(radarDto.getDescription(), radar.getDescription());
+    Assertions.assertNotNull(ringList);
+    Assertions.assertNotNull(segmentList);
+    Assertions.assertNotNull(technologyBlipList);
   }
 
   @Test
   void testToEntityWithNull() {
-    final var tenant = mapper.toEntity(null);
+    final var radar = mapper.toEntity(null);
 
-    Assertions.assertNull(tenant);
+    Assertions.assertNull(radar);
   }
 
   @Test
   void testToEntityAllFields() {
-    final RadarDto tenantDto = new RadarDto(0L, "my title1", "my description1");
-    final var tenant = mapper.toEntity(tenantDto);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(0L);
+    radarDto.setTitle("My title1");
+    radarDto.setDescription("My description1");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+    final var radar = mapper.toEntity(radarDto);
 
-    Assertions.assertEquals(tenant.getId(), tenantDto.getId());
-    Assertions.assertEquals(tenant.getTitle(), tenantDto.getTitle());
-    Assertions.assertEquals(tenant.getDescription(), tenantDto.getDescription());
+    Assertions.assertEquals(radar.getId(), radarDto.getId());
+    Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
+    Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
   }
-  */
 }
