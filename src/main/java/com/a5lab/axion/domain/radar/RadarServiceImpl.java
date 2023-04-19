@@ -69,12 +69,6 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional
-  public Radar save(Radar radar) {
-    return radarRepository.save(radar);
-  }
-
-  @Override
-  @Transactional
   public RadarDto save(RadarDto radarDto) {
     return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
   }

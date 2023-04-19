@@ -14,14 +14,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
-import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.radar.WizardDto;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
 import com.a5lab.axion.domain.technology.TechnologyService;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
 
 @RequiredArgsConstructor
@@ -32,21 +33,20 @@ public class WizardServiceImpl implements WizardService {
   private final RadarService radarService;
   private final RingService ringService;
   private final SegmentService segmentService;
-
   private final TechnologyService technologyService;
   private final TechnologyBlipService technologyBlipService;
 
-  private Radar radar;
+  private RadarDto radarDto;
 
   @Override
   @Transactional
-  public void createRadarEnv(Wizard wizard) throws Exception {
-    this.createRadar(wizard);
+  public void createRadarEnv(WizardDto wizardDto) throws Exception {
+    this.createRadar(wizardDto);
     this.createRings();
     this.createSegments();
     this.createTechnologyBlips();
-    this.radar.setActive(true);
-    this.radarService.save(this.radar);
+    this.radarDto.setActive(true);
+    this.radarService.save(this.radarDto);
 
     /*
     switch (radars.getRadarType().getCode()) {
@@ -71,7 +71,7 @@ public class WizardServiceImpl implements WizardService {
     */
   }
 
-  public void createRadar(Wizard wizard) throws Exception {
+  public void createRadar(WizardDto wizardDto) throws Exception {
     // Read radars
     URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/radars_en.csv");
     String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
@@ -82,13 +82,13 @@ public class WizardServiceImpl implements WizardService {
         .withCSVParser(new CSVParserBuilder().withSeparator('|').build())
         .withSkipLines(1).build();
     while ((record = csvReader.readNext()) != null) {
-      Radar radar = new Radar();
-      radar.setRadarType(wizard.getRadarType());
+      RadarDto radar = new RadarDto();
+      radar.setRadarType(wizardDto.getRadarType());
       radar.setTitle(record[0]);
       radar.setDescription(record[1]);
       radar.setPrimary(Boolean.valueOf(record[2]));
       radar.setActive(Boolean.valueOf(record[3]));
-      this.radar = radarService.save(radar);
+      this.radarDto = radarService.save(radar);
     }
   }
 
@@ -104,7 +104,7 @@ public class WizardServiceImpl implements WizardService {
         .withSkipLines(1).build();
     while ((record = csvReader.readNext()) != null) {
       RingDto ringDto = new RingDto();
-      ringDto.setRadar(radar);
+      ringDto.setRadar(radarDto);
       ringDto.setTitle(record[0]);
       ringDto.setDescription(record[1]);
       ringDto.setPosition(Integer.parseInt(record[2]));
@@ -126,7 +126,7 @@ public class WizardServiceImpl implements WizardService {
         .withSkipLines(1).build();
     while ((record = csvReader.readNext()) != null) {
       SegmentDto segmentDto = new SegmentDto();
-      segmentDto.setRadar(radar);
+      segmentDto.setRadar(radarDto);
       segmentDto.setTitle(record[0]);
       segmentDto.setDescription(record[1]);
       segmentDto.setPosition(Integer.parseInt(record[2]));
@@ -151,12 +151,12 @@ public class WizardServiceImpl implements WizardService {
       final String segmentTitle = record[2];
       final String technologyTitle = record[3];
 
-      TechnologyBlip technologyBlip = new TechnologyBlip();
-      technologyBlip.setRadar(this.radar);
-      technologyBlip.setRing(ringService.findByTitle(ringTitle).get());
-      technologyBlip.setSegment(segmentService.findByTitle(segmentTitle).get());
-      technologyBlip.setTechnology(technologyService.findByTitle(technologyTitle).get());
-      technologyBlipService.save(technologyBlip);
+      TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
+      technologyBlipDto.setRadar(this.radarDto);
+      technologyBlipDto.setRing(ringService.findByTitle(ringTitle).get());
+      technologyBlipDto.setSegment(segmentService.findByTitle(segmentTitle).get());
+      technologyBlipDto.setTechnology(technologyService.findByTitle(technologyTitle).get());
+      technologyBlipService.save(technologyBlipDto);
     }
   }
 }

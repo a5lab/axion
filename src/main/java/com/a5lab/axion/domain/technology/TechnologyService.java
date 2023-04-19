@@ -14,7 +14,7 @@ public interface TechnologyService {
 
   Optional<TechnologyDto> findById(Long id);
 
-  Optional<Technology> findByTitle(String title);
+  Optional<TechnologyDto> findByTitle(String title);
 
   TechnologyDto save(TechnologyDto technologyDto);
 

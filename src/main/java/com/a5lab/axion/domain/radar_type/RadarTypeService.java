@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 
 public interface RadarTypeService {
 
-  Collection<RadarType> findAll();
+  Collection<RadarTypeDto> findAll();
 
-  Page<RadarType> findAll(Pageable pageable);
+  Page<RadarTypeDto> findAll(Pageable pageable);
 
   Optional<RadarType> findById(Long id);
 }

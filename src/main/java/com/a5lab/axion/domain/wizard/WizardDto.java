@@ -21,27 +21,9 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class RadarDto {
-
-  private Long id;
+public class WizardDto {
 
   @NotNull
   private RadarTypeDto radarType;
 
-  @NotBlank
-  @Size(min = 1, max = 64)
-  private String title;
-
-  @NotBlank
-  private String description;
-
-  private boolean primary;
-
-  private boolean active = true;
-
-  private List<RingDto> ringList;
-
-  private List<SegmentDto> segmentList;
-
-  private List<TechnologyBlipDto> technologyBlipList;
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.axion.domain.radar.WizardDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 import com.a5lab.axion.utils.FlashMessages;
 
@@ -30,24 +31,24 @@ public class WizardController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("wizard/add");
-    modelAndView.addObject("wizard", new Wizard());
+    modelAndView.addObject("wizard", new WizardDto());
     modelAndView.addObject("radar_types", radarTypeService.findAll());
     return modelAndView;
   }
 
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid Wizard wizard, BindingResult bindingResult,
+  public ModelAndView create(@Valid WizardDto wizardDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("wizard/add");
-      modelAndView.addObject("wizard", new Wizard());
+      modelAndView.addObject("wizard", new WizardDto());
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
 
     try {
-      wizardService.createRadarEnv(wizard);
+      wizardService.createRadarEnv(wizardDto);
 
       // Redirect
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
