@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.technology.TechnologyDto;
@@ -32,7 +32,7 @@ public class TechnologyBlipDto {
   @JsonProperty("radar_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private Radar radar;
+  private RadarDto radar;
 
   @JsonProperty("technology_id")
   @JsonIdentityReference(alwaysAsId = true)
