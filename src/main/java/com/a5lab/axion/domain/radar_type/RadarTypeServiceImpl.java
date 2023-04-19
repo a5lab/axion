@@ -2,6 +2,7 @@ package com.a5lab.axion.domain.radar_type;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,26 +15,27 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class RadarTypeServiceImpl implements RadarTypeService {
-
   private final RadarTypeRepository radarTypeRepository;
+  private final RadarTypeMapper radarTypeMapper;
+
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<RadarType> findAll() {
-    return radarTypeRepository.findAll(
-        Sort.by(Sort.Direction.ASC, "title"));
+  public Collection<RadarTypeDto> findAll() {
+    return radarTypeRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
+        .stream().map(radarTypeMapper::toDto).collect(Collectors.toList());
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Page<RadarType> findAll(Pageable pageable) {
-    return radarTypeRepository.findAll(pageable);
+  public Page<RadarTypeDto> findAll(Pageable pageable) {
+    return radarTypeRepository.findAll(pageable).map(radarTypeMapper::toDto);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<RadarType> findById(Long id) {
-    return radarTypeRepository.findById(id);
+  public Optional<RadarTypeDto> findById(Long id) {
+    return radarTypeRepository.findById(id).map(radarTypeMapper::toDto);
   }
 
 }

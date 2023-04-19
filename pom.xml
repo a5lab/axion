@@ -234,6 +234,8 @@
                     <excludes>
                         <exclude>**/RadarMapperImpl.java</exclude>
                         <exclude>**/RingMapperImpl.java</exclude>
+                        <exclude>**/SegmentMapperImpl.java</exclude>
+                        <exclude>**/TechnologyBlipMapperImpl.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>

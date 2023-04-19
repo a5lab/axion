@@ -12,5 +12,5 @@ public interface RadarTypeService {
 
   Page<RadarTypeDto> findAll(Pageable pageable);
 
-  Optional<RadarType> findById(Long id);
+  Optional<RadarTypeDto> findById(Long id);
 }

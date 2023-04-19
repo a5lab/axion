@@ -16,7 +16,6 @@ import org.springframework.util.ResourceUtils;
 
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.radar.WizardDto;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;

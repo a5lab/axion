@@ -53,8 +53,8 @@ public class TechnologyServiceImpl implements TechnologyService {
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<Technology> findByTitle(String title) {
-    return technologyRepository.findByTitle(title);
+  public Optional<TechnologyDto> findByTitle(String title) {
+    return technologyRepository.findByTitle(title).map(technologyMapper::toDto);
   }
 
   @Override

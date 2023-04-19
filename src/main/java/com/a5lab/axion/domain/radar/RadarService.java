@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface RadarService {
 
-  Collection<RadarDtoDto> findAll();
+  Collection<RadarDto> findAll();
 
   Page<RadarDto> findAll(RadarFilter radarFilter, Pageable pageable);
 

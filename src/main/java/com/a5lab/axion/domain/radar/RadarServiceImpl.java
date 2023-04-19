@@ -26,8 +26,9 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Radar> findAll() {
-    return radarRepository.findAll(Sort.by(Sort.Direction.ASC, "title"));
+  public Collection<RadarDto> findAll() {
+    return radarRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
+        .stream().map(radarMapper::toDto).collect(Collectors.toList());
   }
 
   @Override

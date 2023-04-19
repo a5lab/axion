@@ -49,8 +49,8 @@ public class RingServiceImpl implements RingService {
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<Ring> findByTitle(String title) {
-    return ringRepository.findByTitle(title);
+  public Optional<RingDto> findByTitle(String title) {
+    return ringRepository.findByTitle(title).map(ringMapper::toDto);
   }
 
   @Override
