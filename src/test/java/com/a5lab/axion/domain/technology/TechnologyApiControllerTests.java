@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Arrays;
 
-
 import com.a5lab.axion.domain.AbstractControllerTests;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,12 +24,12 @@ public class TechnologyApiControllerTests extends AbstractControllerTests {
   private TechnologyService technologyService;
 
   @Test
-  public void shouldGetTenants() throws Exception {
+  public void shouldGetTechnologies() throws Exception {
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(10L);
     technologyDto.setTitle("My title");
     technologyDto.setDescription("My description");
-    technologyDto.setWebsite("my website");
+    technologyDto.setWebsite("My website");
     technologyDto.setMoved(1);
     technologyDto.setActive(true);
 

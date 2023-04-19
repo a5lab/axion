@@ -29,6 +29,7 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
   public void shouldGetSegments() throws Exception {
     final Radar radar = new Radar();
     radar.setId(1L);
+
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
     segmentDto.setRadar(radar);

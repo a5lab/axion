@@ -3,6 +3,7 @@ package com.a5lab.axion.domain.technology;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonPropertyOrder({"id", "title", "website", "description", "moved", "active" })
 public class TechnologyDto {
 
   private Long id;
