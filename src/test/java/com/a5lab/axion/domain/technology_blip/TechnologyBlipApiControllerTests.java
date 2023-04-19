@@ -10,13 +10,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Arrays;
 
-
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.technology.TechnologyDto;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -32,9 +31,17 @@ public class TechnologyBlipApiControllerTests extends AbstractControllerTests {
   @Test
   public void shouldGetTechnologyBlips() throws Exception {
     final Radar radar = new Radar();
-    final SegmentDto segmentDto = new SegmentDto();
-    final RingDto ringDto = new RingDto();
+    radar.setId(1L);
+
     final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(4L);
+
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(2L);
+
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(3L);
+
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
     technologyBlipDto.setRadar(radar);
@@ -50,9 +57,9 @@ public class TechnologyBlipApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$").isArray())
         .andExpect(jsonPath("$", hasSize(technologyBlipDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(technologyBlipDto.getId()), Long.class))
-        .andExpect(jsonPath("$[0].radar.id", equalTo(technologyBlipDto.getRadar().getId()), Long.class))
-        .andExpect(jsonPath("$[0].ring.id", equalTo(technologyBlipDto.getRing().getId()), Long.class))
-        .andExpect(jsonPath("$[0].technology.id", equalTo(technologyBlipDto.getTechnology().getId()), Long.class))
-        .andExpect(jsonPath("$[0].segment.id", equalTo(technologyBlipDto.getSegment().getId()), Long.class));
+        .andExpect(jsonPath("$[0].radar_id", equalTo(technologyBlipDto.getRadar().getId()), Long.class))
+        .andExpect(jsonPath("$[0].technology_id", equalTo(technologyBlipDto.getTechnology().getId()), Long.class))
+        .andExpect(jsonPath("$[0].segment_id", equalTo(technologyBlipDto.getSegment().getId()), Long.class))
+        .andExpect(jsonPath("$[0].ring_id", equalTo(technologyBlipDto.getRing().getId()), Long.class));
   }
 }
