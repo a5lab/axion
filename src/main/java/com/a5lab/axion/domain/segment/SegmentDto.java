@@ -7,6 +7,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,11 +26,15 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonPropertyOrder({"id", "radar_id", "title", "description", "position", "active" })
 public class SegmentDto {
 
   private Long id;
 
   @NotNull
+  @JsonProperty("radar_id")
+  @JsonIdentityReference(alwaysAsId = true)
+  @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
   private Radar radar;
 
   @NotBlank
