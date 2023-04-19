@@ -1,15 +1,12 @@
 package com.a5lab.axion.domain.radar_type;
 
 import jakarta.validation.constraints.NotBlank;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import com.a5lab.axion.domain.radar.RadarDto;
 
 @Getter
 @Setter
@@ -28,6 +25,5 @@ public class RadarTypeDto {
 
   private String description;
 
-  private List<RadarDto> radarList;
-
+  // private List<RadarDto> radarList;
 }
