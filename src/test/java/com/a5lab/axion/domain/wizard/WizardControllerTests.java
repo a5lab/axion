@@ -11,11 +11,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
-
-import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 import com.a5lab.axion.domain.radar.Radar;
+
+import com.a5lab.axion.domain.AbstractControllerTests;
 
 @WebMvcTest(WizardController.class)
 public class WizardControllerTests extends AbstractControllerTests {
@@ -45,7 +45,7 @@ public class WizardControllerTests extends AbstractControllerTests {
     final Radar radar = new Radar();
     radar.setRadarType(radarType);
     radar.setTitle("My radars title");
-    radar.setDescription("My radars desciption");
+    radar.setDescription("My radars description");
     radar.setPrimary(true);
     radar.setActive(true);
 
@@ -64,5 +64,26 @@ public class WizardControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
   }
 
+  @Test
+  public void shouldFailToCreateRadar() throws Exception {
+    final RadarType radarType = new RadarType();
+    radarType.setId(10L);
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
 
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My radars title");
+    radar.setDescription("My radars description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
+    MvcResult result = mockMvc.perform(post("/wizard/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .sessionAttr("tenantDto", radar))
+        .andExpect(status().isOk())
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+
+  }
 }
