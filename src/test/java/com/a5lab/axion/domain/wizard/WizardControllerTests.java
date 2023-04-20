@@ -84,6 +84,5 @@ public class WizardControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-
   }
 }
