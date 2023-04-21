@@ -9,9 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
-import java.util.List;
 
-import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -29,8 +28,8 @@ public class RadarApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetRadars() throws Exception {
-    final RadarType radarType = new RadarType();
-    final RadarDto radarDto = new RadarDto(10L, radarType, "My title", "My description", true, false, null, null, null);
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    final RadarDto radarDto = new RadarDto(10L, radarTypeDto, "My title", "My description", true, false, null, null, null);
     Page<RadarDto> radarDtoPage = new PageImpl<>(Arrays.asList(radarDto));
     Mockito.when(radarService.findAll(any(), any())).thenReturn(radarDtoPage);
 

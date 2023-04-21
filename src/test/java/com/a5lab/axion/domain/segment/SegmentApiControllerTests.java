@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,12 +27,12 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetSegments() throws Exception {
-    final Radar radar = new Radar();
-    radar.setId(1L);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(1L);
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radar);
+    segmentDto.setRadar(radarDto);
     segmentDto.setTitle("My title");
     segmentDto.setDescription("My description");
     segmentDto.setPosition(1);

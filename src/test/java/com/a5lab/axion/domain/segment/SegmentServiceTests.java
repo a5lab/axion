@@ -102,13 +102,13 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setActive(true);
 
     Mockito.when(segmentRepository.findByTitle(segment.getTitle())).thenReturn(Optional.of(segment));
-    Optional<Segment> segmentOptional = segmentService.findByTitle(segment.getTitle());
 
-    Assertions.assertTrue(segmentOptional.isPresent());
-    Assertions.assertEquals(segment.getId(), segmentOptional.get().getId());
-    Assertions.assertEquals(segment.getTitle(), segmentOptional.get().getTitle());
-    Assertions.assertEquals(segment.getDescription(), segmentOptional.get().getDescription());
-    Assertions.assertEquals(segment.getPosition(), segmentOptional.get().getPosition());
+    Optional<SegmentDto> segmentDtoOptional = segmentService.findByTitle(segment.getTitle());
+    Assertions.assertTrue(segmentDtoOptional.isPresent());
+    Assertions.assertEquals(segment.getId(), segmentDtoOptional.get().getId());
+    Assertions.assertEquals(segment.getTitle(), segmentDtoOptional.get().getTitle());
+    Assertions.assertEquals(segment.getDescription(), segmentDtoOptional.get().getDescription());
+    Assertions.assertEquals(segment.getPosition(), segmentDtoOptional.get().getPosition());
     Mockito.verify(segmentRepository).findByTitle(segment.getTitle());
   }
 

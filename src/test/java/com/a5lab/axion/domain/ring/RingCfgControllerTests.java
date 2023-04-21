@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 
 import org.junit.jupiter.api.Assertions;
@@ -25,6 +26,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 
 @WebMvcTest(RingCfgController.class)
 public class RingCfgControllerTests extends AbstractControllerTests {
@@ -37,13 +39,13 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldGetRings() throws Exception {
     // Create radar
-    final Radar radar = new Radar();
-    radar.setTitle("My radar");
-    radar.setDescription("My radar description");
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setTitle("My radar");
+    radarDto.setDescription("My radar description");
 
     // Create ring for radar
     final RingDto ringDto = new RingDto();
-    ringDto.setRadar(radar);
+    ringDto.setRadar(radarDto);
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -135,24 +137,24 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldCreateRing() throws Exception {
     // Create a radar type
-    final RadarType radarType = new RadarType();
-    radarType.setId(1L);
-    radarType.setTitle("Technology radars 1");
-    radarType.setCode("technology_radar_1");
-    radarType.setDescription("Technology radars");
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(1L);
+    radarTypeDto.setTitle("Technology radars 1");
+    radarTypeDto.setCode("technology_radar_1");
+    radarTypeDto.setDescription("Technology radars");
 
     // Create a radar
-    final Radar radar = new Radar();
-    radar.setId(2L);
-    radar.setRadarType(radarType);
-    radar.setTitle("My new test Radar");
-    radar.setDescription("My awesome description");
-    radar.setPrimary(false);
-    radar.setActive(false);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(2L);
+    radarDto.setRadarType(radarTypeDto);
+    radarDto.setTitle("My new test Radar");
+    radarDto.setDescription("My awesome description");
+    radarDto.setPrimary(false);
+    radarDto.setActive(false);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radar);
+    ringDto.setRadar(radarDto);
     ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -230,24 +232,24 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldUpdateRing() throws Exception {
     // Create a radar type
-    final RadarType radarType = new RadarType();
-    radarType.setId(1L);
-    radarType.setTitle("Technology radars 1");
-    radarType.setCode("technology_radar_1");
-    radarType.setDescription("Technology radars");
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(1L);
+    radarTypeDto.setTitle("Technology radars 1");
+    radarTypeDto.setCode("technology_radar_1");
+    radarTypeDto.setDescription("Technology radars");
 
     // Create a radar
-    final Radar radar = new Radar();
-    radar.setId(2L);
-    radar.setRadarType(radarType);
-    radar.setTitle("My new test Radar");
-    radar.setDescription("My awesome description");
-    radar.setPrimary(false);
-    radar.setActive(false);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(2L);
+    radarDto.setRadarType(radarTypeDto);
+    radarDto.setTitle("My new test Radar");
+    radarDto.setDescription("My awesome description");
+    radarDto.setPrimary(false);
+    radarDto.setActive(false);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radar);
+    ringDto.setRadar(radarDto);
     ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");

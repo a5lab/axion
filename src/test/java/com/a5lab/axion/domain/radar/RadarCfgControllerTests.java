@@ -1,7 +1,7 @@
 package com.a5lab.axion.domain.radar;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 
 import org.junit.jupiter.api.Assertions;
@@ -33,16 +33,16 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldGetRadars() throws Exception {
     //Create radarType
-    final RadarType radarType = new RadarType();
-    radarType.setId(10L);
-    radarType.setDescription("My Description");
-    radarType.setTitle("My title");
-    radarType.setCode("My code");
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setDescription("My Description");
+    radarTypeDto.setTitle("My title");
+    radarTypeDto.setCode("My code");
 
     //Create radar for radarType
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(radarType);
+    radarDto.setRadarType(radarTypeDto);
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -109,15 +109,15 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldCreateRadar() throws Exception {
-    final RadarType radarType = new RadarType();
-    radarType.setId(10L);
-    radarType.setDescription("My Description");
-    radarType.setTitle("My title");
-    radarType.setCode("My code");
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setDescription("My Description");
+    radarTypeDto.setTitle("My title");
+    radarTypeDto.setCode("My code");
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(radarType);
+    radarDto.setRadarType(radarTypeDto);
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -132,8 +132,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
         .andReturn();
-
-    String content = result.getResponse().getContentAsString();
   }
 
   @Test
@@ -188,15 +186,15 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldUpdateRadar() throws Exception {
-    final RadarType radarType = new RadarType();
-    radarType.setId(10L);
-    radarType.setDescription("My Description");
-    radarType.setTitle("My title");
-    radarType.setCode("My code");
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setDescription("My Description");
+    radarTypeDto.setTitle("My title");
+    radarTypeDto.setCode("My code");
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(radarType);
+    radarDto.setRadarType(radarTypeDto);
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -211,8 +209,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
         .andReturn();
-
-    String content = result.getResponse().getContentAsString();
   }
 
   @Test

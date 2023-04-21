@@ -2,8 +2,10 @@ package com.a5lab.axion.domain.segment;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,14 +34,13 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     @Test
     public void shouldGetSegments() throws Exception {
-
-        final Radar radar = new Radar();
-        radar.setTitle("My radar");
-        radar.setDescription("My radar description");
+        final RadarDto radarDto = new RadarDto();
+        radarDto.setTitle("My radar");
+        radarDto.setDescription("My radar description");
 
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(radar);
+        segmentDto.setRadar(radarDto);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
@@ -107,23 +108,23 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     @Test
     public void shouldCreateSegment() throws Exception {
-        final RadarType radarType = new RadarType();
-        radarType.setId(1L);
-        radarType.setTitle("Technology radars 1");
-        radarType.setCode("technology_radar_1");
-        radarType.setDescription("Technology radars");
+        final RadarTypeDto radarTypeDto = new RadarTypeDto();
+        radarTypeDto.setId(1L);
+        radarTypeDto.setTitle("Technology radars 1");
+        radarTypeDto.setCode("technology_radar_1");
+        radarTypeDto.setDescription("Technology radars");
 
-        final Radar radar = new Radar();
-        radar.setId(2L);
-        radar.setRadarType(radarType);
-        radar.setTitle("My test Radar");
-        radar.setDescription("My description");
-        radar.setPrimary(false);
-        radar.setActive(false);
+        final RadarDto radarDto = new RadarDto();
+        radarDto.setId(2L);
+        radarDto.setRadarType(radarTypeDto);
+        radarDto.setTitle("My test Radar");
+        radarDto.setDescription("My description");
+        radarDto.setPrimary(false);
+        radarDto.setActive(false);
 
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(radar);
+        segmentDto.setRadar(radarDto);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
@@ -138,8 +139,6 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/settings/segments"))
                 .andReturn();
-
-        String content = result.getResponse().getContentAsString();
     }
 
     @Test
@@ -197,23 +196,23 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     @Test
     public void shouldUpdateSegment() throws Exception {
-        final RadarType radarType = new RadarType();
-        radarType.setId(1L);
-        radarType.setTitle("Technology radars 1");
-        radarType.setCode("technology_radar_1");
-        radarType.setDescription("Technology radars");
+        final RadarTypeDto radarTypeDto = new RadarTypeDto();
+        radarTypeDto.setId(1L);
+        radarTypeDto.setTitle("Technology radars 1");
+        radarTypeDto.setCode("technology_radar_1");
+        radarTypeDto.setDescription("Technology radars");
 
-        final Radar radar = new Radar();
-        radar.setId(2L);
-        radar.setRadarType(radarType);
-        radar.setTitle("My test Radar");
-        radar.setDescription("My description");
-        radar.setPrimary(false);
-        radar.setActive(false);
+        final RadarDto radarDto = new RadarDto();
+        radarDto.setId(2L);
+        radarDto.setRadarType(radarTypeDto);
+        radarDto.setTitle("My test Radar");
+        radarDto.setDescription("My description");
+        radarDto.setPrimary(false);
+        radarDto.setActive(false);
 
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(radar);
+        segmentDto.setRadar(radarDto);
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);

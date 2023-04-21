@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,14 +28,14 @@ public class RingApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetRings() throws Exception {
-    final Radar radar = new Radar();
-    radar.setId(12L);
-    radar.setTitle("My radar");
-    radar.setDescription("My radar description");
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(12L);
+    radarDto.setTitle("My radar");
+    radarDto.setDescription("My radar description");
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radar);
+    ringDto.setRadar(radarDto);
     ringDto.setTitle("My title");
     ringDto.setDescription("My description");
     Page<RingDto> ringDtoPage = new PageImpl<>(Arrays.asList(ringDto));

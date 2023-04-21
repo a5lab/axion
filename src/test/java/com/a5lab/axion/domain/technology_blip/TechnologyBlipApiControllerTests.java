@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.technology.TechnologyDto;
@@ -30,8 +31,8 @@ public class TechnologyBlipApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetTechnologyBlips() throws Exception {
-    final Radar radar = new Radar();
-    radar.setId(1L);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(1L);
 
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(4L);
@@ -44,7 +45,7 @@ public class TechnologyBlipApiControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRadar(radarDto);
     technologyBlipDto.setRing(ringDto);
     technologyBlipDto.setTechnology(technologyDto);
     technologyBlipDto.setSegment(segmentDto);
