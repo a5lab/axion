@@ -8,12 +8,11 @@ import org.mapstruct.BeforeMapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.TargetType;
 
-public abstract class CycleAvoidingEntityToDtoMapper<E, D> implements EntityToDtoMapper<E, D> {
+public abstract class CycleTrackingMapper<E, D> implements PlainMapper<E, D> {
 
   private static final Map<Object, Object> KNOWN_INSTANCES =
-      new ReferenceIdentityMap<>(
-          AbstractReferenceMap.ReferenceStrength.WEAK, AbstractReferenceMap.ReferenceStrength.WEAK,
-          true);
+      new ReferenceIdentityMap<>(AbstractReferenceMap.ReferenceStrength.WEAK,
+          AbstractReferenceMap.ReferenceStrength.WEAK, true);
 
   @BeforeMapping
   protected D getMappedInstance(E source, @TargetType Class<D> targetType) {
