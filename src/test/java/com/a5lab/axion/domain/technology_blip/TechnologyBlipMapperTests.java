@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.technology.Technology;
@@ -80,17 +81,17 @@ class TechnologyBlipMapperTests {
 
   @Test
   void testToEntityAllFields() {
-    final Radar radar = new Radar();
-    radar.setId(10L);
-    radar.setRadarType(null);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar Description");
-    radar.setPrimary(true);
-    radar.setActive(true);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarType(null);
+    radarDto.setTitle("My radar title");
+    radarDto.setDescription("My radar Description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radar);
+    segmentDto.setRadar(radarDto);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment Description");
     segmentDto.setPosition(0);
@@ -98,7 +99,7 @@ class TechnologyBlipMapperTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radar);
+    ringDto.setRadar(radarDto);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setColor("My ring color");
@@ -114,7 +115,7 @@ class TechnologyBlipMapperTests {
 
     final TechnologyBlipDto technology_blipDto = new TechnologyBlipDto();
     technology_blipDto.setId(10L);
-    technology_blipDto.setRadar(radar);
+    technology_blipDto.setRadar(radarDto);
     technology_blipDto.setSegment(segmentDto);
     technology_blipDto.setRing(ringDto);
     technology_blipDto.setTechnology(technologyDto);

@@ -237,14 +237,14 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToCreateTechnologyBlip() throws Exception {
-    final Radar radar = new Radar();
-    radar.setId(10L);
-    radar.setTitle("My radar");
-    radar.setDescription("My radar description");
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setTitle("My radar");
+    radarDto.setDescription("My radar description");
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radar);
+    segmentDto.setRadar(radarDto);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -252,7 +252,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radar);
+    ringDto.setRadar(radarDto);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -269,7 +269,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRadar(radarDto);
     technologyBlipDto.setRing(ringDto);
     technologyBlipDto.setTechnology(technologyDto);
     technologyBlipDto.setSegment(segmentDto);
