@@ -19,7 +19,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import com.a5lab.axion.domain.radar.RadarDto;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
 @Getter
 @Setter
@@ -50,6 +50,6 @@ public class SegmentDto {
 
   private boolean active = true;
 
-  private List<TechnologyBlip> technologyBlipList;
+  private List<TechnologyBlipDto> technologyBlipList;
 
 }
