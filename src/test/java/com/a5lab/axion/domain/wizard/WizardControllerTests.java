@@ -5,17 +5,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeService;
+import com.a5lab.axion.domain.radar.Radar;
+
+import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
-import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.radar_type.RadarTypeService;
-import com.a5lab.axion.domain.radar.Radar;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(WizardController.class)
 public class WizardControllerTests extends AbstractControllerTests {
@@ -59,6 +62,7 @@ public class WizardControllerTests extends AbstractControllerTests {
             .sessionAttr("tenantDto", radar))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/home"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -81,6 +85,7 @@ public class WizardControllerTests extends AbstractControllerTests {
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .sessionAttr("tenantDto", radar))
         .andExpect(status().isOk())
+//        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to create radar due to error."))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
