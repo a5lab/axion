@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-class TenantMapperTests {
+import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.AbstractMapperTests;
+
+class TenantMapperTests  extends AbstractMapperTests {
 
   private final TenantMapper mapper = Mappers.getMapper(TenantMapper.class);
 

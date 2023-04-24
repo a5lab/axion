@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-class RingMapperTests {
+import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.AbstractMapperTests;
+
+class RingMapperTests  extends AbstractMapperTests {
 
   private final RingMapper mapper = Mappers.getMapper(RingMapper.class);
 

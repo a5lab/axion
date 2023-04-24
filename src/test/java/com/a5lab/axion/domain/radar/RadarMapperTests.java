@@ -3,6 +3,8 @@ package com.a5lab.axion.domain.radar;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
@@ -10,7 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-class RadarMapperTests {
+class RadarMapperTests  extends AbstractMapperTests {
 
   private final RadarMapper mapper = Mappers.getMapper(RadarMapper.class);
 

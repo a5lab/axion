@@ -1,5 +1,7 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.technology.Technology;
@@ -11,7 +13,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-class TechnologyBlipMapperTests {
+class TechnologyBlipMapperTests  extends AbstractMapperTests {
 
   private final TechnologyBlipMapper mapper = Mappers.getMapper(TechnologyBlipMapper.class);
 
