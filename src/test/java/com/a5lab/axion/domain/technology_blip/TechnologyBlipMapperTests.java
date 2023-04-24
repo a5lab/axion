@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.technology.Technology;
@@ -9,11 +10,15 @@ import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.technology.TechnologyDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 
-class TechnologyBlipMapperTests {
+class TechnologyBlipMapperTests extends AbstractMapperTests {
 
-  private final TechnologyBlipMapper mapper = Mappers.getMapper(TechnologyBlipMapper.class);
+  // private final TechnologyBlipMapper mapper = Mappers.getMapper(TechnologyBlipMapper.class);
+
+  @Autowired
+  private TechnologyBlipMapper mapper;
+
 
   @Test
   void testToDtoWithNull() {

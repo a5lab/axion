@@ -10,7 +10,5 @@ class ApplicationIntegrationTests {
 
   @Test
   void contextLoads() {
-
   }
-
 }

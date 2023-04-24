@@ -8,11 +8,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.a5lab.axion.config.ApplicationTestBaseConfig;
 import com.a5lab.axion.config.JpaAuditingConfiguration;
 
-@ApplicationTestBaseConfig
-// @SpringBootTest
-public abstract class AbstractServiceTests  extends AbstractAnyTests{
+@SpringBootTest
+public abstract class AbstractMapperTests  extends AbstractAnyTests{
 }
