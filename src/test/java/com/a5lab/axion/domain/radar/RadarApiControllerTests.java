@@ -29,7 +29,10 @@ public class RadarApiControllerTests extends AbstractControllerTests {
   @Test
   public void shouldGetRadars() throws Exception {
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(1L);
+
     final RadarDto radarDto = new RadarDto(10L, radarTypeDto, "My title", "My description", true, false, null, null, null);
+
     Page<RadarDto> radarDtoPage = new PageImpl<>(Arrays.asList(radarDto));
     Mockito.when(radarService.findAll(any(), any())).thenReturn(radarDtoPage);
 
@@ -38,6 +41,7 @@ public class RadarApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$").isArray())
         .andExpect(jsonPath("$", hasSize(radarDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(radarDto.getId()), Long.class))
+        .andExpect(jsonPath("$[0].radar_type_id", equalTo(radarDto.getRadarType().getId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(radarDto.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(radarDto.getDescription())))
         .andExpect(jsonPath("$[0].primary", equalTo(radarDto.isPrimary())));
