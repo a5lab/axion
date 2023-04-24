@@ -1,23 +1,34 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.ring.RingDto;
+import com.a5lab.axion.domain.ring.RingMapper;
 import com.a5lab.axion.domain.segment.SegmentDto;
+import com.a5lab.axion.domain.segment.SegmentMapper;
 import com.a5lab.axion.domain.technology.Technology;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.technology.TechnologyDto;
+import com.a5lab.axion.domain.technology.TechnologyMapper;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-class TechnologyBlipMapperTests {
+class TechnologyBlipMapperTests extends AbstractMapperTests {
 
-  private final TechnologyBlipMapper mapper = Mappers.getMapper(TechnologyBlipMapper.class);
+  private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
+  private final SegmentMapper segmentMapper = Mappers.getMapper(SegmentMapper.class);
+
+  private final TechnologyMapper technologyMapper = Mappers.getMapper(TechnologyMapper.class);
+
+  private final TechnologyBlipMapper technologyBlipMapper =
+      new TechnologyBlipMapperImpl(ringMapper, segmentMapper, technologyMapper);
 
   @Test
   void testToDtoWithNull() {
-    final var technologyBlipDto = mapper.toDto(null);
+    final var technologyBlipDto = technologyBlipMapper.toDto(null);
 
     Assertions.assertNull(technologyBlipDto);
   }
@@ -63,7 +74,7 @@ class TechnologyBlipMapperTests {
     technology_blip.setRing(ring);
     technology_blip.setTechnology(technology);
 
-    final var technologyBlipDto = mapper.toDto(technology_blip);
+    final var technologyBlipDto = technologyBlipMapper.toDto(technology_blip);
 
     Assertions.assertEquals(technologyBlipDto.getRadar().getId(), technology_blip.getRadar().getId());
     Assertions.assertEquals(technologyBlipDto.getSegment().getId(), technology_blip.getSegment().getId());
@@ -73,7 +84,7 @@ class TechnologyBlipMapperTests {
 
   @Test
   void testToEntityWithNull() {
-    final var technology_blip = mapper.toEntity(null);
+    final var technology_blip = technologyBlipMapper.toEntity(null);
 
     Assertions.assertNull(technology_blip);
   }
@@ -119,7 +130,7 @@ class TechnologyBlipMapperTests {
     technology_blipDto.setRing(ringDto);
     technology_blipDto.setTechnology(technologyDto);
 
-    final var technology_blip = mapper.toEntity(technology_blipDto);
+    final var technology_blip = technologyBlipMapper.toEntity(technology_blipDto);
 
     Assertions.assertEquals(technology_blip.getId(), technology_blipDto.getId());
     Assertions.assertEquals(technology_blip.getRadar().getId(), technology_blipDto.getRadar().getId());

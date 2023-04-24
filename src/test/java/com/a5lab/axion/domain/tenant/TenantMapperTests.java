@@ -4,13 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-class TenantMapperTests {
+import com.a5lab.axion.domain.AbstractMapperTests;
 
-  private final TenantMapper mapper = Mappers.getMapper(TenantMapper.class);
+class TenantMapperTests  extends AbstractMapperTests {
+
+  private final TenantMapper tenantMapper = Mappers.getMapper(TenantMapper.class);
 
   @Test
   void testToDtoWithNull() {
-    final var tenantDto = mapper.toDto(null);
+    final var tenantDto = tenantMapper.toDto(null);
 
     Assertions.assertNull(tenantDto);
   }
@@ -18,7 +20,7 @@ class TenantMapperTests {
   @Test
   void testToDtoAllFields() {
     final Tenant tenant = new Tenant(0L, "title", "desciption");
-    final var tenantDto = mapper.toDto(tenant);
+    final var tenantDto = tenantMapper.toDto(tenant);
 
     Assertions.assertEquals(tenantDto.getTitle(), tenant.getTitle());
     Assertions.assertEquals(tenantDto.getDescription(), tenant.getDescription());
@@ -26,7 +28,7 @@ class TenantMapperTests {
 
   @Test
   void testToEntityWithNull() {
-    final var tenant = mapper.toEntity(null);
+    final var tenant = tenantMapper.toEntity(null);
 
     Assertions.assertNull(tenant);
   }
@@ -34,7 +36,7 @@ class TenantMapperTests {
   @Test
   void testToEntityAllFields() {
     final TenantDto tenantDto = new TenantDto(0L, "my title1", "my description1");
-    final var tenant = mapper.toEntity(tenantDto);
+    final var tenant = tenantMapper.toEntity(tenantDto);
 
     Assertions.assertEquals(tenant.getId(), tenantDto.getId());
     Assertions.assertEquals(tenant.getTitle(), tenantDto.getTitle());

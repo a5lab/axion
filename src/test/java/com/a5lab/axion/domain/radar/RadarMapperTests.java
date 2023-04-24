@@ -3,6 +3,7 @@ package com.a5lab.axion.domain.radar;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
@@ -10,13 +11,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-class RadarMapperTests {
+class RadarMapperTests  extends AbstractMapperTests {
 
-  private final RadarMapper mapper = Mappers.getMapper(RadarMapper.class);
+  private final RadarMapper radarMapper = Mappers.getMapper(RadarMapper.class);
 
   @Test
   void testToDtoWithNull() {
-    final RadarDto radarDto = mapper.toDto(null);
+    final RadarDto radarDto = radarMapper.toDto(null);
 //    List<Ring> ringList = ringList.getRingList();
 //    List<Segment> segmentList = mapper.toDto(null).getSegmentList();
 //    List<TechnologyBlip> technologyBlipList = mapper.toDto(null).getTechnologyBlipList();
@@ -36,7 +37,7 @@ class RadarMapperTests {
     radar.setDescription("My description");
     radar.setPrimary(true);
     radar.setActive(true);
-    final var radarDto = mapper.toDto(radar);
+    final var radarDto = radarMapper.toDto(radar);
     List<Ring> ringList = new ArrayList<>();
     List<Segment> segmentList = new ArrayList<>();
     List<TechnologyBlip> technologyBlipList = new ArrayList<>();
@@ -50,7 +51,7 @@ class RadarMapperTests {
 
   @Test
   void testToEntityWithNull() {
-    final Radar radar = mapper.toEntity(null);
+    final Radar radar = radarMapper.toEntity(null);
 
     Assertions.assertNull(radar);
   }
@@ -63,7 +64,7 @@ class RadarMapperTests {
     radarDto.setDescription("My description1");
     radarDto.setPrimary(true);
     radarDto.setActive(true);
-    final Radar radar = mapper.toEntity(radarDto);
+    final Radar radar = radarMapper.toEntity(radarDto);
 
     Assertions.assertEquals(radar.getId(), radarDto.getId());
     Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
