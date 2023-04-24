@@ -4,16 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.AbstractMapperTests;
 
 class RingMapperTests  extends AbstractMapperTests {
 
-  private final RingMapper mapper = Mappers.getMapper(RingMapper.class);
+  private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
 
   @Test
   void testToDtoWithNull() {
-    final var ringDto = mapper.toDto(null);
+    final var ringDto = ringMapper.toDto(null);
 
     Assertions.assertNull(ringDto);
   }
@@ -28,7 +27,7 @@ class RingMapperTests  extends AbstractMapperTests {
     ring.setPosition(0);
     ring.setActive(true);
 
-    final var ringDto = mapper.toDto(ring);
+    final var ringDto = ringMapper.toDto(ring);
 
     Assertions.assertEquals(ringDto.getTitle(), ring.getTitle());
     Assertions.assertEquals(ringDto.getDescription(), ring.getDescription());
@@ -38,7 +37,7 @@ class RingMapperTests  extends AbstractMapperTests {
 
   @Test
   void testToEntityWithNull() {
-    final var ring = mapper.toEntity(null);
+    final var ring = ringMapper.toEntity(null);
 
     Assertions.assertNull(ring);
   }
@@ -51,7 +50,7 @@ class RingMapperTests  extends AbstractMapperTests {
     ringDto.setDescription("description1");
     ringDto.setColor("color1");
     ringDto.setPosition(0);
-    final var ring = mapper.toEntity(ringDto);
+    final var ring = ringMapper.toEntity(ringDto);
 
     Assertions.assertEquals(ring.getId(), ringDto.getId());
     Assertions.assertEquals(ring.getTitle(), ringDto.getTitle());
