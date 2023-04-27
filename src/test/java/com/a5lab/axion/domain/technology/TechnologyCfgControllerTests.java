@@ -1,8 +1,7 @@
 package com.a5lab.axion.domain.technology;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 import java.util.Optional;
@@ -76,9 +76,14 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectShowTechnology() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto();
+
+    Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
+
     MvcResult result = mockMvc.perform(get("/settings/technologies/show/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technologies"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid technology id."))
         .andReturn();
   }
 
@@ -97,7 +102,7 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateTechnologyOnBlankDescription() throws Exception {
+  public void shouldFailToCreateTechnology() throws Exception {
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(10L);
     technologyDto.setWebsite(null);
@@ -129,15 +134,18 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     technologyDto.setMoved(0);
     technologyDto.setActive(true);
 
+    Mockito.when(technologyService.save(technologyDto)).thenReturn(technologyDto);
+
     MvcResult result = mockMvc.perform(post("/settings/technologies/create")
-                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                    .param("website", technologyDto.getWebsite())
-                    .param("title", technologyDto.getTitle())
-                    .param("description", technologyDto.getDescription())
-                    .sessionAttr("technologyDto", technologyDto))
-            .andExpect(status().is3xxRedirection())
-            .andExpect(view().name("redirect:/settings/technologies"))
-            .andReturn();
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("website", technologyDto.getWebsite())
+            .param("title", technologyDto.getTitle())
+            .param("description", technologyDto.getDescription())
+            .sessionAttr("technologyDto", technologyDto))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/technologies"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology has been created successfully."))
+        .andReturn();
 
     String content = result.getResponse().getContentAsString();
   }
@@ -151,6 +159,7 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     technologyDto.setDescription("My technology description");
     technologyDto.setMoved(0);
     technologyDto.setActive(true);
+
     Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
 
     String url = String.format("/settings/technologies/edit/%d", technologyDto.getId());
@@ -164,9 +173,14 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
   }
   @Test
   public void shouldRedirectEditTechnology() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto();
+
+    Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
+
     MvcResult result = mockMvc.perform(get("/settings/technologies/edit/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technologies"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid technology id."))
         .andReturn();
   }
 
@@ -180,6 +194,8 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     technologyDto.setMoved(0);
     technologyDto.setActive(true);
 
+    Mockito.when(technologyService.save(technologyDto)).thenReturn(technologyDto);
+
     MvcResult result = mockMvc.perform(post("/settings/technologies/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("title", technologyDto.getTitle())
@@ -188,6 +204,7 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("technologyDto", technologyDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technologies"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology has been updated successfully."))
         .andReturn();
     String content = result.getResponse().getContentAsString();
   }
@@ -224,10 +241,13 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     technologyDto.setMoved(0);
     technologyDto.setActive(true);
 
+    Mockito.doAnswer((i) -> null).when(technologyService).deleteById(technologyDto.getId());
+
     String url = String.format("/settings/technologies/delete/%d", technologyDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technologies"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology has been deleted successfully."))
         .andReturn();
   }
 
