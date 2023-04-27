@@ -38,7 +38,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
        new TechnologyBlipServiceImpl(technologyBlipRepository, technologyBlipMapper);
 
   @Test
-  void shouldFindAllTechnologies() {
+  void shouldFindAllTechnologyBlips() {
     final Radar radar = new Radar();
     radar.setId(10L);
     radar.setTitle("My radar");
@@ -76,11 +76,10 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technologyBlip.setTechnology(technology);
     technologyBlip.setSegment(segment);
     List<TechnologyBlip> technologyBlipList = List.of(technologyBlip);
-    Mockito.when(technologyBlipRepository.findAll(any(Sort.class)))
-            .thenReturn(technologyBlipList);
 
-    Collection<TechnologyBlipDto> technologyBlipDtoCollection =
-        technologyBlipService.findAll();
+    Mockito.when(technologyBlipRepository.findAll(any(Sort.class))).thenReturn(technologyBlipList);
+
+    Collection<TechnologyBlipDto> technologyBlipDtoCollection = technologyBlipService.findAll();
     Assertions.assertEquals(1, technologyBlipDtoCollection.size());
     Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getId(), technologyBlip.getId());
     Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getRadar().getId(),
@@ -156,6 +155,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(technologyBlip.getRing().getId(), technologyBlipDtoOptional.get().getRing().getId());
     Assertions.assertEquals(technologyBlip.getSegment().getId(), technologyBlipDtoOptional.get().getSegment().getId());
     Assertions.assertEquals(technologyBlip.getTechnology().getId(), technologyBlipDtoOptional.get().getTechnology().getId());
+
     Mockito.verify(technologyBlipRepository).findById(technologyBlip.getId());
   }
 //
@@ -216,8 +216,9 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technologyBlip.setSegment(segment);
 
     Mockito.doAnswer((i) -> null).when(technologyBlipRepository).deleteById(technologyBlip.getId());
-    technologyBlipService.deleteById(technologyBlip.getId());
-    Mockito.verify(technologyBlipRepository).deleteById(technologyBlip.getId());
 
+    technologyBlipService.deleteById(technologyBlip.getId());
+
+    Mockito.verify(technologyBlipRepository).deleteById(technologyBlip.getId());
   }
 }
