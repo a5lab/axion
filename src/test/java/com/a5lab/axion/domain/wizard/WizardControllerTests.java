@@ -35,8 +35,8 @@ public class WizardControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get("/wizard/add"))
         .andExpect(status().isOk())
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("radar_type_id"));
   }
 
@@ -58,8 +58,6 @@ public class WizardControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/home"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
         .andReturn();
-
-    String content = result.getResponse().getContentAsString();
   }
 
   @Test
@@ -69,7 +67,8 @@ public class WizardControllerTests extends AbstractControllerTests {
         .andExpect(status().isOk())
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    // String content = result.getResponse().getContentAsString();
+    // Assertions.assertTrue(content.contains("must not be blank"));
   }
 
   @Test
@@ -78,25 +77,16 @@ public class WizardControllerTests extends AbstractControllerTests {
     radarType.setId(10L);
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
 
-    final RadarType radarType1 = new RadarType();
-    radarType1.setId(11L);
-    radarType1.setCode(RadarType.CAPABILITY_RADAR);
-
     final Wizard wizard = new Wizard(radarType);
-
-    final Wizard wizard1 = new Wizard(radarType1);
 
     Mockito.doThrow(Exception.class).when(wizardService).createRadarEnv(any());
 
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(wizard.getRadarType().getId()))
-            .param("radarType.id", String.valueOf(wizard1.getRadarType().getId())))
+            .param("radarType.id", String.valueOf(wizard.getRadarType().getId())))
         .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/home"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to create radar due to error."))
         .andReturn();
-
-    String content = result.getResponse().getContentAsString();
   }
-
 }
