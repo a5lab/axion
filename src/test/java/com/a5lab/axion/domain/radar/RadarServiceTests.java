@@ -142,8 +142,6 @@ class RadarServiceTests extends AbstractServiceTests {
     Mockito.verify(radarRepository).findByPrimaryAndActive(radar.isPrimary(), radar.isActive());
   }
 
-
-
   @Test
   void shouldSaveRadarDto() {
     final Radar radar = new Radar();
@@ -159,7 +157,7 @@ class RadarServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
 
-    // TODO: Mockito.verify(radarRepository).save(radar);
+    Mockito.verify(radarRepository).save(any());
   }
 
   @Test

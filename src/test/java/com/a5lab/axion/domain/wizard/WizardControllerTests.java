@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 
 import com.a5lab.axion.utils.FlashMessages;
@@ -42,18 +43,18 @@ public class WizardControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldCreateRadar() throws Exception {
-    final RadarType radarType = new RadarType();
-    radarType.setId(10L);
-    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
 
-    final Wizard wizard = new Wizard(radarType);
+    final WizardDto wizardDto = new WizardDto(radarTypeDto);
 
-    Mockito.doAnswer((i) -> null).when(wizardService).createRadarEnv(wizard);
+    Mockito.doAnswer((i) -> null).when(wizardService).createRadarEnv(wizardDto);
 
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(wizard.getRadarType().getId()))
-            .sessionAttr("wizard", wizard))
+            .param("radarType.id", String.valueOf(wizardDto.getRadarType().getId()))
+            .sessionAttr("wizard", wizardDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/home"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
