@@ -4,6 +4,7 @@ import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 
+import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 import java.util.Optional;
@@ -88,9 +90,14 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectShowRadar() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+
+    Mockito.when(radarService.findById(radarDto.getId())).thenReturn(Optional.of(radarDto));
+
     MvcResult result = mockMvc.perform(get("/settings/radars/show/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid radar id."))
         .andReturn();
   }
 
@@ -123,6 +130,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
+    Mockito.when(radarService.save(radarDto)).thenReturn(radarDto);
+
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radarType.id", String.valueOf(radarDto.getRadarType().getId()))
@@ -131,6 +140,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -180,9 +190,14 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectEditRadar() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+
+    Mockito.when(radarService.findById(radarDto.getId())).thenReturn(Optional.of(radarDto));
+
     MvcResult result = mockMvc.perform(get("/settings/radars/edit/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid radar id."))
         .andReturn();
   }
 
@@ -202,6 +217,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
+    Mockito.when(radarService.save(radarDto)).thenReturn(radarDto);
+
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radarType.id", String.valueOf(radarDto.getRadarType().getId()))
@@ -210,6 +227,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been updated successfully."))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -246,10 +264,13 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
+    Mockito.doAnswer((i) -> null).when(radarService).deleteById(radarDto.getId());
+
     String url = String.format("/settings/radars/delete/%d", radarDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been deleted successfully."))
         .andReturn();
   }
 }
