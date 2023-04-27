@@ -19,13 +19,8 @@ import org.mapstruct.factory.Mappers;
 
 class TechnologyBlipMapperTests extends AbstractMapperTests {
 
-  private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
-  private final SegmentMapper segmentMapper = Mappers.getMapper(SegmentMapper.class);
+  private final TechnologyBlipMapper technologyBlipMapper = Mappers.getMapper(TechnologyBlipMapper.class);
 
-  private final TechnologyMapper technologyMapper = Mappers.getMapper(TechnologyMapper.class);
-
-  private final TechnologyBlipMapper technologyBlipMapper =
-      new TechnologyBlipMapperImpl(ringMapper, segmentMapper, technologyMapper);
 
   @Test
   void testToDtoWithNull() {

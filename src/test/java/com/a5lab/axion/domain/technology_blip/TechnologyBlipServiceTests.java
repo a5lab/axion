@@ -24,14 +24,8 @@ import org.springframework.data.domain.Sort;
 class TechnologyBlipServiceTests extends AbstractServiceTests {
   private TechnologyBlipRepository technologyBlipRepository = Mockito.mock(TechnologyBlipRepository.class);
 
-  private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
+  private final TechnologyBlipMapper technologyBlipMapper = Mappers.getMapper(TechnologyBlipMapper.class);
 
-  private final SegmentMapper segmentMapper = Mappers.getMapper(SegmentMapper.class);
-
-  private final TechnologyMapper technologyMapper = Mappers.getMapper(TechnologyMapper.class);
-
-  private final TechnologyBlipMapper technologyBlipMapper =
-      new TechnologyBlipMapperImpl(ringMapper, segmentMapper, technologyMapper);
 
    private TechnologyBlipService technologyBlipService =
        new TechnologyBlipServiceImpl(technologyBlipRepository, technologyBlipMapper);
