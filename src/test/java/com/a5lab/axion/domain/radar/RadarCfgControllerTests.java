@@ -76,7 +76,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    Mockito.when(radarService.findById(radarDto.getId())).thenReturn(Optional.of(radarDto));
+    Mockito.when(radarService.findById(any())).thenReturn(Optional.of(radarDto));
 
     String url = String.format("/settings/radars/show/%d", radarDto.getId());
     MvcResult result = mockMvc.perform(get(url))
@@ -86,6 +86,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(radarDto.getTitle()));
     Assertions.assertTrue(content.contains(radarDto.getDescription()));
+
+    Mockito.verify(radarService).findById(radarDto.getId());
   }
 
   @Test
