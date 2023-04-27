@@ -13,6 +13,7 @@ import java.util.Optional;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarService;
 
+import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,6 +26,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(RingCfgController.class)
 public class RingCfgControllerTests extends AbstractControllerTests {
@@ -90,9 +92,14 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectShowRing() throws Exception {
+    final RingDto ringDto = new RingDto();
+
+    Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
+
     MvcResult result = mockMvc.perform(get("/settings/rings/show/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid ring id."))
         .andReturn();
   }
 
@@ -159,6 +166,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setPosition(0);
     ringDto.setActive(true);
 
+    Mockito.when(ringService.save(ringDto)).thenReturn(ringDto);
+
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radar.id", String.valueOf(ringDto.getRadar().getId()))
@@ -168,6 +177,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been created successfully."))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -221,9 +231,14 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectEditRing() throws Exception {
+    final RingDto ringDto = new RingDto();
+
+    Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
+
     MvcResult result = mockMvc.perform(get("/settings/rings/edit/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid ring id."))
         .andReturn();
   }
 
@@ -254,6 +269,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setPosition(0);
     ringDto.setActive(true);
 
+    Mockito.when(ringService.save(ringDto)).thenReturn(ringDto);
+
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radar.id", String.valueOf(ringDto.getRadar().getId()))
@@ -263,6 +280,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been updated successfully."))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -301,10 +319,13 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setPosition(0);
     ringDto.setActive(true);
 
+    Mockito.doAnswer((i) -> null).when(ringService).deleteById(ringDto.getId());
+
     String url = String.format("/settings/rings/delete/%d", ringDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been deleted successfully."))
         .andReturn();
   }
 
