@@ -63,5 +63,4 @@ public class WizardController {
       return new ModelAndView("redirect:/home");
     }
   }
-
 }
