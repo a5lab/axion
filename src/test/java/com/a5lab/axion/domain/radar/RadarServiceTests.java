@@ -142,7 +142,6 @@ class RadarServiceTests extends AbstractServiceTests {
     Mockito.verify(radarRepository).findByPrimaryAndActive(radar.isPrimary(), radar.isActive());
   }
 
-
   @Test
   void shouldSaveRadar() {
     final Radar radar = new Radar();
