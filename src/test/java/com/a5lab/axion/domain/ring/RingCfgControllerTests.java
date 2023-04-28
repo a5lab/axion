@@ -65,6 +65,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(ringDto.getTitle()));
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
+
+    Mockito.verify(radarService).findAll(any(), any());
   }
 
   @Test
@@ -83,11 +85,14 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     String url = String.format("/settings/rings/show/%d", ringDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/show"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(ringDto.getTitle()));
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
+
+    Mockito.verify(ringService).findById(ringDto.getId());
   }
 
   @Test
@@ -101,6 +106,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/rings"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid ring id."))
         .andReturn();
+
+    Mockito.verify(ringService).findById(any());
   }
 
   @Test
@@ -133,6 +140,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .param("title", ringDto.getTitle())
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/add"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -166,7 +174,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setPosition(0);
     ringDto.setActive(true);
 
-    Mockito.when(ringService.save(ringDto)).thenReturn(ringDto);
+    Mockito.when(ringService.save(any())).thenReturn(ringDto);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -180,7 +188,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been created successfully."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(ringService).save(any());
   }
 
   @Test
@@ -199,6 +207,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .param("title", ringDto.getTitle())
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/add"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -221,11 +230,14 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     String url = String.format("/settings/rings/edit/%d", ringDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/edit"))
         .andReturn();
-    String content = result.getResponse().getContentAsString();
 
+    String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(ringDto.getTitle()));
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
+
+    Mockito.verify(ringService).findById(ringDto.getId());
   }
 
 
@@ -240,6 +252,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/rings"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid ring id."))
         .andReturn();
+
+    Mockito.verify(ringService).findById(any());
   }
 
   @Test
@@ -269,7 +283,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setPosition(0);
     ringDto.setActive(true);
 
-    Mockito.when(ringService.save(ringDto)).thenReturn(ringDto);
+    Mockito.when(ringService.save(any())).thenReturn(ringDto);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -283,7 +297,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been updated successfully."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(ringService).save(any());
   }
 
   @Test
@@ -302,6 +316,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .param("title", ringDto.getTitle())
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -327,6 +342,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/rings"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been deleted successfully."))
         .andReturn();
-  }
 
+    Mockito.verify(ringService).deleteById(ringDto.getId());
+  }
 }
