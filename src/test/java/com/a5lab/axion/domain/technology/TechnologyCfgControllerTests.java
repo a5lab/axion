@@ -64,7 +64,7 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     technologyDto.setMoved(0);
     technologyDto.setActive(true);
 
-    Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
+    Mockito.when(technologyService.findById(any())).thenReturn(Optional.of(technologyDto));
 
     String url = String.format("/settings/technologies/show/%d", technologyDto.getId());
     MvcResult result = mockMvc.perform(get(url))
@@ -81,9 +81,7 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectShowTechnology() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto();
-
-    Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
+    Mockito.when(technologyService.findById(any())).thenReturn(Optional.empty());
 
     MvcResult result = mockMvc.perform(get("/settings/technologies/show/1"))
         .andExpect(status().is3xxRedirection())
@@ -168,7 +166,7 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     technologyDto.setMoved(0);
     technologyDto.setActive(true);
 
-    Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
+    Mockito.when(technologyService.findById(any())).thenReturn(Optional.of(technologyDto));
 
     String url = String.format("/settings/technologies/edit/%d", technologyDto.getId());
     MvcResult result = mockMvc.perform(get(url))
@@ -182,11 +180,10 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(technologyService).findById(technologyDto.getId());
   }
+
   @Test
   public void shouldRedirectEditTechnology() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto();
-
-    Mockito.when(technologyService.findById(technologyDto.getId())).thenReturn(Optional.of(technologyDto));
+    Mockito.when(technologyService.findById(any())).thenReturn(Optional.empty());
 
     MvcResult result = mockMvc.perform(get("/settings/technologies/edit/1"))
         .andExpect(status().is3xxRedirection())
@@ -256,7 +253,7 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     technologyDto.setMoved(0);
     technologyDto.setActive(true);
 
-    Mockito.doAnswer((i) -> null).when(technologyService).deleteById(technologyDto.getId());
+    Mockito.doAnswer((i) -> null).when(technologyService).deleteById(any());
 
     String url = String.format("/settings/technologies/delete/%d", technologyDto.getId());
     MvcResult result = mockMvc.perform(get(url))

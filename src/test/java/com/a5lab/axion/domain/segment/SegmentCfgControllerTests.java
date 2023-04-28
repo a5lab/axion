@@ -73,7 +73,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
 
-        Mockito.when(segmentService.findById(segmentDto.getId())).thenReturn(Optional.of(segmentDto));
+        Mockito.when(segmentService.findById(any())).thenReturn(Optional.of(segmentDto));
 
         String url = String.format("/settings/segments/show/%d", segmentDto.getId());
         MvcResult result = mockMvc.perform(get(url))
@@ -90,9 +90,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     @Test
     public void shouldRedirectShowSegment() throws Exception {
-        final SegmentDto  segmentDto = new SegmentDto();
-
-        Mockito.when(segmentService.findById(segmentDto.getId())).thenReturn(Optional.of(segmentDto));
+        Mockito.when(segmentService.findById(any())).thenReturn(Optional.empty());
 
         MvcResult result = mockMvc.perform(get("/settings/segments/show/1"))
             .andExpect(status().is3xxRedirection())
@@ -188,7 +186,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
 
-        Mockito.when(segmentService.findById(segmentDto.getId())).thenReturn(Optional.of(segmentDto));
+        Mockito.when(segmentService.findById(any())).thenReturn(Optional.of(segmentDto));
 
         String url = String.format("/settings/segments/edit/%d", segmentDto.getId());
         MvcResult result = mockMvc.perform(get(url))
@@ -205,9 +203,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     @Test
     public void shouldRedirectEditSegment() throws Exception {
-        final SegmentDto segmentDto = new SegmentDto();
-
-        Mockito.when(segmentService.findById(segmentDto.getId())).thenReturn(Optional.of(segmentDto));
+        Mockito.when(segmentService.findById(any())).thenReturn(Optional.empty());
 
         MvcResult result = mockMvc.perform(get("/settings/segments/edit/1"))
             .andExpect(status().is3xxRedirection())
@@ -252,8 +248,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
                 .sessionAttr("segmentDto", segmentDto))
             .andExpect(status().is3xxRedirection())
             .andExpect(view().name("redirect:/settings/segments"))
-            .andExpect(MockMvcResultMatchers.flash()
-                .attribute(FlashMessages.INFO, "The segment has been updated successfully."))
+            .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The segment has been updated successfully."))
             .andReturn();
 
         Mockito.verify(segmentService).save(any());
@@ -291,7 +286,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
 
-        Mockito.doAnswer((i) -> null).when(segmentService).deleteById(segmentDto.getId());
+        Mockito.doAnswer((i) -> null).when(segmentService).deleteById(any());
 
         String url = String.format("/settings/segments/delete/%d", segmentDto.getId());
         MvcResult result = mockMvc.perform(get(url))

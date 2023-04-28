@@ -83,6 +83,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     String url = String.format("/settings/radars/show/%d", radarDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/show"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -134,7 +135,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    Mockito.when(radarService.save(radarDto)).thenReturn(radarDto);
+    Mockito.when(radarService.save(any(RadarDto.class))).thenReturn(radarDto);
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -180,7 +181,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
     radarDto.setActive(true);
-    Mockito.when(radarService.findById(radarDto.getId())).thenReturn(Optional.of(radarDto));
+    Mockito.when(radarService.findById(any())).thenReturn(Optional.of(radarDto));
 
     String url = String.format("/settings/radars/edit/%d", radarDto.getId());
     MvcResult result = mockMvc.perform(get(url))
@@ -224,7 +225,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    Mockito.when(radarService.save(radarDto)).thenReturn(radarDto);
+    Mockito.when(radarService.save(any(RadarDto.class))).thenReturn(radarDto);
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -272,7 +273,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    Mockito.doAnswer((i) -> null).when(radarService).deleteById(radarDto.getId());
+    Mockito.doAnswer((i) -> null).when(radarService).deleteById(any());
 
     String url = String.format("/settings/radars/delete/%d", radarDto.getId());
     MvcResult result = mockMvc.perform(get(url))

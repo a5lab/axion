@@ -80,7 +80,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setPosition(0);
     ringDto.setActive(true);
 
-    Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
+    Mockito.when(ringService.findById(any())).thenReturn(Optional.of(ringDto));
 
     String url = String.format("/settings/rings/show/%d", ringDto.getId());
     MvcResult result = mockMvc.perform(get(url))
@@ -97,9 +97,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectShowRing() throws Exception {
-    final RingDto ringDto = new RingDto();
-
-    Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
+    Mockito.when(ringService.findById(any())).thenReturn(Optional.empty());
 
     MvcResult result = mockMvc.perform(get("/settings/rings/show/1"))
         .andExpect(status().is3xxRedirection())
@@ -225,7 +223,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setPosition(0);
     ringDto.setActive(true);
 
-    Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
+    Mockito.when(ringService.findById(any())).thenReturn(Optional.of(ringDto));
 
     String url = String.format("/settings/rings/edit/%d", ringDto.getId());
     MvcResult result = mockMvc.perform(get(url))
@@ -243,9 +241,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectEditRing() throws Exception {
-    final RingDto ringDto = new RingDto();
-
-    Mockito.when(ringService.findById(ringDto.getId())).thenReturn(Optional.of(ringDto));
+    Mockito.when(ringService.findById(any())).thenReturn(Optional.empty());
 
     MvcResult result = mockMvc.perform(get("/settings/rings/edit/1"))
         .andExpect(status().is3xxRedirection())
@@ -334,7 +330,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setPosition(0);
     ringDto.setActive(true);
 
-    Mockito.doAnswer((i) -> null).when(ringService).deleteById(ringDto.getId());
+    Mockito.doAnswer((i) -> null).when(ringService).deleteById(any());
 
     String url = String.format("/settings/rings/delete/%d", ringDto.getId());
     MvcResult result = mockMvc.perform(get(url))

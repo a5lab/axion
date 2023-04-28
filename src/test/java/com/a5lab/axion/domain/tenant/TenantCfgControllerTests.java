@@ -13,7 +13,6 @@ import java.util.Optional;
 import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -53,7 +52,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldShowTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
+    Mockito.when(tenantService.findById(any())).thenReturn(Optional.of(tenantDto));
 
     String url = String.format("/settings/tenants/show/%d", tenantDto.getId());
     MvcResult result = mockMvc.perform(get(url))
@@ -70,9 +69,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectShowTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
-
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
+    Mockito.when(tenantService.findById(any())).thenReturn(Optional.empty());
 
     MvcResult result = mockMvc.perform(get("/settings/tenants/show/1"))
         .andExpect(status().is3xxRedirection())
@@ -135,7 +132,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   public void shouldEditTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
 
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
+    Mockito.when(tenantService.findById(any())).thenReturn(Optional.of(tenantDto));
 
     String url = String.format("/settings/tenants/edit/%d", tenantDto.getId());
     MvcResult result = mockMvc.perform(get(url))
@@ -152,9 +149,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectEditTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
-
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
+    Mockito.when(tenantService.findById(any())).thenReturn(Optional.empty());
 
     MvcResult result = mockMvc.perform(get("/settings/tenants/edit/1"))
         .andExpect(status().is3xxRedirection())
@@ -204,7 +199,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   public void shouldDeleteTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
 
-    Mockito.doAnswer((i) -> null).when(tenantService).deleteById(tenantDto.getId());
+    Mockito.doAnswer((i) -> null).when(tenantService).deleteById(any());
 
     String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());
     MvcResult result = mockMvc.perform(get(url))
