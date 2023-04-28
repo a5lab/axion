@@ -95,8 +95,9 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
         technologyBlip.getRing().getId());
     Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getTechnology().getId(),
         technologyBlip.getTechnology().getId());
+
+    Mockito.verify(technologyBlipRepository).findAll(any(Sort.class));
   }
- /* TODO:
   @Test
   void shouldFindAllTechnologyBlipWithFilter(){
     final Radar radar = new Radar();
@@ -105,7 +106,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     radar.setDescription("My radar description");
 
     final Segment segment = new Segment();
-    segment.setId(10L);
+    segment.setId(11L);
     segment.setRadar(radar);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
@@ -113,7 +114,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     segment.setActive(true);
 
     final Ring ring = new Ring();
-    ring.setId(10L);
+    ring.setId(12L);
     ring.setRadar(radar);
     ring.setTitle("My ring title");
     ring.setDescription("My ring description");
@@ -122,7 +123,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     ring.setActive(true);
 
     final Technology technology = new Technology();
-    technology.setId(10L);
+    technology.setId(13L);
     technology.setTitle("My technology");
     technology.setWebsite("My website");
     technology.setDescription("My technology description");
@@ -130,7 +131,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technology.setActive(true);
 
     final TechnologyBlip technologyBlip = new TechnologyBlip();
-    technologyBlip.setId(10L);
+    technologyBlip.setId(14L);
     technologyBlip.setRadar(radar);
     technologyBlip.setRing(ring);
     technologyBlip.setTechnology(technology);
@@ -138,10 +139,10 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
 
     List<TechnologyBlip> technologyBlipList = List.of(technologyBlip);
     Page<TechnologyBlip> page = new PageImpl<>(technologyBlipList);
-    Mockito.when(technologyBlipRepository.findAll(any(), any(Pageable.class))).thenReturn(page);
+    Mockito.when(technologyBlipRepository.findAll(any(Pageable.class))).thenReturn(page);
 
     TechnologyBlipFilter technologyBlipFilter = new TechnologyBlipFilter();
-    Pageable pageable = PageRequest.of(0, 10, Sort.by("radar,asc"));
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("technology_blips.id,asc"));
     Page<TechnologyBlipDto> technologyBlipDtoPage = technologyBlipService.findAll(technologyBlipFilter, pageable);
     Assertions.assertEquals(1, technologyBlipDtoPage.getSize());
     Assertions.assertEquals(0, technologyBlipDtoPage.getNumber());
@@ -152,9 +153,8 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(technologyBlipDtoPage.iterator().next().getRing().getId(), technologyBlip.getRing().getId());
     Assertions.assertEquals(technologyBlipDtoPage.iterator().next().getTechnology().getId(), technologyBlip.getTechnology().getId());
 
-    Mockito.verify(technologyBlipRepository).findAll(any(), pageable);
+    Mockito.verify(technologyBlipRepository).findAll(any(Pageable.class));
   }
-  */
 
   @Test
   void shouldFindByIdTechnologyBlips() {
@@ -195,7 +195,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technologyBlip.setTechnology(technology);
     technologyBlip.setSegment(segment);
 
-    Mockito.when(technologyBlipRepository.findById(technologyBlip.getId())).thenReturn(Optional.of(technologyBlip));
+    Mockito.when(technologyBlipRepository.findById(any())).thenReturn(Optional.of(technologyBlip));
 
     Optional<TechnologyBlipDto> technologyBlipDtoOptional = technologyBlipService.findById(technologyBlip.getId());
     Assertions.assertEquals(technologyBlip.getId(), technologyBlipDtoOptional.get().getId());
