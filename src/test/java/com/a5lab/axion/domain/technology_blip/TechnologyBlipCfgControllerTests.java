@@ -104,6 +104,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology().getTitle()));
     Assertions.assertTrue(content.contains(technologyBlipDto.getSegment().getTitle()));
     Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
+
+    Mockito.verify(technologyBlipService).findAll(any(), any());
   }
 
 
@@ -151,6 +153,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     String url = String.format("/settings/technology_blips/show/%d", technologyBlipDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/technology_blips/show"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -158,6 +161,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology().getTitle()));
     Assertions.assertTrue(content.contains(technologyBlipDto.getSegment().getTitle()));
     Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
+
+    Mockito.verify(technologyBlipService).findById(technologyBlipDto.getId());
   }
 
   @Test
@@ -171,6 +176,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/technology_blips"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid technology blip id."))
         .andReturn();
+
+    Mockito.verify(technologyBlipService).findById(any());
   }
 
   @Test
@@ -227,7 +234,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     technologyBlipDto.setTechnology(technologyDto);
     technologyBlipDto.setSegment(segmentDto);
 
-    Mockito.when(technologyBlipService.save(technologyBlipDto)).thenReturn(technologyBlipDto);
+    Mockito.when(technologyBlipService.save((TechnologyBlipDto) any())).thenReturn(technologyBlipDto);
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -241,7 +248,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology blip has been created successfully."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(technologyBlipService).save((TechnologyBlipDto) any());
   }
 
   @Test
@@ -286,9 +293,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/technology_blips/add"))
         .andReturn();
-
-    String content = result.getResponse().getContentAsString();
   }
 
   @Test
@@ -299,21 +305,16 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setRadar(radar);
 
-    final TechnologyBlipDto technologyBlipDto1 = new TechnologyBlipDto();
-    technologyBlipDto1.setRadar(radar);
-
     Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService).save((TechnologyBlipDto) any());
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId()))
-            .param("radar.id", String.valueOf(technologyBlipDto1.getRadar().getId())))
+            .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId())))
         .andExpect(status().is3xxRedirection())
-        .andExpect(MockMvcResultMatchers.flash()
-            .attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(technologyBlipService).save((TechnologyBlipDto) any());
   }
 
   @Test
@@ -369,10 +370,10 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     String url = String.format("/settings/technology_blips/edit/%d", technologyBlipDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/technology_blips/edit"))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
-
+    Mockito.verify(technologyBlipService).findById(technologyBlipDto.getId());
   }
 
   @Test
@@ -386,6 +387,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/technology_blips"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid technology blip id."))
         .andReturn();
+
+    Mockito.verify(technologyBlipService).findById(any());
   }
 
   @Test
@@ -436,7 +439,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     technologyBlipDto.setTechnology(technologyDto);
     technologyBlipDto.setSegment(segmentDto);
 
-    Mockito.when(technologyBlipService.save(technologyBlipDto)).thenReturn(technologyBlipDto);
+    Mockito.when(technologyBlipService.save((TechnologyBlipDto) any())).thenReturn(technologyBlipDto);
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -450,9 +453,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology blip has been updated successfully."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(technologyBlipService).save((TechnologyBlipDto) any());
   }
-
 
   @Test
   public void shouldFailToUpdateTechnologyBlip() throws Exception {
@@ -501,9 +503,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
             .param("ring", technologyBlipDto.getRing().getTitle())
             .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/technology_blips/edit"))
         .andReturn();
-
-    String content = result.getResponse().getContentAsString();
   }
 
   @Test
@@ -514,21 +515,16 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setRadar(radar);
 
-    final TechnologyBlipDto technologyBlipDto1 = new TechnologyBlipDto();
-    technologyBlipDto1.setRadar(radar);
-
     Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService).save((TechnologyBlipDto) any());
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId()))
-            .param("radar.id", String.valueOf(technologyBlipDto1.getRadar().getId())))
+            .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId())))
         .andExpect(status().is3xxRedirection())
-        .andExpect(MockMvcResultMatchers.flash()
-            .attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(technologyBlipService).save((TechnologyBlipDto) any());
   }
 
   @Test
@@ -578,5 +574,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/technology_blips"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology blip has been deleted successfully."))
         .andReturn();
+
+    Mockito.verify(technologyBlipService).deleteById(technologyBlipDto.getId());
   }
 }
