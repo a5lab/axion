@@ -64,6 +64,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(radarDto.getTitle()));
     Assertions.assertTrue(content.contains(radarDto.getDescription()));
+
+    Mockito.verify(radarService).findAll(any(), any());
   }
 
   @Test
@@ -145,7 +147,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(radarService).save((RadarDto) any());
   }
 
   @Test
@@ -183,11 +185,14 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     String url = String.format("/settings/radars/edit/%d", radarDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(radarDto.getTitle()));
     Assertions.assertTrue(content.contains(radarDto.getDescription()));
+
+    Mockito.verify(radarService).findById(radarDto.getId());
   }
 
   @Test
@@ -201,6 +206,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/radars"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid radar id."))
         .andReturn();
+
+    Mockito.verify(radarService).findById(any());
   }
 
   @Test
@@ -232,7 +239,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been updated successfully."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(radarService).save((RadarDto) any());
   }
 
   @Test
@@ -250,6 +257,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("title", radarDto.getTitle())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -274,5 +282,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/radars"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been deleted successfully."))
         .andReturn();
+
+    Mockito.verify(radarService).deleteById(radarDto.getId());
   }
 }
