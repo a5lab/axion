@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Filter;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
 import com.a5lab.axion.domain.radar.Radar;
@@ -19,10 +20,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 class TechnologyBlipServiceTests extends AbstractServiceTests {
-  private TechnologyBlipRepository technologyBlipRepository = Mockito.mock(TechnologyBlipRepository.class);
+  private final TechnologyBlipRepository technologyBlipRepository = Mockito.mock(TechnologyBlipRepository.class);
 
   private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
 
@@ -33,12 +39,11 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
   private final TechnologyBlipMapper technologyBlipMapper =
       new TechnologyBlipMapperImpl(ringMapper, segmentMapper, technologyMapper);
 
-   private TechnologyBlipService technologyBlipService =
+   private final TechnologyBlipService technologyBlipService =
        new TechnologyBlipServiceImpl(technologyBlipRepository, technologyBlipMapper);
 
   @Test
-  void shouldFindAllTechnologies() {
-    /* TODO:
+  void shouldFindAllTechnologyBlips() {
     final Radar radar = new Radar();
     radar.setId(10L);
     radar.setTitle("My radar");
@@ -76,45 +81,83 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technologyBlip.setTechnology(technology);
     technologyBlip.setSegment(segment);
     List<TechnologyBlip> technologyBlipList = List.of(technologyBlip);
-    Mockito.when(technologyBlipRepository.findAll(any(Sort.class)
-            .and(any(Sort.class))
-            .and(any(Sort.class))
-            .and(any(Sort.class))))
-            .thenReturn(technologyBlipList);
+
+    Mockito.when(technologyBlipRepository.findAll(any(Sort.class))).thenReturn(technologyBlipList);
 
     Collection<TechnologyBlipDto> technologyBlipDtoCollection = technologyBlipService.findAll();
     Assertions.assertEquals(1, technologyBlipDtoCollection.size());
     Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getId(), technologyBlip.getId());
     Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getRadar().getId(),
         technologyBlip.getRadar().getId());
-    Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getSegment(),
-        technologyBlip.getSegment());
-    Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getRing(),
-        technologyBlip.getRing());
-    Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getTechnology(),
-        technologyBlip.getTechnology());
-     */
+    Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getSegment().getId(),
+        technologyBlip.getSegment().getId());
+    Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getRing().getId(),
+        technologyBlip.getRing().getId());
+    Assertions.assertEquals(technologyBlipDtoCollection.iterator().next().getTechnology().getId(),
+        technologyBlip.getTechnology().getId());
 
+    Mockito.verify(technologyBlipRepository).findAll(any(Sort.class));
   }
-  /*
   @Test
-  void shouldSaveTechnologyBlips() {
-    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setId(10L);
-    technologyBlipDto.setTitle("my title");
-    technologyBlipDto.setDescription("my description");
-    technologyBlipDto.setColor("my color");
-    technologyBlipDto.setPosition(0);
-    technologyBlipDto.setActive(true);
-    //    not sure for this
-    Mockito.when(technologyBlipMapper.toDto(technologyBlipRepository.save(technologyBlipMapper.toEntity(technologyBlipDto)))).thenReturn(Optional.of(technologyBlipDto));
-    technologyBlipService.save(technologyBlipDto);
-    Mockito.verify(technologyBlipRepository).save(technologyBlipMapper.toEntity(technologyBlipDto));
+  void shouldFindAllTechnologyBlipWithFilter(){
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
+
+    final Segment segment = new Segment();
+    segment.setId(11L);
+    segment.setRadar(radar);
+    segment.setTitle("My segment title");
+    segment.setDescription("My segment description");
+    segment.setPosition(1);
+    segment.setActive(true);
+
+    final Ring ring = new Ring();
+    ring.setId(12L);
+    ring.setRadar(radar);
+    ring.setTitle("My ring title");
+    ring.setDescription("My ring description");
+    ring.setPosition(0);
+    ring.setColor("#fbdb84");
+    ring.setActive(true);
+
+    final Technology technology = new Technology();
+    technology.setId(13L);
+    technology.setTitle("My technology");
+    technology.setWebsite("My website");
+    technology.setDescription("My technology description");
+    technology.setMoved(1);
+    technology.setActive(true);
+
+    final TechnologyBlip technologyBlip = new TechnologyBlip();
+    technologyBlip.setId(14L);
+    technologyBlip.setRadar(radar);
+    technologyBlip.setRing(ring);
+    technologyBlip.setTechnology(technology);
+    technologyBlip.setSegment(segment);
+
+    List<TechnologyBlip> technologyBlipList = List.of(technologyBlip);
+    Page<TechnologyBlip> page = new PageImpl<>(technologyBlipList);
+    Mockito.when(technologyBlipRepository.findAll(any(Pageable.class))).thenReturn(page);
+
+    TechnologyBlipFilter technologyBlipFilter = new TechnologyBlipFilter();
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("technology_blips.id,asc"));
+    Page<TechnologyBlipDto> technologyBlipDtoPage = technologyBlipService.findAll(technologyBlipFilter, pageable);
+    Assertions.assertEquals(1, technologyBlipDtoPage.getSize());
+    Assertions.assertEquals(0, technologyBlipDtoPage.getNumber());
+    Assertions.assertEquals(1, technologyBlipDtoPage.getSize());
+    Assertions.assertEquals(technologyBlipDtoPage.iterator().next().getId(), technologyBlip.getId());
+    Assertions.assertEquals(technologyBlipDtoPage.iterator().next().getRadar().getId(), technologyBlip.getRadar().getId());
+    Assertions.assertEquals(technologyBlipDtoPage.iterator().next().getSegment().getId(), technologyBlip.getSegment().getId());
+    Assertions.assertEquals(technologyBlipDtoPage.iterator().next().getRing().getId(), technologyBlip.getRing().getId());
+    Assertions.assertEquals(technologyBlipDtoPage.iterator().next().getTechnology().getId(), technologyBlip.getTechnology().getId());
+
+    Mockito.verify(technologyBlipRepository).findAll(any(Pageable.class));
   }
-   */
 
   @Test
-  void shouldFindByIdTechnologies() {
+  void shouldFindByIdTechnologyBlips() {
     final Radar radar = new Radar();
     radar.setId(10L);
     radar.setTitle("My radar");
@@ -152,44 +195,163 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technologyBlip.setTechnology(technology);
     technologyBlip.setSegment(segment);
 
-    Mockito.when(technologyBlipRepository.findById(technologyBlip.getId())).thenReturn(Optional.of(technologyBlip));
+    Mockito.when(technologyBlipRepository.findById(any())).thenReturn(Optional.of(technologyBlip));
 
-    technologyBlipService.findById(technologyBlip.getId());
+    Optional<TechnologyBlipDto> technologyBlipDtoOptional = technologyBlipService.findById(technologyBlip.getId());
+    Assertions.assertEquals(technologyBlip.getId(), technologyBlipDtoOptional.get().getId());
+    Assertions.assertEquals(technologyBlip.getRadar().getId(), technologyBlipDtoOptional.get().getRadar().getId());
+    Assertions.assertEquals(technologyBlip.getRing().getId(), technologyBlipDtoOptional.get().getRing().getId());
+    Assertions.assertEquals(technologyBlip.getSegment().getId(), technologyBlipDtoOptional.get().getSegment().getId());
+    Assertions.assertEquals(technologyBlip.getTechnology().getId(), technologyBlipDtoOptional.get().getTechnology().getId());
+
     Mockito.verify(technologyBlipRepository).findById(technologyBlip.getId());
   }
-//
-//  @Test
-//  void shouldFindByTitleTechnologies() {
-//    final TechnologyBlip technologyBlip = new TechnologyBlip();
-//    technologyBlip.setId(10L);
-//    technologyBlip.setTitle("My technologyBlip");
-//    technologyBlip.setWebsite("My website");
-//    technologyBlip.setDescription("My technologyBlip description");
-//    technologyBlip.setMoved(0);
-//    technologyBlip.setActive(true);
-//
-//    Mockito.when(technologyBlipRepository.findByTitle(technologyBlip.getTitle())).thenReturn(Optional.of(technologyBlip));
-//    technologyBlipService.findByTitle(technologyBlip.getTitle());
-//
-//    Mockito.verify(technologyBlipRepository).findByTitle(technologyBlip.getTitle());
-//
-//  }
-//
-//  @Test
-//  void shouldDeleteTechnologyBlip() {
-//    final TechnologyBlip technologyBlip = new TechnologyBlip();
-//    technologyBlip.setId(10L);
-//    technologyBlip.setTitle("My technologyBlip");
-//    technologyBlip.setWebsite("My website");
-//    technologyBlip.setDescription("My technologyBlip description");
-//    technologyBlip.setMoved(0);
-//    technologyBlip.setActive(true);
-//
-//    List<TechnologyBlip> technologyBlipList = List.of(technologyBlip);
-//    Mockito.when(technologyBlipRepository.findById(technologyBlip.getId())).thenReturn(Optional.of(technologyBlip));
-//
-//    technologyBlipService.deleteById(technologyBlip.getId());
-//    Mockito.verify(technologyBlipRepository).deleteById(technologyBlip.getId());
-//
-//  }
+
+  @Test
+  void shouldSaveTechnologyBlipDto() {
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
+
+    final Segment segment = new Segment();
+    segment.setId(10L);
+    segment.setRadar(null);
+    segment.setTitle("My segment title");
+    segment.setDescription("My segment description");
+    segment.setPosition(1);
+    segment.setActive(true);
+
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setRadar(null);
+    ring.setTitle("My ring title");
+    ring.setDescription("My ring description");
+    ring.setPosition(0);
+    ring.setColor("#fbdb84");
+    ring.setActive(true);
+
+    final Technology technology = new Technology();
+    technology.setId(10L);
+    technology.setTitle("My technology");
+    technology.setWebsite("My website");
+    technology.setDescription("My technology description");
+    technology.setMoved(1);
+    technology.setActive(true);
+
+    final TechnologyBlip technologyBlip = new TechnologyBlip();
+    technologyBlip.setId(10L);
+    technologyBlip.setRadar(radar);
+    technologyBlip.setRing(ring);
+    technologyBlip.setTechnology(technology);
+    technologyBlip.setSegment(segment);
+
+    Mockito.when(technologyBlipRepository.save(any())).thenReturn(technologyBlip);
+    TechnologyBlipDto technologyBlipDto = technologyBlipService.save(technologyBlipMapper.toDto(technologyBlip));
+
+    Assertions.assertEquals(technologyBlip.getId(), technologyBlipDto.getId());
+    Assertions.assertEquals(technologyBlip.getRadar().getId(), technologyBlipDto.getRadar().getId());
+    Assertions.assertEquals(technologyBlip.getSegment().getId(), technologyBlipDto.getSegment().getId());
+    Assertions.assertEquals(technologyBlip.getRing().getId(), technologyBlipDto.getRing().getId());
+    Assertions.assertEquals(technologyBlip.getTechnology().getId(), technologyBlipDto.getTechnology().getId());
+
+    Mockito.verify(technologyBlipRepository).save(any());
+  }
+
+  @Test
+  void shouldSaveTechnologyBlip() {
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
+
+    final Segment segment = new Segment();
+    segment.setId(10L);
+    segment.setRadar(null);
+    segment.setTitle("My segment title");
+    segment.setDescription("My segment description");
+    segment.setPosition(1);
+    segment.setActive(true);
+
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setRadar(null);
+    ring.setTitle("My ring title");
+    ring.setDescription("My ring description");
+    ring.setPosition(0);
+    ring.setColor("#fbdb84");
+    ring.setActive(true);
+
+    final Technology technology = new Technology();
+    technology.setId(10L);
+    technology.setTitle("My technology");
+    technology.setWebsite("My website");
+    technology.setDescription("My technology description");
+    technology.setMoved(1);
+    technology.setActive(true);
+
+    final TechnologyBlip technologyBlip = new TechnologyBlip();
+    technologyBlip.setId(10L);
+    technologyBlip.setRadar(radar);
+    technologyBlip.setRing(ring);
+    technologyBlip.setTechnology(technology);
+    technologyBlip.setSegment(segment);
+
+    Mockito.when(technologyBlipRepository.save(any())).thenReturn(technologyBlip);
+    technologyBlipService.save(technologyBlip);
+
+    Assertions.assertNotNull(technologyBlip.getId());
+    Assertions.assertNotNull(technologyBlip.getRadar().getId());
+    Assertions.assertNotNull(technologyBlip.getSegment().getId());
+    Assertions.assertNotNull(technologyBlip.getRing().getId());
+    Assertions.assertNotNull(technologyBlip.getTechnology().getId());
+
+    Mockito.verify(technologyBlipRepository).save(technologyBlip);
+  }
+
+  @Test
+  void shouldDeleteTechnologyBlip() {
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
+
+    final Segment segment = new Segment();
+    segment.setId(10L);
+    segment.setRadar(null);
+    segment.setTitle("My segment title");
+    segment.setDescription("My segment description");
+    segment.setPosition(1);
+    segment.setActive(true);
+
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setRadar(null);
+    ring.setTitle("My ring title");
+    ring.setDescription("My ring description");
+    ring.setPosition(0);
+    ring.setColor("#fbdb84");
+    ring.setActive(true);
+
+    final Technology technology = new Technology();
+    technology.setId(10L);
+    technology.setTitle("My technology");
+    technology.setWebsite("My website");
+    technology.setDescription("My technology description");
+    technology.setMoved(1);
+    technology.setActive(true);
+
+    final TechnologyBlip technologyBlip = new TechnologyBlip();
+    technologyBlip.setId(10L);
+    technologyBlip.setRadar(radar);
+    technologyBlip.setRing(ring);
+    technologyBlip.setTechnology(technology);
+    technologyBlip.setSegment(segment);
+
+    Mockito.doAnswer((i) -> null).when(technologyBlipRepository).deleteById(technologyBlip.getId());
+
+    technologyBlipService.deleteById(technologyBlip.getId());
+
+    Mockito.verify(technologyBlipRepository).deleteById(technologyBlip.getId());
+  }
 }
