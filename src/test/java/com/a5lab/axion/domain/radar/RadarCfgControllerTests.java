@@ -147,7 +147,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
         .andReturn();
 
-    Mockito.verify(radarService).save((RadarDto) any());
+    Mockito.verify(radarService).save(any(RadarDto.class));
   }
 
   @Test
@@ -237,7 +237,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been updated successfully."))
         .andReturn();
 
-    Mockito.verify(radarService).save((RadarDto) any());
+    Mockito.verify(radarService).save(any(RadarDto.class));
   }
 
   @Test
