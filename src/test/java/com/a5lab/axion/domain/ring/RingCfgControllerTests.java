@@ -66,7 +66,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains(ringDto.getTitle()));
     Assertions.assertTrue(content.contains(ringDto.getDescription()));
 
-    Mockito.verify(radarService).findAll(any(), any());
+    Mockito.verify(ringService).findAll(any(), any());
   }
 
   @Test

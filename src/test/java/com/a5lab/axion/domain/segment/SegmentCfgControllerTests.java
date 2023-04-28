@@ -60,7 +60,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         Assertions.assertTrue(content.contains(segmentDto.getTitle()));
         Assertions.assertTrue(content.contains(segmentDto.getDescription()));
 
-
+        Mockito.verify(segmentService).findAll(any(), any());
     }
 
     @Test
@@ -78,11 +78,14 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         String url = String.format("/settings/segments/show/%d", segmentDto.getId());
         MvcResult result = mockMvc.perform(get(url))
             .andExpect(status().isOk())
+            .andExpect(view().name("settings/segments/show"))
             .andReturn();
 
         String content = result.getResponse().getContentAsString();
         Assertions.assertTrue(content.contains(segmentDto.getTitle()));
         Assertions.assertTrue(content.contains(segmentDto.getDescription()));
+
+        Mockito.verify(segmentService).findById(segmentDto.getId());
     }
 
     @Test
@@ -96,6 +99,8 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
             .andExpect(view().name("redirect:/settings/segments"))
             .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid segment id."))
             .andReturn();
+
+        Mockito.verify(segmentService).findById(any());
     }
 
     @Test
@@ -135,7 +140,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
 
-        Mockito.when(segmentService.save(segmentDto)).thenReturn(segmentDto);
+        Mockito.when(segmentService.save(any())).thenReturn(segmentDto);
         
         MvcResult result = mockMvc.perform(post("/settings/segments/create")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -148,7 +153,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
             .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The segment has been created successfully."))
             .andReturn();
 
-        String content = result.getResponse().getContentAsString();
+        Mockito.verify(segmentService).save(any());
     }
 
     @Test
@@ -166,6 +171,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
                 .param("title", segmentDto.getTitle())
                 .sessionAttr("segmentDto", segmentDto))
             .andExpect(status().isOk())
+            .andExpect(view().name("settings/segments/add"))
             .andReturn();
 
         String content = result.getResponse().getContentAsString();
@@ -186,12 +192,15 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
         String url = String.format("/settings/segments/edit/%d", segmentDto.getId());
         MvcResult result = mockMvc.perform(get(url))
-                .andExpect(status().isOk())
-                .andReturn();
+            .andExpect(status().isOk())
+            .andExpect(view().name("settings/segments/edit"))
+            .andReturn();
 
         String content = result.getResponse().getContentAsString();
         Assertions.assertTrue(content.contains(segmentDto.getTitle()));
         Assertions.assertTrue(content.contains(segmentDto.getDescription()));
+
+        Mockito.verify(segmentService).findById(segmentDto.getId());
     }
 
     @Test
@@ -205,6 +214,8 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
             .andExpect(view().name("redirect:/settings/segments"))
             .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid segment id."))
             .andReturn();
+
+        Mockito.verify(segmentService).findById(any());
     }
 
     @Test
@@ -231,7 +242,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         segmentDto.setPosition(0);
         segmentDto.setActive(true);
 
-        Mockito.when(segmentService.save(segmentDto)).thenReturn(segmentDto);
+        Mockito.when(segmentService.save(any())).thenReturn(segmentDto);
 
         MvcResult result = mockMvc.perform(post("/settings/segments/update")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -245,7 +256,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
                 .attribute(FlashMessages.INFO, "The segment has been updated successfully."))
             .andReturn();
 
-        String content = result.getResponse().getContentAsString();
+        Mockito.verify(segmentService).save(any());
     }
 
     @Test
@@ -259,11 +270,12 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         segmentDto.setActive(true);
 
         MvcResult result = mockMvc.perform(post("/settings/segments/update")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .param("title", segmentDto.getTitle())
-                        .sessionAttr("segmentDto", segmentDto))
-                .andExpect(status().isOk())
-                .andReturn();
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("title", segmentDto.getTitle())
+                .sessionAttr("segmentDto", segmentDto))
+            .andExpect(status().isOk())
+            .andExpect(view().name("settings/segments/edit"))
+            .andReturn();
 
         String content = result.getResponse().getContentAsString();
         Assertions.assertTrue(content.contains("must not be blank"));
@@ -287,5 +299,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
             .andExpect(view().name("redirect:/settings/segments"))
             .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The segment has been deleted successfully."))
             .andReturn();
+
+        Mockito.verify(segmentService).deleteById(segmentDto.getId());
     }
 }
