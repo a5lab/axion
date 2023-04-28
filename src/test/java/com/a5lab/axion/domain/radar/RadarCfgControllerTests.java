@@ -94,15 +94,15 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectShowRadar() throws Exception {
-    final RadarDto radarDto = new RadarDto();
-
-    Mockito.when(radarService.findById(radarDto.getId())).thenReturn(Optional.of(radarDto));
+    Mockito.when(radarService.findById(any())).thenReturn(Optional.empty());
 
     MvcResult result = mockMvc.perform(get("/settings/radars/show/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid radar id."))
         .andReturn();
+
+    Mockito.verify(radarService).findById(any());
   }
 
   @Test
@@ -197,9 +197,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectEditRadar() throws Exception {
-    final RadarDto radarDto = new RadarDto();
-
-    Mockito.when(radarService.findById(radarDto.getId())).thenReturn(Optional.of(radarDto));
+    Mockito.when(radarService.findById(any())).thenReturn(Optional.empty());
 
     MvcResult result = mockMvc.perform(get("/settings/radars/edit/1"))
         .andExpect(status().is3xxRedirection())
