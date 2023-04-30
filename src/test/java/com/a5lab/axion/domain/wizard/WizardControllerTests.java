@@ -49,7 +49,7 @@ public class WizardControllerTests extends AbstractControllerTests {
 
     final WizardDto wizardDto = new WizardDto(radarTypeDto);
 
-    Mockito.doAnswer((i) -> null).when(wizardService).createRadarEnv(wizardDto);
+    Mockito.doAnswer((i) -> null).when(wizardService).createRadarEnv(any());
 
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -59,6 +59,8 @@ public class WizardControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/home"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
         .andReturn();
+
+    Mockito.verify(wizardService).createRadarEnv(any());
   }
 
   @Test
@@ -66,28 +68,28 @@ public class WizardControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
+        .andExpect(view().name("wizard/add"))
         .andReturn();
-
-    // String content = result.getResponse().getContentAsString();
-    // Assertions.assertTrue(content.contains("must not be blank"));
   }
 
   @Test
   public void shouldThrowExceptionToCreateRadar() throws Exception {
-    final RadarType radarType = new RadarType();
-    radarType.setId(10L);
-    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
 
-    final Wizard wizard = new Wizard(radarType);
+    final WizardDto wizardDto = new WizardDto(radarTypeDto);
 
     Mockito.doThrow(Exception.class).when(wizardService).createRadarEnv(any());
 
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(wizard.getRadarType().getId())))
+            .param("radarType.id", String.valueOf(wizardDto.getRadarType().getId())))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/home"))
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to create radar due to error."))
         .andReturn();
+
+    Mockito.verify(wizardService).createRadarEnv(any());
   }
 }
