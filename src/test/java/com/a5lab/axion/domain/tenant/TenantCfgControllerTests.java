@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 import java.util.Optional;
 
+import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(TenantCfgController.class)
 public class TenantCfgControllerTests extends AbstractControllerTests {
@@ -43,29 +45,39 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(tenantDto.getTitle()));
     Assertions.assertTrue(content.contains(tenantDto.getDescription()));
+
+    Mockito.verify(tenantService).findAll(any(), any());
   }
 
   @Test
   public void shouldShowTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
+    Mockito.when(tenantService.findById(any())).thenReturn(Optional.of(tenantDto));
 
     String url = String.format("/settings/tenants/show/%d", tenantDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/tenants/show"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(tenantDto.getTitle()));
     Assertions.assertTrue(content.contains(tenantDto.getDescription()));
+
+    Mockito.verify(tenantService).findById(tenantDto.getId());
   }
 
   @Test
   public void shouldRedirectShowTenant() throws Exception {
+    Mockito.when(tenantService.findById(any())).thenReturn(Optional.empty());
+
     MvcResult result = mockMvc.perform(get("/settings/tenants/show/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid tenant id."))
         .andReturn();
+
+    Mockito.verify(tenantService).findById(any());
   }
 
   @Test
@@ -85,6 +97,8 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   public void shouldCreateTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
 
+    Mockito.when(tenantService.save(any())).thenReturn(tenantDto);
+
     MvcResult result = mockMvc.perform(post("/settings/tenants/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("title", tenantDto.getTitle())
@@ -92,9 +106,10 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("tenantDto", tenantDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The tenant has been created successfully."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(tenantService).save(any());
   }
 
   @Test
@@ -106,6 +121,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
             .param("title", tenantDto.getTitle())
             .sessionAttr("tenantDto", tenantDto))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/tenants/add"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -115,29 +131,40 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldEditTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
-    Mockito.when(tenantService.findById(tenantDto.getId())).thenReturn(Optional.of(tenantDto));
+
+    Mockito.when(tenantService.findById(any())).thenReturn(Optional.of(tenantDto));
 
     String url = String.format("/settings/tenants/edit/%d", tenantDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/tenants/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains(tenantDto.getTitle()));
     Assertions.assertTrue(content.contains(tenantDto.getDescription()));
+
+    Mockito.verify(tenantService).findById(tenantDto.getId());
   }
 
   @Test
   public void shouldRedirectEditTenant() throws Exception {
+    Mockito.when(tenantService.findById(any())).thenReturn(Optional.empty());
+
     MvcResult result = mockMvc.perform(get("/settings/tenants/edit/1"))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Invalid tenant id."))
         .andReturn();
+
+    Mockito.verify(tenantService).findById(any());
   }
 
   @Test
   public void shouldUpdateTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
+
+    Mockito.when(tenantService.save(any())).thenReturn(tenantDto);
 
     MvcResult result = mockMvc.perform(post("/settings/tenants/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -146,9 +173,10 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("tenantDto", tenantDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The tenant has been updated successfully."))
         .andReturn();
 
-    String content = result.getResponse().getContentAsString();
+    Mockito.verify(tenantService).save(any());
   }
 
   @Test
@@ -160,6 +188,7 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
             .param("title", tenantDto.getTitle())
             .sessionAttr("tenantDto", tenantDto))
         .andExpect(status().isOk())
+        .andExpect(view().name("settings/tenants/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
@@ -170,10 +199,15 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   public void shouldDeleteTenant() throws Exception {
     final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
 
+    Mockito.doAnswer((i) -> null).when(tenantService).deleteById(any());
+
     String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenants"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The tenant has been deleted successfully."))
         .andReturn();
+
+    Mockito.verify(tenantService).deleteById(tenantDto.getId());
   }
 }
