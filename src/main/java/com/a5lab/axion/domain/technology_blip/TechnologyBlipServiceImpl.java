@@ -50,11 +50,13 @@ public class TechnologyBlipServiceImpl implements TechnologyBlipService {
         technologyBlipRepository.save(technologyBlipMapper.toEntity(technologyBlipDto)));
   }
 
+  /* fuck
   @Override
   @Transactional
   public TechnologyBlip save(TechnologyBlip technologyBlip) {
     return technologyBlipRepository.save(technologyBlip);
   }
+  */
 
   @Override
   @Transactional

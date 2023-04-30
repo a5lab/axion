@@ -16,7 +16,7 @@ public interface TechnologyBlipService {
 
   TechnologyBlipDto save(TechnologyBlipDto technologyBlipDto);
 
-  TechnologyBlip save(TechnologyBlip technologyBlip);
+  // fuck TechnologyBlip save(TechnologyBlip technologyBlip);
 
   void deleteById(Long id);
 }
