@@ -296,7 +296,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldThrowExceptionToCreateTechnologyBlip() throws Exception {
+  public void shouldRedirectCreateTechnologyBlip() throws Exception {
     final Radar radar = new Radar();
     radar.setId(10L);
 
@@ -504,7 +504,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldThrowExceptionToUpdateTechnologyBlip() throws Exception {
+  public void shouldRedirectUpdateTechnologyBlip() throws Exception {
     final Radar radar = new Radar();
     radar.setId(10L);
 
