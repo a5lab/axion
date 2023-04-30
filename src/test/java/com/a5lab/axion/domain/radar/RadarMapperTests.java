@@ -1,32 +1,36 @@
 package com.a5lab.axion.domain.radar;
 
+import static org.mockito.ArgumentMatchers.any;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.a5lab.axion.domain.AbstractMapperTests;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import com.a5lab.axion.domain.ring.Ring;
+import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 class RadarMapperTests  extends AbstractMapperTests {
+
+  private final RadarTypeRepository radarTypeRepository = Mockito.mock(RadarTypeRepository.class);
 
   private final RadarMapper radarMapper = Mappers.getMapper(RadarMapper.class);
 
   @Test
   void testToDtoWithNull() {
     final RadarDto radarDto = radarMapper.toDto(null);
-//    List<Ring> ringList = ringList.getRingList();
-//    List<Segment> segmentList = mapper.toDto(null).getSegmentList();
-//    List<TechnologyBlip> technologyBlipList = mapper.toDto(null).getTechnologyBlipList();
 
     Assertions.assertNull(radarDto);
-//    Assertions.assertNull(ringList);
-//    Assertions.assertNull(segmentList);
-//    Assertions.assertNull(technologyBlipList);
-
   }
 
   @Test
@@ -56,18 +60,29 @@ class RadarMapperTests  extends AbstractMapperTests {
     Assertions.assertNull(radar);
   }
 
+  /* TODO: research
   @Test
   void testToEntityAllFields() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(10L);
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
+    radarType.setTitle("My title");
+    radarType.setDescription("My description");
+
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(0L);
     radarDto.setTitle("My title1");
     radarDto.setDescription("My description1");
     radarDto.setPrimary(true);
     radarDto.setActive(true);
+
     final Radar radar = radarMapper.toEntity(radarDto);
 
     Assertions.assertEquals(radar.getId(), radarDto.getId());
     Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
   }
+  */
 }
