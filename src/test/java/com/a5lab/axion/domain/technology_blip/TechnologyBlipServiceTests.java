@@ -252,60 +252,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     Mockito.verify(technologyBlipRepository).save(any());
   }
 
-  /* fuck
-  @Test
-  void shouldSaveTechnologyBlip() {
-    final Radar radar = new Radar();
-    radar.setId(10L);
-    radar.setTitle("My radar");
-    radar.setDescription("My radar description");
-
-    final Segment segment = new Segment();
-    segment.setId(10L);
-    segment.setRadar(null);
-    segment.setTitle("My segment title");
-    segment.setDescription("My segment description");
-    segment.setPosition(1);
-    segment.setActive(true);
-
-    final Ring ring = new Ring();
-    ring.setId(10L);
-    ring.setRadar(null);
-    ring.setTitle("My ring title");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("#fbdb84");
-    ring.setActive(true);
-
-    final Technology technology = new Technology();
-    technology.setId(10L);
-    technology.setTitle("My technology");
-    technology.setWebsite("My website");
-    technology.setDescription("My technology description");
-    technology.setMoved(1);
-    technology.setActive(true);
-
-    final TechnologyBlip technologyBlip = new TechnologyBlip();
-    technologyBlip.setId(10L);
-    technologyBlip.setRadar(radar);
-    technologyBlip.setRing(ring);
-    technologyBlip.setTechnology(technology);
-    technologyBlip.setSegment(segment);
-
-    Mockito.when(technologyBlipRepository.save(any())).thenReturn(technologyBlip);
-    technologyBlipService.save(technologyBlip);
-
-    Assertions.assertNotNull(technologyBlip.getId());
-    Assertions.assertNotNull(technologyBlip.getRadar().getId());
-    Assertions.assertNotNull(technologyBlip.getSegment().getId());
-    Assertions.assertNotNull(technologyBlip.getRing().getId());
-    Assertions.assertNotNull(technologyBlip.getTechnology().getId());
-
-    Mockito.verify(technologyBlipRepository).save(technologyBlip);
-  }
-
-   */
-
   @Test
   void shouldDeleteTechnologyBlip() {
     final Radar radar = new Radar();

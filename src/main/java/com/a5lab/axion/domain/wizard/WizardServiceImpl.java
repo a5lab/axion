@@ -82,7 +82,8 @@ public class WizardServiceImpl implements WizardService {
         .withSkipLines(1).build();
     while ((record = csvReader.readNext()) != null) {
       RadarDto radar = new RadarDto();
-      radar.setRadarType(wizardDto.getRadarType());
+      radar.setRadarTypeId(wizardDto.getRadarType().getId());
+      radar.setRadarTypeTitle(wizardDto.getRadarType().getTitle());
       radar.setTitle(record[0]);
       radar.setDescription(record[1]);
       radar.setPrimary(Boolean.valueOf(record[2]));

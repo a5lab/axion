@@ -326,7 +326,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     // Create a radar
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(2L);
-    radarDto.setRadarType(radarTypeDto);
+    radarDto.setRadarTypeId(radarTypeDto.getId());
+    radarDto.setRadarTypeTitle(radarTypeDto.getTitle());
     radarDto.setTitle("My new test Radar");
     radarDto.setDescription("My awesome description");
     radarDto.setPrimary(false);
@@ -399,7 +400,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     // Create a radar
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(2L);
-    radarDto.setRadarType(radarTypeDto);
+    radarDto.setRadarTypeId(radarTypeDto.getId());
+    radarDto.setRadarTypeTitle(radarTypeDto.getTitle());
     radarDto.setTitle("My new test Radar");
     radarDto.setDescription("My awesome description");
     radarDto.setPrimary(false);

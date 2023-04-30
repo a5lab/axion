@@ -46,7 +46,8 @@ public class WizardServiceTest extends AbstractServiceTests {
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(3L);
-    radarDto.setRadarType(radarTypeDto);
+    radarDto.setRadarTypeId(radarTypeDto.getId());
+    radarDto.setRadarTypeTitle(radarTypeDto.getTitle());
     radarDto.setTitle("Technology radar");
     radarDto.setDescription("My radar description");
 

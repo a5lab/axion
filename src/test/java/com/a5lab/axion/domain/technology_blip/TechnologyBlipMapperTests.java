@@ -89,7 +89,8 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
   void testToEntityAllFields() {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(null);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type title");
     radarDto.setTitle("My radar title");
     radarDto.setDescription("My radar Description");
     radarDto.setPrimary(true);
