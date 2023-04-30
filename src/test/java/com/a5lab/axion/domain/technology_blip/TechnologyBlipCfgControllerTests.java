@@ -1,10 +1,8 @@
 package com.a5lab.axion.domain.technology_blip;
 
 
-import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
@@ -299,11 +297,11 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectCreateTechnologyBlip() throws Exception {
-    final Radar radar = new Radar();
-    radar.setId(10L);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRadar(radarDto);
 
     Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService).save(any(TechnologyBlipDto.class));
 
@@ -325,7 +323,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radarTypeDto.setCode("technology_radar_1");
     radarTypeDto.setDescription("Technology radars");
 
-<<<<<<< HEAD
     // Create a radar
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(2L);
@@ -334,15 +331,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radarDto.setDescription("My awesome description");
     radarDto.setPrimary(false);
     radarDto.setActive(false);
-=======
-    final Radar radar = new Radar();
-    radar.setId(2L);
-    radar.setRadarType(radarType);
-    radar.setTitle("My new test Radar");
-    radar.setDescription("My awesome description");
-    radar.setPrimary(false);
-    radar.setActive(false);
->>>>>>> main
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
@@ -408,7 +396,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radarTypeDto.setCode("technology_radar_1");
     radarTypeDto.setDescription("Technology radars");
 
-<<<<<<< HEAD
     // Create a radar
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(2L);
@@ -417,15 +404,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radarDto.setDescription("My awesome description");
     radarDto.setPrimary(false);
     radarDto.setActive(false);
-=======
-    final Radar radar = new Radar();
-    radar.setId(2L);
-    radar.setRadarType(radarType);
-    radar.setTitle("My new test Radar");
-    radar.setDescription("My awesome description");
-    radar.setPrimary(false);
-    radar.setActive(false);
->>>>>>> main
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
@@ -529,11 +507,11 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldRedirectUpdateTechnologyBlip() throws Exception {
-    final Radar radar = new Radar();
-    radar.setId(10L);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setRadar(radar);
+    technologyBlipDto.setRadar(radarDto);
 
     Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService).save(any(TechnologyBlipDto.class));
 

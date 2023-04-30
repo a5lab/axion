@@ -32,9 +32,6 @@ public class WizardServiceTest extends AbstractServiceTests {
   private final SegmentService segmentService = Mockito.mock(SegmentService.class);
   private final TechnologyService technologyService = Mockito.mock(TechnologyService.class);
   private final TechnologyBlipService technologyBlipService = Mockito.mock(TechnologyBlipService.class);
-  // fuck private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
-  // fuck private final SegmentMapper segmentMapper = Mappers.getMapper(SegmentMapper.class);
-  // fuck private final TechnologyMapper technologyMapper = Mappers.getMapper(TechnologyMapper.class);
   private final WizardService wizardService =
       new WizardServiceImpl(radarService, ringService, segmentService, technologyService, technologyBlipService);
 
