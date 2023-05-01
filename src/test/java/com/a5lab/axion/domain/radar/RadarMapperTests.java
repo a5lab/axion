@@ -13,6 +13,9 @@ import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+import com.a5lab.axion.domain.tenant.TenantService;
+import com.a5lab.axion.domain.tenant.TenantServiceImpl;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -21,10 +24,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 class RadarMapperTests  extends AbstractMapperTests {
+  @MockBean
+  private RadarTypeRepository radarTypeRepository;
 
-  private final RadarTypeRepository radarTypeRepository = Mockito.mock(RadarTypeRepository.class);
-
-  private final RadarMapper radarMapper = Mappers.getMapper(RadarMapper.class);
+  @Autowired
+  private RadarMapper radarMapper;
 
   @Test
   void testToDtoWithNull() {
@@ -60,7 +64,6 @@ class RadarMapperTests  extends AbstractMapperTests {
     Assertions.assertNull(radar);
   }
 
-  /* TODO: research
   @Test
   void testToEntityAllFields() {
     final RadarType radarType = new RadarType();
@@ -84,5 +87,4 @@ class RadarMapperTests  extends AbstractMapperTests {
     Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
   }
-  */
 }
