@@ -32,7 +32,8 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radarDto);
+    segmentDto.setRadarId(radarDto.getId());
+    segmentDto.setRadarTitle(radarDto.getTitle());
     segmentDto.setTitle("My title");
     segmentDto.setDescription("My description");
     segmentDto.setPosition(1);
@@ -46,7 +47,7 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$").isArray())
         .andExpect(jsonPath("$", hasSize(segmentDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(segmentDto.getId()), Long.class))
-        .andExpect(jsonPath("$[0].radar_id", equalTo(segmentDto.getRadar().getId()), Long.class))
+        .andExpect(jsonPath("$[0].radar_id", equalTo(segmentDto.getRadarId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(segmentDto.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(segmentDto.getDescription())))
         .andExpect(jsonPath("$[0].position", equalTo(segmentDto.getPosition()), int.class))

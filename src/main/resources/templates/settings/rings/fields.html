@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-xl-4 col-lg-5 col-md-6 my-1">
     <label for="radar_id" class="label-field">Radar</label>
-    <select id="radar_id" class="field-wrapper" name="radar_id" th:field="*{radar.id}">
+    <select id="radar_id" class="field-wrapper" name="radar_id" th:field="*{radarId}">
       <option th:each="radarDto : ${radarDtos}" th:value="${radarDto.id}" th:utext="${radarDto.title}"/>
     </select>
   </div>

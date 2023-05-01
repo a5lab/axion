@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
 @Getter
@@ -35,7 +34,10 @@ public class RingDto {
   @JsonProperty("radar_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private RadarDto radar;
+  private long radarId;
+
+  private String radarTitle;
+
 
   @NotBlank
   @Size(min = 1, max = 64)

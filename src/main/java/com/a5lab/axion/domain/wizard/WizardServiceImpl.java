@@ -20,6 +20,7 @@ import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
+import com.a5lab.axion.domain.technology.TechnologyDto;
 import com.a5lab.axion.domain.technology.TechnologyService;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
@@ -104,7 +105,8 @@ public class WizardServiceImpl implements WizardService {
         .withSkipLines(1).build();
     while ((record = csvReader.readNext()) != null) {
       RingDto ringDto = new RingDto();
-      ringDto.setRadar(radarDto);
+      ringDto.setRadarId(radarDto.getId());
+      ringDto.setRadarTitle(radarDto.getTitle());
       ringDto.setTitle(record[0]);
       ringDto.setDescription(record[1]);
       ringDto.setPosition(Integer.parseInt(record[2]));
@@ -126,7 +128,8 @@ public class WizardServiceImpl implements WizardService {
         .withSkipLines(1).build();
     while ((record = csvReader.readNext()) != null) {
       SegmentDto segmentDto = new SegmentDto();
-      segmentDto.setRadar(radarDto);
+      segmentDto.setRadarId(radarDto.getId());
+      segmentDto.setRadarTitle(radarDto.getTitle());
       segmentDto.setTitle(record[0]);
       segmentDto.setDescription(record[1]);
       segmentDto.setPosition(Integer.parseInt(record[2]));
@@ -152,10 +155,17 @@ public class WizardServiceImpl implements WizardService {
       final String technologyTitle = record[3];
 
       TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-      technologyBlipDto.setRadar(this.radarDto);
-      technologyBlipDto.setRing(ringService.findByTitle(ringTitle).get());
-      technologyBlipDto.setSegment(segmentService.findByTitle(segmentTitle).get());
-      technologyBlipDto.setTechnology(technologyService.findByTitle(technologyTitle).get());
+      technologyBlipDto.setRadarId(this.radarDto.getId());
+      technologyBlipDto.setRadarTitle(this.radarDto.getTitle());
+      RingDto ringDto = ringService.findByTitle(ringTitle).get();
+      technologyBlipDto.setRingId(ringDto.getId());
+      technologyBlipDto.setRingTitle(ringDto.getTitle());
+      SegmentDto segmentDto = segmentService.findByTitle(segmentTitle).get();
+      technologyBlipDto.setSegmentId(segmentDto.getId());
+      technologyBlipDto.setSegmentTitle(segmentDto.getTitle());
+      TechnologyDto technologyDto = technologyService.findByTitle(technologyTitle).get();
+      technologyBlipDto.setTechnologyId(technologyDto.getId());
+      technologyBlipDto.setTechnologyTitle(technologyDto.getTitle());
       technologyBlipService.save(technologyBlipDto);
     }
   }

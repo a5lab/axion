@@ -66,12 +66,12 @@
                     </thead>
                     <tbody>
                       <tr th:each="technologyBlip : ${radarDto.getTechnologyBlipList}">
-                        <td th:text="${technologyBlip.technology.title}"></td>
-                        <td th:text="${technologyBlip.technology.website}"></td>
-                        <td th:text="${technologyBlip.segment.position}"></td>
-                        <td th:text="${technologyBlip.ring.position}"></td>
-                        <td th:text="${technologyBlip.technology.moved}"></td>
-                        <td th:text="${technologyBlip.technology.active}"></td>
+                        <td th:text="${technologyBlip.technologyTitle}"></td>
+                        <td th:text="${technologyBlip.technologyWebsite}"></td>
+                        <td th:text="${technologyBlip.segmentPosition}"></td>
+                        <td th:text="${technologyBlip.ringPosition}"></td>
+                        <td th:text="${technologyBlip.technologyMoved}"></td>
+                        <td th:text="${technologyBlip.technologyActive}"></td>
                       </tr>
                     </tbody>
                   </table>
