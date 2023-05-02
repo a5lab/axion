@@ -1,13 +1,9 @@
 package com.a5lab.axion.domain.radar;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.ValidationException;
 
-import org.hibernate.validator.internal.engine.path.PathImpl;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.a5lab.axion.domain.AbstractRepositoryTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 
 class RadarRepositoryTests extends AbstractRepositoryTests {
 
@@ -103,6 +100,35 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
     Assertions.assertNull(radar.getId());
     assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
         .isInstanceOf(ValidationException.class);
+  }
+
+  @Test
+  void shouldThrowErrorToCreateRadar() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+    radarType.setTitle("My radarType");
+    radarType.setDescription("My radarType Description");
+    radarType.setCode("My code");
+
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My radar");
+    radar.setDescription("My awesome description");
+
+    final Radar radar2 = new Radar();
+    radar2.setRadarType(radarType);
+    radar2.setTitle("My radar");
+    radar2.setDescription("My awesome description");
+
+    Assertions.assertEquals(radar.getTitle(), radar2.getTitle());
+
+    radarTypeRepository.save(radarType);
+    radarRepository.save(radar);
+    radarRepository.save(radar2);
+    assertThatThrownBy(() ->radarRepository.save(radar2)).isInstanceOf(DataIntegrityViolationException.class);
+
+    //TODO:
+    // assertThatThrownBy(() ->radarRepository.save(radar2
   }
 
   @Test
