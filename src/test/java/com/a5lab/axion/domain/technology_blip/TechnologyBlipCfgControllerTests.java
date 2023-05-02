@@ -59,7 +59,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
+    segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -67,7 +67,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -84,10 +84,10 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radarDto);
-    technologyBlipDto.setRing(ringDto);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
 
     Page<TechnologyBlipDto> page = new PageImpl<>(List.of(technologyBlipDto));
     Mockito.when(technologyBlipService.findAll(any(), any())).thenReturn(page);
@@ -100,10 +100,10 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains(technologyBlipDto.getRadar().getTitle()));
-    Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology().getTitle()));
-    Assertions.assertTrue(content.contains(technologyBlipDto.getSegment().getTitle()));
-    Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRadarTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getTechnologyTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getSegmentTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRingTitle()));
 
     Mockito.verify(technologyBlipService).findAll(any(), any());
   }

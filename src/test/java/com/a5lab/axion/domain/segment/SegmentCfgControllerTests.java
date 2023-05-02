@@ -41,7 +41,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(radarDto);
+        segmentDto.setRadarId(radarDto.getId());
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
@@ -68,7 +68,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   public void shouldShowSegment() throws Exception {
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
+    segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(0);
@@ -131,7 +131,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
         final SegmentDto segmentDto = new SegmentDto();
         segmentDto.setId(10L);
-        segmentDto.setRadar(radarDto);
+        segmentDto.setRadarId(radarDto.getId());
         segmentDto.setTitle("My segment");
         segmentDto.setDescription("My segment description");
         segmentDto.setPosition(0);
@@ -141,7 +141,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/segments/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(segmentDto.getRadar().getId()))
+            .param("radar.id", String.valueOf(segmentDto.getRadarId()))
             .param("title", segmentDto.getTitle())
             .param("description", segmentDto.getDescription())
             .sessionAttr("segmentDto", segmentDto))
@@ -157,7 +157,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   public void shouldFailToCreateSegment() throws Exception {
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
+    segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(0);
@@ -179,7 +179,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   public void shouldEditSegment() throws Exception {
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
+    segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(0);
@@ -232,7 +232,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radarDto);
+    segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(0);
@@ -242,7 +242,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/segments/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(segmentDto.getRadar().getId()))
+            .param("radar.id", String.valueOf(segmentDto.getRadarId()))
             .param("title", segmentDto.getTitle())
             .param("description", segmentDto.getDescription())
             .sessionAttr("segmentDto", segmentDto))
@@ -259,7 +259,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   public void shouldFailToUpdateSegment() throws Exception {
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
+    segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(0);
@@ -281,7 +281,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   public void shouldDeleteSegment() throws Exception {
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
+    segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(0);

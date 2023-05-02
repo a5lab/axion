@@ -45,7 +45,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     // Create ring for radar
     final RingDto ringDto = new RingDto();
-    ringDto.setRadar(radarDto);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -73,7 +73,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   public void shouldShowRing() throws Exception {
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -125,7 +125,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   public void shouldFailToCreateRingOnLowerCaseTitle() throws Exception {
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -166,7 +166,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radarDto);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -177,7 +177,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(ringDto.getRadar().getId()))
+            .param("radar.id", String.valueOf(ringDto.getRadarId()))
             .param("title", ringDto.getTitle())
             .param("description", ringDto.getDescription())
             .param("color", ringDto.getColor())
@@ -194,7 +194,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   public void shouldFailToCreateRingOnBlankDescription() throws Exception {
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -217,7 +217,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   public void shouldEditRing() throws Exception {
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -274,7 +274,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radarDto);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -285,7 +285,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(ringDto.getRadar().getId()))
+            .param("radar.id", String.valueOf(ringDto.getRadarId()))
             .param("title", ringDto.getTitle())
             .param("description", ringDto.getDescription())
             .param("color", ringDto.getColor())
@@ -302,7 +302,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   public void shouldFailToUpdateRing() throws Exception {
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -325,7 +325,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   public void shouldDeleteRing() throws Exception {
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");

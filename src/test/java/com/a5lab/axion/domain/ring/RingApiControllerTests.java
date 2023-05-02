@@ -35,7 +35,7 @@ public class RingApiControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radarDto);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My title");
     ringDto.setDescription("My description");
     Page<RingDto> ringDtoPage = new PageImpl<>(Arrays.asList(ringDto));
@@ -46,7 +46,7 @@ public class RingApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$").isArray())
         .andExpect(jsonPath("$", hasSize(ringDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(ringDto.getId()), Long.class))
-        .andExpect(jsonPath("$[0].radar_id", equalTo(ringDto.getRadar().getId()), Long.class))
+        .andExpect(jsonPath("$[0].radar_id", equalTo(ringDto.getRadarId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(ringDto.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(ringDto.getDescription())))
         .andExpect(jsonPath("$[0].color", equalTo(ringDto.getColor())))

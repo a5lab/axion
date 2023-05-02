@@ -72,10 +72,10 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
 
     final var technologyBlipDto = technologyBlipMapper.toDto(technology_blip);
 
-    Assertions.assertEquals(technologyBlipDto.getRadar().getId(), technology_blip.getRadar().getId());
-    Assertions.assertEquals(technologyBlipDto.getSegment().getId(), technology_blip.getSegment().getId());
-    Assertions.assertEquals(technologyBlipDto.getRing().getId(), technology_blip.getRing().getId());
-    Assertions.assertEquals(technologyBlipDto.getTechnology().getId(), technology_blip.getTechnology().getId());
+    Assertions.assertEquals(technologyBlipDto.getRadarId(), technology_blip.getRadar().getId());
+    Assertions.assertEquals(technologyBlipDto.getSegmentId(), technology_blip.getSegment().getId());
+    Assertions.assertEquals(technologyBlipDto.getRingId(), technology_blip.getRing().getId());
+    Assertions.assertEquals(technologyBlipDto.getTechnologyId(), technology_blip.getTechnology().getId());
   }
 
   @Test
@@ -98,7 +98,7 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radarDto);
+    segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment Description");
     segmentDto.setPosition(0);
@@ -106,7 +106,7 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radarDto);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setColor("My ring color");
@@ -122,17 +122,17 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
 
     final TechnologyBlipDto technology_blipDto = new TechnologyBlipDto();
     technology_blipDto.setId(10L);
-    technology_blipDto.setRadar(radarDto);
-    technology_blipDto.setSegment(segmentDto);
-    technology_blipDto.setRing(ringDto);
-    technology_blipDto.setTechnology(technologyDto);
+    technology_blipDto.setRadarId(radarDto.getId());
+    technology_blipDto.setSegmentId(segmentDto.getId());
+    technology_blipDto.setRingId(ringDto.getId());
+    technology_blipDto.setTechnologyId(technologyDto.getId());
 
     final var technology_blip = technologyBlipMapper.toEntity(technology_blipDto);
 
     Assertions.assertEquals(technology_blip.getId(), technology_blipDto.getId());
-    Assertions.assertEquals(technology_blip.getRadar().getId(), technology_blipDto.getRadar().getId());
-    Assertions.assertEquals(technology_blip.getSegment().getId(), technology_blipDto.getSegment().getId());
-    Assertions.assertEquals(technology_blip.getRing().getId(), technology_blipDto.getRing().getId());
-    Assertions.assertEquals(technology_blip.getTechnology().getId(), technology_blipDto.getTechnology().getId());
+    Assertions.assertEquals(technology_blip.getRadar().getId(), technology_blipDto.getRadarId());
+    Assertions.assertEquals(technology_blip.getSegment().getId(), technology_blipDto.getSegmentId());
+    Assertions.assertEquals(technology_blip.getRing().getId(), technology_blipDto.getRingId());
+    Assertions.assertEquals(technology_blip.getTechnology().getId(), technology_blipDto.getTechnologyId());
   }
 }

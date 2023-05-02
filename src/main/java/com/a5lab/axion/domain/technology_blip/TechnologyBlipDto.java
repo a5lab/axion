@@ -1,6 +1,5 @@
 package com.a5lab.axion.domain.technology_blip;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
