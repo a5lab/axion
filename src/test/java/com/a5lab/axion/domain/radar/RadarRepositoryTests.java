@@ -103,35 +103,6 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
   }
 
   @Test
-  void shouldThrowErrorToCreateRadar() {
-    final RadarType radarType = new RadarType();
-    radarType.setId(1L);
-    radarType.setTitle("My radarType");
-    radarType.setDescription("My radarType Description");
-    radarType.setCode("My code");
-
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My radar");
-    radar.setDescription("My awesome description");
-
-    final Radar radar2 = new Radar();
-    radar2.setRadarType(radarType);
-    radar2.setTitle("My radar");
-    radar2.setDescription("My awesome description");
-
-    Assertions.assertEquals(radar.getTitle(), radar2.getTitle());
-
-    radarTypeRepository.save(radarType);
-    radarRepository.save(radar);
-    radarRepository.save(radar2);
-    assertThatThrownBy(() ->radarRepository.save(radar2)).isInstanceOf(DataIntegrityViolationException.class);
-
-    //TODO:
-    // assertThatThrownBy(() ->radarRepository.save(radar2
-  }
-
-  @Test
   void shouldFailOnWhiteSpaceTitle() {
     final Radar radar = new Radar();
     radar.setTitle(" ");

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
@@ -149,6 +150,40 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     Mockito.verify(radarService).save(any(RadarDto.class));
+  }
+
+  @Test
+  public void ShouldThrowErrorToCreateRadar() throws Exception {
+    final RadarType radarType = new RadarType();
+    radarType.setId(10L);
+    radarType.setDescription("My Description");
+    radarType.setTitle("My title");
+    radarType.setCode("My code");
+
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarType(radarType);
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+
+    Mockito.doThrow(DataIntegrityViolationException.class).when(radarService).save(any(RadarDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/radars/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarType.id", String.valueOf(radarDto.getRadarType().getId()))
+            .param("title", radarDto.getTitle())
+            .param("description", radarDto.getDescription())
+            .sessionAttr("radarDto", radarDto))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/radars"))
+        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to create radar due to error."))
+        .andReturn();
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
+
+
   }
 
   @Test

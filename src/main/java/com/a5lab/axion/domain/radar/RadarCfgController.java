@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -101,11 +102,19 @@ public class RadarCfgController {
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
-    radarService.save(radarDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("radar.flash.info.created", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/radars");
+    try {
+
+      radarService.save(radarDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("radar.flash.info.created", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/radars");
+    } catch (DataIntegrityViolationException e) {
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
+          messageSource.getMessage("radar.flash.error.exception", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/radars");
+    }
   }
 
   @GetMapping(value = "/edit/{id}")
