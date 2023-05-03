@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.technology.TechnologyDto;
@@ -30,8 +31,8 @@ public class TechnologyBlipApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetTechnologyBlips() throws Exception {
-    final Radar radar = new Radar();
-    radar.setId(1L);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(1L);
 
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(4L);
@@ -44,10 +45,10 @@ public class TechnologyBlipApiControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radar);
-    technologyBlipDto.setRing(ringDto);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
 
     Page<TechnologyBlipDto> technologyBlipDtoPage = new PageImpl<>(Arrays.asList(technologyBlipDto));
     Mockito.when(technologyBlipService.findAll(any(), any())).thenReturn(technologyBlipDtoPage);
@@ -57,9 +58,9 @@ public class TechnologyBlipApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$").isArray())
         .andExpect(jsonPath("$", hasSize(technologyBlipDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(technologyBlipDto.getId()), Long.class))
-        .andExpect(jsonPath("$[0].radar_id", equalTo(technologyBlipDto.getRadar().getId()), Long.class))
-        .andExpect(jsonPath("$[0].technology_id", equalTo(technologyBlipDto.getTechnology().getId()), Long.class))
-        .andExpect(jsonPath("$[0].segment_id", equalTo(technologyBlipDto.getSegment().getId()), Long.class))
-        .andExpect(jsonPath("$[0].ring_id", equalTo(technologyBlipDto.getRing().getId()), Long.class));
+        .andExpect(jsonPath("$[0].radar_id", equalTo(technologyBlipDto.getRadarId()), Long.class))
+        .andExpect(jsonPath("$[0].technology_id", equalTo(technologyBlipDto.getTechnologyId()), Long.class))
+        .andExpect(jsonPath("$[0].segment_id", equalTo(technologyBlipDto.getSegmentId()), Long.class))
+        .andExpect(jsonPath("$[0].ring_id", equalTo(technologyBlipDto.getRingId()), Long.class));
   }
 }

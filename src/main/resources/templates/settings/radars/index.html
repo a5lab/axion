@@ -28,7 +28,7 @@
               </thead>
               <tbody>
                 <tr th:each="radarDto : ${radarDtoPage.getContent()}">
-                  <td th:text="${radarDto.radarType.title}"></td>
+                  <td th:text="${radarDto.radarTypeTitle}"></td>
                   <td th:text="${radarDto.title}"></td>
                   <td th:text="${radarDto.description}"></td>
                   <td th:text="${radarDto.primary}"></td>

@@ -13,11 +13,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.ring.RingDto;
-import com.a5lab.axion.domain.segment.SegmentDto;
-import com.a5lab.axion.domain.technology.TechnologyDto;
-
 @Getter
 @Setter
 @ToString
@@ -32,20 +27,30 @@ public class TechnologyBlipDto {
   @JsonProperty("radar_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private Radar radar;
+  private long radarId;
+  private String radarTitle;
 
   @JsonProperty("technology_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private TechnologyDto technology;
+  private long technologyId;
+  private String technologyTitle;
+  private String technologyWebsite;
+  private int technologyMoved;
+  private boolean technologyActive;
 
   @JsonProperty("segment_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private SegmentDto segment;
+  private long segmentId;
+  private String segmentTitle;
+  private int segmentPosition;
 
   @JsonProperty("ring_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private RingDto ring;
+  private long ringId;
+  private String ringTitle;
+  private int ringPosition;
+
 }

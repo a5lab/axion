@@ -1,7 +1,7 @@
 package com.a5lab.axion.domain.radar;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 
 import com.a5lab.axion.utils.FlashMessages;
@@ -35,16 +35,17 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldGetRadars() throws Exception {
     //Create radarType
-    final RadarType radarType = new RadarType();
-    radarType.setId(10L);
-    radarType.setDescription("My Description");
-    radarType.setTitle("My title");
-    radarType.setCode("My code");
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setDescription("My Description");
+    radarTypeDto.setTitle("My title");
+    radarTypeDto.setCode("My code");
 
     //Create radar for radarType
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(radarType);
+    radarDto.setRadarTypeId(radarTypeDto.getId());
+    radarDto.setRadarTypeTitle(radarTypeDto.getTitle());
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -72,7 +73,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   public void shouldShowRadar() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(null);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type");
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -121,15 +123,16 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldCreateRadar() throws Exception {
-    final RadarType radarType = new RadarType();
-    radarType.setId(10L);
-    radarType.setDescription("My Description");
-    radarType.setTitle("My title");
-    radarType.setCode("My code");
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setDescription("My Description");
+    radarTypeDto.setTitle("My title");
+    radarTypeDto.setCode("My code");
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(radarType);
+    radarDto.setRadarTypeId(radarTypeDto.getId());
+    radarDto.setRadarTypeTitle(radarTypeDto.getTitle());
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -139,7 +142,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarType().getId()))
+            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
@@ -155,7 +158,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   public void shouldFailToCreateRadar() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(null);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type");
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -176,7 +180,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   public void shouldEditRadar() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(null);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type");
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -211,15 +216,16 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldUpdateRadar() throws Exception {
-    final RadarType radarType = new RadarType();
-    radarType.setId(10L);
-    radarType.setDescription("My Description");
-    radarType.setTitle("My title");
-    radarType.setCode("My code");
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setDescription("My Description");
+    radarTypeDto.setTitle("My title");
+    radarTypeDto.setCode("My code");
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(radarType);
+    radarDto.setRadarTypeId(radarTypeDto.getId());
+    radarDto.setRadarTypeTitle(radarTypeDto.getTitle());
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -229,7 +235,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarType().getId()))
+            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
@@ -245,7 +251,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   public void shouldFailToUpdateRadar() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(null);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type title");
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
@@ -267,7 +274,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   public void shouldDeleteRadar() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
-    radarDto.setRadarType(null);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type title");
     radarDto.setTitle("My title");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);

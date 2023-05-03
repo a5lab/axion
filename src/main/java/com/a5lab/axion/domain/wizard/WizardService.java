@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.wizard;
 
+
 public interface WizardService {
-  void createRadarEnv(Wizard wizard) throws Exception;
+  void createRadarEnv(WizardDto wizardDto) throws Exception;
 }

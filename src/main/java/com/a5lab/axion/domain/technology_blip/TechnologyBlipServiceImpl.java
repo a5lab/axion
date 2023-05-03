@@ -52,12 +52,6 @@ public class TechnologyBlipServiceImpl implements TechnologyBlipService {
 
   @Override
   @Transactional
-  public TechnologyBlip save(TechnologyBlip technologyBlip) {
-    return technologyBlipRepository.save(technologyBlip);
-  }
-
-  @Override
-  @Transactional
   public void deleteById(Long id) {
     technologyBlipRepository.deleteById(id);
   }

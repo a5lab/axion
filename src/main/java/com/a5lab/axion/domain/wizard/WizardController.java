@@ -30,24 +30,24 @@ public class WizardController {
   @GetMapping("/add")
   public ModelAndView add() {
     ModelAndView modelAndView = new ModelAndView("wizard/add");
-    modelAndView.addObject("wizard", new Wizard());
+    modelAndView.addObject("wizard", new WizardDto());
     modelAndView.addObject("radar_types", radarTypeService.findAll());
     return modelAndView;
   }
 
 
   @PostMapping(value = "/create")
-  public ModelAndView create(@Valid Wizard wizard, BindingResult bindingResult,
+  public ModelAndView create(@Valid WizardDto wizardDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("wizard/add");
-      modelAndView.addObject("wizard", new Wizard());
+      modelAndView.addObject("wizard", new WizardDto());
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
 
     try {
-      wizardService.createRadarEnv(wizard);
+      wizardService.createRadarEnv(wizardDto);
 
       // Redirect
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,

@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,12 +27,13 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetSegments() throws Exception {
-    final Radar radar = new Radar();
-    radar.setId(1L);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(1L);
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radar);
+    segmentDto.setRadarId(radarDto.getId());
+    segmentDto.setRadarTitle(radarDto.getTitle());
     segmentDto.setTitle("My title");
     segmentDto.setDescription("My description");
     segmentDto.setPosition(1);
@@ -46,7 +47,7 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$").isArray())
         .andExpect(jsonPath("$", hasSize(segmentDtoPage.getContent().size())))
         .andExpect(jsonPath("$[0].id", equalTo(segmentDto.getId()), Long.class))
-        .andExpect(jsonPath("$[0].radar_id", equalTo(segmentDto.getRadar().getId()), Long.class))
+        .andExpect(jsonPath("$[0].radar_id", equalTo(segmentDto.getRadarId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(segmentDto.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(segmentDto.getDescription())))
         .andExpect(jsonPath("$[0].position", equalTo(segmentDto.getPosition()), int.class))

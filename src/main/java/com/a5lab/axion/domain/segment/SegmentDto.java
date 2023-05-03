@@ -18,8 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
 @Getter
 @Setter
@@ -35,7 +34,9 @@ public class SegmentDto {
   @JsonProperty("radar_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private Radar radar;
+  private long radarId;
+
+  private String radarTitle;
 
   @NotBlank
   @Size(min = 1, max = 64)
@@ -50,6 +51,5 @@ public class SegmentDto {
 
   private boolean active = true;
 
-  private List<TechnologyBlip> technologyBlipList;
-
+  private List<TechnologyBlipDto> technologyBlipList;
 }

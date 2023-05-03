@@ -27,10 +27,10 @@
               </thead>
               <tbody>
                 <tr th:each="technologyBlipDto : ${technologyBlipDtoPage.getContent()}">
-                  <td th:text="${technologyBlipDto.radar.title}"></td>
-                  <td th:text="${technologyBlipDto.segment.title}"></td>
-                  <td th:text="${technologyBlipDto.ring.title}"></td>
-                  <td th:text="${technologyBlipDto.technology.title}"></td>
+                  <td th:text="${technologyBlipDto.radarTitle}"></td>
+                  <td th:text="${technologyBlipDto.segmentTitle}"></td>
+                  <td th:text="${technologyBlipDto.ringTitle}"></td>
+                  <td th:text="${technologyBlipDto.technologyTitle}"></td>
                   <td>
                     <a class="action-show" data-bs-placement="bottom" data-bs-toggle="tooltip"
                        th:href="@{/settings/technology_blips/show/{id}(id=${technologyBlipDto.id})}" title="Show"></a>
