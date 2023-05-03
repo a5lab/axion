@@ -153,7 +153,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void ShouldThrowErrorToCreateRadar() throws Exception {
+  public void ShouldRedirectToCreateRadar() throws Exception {
     final RadarType radarType = new RadarType();
     radarType.setId(10L);
     radarType.setDescription("My Description");
@@ -182,8 +182,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     Mockito.verify(radarService).save(any(RadarDto.class));
-
-
   }
 
   @Test

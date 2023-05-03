@@ -103,7 +103,6 @@ public class RadarCfgController {
       return modelAndView;
     }
     try {
-
       radarService.save(radarDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
           messageSource.getMessage("radar.flash.info.created", null,

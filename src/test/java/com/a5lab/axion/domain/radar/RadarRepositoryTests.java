@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import jakarta.validation.ValidationException;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.a5lab.axion.domain.AbstractRepositoryTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
-import org.springframework.dao.DataIntegrityViolationException;
 
 class RadarRepositoryTests extends AbstractRepositoryTests {
 
