@@ -118,7 +118,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
+    segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -126,7 +126,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -143,10 +143,10 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radarDto);
-    technologyBlipDto.setRing(ringDto);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
 
     Mockito.when(technologyBlipService.findById(any())).thenReturn(Optional.of(technologyBlipDto));
 
@@ -157,10 +157,10 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains(technologyBlipDto.getRadar().getTitle()));
-    Assertions.assertTrue(content.contains(technologyBlipDto.getTechnology().getTitle()));
-    Assertions.assertTrue(content.contains(technologyBlipDto.getSegment().getTitle()));
-    Assertions.assertTrue(content.contains(technologyBlipDto.getRing().getTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRadarTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getTechnologyTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getSegmentTitle()));
+    Assertions.assertTrue(content.contains(technologyBlipDto.getRingTitle()));
 
     Mockito.verify(technologyBlipService).findById(technologyBlipDto.getId());
   }
@@ -202,7 +202,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radarDto);
+    segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -210,7 +210,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radarDto);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -227,19 +227,19 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radarDto);
-    technologyBlipDto.setRing(ringDto);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
 
     Mockito.when(technologyBlipService.save(any(TechnologyBlipDto.class))).thenReturn(technologyBlipDto);
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId()))
-            .param("technology.id", String.valueOf(technologyBlipDto.getTechnology().getId()))
-            .param("segment.id", String.valueOf(technologyBlipDto.getSegment().getId()))
-            .param("ring.id", String.valueOf(technologyBlipDto.getRing().getId()))
+            .param("radar.id", String.valueOf(technologyBlipDto.getRadarId()))
+            .param("technology.id", String.valueOf(technologyBlipDto.getTechnologyId()))
+            .param("segment.id", String.valueOf(technologyBlipDto.getSegmentId()))
+            .param("ring.id", String.valueOf(technologyBlipDto.getRingId()))
             .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technology_blips"))
@@ -258,7 +258,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radarDto);
+    segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -266,7 +266,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radarDto);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -283,10 +283,10 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radarDto);
-    technologyBlipDto.setRing(ringDto);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
@@ -301,13 +301,13 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radarDto.setId(10L);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setRadar(radarDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
 
     Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService).save(any(TechnologyBlipDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId())))
+            .param("radar.id", String.valueOf(technologyBlipDto.getRadarId())))
         .andExpect(status().is3xxRedirection())
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
         .andReturn();
@@ -335,7 +335,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radarDto);
+    segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -343,7 +343,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radarDto);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -360,10 +360,10 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radarDto);
-    technologyBlipDto.setRing(ringDto);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
 
     Mockito.when(technologyBlipService.findById(any())).thenReturn(Optional.of(technologyBlipDto));
 
@@ -409,7 +409,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(radarDto);
+    segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -417,7 +417,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(radarDto);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -434,19 +434,19 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radarDto);
-    technologyBlipDto.setRing(ringDto);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
 
     Mockito.when(technologyBlipService.save(any(TechnologyBlipDto.class))).thenReturn(technologyBlipDto);
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId()))
-            .param("technology.id", String.valueOf(technologyBlipDto.getTechnology().getId()))
-            .param("segment.id", String.valueOf(technologyBlipDto.getSegment().getId()))
-            .param("ring.id", String.valueOf(technologyBlipDto.getRing().getId()))
+            .param("radar.id", String.valueOf(technologyBlipDto.getRadarId()))
+            .param("technology.id", String.valueOf(technologyBlipDto.getTechnologyId()))
+            .param("segment.id", String.valueOf(technologyBlipDto.getSegmentId()))
+            .param("ring.id", String.valueOf(technologyBlipDto.getRingId()))
             .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technology_blips"))
@@ -465,7 +465,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
+    segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -473,7 +473,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -490,17 +490,17 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radarDto);
-    technologyBlipDto.setRing(ringDto);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar", technologyBlipDto.getRadar().getTitle())
-            .param("technology", technologyBlipDto.getTechnology().getTitle())
-            .param("segment", technologyBlipDto.getSegment().getTitle())
-            .param("ring", technologyBlipDto.getRing().getTitle())
+            .param("radar", technologyBlipDto.getRadarTitle())
+            .param("technology", technologyBlipDto.getTechnologyTitle())
+            .param("segment", technologyBlipDto.getSegmentTitle())
+            .param("ring", technologyBlipDto.getRingTitle())
             .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().isOk())
         .andExpect(view().name("settings/technology_blips/edit"))
@@ -513,13 +513,13 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     radarDto.setId(10L);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setRadar(radarDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
 
     Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService).save(any(TechnologyBlipDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radar.id", String.valueOf(technologyBlipDto.getRadar().getId())))
+            .param("radar.id", String.valueOf(technologyBlipDto.getRadarId())))
         .andExpect(status().is3xxRedirection())
         .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
         .andReturn();
@@ -536,7 +536,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
-    segmentDto.setRadar(null);
+    segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -544,7 +544,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
-    ringDto.setRadar(null);
+    ringDto.setRadarId(0L);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -561,10 +561,10 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
-    technologyBlipDto.setRadar(radarDto);
-    technologyBlipDto.setRing(ringDto);
-    technologyBlipDto.setTechnology(technologyDto);
-    technologyBlipDto.setSegment(segmentDto);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
 
     Mockito.doAnswer((i) -> null).when(technologyBlipService).deleteById(any());
 
