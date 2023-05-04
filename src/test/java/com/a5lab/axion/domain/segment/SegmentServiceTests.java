@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.radar.Radar;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -112,11 +113,18 @@ class SegmentServiceTests extends AbstractServiceTests {
     Mockito.verify(segmentRepository).findByTitle(segment.getTitle());
   }
 
-  /* TODO: fix it
+  /* TODO:
   @Test
   void shouldSaveSegment() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setRadarType(null);
+    radar.setTitle("Radar title");
+    radar.setDescription("Radar Description");
+
     final Segment segment = new Segment();
-    segment.setId(10L);
+    segment.setId(2L);
+    segment.setRadar(radar);
     segment.setTitle("My title");
     segment.setDescription("My description");
     segment.setPosition(0);
