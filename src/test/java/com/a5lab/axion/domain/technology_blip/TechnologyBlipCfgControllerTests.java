@@ -23,7 +23,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -50,25 +49,24 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private RingService ringService;
 
-  /* TODO: fix it
   @Test
   public void shouldGetTechnologyBlips() throws Exception {
     final RadarDto radarDto = new RadarDto();
-    radarDto.setId(10L);
+    radarDto.setId(1L);
     radarDto.setTitle("My radar");
     radarDto.setDescription("My radar description");
 
     final SegmentDto segmentDto = new SegmentDto();
-    segmentDto.setId(10L);
-    segmentDto.setRadarId(0L);
+    segmentDto.setId(2L);
+    segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     final RingDto ringDto = new RingDto();
-    ringDto.setId(10L);
-    ringDto.setRadarId(0L);
+    ringDto.setId(3L);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -76,7 +74,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setActive(true);
 
     final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setId(10L);
+    technologyDto.setId(4L);
     technologyDto.setTitle("My technology");
     technologyDto.setWebsite("My website");
     technologyDto.setDescription("My technology description");
@@ -84,11 +82,15 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     technologyDto.setActive(true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setId(10L);
+    technologyBlipDto.setId(5L);
     technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRadarTitle(radarDto.getTitle());
     technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setRingTitle(ringDto.getTitle());
     technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setTechnologyTitle(technologyDto.getTitle());
     technologyBlipDto.setSegmentId(segmentDto.getId());
+    technologyBlipDto.setSegmentTitle(segmentDto.getTitle());
 
     Page<TechnologyBlipDto> page = new PageImpl<>(List.of(technologyBlipDto));
     Mockito.when(technologyBlipService.findAll(any(), any())).thenReturn(page);
@@ -109,28 +111,24 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(technologyBlipService).findAll(any(), any());
   }
 
-   */
-
-
-  /* TODO: fix it
   @Test
   public void shouldShowTechnologyBlip() throws Exception {
     final RadarDto radarDto = new RadarDto();
-    radarDto.setId(10L);
+    radarDto.setId(1L);
     radarDto.setTitle("My radar");
     radarDto.setDescription("My radar description");
 
     final SegmentDto segmentDto = new SegmentDto();
-    segmentDto.setId(10L);
-    segmentDto.setRadarId(0L);
+    segmentDto.setId(2L);
+    segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     final RingDto ringDto = new RingDto();
-    ringDto.setId(10L);
-    ringDto.setRadarId(0L);
+    ringDto.setId(3L);
+    ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);
@@ -138,7 +136,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setActive(true);
 
     final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setId(10L);
+    technologyDto.setId(4L);
     technologyDto.setTitle("My technology");
     technologyDto.setWebsite("My website");
     technologyDto.setDescription("My technology description");
@@ -146,11 +144,15 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     technologyDto.setActive(true);
 
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setId(10L);
+    technologyBlipDto.setId(5L);
     technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRadarTitle(radarDto.getTitle());
     technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setRingTitle(ringDto.getTitle());
     technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setTechnologyTitle(technologyDto.getTitle());
     technologyBlipDto.setSegmentId(segmentDto.getId());
+    technologyBlipDto.setSegmentTitle(segmentDto.getTitle());
 
     Mockito.when(technologyBlipService.findById(any())).thenReturn(Optional.of(technologyBlipDto));
 
@@ -168,7 +170,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(technologyBlipService).findById(technologyBlipDto.getId());
   }
-   */
 
   @Test
   public void shouldRedirectShowTechnologyBlip() throws Exception {
@@ -253,8 +254,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
-
-  /* TODO: fix it
+/*
   @Test
   public void shouldFailToCreateTechnologyBlip() throws Exception {
     final RadarDto radarDto = new RadarDto();
@@ -290,6 +290,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(10L);
     technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRadarTitle(radarDto.getTitle());
     technologyBlipDto.setRingId(ringDto.getId());
     technologyBlipDto.setTechnologyId(technologyDto.getId());
     technologyBlipDto.setSegmentId(segmentDto.getId());
@@ -300,7 +301,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("settings/technology_blips/add"))
         .andReturn();
   }
-   */
+
+ */
 
   @Test
   public void shouldRedirectCreateTechnologyBlip() throws Exception {

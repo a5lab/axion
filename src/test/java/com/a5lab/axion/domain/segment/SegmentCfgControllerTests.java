@@ -33,10 +33,10 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
 
-    /* TODO: fix it
     @Test
     public void shouldGetSegments() throws Exception {
         final RadarDto radarDto = new RadarDto();
+        radarDto.setId(1L);
         radarDto.setTitle("My radar");
         radarDto.setDescription("My radar description");
 
@@ -64,8 +64,6 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(segmentService).findAll(any(), any());
   }
-
-     */
 
   @Test
   public void shouldShowSegment() throws Exception {
@@ -113,7 +111,6 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         .andExpect(model().attributeExists("segmentDto"))
         .andReturn();
   }
-
 
     @Test
     public void shouldCreateSegment() throws Exception {
