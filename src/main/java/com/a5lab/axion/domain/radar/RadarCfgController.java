@@ -109,10 +109,10 @@ public class RadarCfgController {
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/radars");
     } catch (DataIntegrityViolationException e) {
-      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("radar.flash.error.exception", null,
-              LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/radars");
+      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      bindingResult.rejectValue("title", "n.a", "this title is already taken");
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
+      return modelAndView;
     }
   }
 

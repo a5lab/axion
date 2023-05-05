@@ -153,7 +153,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void ShouldRedirectToCreateRadar() throws Exception {
+  public void ShouldCatchExceptionToCreateRadar() throws Exception {
     final RadarType radarType = new RadarType();
     radarType.setId(10L);
     radarType.setDescription("My Description");
@@ -176,10 +176,12 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(view().name("redirect:/settings/radars"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to create radar due to error."))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/add"))
         .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("this title is already taken"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
