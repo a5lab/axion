@@ -41,7 +41,7 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
   }
 
   @Test
-  void testToAllFields() {
+  void testToDtoAllFields() {
     final Radar radar = new Radar();
     radar.setId(10L);
     radar.setRadarType(null);
