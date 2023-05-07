@@ -8,10 +8,13 @@ import java.util.Optional;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
 
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -20,11 +23,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 class RingServiceTests extends AbstractServiceTests {
-  private final RingRepository ringRepository = Mockito.mock(RingRepository.class);
-
-  private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
-
-  private final RingService ringService = new RingServiceImpl(ringRepository, ringMapper);
+  @MockBean
+  private RingRepository ringRepository;
+  @MockBean
+  private RadarRepository radarRepository;
+  @Autowired
+  private RingMapper ringMapper;
+  @Autowired
+  private RingService ringService;
 
   @Test
   void shouldFindAllRings() {
@@ -120,17 +126,26 @@ class RingServiceTests extends AbstractServiceTests {
     Mockito.verify(ringRepository).findByTitle(ring.getTitle());
   }
 
-  /* TODO: fix it
   @Test
   void shouldSaveRing() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
     final Ring ring = new Ring();
     ring.setId(10L);
+    ring.setRadar(radar);
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(0);
     ring.setActive(true);
 
+    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
     Mockito.when(ringRepository.save(any())).thenReturn(ring);
 
     RingDto ringDto = ringService.save(ringMapper.toDto(ring));
@@ -139,9 +154,8 @@ class RingServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(ring.getDescription(), ringDto.getDescription());
 
     Mockito.verify(ringRepository).save(any());
+    Mockito.verify(radarRepository).findById(radar.getId());
   }
-
-   */
 
   @Test
   void shouldDeleteRing() {
