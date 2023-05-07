@@ -1,14 +1,26 @@
 package com.a5lab.axion.domain.ring;
 
+import static org.mockito.ArgumentMatchers.any;
+
+import java.util.Optional;
+
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
 
 import com.a5lab.axion.domain.AbstractMapperTests;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 class RingMapperTests  extends AbstractMapperTests {
 
-  private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
+  @MockBean
+  private RadarRepository radarRepository;
+
+  @Autowired
+  private RingMapper ringMapper;
 
   @Test
   void testToDtoWithNull() {
@@ -42,11 +54,20 @@ class RingMapperTests  extends AbstractMapperTests {
     Assertions.assertNull(ring);
   }
 
-  /* TODO: fix it
   @Test
   void testToEntityAllFields() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar Description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
+    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
+
     final RingDto ringDto = new RingDto();
-    ringDto.setId(0L);
+    ringDto.setId(2L);
+    ringDto.setRadarId(radar.getId());
     ringDto.setTitle("title1");
     ringDto.setDescription("description1");
     ringDto.setColor("color1");
@@ -58,7 +79,7 @@ class RingMapperTests  extends AbstractMapperTests {
     Assertions.assertEquals(ring.getDescription(), ringDto.getDescription());
     Assertions.assertEquals(ringDto.getColor(), ring.getColor());
     Assertions.assertEquals(ringDto.getPosition(), ring.getPosition());
-  }
 
-   */
+    Mockito.verify(radarRepository).findById(radar.getId());
+  }
 }
