@@ -31,6 +31,7 @@ import com.a5lab.axion.utils.FlashMessages;
 @RequestMapping("/settings/radars")
 @RequiredArgsConstructor
 public class RadarCfgController {
+  public static final String UC_RADARS_TITLE = "UC_RADARS_TITLE";
 
   private final RadarService radarService;
 
@@ -90,12 +91,6 @@ public class RadarCfgController {
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid RadarDto radarDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
-    /* Hande primary error
-    // Add errors
-    bindingResult.reject("n.a", "global error");
-    bindingResult.rejectValue("primary", "n.a", "primary error");
-    */
-
     if (bindingResult.hasErrors()) {
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radarDto", radarDto);
@@ -109,8 +104,13 @@ public class RadarCfgController {
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/radars");
     } catch (DataIntegrityViolationException e) {
+      if (e.getMessage().contains(UC_RADARS_TITLE)) {
+        bindingResult.rejectValue("title", "title_isy_taken", "this title is already taken");
+      } else {
+        bindingResult.reject("unknown_data_integrity_error", "unknown data integrity error");
+      }
+      // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-      bindingResult.rejectValue("title", "n.a", "this title is already taken");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
@@ -141,11 +141,25 @@ public class RadarCfgController {
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
-    radarService.save(radarDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("radar.flash.info.updated", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/radars");
+
+    try {
+      radarService.save(radarDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("radar.flash.info.updated", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/radars");
+    } catch (DataIntegrityViolationException e) {
+      if (e.getMessage().contains(UC_RADARS_TITLE)) {
+        bindingResult.rejectValue("title", "title_is_taken", "this title is already taken");
+      } else {
+        bindingResult.reject("unknown_data_integrity_error", "unknown data integrity error");
+      }
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
+      modelAndView.addObject("radarDto", radarDto);
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
+      return modelAndView;
+    }
   }
 
   @GetMapping(value = "/delete/{id}")

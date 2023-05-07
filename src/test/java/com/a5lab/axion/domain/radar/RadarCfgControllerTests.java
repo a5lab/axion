@@ -5,6 +5,7 @@ import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 
 import com.a5lab.axion.utils.FlashMessages;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -149,45 +150,13 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
         .andReturn();
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
 
-  @Test
-  public void ShouldCatchExceptionToCreateRadar() throws Exception {
-    final RadarType radarType = new RadarType();
-    radarType.setId(10L);
-    radarType.setDescription("My Description");
-    radarType.setTitle("My title");
-    radarType.setCode("My code");
-
-    final RadarDto radarDto = new RadarDto();
-    radarDto.setId(10L);
-    radarDto.setRadarType(radarType);
-    radarDto.setTitle("My title");
-    radarDto.setDescription("My description");
-    radarDto.setPrimary(true);
-    radarDto.setActive(true);
-
-    Mockito.doThrow(DataIntegrityViolationException.class).when(radarService).save(any(RadarDto.class));
-
-    MvcResult result = mockMvc.perform(post("/settings/radars/create")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarType().getId()))
-            .param("title", radarDto.getTitle())
-            .param("description", radarDto.getDescription())
-            .sessionAttr("radarDto", radarDto))
-        .andExpect(status().isOk())
-        .andExpect(view().name("settings/radars/add"))
-        .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("this title is already taken"));
-
-    Mockito.verify(radarService).save(any(RadarDto.class));
-  }
 
   @Test
   public void shouldFailToCreateRadar() throws Exception {
@@ -209,6 +178,37 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+  }
+
+  @Test
+  public void shouldFailToCreateRadarDueToNotUniqueTitle() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type");
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+
+
+    Mockito.doThrow(new DataIntegrityViolationException("constraint UC_RADARS_TITLE_index violation"))
+        .when(radarService).save(any(RadarDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/radars/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("title", radarDto.getTitle())
+            .param("description", radarDto.getDescription())
+            .sessionAttr("radarDto", radarDto))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("this title is already taken"));
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
   }
 
   @Test
@@ -276,7 +276,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been updated successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been updated successfully."))
         .andReturn();
 
     Mockito.verify(radarService).save(any(RadarDto.class));
@@ -306,6 +307,37 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
+  public void shouldFailToUpdateRadarDueToNotUniqueTitle() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type");
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+
+    Mockito.doThrow(new DataIntegrityViolationException("constraint UC_RADARS_TITLE_index violation"))
+        .when(radarService).save(any(RadarDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/radars/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("title", radarDto.getTitle())
+            .param("description", radarDto.getDescription())
+            .sessionAttr("radarDto", radarDto))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/edit"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("this title is already taken"));
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
+  }
+
+
+  @Test
   public void shouldDeleteRadar() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
@@ -322,7 +354,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/radars"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been deleted successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been deleted successfully."))
         .andReturn();
 
     Mockito.verify(radarService).deleteById(radarDto.getId());
