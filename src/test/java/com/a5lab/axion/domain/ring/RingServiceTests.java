@@ -8,10 +8,13 @@ import java.util.Optional;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
 
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -20,11 +23,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 class RingServiceTests extends AbstractServiceTests {
-  private final RingRepository ringRepository = Mockito.mock(RingRepository.class);
-
-  private final RingMapper ringMapper = Mappers.getMapper(RingMapper.class);
-
-  private final RingService ringService = new RingServiceImpl(ringRepository, ringMapper);
+  @MockBean
+  private RingRepository ringRepository;
+  @MockBean
+  private RadarRepository radarRepository;
+  @Autowired
+  private RingMapper ringMapper;
+  @Autowired
+  private RingService ringService;
 
   @Test
   void shouldFindAllRings() {
@@ -109,27 +115,37 @@ class RingServiceTests extends AbstractServiceTests {
 
     Mockito.when(ringRepository.findByTitle(ring.getTitle())).thenReturn(Optional.of(ring));
 
-    Optional<Ring> ringOptional = ringService.findByTitle(ring.getTitle());
-    Assertions.assertTrue(ringOptional.isPresent());
-    Assertions.assertEquals(ring.getId(), ringOptional.get().getId());
-    Assertions.assertEquals(ring.getTitle(), ringOptional.get().getTitle());
-    Assertions.assertEquals(ring.getDescription(), ringOptional.get().getDescription());
-    Assertions.assertEquals(ring.getColor(), ringOptional.get().getColor());
-    Assertions.assertEquals(ring.getPosition(), ringOptional.get().getPosition());
+    Optional<RingDto> ringDtoOptional = ringService.findByTitle(ring.getTitle());
+    Assertions.assertTrue(ringDtoOptional.isPresent());
+    Assertions.assertEquals(ring.getId(), ringDtoOptional.get().getId());
+    Assertions.assertEquals(ring.getTitle(), ringDtoOptional.get().getTitle());
+    Assertions.assertEquals(ring.getDescription(), ringDtoOptional.get().getDescription());
+    Assertions.assertEquals(ring.getColor(), ringDtoOptional.get().getColor());
+    Assertions.assertEquals(ring.getPosition(), ringDtoOptional.get().getPosition());
 
     Mockito.verify(ringRepository).findByTitle(ring.getTitle());
   }
 
   @Test
   void shouldSaveRing() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
     final Ring ring = new Ring();
     ring.setId(10L);
+    ring.setRadar(radar);
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(0);
     ring.setActive(true);
 
+    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
     Mockito.when(ringRepository.save(any())).thenReturn(ring);
 
     RingDto ringDto = ringService.save(ringMapper.toDto(ring));
@@ -138,6 +154,7 @@ class RingServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(ring.getDescription(), ringDto.getDescription());
 
     Mockito.verify(ringRepository).save(any());
+    Mockito.verify(radarRepository).findById(radar.getId());
   }
 
   @Test

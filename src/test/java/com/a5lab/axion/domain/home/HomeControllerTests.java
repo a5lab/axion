@@ -27,10 +27,6 @@ import com.a5lab.axion.domain.radar_type.RadarTypeService;
 public class HomeControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
-  @MockBean
-  private RadarTypeService radarTypeService;
-  @MockBean
-  private MessageSource messageSource;
 
   @Test
   public void shouldGetHome() throws Exception {

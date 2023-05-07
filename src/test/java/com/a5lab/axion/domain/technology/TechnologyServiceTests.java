@@ -107,13 +107,13 @@ class TechnologyServiceTests extends AbstractServiceTests {
 
     Mockito.when(technologyRepository.findByTitle(technology.getTitle())).thenReturn(Optional.of(technology));
 
-    Optional<Technology> technologyOptional = technologyService.findByTitle(technology.getTitle());
-    Assertions.assertTrue(technologyOptional.isPresent());
-    Assertions.assertEquals(technology.getId(), technologyOptional.get().getId());
-    Assertions.assertEquals(technology.getTitle(), technologyOptional.get().getTitle());
-    Assertions.assertEquals(technology.getWebsite(), technologyOptional.get().getWebsite());
-    Assertions.assertEquals(technology.getDescription(), technologyOptional.get().getDescription());
-    Assertions.assertEquals(technology.getMoved(), technologyOptional.get().getMoved());
+    Optional<TechnologyDto> technologyDtoOptional = technologyService.findByTitle(technology.getTitle());
+    Assertions.assertTrue(technologyDtoOptional.isPresent());
+    Assertions.assertEquals(technology.getId(), technologyDtoOptional.get().getId());
+    Assertions.assertEquals(technology.getTitle(), technologyDtoOptional.get().getTitle());
+    Assertions.assertEquals(technology.getWebsite(), technologyDtoOptional.get().getWebsite());
+    Assertions.assertEquals(technology.getDescription(), technologyDtoOptional.get().getDescription());
+    Assertions.assertEquals(technology.getMoved(), technologyDtoOptional.get().getMoved());
 
     Mockito.verify(technologyRepository).findByTitle(technology.getTitle());
   }

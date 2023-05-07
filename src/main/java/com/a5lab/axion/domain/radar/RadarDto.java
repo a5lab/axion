@@ -16,10 +16,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.ring.Ring;
-import com.a5lab.axion.domain.segment.Segment;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+import com.a5lab.axion.domain.ring.RingDto;
+import com.a5lab.axion.domain.segment.SegmentDto;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
 @JsonPropertyOrder({"id", "radar_type_id", "title", "description", "primary", "active"})
 @Getter
@@ -35,7 +34,9 @@ public class RadarDto {
   @JsonProperty("radar_type_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private RadarType radarType;
+  private long radarTypeId;
+
+  private String radarTypeTitle;
 
   @NotBlank
   @Size(min = 1, max = 64)
@@ -48,9 +49,9 @@ public class RadarDto {
 
   private boolean active = true;
 
-  private List<Ring> ringList;
+  private List<RingDto> ringList;
 
-  private List<Segment> segmentList;
+  private List<SegmentDto> segmentList;
 
-  private List<TechnologyBlip> technologyBlipList;
+  private List<TechnologyBlipDto> technologyBlipList;
 }

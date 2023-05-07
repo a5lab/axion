@@ -7,10 +7,17 @@ import java.util.List;
 import java.util.Optional;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarMapper;
+import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -19,11 +26,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 class SegmentServiceTests extends AbstractServiceTests {
-  private final SegmentRepository segmentRepository = Mockito.mock(SegmentRepository.class);
+  @MockBean
+  private SegmentRepository segmentRepository;
 
-  private final SegmentMapper segmentMapper = Mappers.getMapper(SegmentMapper.class);
+  @MockBean
+  private RadarRepository radarRepository;
 
-  private final SegmentService segmentService = new SegmentServiceImpl(segmentRepository, segmentMapper);
+  @Autowired
+  private SegmentMapper segmentMapper;
+
+  @Autowired
+  private SegmentService segmentService;
 
   @Test
   void shouldFindAllSegments() {
@@ -102,26 +115,35 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setActive(true);
 
     Mockito.when(segmentRepository.findByTitle(segment.getTitle())).thenReturn(Optional.of(segment));
-    Optional<Segment> segmentOptional = segmentService.findByTitle(segment.getTitle());
 
-    Assertions.assertTrue(segmentOptional.isPresent());
-    Assertions.assertEquals(segment.getId(), segmentOptional.get().getId());
-    Assertions.assertEquals(segment.getTitle(), segmentOptional.get().getTitle());
-    Assertions.assertEquals(segment.getDescription(), segmentOptional.get().getDescription());
-    Assertions.assertEquals(segment.getPosition(), segmentOptional.get().getPosition());
+    Optional<SegmentDto> segmentDtoOptional = segmentService.findByTitle(segment.getTitle());
+    Assertions.assertTrue(segmentDtoOptional.isPresent());
+    Assertions.assertEquals(segment.getId(), segmentDtoOptional.get().getId());
+    Assertions.assertEquals(segment.getTitle(), segmentDtoOptional.get().getTitle());
+    Assertions.assertEquals(segment.getDescription(), segmentDtoOptional.get().getDescription());
+    Assertions.assertEquals(segment.getPosition(), segmentDtoOptional.get().getPosition());
     Mockito.verify(segmentRepository).findByTitle(segment.getTitle());
   }
 
   @Test
   void shouldSaveSegment() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setRadarType(null);
+    radar.setTitle("Radar title");
+    radar.setDescription("Radar description");
+
     final Segment segment = new Segment();
-    segment.setId(10L);
+    segment.setId(2L);
+    segment.setRadar(radar);
     segment.setTitle("My title");
     segment.setDescription("My description");
     segment.setPosition(0);
     segment.setActive(true);
 
+
     Mockito.when(segmentRepository.save(any())).thenReturn(segment);
+    Mockito.when(radarRepository.findById(radar.getId())).thenReturn(Optional.of(radar));
 
     SegmentDto segmentDto = segmentService.save(segmentMapper.toDto(segment));
     Assertions.assertEquals(segment.getId(), segmentDto.getId());
@@ -130,6 +152,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(segment.getPosition(), segmentDto.getPosition());
 
     Mockito.verify(segmentRepository).save(any());
+    Mockito.verify(radarRepository).findById(radar.getId());
   }
 
   @Test

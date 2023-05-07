@@ -12,14 +12,14 @@ import org.mapstruct.ReportingPolicy;
 @MapperConfig(
     componentModel = "spring",
     injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+    unmappedSourcePolicy = ReportingPolicy.IGNORE,
     unmappedTargetPolicy = ReportingPolicy.ERROR,
     typeConversionPolicy = ReportingPolicy.ERROR,
     collectionMappingStrategy = CollectionMappingStrategy.ACCESSOR_ONLY,
     nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL,
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL,
     nullValueCheckStrategy = NullValueCheckStrategy.ON_IMPLICIT_CONVERSION,
-    mappingInheritanceStrategy = MappingInheritanceStrategy.EXPLICIT,
-    unmappedSourcePolicy = ReportingPolicy.IGNORE
+    mappingInheritanceStrategy = MappingInheritanceStrategy.EXPLICIT
 )
 public interface MapperConfiguration {
 }

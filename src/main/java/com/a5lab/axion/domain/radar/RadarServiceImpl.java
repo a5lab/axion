@@ -26,8 +26,9 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional(readOnly = true)
-  public Collection<Radar> findAll() {
-    return radarRepository.findAll(Sort.by(Sort.Direction.ASC, "title"));
+  public Collection<RadarDto> findAll() {
+    return radarRepository.findAll(Sort.by(Sort.Direction.ASC, "title"))
+        .stream().map(radarMapper::toDto).collect(Collectors.toList());
   }
 
   @Override
@@ -65,12 +66,6 @@ public class RadarServiceImpl implements RadarService {
   public List<RadarDto> findByPrimaryAndActive(boolean primary, boolean active) {
     return radarRepository.findByPrimaryAndActive(primary, active)
         .stream().map(radarMapper::toDto).collect(Collectors.toList());
-  }
-
-  @Override
-  @Transactional
-  public Radar save(Radar radar) {
-    return radarRepository.save(radar);
   }
 
   @Override

@@ -131,7 +131,7 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldCreateRing() throws Exception {
+  public void shouldCreateTechnology() throws Exception {
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(10L);
     technologyDto.setWebsite("My website");

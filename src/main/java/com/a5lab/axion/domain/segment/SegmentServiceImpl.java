@@ -49,8 +49,8 @@ public class SegmentServiceImpl implements SegmentService {
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<Segment> findByTitle(String title) {
-    return segmentRepository.findByTitle(title);
+  public Optional<SegmentDto> findByTitle(String title) {
+    return segmentRepository.findByTitle(title).map(segmentMapper::toDto);
   }
 
 
