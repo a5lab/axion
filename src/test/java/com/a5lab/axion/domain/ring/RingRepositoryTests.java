@@ -4,6 +4,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import jakarta.validation.ValidationException;
 
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,26 +15,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.a5lab.axion.domain.AbstractRepositoryTests;
 
 class RingRepositoryTests extends AbstractRepositoryTests {
+  @Autowired
+  private RadarRepository radarRepository;
+
+  @Autowired
+  private RadarTypeRepository radarTypeRepository;
 
   @Autowired
   private RingRepository ringRepository;
 
   @Test
   void shouldSaveRingWithAllFields() {
-    // TODO: fix it, create radars before
-    /*
-    final Ring r = new Ring();
-    r.setTitle("TEST");
-    r.setDescription("Very good description for Ring");
+    final RadarType radarType = new RadarType();
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
+    radarType.setDescription("Technology radars");
+    radarTypeRepository.saveAndFlush(radarType);
 
-    Assertions.assertNull(r.getId());
-    ringRepository.saveAndFlush(r);
-    Assertions.assertNotNull(r.getId());
-    Assertions.assertNotNull(r.getCreatedBy());
-    Assertions.assertNotNull(r.getCreatedDate());
-    Assertions.assertNotNull(r.getLastModifiedBy());
-    Assertions.assertNotNull(r.getLastModifiedDate());
-     */
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radarRepository.saveAndFlush(radar);
+
+    final Ring ring = new Ring();
+    ring.setTitle("TEST");
+    ring.setRadar(radar);
+    ring.setColor("d42d");
+    ring.setDescription("Very good description for Ring");
+
+    Assertions.assertNull(ring.getId());
+    Ring saved = ringRepository.saveAndFlush(ring);
+    Assertions.assertNotNull(saved.getId());
+    Assertions.assertNotNull(saved.getRadar());
+    Assertions.assertNotNull(saved.getTitle());
+    Assertions.assertNotNull(saved.getColor());
+    Assertions.assertNotNull(saved.getDescription());
+    Assertions.assertNotNull(saved.getCreatedBy());
+    Assertions.assertNotNull(saved.getCreatedDate());
+    Assertions.assertNotNull(saved.getLastModifiedBy());
+    Assertions.assertNotNull(saved.getLastModifiedDate());
   }
 
   @Test
@@ -110,35 +136,62 @@ class RingRepositoryTests extends AbstractRepositoryTests {
 
   @Test
   void shouldFindSavedRingById() {
-    /* TODO: uncomment: radars id should be created
-    final Ring r = new Ring();
-    r.setTitle("MY");
-    r.setDescription("Very good description for Ring");
+    final RadarType radarType = new RadarType();
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
+    radarType.setDescription("Technology radars");
+    radarTypeRepository.saveAndFlush(radarType);
 
-    Assertions.assertNull(r.getId());
-    ringRepository.saveAndFlush(r);
-    Assertions.assertNotNull(r.getId());
-    var id = r.getId();
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radarRepository.saveAndFlush(radar);
+
+    final Ring ring = new Ring();
+    ring.setTitle("TEST");
+    ring.setRadar(radar);
+    ring.setColor("d42d");
+    ring.setDescription("Very good description for Ring");
+
+    Assertions.assertNull(ring.getId());
+    ringRepository.saveAndFlush(ring);
+    Assertions.assertNotNull(ring.getId());
+    var id = ring.getId();
 
     Assertions.assertTrue(ringRepository.findById(id).isPresent());
-     */
   }
 
   @Test
   void shouldFindSavedRingByTitle() {
-    /* TODO: uncomment: radars id should be created
-    String title = "SUPER";
-    final Ring r = new Ring();
-    r.setTitle(title);
-    r.setDescription("Very good description for Ring");
+    final RadarType radarType = new RadarType();
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
+    radarType.setDescription("Technology radars");
+    radarTypeRepository.saveAndFlush(radarType);
 
-    Assertions.assertNull(r.getId());
-    ringRepository.saveAndFlush(r);
-    Assertions.assertNotNull(r.getId());
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radarRepository.saveAndFlush(radar);
+
+    String title = "SUPER";
+    final Ring ring = new Ring();
+    ring.setTitle(title);
+    ring.setRadar(radar);
+    ring.setColor("d42d");
+    ring.setDescription("Very good description for Ring");
+
+    Assertions.assertNull(ring.getId());
+    ringRepository.saveAndFlush(ring);
+    Assertions.assertNotNull(ring.getId());
 
     // todo: use service (not repository?)
     Assertions.assertTrue(ringRepository.findByTitle(title).isPresent());
-     */
   }
-
 }
