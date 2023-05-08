@@ -11,7 +11,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarDto;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,6 @@ public class RingApiControllerTests extends AbstractControllerTests {
   @MockBean
   private RingService ringService;
 
-  /* TODO: fix it
   @Test
   public void shouldGetRings() throws Exception {
     final RadarDto radarDto = new RadarDto();
@@ -39,6 +37,7 @@ public class RingApiControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My title");
     ringDto.setDescription("My description");
+
     Page<RingDto> ringDtoPage = new PageImpl<>(Arrays.asList(ringDto));
     Mockito.when(ringService.findAll(any(), any())).thenReturn(ringDtoPage);
 
@@ -52,6 +51,7 @@ public class RingApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$[0].description", equalTo(ringDto.getDescription())))
         .andExpect(jsonPath("$[0].color", equalTo(ringDto.getColor())))
         .andExpect(jsonPath("$[0].active", equalTo(ringDto.isActive())));
+
+    Mockito.verify(ringService).findAll(any(), any());
   }
-   */
 }
