@@ -4,6 +4,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import jakarta.validation.ValidationException;
 
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,26 +15,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.a5lab.axion.domain.AbstractRepositoryTests;
 
 class SegmentRepositoryTests extends AbstractRepositoryTests {
+  @Autowired
+  private RadarRepository radarRepository;
+
+  @Autowired
+  private RadarTypeRepository radarTypeRepository;
 
   @Autowired
   private SegmentRepository segmentRepository;
 
   @Test
   void shouldSaveSegmentWithAllFields() {
-    // TODO: add radars to segments
-    /*
-    final Segment s = new Segment();
-    s.setTitle("My new test Segment");
-    s.setDescription("My awesome description");
+    final RadarType radarType = new RadarType();
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
+    radarType.setDescription("Technology radars");
+    radarTypeRepository.saveAndFlush(radarType);
 
-    Assertions.assertNull(s.getId());
-    segmentRepository.saveAndFlush(s);
-    Assertions.assertNotNull(s.getId());
-    Assertions.assertNotNull(s.getCreatedBy());
-    Assertions.assertNotNull(s.getCreatedDate());
-    Assertions.assertNotNull(s.getLastModifiedBy());
-    Assertions.assertNotNull(s.getLastModifiedDate());
-     */
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radarRepository.saveAndFlush(radar);
+
+    final Segment segment = new Segment();
+    segment.setTitle("My segment title");
+    segment.setRadar(radar);
+    segment.setDescription("My segment description");
+
+    Assertions.assertNull(segment.getId());
+    Segment saved = segmentRepository.saveAndFlush(segment);
+    Assertions.assertNotNull(saved.getId());
+    Assertions.assertNotNull(saved.getRadar());
+    Assertions.assertNotNull(saved.getTitle());
+    Assertions.assertNotNull(saved.getDescription());
+    Assertions.assertNotNull(saved.getCreatedBy());
+    Assertions.assertNotNull(saved.getCreatedDate());
+    Assertions.assertNotNull(saved.getLastModifiedBy());
+    Assertions.assertNotNull(saved.getLastModifiedDate());
   }
 
   @Test
