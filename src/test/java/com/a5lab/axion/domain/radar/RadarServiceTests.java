@@ -7,18 +7,29 @@ import java.util.List;
 import java.util.Optional;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 class RadarServiceTests extends AbstractServiceTests {
-  private final RadarRepository radarRepository = Mockito.mock(RadarRepository.class);
-
-  private final RadarMapper radarMapper = Mappers.getMapper(RadarMapper.class);
-
-  private final RadarService radarService = new RadarServiceImpl(radarRepository, radarMapper);
+  @MockBean
+  private RadarTypeRepository radarTypeRepository;
+  @MockBean
+  private RadarRepository radarRepository;
+  @Autowired
+  private RadarMapper radarMapper;
+  @Autowired
+  private RadarService radarService;
 
   @Test
   void shouldFindAllRadars() {
@@ -40,21 +51,27 @@ class RadarServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldFindAllRadarsWithFilter() {
-    /*
-    final Radar radarDto = new Radar(10L, "my title", "my description");
-    List<Radar> radarDtoList = List.of(radarDto);
-    Page<Radar> page = new PageImpl<>(radarDtoList);
-    Mockito.when(radarRepository.findAll(any(Sort.class), any())).thenReturn(page);
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(null);
+    radar.setTitle("Radar title");
+    radar.setDescription("Radar Description");
+
+    List<Radar> radarList = List.of(radar);
+    Page<Radar> page = new PageImpl<>(radarList);
+    Mockito.when(radarRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
 
     RadarFilter radarFilter = new RadarFilter();
-    Pageable pageable = new Pageable();
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("title, asc"));
+    Page<RadarDto> radarDtoPage = radarService.findAll(radarFilter, pageable);
+    Assertions.assertEquals(1, radarDtoPage.getSize());
+    Assertions.assertEquals(0, radarDtoPage.getNumber());
+    Assertions.assertEquals(1, radarDtoPage.getTotalPages());
+    Assertions.assertEquals(radarDtoPage.iterator().next().getId(), radar.getId());
+    Assertions.assertEquals(radarDtoPage.iterator().next().getTitle(), radar.getTitle());
+    Assertions.assertEquals(radarDtoPage.iterator().next().getDescription(), radar.getDescription());
 
-    Collection<RadarDto> radarDtoCollection = radarService.findAll(radarFilter, pageable);
-    Assertions.assertEquals(1, radarDtoCollection.size());
-    Assertions.assertEquals(radarDtoCollection.iterator().next().getId(), radar.getId());
-    Assertions.assertEquals(radarDtoCollection.iterator().next().getTitle(), radar.getTitle());
-    Assertions.assertEquals(radarDtoCollection.iterator().next().getDescription(), radar.getDescription());
-    */
+    // Mockito.verify(radarRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test
@@ -142,16 +159,19 @@ class RadarServiceTests extends AbstractServiceTests {
     Mockito.verify(radarRepository).findByPrimaryAndActive(radar.isPrimary(), radar.isActive());
   }
 
-  /* TODO:
   @Test
   void shouldSaveRadarDto() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
     final Radar radar = new Radar();
     radar.setId(10L);
-    radar.setRadarType(null);
+    radar.setRadarType(radarType);
     radar.setTitle("Radar title");
     radar.setDescription("Radar description");
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
     RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
     Assertions.assertEquals(radar.getId(), radarDto.getId());
@@ -159,8 +179,8 @@ class RadarServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
 
     Mockito.verify(radarRepository).save(any());
+    Mockito.verify(radarTypeRepository).findById(radarType.getId());
   }
-  */
 
   @Test
   void shouldDeleteRadar() {
