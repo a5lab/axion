@@ -16,8 +16,6 @@ import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WizardDto {
-
   @NotNull
   private RadarTypeDto radarType;
-
 }
