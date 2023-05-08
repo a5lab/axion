@@ -11,10 +11,12 @@ import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarMapper;
 import com.a5lab.axion.domain.radar.RadarRepository;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
+import com.a5lab.axion.domain.tenant.Tenant;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -70,7 +72,8 @@ class SegmentServiceTests extends AbstractServiceTests {
 
     List<Segment> segmentList = List.of(segment);
     Page<Segment> page = new PageImpl<>(segmentList);
-    Mockito.when(segmentRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
+    Mockito.when(segmentRepository.findAll(ArgumentMatchers.<Specification<Segment>>any(), any(Pageable.class)))
+        .thenReturn(page);
 
     SegmentFilter segmentFilter = new SegmentFilter();
     Pageable pageable = PageRequest.of(0, 10, Sort.by("title,asc"));

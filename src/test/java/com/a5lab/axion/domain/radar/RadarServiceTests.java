@@ -9,8 +9,11 @@ import java.util.Optional;
 import com.a5lab.axion.domain.AbstractServiceTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
+import com.a5lab.axion.domain.tenant.Tenant;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -59,7 +62,8 @@ class RadarServiceTests extends AbstractServiceTests {
 
     List<Radar> radarList = List.of(radar);
     Page<Radar> page = new PageImpl<>(radarList);
-    Mockito.when(radarRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
+    Mockito.when(radarRepository.findAll(ArgumentMatchers.<Specification<Radar>>any(), any(Pageable.class)))
+        .thenReturn(page);
 
     RadarFilter radarFilter = new RadarFilter();
     Pageable pageable = PageRequest.of(0, 10, Sort.by("title, asc"));
@@ -105,7 +109,7 @@ class RadarServiceTests extends AbstractServiceTests {
     List<Radar> radarList = List.of(radar);
     Mockito.when(radarRepository.findByPrimary(any(boolean.class))).thenReturn(radarList);
 
-    Optional<Radar> radarOptional =  radarService.findByPrimary(radar.isPrimary());
+    Optional<Radar> radarOptional = radarService.findByPrimary(radar.isPrimary());
     Assertions.assertTrue(radarOptional.isPresent());
     Assertions.assertEquals(radar.isPrimary(), radarOptional.isPresent());
     Assertions.assertEquals(radar.getId(), radarOptional.get().getId());
