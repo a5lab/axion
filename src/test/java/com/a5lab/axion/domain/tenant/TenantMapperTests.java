@@ -2,13 +2,13 @@ package com.a5lab.axion.domain.tenant;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
 
 import com.a5lab.axion.domain.AbstractMapperTests;
+import org.springframework.beans.factory.annotation.Autowired;
 
 class TenantMapperTests  extends AbstractMapperTests {
-
-  private final TenantMapper tenantMapper = Mappers.getMapper(TenantMapper.class);
+  @Autowired
+  private TenantMapper tenantMapper;
 
   @Test
   void testToDtoWithNull() {
