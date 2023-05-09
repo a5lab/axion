@@ -10,8 +10,11 @@ import com.a5lab.axion.domain.AbstractServiceTests;
 
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.tenant.Tenant;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -67,7 +70,8 @@ class RingServiceTests extends AbstractServiceTests {
 
     List<Ring> ringList = List.of(ring);
     Page<Ring> page = new PageImpl<>(ringList);
-    Mockito.when(ringRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
+    Mockito.when(ringRepository.findAll(ArgumentMatchers.<Specification<Ring>>any(), any(Pageable.class)))
+        .thenReturn(page);
 
     RingFilter ringFilter = new RingFilter();
     Pageable pageable = PageRequest.of(0, 10, Sort.by("title,asc"));

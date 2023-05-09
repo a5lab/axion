@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -47,7 +48,8 @@ class TenantServiceTests extends AbstractServiceTests {
 
     List<Tenant> tenantList = List.of(tenant);
     Page<Tenant> page = new PageImpl<>(tenantList);
-    Mockito.when(tenantRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
+    Mockito.when(tenantRepository.findAll(ArgumentMatchers.<Specification<Tenant>>any(), any(Pageable.class)))
+        .thenReturn(page);
 
     TenantFilter tenantFilter = new TenantFilter();
     Pageable pageable = PageRequest.of(0, 10, Sort.by("title,asc"));
