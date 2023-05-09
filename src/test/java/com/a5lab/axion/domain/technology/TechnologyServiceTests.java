@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -45,7 +46,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(1, technologyDtoCollection.size());
     Assertions.assertEquals(technologyDtoCollection.iterator().next().getId(), technology.getId());
     Assertions.assertEquals(technologyDtoCollection.iterator().next().getTitle(), technology.getTitle());
-    Assertions.assertEquals(technologyDtoCollection.iterator().next().getDescription(),technology.getDescription());
+    Assertions.assertEquals(technologyDtoCollection.iterator().next().getDescription(), technology.getDescription());
   }
 
   @Test
@@ -60,7 +61,8 @@ class TechnologyServiceTests extends AbstractServiceTests {
 
     List<Technology> technologyList = List.of(technology);
     Page<Technology> page = new PageImpl<>(technologyList);
-    Mockito.when(technologyRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(page);
+    Mockito.when(technologyRepository.findAll(ArgumentMatchers.<Specification<Technology>>any(), any(Pageable.class)))
+        .thenReturn(page);
 
     TechnologyFilter technologyFilter = new TechnologyFilter();
     Pageable pageable = PageRequest.of(0, 10, Sort.by("title,asc"));
