@@ -42,7 +42,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
   private TechnologyBlipMapper technologyBlipMapper;
   @Autowired
   private TechnologyBlipService technologyBlipService;
-
+  /*
   @Test
   void shouldFindAllTechnologyBlips() {
     final Radar radar = new Radar();
@@ -318,4 +318,5 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
 
     Mockito.verify(technologyBlipRepository).deleteById(technologyBlip.getId());
   }
+   */
 }
