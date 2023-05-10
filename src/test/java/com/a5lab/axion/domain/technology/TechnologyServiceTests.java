@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
-import com.a5lab.axion.domain.tenant.Tenant;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -22,11 +22,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 class TechnologyServiceTests extends AbstractServiceTests {
-  private final TechnologyRepository technologyRepository = Mockito.mock(TechnologyRepository.class);
-
-  private final TechnologyMapper technologyMapper = Mappers.getMapper(TechnologyMapper.class);
-
-  private final TechnologyService technologyService = new TechnologyServiceImpl(technologyRepository, technologyMapper);
+  @MockBean
+  private TechnologyRepository technologyRepository;
+  @Autowired
+  private TechnologyMapper technologyMapper;
+  @Autowired
+  private TechnologyService technologyService;
 
   @Test
   void shouldFindAllTechnologies() {

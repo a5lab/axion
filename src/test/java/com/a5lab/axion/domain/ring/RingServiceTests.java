@@ -10,7 +10,6 @@ import com.a5lab.axion.domain.AbstractServiceTests;
 
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
-import com.a5lab.axion.domain.tenant.Tenant;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

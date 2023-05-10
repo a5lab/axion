@@ -21,15 +21,22 @@ import com.a5lab.axion.domain.radar_type.RadarType;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 public class WizardServiceTest extends AbstractServiceTests {
-  private final RadarService radarService = Mockito.mock(RadarService.class);
-  private final RingService ringService = Mockito.mock(RingService.class);
-  private final SegmentService segmentService = Mockito.mock(SegmentService.class);
-  private final TechnologyService technologyService = Mockito.mock(TechnologyService.class);
-  private final TechnologyBlipService technologyBlipService = Mockito.mock(TechnologyBlipService.class);
-  private final WizardService wizardService =
-      new WizardServiceImpl(radarService, ringService, segmentService, technologyService, technologyBlipService);
+  @MockBean
+  private RadarService radarService;
+  @MockBean
+  private RingService ringService;
+  @MockBean
+  private SegmentService segmentService;
+  @MockBean
+  private TechnologyService technologyService;
+  @MockBean
+  private TechnologyBlipService technologyBlipService;
+  @Autowired
+  private WizardService wizardService;
 
 
   @Test
@@ -49,7 +56,8 @@ public class WizardServiceTest extends AbstractServiceTests {
 
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(4L);
-    segmentDto.setRadarId(0L);
+    segmentDto.setRadarId(radarDto.getId());
+    segmentDto.setRadarTitle(radarDto.getTitle());
     segmentDto.setTitle("Languages");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -57,7 +65,8 @@ public class WizardServiceTest extends AbstractServiceTests {
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(5L);
-    ringDto.setRadarId(0L);
+    ringDto.setRadarId(radarDto.getId());
+    ringDto.setRadarTitle(radarDto.getTitle());
     ringDto.setTitle("ADOPT");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(0);

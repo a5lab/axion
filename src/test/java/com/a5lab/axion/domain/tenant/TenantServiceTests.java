@@ -8,9 +8,10 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
+import org.mockito.ArgumentMatchers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -22,11 +23,12 @@ import com.a5lab.axion.domain.AbstractServiceTests;
 import org.springframework.data.jpa.domain.Specification;
 
 class TenantServiceTests extends AbstractServiceTests {
-  private final TenantRepository tenantRepository = Mockito.mock(TenantRepository.class);
-
-  private final TenantMapper tenantMapper = Mappers.getMapper(TenantMapper.class);
-
-  private final TenantService tenantService = new TenantServiceImpl(tenantRepository, tenantMapper);
+  @MockBean
+  private TenantRepository tenantRepository;
+  @Autowired
+  private TenantMapper tenantMapper;
+  @Autowired
+  private TenantService tenantService;
 
   @Test
   void shouldFindAllTenants() {

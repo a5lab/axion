@@ -9,7 +9,6 @@ import java.util.Optional;
 import com.a5lab.axion.domain.AbstractServiceTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
-import com.a5lab.axion.domain.tenant.Tenant;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
