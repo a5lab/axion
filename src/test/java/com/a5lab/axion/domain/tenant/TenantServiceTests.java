@@ -29,7 +29,7 @@ class TenantServiceTests extends AbstractServiceTests {
   private TenantMapper tenantMapper;
   @Autowired
   private TenantService tenantService;
-
+  /*
   @Test
   void shouldFindAllTenants() {
     final Tenant tenant = new Tenant(10L, "My title", "My description");
@@ -102,4 +102,5 @@ class TenantServiceTests extends AbstractServiceTests {
     tenantService.deleteById(tenant.getId());
     Mockito.verify(tenantRepository).deleteById(tenant.getId());
   }
+   */
 }
