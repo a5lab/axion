@@ -8,9 +8,9 @@ import com.a5lab.axion.AxionApplication;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = AxionApplication.class)
 public abstract class AbstractIntegrationTests  extends AbstractAnyTests{
-  final private static int port = 8080;
-  final private static String baseUrl = "http://127.0.0.1:";
+  final protected static int port = 8080;
+  final protected static String baseUrl = "http://127.0.0.1:";
 
   @Autowired
-  private TestRestTemplate restTemplate;
+  protected TestRestTemplate restTemplate;
 }
