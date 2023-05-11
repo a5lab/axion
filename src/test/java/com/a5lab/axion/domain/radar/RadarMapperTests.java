@@ -2,6 +2,9 @@ package com.a5lab.axion.domain.radar;
 
 import static org.mockito.ArgumentMatchers.any;
 
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +18,7 @@ import com.a5lab.axion.domain.ring.RingMapper;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentMapper;
+import com.a5lab.axion.domain.technology.Technology;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipMapper;
@@ -56,17 +60,73 @@ class RadarMapperTests  extends AbstractMapperTests {
     radar.setDescription("My description");
     radar.setPrimary(true);
     radar.setActive(true);
-    final var radarDto = radarMapper.toDto(radar);
-    List<Ring> ringList = new ArrayList<>();
-    List<Segment> segmentList = new ArrayList<>();
-    List<TechnologyBlip> technologyBlipList = new ArrayList<>();
 
+    final var radarDto = radarMapper.toDto(radar);
     Assertions.assertEquals(radarDto.getTitle(), radar.getTitle());
     Assertions.assertEquals(radarDto.getDescription(), radar.getDescription());
-    Assertions.assertNotNull(ringList);
-    Assertions.assertNotNull(segmentList);
-    Assertions.assertNotNull(technologyBlipList);
+    Assertions.assertNotNull(radarDto.isPrimary());
+    Assertions.assertNotNull(radarDto.isActive());
   }
+
+  @Test
+  public void testToDtoAllLists() {
+    // Create radar
+    final Radar radar = new Radar();
+    radar.setId(0L);
+    radar.setTitle("My title");
+    radar.setDescription("My description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
+    // Create ring
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setTitle("My title");
+    ring.setDescription("My description");
+    ring.setColor("My color");
+    ring.setPosition(0);
+    ring.setActive(true);
+    radar.setRingList(List.of(ring));
+
+    // Create segment
+    final Segment segment = new Segment();
+    segment.setId(10L);
+    segment.setRadar(radar);
+    segment.setTitle("My segment");
+    segment.setDescription("My segment description");
+    segment.setPosition(0);
+    segment.setActive(true);
+    radar.setSegmentList(List.of(segment));
+
+    // Create technology
+    final var technology = new Technology();
+    technology.setId(22L);
+    technology.setTitle("My  title");
+    technology.setWebsite("https://www.example.com");
+    technology.setDescription("My description");
+    technology.setMoved(0);
+    technology.setActive(true);
+
+    // Create technologyBlip
+    final var technologyBlip = new TechnologyBlip();
+    technologyBlip.setId(10L);
+    technologyBlip.setRadar(radar);
+    technologyBlip.setRing(ring);
+    technologyBlip.setTechnology(technology);
+    technologyBlip.setSegment(segment);
+    radar.setTechnologyBlipList(List.of(technologyBlip));
+
+    RadarDto radarDto = radarMapper.toDto(radar);
+    Assertions.assertEquals(radarDto.getTitle(), radar.getTitle());
+    Assertions.assertEquals(radarDto.getDescription(), radar.getDescription());
+    Assertions.assertNotNull(radarDto.isPrimary());
+    Assertions.assertNotNull(radarDto.isActive());
+
+    Assertions.assertNotNull(radarDto.getRingList());
+    Assertions.assertNotNull(radarDto.getSegmentList());
+    Assertions.assertNotNull(radarDto.getTechnologyBlipList());
+  }
+
 
   @Test
   void testToEntityWithNull() {
@@ -98,55 +158,4 @@ class RadarMapperTests  extends AbstractMapperTests {
     Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
   }
-
-  @Test
-  public void testAllListToListDto() {
-    // Create radar
-    final Radar radar = new Radar();
-    RadarDto radarDto = radarMapper.toDto(radar);
-
-    // Create ring
-    final Ring ring = new Ring();
-    ring.setId(10L);
-    ring.setTitle("My title");
-    ring.setDescription("My description");
-    ring.setColor("My color");
-    ring.setPosition(0);
-    ring.setActive(true);
-    RingDto ringDto = ringMapper.toDto(ring);
-    List<RingDto> ringDtoList = List.of(ringDto);
-
-    // Create segment
-    final Segment segment = new Segment();
-    segment.setId(10L);
-    segment.setRadar(radar);
-    segment.setTitle("My segment");
-    segment.setDescription("My segment description");
-    segment.setPosition(0);
-    segment.setActive(true);
-    SegmentDto segmentDto = segmentMapper.toDto(segment);
-    List<SegmentDto> segmentDtoList = List.of(segmentDto);
-
-    // Create technologyBlip
-    final var technologyBlip = new TechnologyBlip();
-    technologyBlip.setId(10L);
-    technologyBlip.setRadar(radar);
-    technologyBlip.setRing(ring);
-//    technologyBlip.setTechnology(technology);
-    technologyBlip.setSegment(segment);
-    TechnologyBlipDto technologyBlipDto = technologyBlipMapper.toDto(technologyBlip);
-    List<TechnologyBlipDto> technologyBlipDtoList = List.of(technologyBlipDto);
-
-    radarDto.setRingList(ringDtoList);
-    radarDto.setSegmentList(segmentDtoList);
-    radarDto.setTechnologyBlipList(technologyBlipDtoList);
-
-    Assertions.assertNotNull(radarDto.getRingList());
-    Assertions.assertNotNull(radarDto.getSegmentList());
-    Assertions.assertNotNull(radarDto.getTechnologyBlipList());
-    Assertions.assertNotNull(ringDtoList);
-    Assertions.assertNotNull(segmentDtoList);
-    Assertions.assertNotNull(technologyBlipDtoList);
-  }
-
 }
