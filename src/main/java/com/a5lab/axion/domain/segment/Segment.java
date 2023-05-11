@@ -17,7 +17,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -67,7 +66,6 @@ public class Segment extends AbstractAuditable {
   @Column(name = "is_active", nullable = false)
   private boolean active = true;
 
-  @Setter(AccessLevel.NONE)
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "segment", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<TechnologyBlip> technologyBlipList;
