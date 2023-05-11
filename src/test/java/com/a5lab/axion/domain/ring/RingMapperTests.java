@@ -37,8 +37,8 @@ class RingMapperTests  extends AbstractMapperTests {
   void testToDtoAllFields() {
     final Ring ring = new Ring();
     ring.setId(0L);
-    ring.setTitle("title");
-    ring.setDescription("description");
+    ring.setTitle("My ring title");
+    ring.setDescription("My ring description");
     ring.setColor("color");
     ring.setPosition(0);
     ring.setActive(true);
@@ -55,8 +55,8 @@ class RingMapperTests  extends AbstractMapperTests {
   public void testToDtoTechnologyBlipList() {
     final Radar radar = new Radar();
     radar.setId(1L);
-    radar.setTitle("My title");
-    radar.setDescription("My description");
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
     radar.setPrimary(true);
     radar.setActive(true);
 
@@ -87,7 +87,6 @@ class RingMapperTests  extends AbstractMapperTests {
     Assertions.assertNotNull(ringDto.getTechnologyBlipList());
     Assertions.assertEquals(1, ringDto.getTechnologyBlipList().size());
     Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getId(), technologyBlip.getId());
-
   }
 
   @Test
@@ -134,9 +133,9 @@ class RingMapperTests  extends AbstractMapperTests {
     final RingDto ringDto = new RingDto();
     ringDto.setId(2L);
     ringDto.setRadarId(radar.getId());
-    ringDto.setTitle("title1");
-    ringDto.setDescription("description1");
-    ringDto.setColor("color1");
+    ringDto.setTitle("My ring title1");
+    ringDto.setDescription("My ring description1");
+    ringDto.setColor("color");
     ringDto.setPosition(0);
     final var ring = ringMapper.toEntity(ringDto);
 
@@ -164,9 +163,9 @@ class RingMapperTests  extends AbstractMapperTests {
     ringDto.setId(2L);
     ringDto.setRadarId(radar.getId());
     ringDto.setRadarTitle(radar.getTitle());
-    ringDto.setTitle("title1");
-    ringDto.setDescription("description1");
-    ringDto.setColor("color1");
+    ringDto.setTitle("My ring title");
+    ringDto.setDescription("My ring description1");
+    ringDto.setColor("color");
     ringDto.setPosition(0);
 
     final var technologyBlipDto = new TechnologyBlipDto();
@@ -188,5 +187,6 @@ class RingMapperTests  extends AbstractMapperTests {
     Assertions.assertEquals(1, ringDto.getTechnologyBlipList().size());
     Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getId(), technologyBlipDto.getId());
 
+    Mockito.verify(radarRepository).findById(radar.getId());
   }
 }
