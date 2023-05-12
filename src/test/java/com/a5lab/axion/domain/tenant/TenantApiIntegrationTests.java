@@ -10,10 +10,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.a5lab.axion.domain.AbstractIntegrationTests;
+import com.a5lab.axion.domain.AbstractApiIntegrationTests;
 
 
-class TenantApiIntegrationTests extends AbstractIntegrationTests {
+class TenantApiIntegrationTests extends AbstractApiIntegrationTests {
 
   @Autowired
   private TenantService tenantService;

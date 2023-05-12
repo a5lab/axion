@@ -10,7 +10,4 @@ import com.a5lab.axion.AxionApplication;
 public abstract class AbstractIntegrationTests  extends AbstractAnyTests{
   final protected static int port = 8080;
   final protected static String baseUrl = "http://127.0.0.1:";
-
-  @Autowired
-  protected TestRestTemplate restTemplate;
 }
