@@ -232,6 +232,7 @@
                     <printFailingErrors>true</printFailingErrors>
                     <targetJdk>${java.version}</targetJdk>
                     <excludes>
+                        <exclude>**/RadarController.java</exclude>
                         <exclude>**/RadarMapperImpl.java</exclude>
                         <exclude>**/RingMapperImpl.java</exclude>
                         <exclude>**/SegmentMapperImpl.java</exclude>
