@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html th:fragment="radar (title, metas, content)" xmlns:th="http://www.thymeleaf.org">
+<html th:fragment="radar (title, metas, scripts, content)" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title th:replace="${title}">Layout title</title>
     <th:block th:insert="~{fragments/google_analytics.html}"/>
     <th:block th:insert="~{fragments/meta_information.html}"/>
     <th:block th:replace="${metas}"/>
+    <th:block th:replace="${scripts}"/>
   </head>
   <body>
     <navbar th:insert="~{fragments/main_navbar.html}"></navbar>

@@ -342,7 +342,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>Minimize home.js files</id>
+                        <id>Minimize radar.js files</id>
                         <phase>initialize</phase>
                         <goals>
                             <goal>exec</goal>
@@ -351,9 +351,9 @@
                             <executable>uglifyjs</executable>
                             <workingDirectory>${basedir}/src/main/resources/static/js/</workingDirectory>
                             <arguments>
-                                <argument>home.js</argument>
+                                <argument>radar.js</argument>
                                 <argument>-o</argument>
-                                <argument>home.min.js</argument>
+                                <argument>radar.min.js</argument>
                                 <argument>-c</argument>
                                 <argument>-m</argument>
                             </arguments>
@@ -501,7 +501,7 @@
                             <exclude>/static/js/bootstrap.bundle.js</exclude>
                             <exclude>/static/js/bootstrap.bundle.js.map</exclude>
                             <exclude>/static/js/d3.js</exclude>
-                            <exclude>/static/js/home.js</exclude>
+                            <exclude>/static/js/radar.js</exclude>
                         </excludes>
                     </resource>
                 </resources>

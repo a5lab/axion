@@ -1,106 +1,94 @@
 <!DOCTYPE HTML>
-<html th:replace="~{layouts/radar :: radar(~{::title}, ~{::meta}, ~{:: #content})}"
+<html th:replace="~{layouts/radar :: radar(~{::title}, ~{::meta}, ~{::script}, ~{:: #content})}"
       xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Dashboard title</title>
-    <meta name="description" content="Page description"/>
-    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta content="Page description" name="description"/>
+    <meta content="HTML, CSS, JavaScript" name="keywords">
+    <script th:src="@{/js/d3.min.js}"></script>
+    <script th:src="@{/js/radar.min.js}"></script>
   </head>
   <body>
     <div id="content">
-      <h1 class="wrapper-title">Radars</h1>
-      <div class="wrapper-content">
-        <ul class="ul-show-wrapper">
-          <li>
-            <p>Title</p>
-            <p th:text="${radarDto.title}"></p>
-          </li>
-          <li>
-            <p>Description</p>
-            <p th:text="${radarDto.description}"></p>
-          </li>
-          <li>
-            <p>Primary</p>
-            <p th:text="${radarDto.primary}"></p>
-          </li>
-          <li>
-            <p>Active</p>
-            <p th:text="${radarDto.active}"></p>
-          </li>
-        </ul>
-        <div class="row mb-4">
-          <h2 class="title color-blue-primary">Blips</h2>
-          <div class="table-wrap">
-            <table class="table table-home" id="blips">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Website</th>
-                  <th>Quadrant</th>
-                  <th>Ring</th>
-                  <th>Moved</th>
-                  <th>Active</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="technologyBlip : ${radarDto.getTechnologyBlipList}">
-                  <td th:text="${technologyBlip.technologyTitle}"></td>
-                  <td th:text="${technologyBlip.technologyWebsite}"></td>
-                  <td th:text="${technologyBlip.segmentPosition}"></td>
-                  <td th:text="${technologyBlip.ringPosition}"></td>
-                  <td th:text="${technologyBlip.technologyMoved}"></td>
-                  <td th:text="${technologyBlip.technologyActive}"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <svg id="radar"></svg>
+      <div class="row justify-content-center">
+        <div class="text-center">
+          <h1 class="title color-blue-primary mb-4" th:id="name" th:text="${radarDto.title}"></h1>
+          <p class="lead-banner-text grey" th:id="description" th:text="${radarDto.description}"></p>
         </div>
-        <div class="row mb-4">
-          <h2 class="title color-blue-primary">Segments</h2>
-          <div class="table-wrap">
-            <table class="table table-home" id="segments">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Position</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="segment : ${radarDto.getSegmentList}">
-                  <td th:text="${segment.title}"></td>
-                  <td th:text="${segment.description}"></td>
-                  <td th:text="${segment.position}"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="row mb-4">
-          <h2 class="title color-blue-primary">Rings</h2>
-          <div class="table-wrap">
-            <table class="table table-home" id="rings">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Position</th>
-                  <th>Color</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="ring : ${radarDto.getRingList}">
-                  <td th:text="${ring.title}"></td>
-                  <td th:text="${ring.description}"></td>
-                  <td th:text="${ring.position}"></td>
-                  <td th:text="${ring.color}"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <p><a href="/radars" class="btn-blue-wrapper">View all radars</a></p>
       </div>
+      <div class="row mb-4">
+        <h2 class="title color-blue-primary">Blips</h2>
+        <div class="table-wrap">
+          <table class="table table-home" id="blips">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Website</th>
+                <th>Quadrant</th>
+                <th>Ring</th>
+                <th>Moved</th>
+                <th>Active</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="technologyBlip : ${radarDto.getTechnologyBlipList}">
+                <td th:text="${technologyBlip.technologyTitle}"></td>
+                <td th:text="${technologyBlip.technologyWebsite}"></td>
+                <td th:text="${technologyBlip.segmentPosition}"></td>
+                <td th:text="${technologyBlip.ringPosition}"></td>
+                <td th:text="${technologyBlip.technologyMoved}"></td>
+                <td th:text="${technologyBlip.technologyActive}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <h2 class="title color-blue-primary">Segments</h2>
+        <div class="table-wrap">
+          <table class="table table-home" id="segments">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Position</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="segment : ${radarDto.getSegmentList}">
+                <td th:text="${segment.title}"></td>
+                <td th:text="${segment.description}"></td>
+                <td th:text="${segment.position}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <h2 class="title color-blue-primary">Rings</h2>
+        <div class="table-wrap">
+          <table class="table table-home" id="rings">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Position</th>
+                <th>Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="ring : ${radarDto.getRingList}">
+                <td th:text="${ring.title}"></td>
+                <td th:text="${ring.description}"></td>
+                <td th:text="${ring.position}"></td>
+                <td th:text="${ring.color}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p><a class="btn-blue-wrapper" href="/radars">View all radars</a></p>
     </div>
   </body>
 </html>
