@@ -69,7 +69,7 @@ public class RadarController {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
           messageSource.getMessage("radar.flash.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/radars");
+      return new ModelAndView("redirect:/radars");
     }
   }
 
