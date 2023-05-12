@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.config.MapperConfiguration;
 import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipMapper;
 import com.a5lab.axion.utils.PlainMapper;
 
 @Mapper(config = MapperConfiguration.class,
+    uses = {TechnologyBlipMapper.class},
     unmappedTargetPolicy = ReportingPolicy.WARN,
     typeConversionPolicy = ReportingPolicy.WARN)
 public abstract class RingMapper implements PlainMapper<Ring, RingDto> {
