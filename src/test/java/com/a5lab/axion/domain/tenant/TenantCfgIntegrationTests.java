@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import com.a5lab.axion.domain.AbstractIntegrationTests;
 
 
-class TenantApiIntegrationTests extends AbstractIntegrationTests {
+class TenantCfgIntegrationTests extends AbstractIntegrationTests {
 
   @Autowired
   private TenantService tenantService;
@@ -26,13 +26,11 @@ class TenantApiIntegrationTests extends AbstractIntegrationTests {
     tenantDto.setDescription("My description");
     tenantDto = tenantService.save(tenantDto);
 
-    ResponseEntity<List<Tenant>> responseEntity =
-        restTemplate.exchange(baseUrl + port + "/api/v1/tenants", HttpMethod.GET, null,
-            new ParameterizedTypeReference<List<Tenant>>() {
-            });
-    List<Tenant> tenantList = responseEntity.getBody();
+    ResponseEntity<String> responseEntity =
+        restTemplate.exchange(baseUrl + port + "/settings/tenants", HttpMethod.GET, null, String.class);
     Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-    Assertions.assertEquals(1, tenantList.size());
+    Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getTitle()));
+    Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getDescription()));
 
     this.tenantService.deleteById(tenantDto.getId());
   }
