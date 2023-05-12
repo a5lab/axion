@@ -180,6 +180,9 @@
                         </goals>
                         <phase>prepare-package</phase>
                         <configuration>
+                            <excludes>
+                                <exclude>com/gargoylesoftware/htmlunit/css/StyleAttributes$Definition</exclude>
+                            </excludes>
                             <rules>
                                 <rule>
                                     <element>BUNDLE</element>
@@ -568,6 +571,11 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>com/gargoylesoftware/htmlunit/css/StyleAttributes$Definition</exclude>
+                    </excludes>
+                </configuration>
                 <reportSets>
                     <reportSet>
                         <reports>
