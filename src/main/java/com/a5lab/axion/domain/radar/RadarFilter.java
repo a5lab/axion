@@ -17,7 +17,4 @@ public class RadarFilter {
 
   @Size(min = 0, max = 64)
   private String title;
-
-  private boolean active;
-
 }
