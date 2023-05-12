@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.config.MapperConfiguration;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
+import com.a5lab.axion.domain.ring.RingMapper;
+import com.a5lab.axion.domain.segment.SegmentMapper;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipMapper;
 import com.a5lab.axion.utils.PlainMapper;
 
 @Mapper(config = MapperConfiguration.class,
+    uses = {RingMapper.class, SegmentMapper.class, TechnologyBlipMapper.class},
     unmappedTargetPolicy = ReportingPolicy.WARN,
     typeConversionPolicy = ReportingPolicy.WARN)
 public abstract class RadarMapper implements PlainMapper<Radar, RadarDto> {
