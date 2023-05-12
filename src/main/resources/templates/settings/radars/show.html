@@ -28,6 +28,77 @@
             <p th:text="${radarDto.active}"></p>
           </li>
         </ul>
+        <div class="row mb-4">
+          <h2 class="title color-blue-primary">Blips</h2>
+          <div class="table-wrap">
+            <table class="table table-home" id="blips">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Website</th>
+                  <th>Quadrant</th>
+                  <th>Ring</th>
+                  <th>Moved</th>
+                  <th>Active</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="technologyBlip : ${radarDto.getTechnologyBlipList}">
+                  <td th:text="${technologyBlip.technologyTitle}"></td>
+                  <td th:text="${technologyBlip.technologyWebsite}"></td>
+                  <td th:text="${technologyBlip.segmentPosition}"></td>
+                  <td th:text="${technologyBlip.ringPosition}"></td>
+                  <td th:text="${technologyBlip.technologyMoved}"></td>
+                  <td th:text="${technologyBlip.technologyActive}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <h2 class="title color-blue-primary">Segments</h2>
+          <div class="table-wrap">
+            <table class="table table-home" id="segments">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Position</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="segment : ${radarDto.getSegmentList}">
+                  <td th:text="${segment.title}"></td>
+                  <td th:text="${segment.description}"></td>
+                  <td th:text="${segment.position}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <h2 class="title color-blue-primary">Rings</h2>
+          <div class="table-wrap">
+            <table class="table table-home" id="rings">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Position</th>
+                  <th>Color</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="ring : ${radarDto.getRingList}">
+                  <td th:text="${ring.title}"></td>
+                  <td th:text="${ring.description}"></td>
+                  <td th:text="${ring.position}"></td>
+                  <td th:text="${ring.color}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <p><a href="/settings/radars" class="btn-blue-wrapper">View all radars</a></p>
       </div>
     </div>

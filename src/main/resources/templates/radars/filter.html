@@ -1,0 +1,16 @@
+<div id="filter">
+  <div class="filter-sort">
+    <a href="#" id="filter-nav" class="mb-3 color-blue-primary">Filter</a>
+  </div>
+  <form action="#" id="filter-form" class="mb-3" method="get" th:action="@{/radars}" th:object="${radarFilter}">
+    <div th:if="${#fields.hasAnyErrors()}">
+      <ul>
+        <li th:each="error : ${#fields.allErrors()}" th:text="${error}"/>
+      </ul>
+    </div>
+    <label for="title">Title</label>
+    <input id="title" placeholder="Title" th:field="*{title}" type="text">
+    <input class="filter-button" type="submit" value="Filter">
+  </form>
+  <div class="border-grey"></div>
+</div>
