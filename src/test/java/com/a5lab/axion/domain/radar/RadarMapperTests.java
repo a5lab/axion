@@ -10,13 +10,16 @@ import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.ring.RingDto;
+import com.a5lab.axion.domain.ring.RingMapper;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.segment.SegmentDto;
+import com.a5lab.axion.domain.segment.SegmentMapper;
 import com.a5lab.axion.domain.technology.Technology;
 import com.a5lab.axion.domain.technology.TechnologyDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipMapper;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,9 +31,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 class RadarMapperTests  extends AbstractMapperTests {
+
+
   @MockBean
   private RadarTypeRepository radarTypeRepository;
 
+  @MockBean
+  private RingMapper ringMapper;
+
+  @MockBean
+  private SegmentMapper segmentMapper;
+
+  @MockBean
+  private TechnologyBlipMapper technologyBlipMapper;
+  @Autowired
+  private RadarRepository radarRepository;
   @Autowired
   private RadarMapper radarMapper;
 
@@ -107,6 +122,7 @@ class RadarMapperTests  extends AbstractMapperTests {
     radar.setTechnologyBlipList(List.of(technologyBlip));
 
     RadarDto radarDto = radarMapper.toDto(radar);
+
     Assertions.assertEquals(radarDto.getTitle(), radar.getTitle());
     Assertions.assertEquals(radarDto.getDescription(), radar.getDescription());
     Assertions.assertNotNull(radarDto.isPrimary());
@@ -182,7 +198,6 @@ class RadarMapperTests  extends AbstractMapperTests {
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
   }
 
-  /* TODO: add extra mockito
   @Test
   public void testToEntityAllLists() {
     // Create radarType
@@ -218,7 +233,7 @@ class RadarMapperTests  extends AbstractMapperTests {
     // Create technology
     final var technologyDto = new TechnologyDto();
     technologyDto.setId(3L);
-    technologyDto.setTitle("My  title");
+    technologyDto.setTitle("My title");
     technologyDto.setWebsite("https://www.example.com");
     technologyDto.setDescription("My description");
     technologyDto.setMoved(0);
@@ -244,7 +259,20 @@ class RadarMapperTests  extends AbstractMapperTests {
     technologyBlipDto.setSegmentId(segmentDto.getId());
     radarDto.setTechnologyBlipList(List.of(technologyBlipDto));
 
+
+
     Radar radar = radarMapper.toEntity(radarDto);
+
+    final Ring ring = new Ring();
+    Mockito.when(ringMapper.toEntity(any())).thenReturn(ring);
+
+    final Segment segment = new Segment();
+    Mockito.when(segmentMapper.toEntity(any())).thenReturn(segment);
+
+    final TechnologyBlip technologyBlip = new TechnologyBlip();
+    Mockito.when(technologyBlipMapper.toEntity(any())).thenReturn(technologyBlip);
+
+    Mockito.verify(ringMapper).toEntity(ringDto);
 
     Assertions.assertEquals(radar.getId(), radarDto.getId());
     Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
@@ -253,7 +281,7 @@ class RadarMapperTests  extends AbstractMapperTests {
     Assertions.assertNotNull(radar.isActive());
 
     // Compare ring values
-    Assertions.assertNotNull(radar.getRingList());
+    Assertions.assertNotNull(radarDto.getRingList());
     Assertions.assertEquals(1, radar.getRingList().size());
     Assertions.assertEquals(radar.getRingList().iterator().next().getId(), ringDto.getId());
     Assertions.assertEquals(radar.getRingList().iterator().next().getTitle(), ringDto.getTitle());
@@ -278,5 +306,4 @@ class RadarMapperTests  extends AbstractMapperTests {
 
     Mockito.verify(radarTypeRepository).findById(radarType.getId());
   }
-  */
 }
