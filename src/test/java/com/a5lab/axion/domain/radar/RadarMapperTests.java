@@ -70,6 +70,7 @@ class RadarMapperTests  extends AbstractMapperTests {
     // Create ring
     final Ring ring = new Ring();
     ring.setId(2L);
+    ring.setRadar(radar);
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("My color");
