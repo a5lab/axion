@@ -11,14 +11,11 @@ import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingMapper;
-import com.a5lab.axion.domain.ring.RingRepository;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentMapper;
-import com.a5lab.axion.domain.segment.SegmentRepository;
 import com.a5lab.axion.domain.technology.Technology;
 import com.a5lab.axion.domain.technology.TechnologyDto;
-import com.a5lab.axion.domain.technology.TechnologyRepository;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
