@@ -86,3 +86,5 @@ Technical and business radar. Spring boot based application
 
 * https://github.com/thoughtworks/build-your-own-radar
 * https://github.com/zalando/tech-radar
+
+# GPG key verification
