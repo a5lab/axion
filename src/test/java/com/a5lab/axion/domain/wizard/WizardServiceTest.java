@@ -38,7 +38,6 @@ public class WizardServiceTest extends AbstractServiceTests {
   @Autowired
   private WizardService wizardService;
 
-  /*
   @Test
   void shouldCreateRadarEnv() throws Exception {
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
@@ -106,5 +105,4 @@ public class WizardServiceTest extends AbstractServiceTests {
     Mockito.verify(technologyService, Mockito.times(2)).findByTitle(any());
     Mockito.verify(technologyBlipService, Mockito.times(2)).save(any());
   }
-   */
 }
