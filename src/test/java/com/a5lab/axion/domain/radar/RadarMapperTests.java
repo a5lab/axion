@@ -34,13 +34,13 @@ class RadarMapperTests  extends AbstractMapperTests {
   private RadarTypeRepository radarTypeRepository;
 
   @MockBean
-  private TechnologyBlipMapper technologyBlipMapper;
-
-  @MockBean
   private RingMapper ringMapper;
 
   @MockBean
   private SegmentMapper segmentMapper;
+
+  @MockBean
+  private TechnologyBlipMapper technologyBlipMapper;
 
   @Autowired
   private RadarMapper radarMapper;
