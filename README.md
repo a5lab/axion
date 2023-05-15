@@ -87,4 +87,11 @@ Technical and business radar. Spring boot based application
 * https://github.com/thoughtworks/build-your-own-radar
 * https://github.com/zalando/tech-radar
 
-# GPG key verification
+# GPG key configuration
+
+* gpg --full-gen-key
+* gpg --list-secret-keys --keyid-format long
+* gpg --armor --export "key-gen" for example gpg --armor --export 3AA5C34371567BD2
+* git config --global user.signingkey "key-gen"
+* git config --global commit.gpgSign true
+* git config --global tag.gpgSign true
