@@ -20,9 +20,10 @@ public abstract class SegmentMapper implements PlainMapper<Segment, SegmentDto> 
 
   @Mapping(source = "radar.id", target = "radarId")
   @Mapping(source = "radar.title", target = "radarTitle")
+  @Mapping(source = "technologyBlipList", target = "technologyBlipDtoList")
   public abstract SegmentDto toDto(final Segment entity);
 
   @Mapping(target = "radar", expression = "java(radarRepository.findById(dto.getRadarId()).get())")
+  @Mapping(source = "technologyBlipDtoList", target = "technologyBlipList")
   public abstract Segment toEntity(final SegmentDto dto);
-  
 }

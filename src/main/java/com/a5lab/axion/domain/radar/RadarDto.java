@@ -49,9 +49,9 @@ public class RadarDto {
 
   private boolean active = true;
 
-  private List<RingDto> ringList;
+  private List<RingDto>  ringDtoList;
 
-  private List<SegmentDto> segmentList;
+  private List<SegmentDto> segmentDtoList;
 
-  private List<TechnologyBlipDto> technologyBlipList;
+  private List<TechnologyBlipDto> technologyBlipDtoList;
 }

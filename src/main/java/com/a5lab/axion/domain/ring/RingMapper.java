@@ -21,9 +21,11 @@ public abstract class RingMapper implements PlainMapper<Ring, RingDto> {
 
   @Mapping(source = "radar.id", target = "radarId")
   @Mapping(source = "radar.title", target = "radarTitle")
+  @Mapping(source = "technologyBlipList", target = "technologyBlipDtoList")
   public abstract RingDto toDto(final Ring entity);
 
   @Mapping(target = "radar", expression = "java(radarRepository.findById(dto.getRadarId()).get())")
+  @Mapping(source = "technologyBlipDtoList", target = "technologyBlipList")
   public abstract Ring toEntity(final RingDto dto);
 
 }

@@ -113,21 +113,21 @@ class SegmentMapperTests  extends AbstractMapperTests {
     Assertions.assertEquals(segment.getRadar().getId(), segmentDto.getRadarId());
     Assertions.assertEquals(segment.getRadar().getTitle(), segmentDto.getRadarTitle());
 
-    Assertions.assertNotNull(segmentDto.getTechnologyBlipList());
-    Assertions.assertEquals(1, segmentDto.getTechnologyBlipList().size());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getId(), technologyBlip.getId());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getRadarTitle(), technologyBlip.getRadar().getTitle());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getTechnologyId(), technologyBlip.getTechnology().getId());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getTechnologyTitle(), technologyBlip.getTechnology().getTitle());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getTechnologyWebsite(), technologyBlip.getTechnology().getWebsite());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getTechnologyMoved(), technologyBlip.getTechnology().getMoved());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().isTechnologyActive(), technologyBlip.getTechnology().isActive());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getSegmentId(), technologyBlip.getSegment().getId());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getSegmentTitle(), technologyBlip.getSegment().getTitle());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getSegmentPosition(), technologyBlip.getSegment().getPosition());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getRingId(), technologyBlip.getRing().getId());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getRingTitle(), technologyBlip.getRing().getTitle());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipList().iterator().next().getRingPosition(), technologyBlip.getRing().getPosition());
+    Assertions.assertNotNull(segmentDto.getTechnologyBlipDtoList());
+    Assertions.assertEquals(1, segmentDto.getTechnologyBlipDtoList().size());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getId(), technologyBlip.getId());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRadarTitle(), technologyBlip.getRadar().getTitle());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyId(), technologyBlip.getTechnology().getId());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyTitle(), technologyBlip.getTechnology().getTitle());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyWebsite(), technologyBlip.getTechnology().getWebsite());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyMoved(), technologyBlip.getTechnology().getMoved());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().isTechnologyActive(), technologyBlip.getTechnology().isActive());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getSegmentId(), technologyBlip.getSegment().getId());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getSegmentTitle(), technologyBlip.getSegment().getTitle());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getSegmentPosition(), technologyBlip.getSegment().getPosition());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingId(), technologyBlip.getRing().getId());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingTitle(), technologyBlip.getRing().getTitle());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingPosition(), technologyBlip.getRing().getPosition());
   }
 
   @Test

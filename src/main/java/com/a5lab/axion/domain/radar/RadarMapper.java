@@ -23,9 +23,15 @@ public abstract class RadarMapper implements PlainMapper<Radar, RadarDto> {
 
   @Mapping(source = "radarType.id", target = "radarTypeId")
   @Mapping(source = "radarType.title", target = "radarTypeTitle")
+  @Mapping(source = "ringList", target = "ringDtoList")
+  @Mapping(source = "segmentList", target = "segmentDtoList")
+  @Mapping(source = "technologyBlipList", target = "technologyBlipDtoList")
   public abstract RadarDto toDto(final Radar entity);
 
   @Mapping(target = "radarType", expression = "java(radarTypeRepository.findById(dto.getRadarTypeId()).get())")
+  @Mapping(source = "ringDtoList", target = "ringList")
+  @Mapping(source = "segmentDtoList", target = "segmentList")
+  @Mapping(source = "technologyBlipDtoList", target = "technologyBlipList")
   public abstract Radar toEntity(final RadarDto dto);
 
 }

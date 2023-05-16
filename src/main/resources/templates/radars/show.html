@@ -32,7 +32,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="technologyBlip : ${radarDto.getTechnologyBlipList}">
+              <tr th:each="technologyBlip : ${radarDto.getTechnologyBlipDtoList}">
                 <td th:text="${technologyBlip.technologyTitle}"></td>
                 <td th:text="${technologyBlip.technologyWebsite}"></td>
                 <td th:text="${technologyBlip.segmentPosition}"></td>
@@ -56,7 +56,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="segment : ${radarDto.getSegmentList}">
+              <tr th:each="segment : ${radarDto.getSegmentDtoList}">
                 <td th:text="${segment.title}"></td>
                 <td th:text="${segment.description}"></td>
                 <td th:text="${segment.position}"></td>
@@ -78,7 +78,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="ring : ${radarDto.getRingList}">
+              <tr th:each="ring : ${radarDto.getRingDtoList}">
                 <td th:text="${ring.title}"></td>
                 <td th:text="${ring.description}"></td>
                 <td th:text="${ring.position}"></td>

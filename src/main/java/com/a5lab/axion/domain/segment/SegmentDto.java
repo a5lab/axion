@@ -51,5 +51,5 @@ public class SegmentDto {
 
   private boolean active = true;
 
-  private List<TechnologyBlipDto> technologyBlipList;
+  private List<TechnologyBlipDto> technologyBlipDtoList;
 }
