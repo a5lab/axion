@@ -115,21 +115,21 @@ class RingMapperTests  extends AbstractMapperTests {
     Assertions.assertEquals(ring.getRadar().getId(), ringDto.getRadarId());
     Assertions.assertEquals(ring.getRadar().getTitle(), ringDto.getRadarTitle());
 
-    Assertions.assertNotNull(ringDto.getTechnologyBlipList());
-    Assertions.assertEquals(1, ringDto.getTechnologyBlipList().size());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getId(), technologyBlip.getId());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getRadarTitle(), technologyBlip.getRadar().getTitle());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getTechnologyId(), technologyBlip.getTechnology().getId());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getTechnologyTitle(), technologyBlip.getTechnology().getTitle());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getTechnologyWebsite(), technologyBlip.getTechnology().getWebsite());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getTechnologyMoved(), technologyBlip.getTechnology().getMoved());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().isTechnologyActive(), technologyBlip.getTechnology().isActive());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getSegmentId(), technologyBlip.getSegment().getId());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getSegmentTitle(), technologyBlip.getSegment().getTitle());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getSegmentPosition(), technologyBlip.getSegment().getPosition());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getRingId(), technologyBlip.getRing().getId());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getRingTitle(), technologyBlip.getRing().getTitle());
-    Assertions.assertEquals(ringDto.getTechnologyBlipList().iterator().next().getRingPosition(), technologyBlip.getRing().getPosition());
+    Assertions.assertNotNull(ringDto.getTechnologyBlipDtoList());
+    Assertions.assertEquals(1, ringDto.getTechnologyBlipDtoList().size());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getId(), technologyBlip.getId());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRadarTitle(), technologyBlip.getRadar().getTitle());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyId(), technologyBlip.getTechnology().getId());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyTitle(), technologyBlip.getTechnology().getTitle());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyWebsite(), technologyBlip.getTechnology().getWebsite());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyMoved(), technologyBlip.getTechnology().getMoved());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().isTechnologyActive(), technologyBlip.getTechnology().isActive());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getSegmentId(), technologyBlip.getSegment().getId());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getSegmentTitle(), technologyBlip.getSegment().getTitle());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getSegmentPosition(), technologyBlip.getSegment().getPosition());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRingId(), technologyBlip.getRing().getId());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRingTitle(), technologyBlip.getRing().getTitle());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRingPosition(), technologyBlip.getRing().getPosition());
   }
 
   @Test
