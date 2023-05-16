@@ -2,7 +2,6 @@ package com.a5lab.axion.domain.ring;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.config.MapperConfiguration;
@@ -11,9 +10,7 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlipMapper;
 import com.a5lab.axion.utils.PlainMapper;
 
 @Mapper(config = MapperConfiguration.class,
-    uses = {TechnologyBlipMapper.class},
-    unmappedTargetPolicy = ReportingPolicy.WARN,
-    typeConversionPolicy = ReportingPolicy.WARN)
+    uses = {TechnologyBlipMapper.class})
 public abstract class RingMapper implements PlainMapper<Ring, RingDto> {
 
   @Autowired
@@ -27,5 +24,4 @@ public abstract class RingMapper implements PlainMapper<Ring, RingDto> {
   @Mapping(target = "radar", expression = "java(radarRepository.findById(dto.getRadarId()).get())")
   @Mapping(source = "technologyBlipDtoList", target = "technologyBlipList")
   public abstract Ring toEntity(final RingDto dto);
-
 }
