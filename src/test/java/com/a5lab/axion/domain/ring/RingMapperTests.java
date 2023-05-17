@@ -15,15 +15,17 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipMapper;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.a5lab.axion.domain.AbstractMapperTests;
+
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-class RingMapperTests  extends AbstractMapperTests {
+class RingMapperTests extends AbstractMapperTests {
 
   @MockBean
   private RadarRepository radarRepository;
@@ -123,19 +125,32 @@ class RingMapperTests  extends AbstractMapperTests {
     Assertions.assertNotNull(ringDto.getTechnologyBlipDtoList());
     Assertions.assertEquals(1, ringDto.getTechnologyBlipDtoList().size());
     Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getId(), technologyBlipDto.getId());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRadarId(), technologyBlipDto.getRadarId());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRadarTitle(), technologyBlipDto.getRadarTitle());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyId(), technologyBlipDto.getTechnologyId());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyTitle(), technologyBlipDto.getTechnologyTitle());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyWebsite(), technologyBlipDto.getTechnologyWebsite());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyMoved(), technologyBlipDto.getTechnologyMoved());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().isTechnologyActive(), technologyBlipDto.isTechnologyActive());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getSegmentId(), technologyBlipDto.getSegmentId());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getSegmentTitle(), technologyBlipDto.getSegmentTitle());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getSegmentPosition(), technologyBlipDto.getSegmentPosition());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRingId(), technologyBlipDto.getRingId());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRingTitle(), technologyBlipDto.getRingTitle());
-    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRingPosition(), technologyBlipDto.getRingPosition());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRadarId(),
+        technologyBlipDto.getRadarId());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRadarTitle(),
+        technologyBlipDto.getRadarTitle());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyId(),
+        technologyBlipDto.getTechnologyId());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyTitle(),
+        technologyBlipDto.getTechnologyTitle());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyWebsite(),
+        technologyBlipDto.getTechnologyWebsite());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getTechnologyMoved(),
+        technologyBlipDto.getTechnologyMoved());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().isTechnologyActive(),
+        technologyBlipDto.isTechnologyActive());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getSegmentId(),
+        technologyBlipDto.getSegmentId());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getSegmentTitle(),
+        technologyBlipDto.getSegmentTitle());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getSegmentPosition(),
+        technologyBlipDto.getSegmentPosition());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRingId(),
+        technologyBlipDto.getRingId());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRingTitle(),
+        technologyBlipDto.getRingTitle());
+    Assertions.assertEquals(ringDto.getTechnologyBlipDtoList().iterator().next().getRingPosition(),
+        technologyBlipDto.getRingPosition());
 
     Mockito.verify(technologyBlipMapper).toDto(any());
   }
@@ -220,8 +235,10 @@ class RingMapperTests  extends AbstractMapperTests {
     Assertions.assertNotNull(mapped_ring.getTechnologyBlipList());
     Assertions.assertEquals(1, mapped_ring.getTechnologyBlipList().size());
     Assertions.assertEquals(mapped_ring.getTechnologyBlipList().iterator().next().getId(), technologyBlip.getId());
-    Assertions.assertEquals(mapped_ring.getTechnologyBlipList().iterator().next().getRadar().getId(), technologyBlip.getRadar().getId());
-    Assertions.assertEquals(mapped_ring.getTechnologyBlipList().iterator().next().getRing().getId(), technologyBlip.getRing().getId());
+    Assertions.assertEquals(mapped_ring.getTechnologyBlipList().iterator().next().getRadar().getId(),
+        technologyBlip.getRadar().getId());
+    Assertions.assertEquals(mapped_ring.getTechnologyBlipList().iterator().next().getRing().getId(),
+        technologyBlip.getRing().getId());
 
     Mockito.verify(radarRepository).findById(radar.getId());
     Mockito.verify(technologyBlipMapper).toEntity(any());
