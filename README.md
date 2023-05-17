@@ -54,6 +54,14 @@ Technical and business radar. Spring boot based application
 * setup ident 2 at html code style
 * remove all items from "do not indent child of" field
 
+# Conventions
+
+## Git conventions
+
+* the first letter of the commit should be written in upper case
+* the simple perfect should be used for commit message
+* the title and description should be provided, for example by command: git commit -m "title" -m "description"
+
 # Useful commands:
 
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
