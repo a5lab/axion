@@ -54,6 +54,14 @@ Technical and business radar. Spring boot based application
 * setup ident 2 at html code style
 * remove all items from "do not indent child of" field
 
+### Pull-request checkstyle
+
+* The first letter of the commit must be written in upper case;
+* The first push of the last commit is copied to the PR title;
+* The commit message is the commit title in IDEA;
+* add a commit title and description, run by command: git commit -m "title" -m "description"
+* add a PR title and description, run by command: git merge feature -m "commit message" -m "add description" --no-ff
+
 # Useful commands:
 
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
