@@ -7,10 +7,10 @@ import java.util.Optional;
 
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.technology.Technology;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -55,9 +55,16 @@ class RingMapperTests  extends AbstractMapperTests {
 
   @Test
   public void testToDtoAllLists() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(10L);
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
+    radarType.setTitle("My title");
+    radarType.setDescription("My description");
+
     // Create radar
     final Radar radar = new Radar();
     radar.setId(1L);
+    radar.setRadarType(radarType);
     radar.setTitle("My title");
     radar.setDescription("My description");
     radar.setPrimary(true);

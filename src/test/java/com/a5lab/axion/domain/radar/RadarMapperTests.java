@@ -69,9 +69,16 @@ class RadarMapperTests extends AbstractMapperTests {
 
   @Test
   public void testToDtoAllLists() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(10L);
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
+    radarType.setTitle("My title");
+    radarType.setDescription("My description");
+
     // Create radar
     final Radar radar = new Radar();
     radar.setId(1L);
+    radar.setRadarType(radarType);
     radar.setTitle("My radar title");
     radar.setDescription("My radar description");
     radar.setPrimary(true);
@@ -125,6 +132,9 @@ class RadarMapperTests extends AbstractMapperTests {
 
     // Map object
     RadarDto radarDto = radarMapper.toDto(radar);
+    Assertions.assertEquals(radarDto.getId(), radar.getId());
+    Assertions.assertEquals(radarDto.getRadarTypeId(), radar.getRadarType().getId());
+    Assertions.assertEquals(radarDto.getRadarTypeTitle(), radar.getRadarType().getTitle());
     Assertions.assertEquals(radarDto.getTitle(), radar.getTitle());
     Assertions.assertEquals(radarDto.getDescription(), radar.getDescription());
     Assertions.assertNotNull(radarDto.isPrimary());
