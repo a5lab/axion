@@ -1,22 +1,29 @@
 package com.a5lab.axion.domain.radar_type;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.utils.JpaConstants;
 
 
 @Entity
@@ -54,9 +61,7 @@ public class RadarType extends AbstractAuditable {
   @Column(name = "description", nullable = false)
   private String description;
 
-  /*
-  @Setter(AccessLevel.NONE)
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "radar_type")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "radar_type", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
-  private List<RadarType> radarTypeList; */
+  private List<Radar> radarList;
 }
