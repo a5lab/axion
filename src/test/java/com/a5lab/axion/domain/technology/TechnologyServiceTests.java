@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import com.a5lab.axion.domain.AbstractServiceTests;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -20,6 +18,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+
+import com.a5lab.axion.domain.AbstractServiceTests;
 
 class TechnologyServiceTests extends AbstractServiceTests {
   @MockBean
@@ -74,7 +74,8 @@ class TechnologyServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(technologyDtoPage.iterator().next().getTitle(), technology.getTitle());
     Assertions.assertEquals(technologyDtoPage.iterator().next().getDescription(), technology.getDescription());
 
-    // Mockito.verify(technologyRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
+    // Mockito.verify(technologyRepository).findAll(
+    //     Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test

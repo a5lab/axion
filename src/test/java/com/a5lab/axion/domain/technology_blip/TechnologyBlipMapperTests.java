@@ -4,6 +4,12 @@ import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
 import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
@@ -12,13 +18,7 @@ import com.a5lab.axion.domain.ring.RingRepository;
 import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.segment.SegmentRepository;
 import com.a5lab.axion.domain.technology.Technology;
-
 import com.a5lab.axion.domain.technology.TechnologyRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 class TechnologyBlipMapperTests extends AbstractMapperTests {
 
@@ -29,7 +29,7 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
   @MockBean
   private SegmentRepository segmentRepository;
   @MockBean
-  private TechnologyRepository technologyRepository ;
+  private TechnologyRepository technologyRepository;
   @Autowired
   private TechnologyBlipMapper technologyBlipMapper;
 
@@ -43,7 +43,7 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
   @Test
   void testToDtoAllFields() {
     final Radar radar = new Radar();
-    radar.setId(10L);
+    radar.setId(1L);
     radar.setRadarType(null);
     radar.setTitle("My radar title");
     radar.setDescription("My radar Description");
@@ -51,31 +51,31 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
     radar.setActive(true);
 
     final Segment segment = new Segment();
-    segment.setId(10L);
+    segment.setId(2L);
     segment.setRadar(radar);
     segment.setTitle("My segment title");
     segment.setDescription("My segment Description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     final Ring ring = new Ring();
-    ring.setId(10L);
+    ring.setId(3L);
     ring.setRadar(radar);
     ring.setTitle("My ring title");
     ring.setDescription("My ring description");
     ring.setColor("My ring color");
-    ring.setPosition(0);
+    ring.setPosition(1);
 
     final Technology technology = new Technology();
-    technology.setId(10L);
+    technology.setId(4L);
     technology.setTitle("My technology title");
     technology.setWebsite("My technology website");
     technology.setDescription("My technology description");
-    technology.setMoved(0);
+    technology.setMoved(1);
     technology.setActive(true);
 
     final TechnologyBlip technology_blip = new TechnologyBlip();
-    technology_blip.setId(10L);
+    technology_blip.setId(5L);
     technology_blip.setRadar(radar);
     technology_blip.setSegment(segment);
     technology_blip.setRing(ring);
@@ -99,38 +99,38 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
   @Test
   void testToEntityAllFields() {
     final Radar radar = new Radar();
-    radar.setId(10L);
+    radar.setId(1L);
     radar.setTitle("My radar title");
     radar.setDescription("My radar Description");
     radar.setPrimary(true);
     radar.setActive(true);
 
     final Segment segment = new Segment();
-    segment.setId(10L);
+    segment.setId(2L);
     segment.setRadar(radar);
     segment.setTitle("My segment title");
     segment.setDescription("My segment Description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     final Ring ring = new Ring();
-    ring.setId(10L);
+    ring.setId(3L);
     ring.setRadar(radar);
     ring.setTitle("My ring title");
     ring.setDescription("My ring description");
     ring.setColor("My ring color");
-    ring.setPosition(0);
+    ring.setPosition(1);
 
     final Technology technology = new Technology();
-    technology.setId(10L);
+    technology.setId(4L);
     technology.setTitle("My technology title");
     technology.setWebsite("My technology website");
     technology.setDescription("My technology description");
-    technology.setMoved(0);
+    technology.setMoved(1);
     technology.setActive(true);
 
     final TechnologyBlipDto technology_blipDto = new TechnologyBlipDto();
-    technology_blipDto.setId(10L);
+    technology_blipDto.setId(5L);
     technology_blipDto.setRadarId(radar.getId());
     technology_blipDto.setSegmentId(segment.getId());
     technology_blipDto.setRingId(ring.getId());

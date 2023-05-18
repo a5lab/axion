@@ -1,17 +1,15 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import com.a5lab.axion.domain.radar.RadarDto;
-import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import com.a5lab.axion.domain.ring.RingDto;
-import com.a5lab.axion.domain.ring.RingService;
-import com.a5lab.axion.domain.segment.SegmentDto;
-import com.a5lab.axion.domain.segment.SegmentService;
-import com.a5lab.axion.domain.technology.TechnologyDto;
-import com.a5lab.axion.domain.technology.TechnologyService;
+import java.util.List;
+import java.util.Optional;
 
-import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -22,18 +20,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import com.a5lab.axion.domain.radar.RadarDto;
+import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
+import com.a5lab.axion.domain.ring.RingDto;
+import com.a5lab.axion.domain.ring.RingService;
+import com.a5lab.axion.domain.segment.SegmentDto;
+import com.a5lab.axion.domain.segment.SegmentService;
+import com.a5lab.axion.domain.technology.TechnologyDto;
+import com.a5lab.axion.domain.technology.TechnologyService;
+import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(TechnologyBlipCfgController.class)
 
@@ -69,7 +68,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -131,7 +130,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -219,7 +218,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -249,12 +248,13 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technology_blips"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology blip has been created successfully."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.INFO, "The technology blip has been created successfully."))
         .andReturn();
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
-/*
+  /*
   @Test
   public void shouldFailToCreateTechnologyBlip() throws Exception {
     final RadarDto radarDto = new RadarDto();
@@ -275,7 +275,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -301,8 +301,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("settings/technology_blips/add"))
         .andReturn();
   }
-
- */
+  */
 
   @Test
   public void shouldRedirectCreateTechnologyBlip() throws Exception {
@@ -312,13 +311,15 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setRadarId(radarDto.getId());
 
-    Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService).save(any(TechnologyBlipDto.class));
+    Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService)
+        .save(any(TechnologyBlipDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radar.id", String.valueOf(technologyBlipDto.getRadarId())))
         .andExpect(status().is3xxRedirection())
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
         .andReturn();
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
@@ -355,7 +356,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -429,7 +430,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -459,7 +460,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technology_blips"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology blip has been updated successfully."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.INFO, "The technology blip has been updated successfully."))
         .andReturn();
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
@@ -486,7 +488,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(0L);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -526,13 +528,15 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setRadarId(radarDto.getId());
 
-    Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService).save(any(TechnologyBlipDto.class));
+    Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService)
+        .save(any(TechnologyBlipDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radar.id", String.valueOf(technologyBlipDto.getRadarId())))
         .andExpect(status().is3xxRedirection())
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
         .andReturn();
 
     Mockito.verify(technologyBlipService).save(any((TechnologyBlipDto.class)));
@@ -558,7 +562,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(0L);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -583,7 +587,8 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technology_blips"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology blip has been deleted successfully."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.INFO, "The technology blip has been deleted successfully."))
         .andReturn();
 
     Mockito.verify(technologyBlipService).deleteById(technologyBlipDto.getId());

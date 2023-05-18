@@ -6,7 +6,6 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
 import org.hibernate.validator.internal.engine.path.PathImpl;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,8 +81,8 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(
           ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "title");
-      Assertions.assertTrue(constraintViolation.getMessage().equals("must not be blank") ||
-          constraintViolation.getMessage().equals("size must be between 1 and 64"));
+      Assertions.assertTrue(constraintViolation.getMessage().equals("must not be blank")
+          || constraintViolation.getMessage().equals("size must be between 1 and 64"));
     }
   }
 
@@ -143,8 +142,8 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(
           ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "description");
-      Assertions.assertTrue(constraintViolation.getMessage().equals("must not be blank") ||
-          constraintViolation.getMessage().equals("size must be between 1 and 512"));
+      Assertions.assertTrue(constraintViolation.getMessage().equals("must not be blank")
+          || constraintViolation.getMessage().equals("size must be between 1 and 512"));
     }
   }
 

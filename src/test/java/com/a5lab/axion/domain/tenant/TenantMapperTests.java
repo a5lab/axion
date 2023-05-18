@@ -2,11 +2,11 @@ package com.a5lab.axion.domain.tenant;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import com.a5lab.axion.domain.AbstractMapperTests;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class TenantMapperTests  extends AbstractMapperTests {
+import com.a5lab.axion.domain.AbstractMapperTests;
+
+class TenantMapperTests extends AbstractMapperTests {
   @Autowired
   private TenantMapper tenantMapper;
 

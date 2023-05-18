@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.tenant;
 
+/*
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Collection;
@@ -9,18 +10,21 @@ import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+ */
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+/*
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+ */
 
 import com.a5lab.axion.domain.AbstractServiceTests;
 
-import org.springframework.data.jpa.domain.Specification;
+// import org.springframework.data.jpa.domain.Specification;
 
 class TenantServiceTests extends AbstractServiceTests {
   @MockBean
@@ -41,7 +45,6 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(tenantDtoCollection.iterator().next().getId(), tenant.getId());
     Assertions.assertEquals(tenantDtoCollection.iterator().next().getTitle(), tenant.getTitle());
     Assertions.assertEquals(tenantDtoCollection.iterator().next().getDescription(), tenant.getDescription());
-
   }
 
   @Test
@@ -63,7 +66,8 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(tenantDtoPage.iterator().next().getTitle(), tenant.getTitle());
     Assertions.assertEquals(tenantDtoPage.iterator().next().getDescription(), tenant.getDescription());
 
-    // Mockito.verify(tenantRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
+    // Mockito.verify(tenantRepository).findAll(
+      //  Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test
@@ -79,7 +83,6 @@ class TenantServiceTests extends AbstractServiceTests {
 
     Mockito.verify(tenantRepository).findById(tenant.getId());
   }
-
 
   @Test
   void shouldSaveTenant() {
