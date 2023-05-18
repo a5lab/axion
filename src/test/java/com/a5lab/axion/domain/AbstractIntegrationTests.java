@@ -7,7 +7,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import com.a5lab.axion.AxionApplication;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = AxionApplication.class)
-public abstract class AbstractIntegrationTests  extends AbstractAnyTests{
+public abstract class AbstractIntegrationTests extends AbstractAnyTests {
   final protected static int port = 8080;
   final protected static String baseUrl = "http://127.0.0.1:";
 

@@ -6,10 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import com.a5lab.axion.domain.AbstractServiceTests;
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar.RadarRepository;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -22,6 +18,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+
+import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
 
 class SegmentServiceTests extends AbstractServiceTests {
   @MockBean
@@ -43,7 +43,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setRadar(null);
     segment.setTitle("My segment");
     segment.setDescription("My segment description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     List<Segment> segmentList = List.of(segment);
@@ -63,7 +63,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setRadar(null);
     segment.setTitle("My segment");
     segment.setDescription("My segment description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     List<Segment> segmentList = List.of(segment);
@@ -81,7 +81,8 @@ class SegmentServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(segmentDtoPage.iterator().next().getTitle(), segment.getTitle());
     Assertions.assertEquals(segmentDtoPage.iterator().next().getDescription(), segment.getDescription());
 
-    // Mockito.verify(segmentRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
+    // Mockito.verify(segmentRepository).findAll(
+    //    Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test
@@ -90,7 +91,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setId(10L);
     segment.setTitle("My title");
     segment.setDescription("My description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     Mockito.when(segmentRepository.findById(segment.getId())).thenReturn(Optional.of(segment));
@@ -110,7 +111,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setId(10L);
     segment.setTitle("My title");
     segment.setDescription("My description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     Mockito.when(segmentRepository.findByTitle(segment.getTitle())).thenReturn(Optional.of(segment));
@@ -137,7 +138,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setRadar(radar);
     segment.setTitle("My title");
     segment.setDescription("My description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
 
@@ -160,7 +161,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setId(10L);
     segment.setTitle("My title");
     segment.setDescription("My description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     Mockito.doAnswer((i) -> null).when(segmentRepository).deleteById(segment.getId());

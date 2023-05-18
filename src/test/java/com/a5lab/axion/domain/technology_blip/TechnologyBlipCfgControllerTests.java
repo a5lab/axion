@@ -1,17 +1,14 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import com.a5lab.axion.domain.radar.RadarDto;
-import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import com.a5lab.axion.domain.ring.RingDto;
-import com.a5lab.axion.domain.ring.RingService;
-import com.a5lab.axion.domain.segment.SegmentDto;
-import com.a5lab.axion.domain.segment.SegmentService;
-import com.a5lab.axion.domain.technology.TechnologyDto;
-import com.a5lab.axion.domain.technology.TechnologyService;
-
-import com.a5lab.axion.utils.FlashMessages;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,19 +20,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import com.a5lab.axion.domain.radar.RadarDto;
+import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
+import com.a5lab.axion.domain.ring.RingDto;
+import com.a5lab.axion.domain.ring.RingService;
+import com.a5lab.axion.domain.segment.SegmentDto;
+import com.a5lab.axion.domain.segment.SegmentService;
+import com.a5lab.axion.domain.technology.TechnologyDto;
+import com.a5lab.axion.domain.technology.TechnologyService;
+import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(TechnologyBlipCfgController.class)
 
@@ -71,7 +68,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -133,7 +130,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -221,7 +218,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -257,7 +254,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
-/*
+  /*
   @Test
   public void shouldFailToCreateTechnologyBlip() throws Exception {
     final RadarDto radarDto = new RadarDto();
@@ -278,7 +275,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -304,8 +301,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("settings/technology_blips/add"))
         .andReturn();
   }
-
- */
+  */
 
   @Test
   public void shouldRedirectCreateTechnologyBlip() throws Exception {
@@ -360,7 +356,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -434,7 +430,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -492,7 +488,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(0L);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 
@@ -566,7 +562,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(0L);
     ringDto.setTitle("My ring title");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 

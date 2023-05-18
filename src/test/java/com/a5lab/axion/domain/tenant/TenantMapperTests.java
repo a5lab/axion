@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.domain.AbstractMapperTests;
 
-class TenantMapperTests  extends AbstractMapperTests {
+class TenantMapperTests extends AbstractMapperTests {
   @Autowired
   private TenantMapper tenantMapper;
 

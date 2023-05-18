@@ -5,6 +5,12 @@ import static org.mockito.ArgumentMatchers.any;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
 import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
@@ -18,14 +24,7 @@ import com.a5lab.axion.domain.technology.Technology;
 import com.a5lab.axion.domain.technology.TechnologyDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
-
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipMapper;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 class RadarMapperTests extends AbstractMapperTests {
 
@@ -258,7 +257,7 @@ class RadarMapperTests extends AbstractMapperTests {
     ring.setTitle("My ring title");
     ring.setDescription("My ring description");
     ring.setColor("My color");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setActive(true);
 
     Mockito.when(ringMapper.toEntity(any())).thenReturn(ring);
@@ -269,7 +268,7 @@ class RadarMapperTests extends AbstractMapperTests {
     segment.setRadar(radar);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     Mockito.when(segmentMapper.toEntity(any())).thenReturn(segment);

@@ -4,15 +4,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import jakarta.validation.ValidationException;
 
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar.RadarRepository;
-import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.domain.AbstractRepositoryTests;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 
 class SegmentRepositoryTests extends AbstractRepositoryTests {
   @Autowired
@@ -59,66 +59,59 @@ class SegmentRepositoryTests extends AbstractRepositoryTests {
 
   @Test
   void shouldFailOnNullTitle() {
-    final Segment s = new Segment();
-    s.setDescription("My awesome description");
+    final Segment segment = new Segment();
+    segment.setDescription("My awesome description");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
-        .isInstanceOf(ValidationException.class);
+    Assertions.assertNull(segment.getId());
+    assertThatThrownBy(() -> segmentRepository.saveAndFlush(segment)).isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnNullDescription() {
-    final Segment s = new Segment();
-    s.setTitle("My new test Segment");
+    final Segment segment = new Segment();
+    segment.setTitle("My new test Segment");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
-        .isInstanceOf(ValidationException.class);
+    Assertions.assertNull(segment.getId());
+    assertThatThrownBy(() -> segmentRepository.saveAndFlush(segment)).isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnEmptyTitle() {
-    final Segment s = new Segment();
-    s.setTitle("");
-    s.setDescription("My awesome description");
+    final Segment segment = new Segment();
+    segment.setTitle("");
+    segment.setDescription("My awesome description");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
-        .isInstanceOf(ValidationException.class);
+    Assertions.assertNull(segment.getId());
+    assertThatThrownBy(() -> segmentRepository.saveAndFlush(segment)).isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnWhiteSpaceTitle() {
-    final Segment s = new Segment();
-    s.setTitle(" ");
-    s.setDescription("My awesome description");
+    final Segment segment = new Segment();
+    segment.setTitle(" ");
+    segment.setDescription("My awesome description");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
-        .isInstanceOf(ValidationException.class);
+    Assertions.assertNull(segment.getId());
+    assertThatThrownBy(() -> segmentRepository.saveAndFlush(segment)).isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnEmptyDescription() {
-    final Segment s = new Segment();
-    s.setTitle("Hello");
-    s.setDescription("");
+    final Segment segment = new Segment();
+    segment.setTitle("Hello");
+    segment.setDescription("");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
-        .isInstanceOf(ValidationException.class);
+    Assertions.assertNull(segment.getId());
+    assertThatThrownBy(() -> segmentRepository.saveAndFlush(segment)).isInstanceOf(ValidationException.class);
   }
 
   @Test
   void shouldFailOnWhiteSpaceDescription() {
-    final Segment s = new Segment();
-    s.setTitle("Hello");
-    s.setDescription(" ");
+    final Segment segment = new Segment();
+    segment.setTitle("Hello");
+    segment.setDescription(" ");
 
-    Assertions.assertNull(s.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(s))
-        .isInstanceOf(ValidationException.class);
+    Assertions.assertNull(segment.getId());
+    assertThatThrownBy(() -> segmentRepository.saveAndFlush(segment)).isInstanceOf(ValidationException.class);
   }
-
 }

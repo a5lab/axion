@@ -1,11 +1,14 @@
 package com.a5lab.axion.domain.segment;
 
-import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar.RadarDto;
-import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.radar_type.RadarTypeDto;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import com.a5lab.axion.utils.FlashMessages;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,13 +21,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.radar.RadarDto;
+import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
+import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(SegmentCfgController.class)
 public class SegmentCfgControllerTests extends AbstractControllerTests {
@@ -45,7 +46,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     Page<SegmentDto> page = new PageImpl<>(List.of(segmentDto));
@@ -72,7 +73,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     Mockito.when(segmentService.findById(any())).thenReturn(Optional.of(segmentDto));
@@ -134,7 +135,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     Mockito.when(segmentService.save(any())).thenReturn(segmentDto);
@@ -161,7 +162,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/settings/segments/create")
@@ -183,7 +184,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     Mockito.when(segmentService.findById(any())).thenReturn(Optional.of(segmentDto));
@@ -236,7 +237,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     Mockito.when(segmentService.save(any())).thenReturn(segmentDto);
@@ -263,7 +264,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/settings/segments/update")
@@ -285,7 +286,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setRadarId(0L);
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     Mockito.doAnswer((i) -> null).when(segmentService).deleteById(any());
