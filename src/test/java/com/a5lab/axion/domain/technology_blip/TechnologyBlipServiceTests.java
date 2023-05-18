@@ -11,25 +11,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 */
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-/*
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;*/
-
-
 import com.a5lab.axion.domain.AbstractServiceTests;
-// import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
-// import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.ring.RingRepository;
-// import com.a5lab.axion.domain.segment.Segment;
 import com.a5lab.axion.domain.segment.SegmentRepository;
-// import com.a5lab.axion.domain.technology.Technology;
 import com.a5lab.axion.domain.technology.TechnologyRepository;
 
 class TechnologyBlipServiceTests extends AbstractServiceTests {

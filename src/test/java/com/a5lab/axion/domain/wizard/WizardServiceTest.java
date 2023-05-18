@@ -7,15 +7,11 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito; */
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
-
-/*
-import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import com.a5lab.axion.domain.radar.RadarDto; */
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentService;
