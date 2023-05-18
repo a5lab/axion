@@ -33,23 +33,23 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
 
-    @Test
-    public void shouldGetSegments() throws Exception {
-        final RadarDto radarDto = new RadarDto();
-        radarDto.setId(1L);
-        radarDto.setTitle("My radar");
-        radarDto.setDescription("My radar description");
+  @Test
+  public void shouldGetSegments() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(1L);
+    radarDto.setTitle("My radar");
+    radarDto.setDescription("My radar description");
 
-        final SegmentDto segmentDto = new SegmentDto();
-        segmentDto.setId(10L);
-        segmentDto.setRadarId(radarDto.getId());
-        segmentDto.setTitle("My segment");
-        segmentDto.setDescription("My segment description");
-        segmentDto.setPosition(0);
-        segmentDto.setActive(true);
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setRadarId(radarDto.getId());
+    segmentDto.setTitle("My segment");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(0);
+    segmentDto.setActive(true);
 
-        Page<SegmentDto> page = new PageImpl<>(List.of(segmentDto));
-        Mockito.when(segmentService.findAll(any(), any())).thenReturn(page);
+    Page<SegmentDto> page = new PageImpl<>(List.of(segmentDto));
+    Mockito.when(segmentService.findAll(any(), any())).thenReturn(page);
 
     MvcResult result = mockMvc.perform(get("/settings/segments"))
         .andExpect(status().isOk())
@@ -112,30 +112,30 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         .andReturn();
   }
 
-    @Test
-    public void shouldCreateSegment() throws Exception {
-        final RadarTypeDto radarTypeDto = new RadarTypeDto();
-        radarTypeDto.setId(1L);
-        radarTypeDto.setTitle("Technology radars 1");
-        radarTypeDto.setCode("technology_radar_1");
-        radarTypeDto.setDescription("Technology radars");
+  @Test
+  public void shouldCreateSegment() throws Exception {
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(1L);
+    radarTypeDto.setTitle("Technology radars 1");
+    radarTypeDto.setCode("technology_radar_1");
+    radarTypeDto.setDescription("Technology radars");
 
-        final RadarDto radarDto = new RadarDto();
-        radarDto.setId(2L);
-        radarDto.setRadarTypeId(radarTypeDto.getId());
-        radarDto.setRadarTypeTitle(radarTypeDto.getTitle());
-        radarDto.setTitle("My test Radar");
-        radarDto.setDescription("My description");
-        radarDto.setPrimary(false);
-        radarDto.setActive(false);
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(2L);
+    radarDto.setRadarTypeId(radarTypeDto.getId());
+    radarDto.setRadarTypeTitle(radarTypeDto.getTitle());
+    radarDto.setTitle("My test Radar");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(false);
+    radarDto.setActive(false);
 
-        final SegmentDto segmentDto = new SegmentDto();
-        segmentDto.setId(10L);
-        segmentDto.setRadarId(radarDto.getId());
-        segmentDto.setTitle("My segment");
-        segmentDto.setDescription("My segment description");
-        segmentDto.setPosition(0);
-        segmentDto.setActive(true);
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setRadarId(radarDto.getId());
+    segmentDto.setTitle("My segment");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(0);
+    segmentDto.setActive(true);
 
     Mockito.when(segmentService.save(any())).thenReturn(segmentDto);
 
@@ -147,7 +147,8 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("segmentDto", segmentDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/segments"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The segment has been created successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The segment has been created successfully."))
         .andReturn();
 
     Mockito.verify(segmentService).save(any());

@@ -4,8 +4,6 @@ import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 
-import com.a5lab.axion.utils.FlashMessages;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,6 +23,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(RadarCfgController.class)
 public class RadarCfgControllerTests extends AbstractControllerTests {

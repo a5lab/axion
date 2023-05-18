@@ -74,7 +74,8 @@ class TechnologyServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(technologyDtoPage.iterator().next().getTitle(), technology.getTitle());
     Assertions.assertEquals(technologyDtoPage.iterator().next().getDescription(), technology.getDescription());
 
-    // Mockito.verify(technologyRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
+    // Mockito.verify(technologyRepository).findAll(
+    //     Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test

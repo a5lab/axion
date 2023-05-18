@@ -2,6 +2,7 @@ package com.a5lab.axion.domain.technology;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.utils.FlashMessages;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -150,7 +151,8 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("technologyDto", technologyDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technologies"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology has been created successfully."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.INFO, "The technology has been created successfully."))
         .andReturn();
 
     Mockito.verify(technologyService).save(any());
@@ -214,7 +216,8 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("technologyDto", technologyDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technologies"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology has been updated successfully."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.INFO, "The technology has been updated successfully."))
         .andReturn();
 
     Mockito.verify(technologyService).save(any());
@@ -259,7 +262,8 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/technologies"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The technology has been deleted successfully."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.INFO, "The technology has been deleted successfully."))
         .andReturn();
 
     Mockito.verify(technologyService).deleteById(technologyDto.getId());

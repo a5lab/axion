@@ -13,7 +13,6 @@ import java.util.Optional;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 
-import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,10 +22,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(RingCfgController.class)
 public class RingCfgControllerTests extends AbstractControllerTests {
@@ -185,7 +185,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been created successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been created successfully."))
         .andReturn();
 
     Mockito.verify(ringService).save(any());
@@ -293,7 +294,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been updated successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been updated successfully."))
         .andReturn();
 
     Mockito.verify(ringService).save(any());
@@ -339,7 +341,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been deleted successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been deleted successfully."))
         .andReturn();
 
     Mockito.verify(ringService).deleteById(ringDto.getId());

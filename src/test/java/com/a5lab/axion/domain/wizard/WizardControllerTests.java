@@ -11,6 +11,7 @@ import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 
 import com.a5lab.axion.utils.FlashMessages;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,6 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @WebMvcTest(WizardController.class)
@@ -57,7 +59,8 @@ public class WizardControllerTests extends AbstractControllerTests {
             .sessionAttr("wizard", wizardDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/home"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
         .andReturn();
 
     Mockito.verify(wizardService).createRadarEnv(any());
