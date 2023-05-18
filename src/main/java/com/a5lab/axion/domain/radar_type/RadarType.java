@@ -61,7 +61,7 @@ public class RadarType extends AbstractAuditable {
   @Column(name = "description", nullable = false)
   private String description;
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "radar_type", cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "radarType", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<Radar> radarList;
 }
