@@ -4,15 +4,15 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import jakarta.validation.ValidationException;
 
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar.RadarRepository;
-import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.domain.AbstractRepositoryTests;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 
 class RingRepositoryTests extends AbstractRepositoryTests {
   @Autowired

@@ -6,11 +6,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import com.a5lab.axion.domain.radar_type.RadarTypeService;
-
-import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -18,9 +13,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
+import com.a5lab.axion.domain.radar_type.RadarTypeService;
+import com.a5lab.axion.utils.FlashMessages;
+
 
 @WebMvcTest(WizardController.class)
 public class WizardControllerTests extends AbstractControllerTests {
@@ -57,7 +57,8 @@ public class WizardControllerTests extends AbstractControllerTests {
             .sessionAttr("wizard", wizardDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/home"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
         .andReturn();
 
     Mockito.verify(wizardService).createRadarEnv(any());

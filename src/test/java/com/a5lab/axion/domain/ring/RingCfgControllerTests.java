@@ -10,10 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 import java.util.Optional;
 
-import com.a5lab.axion.domain.radar.RadarDto;
-import com.a5lab.axion.domain.radar.RadarService;
-
-import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,10 +19,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.radar.RadarDto;
+import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(RingCfgController.class)
 public class RingCfgControllerTests extends AbstractControllerTests {
@@ -49,7 +48,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setActive(true);
 
     List<RingDto> ringList = List.of(ringDto);
@@ -78,7 +77,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setActive(true);
 
     Mockito.when(ringService.findById(any())).thenReturn(Optional.of(ringDto));
@@ -130,7 +129,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
@@ -171,7 +170,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setActive(true);
 
     Mockito.when(ringService.save(any())).thenReturn(ringDto);
@@ -185,7 +184,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been created successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been created successfully."))
         .andReturn();
 
     Mockito.verify(ringService).save(any());
@@ -199,7 +199,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
@@ -222,7 +222,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setActive(true);
 
     Mockito.when(ringService.findById(any())).thenReturn(Optional.of(ringDto));
@@ -279,7 +279,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setActive(true);
 
     Mockito.when(ringService.save(any())).thenReturn(ringDto);
@@ -293,7 +293,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been updated successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been updated successfully."))
         .andReturn();
 
     Mockito.verify(ringService).save(any());
@@ -307,7 +308,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
@@ -330,7 +331,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setActive(true);
 
     Mockito.doAnswer((i) -> null).when(ringService).deleteById(any());
@@ -339,7 +340,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/rings"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been deleted successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been deleted successfully."))
         .andReturn();
 
     Mockito.verify(ringService).deleteById(ringDto.getId());
