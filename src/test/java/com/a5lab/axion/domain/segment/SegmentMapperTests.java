@@ -162,6 +162,8 @@ class SegmentMapperTests extends AbstractMapperTests {
         technologyBlipDto.getRingTitle());
     Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingPosition(),
         technologyBlipDto.getRingPosition());
+
+    Mockito.verify(technologyBlipMapper).toEntity(any());
   }
 
   @Test
