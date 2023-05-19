@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -38,6 +37,5 @@ public class TenantApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$[0].id", equalTo(tenantDto.getId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(tenantDto.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(tenantDto.getDescription())));
-
   }
 }

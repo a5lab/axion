@@ -5,6 +5,12 @@ import static org.mockito.ArgumentMatchers.any;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
 import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
@@ -18,14 +24,7 @@ import com.a5lab.axion.domain.technology.Technology;
 import com.a5lab.axion.domain.technology.TechnologyDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
-
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipMapper;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 class RadarMapperTests extends AbstractMapperTests {
 
@@ -155,7 +154,8 @@ class RadarMapperTests extends AbstractMapperTests {
     Assertions.assertEquals(1, radarDto.getSegmentDtoList().size());
     Assertions.assertEquals(radarDto.getSegmentDtoList().iterator().next().getId(), segmentDto.getId());
     Assertions.assertEquals(radarDto.getSegmentDtoList().iterator().next().getTitle(), segmentDto.getTitle());
-    Assertions.assertEquals(radarDto.getSegmentDtoList().iterator().next().getDescription(), segmentDto.getDescription());
+    Assertions.assertEquals(radarDto.getSegmentDtoList().iterator().next().getDescription(),
+        segmentDto.getDescription());
     Assertions.assertEquals(radarDto.getSegmentDtoList().iterator().next().getPosition(), segmentDto.getPosition());
     Assertions.assertEquals(radarDto.getSegmentDtoList().iterator().next().isActive(), segmentDto.isActive());
 
@@ -267,7 +267,7 @@ class RadarMapperTests extends AbstractMapperTests {
     ring.setTitle("My ring title");
     ring.setDescription("My ring description");
     ring.setColor("My color");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setActive(true);
 
     Mockito.when(ringMapper.toEntity(any())).thenReturn(ring);
@@ -278,7 +278,7 @@ class RadarMapperTests extends AbstractMapperTests {
     segment.setRadar(radar);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     Mockito.when(segmentMapper.toEntity(any())).thenReturn(segment);
@@ -303,68 +303,68 @@ class RadarMapperTests extends AbstractMapperTests {
     Mockito.when(technologyBlipMapper.toEntity(any())).thenReturn(technologyBlip);
 
     // Map object
-    Radar mapped_radar = radarMapper.toEntity(radarDto);
-    Assertions.assertEquals(mapped_radar.getId(), radarDto.getId());
-    Assertions.assertEquals(mapped_radar.getTitle(), radarDto.getTitle());
-    Assertions.assertEquals(mapped_radar.getDescription(), radarDto.getDescription());
-    Assertions.assertNotNull(mapped_radar.isPrimary());
-    Assertions.assertNotNull(mapped_radar.isActive());
-    Assertions.assertEquals(mapped_radar.getId(), mapped_radar.getRingList().iterator().next().getRadar().getId());
-    Assertions.assertEquals(mapped_radar.getId(), mapped_radar.getSegmentList().iterator().next().getRadar().getId());
-    Assertions.assertEquals(mapped_radar.getId(),
-        mapped_radar.getTechnologyBlipList().iterator().next().getRadar().getId());
+    Radar mappedRadar = radarMapper.toEntity(radarDto);
+    Assertions.assertEquals(mappedRadar.getId(), radarDto.getId());
+    Assertions.assertEquals(mappedRadar.getTitle(), radarDto.getTitle());
+    Assertions.assertEquals(mappedRadar.getDescription(), radarDto.getDescription());
+    Assertions.assertNotNull(mappedRadar.isPrimary());
+    Assertions.assertNotNull(mappedRadar.isActive());
+    Assertions.assertEquals(mappedRadar.getId(), mappedRadar.getRingList().iterator().next().getRadar().getId());
+    Assertions.assertEquals(mappedRadar.getId(), mappedRadar.getSegmentList().iterator().next().getRadar().getId());
+    Assertions.assertEquals(mappedRadar.getId(),
+        mappedRadar.getTechnologyBlipList().iterator().next().getRadar().getId());
 
     // Compare ring values
     Assertions.assertNotNull(radarDto.getRingDtoList());
-    Assertions.assertEquals(1, mapped_radar.getRingList().size());
-    Assertions.assertEquals(mapped_radar.getRingList().iterator().next().getId(), ring.getId());
-    Assertions.assertEquals(mapped_radar.getRingList().iterator().next().getRadar().getId(), radar.getId());
-    Assertions.assertEquals(mapped_radar.getRingList().iterator().next().getTitle(), ring.getTitle());
-    Assertions.assertEquals(mapped_radar.getRingList().iterator().next().getDescription(), ring.getDescription());
-    Assertions.assertEquals(mapped_radar.getRingList().iterator().next().getPosition(), ring.getPosition());
-    Assertions.assertEquals(mapped_radar.getRingList().iterator().next().getColor(), ring.getColor());
-    Assertions.assertEquals(mapped_radar.getRingList().iterator().next().isActive(), ring.isActive());
+    Assertions.assertEquals(1, mappedRadar.getRingList().size());
+    Assertions.assertEquals(mappedRadar.getRingList().iterator().next().getId(), ring.getId());
+    Assertions.assertEquals(mappedRadar.getRingList().iterator().next().getRadar().getId(), radar.getId());
+    Assertions.assertEquals(mappedRadar.getRingList().iterator().next().getTitle(), ring.getTitle());
+    Assertions.assertEquals(mappedRadar.getRingList().iterator().next().getDescription(), ring.getDescription());
+    Assertions.assertEquals(mappedRadar.getRingList().iterator().next().getPosition(), ring.getPosition());
+    Assertions.assertEquals(mappedRadar.getRingList().iterator().next().getColor(), ring.getColor());
+    Assertions.assertEquals(mappedRadar.getRingList().iterator().next().isActive(), ring.isActive());
 
     // Compare segment values
-    Assertions.assertNotNull(mapped_radar.getSegmentList());
-    Assertions.assertEquals(1, mapped_radar.getRingList().size());
-    Assertions.assertEquals(mapped_radar.getSegmentList().iterator().next().getId(), segment.getId());
-    Assertions.assertEquals(mapped_radar.getSegmentList().iterator().next().getRadar().getId(), radar.getId());
-    Assertions.assertEquals(mapped_radar.getSegmentList().iterator().next().getTitle(), segment.getTitle());
-    Assertions.assertEquals(mapped_radar.getSegmentList().iterator().next().getDescription(), segment.getDescription());
-    Assertions.assertEquals(mapped_radar.getSegmentList().iterator().next().getPosition(), segment.getPosition());
-    Assertions.assertEquals(mapped_radar.getSegmentList().iterator().next().isActive(), segment.isActive());
+    Assertions.assertNotNull(mappedRadar.getSegmentList());
+    Assertions.assertEquals(1, mappedRadar.getRingList().size());
+    Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().getId(), segment.getId());
+    Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().getRadar().getId(), radar.getId());
+    Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().getTitle(), segment.getTitle());
+    Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().getDescription(), segment.getDescription());
+    Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().getPosition(), segment.getPosition());
+    Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().isActive(), segment.isActive());
 
     // Compare technology blips values
-    Assertions.assertNotNull(mapped_radar.getTechnologyBlipList());
-    Assertions.assertEquals(1, mapped_radar.getRingList().size());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getId(), technologyBlip.getId());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getRadar(),
+    Assertions.assertNotNull(mappedRadar.getTechnologyBlipList());
+    Assertions.assertEquals(1, mappedRadar.getRingList().size());
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getId(), technologyBlip.getId());
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getRadar(),
         technologyBlip.getRadar());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getRadar().getId(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getRadar().getId(),
         technologyBlip.getRadar().getId());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getTechnology(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getTechnology(),
         technologyBlip.getTechnology());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getTechnology().getId(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getTechnology().getId(),
         technologyBlip.getTechnology().getId());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getTechnology().getTitle(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getTechnology().getTitle(),
         technologyBlip.getTechnology().getTitle());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getTechnology().getWebsite(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getTechnology().getWebsite(),
         technologyBlip.getTechnology().getWebsite());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getTechnology().getMoved(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getTechnology().getMoved(),
         technologyBlip.getTechnology().getMoved());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getSegment().getId(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getSegment().getId(),
         technologyBlip.getSegment().getId());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getSegment().getTitle(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getSegment().getTitle(),
         technologyBlip.getSegment().getTitle());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getSegment().getPosition(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getSegment().getPosition(),
         technologyBlip.getSegment().getPosition());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getRing(), technologyBlip.getRing());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getRing().getId(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getRing(), technologyBlip.getRing());
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getRing().getId(),
         technologyBlip.getRing().getId());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getRing().getTitle(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getRing().getTitle(),
         technologyBlip.getRing().getTitle());
-    Assertions.assertEquals(mapped_radar.getTechnologyBlipList().iterator().next().getRing().getPosition(),
+    Assertions.assertEquals(mappedRadar.getTechnologyBlipList().iterator().next().getRing().getPosition(),
         technologyBlip.getRing().getPosition());
 
     Mockito.verify(radarTypeRepository).findById(radarType.getId());

@@ -1,26 +1,24 @@
 package com.a5lab.axion.domain.segment;
 
-
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.a5lab.axion.domain.AbstractMapperTests;
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar.RadarRepository;
-
-import com.a5lab.axion.domain.ring.Ring;
-import com.a5lab.axion.domain.technology.Technology;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-class SegmentMapperTests  extends AbstractMapperTests {
+import com.a5lab.axion.domain.AbstractMapperTests;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.ring.Ring;
+import com.a5lab.axion.domain.technology.Technology;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
+
+class SegmentMapperTests extends AbstractMapperTests {
 
   @MockBean
   private RadarRepository radarRepository;
@@ -41,7 +39,7 @@ class SegmentMapperTests  extends AbstractMapperTests {
     segment.setId(1L);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
-    segment.setPosition(0);
+    segment.setPosition(1);
     segment.setActive(true);
 
     final var segmentDto = segmentMapper.toDto(segment);
@@ -116,18 +114,30 @@ class SegmentMapperTests  extends AbstractMapperTests {
     Assertions.assertNotNull(segmentDto.getTechnologyBlipDtoList());
     Assertions.assertEquals(1, segmentDto.getTechnologyBlipDtoList().size());
     Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getId(), technologyBlip.getId());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRadarTitle(), technologyBlip.getRadar().getTitle());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyId(), technologyBlip.getTechnology().getId());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyTitle(), technologyBlip.getTechnology().getTitle());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyWebsite(), technologyBlip.getTechnology().getWebsite());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyMoved(), technologyBlip.getTechnology().getMoved());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().isTechnologyActive(), technologyBlip.getTechnology().isActive());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getSegmentId(), technologyBlip.getSegment().getId());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getSegmentTitle(), technologyBlip.getSegment().getTitle());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getSegmentPosition(), technologyBlip.getSegment().getPosition());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingId(), technologyBlip.getRing().getId());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingTitle(), technologyBlip.getRing().getTitle());
-    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingPosition(), technologyBlip.getRing().getPosition());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRadarTitle(),
+        technologyBlip.getRadar().getTitle());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyId(),
+        technologyBlip.getTechnology().getId());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyTitle(),
+        technologyBlip.getTechnology().getTitle());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyWebsite(),
+        technologyBlip.getTechnology().getWebsite());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getTechnologyMoved(),
+        technologyBlip.getTechnology().getMoved());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().isTechnologyActive(),
+        technologyBlip.getTechnology().isActive());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getSegmentId(),
+        technologyBlip.getSegment().getId());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getSegmentTitle(),
+        technologyBlip.getSegment().getTitle());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getSegmentPosition(),
+        technologyBlip.getSegment().getPosition());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingId(),
+        technologyBlip.getRing().getId());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingTitle(),
+        technologyBlip.getRing().getTitle());
+    Assertions.assertEquals(segmentDto.getTechnologyBlipDtoList().iterator().next().getRingPosition(),
+        technologyBlip.getRing().getPosition());
   }
 
   @Test
@@ -154,7 +164,7 @@ class SegmentMapperTests  extends AbstractMapperTests {
     segmentDto.setRadarTitle(radar.getTitle());
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     final var segment = segmentMapper.toEntity(segmentDto);
@@ -185,7 +195,7 @@ class SegmentMapperTests  extends AbstractMapperTests {
     segmentDto.setRadarTitle(radar.getTitle());
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
-    segmentDto.setPosition(0);
+    segmentDto.setPosition(1);
     segmentDto.setActive(true);
 
     final var technologyBlipDto = new TechnologyBlipDto();
