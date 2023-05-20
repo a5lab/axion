@@ -15,7 +15,7 @@ public interface RadarService {
 
   Optional<RadarDto> findById(Long id);
 
-  Optional<Radar> findByPrimary(boolean primary);
+  Optional<RadarDto> findByPrimary(boolean primary);
 
   List<RadarDto> findByPrimaryAndActive(boolean primary, boolean active);
 
