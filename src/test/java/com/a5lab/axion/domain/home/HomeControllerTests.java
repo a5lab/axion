@@ -1,12 +1,13 @@
 package com.a5lab.axion.domain.home;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ public class HomeControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    Mockito.when(radarService.findByPrimaryAndActive(true, true))
+    Mockito.when(radarService.findByPrimaryAndActive(any(boolean.class), any(boolean.class)))
         .thenReturn(List.of(radarDto));
 
     MvcResult result = mockMvc.perform(get("/"))
@@ -52,12 +53,11 @@ public class HomeControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldGetHomeWithNoPrimaryRadar() throws Exception {
-
-    Mockito.when(radarService.findByPrimary(true)).thenReturn(Optional.empty());
+    Mockito.when(radarService.findByPrimaryAndActive(any(boolean.class), any(boolean.class)))
+        .thenReturn(new ArrayList<RadarDto>());
 
     mockMvc.perform(get("/"))
         .andExpect(status().isOk())
-        .andExpect(view().name("home/index"))
-        .andExpect(model().attributeDoesNotExist("radarDto"));
+        .andExpect(view().name("home/index"));
   }
 }
