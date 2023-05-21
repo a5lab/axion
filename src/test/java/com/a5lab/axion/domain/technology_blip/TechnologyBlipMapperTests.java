@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.ring.RingRepository;
 import com.a5lab.axion.domain.segment.Segment;
@@ -42,9 +43,15 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
 
   @Test
   void testToDtoAllFields() {
+    final var radarType = new RadarType();
+    radarType.setId(10L);
+    radarType.setTitle("My radarType title");
+    radarType.setDescription("My radarType description");
+    radarType.setCode("My radarType code");
+
     final Radar radar = new Radar();
     radar.setId(1L);
-    radar.setRadarType(null);
+    radar.setRadarType(radarType);
     radar.setTitle("My radar title");
     radar.setDescription("My radar Description");
     radar.setPrimary(true);
@@ -98,8 +105,15 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
 
   @Test
   void testToEntityAllFields() {
+    final var radarType = new RadarType();
+    radarType.setId(10L);
+    radarType.setTitle("My radarType title");
+    radarType.setDescription("My radarType description");
+    radarType.setCode("My radarType code");
+
     final Radar radar = new Radar();
     radar.setId(1L);
+    radar.setRadarType(radarType);
     radar.setTitle("My radar title");
     radar.setDescription("My radar Description");
     radar.setPrimary(true);
