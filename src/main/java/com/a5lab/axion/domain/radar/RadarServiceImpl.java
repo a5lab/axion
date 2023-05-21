@@ -40,6 +40,12 @@ public class RadarServiceImpl implements RadarService {
           && !radarFilter.getTitle().isBlank()) {
         predicateList.add(builder.like(root.get("title"), radarFilter.getTitle()));
       }
+      if (radarFilter != null && radarFilter.isFilter1() && radarFilter.isPrimary()) {
+        predicateList.add(builder.isTrue(builder.literal(true)));
+      }
+      if (radarFilter != null && radarFilter.isFilter2() && radarFilter.isActive()) {
+        predicateList.add(builder.isTrue(builder.literal(true)));
+      }
       return builder.and(predicateList.toArray(new Predicate[] {}));
     }, pageable).map(radarMapper::toDto);
   }
@@ -60,6 +66,19 @@ public class RadarServiceImpl implements RadarService {
       return Optional.of(radarList.get(0));
     }
   }
+
+  /*
+  @Override
+  @Transactional(readOnly = true)
+  public Optional<RadarDto> findByActive(boolean active) {
+    List<RadarDto> radarList = radarRepository.findByActive(active).stream().map(radarMapper::toDto).toList();
+    if (radarList.isEmpty()) {
+      return Optional.empty();
+    } else {
+      return Optional.of(radarList.get(0));
+    }
+  }
+   */
 
   @Override
   @Transactional(readOnly = true)
