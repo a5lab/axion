@@ -39,6 +39,8 @@ public class RadarController {
                             @RequestParam(defaultValue = "title,asc") String[] sort) {
     Sort.Direction direction = sort[1].equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
     Sort.Order order = new Sort.Order(direction, sort[0]);
+    radarFilter.setFilter2(true);
+    radarFilter.setActive(true);
 
     ModelAndView modelAndView = new ModelAndView("radars/index");
     Page<RadarDto> radarDtoPage = radarService.findAll(radarFilter, PageRequest.of(page - 1, size, Sort.by(order)));

@@ -40,11 +40,19 @@ public class RadarServiceImpl implements RadarService {
           && !radarFilter.getTitle().isBlank()) {
         predicateList.add(builder.like(root.get("title"), radarFilter.getTitle()));
       }
-      if (radarFilter != null && radarFilter.isFilter1() && radarFilter.isPrimary()) {
-        predicateList.add(builder.isTrue(builder.literal(true)));
+      if (radarFilter != null && radarFilter.isFilter1()) {
+        if (radarFilter.isPrimary()) {
+          predicateList.add(builder.isTrue(root.get("primary")));
+        }
+      } else {
+        predicateList.add(builder.isFalse(root.get("primary")));
       }
-      if (radarFilter != null && radarFilter.isFilter2() && radarFilter.isActive()) {
-        predicateList.add(builder.isTrue(builder.literal(true)));
+      if (radarFilter != null && radarFilter.isFilter2()) {
+        if (radarFilter.isActive()) {
+           predicateList.add(builder.isTrue(root.get("active")));
+        }
+      } else {
+        predicateList.add(builder.isFalse(root.get("active")));
       }
       return builder.and(predicateList.toArray(new Predicate[] {}));
     }, pageable).map(radarMapper::toDto);
