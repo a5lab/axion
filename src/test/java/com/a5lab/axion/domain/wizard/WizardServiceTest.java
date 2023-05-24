@@ -24,11 +24,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class WizardServiceTest extends AbstractServiceTests {
-  private final RadarService radarService = mock(RadarService.class);
-  private final RingService ringService = mock(RingService.class);
-  private final SegmentService segmentService = mock(SegmentService.class);
-  private final TechnologyService technologyService = mock(TechnologyService.class);
-  private final TechnologyBlipService technologyBlipService = mock(TechnologyBlipService.class);
+  private final RadarService radarService = Mockito.mock(RadarService.class);
+  private final RingService ringService = Mockito.mock(RingService.class);
+  private final SegmentService segmentService = Mockito.mock(SegmentService.class);
+  private final TechnologyService technologyService = Mockito.mock(TechnologyService.class);
+  private final TechnologyBlipService technologyBlipService = Mockito.mock(TechnologyBlipService.class);
 
   private final WizardService wizardService = new WizardServiceImpl(radarService, ringService, segmentService, technologyService, technologyBlipService);
 

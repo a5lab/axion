@@ -8,28 +8,25 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mapstruct.factory.Mappers;
 import org.mockito.ArgumentMatchers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.Mockito;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
 
-import org.springframework.data.jpa.domain.Specification;
-
 class TenantServiceTests extends AbstractServiceTests {
-  @MockBean
-  private TenantRepository tenantRepository;
-  @Autowired
-  private TenantMapper tenantMapper;
-  @Autowired
-  private TenantService tenantService;
-  /*
+  private final TenantRepository tenantRepository = Mockito.mock(TenantRepository.class);
+  private final TenantMapper tenantMapper = Mappers.getMapper(TenantMapper.class);
+
+  private final TenantService tenantService = new TenantServiceImpl(tenantRepository, tenantMapper);
+
+
   @Test
   void shouldFindAllTenants() {
     final Tenant tenant = new Tenant(10L, "My title", "My description");
@@ -102,5 +99,4 @@ class TenantServiceTests extends AbstractServiceTests {
     tenantService.deleteById(tenant.getId());
     Mockito.verify(tenantRepository).deleteById(tenant.getId());
   }
-   */
 }

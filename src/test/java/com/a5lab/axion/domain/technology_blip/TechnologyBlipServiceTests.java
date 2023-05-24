@@ -6,43 +6,38 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import com.a5lab.axion.domain.AbstractServiceTests;
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar.RadarRepository;
-import com.a5lab.axion.domain.ring.Ring;
-import com.a5lab.axion.domain.ring.RingRepository;
-import com.a5lab.axion.domain.segment.Segment;
-import com.a5lab.axion.domain.segment.SegmentRepository;
-import com.a5lab.axion.domain.technology.Technology;
-
-import com.a5lab.axion.domain.technology.TechnologyRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.ring.Ring;
+import com.a5lab.axion.domain.ring.RingRepository;
+import com.a5lab.axion.domain.segment.Segment;
+import com.a5lab.axion.domain.segment.SegmentRepository;
+import com.a5lab.axion.domain.technology.Technology;
+import com.a5lab.axion.domain.technology.TechnologyRepository;
+
 class TechnologyBlipServiceTests extends AbstractServiceTests {
-  @MockBean
-  private RingRepository ringRepository;
-  @MockBean
-  private RadarRepository radarRepository;
-  @MockBean
-  private SegmentRepository segmentRepository;
-  @MockBean
-  private TechnologyRepository technologyRepository;
-  @MockBean
-  private TechnologyBlipRepository technologyBlipRepository;
-  @Autowired
-  private TechnologyBlipMapper technologyBlipMapper;
-  @Autowired
-  private TechnologyBlipService technologyBlipService;
-  /*
+
+  private final RadarRepository radarRepository = Mockito.mock(RadarRepository.class);
+  private final RingRepository ringRepository = Mockito.mock(RingRepository.class);
+  private final SegmentRepository segmentRepository = Mockito.mock(SegmentRepository.class);
+  private final TechnologyRepository technologyRepository = Mockito.mock(TechnologyRepository.class);
+  private final TechnologyBlipRepository technologyBlipRepository = Mockito.mock(TechnologyBlipRepository.class);
+  private final TechnologyBlipMapper technologyBlipMapper = Mappers.getMapper(TechnologyBlipMapper.class);
+  private final TechnologyBlipService technologyBlipService =
+      new TechnologyBlipServiceImpl(radarRepository, ringRepository, segmentRepository, technologyRepository, technologyBlipRepository, technologyBlipMapper);
+
   @Test
   void shouldFindAllTechnologyBlips() {
     final Radar radar = new Radar();
@@ -215,14 +210,20 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldSaveTechnologyBlipDto() {
+    final RadarType radarType = new RadarType();
+    radarType.setTitle("Technology radars");
+    radarType.setCode("technology_radar");
+    radarType.setDescription("Technology radars");
+
     final Radar radar = new Radar();
     radar.setId(10L);
-    radar.setTitle("My radar");
-    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar Description");
+    radar.setPrimary(true);
+    radar.setActive(true);
 
     final Segment segment = new Segment();
     segment.setId(10L);
-    segment.setRadar(null);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
@@ -230,7 +231,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
 
     final Ring ring = new Ring();
     ring.setId(10L);
-    ring.setRadar(null);
     ring.setTitle("My ring title");
     ring.setDescription("My ring description");
     ring.setPosition(0);
@@ -245,12 +245,12 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technology.setMoved(1);
     technology.setActive(true);
 
-    final TechnologyBlip technologyBlip = new TechnologyBlip();
+    final TechnologyBlipDto technologyBlip = new TechnologyBlipDto();
     technologyBlip.setId(10L);
-    technologyBlip.setRadar(radar);
-    technologyBlip.setRing(ring);
-    technologyBlip.setTechnology(technology);
-    technologyBlip.setSegment(segment);
+    technologyBlip.setRadarId(radar.getId());
+    technologyBlip.setRingId(ring.getId());
+    technologyBlip.setTechnologyId(technology.getId());
+    technologyBlip.setSegmentId(segment.getId());
 
     Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
     Mockito.when(segmentRepository.findById(any())).thenReturn(Optional.of(segment));
@@ -258,13 +258,13 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     Mockito.when(technologyRepository.findById(any())).thenReturn(Optional.of(technology));
     Mockito.when(technologyBlipRepository.save(any())).thenReturn(technologyBlip);
 
-    TechnologyBlipDto technologyBlipDto = technologyBlipService.save(technologyBlipMapper.toDto(technologyBlip));
+    TechnologyBlipDto technologyBlipDto = technologyBlipService.save(technologyBlip);
 
     Assertions.assertEquals(technologyBlip.getId(), technologyBlipDto.getId());
-    Assertions.assertEquals(technologyBlip.getRadar().getId(), technologyBlipDto.getRadarId());
-    Assertions.assertEquals(technologyBlip.getSegment().getId(), technologyBlipDto.getSegmentId());
-    Assertions.assertEquals(technologyBlip.getRing().getId(), technologyBlipDto.getRingId());
-    Assertions.assertEquals(technologyBlip.getTechnology().getId(), technologyBlipDto.getTechnologyId());
+    Assertions.assertEquals(technologyBlip.getRadarId(), technologyBlipDto.getRadarId());
+    Assertions.assertEquals(technologyBlip.getRingId(), technologyBlipDto.getSegmentId());
+    Assertions.assertEquals(technologyBlip.getTechnologyId(), technologyBlipDto.getRingId());
+    Assertions.assertEquals(technologyBlip.getSegmentId(), technologyBlipDto.getTechnologyId());
 
     Mockito.verify(technologyBlipRepository).save(any());
     Mockito.verify(radarRepository).findById(radar.getId());
@@ -318,5 +318,4 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
 
     Mockito.verify(technologyBlipRepository).deleteById(technologyBlip.getId());
   }
-   */
 }

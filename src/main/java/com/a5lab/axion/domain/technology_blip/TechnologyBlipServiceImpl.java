@@ -11,10 +11,25 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.ring.RingRepository;
+import com.a5lab.axion.domain.ring.RingService;
+import com.a5lab.axion.domain.segment.SegmentRepository;
+import com.a5lab.axion.domain.segment.SegmentService;
+import com.a5lab.axion.domain.technology.TechnologyRepository;
+import com.a5lab.axion.domain.technology.TechnologyService;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class TechnologyBlipServiceImpl implements TechnologyBlipService {
+
+  private final RadarRepository radarRepository;
+  private final RingRepository ringRepository;
+  private final SegmentRepository segmentRepository;
+  private final TechnologyRepository technologyRepository;
+
   private final TechnologyBlipRepository technologyBlipRepository;
   private final TechnologyBlipMapper technologyBlipMapper;
 
