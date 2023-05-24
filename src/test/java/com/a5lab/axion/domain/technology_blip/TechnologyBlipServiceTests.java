@@ -36,7 +36,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
   private final TechnologyBlipRepository technologyBlipRepository = Mockito.mock(TechnologyBlipRepository.class);
   private final TechnologyBlipMapper technologyBlipMapper = Mappers.getMapper(TechnologyBlipMapper.class);
   private final TechnologyBlipService technologyBlipService =
-      new TechnologyBlipServiceImpl(radarRepository, ringRepository, segmentRepository, technologyRepository, technologyBlipRepository, technologyBlipMapper);
+      new TechnologyBlipServiceImpl(technologyBlipRepository, technologyBlipMapper);
 
   @Test
   void shouldFindAllTechnologyBlips() {
