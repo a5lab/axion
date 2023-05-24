@@ -1,5 +1,7 @@
 package com.a5lab.axion.domain.tenant;
 
+import java.util.Objects;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,8 +70,8 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
     tenantDto = tenantService.save(tenantDto);
 
     ResponseEntity<String> responseEntity =
-        restTemplate.exchange(baseUrl + port + "/settings/tenants", HttpMethod.GET, null, String.class);
-    Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        restTemplate.exchange(baseUrl + port + "/settings/tenants/create", HttpMethod.POST, null, String.class);
+    Assertions.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
     Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getTitle()));
     Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getDescription()));
 
@@ -77,5 +79,74 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
     this.tenantService.deleteById(tenantDto.getId());
   }
 
+  @Test
+  public void shouldDueToFailCreateTenants() {
+    TenantDto tenantDto = new TenantDto();
+    tenantDto.setId(1L);
+    tenantDto.setTitle("My title");
+    tenantDto.setDescription("My description");
+    tenantDto = tenantService.save(tenantDto);
 
+    tenantDto = tenantService.save(tenantDto);
+
+    ResponseEntity<String> responseEntity =
+        restTemplate.exchange(baseUrl + port + "/settings/tenants/create", HttpMethod.POST, null, String.class);
+    Assertions.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+    Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getTitle()));
+    Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getDescription()));
+
+
+    this.tenantService.deleteById(tenantDto.getId());
+  }
+
+  @Test
+  public void shouldEditTenants() {
+    TenantDto tenantDto = new TenantDto();
+    tenantDto.setId(1L);
+    tenantDto.setTitle("My title");
+    tenantDto.setDescription("My description");
+    tenantDto = tenantService.save(tenantDto);
+    this.tenantService.findById(tenantDto.getId());
+
+    ResponseEntity<String> responseEntity =
+        restTemplate.exchange(baseUrl + port + "/settings/tenants/edit/1", HttpMethod.GET, null, String.class);
+    Assertions.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+    Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getTitle()));
+    Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getDescription()));
+
+    this.tenantService.deleteById(tenantDto.getId());
+  }
+
+  @Test
+  public void shouldUpdateTenants() {
+    TenantDto tenantDto = new TenantDto();
+    tenantDto.setId(1L);
+    tenantDto.setTitle("My title");
+    tenantDto.setDescription("My description");
+    tenantDto = tenantService.save(tenantDto);
+
+    ResponseEntity<String> responseEntity =
+        restTemplate.exchange(baseUrl + port + "/settings/tenants/update", HttpMethod.POST, null, String.class);
+    Assertions.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+    Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getTitle()));
+    Assertions.assertTrue(responseEntity.getBody().contains(tenantDto.getDescription()));
+
+    this.tenantService.deleteById(tenantDto.getId());
+  }
+
+  @Test
+  public void shouldDeleteTenants() {
+    TenantDto tenantDto = new TenantDto();
+    tenantDto.setId(1L);
+    tenantDto.setTitle("My title");
+    tenantDto.setDescription("My description");
+    tenantDto = tenantService.save(tenantDto);
+    this.tenantService.deleteById(tenantDto.getId());
+
+    ResponseEntity<String> responseEntity =
+        restTemplate.exchange(baseUrl + port + "/settings/tenants/delete", HttpMethod.POST, null, String.class);
+    Assertions.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+
+    this.tenantService.deleteById(tenantDto.getId());
+  }
 }
