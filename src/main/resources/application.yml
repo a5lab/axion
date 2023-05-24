@@ -2,6 +2,14 @@ logging:
   charset:
     console: UTF-8
   level:
+    org:
+      hibernate: ERROR
+      springframework:
+        web: DEBUG
+    com:
+      zaxxer:
+        hikari: TRACE
+        HikariConfig: DEBUG
     root: info
   config: classpath:configs/logback-spring.xml
 
