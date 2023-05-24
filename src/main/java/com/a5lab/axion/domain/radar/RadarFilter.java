@@ -19,10 +19,8 @@ public class RadarFilter {
   private String title;
 
   private boolean filterByPrimary;
-
-  private boolean filterByActive;
-
   private boolean primary;
 
+  private boolean filterByActive;
   private boolean active;
 }
