@@ -1,6 +1,7 @@
 package com.a5lab.axion.domain.wizard;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 
 import java.util.Optional;
 
@@ -21,22 +22,15 @@ import com.a5lab.axion.domain.radar_type.RadarType;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 public class WizardServiceTest extends AbstractServiceTests {
-  @MockBean
-  private RadarService radarService;
-  @MockBean
-  private RingService ringService;
-  @MockBean
-  private SegmentService segmentService;
-  @MockBean
-  private TechnologyService technologyService;
-  @MockBean
-  private TechnologyBlipService technologyBlipService;
-  @Autowired
-  private WizardService wizardService;
+  private final RadarService radarService = mock(RadarService.class);
+  private final RingService ringService = mock(RingService.class);
+  private final SegmentService segmentService = mock(SegmentService.class);
+  private final TechnologyService technologyService = mock(TechnologyService.class);
+  private final TechnologyBlipService technologyBlipService = mock(TechnologyBlipService.class);
+
+  private final WizardService wizardService = new WizardServiceImpl(radarService, ringService, segmentService, technologyService, technologyBlipService);
 
   @Test
   void shouldCreateRadarEnv() throws Exception {
