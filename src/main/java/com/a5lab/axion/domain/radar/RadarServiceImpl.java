@@ -49,7 +49,7 @@ public class RadarServiceImpl implements RadarService {
       }
       if (radarFilter != null && radarFilter.isFilter2()) {
         if (radarFilter.isActive()) {
-           predicateList.add(builder.isTrue(root.get("active")));
+          predicateList.add(builder.isTrue(root.get("active")));
         }
       } else {
         predicateList.add(builder.isFalse(root.get("active")));

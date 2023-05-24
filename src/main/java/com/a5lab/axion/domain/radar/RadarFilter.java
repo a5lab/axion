@@ -18,9 +18,9 @@ public class RadarFilter {
   @Size(min = 0, max = 64)
   private String title;
 
-  private boolean filter1;
+  private boolean filterByPrimary;
 
-  private boolean filter2;
+  private boolean filterByActive;
 
   private boolean primary;
 
