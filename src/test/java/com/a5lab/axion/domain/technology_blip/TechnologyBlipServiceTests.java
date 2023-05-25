@@ -1,6 +1,5 @@
 package com.a5lab.axion.domain.technology_blip;
 
-/*
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Collection;
@@ -261,13 +260,13 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     Mockito.when(technologyRepository.findById(any())).thenReturn(Optional.of(technology));
     Mockito.when(technologyBlipRepository.save(any())).thenReturn(technologyBlip);
 
-    TechnologyBlipDto technologyBlipDto = technologyBlipService.save(technologyBlip);
+    TechnologyBlipDto technologyBlipDto = technologyBlipService.save(technologyBlipMapper.toDto(technologyBlip));
 
     Assertions.assertEquals(technologyBlip.getId(), technologyBlipDto.getId());
-    Assertions.assertEquals(technologyBlip.getRadarId(), technologyBlipDto.getRadarId());
-    Assertions.assertEquals(technologyBlip.getRingId(), technologyBlipDto.getSegmentId());
-    Assertions.assertEquals(technologyBlip.getTechnologyId(), technologyBlipDto.getRingId());
-    Assertions.assertEquals(technologyBlip.getSegmentId(), technologyBlipDto.getTechnologyId());
+    Assertions.assertEquals(technologyBlip.getRadar().getId(), technologyBlipDto.getRadarId());
+    Assertions.assertEquals(technologyBlip.getRing().getId(), technologyBlipDto.getSegmentId());
+    Assertions.assertEquals(technologyBlip.getTechnology().getId(), technologyBlipDto.getRingId());
+    Assertions.assertEquals(technologyBlip.getSegment().getId(), technologyBlipDto.getTechnologyId());
 
     Mockito.verify(technologyBlipRepository).save(any());
     Mockito.verify(radarRepository).findById(radar.getId());

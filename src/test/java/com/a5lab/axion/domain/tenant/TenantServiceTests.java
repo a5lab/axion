@@ -60,7 +60,7 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(tenantDtoPage.iterator().next().getDescription(), tenant.getDescription());
 
     // Mockito.verify(tenantRepository).findAll(
-      //  Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
+    //  Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test
