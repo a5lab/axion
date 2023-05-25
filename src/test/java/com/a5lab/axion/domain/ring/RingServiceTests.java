@@ -6,11 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import com.a5lab.axion.domain.AbstractServiceTests;
-
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar.RadarRepository;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -23,6 +18,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+
+import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
 
 class RingServiceTests extends AbstractServiceTests {
   @MockBean
@@ -41,7 +40,7 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("My color");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setActive(true);
 
     List<Ring> ringList = List.of(ring);
@@ -64,7 +63,7 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("My color");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setActive(true);
 
     List<Ring> ringList = List.of(ring);
@@ -92,7 +91,7 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("my color");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setActive(true);
 
     Mockito.when(ringRepository.findById(ring.getId())).thenReturn(Optional.of(ring));
@@ -113,7 +112,7 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("my color");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setActive(true);
 
     Mockito.when(ringRepository.findByTitle(ring.getTitle())).thenReturn(Optional.of(ring));
@@ -145,7 +144,7 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("my color");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setActive(true);
 
     Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
@@ -167,7 +166,7 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("my color");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setActive(true);
 
     Mockito.doAnswer((i) -> null).when(ringRepository).deleteById(ring.getId());

@@ -5,8 +5,12 @@ import static org.mockito.Mockito.mock;
 
 import java.util.Optional;
 
-import com.a5lab.axion.domain.radar.RadarDto;
-import com.a5lab.axion.domain.radar_type.RadarTypeDto;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
@@ -16,12 +20,6 @@ import com.a5lab.axion.domain.technology.TechnologyService;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
 
-import com.a5lab.axion.domain.AbstractServiceTests;
-import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.radar_type.RadarType;
-
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 public class WizardServiceTest extends AbstractServiceTests {
   private final RadarService radarService = Mockito.mock(RadarService.class);
@@ -62,7 +60,7 @@ public class WizardServiceTest extends AbstractServiceTests {
     ringDto.setRadarTitle(radarDto.getTitle());
     ringDto.setTitle("ADOPT");
     ringDto.setDescription("My ring description");
-    ringDto.setPosition(0);
+    ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
     ringDto.setActive(true);
 

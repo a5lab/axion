@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 import java.util.Optional;
 
-import com.a5lab.axion.utils.FlashMessages;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,9 +19,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(TenantCfgController.class)
 public class TenantCfgControllerTests extends AbstractControllerTests {
@@ -106,7 +106,8 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("tenantDto", tenantDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenants"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The tenant has been created successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The tenant has been created successfully."))
         .andReturn();
 
     Mockito.verify(tenantService).save(any());
@@ -173,7 +174,8 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
             .sessionAttr("tenantDto", tenantDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenants"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The tenant has been updated successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The tenant has been updated successfully."))
         .andReturn();
 
     Mockito.verify(tenantService).save(any());
@@ -205,7 +207,8 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(get(url))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/settings/tenants"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The tenant has been deleted successfully."))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The tenant has been deleted successfully."))
         .andReturn();
 
     Mockito.verify(tenantService).deleteById(tenantDto.getId());

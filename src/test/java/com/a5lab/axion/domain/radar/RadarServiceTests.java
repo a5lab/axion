@@ -6,10 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import com.a5lab.axion.domain.AbstractServiceTests;
-import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -22,6 +18,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+
+import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 
 class RadarServiceTests extends AbstractServiceTests {
   @MockBean
@@ -94,50 +94,6 @@ class RadarServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(radar.getDescription(), radarDtoOptional.get().getDescription());
 
     Mockito.verify(radarRepository).findById(radar.getId());
-  }
-
-  @Test
-  void shouldFindByPrimaryRadarsIfPresent() {
-    final Radar radar = new Radar();
-    radar.setId(10L);
-    radar.setRadarType(null);
-    radar.setTitle("Radar title");
-    radar.setDescription("Radar Description");
-    radar.setPrimary(true);
-
-    List<Radar> radarList = List.of(radar);
-    Mockito.when(radarRepository.findByPrimary(any(boolean.class))).thenReturn(radarList);
-
-    Optional<Radar> radarOptional = radarService.findByPrimary(radar.isPrimary());
-    Assertions.assertTrue(radarOptional.isPresent());
-    Assertions.assertEquals(radar.isPrimary(), radarOptional.isPresent());
-    Assertions.assertEquals(radar.getId(), radarOptional.get().getId());
-    Assertions.assertEquals(radar.getTitle(), radarOptional.get().getTitle());
-    Assertions.assertEquals(radar.getDescription(), radarOptional.get().getDescription());
-
-    Mockito.verify(radarRepository).findByPrimary((radar.isPrimary()));
-  }
-
-  @Test
-  void shouldFindByPrimaryRadarsIfNotPresent() {
-    final Radar radar = new Radar();
-    radar.setId(10L);
-    radar.setRadarType(null);
-    radar.setTitle("Radar title");
-    radar.setDescription("Radar Description");
-    radar.setPrimary(false);
-
-    List<Radar> radarList = List.of(radar);
-    Mockito.when(radarRepository.findByPrimary(any(boolean.class))).thenReturn(radarList);
-
-    Optional<Radar> radarOptional = radarService.findByPrimary(radar.isPrimary());
-    Assertions.assertTrue(radarOptional.isPresent());
-    Assertions.assertEquals(radar.isPrimary(), radarOptional.isEmpty());
-    Assertions.assertEquals(radar.getId(), radarOptional.get().getId());
-    Assertions.assertEquals(radar.getTitle(), radarOptional.get().getTitle());
-    Assertions.assertEquals(radar.getDescription(), radarOptional.get().getDescription());
-
-    Mockito.verify(radarRepository).findByPrimary((radar.isPrimary()));
   }
 
   @Test

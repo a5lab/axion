@@ -1,30 +1,28 @@
 package com.a5lab.axion.domain.radar;
 
-import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import com.a5lab.axion.domain.radar_type.RadarTypeService;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import com.a5lab.axion.utils.FlashMessages;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
+import com.a5lab.axion.domain.radar_type.RadarTypeService;
+import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(RadarController.class)
 public class RadarControllerTests extends AbstractControllerTests {

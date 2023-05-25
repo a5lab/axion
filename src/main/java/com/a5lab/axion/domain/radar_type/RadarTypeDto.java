@@ -24,6 +24,4 @@ public class RadarTypeDto {
   private String code;
 
   private String description;
-
-  // private List<RadarDto> radarList;
 }

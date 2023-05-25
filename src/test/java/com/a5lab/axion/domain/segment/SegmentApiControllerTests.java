@@ -10,15 +10,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Arrays;
 
-import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.domain.radar.RadarDto;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+
+import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.radar.RadarDto;
 
 @WebMvcTest(SegmentApiController.class)
 public class SegmentApiControllerTests extends AbstractControllerTests {

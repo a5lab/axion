@@ -2,7 +2,6 @@ package com.a5lab.axion.domain.technology_blip;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.config.MapperConfiguration;
@@ -12,9 +11,7 @@ import com.a5lab.axion.domain.segment.SegmentRepository;
 import com.a5lab.axion.domain.technology.TechnologyRepository;
 import com.a5lab.axion.utils.PlainMapper;
 
-@Mapper(config = MapperConfiguration.class,
-    unmappedTargetPolicy = ReportingPolicy.WARN,
-    typeConversionPolicy = ReportingPolicy.WARN)
+@Mapper(config = MapperConfiguration.class)
 public abstract class TechnologyBlipMapper implements PlainMapper<TechnologyBlip, TechnologyBlipDto> {
   @Autowired
   protected RadarRepository radarRepository;

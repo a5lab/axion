@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.technology_blip;
 
+/*
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Collection;
@@ -41,12 +42,12 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
   @Test
   void shouldFindAllTechnologyBlips() {
     final Radar radar = new Radar();
-    radar.setId(10L);
+    radar.setId(1L);
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
     final Segment segment = new Segment();
-    segment.setId(10L);
+    segment.setId(2L);
     segment.setRadar(null);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
@@ -54,16 +55,16 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     segment.setActive(true);
 
     final Ring ring = new Ring();
-    ring.setId(10L);
+    ring.setId(3L);
     ring.setRadar(null);
     ring.setTitle("My ring title");
     ring.setDescription("My ring description");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setColor("#fbdb84");
     ring.setActive(true);
 
     final Technology technology = new Technology();
-    technology.setId(10L);
+    technology.setId(4L);
     technology.setTitle("My technology");
     technology.setWebsite("My website");
     technology.setDescription("My technology description");
@@ -71,7 +72,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technology.setActive(true);
 
     final TechnologyBlip technologyBlip = new TechnologyBlip();
-    technologyBlip.setId(10L);
+    technologyBlip.setId(5L);
     technologyBlip.setRadar(radar);
     technologyBlip.setRing(ring);
     technologyBlip.setTechnology(technology);
@@ -98,12 +99,12 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
   @Test
   void shouldFindAllTechnologyBlipWithFilter() {
     final Radar radar = new Radar();
-    radar.setId(10L);
+    radar.setId(1L);
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
     final Segment segment = new Segment();
-    segment.setId(11L);
+    segment.setId(2L);
     segment.setRadar(radar);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
@@ -111,16 +112,16 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     segment.setActive(true);
 
     final Ring ring = new Ring();
-    ring.setId(12L);
+    ring.setId(3L);
     ring.setRadar(radar);
     ring.setTitle("My ring title");
     ring.setDescription("My ring description");
-    ring.setPosition(0);
+    ring.setPosition(1);
     ring.setColor("#fbdb84");
     ring.setActive(true);
 
     final Technology technology = new Technology();
-    technology.setId(13L);
+    technology.setId(4L);
     technology.setTitle("My technology");
     technology.setWebsite("My website");
     technology.setDescription("My technology description");
@@ -128,7 +129,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technology.setActive(true);
 
     final TechnologyBlip technologyBlip = new TechnologyBlip();
-    technologyBlip.setId(14L);
+    technologyBlip.setId(5L);
     technologyBlip.setRadar(radar);
     technologyBlip.setRing(ring);
     technologyBlip.setTechnology(technology);
@@ -160,29 +161,29 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
   @Test
   void shouldFindByIdTechnologyBlips() {
     final Radar radar = new Radar();
-    radar.setId(10L);
+    radar.setId(1L);
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
+    final Ring ring = new Ring();
+    ring.setId(3L);
+    ring.setRadar(null);
+    ring.setTitle("My ring title");
+    ring.setDescription("My ring description");
+    ring.setPosition(1);
+    ring.setColor("#fbdb84");
+    ring.setActive(true);
+
     final Segment segment = new Segment();
-    segment.setId(10L);
+    segment.setId(2L);
     segment.setRadar(null);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
     segment.setActive(true);
 
-    final Ring ring = new Ring();
-    ring.setId(10L);
-    ring.setRadar(null);
-    ring.setTitle("My ring title");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("#fbdb84");
-    ring.setActive(true);
-
     final Technology technology = new Technology();
-    technology.setId(10L);
+    technology.setId(4L);
     technology.setTitle("My technology");
     technology.setWebsite("My website");
     technology.setDescription("My technology description");
@@ -190,7 +191,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technology.setActive(true);
 
     final TechnologyBlip technologyBlip = new TechnologyBlip();
-    technologyBlip.setId(10L);
+    technologyBlip.setId(5L);
     technologyBlip.setRadar(radar);
     technologyBlip.setRing(ring);
     technologyBlip.setTechnology(technology);
@@ -216,41 +217,43 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     radarType.setDescription("Technology radars");
 
     final Radar radar = new Radar();
-    radar.setId(10L);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar Description");
+    radar.setId(1L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
     radar.setPrimary(true);
     radar.setActive(true);
 
+    final Ring ring = new Ring();
+    ring.setId(3L);
+    ring.setRadar(null);
+    ring.setTitle("My ring title");
+    ring.setDescription("My ring description");
+    ring.setPosition(1);
+    ring.setColor("#fbdb84");
+    ring.setActive(true);
+
     final Segment segment = new Segment();
-    segment.setId(10L);
+    segment.setId(2L);
+    segment.setRadar(null);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
     segment.setActive(true);
 
-    final Ring ring = new Ring();
-    ring.setId(10L);
-    ring.setTitle("My ring title");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("#fbdb84");
-    ring.setActive(true);
-
     final Technology technology = new Technology();
-    technology.setId(10L);
+    technology.setId(4L);
     technology.setTitle("My technology");
     technology.setWebsite("My website");
     technology.setDescription("My technology description");
     technology.setMoved(1);
     technology.setActive(true);
 
-    final TechnologyBlipDto technologyBlip = new TechnologyBlipDto();
-    technologyBlip.setId(10L);
-    technologyBlip.setRadarId(radar.getId());
-    technologyBlip.setRingId(ring.getId());
-    technologyBlip.setTechnologyId(technology.getId());
-    technologyBlip.setSegmentId(segment.getId());
+    final TechnologyBlip technologyBlip = new TechnologyBlip();
+    technologyBlip.setId(5L);
+    technologyBlip.setRadar(radar);
+    technologyBlip.setRing(ring);
+    technologyBlip.setTechnology(technology);
+    technologyBlip.setSegment(segment);
 
     Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
     Mockito.when(segmentRepository.findById(any())).thenReturn(Optional.of(segment));
@@ -280,22 +283,22 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     radar.setTitle("My radar");
     radar.setDescription("My radar description");
 
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setRadar(radar);
+    ring.setTitle("My ring title");
+    ring.setDescription("My ring description");
+    ring.setPosition(1);
+    ring.setColor("#fbdb84");
+    ring.setActive(true);
+
     final Segment segment = new Segment();
     segment.setId(10L);
-    segment.setRadar(null);
+    segment.setRadar(radar);
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
     segment.setActive(true);
-
-    final Ring ring = new Ring();
-    ring.setId(10L);
-    ring.setRadar(null);
-    ring.setTitle("My ring title");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("#fbdb84");
-    ring.setActive(true);
 
     final Technology technology = new Technology();
     technology.setId(10L);

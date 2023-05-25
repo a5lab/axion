@@ -38,7 +38,6 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(tenantDtoCollection.iterator().next().getId(), tenant.getId());
     Assertions.assertEquals(tenantDtoCollection.iterator().next().getTitle(), tenant.getTitle());
     Assertions.assertEquals(tenantDtoCollection.iterator().next().getDescription(), tenant.getDescription());
-
   }
 
   @Test
@@ -60,7 +59,8 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(tenantDtoPage.iterator().next().getTitle(), tenant.getTitle());
     Assertions.assertEquals(tenantDtoPage.iterator().next().getDescription(), tenant.getDescription());
 
-    // Mockito.verify(tenantRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
+    // Mockito.verify(tenantRepository).findAll(
+      //  Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test
@@ -76,7 +76,6 @@ class TenantServiceTests extends AbstractServiceTests {
 
     Mockito.verify(tenantRepository).findById(tenant.getId());
   }
-
 
   @Test
   void shouldSaveTenant() {
