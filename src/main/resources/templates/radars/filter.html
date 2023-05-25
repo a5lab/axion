@@ -1,8 +1,8 @@
 <div id="filter">
   <div class="filter-sort">
-    <a href="#" id="filter-nav" class="mb-3 color-blue-primary">Filter</a>
+    <a class="mb-3 color-blue-primary" href="#" id="filter-nav">Filter</a>
   </div>
-  <form action="#" id="filter-form" class="mb-3" method="get" th:action="@{/radars}" th:object="${radarFilter}">
+  <form action="#" class="mb-3" id="filter-form" method="get" th:action="@{/radars}" th:object="${radarFilter}">
     <div th:if="${#fields.hasAnyErrors()}">
       <ul>
         <li th:each="error : ${#fields.allErrors()}" th:text="${error}"/>
@@ -10,24 +10,20 @@
     </div>
     <label for="title">Title</label>
     <input id="title" placeholder="Title" th:field="*{title}" type="text">
-    <input class="filter-button" type="submit" value="Filter">
+    <span class="error-field-wrapper" th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></span>
 
-    <input type="checkbox" id="filterByPrimary" class="check-wrapper-me-1" name="filterByPrimary" value="true" onchange="document.getElementById('primary').disabled = !this.checked;" />
-    <input type="hidden" name="_filterByPrimary" value="on">
+    <input class="check-wrapper me-1" id="filterByPrimary"
+           onchange="document.getElementById('primary').disabled = !this.checked;" th:field="*{filterByPrimary}"
+           type="checkbox">
     <label for="filterByPrimary">Filter by primary</label>
+    <span class="error-field-wrapper" th:errors="*{filterByPrimary}"
+          th:if="${#fields.hasErrors('filterByPrimary')}"></span>
 
-    <input type="checkbox" id="primary" class="check-wrapper-me-1" name="primary" value="true" disabled/>
-    <input type="hidden" name="_primary" value="on">
+    <input class="check-wrapper me-1" id="primary" th:field="*{primary}" type="checkbox">
     <label for="primary">Primary</label>
+    <span class="error-field-wrapper" th:errors="*{primary}" th:if="${#fields.hasErrors('filterByPrimary')}"></span>
 
-    <input type="checkbox" id="filterByActive" class="check-wrapper-me-1" name="filterByActive" value="true" onchange="document.getElementById('active').disabled = !this.checked;" />
-    <input type="hidden" name="_filterByActive" value="on">
-    <label for="filterByActive">Filter by active</label>
-
-    <input type="checkbox" id="active" class="check-wrapper-me-1" name="active" value="true" disabled/>
-    <input type="hidden" name="_active" value="on">
-    <label for="active">Active</label>
-
+    <input class="filter-button" type="submit" value="Filter">
   </form>
   <div class="border-grey"></div>
 </div>
