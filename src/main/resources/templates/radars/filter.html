@@ -11,6 +11,23 @@
     <label for="title">Title</label>
     <input id="title" placeholder="Title" th:field="*{title}" type="text">
     <input class="filter-button" type="submit" value="Filter">
+
+    <input type="checkbox" id="filterByPrimary" class="check-wrapper-me-1" name="filterByPrimary" value="true" onchange="document.getElementById('primary').disabled = !this.checked;" />
+    <input type="hidden" name="_filterByPrimary" value="on">
+    <label for="filterByPrimary">Filter by primary</label>
+
+    <input type="checkbox" id="primary" class="check-wrapper-me-1" name="primary" value="true" disabled/>
+    <input type="hidden" name="_primary" value="on">
+    <label for="primary">Primary</label>
+
+    <input type="checkbox" id="filterByActive" class="check-wrapper-me-1" name="filterByActive" value="true" onchange="document.getElementById('active').disabled = !this.checked;" />
+    <input type="hidden" name="_filterByActive" value="on">
+    <label for="filterByActive">Filter by active</label>
+
+    <input type="checkbox" id="active" class="check-wrapper-me-1" name="active" value="true" disabled/>
+    <input type="hidden" name="_active" value="on">
+    <label for="active">Active</label>
+
   </form>
   <div class="border-grey"></div>
 </div>
