@@ -11,7 +11,7 @@ spring:
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
     url: jdbc:tc:postgresql:14.6:///axion?TC_DAEMON=true&TC_TMPFS=/testtmpfs:rw
     hikari:
-      minimum-idle: 5
+      minimum-idle: 2
       maximum-pool-size: 5
   liquibase:
     change-log: database/changelog-master.xml
