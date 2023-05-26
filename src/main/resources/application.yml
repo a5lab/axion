@@ -5,11 +5,11 @@ logging:
     org:
       hibernate: ERROR
       springframework:
-        web: DEBUG
+        web: INFO
       com:
         zaxxer:
-          hikari: TRACE
-          HikariConfig: DEBUG
+          hikari: INFO
+          HikariConfig: INFO
     root: info
   config: classpath:configs/logback-spring.xml
 
