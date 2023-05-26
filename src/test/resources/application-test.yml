@@ -1,10 +1,25 @@
+logging:
+  level:
+    org:
+      springframework:
+        test:
+          context:
+            cache: INFO
+
 spring:
   datasource:
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
     url: jdbc:tc:postgresql:14.6:///axion?TC_DAEMON=true&TC_TMPFS=/testtmpfs:rw
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 5
   liquibase:
     change-log: database/changelog-master.xml
     label-filter: test
     contexts: test
   jpa:
     show-sql: true
+  test:
+    context:
+      cache:
+        maxSize: 16
