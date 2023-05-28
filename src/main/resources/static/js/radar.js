@@ -15,12 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+
   // Check dom model correctness
-  if(d3.selectAll("h1#name")._groups[0].length == 0
-    || d3.selectAll("table#segments tbody tr")._groups[0].length == 0
-    || d3.selectAll("table#rings tbody tr")._groups[0].length == 0
-    || d3.selectAll("table#blips tbody tr")._groups[0].length == 0){
-    console.log("Invalid DOM model in order to build radar.")
+  if(d3.selectAll("svg#radar")._groups[0].length){
+    // console.log("There is information to build radar.")
+    if(d3.selectAll("h1#name")._groups[0].length == 0
+      || d3.selectAll("table#segments tbody tr")._groups[0].length == 0
+      || d3.selectAll("table#rings tbody tr")._groups[0].length == 0
+      || d3.selectAll("table#blips tbody tr")._groups[0].length == 0){
+      console.log("Invalid DOM model in order to build radar.")
+      return;
+    }
+  } else {
+    // console.log("There isn't information to build radar.")
     return;
   }
 
