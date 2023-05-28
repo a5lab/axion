@@ -1,6 +1,5 @@
 package com.a5lab.axion.domain.tenant;
 
-/*
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Collection;
@@ -9,22 +8,18 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
- */
 import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-/*
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
- */
+import org.springframework.data.jpa.domain.Specification;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
-
-// import org.springframework.data.jpa.domain.Specification;
 
 class TenantServiceTests extends AbstractServiceTests {
   @MockBean
@@ -33,7 +28,7 @@ class TenantServiceTests extends AbstractServiceTests {
   private TenantMapper tenantMapper;
   @Autowired
   private TenantService tenantService;
-  /*
+
   @Test
   void shouldFindAllTenants() {
     final Tenant tenant = new Tenant(10L, "My title", "My description");
@@ -67,7 +62,7 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(tenantDtoPage.iterator().next().getDescription(), tenant.getDescription());
 
     // Mockito.verify(tenantRepository).findAll(
-      //  Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
+    //  Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
   }
 
   @Test
@@ -105,5 +100,4 @@ class TenantServiceTests extends AbstractServiceTests {
     tenantService.deleteById(tenant.getId());
     Mockito.verify(tenantRepository).deleteById(tenant.getId());
   }
-   */
 }

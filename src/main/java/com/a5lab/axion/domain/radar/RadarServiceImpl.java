@@ -66,17 +66,6 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<Radar> findByPrimary(boolean primary) {
-    List<Radar> radarList = radarRepository.findByPrimary(primary);
-    if (radarList.isEmpty()) {
-      return Optional.empty();
-    } else {
-      return Optional.of(radarList.get(0));
-    }
-  }
-
-  @Override
-  @Transactional(readOnly = true)
   public List<RadarDto> findByPrimaryAndActive(boolean primary, boolean active) {
     return radarRepository.findByPrimaryAndActive(primary, active)
         .stream().map(radarMapper::toDto).collect(Collectors.toList());

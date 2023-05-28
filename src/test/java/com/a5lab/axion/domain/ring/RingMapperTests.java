@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import com.a5lab.axion.domain.AbstractMapperTests;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.technology.TechnologyDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
@@ -58,9 +59,16 @@ class RingMapperTests extends AbstractMapperTests {
 
   @Test
   public void testToDtoAllLists() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(10L);
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
+    radarType.setTitle("My title");
+    radarType.setDescription("My description");
+
     // Create radar
     final Radar radar = new Radar();
     radar.setId(1L);
+    radar.setRadarType(radarType);
     radar.setTitle("My title");
     radar.setDescription("My description");
     radar.setPrimary(true);
@@ -181,10 +189,17 @@ class RingMapperTests extends AbstractMapperTests {
 
   @Test
   public void testToEntityAllLists() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
+    radarType.setTitle("My radarType title");
+    radarType.setDescription("My radarType description");
+
     final Radar radar = new Radar();
     radar.setId(1L);
+    radar.setRadarType(radarType);
     radar.setTitle("My radar title");
-    radar.setDescription("My radar Description");
+    radar.setDescription("My radar description");
     radar.setPrimary(true);
     radar.setActive(true);
 
@@ -204,7 +219,7 @@ class RingMapperTests extends AbstractMapperTests {
     ringDto.setRadarId(radar.getId());
     ringDto.setRadarTitle(radar.getTitle());
     ringDto.setTitle("My ring title");
-    ringDto.setDescription("My ring description1");
+    ringDto.setDescription("My ring description");
     ringDto.setColor("color");
     ringDto.setPosition(1);
     ringDto.setTechnologyBlipDtoList(List.of(new TechnologyBlipDto()));
@@ -216,13 +231,23 @@ class RingMapperTests extends AbstractMapperTests {
 
     Mockito.when(technologyBlipMapper.toEntity(any())).thenReturn(technologyBlip);
 
-    Ring mappedRing = ringMapper.toEntity(ringDto);
+    final var mappedRing = ringMapper.toEntity(ringDto);
 
     Assertions.assertEquals(mappedRing.getId(), ringDto.getId());
     Assertions.assertEquals(mappedRing.getTitle(), ringDto.getTitle());
     Assertions.assertEquals(mappedRing.getDescription(), ringDto.getDescription());
     Assertions.assertEquals(mappedRing.getColor(), ringDto.getColor());
     Assertions.assertEquals(mappedRing.getPosition(), ringDto.getPosition());
+    Assertions.assertEquals(mappedRing.getId(),
+        mappedRing.getTechnologyBlipList().iterator().next().getRing().getId());
+    Assertions.assertEquals(mappedRing.getTitle(),
+        mappedRing.getTechnologyBlipList().iterator().next().getRing().getTitle());
+    Assertions.assertEquals(mappedRing.getDescription(),
+        mappedRing.getTechnologyBlipList().iterator().next().getRing().getDescription());
+    Assertions.assertEquals(mappedRing.getPosition(),
+        mappedRing.getTechnologyBlipList().iterator().next().getRing().getPosition());
+    Assertions.assertEquals(mappedRing.getRadar().getId(),
+        mappedRing.getTechnologyBlipList().iterator().next().getRadar().getId());
 
     Assertions.assertEquals(mappedRing.getRadar().getId(), ringDto.getRadarId());
     Assertions.assertEquals(mappedRing.getRadar().getTitle(), ringDto.getRadarTitle());
@@ -234,6 +259,12 @@ class RingMapperTests extends AbstractMapperTests {
         technologyBlip.getRadar().getId());
     Assertions.assertEquals(mappedRing.getTechnologyBlipList().iterator().next().getRing().getId(),
         technologyBlip.getRing().getId());
+    Assertions.assertEquals(mappedRing.getTechnologyBlipList().iterator().next().getRing().getTitle(),
+        technologyBlip.getRing().getTitle());
+    Assertions.assertEquals(mappedRing.getTechnologyBlipList().iterator().next().getRing().getDescription(),
+        technologyBlip.getRing().getDescription());
+    Assertions.assertEquals(mappedRing.getTechnologyBlipList().iterator().next().getRing().getPosition(),
+        technologyBlip.getRing().getPosition());
 
     Mockito.verify(radarRepository).findById(radar.getId());
     Mockito.verify(technologyBlipMapper).toEntity(any());
