@@ -1,28 +1,27 @@
 package com.a5lab.axion.domain.wizard;
 
-/*
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito; */
-
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.ring.RingService;
-import com.a5lab.axion.domain.segment.SegmentService;
-import com.a5lab.axion.domain.technology.TechnologyService;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
-
-/*
+import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.ring.RingDto;
+import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
+import com.a5lab.axion.domain.segment.SegmentService;
 import com.a5lab.axion.domain.technology.TechnologyDto;
-import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;*/
+import com.a5lab.axion.domain.technology.TechnologyService;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
 
 public class WizardServiceTest extends AbstractServiceTests {
   @MockBean
@@ -38,7 +37,6 @@ public class WizardServiceTest extends AbstractServiceTests {
   @Autowired
   private WizardService wizardService;
 
-  /*
   @Test
   void shouldCreateRadarEnv() throws Exception {
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
@@ -106,5 +104,4 @@ public class WizardServiceTest extends AbstractServiceTests {
     Mockito.verify(technologyService, Mockito.times(2)).findByTitle(any());
     Mockito.verify(technologyBlipService, Mockito.times(2)).save(any());
   }
-   */
 }
