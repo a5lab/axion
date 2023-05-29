@@ -117,7 +117,5 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
     ResponseEntity<String> responseEntity =
         restTemplate.exchange(baseUrl + port + "/settings/tenants/delete/1", HttpMethod.POST, null, String.class);
     Assertions.assertEquals(responseEntity.getStatusCode(), HttpStatus.FOUND);
-
-    this.tenantService.deleteById(tenantDto.getId());
   }
 }
