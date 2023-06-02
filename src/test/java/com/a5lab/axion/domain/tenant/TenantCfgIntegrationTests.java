@@ -153,7 +153,7 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
 
     List<Tenant> tenantListAfter = new LinkedList<>(tenantRepository.findAll());
 
-    Assertions.assertEquals(tenantListBefore.size()-1, tenantListAfter.size());
+    Assertions.assertEquals(tenantListBefore.size() - 1, tenantListAfter.size());
     // TODO: why OK, rather than FOUND. What the difference between update & delete
     Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
   }
