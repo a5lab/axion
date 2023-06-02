@@ -1,12 +1,12 @@
 package com.a5lab.axion.domain.tenant;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -67,14 +67,11 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
     Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
   }
 
-  /*
   @Test
   public void shouldCreateTenants() {
     TenantDto tenantDto = new TenantDto();
-    tenantDto.setId(2L);
     tenantDto.setTitle("My title");
     tenantDto.setDescription("My description");
-    List<Tenant> tenantListBefore = new LinkedList<>(tenantRepository.findAll());
 
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -82,17 +79,20 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
     multiValueMap.add("title", tenantDto.getTitle());
     multiValueMap.add("description", tenantDto.getDescription());
     HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(multiValueMap, httpHeaders);
+
+    List<Tenant> tenantListBefore = tenantRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     ResponseEntity<String> responseEntity = restTemplate.postForEntity(
         baseUrl + port + "/settings/tenants/create", httpEntity, String.class);
 
     Assertions.assertEquals(HttpStatus.FOUND, responseEntity.getStatusCode());
-    List<Tenant> tenantListAfter = new LinkedList<>(tenantRepository.findAll());
+    List<Tenant> tenantListAfter = tenantRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
-    Assertions.assertEquals(tenantListBefore.size()+1, tenantListAfter.size());
+    Assertions.assertEquals(tenantListBefore.size() + 1, tenantListAfter.size());
+    Assertions.assertEquals(tenantListAfter.iterator().next().getDescription(), tenantDto.getDescription());
+    Assertions.assertEquals(tenantListAfter.iterator().next().getTitle(), tenantDto.getTitle());
 
-    this.tenantService.deleteById(tenantDto.getId());
+    this.tenantService.deleteById(tenantListAfter.iterator().next().getId());
   }
-   */
 
   @Test
   public void shouldEditTenants() {
@@ -140,21 +140,20 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
   @Test
   public void shouldDeleteTenants() {
     TenantDto tenantDto = new TenantDto();
-    tenantDto.setId(1L);
     tenantDto.setTitle("My title");
     tenantDto.setDescription("My description");
     tenantDto = tenantService.save(tenantDto);
-    List<Tenant> tenantListBefore = new LinkedList<>(tenantRepository.findAll());
+    List<Tenant> tenantListBefore = tenantRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
 
-    String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());
+    String url = String.format("/settings/tenants/delete/%d", tenantListBefore.iterator().next().getId());
     ResponseEntity<String> responseEntity =
         restTemplate.exchange(baseUrl + port + url, HttpMethod.GET, null, String.class);
 
-    List<Tenant> tenantListAfter = new LinkedList<>(tenantRepository.findAll());
+    List<Tenant> tenantListAfter = tenantRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
     Assertions.assertEquals(tenantListBefore.size() - 1, tenantListAfter.size());
     // TODO: why OK, rather than FOUND. What the difference between update & delete
-    Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    Assertions.assertEquals(HttpStatus.FOUND, responseEntity.getStatusCode());
   }
 }
