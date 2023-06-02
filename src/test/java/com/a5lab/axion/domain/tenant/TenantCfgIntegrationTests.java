@@ -1,7 +1,7 @@
 package com.a5lab.axion.domain.tenant;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +13,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -23,6 +22,9 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
 
   @Autowired
   private TenantService tenantService;
+
+  @Autowired
+  private TenantRepository tenantRepository;
 
   @Test
   public void shouldGetTenants() {
@@ -68,13 +70,11 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
   /*
   @Test
   public void shouldCreateTenants() {
-    // TODO: here is logic problem: we should avoid id, it can be changed(?)
-    // We need cound records and check that count +1 and get last id
-
     TenantDto tenantDto = new TenantDto();
-    tenantDto.setId(1L);
+    tenantDto.setId(2L);
     tenantDto.setTitle("My title");
     tenantDto.setDescription("My description");
+    List<Tenant> tenantListBefore = new LinkedList<>(tenantRepository.findAll());
 
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -86,12 +86,13 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
         baseUrl + port + "/settings/tenants/create", httpEntity, String.class);
 
     Assertions.assertEquals(HttpStatus.FOUND, responseEntity.getStatusCode());
-    // TODO: get last id from database and compare with tenantDto
+    List<Tenant> tenantListAfter = new LinkedList<>(tenantRepository.findAll());
+
+    Assertions.assertEquals(tenantListBefore.size()+1, tenantListAfter.size());
 
     this.tenantService.deleteById(tenantDto.getId());
   }
    */
-
 
   @Test
   public void shouldEditTenants() {
@@ -143,10 +144,16 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
     tenantDto.setTitle("My title");
     tenantDto.setDescription("My description");
     tenantDto = tenantService.save(tenantDto);
+    List<Tenant> tenantListBefore = new LinkedList<>(tenantRepository.findAll());
+
 
     String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());
     ResponseEntity<String> responseEntity =
         restTemplate.exchange(baseUrl + port + url, HttpMethod.GET, null, String.class);
+
+    List<Tenant> tenantListAfter = new LinkedList<>(tenantRepository.findAll());
+
+    Assertions.assertEquals(tenantListBefore.size()-1, tenantListAfter.size());
     // TODO: why OK, rather than FOUND. What the difference between update & delete
     Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
   }
