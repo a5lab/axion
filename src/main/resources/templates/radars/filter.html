@@ -13,13 +13,12 @@
     <span class="error-field-wrapper" th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></span>
 
     <input class="check-wrapper me-1" id="filterByPrimary"
-           change="$('#primary').disabled = !this.checked;" th:field="*{filterByPrimary}"
-           type="checkbox">
+           onchange="$('#primary')[0].disabled = !this.checked;" th:field="*{filterByPrimary}" type="checkbox">
     <label for="filterByPrimary">Filter by primary</label>
     <span class="error-field-wrapper" th:errors="*{filterByPrimary}"
           th:if="${#fields.hasErrors('filterByPrimary')}"></span>
 
-    <input class="check-wrapper me-1" id="primary" th:field="*{primary}" type="checkbox">
+    <input class="check-wrapper me-1" disabled="true" id="primary" th:field="*{primary}" type="checkbox">
     <label for="primary">Primary</label>
     <span class="error-field-wrapper" th:errors="*{primary}" th:if="${#fields.hasErrors('filterByPrimary')}"></span>
 
