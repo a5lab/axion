@@ -79,14 +79,12 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
     multiValueMap.add("title", tenantDto.getTitle());
     multiValueMap.add("description", tenantDto.getDescription());
     HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(multiValueMap, httpHeaders);
-
     List<Tenant> tenantListBefore = tenantRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     ResponseEntity<String> responseEntity = restTemplate.postForEntity(
         baseUrl + port + "/settings/tenants/create", httpEntity, String.class);
 
     Assertions.assertEquals(HttpStatus.FOUND, responseEntity.getStatusCode());
     List<Tenant> tenantListAfter = tenantRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-
     Assertions.assertEquals(tenantListBefore.size() + 1, tenantListAfter.size());
     Assertions.assertEquals(tenantListAfter.iterator().next().getDescription(), tenantDto.getDescription());
     Assertions.assertEquals(tenantListAfter.iterator().next().getTitle(), tenantDto.getTitle());
@@ -143,17 +141,13 @@ class TenantCfgIntegrationTests extends AbstractIntegrationTests {
     tenantDto.setTitle("My title");
     tenantDto.setDescription("My description");
     tenantDto = tenantService.save(tenantDto);
-    List<Tenant> tenantListBefore = tenantRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
-
-    String url = String.format("/settings/tenants/delete/%d", tenantListBefore.iterator().next().getId());
+    String url = String.format("/settings/tenants/delete/%d", tenantDto.getId());
     ResponseEntity<String> responseEntity =
         restTemplate.exchange(baseUrl + port + url, HttpMethod.GET, null, String.class);
 
-    List<Tenant> tenantListAfter = tenantRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-
-    Assertions.assertEquals(tenantListBefore.size() - 1, tenantListAfter.size());
-    // TODO: why OK, rather than FOUND. What the difference between update & delete
-    Assertions.assertEquals(HttpStatus.FOUND, responseEntity.getStatusCode());
+    Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    Optional<TenantDto> tenantDtoOptional = this.tenantService.findById(tenantDto.getId());
+    Assertions.assertTrue(tenantDtoOptional.isEmpty());
   }
 }
