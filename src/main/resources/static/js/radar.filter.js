@@ -1,25 +1,31 @@
-function x() {
-    var checkbox = document.getElementById('primary');
-    var checkbox1 = document.getElementById('filterByPrimary');
-    var check = document.body.contains(checkbox1);
-        if (check == true) {
-            if (checkbox1.checked == true) {
-                checkbox.removeAttribute('disabled');
+function activationCheckbox() {
+    var primary = document.getElementById('primary');
+    var filter = document.getElementById('filterByPrimary');
+    var checkingExist = document.body.contains(filter);
+
+        // Existence check
+        if (checkingExist == true) {
+            // Activation condition
+            if (filter.checked == true) {
+                primary.removeAttribute('disabled');
                 }
                 else {
-                checkbox.setAttribute('disabled', 'disabled');
+                primary.setAttribute('disabled', 'disabled');
                 }
         }
-    checkbox = document.getElementById('active');
-    checkbox1 = document.getElementById('filterByActive');
-    var check = document.body.contains(checkbox1);
-        if (check == true) {
-            if (checkbox1.checked == true) {
-            checkbox.removeAttribute('disabled');
+    var active = document.getElementById('active');
+    filter = document.getElementById('filterByActive');
+    checkingExist = document.body.contains(filter);
+
+        // Existence check
+        if (checkingExist == true) {
+            // Activation condition
+            if (filter.checked == true) {
+            active.removeAttribute('disabled');
             }
             else {
-            checkbox.setAttribute('disabled', 'disabled');
+            active.setAttribute('disabled', 'disabled');
             }
         }
 }
-window.onload = x;
+window.onload = activationCheckbox;
