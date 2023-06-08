@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -28,12 +29,14 @@ public class TechnologyBlipDto {
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
   private long radarId;
+  @NotBlank
   private String radarTitle;
 
   @JsonProperty("technology_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
   private long technologyId;
+  @NotBlank
   private String technologyTitle;
   private String technologyWebsite;
   private int technologyMoved;
@@ -43,6 +46,7 @@ public class TechnologyBlipDto {
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
   private long segmentId;
+  @NotBlank
   private String segmentTitle;
   private int segmentPosition;
 
@@ -50,6 +54,7 @@ public class TechnologyBlipDto {
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
   private long ringId;
+  @NotBlank
   private String ringTitle;
   private int ringPosition;
 
