@@ -270,13 +270,51 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToCreateTechnologyBlip() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setTitle("My radar");
+    radarDto.setDescription("My radar description");
+
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setRadarId(radarDto.getId());
+    segmentDto.setTitle("My segment title");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(1);
+    segmentDto.setActive(true);
+
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setRadarId(radarDto.getId());
+    ringDto.setTitle("My ring title");
+    ringDto.setDescription("My ring description");
+    ringDto.setPosition(1);
+    ringDto.setColor("#fbdb84");
+    ringDto.setActive(true);
+
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setId(10L);
+    technologyDto.setTitle("My technology");
+    technologyDto.setWebsite("My website");
+    technologyDto.setDescription("My technology description");
+    technologyDto.setMoved(1);
+    technologyDto.setActive(true);
+
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(5L);
+    technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRadarTitle(radarDto.getTitle());
+    technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setRingTitle(ringDto.getTitle());
+    technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setTechnologyTitle(technologyDto.getTitle());
+    technologyBlipDto.setSegmentId(segmentDto.getId());
+    technologyBlipDto.setSegmentTitle(segmentDto.getTitle());
 
-    Collection<RadarDto> radarDtoCollection = List.of(new RadarDto());
-    Collection<RingDto> ringDtoCollection = List.of(new RingDto());
-    Collection<SegmentDto> segmentDtoCollection = List.of(new SegmentDto());
-    Collection<TechnologyDto> technologyDtoCollection = List.of(new TechnologyDto());
+    Collection<RadarDto> radarDtoCollection = List.of(radarDto);
+    Collection<RingDto> ringDtoCollection = List.of(ringDto);
+    Collection<SegmentDto> segmentDtoCollection = List.of(segmentDto);
+    Collection<TechnologyDto> technologyDtoCollection = List.of(technologyDto);
 
     Mockito.when(radarService.findAll()).thenReturn(radarDtoCollection);
     Mockito.when(ringService.findAll()).thenReturn(ringDtoCollection);
@@ -287,9 +325,13 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radar.id", String.valueOf(technologyBlipDto.getRadarId()))
+            .param("radar.title", technologyBlipDto.getRadarTitle())
             .param("technology.id", String.valueOf(technologyBlipDto.getTechnologyId()))
+            .param("technology.title", technologyBlipDto.getTechnologyTitle())
             .param("segment.id", String.valueOf(technologyBlipDto.getSegmentId()))
+            .param("segment.title", technologyBlipDto.getSegmentTitle())
             .param("ring.id", String.valueOf(technologyBlipDto.getRingId()))
+            .param("ring.title", technologyBlipDto.getRingTitle())
             .sessionAttr("technologyBlipDto", technologyBlipDto))
         .andExpect(status().isOk())
         .andExpect(view().name("settings/technology_blips/add"))
