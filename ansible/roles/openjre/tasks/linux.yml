@@ -1,6 +1,0 @@
----
-
-- name: install openjre packages
-  package:
-    name: "{{ openjre__package_map[ansible_os_family] }}"
-    state: present

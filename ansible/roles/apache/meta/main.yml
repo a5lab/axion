@@ -1,6 +1,0 @@
----
-
-dependencies:
-  - role: certbot
-    certbot__domains: "{{ inventory_hostname }}"
-    certbot__cert_type: "{{ apache__cert_type }}"

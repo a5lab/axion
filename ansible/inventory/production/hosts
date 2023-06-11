@@ -1,8 +1,0 @@
-[axion_server]
-axion.a5lab.com ansible_host=65.109.133.229
-
-[all:children]
-axion_server
-
-[all:vars]
-ansible_user=ansible

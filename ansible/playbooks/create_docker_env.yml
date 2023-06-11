@@ -1,8 +1,0 @@
----
-
-- name: create docker environment
-  hosts: localhost
-  connection: local
-  become: no
-  roles:
-    - role: ../roles/docker_env
