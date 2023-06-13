@@ -1,3 +1,30 @@
+$(document).ready(function () {
+  $('#filter-nav').click(function (event) {
+    $('#filter-form').toggle();
+  });
+});
+
+$(document).ready(function () {
+  if ($('#filterByPrimary').length) {
+    if ($('#filterByPrimary').is(':checked')){
+      $('#primary').remove('disabled')
+    } else {
+      $('#primary').attr('disabled', 'disabled')
+    }
+  }
+});
+
+$(document).ready(function () {
+  if ($('#filterByActive').length) {
+    if ($('#filterByActive').is(':checked')){
+      $('#active').remove('disabled')
+    } else {
+      $('#active').attr('disabled', 'disabled')
+    }
+  }
+});
+
+/*
 document.addEventListener('DOMContentLoaded', () => {
   function showFilter() {
     var filterNav = document.getElementById('filter-nav');
@@ -45,31 +72,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   activationCheckbox();
-});
-/*
-$(document).ready(function () {
-  $('#filter-nav').click(function (event) {
-    $('#filter-form').toggle();
-  });
-});
-
-$(document).ready(function () {
-  if ($('#filterByPrimary').length) {
-    if ($('#filterByPrimary').is(':checked')){
-      $('#primary').remove('disabled')
-    } else {
-      $('#primary').attr('disabled', 'disabled')
-    }
-  }
-});
-
-$(document).ready(function () {
-  if ($('#filterByActive').length) {
-    if ($('#filterByActive').is(':checked')){
-      $('#active').remove('disabled')
-    } else {
-      $('#active').attr('disabled', 'disabled')
-    }
-  }
 });
 */
