@@ -1,11 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-  function x() {
-    $('#filter-nav').click(function ( event ) {
-      $('#filter-form').toggle();
+  function showFilter() {
+    var filterNav = document.getElementById('filter-nav');
+    var filterForm = document.getElementById('filter-form');
+    (filterNav).click(function ( event ) {
+      (filterForm).toggle();
     });
   }
-  function activationCheckbox() {
+  showFilter();
+});
 
+document.addEventListener('DOMContentLoaded', () => {
+  function activationCheckbox() {
     var primary = document.getElementById('primary');
     var filter = document.getElementById('filterByPrimary');
     var checkingExist = document.body.contains(filter);
@@ -19,9 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
          primary.setAttribute('disabled', 'disabled');
        }
     }
+  }
+  activationCheckbox();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  function activationCheckbox() {
     var active = document.getElementById('active');
-    filter = document.getElementById('filterByActive');
-    checkingExist = document.body.contains(filter);
+    var filter = document.getElementById('filterByActive');
+    var checkingExist = document.body.contains(filter);
 
     // Existence check
     if (checkingExist == true) {
@@ -33,29 +44,32 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-  x();
   activationCheckbox();
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-  ( function () {
-    $('#filter-nav').click(function (event) {
-      $('#filter-form').toggle();
-      });
+/*
+$(document).ready(function () {
+  $('#filter-nav').click(function (event) {
+    $('#filter-form').toggle();
   });
+});
 
+$(document).ready(function () {
   if ($('#filterByPrimary').length) {
-    if ($('#filterByPrimary')[0].checked){
-      $('#primary')[0].removeAttribute('disabled')
+    if ($('#filterByPrimary').is(':checked')){
+      $('#primary').remove('disabled')
     } else {
-      $('#primary')[0].setAttribute('disabled', 'disabled')
-    }
-  }
-  if ($('#filterByActive').length) {
-    if ($('#filterByActive')[0].checked){
-      $('#active')[0].removeAttribute('disabled')
-    } else {
-      $('#active')[0].setAttribute('disabled', 'disabled')
+      $('#primary').attr('disabled', 'disabled')
     }
   }
 });
+
+$(document).ready(function () {
+  if ($('#filterByActive').length) {
+    if ($('#filterByActive').is(':checked')){
+      $('#active').remove('disabled')
+    } else {
+      $('#active').attr('disabled', 'disabled')
+    }
+  }
+});
+*/
