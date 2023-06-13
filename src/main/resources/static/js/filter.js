@@ -1,9 +1,16 @@
+/*
+ * Helper that show/hide filter.
+ * Helper assumes only one filter per page.
+ */
 $(document).ready(function () {
   $('#filter-nav').click(function (event) {
     $('#filter-form').toggle();
   });
 });
 
+/*
+ * Helper that ...
+ */
 $(document).ready(function () {
   if ($('#filterByPrimary').length) {
     if ($('#filterByPrimary').is(':checked')){
@@ -14,6 +21,9 @@ $(document).ready(function () {
   }
 });
 
+/*
+ * Helper that ...
+ */
 $(document).ready(function () {
   if ($('#filterByActive').length) {
     if ($('#filterByActive').is(':checked')){
