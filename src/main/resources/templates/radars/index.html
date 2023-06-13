@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
-<html th:replace="~{layouts/radar :: radar(~{::title}, ~{::meta}, ~{::script}, ~{:: #content})}"
+<html th:replace="~{layouts/radar :: radar(~{::title}, ~{::meta}, ~{}, ~{:: #content})}"
       xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Dashboard title</title>
     <meta name="description" content="Page description"/>
     <meta name="keywords" content="HTML, CSS, JavaScript">
-    <script th:src="@{/js/filter.min.js}"></script>
   </head>
   <body>
     <div id="content">
