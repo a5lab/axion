@@ -17,9 +17,14 @@ public class ViewAttributesConfiguration implements WebMvcConfigurer {
   @Value("${application.keys.google_analytics}")
   private String googleAnalytics;
 
+  @Value("${application.keys.yandex_metrika}")
+  private String yandexMetrika;
+
   private static final String VIEW_SERVLET_PATH_ATTRIBUTE = "servletPath";
 
   private static final String VIEW_GOOGLE_ANALYTICS_ATTRIBUTE = "googleAnalytics";
+
+  private static final String VIEW_YANDEX_METRIKA_ATTRIBUTE = "yandexMetrika";
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
@@ -37,6 +42,12 @@ public class ViewAttributesConfiguration implements WebMvcConfigurer {
           if (!googleAnalytics.isEmpty() && !googleAnalytics.trim().isBlank()) {
             modelAndView.addObject(VIEW_GOOGLE_ANALYTICS_ATTRIBUTE, googleAnalytics);
           }
+
+          // Add a Yandex Metrika
+          if (!yandexMetrika.isEmpty() && !yandexMetrika.trim().isBlank()) {
+            modelAndView.addObject(VIEW_YANDEX_METRIKA_ATTRIBUTE, yandexMetrika);
+          }
+
         }
       }
     });

@@ -146,6 +146,7 @@ application:
   version: '@project.version@'
   keys:
     google_analytics:
+    yandex_metrika:
   paging:
     page: 1
     size: 10
