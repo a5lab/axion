@@ -2,7 +2,7 @@
   <div class="filter-sort">
     <a class="mb-3 color-blue-primary" href="#" id="filter-nav">Filter</a>
   </div>
-  <form action="#" class="mb-3" id="filter-form" method="get" th:action="@{/radars}" th:object="${radarFilter}">
+  <form action="#" class="mb-3" id="filter-form" method="get" style="display: none;" th:action="@{/radars}" th:object="${radarFilter}">
     <div th:if="${#fields.hasAnyErrors()}">
       <ul>
         <li th:each="error : ${#fields.allErrors()}" th:text="${error}"/>

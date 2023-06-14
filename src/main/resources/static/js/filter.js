@@ -9,7 +9,8 @@ $(document).ready(function () {
 });
 
 /*
- * Helper that ...
+ * Helper assumes the presence of a filter checkbox on the page.
+ * Helper checks the status of the filter when the page is loaded.
  */
 $(document).ready(function () {
   if ($('#filterByPrimary').length) {
@@ -22,7 +23,8 @@ $(document).ready(function () {
 });
 
 /*
- * Helper that ...
+ * Helper assumes the presence of a filter checkbox on the page.
+ * Helper checks the status of the filter when the page is loaded.
  */
 $(document).ready(function () {
   if ($('#filterByActive').length) {
