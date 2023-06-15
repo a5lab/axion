@@ -18,7 +18,7 @@
     <span class="error-field-wrapper" th:errors="*{filterByPrimary}"
           th:if="${#fields.hasErrors('filterByPrimary')}"></span>
 
-    <input class="check-wrapper me-1" disabled="true" id="primary" th:field="*{primary}" type="checkbox">
+    <input class="check-wrapper me-1" id="primary" th:field="*{primary}" type="checkbox">
     <label for="primary">Primary</label>
     <span class="error-field-wrapper" th:errors="*{primary}" th:if="${#fields.hasErrors('filterByPrimary')}"></span>
 
