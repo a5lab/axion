@@ -101,7 +101,7 @@ public class WizardServiceTest extends AbstractServiceTests {
     Mockito.verify(ringService, Mockito.times(2)).findByTitle(any());
     Mockito.verify(segmentService, Mockito.times(4)).save(any());
     Mockito.verify(segmentService, Mockito.times(2)).findByTitle(any());
-    Mockito.verify(technologyService, Mockito.times(2)).findByTitle(any());
+    Mockito.verify(technologyService, Mockito.times(4)).findByTitle(any());
     Mockito.verify(technologyBlipService, Mockito.times(2)).save(any());
   }
 }

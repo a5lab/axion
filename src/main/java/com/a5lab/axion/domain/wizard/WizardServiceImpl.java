@@ -44,6 +44,7 @@ public class WizardServiceImpl implements WizardService {
     this.createRadar(wizardDto);
     this.createRings();
     this.createSegments();
+    this.createTechnologies();
     this.createTechnologyBlips();
     this.radarDto.setActive(true);
     this.radarService.save(this.radarDto);
@@ -135,6 +136,29 @@ public class WizardServiceImpl implements WizardService {
       segmentDto.setPosition(Integer.parseInt(record[2]));
       segmentDto.setActive(true);
       segmentService.save(segmentDto);
+    }
+  }
+
+  private void createTechnologies() throws Exception {
+    // Read technology_blips
+    URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/technologies_en.csv");
+    String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
+        .collect(Collectors.joining("\n"));
+
+    String[] record = null;
+    CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))
+        .withCSVParser(new CSVParserBuilder().withSeparator('|').build())
+        .withSkipLines(1).build();
+    while ((record = csvReader.readNext()) != null) {
+      TechnologyDto technologyDto = new TechnologyDto();
+      technologyDto.setTitle(record[0]);
+      technologyDto.setWebsite(record[1]);
+      technologyDto.setDescription(record[2]);
+
+      // Create only if not exists
+      if (technologyService.findByTitle(technologyDto.getTitle()).isEmpty()) {
+        technologyDto = technologyService.save(technologyDto);
+      }
     }
   }
 
