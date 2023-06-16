@@ -41,6 +41,12 @@ public class WizardServiceImpl implements WizardService {
   @Override
   @Transactional
   public void createRadarEnv(WizardDto wizardDto) throws Exception {
+    RadarProcessorFactory radarProcessorFactory = new RadarProcessorFactory();
+    RadarProcessor radarProcessor = radarProcessorFactory.create(wizardDto.getRadarType());
+    radarProcessor.process();
+
+
+    /*
     this.createRadar(wizardDto);
     this.createRings();
     this.createSegments();
@@ -48,6 +54,7 @@ public class WizardServiceImpl implements WizardService {
     this.createTechnologyBlips();
     this.radarDto.setActive(true);
     this.radarService.save(this.radarDto);
+     */
 
     /*
     switch (radars.getRadarType().getCode()) {
