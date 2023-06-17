@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.wizard;
+package com.a5lab.axion.domain.wizard.processors;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,21 +9,30 @@ import java.util.stream.Collectors;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.util.ResourceUtils;
 
 import com.a5lab.axion.domain.radar.RadarDto;
+import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.wizard.WizardDto;
 
 public abstract class AbstractRadarProcessor implements RadarProcessor {
 
-  protected WizardServiceImpl wizardService;
+  protected final ApplicationContext applicationContext;
 
-  protected WizardDto wizardDto;
+  protected final RadarService radarService;
+
+  protected final WizardDto wizardDto;
 
   protected RadarDto radarDto;
 
-  public AbstractRadarProcessor(WizardServiceImpl wizardService, WizardDto wizardDto) {
-    this.wizardService = wizardService;
+
+  public AbstractRadarProcessor(ApplicationContext applicationContext, WizardDto wizardDto) {
+    this.applicationContext = applicationContext;
     this.wizardDto = wizardDto;
+
+    // Create radar service base on application context
+    radarService =  applicationContext.getBean(RadarService.class);
   }
 
   public void createRadar() throws Exception {
@@ -42,14 +51,14 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
       radar.setRadarTypeTitle(wizardDto.getRadarType().getTitle());
       radar.setTitle(record[0]);
       radar.setDescription(record[1]);
-      radar.setPrimary(Boolean.valueOf(record[2]));
-      radar.setActive(Boolean.valueOf(record[3]));
-      this.radarDto = wizardService.radarService.save(radar);
+      radar.setPrimary(Boolean.parseBoolean(record[2]));
+      radar.setActive(Boolean.parseBoolean(record[3]));
+      this.radarDto = this.radarService.save(radar);
     }
   }
 
-  public void activateRadar() throws Exception {
+  public void activateRadar() {
     this.radarDto.setActive(true);
-    this.wizardService.radarService.save(this.radarDto);
+    this.radarService.save(this.radarDto);
   }
 }

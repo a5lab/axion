@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.wizard;
+package com.a5lab.axion.domain.wizard.processors;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,17 +9,38 @@ import java.util.stream.Collectors;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.util.ResourceUtils;
 
 import com.a5lab.axion.domain.ring.RingDto;
+import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
+import com.a5lab.axion.domain.segment.SegmentService;
 import com.a5lab.axion.domain.technology.TechnologyDto;
+import com.a5lab.axion.domain.technology.TechnologyService;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
+import com.a5lab.axion.domain.wizard.WizardDto;
 
 public class TechnologyRadarProcessor extends AbstractRadarProcessor {
 
-  public TechnologyRadarProcessor(WizardServiceImpl wizardService, WizardDto wizardDto) {
-    super(wizardService, wizardDto);
+  private final RingService ringService;
+
+  private final SegmentService segmentService;
+
+  private final TechnologyService technologyService;
+
+  private final TechnologyBlipService technologyBlipService;
+  
+
+  public TechnologyRadarProcessor(ApplicationContext applicationContext, WizardDto wizardDto) {
+    super(applicationContext, wizardDto);
+
+    // Create services base on application context
+    ringService =  applicationContext.getBean(RingService.class);
+    segmentService =  applicationContext.getBean(SegmentService.class);
+    technologyService =  applicationContext.getBean(TechnologyService.class);
+    technologyBlipService =  applicationContext.getBean(TechnologyBlipService.class);
   }
 
   @Override
@@ -51,7 +72,7 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       ringDto.setPosition(Integer.parseInt(record[2]));
       ringDto.setColor(record[3]);
       ringDto.setActive(true);
-      this.wizardService.ringService.save(ringDto);
+      this.ringService.save(ringDto);
     }
   }
 
@@ -73,7 +94,7 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       segmentDto.setDescription(record[1]);
       segmentDto.setPosition(Integer.parseInt(record[2]));
       segmentDto.setActive(true);
-      this.wizardService.segmentService.save(segmentDto);
+      this.segmentService.save(segmentDto);
     }
   }
 
@@ -94,8 +115,8 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       technologyDto.setDescription(record[2]);
 
       // Create only if not exists
-      if (this.wizardService.technologyService.findByTitle(technologyDto.getTitle()).isEmpty()) {
-        technologyDto = this.wizardService.technologyService.save(technologyDto);
+      if (this.technologyService.findByTitle(technologyDto.getTitle()).isEmpty()) {
+        this.technologyService.save(technologyDto);
       }
     }
   }
@@ -119,16 +140,16 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
       technologyBlipDto.setRadarId(this.radarDto.getId());
       technologyBlipDto.setRadarTitle(this.radarDto.getTitle());
-      RingDto ringDto = this.wizardService.ringService.findByTitle(ringTitle).get();
+      RingDto ringDto = this.ringService.findByTitle(ringTitle).get();
       technologyBlipDto.setRingId(ringDto.getId());
       technologyBlipDto.setRingTitle(ringDto.getTitle());
-      SegmentDto segmentDto = this.wizardService.segmentService.findByTitle(segmentTitle).get();
+      SegmentDto segmentDto = this.segmentService.findByTitle(segmentTitle).get();
       technologyBlipDto.setSegmentId(segmentDto.getId());
       technologyBlipDto.setSegmentTitle(segmentDto.getTitle());
-      TechnologyDto technologyDto = this.wizardService.technologyService.findByTitle(technologyTitle).get();
+      TechnologyDto technologyDto = this.technologyService.findByTitle(technologyTitle).get();
       technologyBlipDto.setTechnologyId(technologyDto.getId());
       technologyBlipDto.setTechnologyTitle(technologyDto.getTitle());
-      this.wizardService.technologyBlipService.save(technologyBlipDto);
+      this.technologyBlipService.save(technologyBlipDto);
     }
   }
 }
