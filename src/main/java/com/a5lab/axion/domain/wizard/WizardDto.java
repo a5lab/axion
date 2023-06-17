@@ -8,14 +8,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class WizardDto {
+
   @NotNull
-  private RadarTypeDto radarType;
+  private long radarTypeId;
+
+  private String radarTypeCode;
+
+  private String radarTypeTitle;
 }

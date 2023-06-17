@@ -47,8 +47,8 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
         .withSkipLines(1).build();
     while ((record = csvReader.readNext()) != null) {
       RadarDto radar = new RadarDto();
-      radar.setRadarTypeId(wizardDto.getRadarType().getId());
-      radar.setRadarTypeTitle(wizardDto.getRadarType().getTitle());
+      radar.setRadarTypeId(wizardDto.getRadarTypeId());
+      radar.setRadarTypeTitle(wizardDto.getRadarTypeTitle());
       radar.setTitle(record[0]);
       radar.setDescription(record[1]);
       radar.setPrimary(Boolean.parseBoolean(record[2]));

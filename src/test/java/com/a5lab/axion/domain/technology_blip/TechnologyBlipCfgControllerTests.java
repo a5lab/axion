@@ -35,7 +35,6 @@ import com.a5lab.axion.domain.technology.TechnologyService;
 import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(TechnologyBlipCfgController.class)
-
 public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   @MockBean
   private TechnologyBlipService technologyBlipService;

@@ -45,7 +45,9 @@ public class WizardServiceTest extends AbstractServiceTests {
     radarTypeDto.setId(1L);
     radarTypeDto.setCode(RadarType.CAPABILITY_RADAR);
 
-    final WizardDto wizardDto = new WizardDto(radarTypeDto);
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(radarTypeDto.getId());
+    wizardDto.setRadarTypeCode(radarTypeDto.getCode());
 
     UnsupportedOperationException exception =
         catchThrowableOfType(() -> wizardService.createRadarEnv(wizardDto),
@@ -59,7 +61,9 @@ public class WizardServiceTest extends AbstractServiceTests {
     radarTypeDto.setId(1L);
     radarTypeDto.setCode(RadarType.PRACTICE_RADAR);
 
-    final WizardDto wizardDto = new WizardDto(radarTypeDto);
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(radarTypeDto.getId());
+    wizardDto.setRadarTypeCode(radarTypeDto.getCode());
 
     UnsupportedOperationException exception =
         catchThrowableOfType(() -> wizardService.createRadarEnv(wizardDto),
@@ -73,7 +77,9 @@ public class WizardServiceTest extends AbstractServiceTests {
     radarTypeDto.setId(1L);
     radarTypeDto.setCode(RadarType.PROCESS_RADAR);
 
-    final WizardDto wizardDto = new WizardDto(radarTypeDto);
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(radarTypeDto.getId());
+    wizardDto.setRadarTypeCode(radarTypeDto.getCode());
 
     UnsupportedOperationException exception =
         catchThrowableOfType(() -> wizardService.createRadarEnv(wizardDto),
@@ -88,7 +94,9 @@ public class WizardServiceTest extends AbstractServiceTests {
     radarTypeDto.setId(1L);
     radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
 
-    final WizardDto wizardDto = new WizardDto(radarTypeDto);
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(radarTypeDto.getId());
+    wizardDto.setRadarTypeCode(radarTypeDto.getCode());
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(3L);
