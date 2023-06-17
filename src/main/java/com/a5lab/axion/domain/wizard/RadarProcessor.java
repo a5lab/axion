@@ -1,5 +1,5 @@
 package com.a5lab.axion.domain.wizard;
 
 public interface RadarProcessor {
-  void process();
+  void process() throws Exception;
 }
