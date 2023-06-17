@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeService;
 import com.a5lab.axion.utils.FlashMessages;
 
 
@@ -26,7 +27,9 @@ public class WizardControllerTests extends AbstractControllerTests {
   @MockBean
   private WizardService wizardService;
 
-  /*
+  @MockBean
+  private RadarTypeService radarTypeService;
+
   @Test
   public void shouldAddRadar() throws Exception {
     MvcResult result = mockMvc.perform(get("/wizard/add"))
@@ -85,5 +88,4 @@ public class WizardControllerTests extends AbstractControllerTests {
 
     Mockito.verify(wizardService).createRadarEnv(any());
   }
-   */
 }
