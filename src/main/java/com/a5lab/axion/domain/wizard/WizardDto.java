@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.wizard;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.ToString;
 public class WizardDto {
 
   @NotNull
+  @Min(1)
   private long radarTypeId;
 
   private String radarTypeCode;

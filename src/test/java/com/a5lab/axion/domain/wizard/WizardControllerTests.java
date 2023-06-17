@@ -50,7 +50,7 @@ public class WizardControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(wizardDto.getRadarTypeId()))
+            .param("radarTypeId", String.valueOf(wizardDto.getRadarTypeId()))
             .sessionAttr("wizard", wizardDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/home"))
@@ -76,14 +76,15 @@ public class WizardControllerTests extends AbstractControllerTests {
     wizardDto.setRadarTypeId(10L);
     wizardDto.setRadarTypeCode(RadarType.TECHNOLOGY_RADAR);
 
-    Mockito.doThrow(Exception.class).when(wizardService).createRadarEnv(any());
+    Mockito.doThrow(new UnsupportedOperationException("Not supported yet.")).when(wizardService).createRadarEnv(any());
 
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(wizardDto.getRadarTypeId())))
+            .param("radarTypeId", String.valueOf(wizardDto.getRadarTypeId())))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/home"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to create radar due to error."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.ERROR, "Unable to create radar due to error: not supported yet."))
         .andReturn();
 
     Mockito.verify(wizardService).createRadarEnv(any());
