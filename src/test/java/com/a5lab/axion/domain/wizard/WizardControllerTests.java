@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 import com.a5lab.axion.utils.FlashMessages;
 
@@ -43,17 +42,15 @@ public class WizardControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldCreateRadar() throws Exception {
-    final RadarTypeDto radarTypeDto = new RadarTypeDto();
-    radarTypeDto.setId(10L);
-    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
-
-    final WizardDto wizardDto = new WizardDto(radarTypeDto);
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(10L);
+    wizardDto.setRadarTypeCode(RadarType.TECHNOLOGY_RADAR);
 
     Mockito.doAnswer((i) -> null).when(wizardService).createRadarEnv(any());
 
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(wizardDto.getRadarType().getId()))
+            .param("radarTypeId", String.valueOf(wizardDto.getRadarTypeId()))
             .sessionAttr("wizard", wizardDto))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/home"))
@@ -75,20 +72,19 @@ public class WizardControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldThrowExceptionToCreateRadar() throws Exception {
-    final RadarTypeDto radarTypeDto = new RadarTypeDto();
-    radarTypeDto.setId(10L);
-    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(10L);
+    wizardDto.setRadarTypeCode(RadarType.TECHNOLOGY_RADAR);
 
-    final WizardDto wizardDto = new WizardDto(radarTypeDto);
-
-    Mockito.doThrow(Exception.class).when(wizardService).createRadarEnv(any());
+    Mockito.doThrow(new UnsupportedOperationException("Not supported yet.")).when(wizardService).createRadarEnv(any());
 
     MvcResult result = mockMvc.perform(post("/wizard/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(wizardDto.getRadarType().getId())))
+            .param("radarTypeId", String.valueOf(wizardDto.getRadarTypeId())))
         .andExpect(status().is3xxRedirection())
         .andExpect(view().name("redirect:/home"))
-        .andExpect(MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Unable to create radar due to error."))
+        .andExpect(MockMvcResultMatchers.flash()
+            .attribute(FlashMessages.ERROR, "Unable to create radar due to error: not supported yet."))
         .andReturn();
 
     Mockito.verify(wizardService).createRadarEnv(any());

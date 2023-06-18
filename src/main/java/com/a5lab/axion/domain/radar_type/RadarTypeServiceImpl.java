@@ -38,4 +38,9 @@ public class RadarTypeServiceImpl implements RadarTypeService {
     return radarTypeRepository.findById(id).map(radarTypeMapper::toDto);
   }
 
+  @Override
+  @Transactional(readOnly = true)
+  public Optional<RadarTypeDto> findByCode(String code) {
+    return radarTypeRepository.findByCode(code).map(radarTypeMapper::toDto);
+  }
 }
