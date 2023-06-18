@@ -50,7 +50,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindAllTechnologiesWithFilter() {
+  void shouldFindAllTechnologiesWithEmptyFilter() {
     final Technology technology = new Technology();
     technology.setId(10L);
     technology.setTitle("My technology");

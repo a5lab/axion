@@ -56,7 +56,7 @@ class RadarTypeServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindAllRadarTypesWithFilter() {
+  void shouldFindAllRadarTypesWithEmptyFilter() {
     final RadarType radarType = new RadarType();
     radarType.setId(10L);
     radarType.setTitle("Radar type title");
