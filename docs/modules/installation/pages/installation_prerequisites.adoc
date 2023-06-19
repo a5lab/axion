@@ -15,7 +15,8 @@ If you desire to build the radar from sources make sure that you have installed:
 
 [cols="1,2,2",options="header"]
 |===
-|Package |Version |Download 
+|Package |Version |Download
+|Node.js | 18 and higher | xref:https://nodejs.org/en/[nodejs.org]
 |Apache Maven | 3.8.7 and higher | xref:https://maven.apache.org/download.cgi[maven.apache.org]
 |Node.js | 18 and higher | xref:https://nodejs.org/en/[nodejs.org]
 |uglifycss | 0.0.29 and higher | use npm package manager for download/update
