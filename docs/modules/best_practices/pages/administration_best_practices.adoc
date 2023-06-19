@@ -9,7 +9,7 @@ Some advise on how to keep your work alive.
 * Monitoring and reporting are expensive operations that can negatively affect your repository
 * Offload reporting to external tools to minimize the impact on production servers
 * Use these endpoints for the real-time status of the server
-* Consider using the xref:https://prometheus.io/[Prometheus] endpoint as a data source for other tools like Grafana or Elastic
+* Consider using the https://prometheus.io/[Prometheus] endpoint as a data source for other tools like Grafana or Elastic
 
 ==== Keep the audit log enabled
 
