@@ -477,7 +477,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService)
         .save(any(TechnologyBlipDto.class));
 
-    MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
+    MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radarId", String.valueOf(technologyBlipDto.getRadarId()))
             .param("technologyId", String.valueOf(technologyBlipDto.getTechnologyId()))
