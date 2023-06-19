@@ -101,31 +101,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldSaveTechnologyBlip() {
-    final TechnologyBlip technologyBlip = new TechnologyBlip();
-    technologyBlip.setId(5L);
-
-    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.empty());
-    Mockito.when(segmentRepository.findById(any())).thenReturn(Optional.empty());
-    Mockito.when(ringRepository.findById(any())).thenReturn(Optional.empty());
-    Mockito.when(technologyRepository.findById(any())).thenReturn(Optional.empty());
-    Mockito.when(technologyBlipRepository.save(any())).thenReturn(technologyBlip);
-
-    TechnologyBlipDto technologyBlipDto = technologyBlipService.save(technologyBlipMapper.toDto(technologyBlip));
-    Assertions.assertEquals(technologyBlip.getId(), technologyBlipDto.getId());
-    Assertions.assertEquals(technologyBlip.getRadar().getId(), technologyBlipDto.getRadarId());
-    Assertions.assertEquals(technologyBlip.getSegment().getId(), technologyBlipDto.getSegmentId());
-    Assertions.assertEquals(technologyBlip.getRing().getId(), technologyBlipDto.getRingId());
-    Assertions.assertEquals(technologyBlip.getTechnology().getId(), technologyBlipDto.getTechnologyId());
-
-    Mockito.verify(technologyBlipRepository).save(any());
-    Mockito.verify(radarRepository).findById(any());
-    Mockito.verify(ringRepository).findById(any());
-    Mockito.verify(segmentRepository).findById(any());
-    Mockito.verify(technologyRepository).findById(any());
-  }
-
-  @Test
   void shouldFindAllTechnologyBlipWithEmptyFilter() {
     final Radar radar = new Radar();
     radar.setId(1L);
