@@ -39,7 +39,7 @@ public class RadarType extends AbstractAuditable {
   public static final String CAPABILITY_RADAR = "capability";
   public static final String PRACTICE_RADAR = "practice";
   public static final String PROCESS_RADAR = "process";
-  public static final String TECHNOLOGY_RADAR = "technologies";
+  public static final String TECHNOLOGY_RADAR = "technology";
 
 
   @Id

@@ -1,9 +1,0 @@
----
-
-- name: clean docker environent
-  hosts: localhost
-  connection: local
-  become: no
-  roles:
-    - role: ../roles/docker_env
-      state: absent

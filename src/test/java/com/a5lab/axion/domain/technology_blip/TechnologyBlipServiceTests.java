@@ -126,7 +126,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindAllTechnologyBlipWithFilter() {
+  void shouldFindAllTechnologyBlipWithEmptyFilter() {
     final Radar radar = new Radar();
     radar.setId(1L);
     radar.setTitle("My radar");

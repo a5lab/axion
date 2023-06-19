@@ -1,6 +1,0 @@
----
-
-- name: install build_env packages
-  package:
-    name: "{{ build_env__package_map[ansible_os_family][ansible_distribution][ansible_distribution_major_version] }}"
-    state: present

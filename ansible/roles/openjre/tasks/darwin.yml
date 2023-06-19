@@ -1,7 +1,0 @@
----
-
-- name: install openjre packages
-  homebrew:
-    name: "{{ openjre__package_map[ansible_os_family] }}"
-    state: present
-    path: "{{ openjre__brew_bin_path }}"

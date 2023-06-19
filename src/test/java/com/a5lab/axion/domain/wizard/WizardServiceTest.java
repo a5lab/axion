@@ -1,9 +1,11 @@
 package com.a5lab.axion.domain.wizard;
 
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +40,63 @@ public class WizardServiceTest extends AbstractServiceTests {
   private WizardService wizardService;
 
   @Test
-  void shouldCreateRadarEnv() throws Exception {
+  void shouldCreateCapabilityRadarEnv() {
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(1L);
+    radarTypeDto.setCode(RadarType.CAPABILITY_RADAR);
+
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(radarTypeDto.getId());
+    wizardDto.setRadarTypeCode(radarTypeDto.getCode());
+
+    UnsupportedOperationException exception =
+        catchThrowableOfType(() -> wizardService.createRadarEnv(wizardDto),
+            UnsupportedOperationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+  }
+
+  @Test
+  void shouldCreatePracticeRadarEnv() {
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(1L);
+    radarTypeDto.setCode(RadarType.PRACTICE_RADAR);
+
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(radarTypeDto.getId());
+    wizardDto.setRadarTypeCode(radarTypeDto.getCode());
+
+    UnsupportedOperationException exception =
+        catchThrowableOfType(() -> wizardService.createRadarEnv(wizardDto),
+            UnsupportedOperationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+  }
+
+  @Test
+  void shouldCreateProcessRadarEnv() {
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(1L);
+    radarTypeDto.setCode(RadarType.PROCESS_RADAR);
+
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(radarTypeDto.getId());
+    wizardDto.setRadarTypeCode(radarTypeDto.getCode());
+
+    UnsupportedOperationException exception =
+        catchThrowableOfType(() -> wizardService.createRadarEnv(wizardDto),
+            UnsupportedOperationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+  }
+
+
+  @Test
+  void shouldCreateTechnologyRadarEnv() throws Exception {
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
     radarTypeDto.setId(1L);
     radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
 
-    final WizardDto wizardDto = new WizardDto(radarTypeDto);
+    final WizardDto wizardDto = new WizardDto();
+    wizardDto.setRadarTypeId(radarTypeDto.getId());
+    wizardDto.setRadarTypeCode(radarTypeDto.getCode());
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(3L);
@@ -101,7 +154,7 @@ public class WizardServiceTest extends AbstractServiceTests {
     Mockito.verify(ringService, Mockito.times(2)).findByTitle(any());
     Mockito.verify(segmentService, Mockito.times(4)).save(any());
     Mockito.verify(segmentService, Mockito.times(2)).findByTitle(any());
-    Mockito.verify(technologyService, Mockito.times(2)).findByTitle(any());
+    Mockito.verify(technologyService, Mockito.times(4)).findByTitle(any());
     Mockito.verify(technologyBlipService, Mockito.times(2)).save(any());
   }
 }

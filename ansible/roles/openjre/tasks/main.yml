@@ -1,4 +1,0 @@
----
-
-- name: import openjre for specific os
-  include_tasks: "{{ ansible_system | lower }}.yml"

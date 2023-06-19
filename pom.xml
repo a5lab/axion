@@ -182,7 +182,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.89</minimum>
+                                            <minimum>0.90</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -337,6 +337,24 @@
                                 <argument>application.js</argument>
                                 <argument>-o</argument>
                                 <argument>application.min.js</argument>
+                                <argument>-c</argument>
+                                <argument>-m</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>Minimize filter.js files</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>uglifyjs</executable>
+                            <workingDirectory>${basedir}/src/main/resources/static/js/</workingDirectory>
+                            <arguments>
+                                <argument>filter.js</argument>
+                                <argument>-o</argument>
+                                <argument>filter.min.js</argument>
                                 <argument>-c</argument>
                                 <argument>-m</argument>
                             </arguments>

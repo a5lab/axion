@@ -52,7 +52,7 @@ class RadarServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindAllRadarsWithFilter() {
+  void shouldFindAllRadarsWithEmptyFilter() {
     final Radar radar = new Radar();
     radar.setId(10L);
     radar.setRadarType(null);
@@ -65,6 +65,40 @@ class RadarServiceTests extends AbstractServiceTests {
         .thenReturn(page);
 
     RadarFilter radarFilter = new RadarFilter();
+    Pageable pageable = PageRequest.of(0, 10, Sort.by("title, asc"));
+    Page<RadarDto> radarDtoPage = radarService.findAll(radarFilter, pageable);
+    Assertions.assertEquals(1, radarDtoPage.getSize());
+    Assertions.assertEquals(0, radarDtoPage.getNumber());
+    Assertions.assertEquals(1, radarDtoPage.getTotalPages());
+    Assertions.assertEquals(radarDtoPage.iterator().next().getId(), radar.getId());
+    Assertions.assertEquals(radarDtoPage.iterator().next().getTitle(), radar.getTitle());
+    Assertions.assertEquals(radarDtoPage.iterator().next().getDescription(), radar.getDescription());
+
+    // Mockito.verify(radarRepository).findAll(Specification.allOf((root, query, criteriaBuilder) -> null), pageable);
+  }
+
+  @Test
+  void shouldFindAllRadarsWithFullFilter() {
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(null);
+    radar.setTitle("Radar title");
+    radar.setDescription("Radar Description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
+    List<Radar> radarList = List.of(radar);
+    Page<Radar> page = new PageImpl<>(radarList);
+    Mockito.when(radarRepository.findAll(ArgumentMatchers.<Specification<Radar>>any(), any(Pageable.class)))
+        .thenReturn(page);
+
+    RadarFilter radarFilter = new RadarFilter();
+    radarFilter.setTitle(radar.getTitle());
+    radarFilter.setFilterByPrimary(true);
+    radarFilter.setPrimary(true);
+    radarFilter.setFilterByActive(true);
+    radarFilter.setActive(true);
+
     Pageable pageable = PageRequest.of(0, 10, Sort.by("title, asc"));
     Page<RadarDto> radarDtoPage = radarService.findAll(radarFilter, pageable);
     Assertions.assertEquals(1, radarDtoPage.getSize());

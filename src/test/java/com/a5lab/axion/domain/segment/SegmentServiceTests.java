@@ -57,7 +57,7 @@ class SegmentServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindAllSegmentsWithFilter() {
+  void shouldFindAllSegmentsWithEmptyFilter() {
     final Segment segment = new Segment();
     segment.setId(10L);
     segment.setRadar(null);

@@ -43,7 +43,7 @@ class TenantServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindAllTenantsWithFilter() {
+  void shouldFindAllTenantsWithEmptyFilter() {
     final Tenant tenant = new Tenant(10L, "My title", "My description");
 
     List<Tenant> tenantList = List.of(tenant);

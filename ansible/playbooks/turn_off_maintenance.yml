@@ -1,9 +1,0 @@
----
-
-- name: turn off maintenance
-  hosts: a5lab_server
-  become: yes
-  become_user: root
-  roles:
-    - role: ../roles/maintenance
-      state: absent
