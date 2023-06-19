@@ -131,6 +131,9 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <scm>
+        <developerConnection>scm:git:git@github.com:a5lab/axion.git</developerConnection>
+    </scm>
     <build>
         <plugins>
             <plugin>
