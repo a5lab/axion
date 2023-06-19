@@ -57,7 +57,7 @@ class RingServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindAllRingsWithFilter() {
+  void shouldFindAllRingsWithEmptyFilter() {
     final Ring ring = new Ring();
     ring.setId(10L);
     ring.setTitle("My title");

@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -17,6 +19,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.radar_type.RadarType;
+import com.a5lab.axion.domain.radar_type.RadarTypeDto;
+import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 import com.a5lab.axion.utils.FlashMessages;
 
@@ -32,6 +36,14 @@ public class WizardControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldAddRadar() throws Exception {
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setTitle("Radar type title");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
+    radarTypeDto.setDescription("Radar type description");
+
+    Mockito.when(radarTypeService.findByCode(radarTypeDto.getCode())).thenReturn(Optional.of(radarTypeDto));
+
     MvcResult result = mockMvc.perform(get("/wizard/add"))
         .andExpect(status().isOk())
         .andReturn();
@@ -42,9 +54,18 @@ public class WizardControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldCreateRadar() throws Exception {
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(10L);
+    radarTypeDto.setTitle("Radar type title");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
+    radarTypeDto.setDescription("Radar type description");
+
+    Mockito.when(radarTypeService.findById(radarTypeDto.getId())).thenReturn(Optional.of(radarTypeDto));
+
     final WizardDto wizardDto = new WizardDto();
-    wizardDto.setRadarTypeId(10L);
-    wizardDto.setRadarTypeCode(RadarType.TECHNOLOGY_RADAR);
+    wizardDto.setRadarTypeId(radarTypeDto.getId());
+    wizardDto.setRadarTypeCode(radarTypeDto.getCode());
+    wizardDto.setRadarTypeTitle(radarTypeDto.getTitle());
 
     Mockito.doAnswer((i) -> null).when(wizardService).createRadarEnv(any());
 

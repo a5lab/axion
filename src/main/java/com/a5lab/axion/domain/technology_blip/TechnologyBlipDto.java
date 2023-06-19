@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -24,6 +25,7 @@ public class TechnologyBlipDto {
   private Long id;
 
   @NotNull
+  @Min(1)
   @JsonProperty("radar_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
