@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.a5lab</groupId>
     <artifactId>axion</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0-SNAPSHOT</version>
     <name>axion</name>
     <description>Technical and business radar</description>
     <properties>
@@ -132,7 +132,7 @@
     </dependencyManagement>
     <scm>
         <developerConnection>scm:git:git@github.com:a5lab/axion.git</developerConnection>
-      <tag>v0.2.0</tag>
+      <tag>HEAD</tag>
   </scm>
     <build>
         <plugins>
