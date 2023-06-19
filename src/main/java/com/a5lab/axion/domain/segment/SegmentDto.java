@@ -31,6 +31,7 @@ public class SegmentDto {
   private Long id;
 
   @NotNull
+  @Min(1)
   @JsonProperty("radar_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
