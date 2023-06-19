@@ -62,6 +62,15 @@ Technical and business radar. Spring boot based application
 * the simple perfect should be used for commit message
 * the title and description should be provided, for example by command: git commit -m "title" -m "description"
 
+# GPG key configuration
+
+* gpg --full-gen-key
+* gpg --list-secret-keys --keyid-format long
+* gpg --armor --export "key-gen" for example gpg --armor --export 3AA5C34371567BD2
+* git config --global user.signingkey "key-gen"
+* git config --global commit.gpgSign true
+* git config --global tag.gpgSign true
+
 # Useful commands:
 
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
@@ -90,16 +99,12 @@ Technical and business radar. Spring boot based application
 * prune tags by command: git fetch --prune --prune-tags
 * run psql console by command: su - postgres and run psql
 
-# Inspired by 
+# Useful resources:
+
+* https://tooomm.github.io/github-release-stats/ to view GitHub statistics 
+
+# Inspired by
 
 * https://github.com/thoughtworks/build-your-own-radar
 * https://github.com/zalando/tech-radar
 
-# GPG key configuration
-
-* gpg --full-gen-key
-* gpg --list-secret-keys --keyid-format long
-* gpg --armor --export "key-gen" for example gpg --armor --export 3AA5C34371567BD2
-* git config --global user.signingkey "key-gen"
-* git config --global commit.gpgSign true
-* git config --global tag.gpgSign true
