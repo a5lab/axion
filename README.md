@@ -4,7 +4,7 @@ Technical and business radar. Spring boot based application
 
 # Release application
 * update version at antora.yml file
-* run command mvn release and provide information
+* run command mvn release:prepare and mvn release:perform
 * create archive by command: tar -zcvf Binaries.tar.gz axion*.jar
 * commit changes and create a new git tag
 * create a new release at GitHub and provide information
