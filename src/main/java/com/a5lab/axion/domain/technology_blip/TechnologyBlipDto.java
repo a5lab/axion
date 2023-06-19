@@ -32,6 +32,8 @@ public class TechnologyBlipDto {
   private long radarId;
   private String radarTitle;
 
+  @NotNull
+  @Min(1)
   @JsonProperty("technology_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -41,6 +43,8 @@ public class TechnologyBlipDto {
   private int technologyMoved;
   private boolean technologyActive;
 
+  @NotNull
+  @Min(1)
   @JsonProperty("segment_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -48,6 +52,8 @@ public class TechnologyBlipDto {
   private String segmentTitle;
   private int segmentPosition;
 
+  @NotNull
+  @Min(1)
   @JsonProperty("ring_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
