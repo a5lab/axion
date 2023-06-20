@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:fragment="account (title, metas, content)" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" th:fragment="account (title, metas, content)" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title th:replace="${title}">Layout title</title>
     <th:block th:insert="~{fragments/google_analytics.html}"/>
@@ -8,7 +8,7 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/yandex_metrika.html}"/>
-    <navbar th:insert="~{fragments/main_navbar.html}"></navbar>
+    <th:block th:replace="~{fragments/main_navbar.html}"/>
     <div th:replace="~{fragments/system_flash.html}"></div>
     <div class="container-fluid">
       <div class="row flex-nowrap">
@@ -19,6 +19,6 @@
         </div>
       </div>
     </div>
-    <footer th:insert="~{fragments/main_footer.html}"></footer>
+    <footer th:replace="~{fragments/main_footer.html}"></footer>
   </body>
 </html>
