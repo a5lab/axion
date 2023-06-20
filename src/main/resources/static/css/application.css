@@ -231,6 +231,10 @@ a.sidebar-link:hover {
   border-left: .3em solid transparent;
 }
 
+#filter-form {
+  display: none;
+}
+
 .filter-button {
   background: #0F054C;
   color: #FFFFFF;
