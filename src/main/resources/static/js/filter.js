@@ -9,30 +9,6 @@ $(document).ready(function () {
 });
 
 /*
- * Helper that show/hide filter on page load.
- * Helper assumes filter activation.
- */
-$(document).ready(function () {
-  if ($("#title").length) {
-    if ($("#website").length) {
-      if ($("#title").val().length >= 1 || $("#website").val().length >= 1) {
-        $('#filter-form').toggle();
-      }
-    } else {
-      if ($('#filterByPrimary').length || $('#filterByActive').length) {
-        if ( $("#title").val().length >= 1 || $('#filterByPrimary').is(':checked') || $('#filterByActive').is(':checked')) {
-          $('#filter-form').toggle();
-        }
-      } else {
-        if ($("#title").val().length >= 1) {
-          $('#filter-form').toggle();
-        }
-      }
-    }
-  }
-});
-
-/*
  * Helper checks the status of the filter when the page is loaded.
  * Helper assumes the presence of a filter checkbox on the page.
  */
