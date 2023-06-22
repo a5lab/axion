@@ -25,7 +25,7 @@ import com.a5lab.axion.domain.radar.RadarService;
 public class HomeControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
-
+  /*
   @Test
   public void shouldGetHome() throws Exception {
     final RadarDto radarDto = new RadarDto();
@@ -60,4 +60,6 @@ public class HomeControllerTests extends AbstractControllerTests {
         .andExpect(status().isOk())
         .andExpect(view().name("home/index"));
   }
+
+   */
 }

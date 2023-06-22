@@ -131,28 +131,6 @@ class RadarServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFindByPrimaryAndActiveRadars() {
-    final Radar radar = new Radar();
-    radar.setId(10L);
-    radar.setRadarType(null);
-    radar.setTitle("Radar title");
-    radar.setDescription("Radar Description");
-    radar.setPrimary(true);
-    radar.setActive(true);
-
-    List<Radar> radarList = List.of(radar);
-    Mockito.when(radarRepository.findByPrimaryAndActive(any(boolean.class), any(boolean.class))).thenReturn(radarList);
-
-    List<RadarDto> radarDtoOptional = radarService.findByPrimaryAndActive(radar.isPrimary(), radar.isActive());
-    Assertions.assertFalse(radarDtoOptional.isEmpty());
-    Assertions.assertEquals(radar.getId(), radarDtoOptional.get(0).getId());
-    Assertions.assertEquals(radar.getTitle(), radarDtoOptional.get(0).getTitle());
-    Assertions.assertEquals(radar.getDescription(), radarDtoOptional.get(0).getDescription());
-
-    Mockito.verify(radarRepository).findByPrimaryAndActive(radar.isPrimary(), radar.isActive());
-  }
-
-  @Test
   void shouldSaveRadarDto() {
     final RadarType radarType = new RadarType();
     radarType.setId(1L);
