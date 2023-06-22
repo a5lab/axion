@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -27,6 +26,7 @@ import com.a5lab.axion.domain.radar.RadarService;
 public class HomeControllerTests extends AbstractControllerTests {
   @MockBean
   private RadarService radarService;
+
   @Test
   public void shouldGetHome() throws Exception {
     final RadarDto radarDto = new RadarDto();
