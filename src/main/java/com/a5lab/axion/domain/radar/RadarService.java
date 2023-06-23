@@ -1,7 +1,6 @@
 package com.a5lab.axion.domain.radar;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -14,8 +13,6 @@ public interface RadarService {
   Page<RadarDto> findAll(RadarFilter radarFilter, Pageable pageable);
 
   Optional<RadarDto> findById(Long id);
-
-  List<RadarDto> findByPrimaryAndActive(boolean primary, boolean active);
 
   RadarDto save(RadarDto radarDto);
 

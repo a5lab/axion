@@ -65,13 +65,6 @@ public class RadarServiceImpl implements RadarService {
   }
 
   @Override
-  @Transactional(readOnly = true)
-  public List<RadarDto> findByPrimaryAndActive(boolean primary, boolean active) {
-    return radarRepository.findByPrimaryAndActive(primary, active)
-        .stream().map(radarMapper::toDto).collect(Collectors.toList());
-  }
-
-  @Override
   @Transactional
   public RadarDto save(RadarDto radarDto) {
     return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
