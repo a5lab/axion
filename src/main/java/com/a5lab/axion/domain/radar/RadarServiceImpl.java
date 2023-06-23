@@ -9,8 +9,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,8 +23,6 @@ public class RadarServiceImpl implements RadarService {
   private final RadarRepository radarRepository;
 
   private final RadarMapper radarMapper;
-
-  private final MessageSource messageSource;
 
   @Override
   @Transactional(readOnly = true)
@@ -76,9 +72,7 @@ public class RadarServiceImpl implements RadarService {
       List<Radar> radarList = radarRepository.findByPrimaryAndActive(true, true);
       for (Radar radar : radarList) {
         if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary() && radar.isActive()) {
-          throw new InvalidPrimaryException(
-              messageSource.getMessage("radar.flash.error.invalid_id", null,
-                  LocaleContextHolder.getLocale()));
+          throw new InvalidPrimaryException("Should be only one primary active radar");
         }
       }
     }
