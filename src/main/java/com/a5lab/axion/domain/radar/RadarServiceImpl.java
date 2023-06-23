@@ -4,10 +4,13 @@ import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,6 +26,7 @@ public class RadarServiceImpl implements RadarService {
 
   private final RadarMapper radarMapper;
 
+  private final MessageSource messageSource;
 
   @Override
   @Transactional(readOnly = true)
@@ -67,6 +71,17 @@ public class RadarServiceImpl implements RadarService {
   @Override
   @Transactional
   public RadarDto save(RadarDto radarDto) {
+    if (radarDto.isPrimary()) {
+      // Find another primary radar
+      List<Radar> radarList = radarRepository.findByPrimaryAndActive(true, true);
+      for (Radar radar : radarList) {
+        if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary() && radar.isActive()) {
+          throw new InvalidPrimaryException(
+              messageSource.getMessage("radar.flash.error.invalid_id", null,
+                  LocaleContextHolder.getLocale()));
+        }
+      }
+    }
     return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
   }
 
