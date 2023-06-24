@@ -76,6 +76,15 @@ public class RadarServiceImpl implements RadarService {
         }
       }
     }
+    if (radarDto.isActive()){
+      Optional<Radar> radar = radarRepository.findById(radarDto.getId());
+      if(radar.isPresent()){
+        List<> approvers = new ArrayList(Approver);
+
+
+      }
+    }
+
     return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
   }
 
