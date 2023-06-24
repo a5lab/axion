@@ -105,10 +105,23 @@ public class RadarCfgController {
       return new ModelAndView("redirect:/settings/radars");
     } catch (DataIntegrityViolationException e) {
       if (e.getMessage().contains(UC_RADARS_TITLE)) {
-        bindingResult.rejectValue("title", "title_isy_taken", "this title is already taken");
+        bindingResult.rejectValue("title", "title_is_taken",
+            messageSource.getMessage("radar.form.error.title_is_taken", null,
+                LocaleContextHolder.getLocale()));
       } else {
-        bindingResult.reject("unknown_data_integrity_error", "unknown data integrity error");
+        bindingResult.reject("unknown_data_integrity_error",
+            messageSource.getMessage("radar.form.error.data_integrity_error", null,
+                LocaleContextHolder.getLocale()));
       }
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
+      return modelAndView;
+    } catch (InvalidPrimaryException e) {
+      bindingResult.rejectValue("primary", "primary_invalid_primary",
+          messageSource.getMessage("radar.form.error.invalid_primary", null,
+              LocaleContextHolder.getLocale()));
+
       // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
@@ -150,13 +163,26 @@ public class RadarCfgController {
       return new ModelAndView("redirect:/settings/radars");
     } catch (DataIntegrityViolationException e) {
       if (e.getMessage().contains(UC_RADARS_TITLE)) {
-        bindingResult.rejectValue("title", "title_is_taken", "this title is already taken");
+        bindingResult.rejectValue("title", "title_is_taken",
+            messageSource.getMessage("radar.form.error.title_is_taken", null,
+                LocaleContextHolder.getLocale()));
       } else {
-        bindingResult.reject("unknown_data_integrity_error", "unknown data integrity error");
+        bindingResult.reject("unknown_data_integrity_error",
+            messageSource.getMessage("radar.form.error.data_integrity_error", null,
+                LocaleContextHolder.getLocale()));
       }
       // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radarDto", radarDto);
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
+      return modelAndView;
+    } catch (InvalidPrimaryException e) {
+      bindingResult.rejectValue("primary", "primary_invalid_primary",
+          messageSource.getMessage("radar.form.error.invalid_primary", null,
+              LocaleContextHolder.getLocale()));
+
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }

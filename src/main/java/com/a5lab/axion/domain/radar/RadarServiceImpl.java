@@ -4,6 +4,7 @@ import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,6 @@ public class RadarServiceImpl implements RadarService {
   private final RadarRepository radarRepository;
 
   private final RadarMapper radarMapper;
-
 
   @Override
   @Transactional(readOnly = true)
@@ -67,6 +67,15 @@ public class RadarServiceImpl implements RadarService {
   @Override
   @Transactional
   public RadarDto save(RadarDto radarDto) {
+    if (radarDto.isPrimary()) {
+      // Find another primary radar
+      List<Radar> radarList = radarRepository.findByPrimary(true);
+      for (Radar radar : radarList) {
+        if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary() && radar.isActive()) {
+          throw new InvalidPrimaryException("Should be only one primary radar");
+        }
+      }
+    }
     return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
   }
 
