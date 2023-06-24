@@ -1,8 +1,10 @@
 package com.a5lab.axion.domain.radar;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -142,6 +144,7 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setDescription("Radar description");
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
     RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
@@ -150,6 +153,7 @@ class RadarServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
 
     Mockito.verify(radarRepository).save(any());
+    Mockito.verify(radarRepository).findByPrimary(true);
     Mockito.verify(radarTypeRepository).findById(radarType.getId());
   }
 
