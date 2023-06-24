@@ -144,7 +144,7 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setDescription("Radar description");
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
-    Mockito.when(radarRepository.findByPrimaryAndActive(anyBoolean(), anyBoolean())).thenReturn(new LinkedList<>());
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
     RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
@@ -153,7 +153,7 @@ class RadarServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
 
     Mockito.verify(radarRepository).save(any());
-    Mockito.verify(radarRepository).findByPrimaryAndActive(true, true);
+    Mockito.verify(radarRepository).findByPrimary(true);
     Mockito.verify(radarTypeRepository).findById(radarType.getId());
   }
 

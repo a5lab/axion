@@ -69,10 +69,10 @@ public class RadarServiceImpl implements RadarService {
   public RadarDto save(RadarDto radarDto) {
     if (radarDto.isPrimary()) {
       // Find another primary radar
-      List<Radar> radarList = radarRepository.findByPrimaryAndActive(true, true);
+      List<Radar> radarList = radarRepository.findByPrimary(true);
       for (Radar radar : radarList) {
         if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary() && radar.isActive()) {
-          throw new InvalidPrimaryException("Should be only one primary active radar");
+          throw new InvalidPrimaryException("Should be only one primary radar");
         }
       }
     }
