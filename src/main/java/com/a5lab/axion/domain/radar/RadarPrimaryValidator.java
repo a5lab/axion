@@ -18,6 +18,6 @@ public class RadarPrimaryValidator
         .addPropertyNode("primary").addConstraintViolation();
     return false;
     */
-    return true;
+    return false;
   }
 }
