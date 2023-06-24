@@ -15,6 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.a5lab.axion.domain.Approver;
+
 
 @RequiredArgsConstructor
 @Service
@@ -66,7 +68,7 @@ public class RadarServiceImpl implements RadarService {
 
   @Override
   @Transactional
-  public RadarDto save(RadarDto radarDto) {
+  public RadarDto save(RadarDto radarDto){
     if (radarDto.isPrimary()) {
       // Find another primary radar
       List<Radar> radarList = radarRepository.findByPrimary(true);
@@ -79,9 +81,8 @@ public class RadarServiceImpl implements RadarService {
     if (radarDto.isActive()){
       Optional<Radar> radar = radarRepository.findById(radarDto.getId());
       if(radar.isPresent()){
-        List<> approvers = new ArrayList(Approver);
-
-
+        new RingApprover(radar.get()).approve();
+        new SegmentApprover(radar.get()).approve();
       }
     }
 

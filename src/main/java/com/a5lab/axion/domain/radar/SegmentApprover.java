@@ -25,7 +25,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.context.ApplicationContext;
 
 import com.a5lab.axion.domain.AbstractAuditable;
-import com.a5lab.axion.domain.Approver;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.ring.Ring;
 import com.a5lab.axion.domain.segment.Segment;
@@ -34,11 +33,14 @@ import com.a5lab.axion.domain.wizard.WizardDto;
 import com.a5lab.axion.domain.wizard.processors.AbstractRadarProcessor;
 import com.a5lab.axion.utils.JpaConstants;
 
-public class AbstractRadarApprover extends Approver {
+public class SegmentApprover extends AbstractRadarApprover {
 
-  protected final Radar radar;
+  public SegmentApprover(Radar radar) {
+    super(radar);
+  }
 
-  public AbstractRadarApprover(Radar radar) {
-    this.radar = radar;
+  @Override
+  public void approve() throws Exception {
+    throw new UnsupportedOperationException("Not supported yet.");
   }
 }
