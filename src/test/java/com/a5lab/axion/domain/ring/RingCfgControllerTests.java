@@ -166,6 +166,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     final RingDto ringDto = new RingDto();
     ringDto.setId(3L);
     ringDto.setRadarId(radarDto.getId());
+    ringDto.setRadarTitle(radarDto.getTitle());
     ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -186,6 +187,9 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(
             MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been created successfully."))
         .andReturn();
+
+    Assertions.assertEquals(ringDto.getRadarId(), radarDto.getId());
+    Assertions.assertEquals(ringDto.getRadarTitle(), radarDto.getTitle());
 
     Mockito.verify(ringService).save(any());
   }
@@ -263,6 +267,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     final RingDto ringDto = new RingDto();
     ringDto.setId(3L);
     ringDto.setRadarId(radarDto.getId());
+    ringDto.setRadarTitle(radarDto.getTitle());
     ringDto.setTitle("TRIAL");
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
@@ -283,6 +288,9 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(
             MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been updated successfully."))
         .andReturn();
+
+    Assertions.assertEquals(ringDto.getRadarId(), radarDto.getId());
+    Assertions.assertEquals(ringDto.getRadarTitle(), radarDto.getTitle());
 
     Mockito.verify(ringService).save(any());
   }
