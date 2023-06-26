@@ -126,19 +126,6 @@ public class RadarCfgController {
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
-
-    /* fuck
-    } catch (InvalidPrimaryException e) {
-      bindingResult.rejectValue("primary", "primary_invalid_primary",
-          messageSource.getMessage("radar.form.error.invalid_primary", null,
-              LocaleContextHolder.getLocale()));
-
-      // Show form again
-      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-      modelAndView.addObject("radar_types", radarTypeService.findAll());
-      return modelAndView;
-    }
-     */
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -196,18 +183,6 @@ public class RadarCfgController {
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
-    /* fuck
-    } catch (InvalidPrimaryException e) {
-      bindingResult.rejectValue("primary", "primary_invalid_primary",
-          messageSource.getMessage("radar.form.error.invalid_primary", null,
-              LocaleContextHolder.getLocale()));
-
-      // Show form again
-      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-      modelAndView.addObject("radar_types", radarTypeService.findAll());
-      return modelAndView;
-    }
-     */
   }
 
   @GetMapping(value = "/delete/{id}")

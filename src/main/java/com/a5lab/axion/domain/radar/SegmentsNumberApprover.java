@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.radar.approvers;
+package com.a5lab.axion.domain.radar;
 
 
 import lombok.RequiredArgsConstructor;
@@ -6,18 +6,16 @@ import org.springframework.context.MessageSource;
 
 import com.a5lab.axion.domain.InconsistentModelException;
 import com.a5lab.axion.domain.ModelApprover;
-import com.a5lab.axion.domain.radar.Radar;
 
 @RequiredArgsConstructor
-public class RingApprover implements ModelApprover {
+public class SegmentsNumberApprover implements ModelApprover {
 
   private final MessageSource messageSource;
 
   private final Radar radar;
 
-
   @Override
   public void approve() throws InconsistentModelException {
-    // throw new InvalidRingException("Invalid ring exceptions.");
+    // throw new InvalidSegmentException("Invalid segment exceptions.");
   }
 }

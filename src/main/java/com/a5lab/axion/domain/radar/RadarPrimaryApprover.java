@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.radar.approvers;
+package com.a5lab.axion.domain.radar;
 
 
 import java.util.Objects;
@@ -9,11 +9,9 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.a5lab.axion.domain.InconsistentModelException;
 import com.a5lab.axion.domain.ModelApprover;
-import com.a5lab.axion.domain.radar.Radar;
-import com.a5lab.axion.domain.radar.RadarDto;
 
 @RequiredArgsConstructor
-public class PrimaryApprover implements ModelApprover {
+public class RadarPrimaryApprover implements ModelApprover {
 
   private final MessageSource messageSource;
 

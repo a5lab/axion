@@ -15,10 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.a5lab.axion.domain.radar.approvers.PrimaryApprover;
-import com.a5lab.axion.domain.radar.approvers.RingApprover;
-import com.a5lab.axion.domain.radar.approvers.SegmentApprover;
-
 
 @RequiredArgsConstructor
 @Service
@@ -78,14 +74,14 @@ public class RadarServiceImpl implements RadarService {
       // Find another primary radar
       List<Radar> radarList = radarRepository.findByPrimary(true);
       for (Radar radar : radarList) {
-        new PrimaryApprover(messageSource, radarDto, radar).approve();
+        new RadarPrimaryApprover(messageSource, radarDto, radar).approve();
       }
     }
 
     if (radarDto.isActive()) {
       Radar radar = radarMapper.toEntity(radarDto);
-      new RingApprover(messageSource, radar).approve();
-      new SegmentApprover(messageSource, radar).approve();
+      new RingsNumberApprover(messageSource, radar).approve();
+      new SegmentsNumberApprover(messageSource, radar).approve();
     }
 
     return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
