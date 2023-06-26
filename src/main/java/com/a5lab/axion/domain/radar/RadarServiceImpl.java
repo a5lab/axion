@@ -81,12 +81,11 @@ public class RadarServiceImpl implements RadarService {
         new PrimaryApprover(messageSource, radarDto, radar).approve();
       }
     }
+
     if (radarDto.isActive()) {
-      Optional<Radar> radar = radarRepository.findById(radarDto.getId());
-      if (radar.isPresent()) {
-        new RingApprover(messageSource, radar.get()).approve();
-        new SegmentApprover(messageSource, radar.get()).approve();
-      }
+      Radar radar = radarMapper.toEntity(radarDto);
+      new RingApprover(messageSource, radar).approve();
+      new SegmentApprover(messageSource, radar).approve();
     }
 
     return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
