@@ -154,7 +154,7 @@ class RadarServiceTests extends AbstractServiceTests {
 
     Mockito.verify(radarRepository).save(any());
     Mockito.verify(radarRepository).findByPrimary(true);
-    Mockito.verify(radarTypeRepository, Mockito.times(2)).findById(radarType.getId());
+    Mockito.verify(radarTypeRepository).findById(radarType.getId());
   }
 
   @Test
