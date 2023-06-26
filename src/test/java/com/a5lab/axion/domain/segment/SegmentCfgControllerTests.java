@@ -42,7 +42,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     radarDto.setDescription("My radar description");
 
     final SegmentDto segmentDto = new SegmentDto();
-    segmentDto.setId(10L);
+    segmentDto.setId(2L);
     segmentDto.setRadarId(radarDto.getId());
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
@@ -130,8 +130,9 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     radarDto.setActive(false);
 
     final SegmentDto segmentDto = new SegmentDto();
-    segmentDto.setId(10L);
+    segmentDto.setId(3L);
     segmentDto.setRadarId(radarDto.getId());
+    segmentDto.setRadarTitle(radarDto.getTitle());
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -150,6 +151,9 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         .andExpect(
             MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The segment has been created successfully."))
         .andReturn();
+
+    Assertions.assertEquals(segmentDto.getRadarId(), radarDto.getId());
+    Assertions.assertEquals(segmentDto.getRadarTitle(), radarDto.getTitle());
 
     Mockito.verify(segmentService).save(any());
   }
@@ -223,6 +227,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(3L);
     segmentDto.setRadarId(radarDto.getId());
+    segmentDto.setRadarTitle(radarDto.getTitle());
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
@@ -241,6 +246,9 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         .andExpect(
             MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The segment has been updated successfully."))
         .andReturn();
+
+    Assertions.assertEquals(segmentDto.getRadarId(), radarDto.getId());
+    Assertions.assertEquals(segmentDto.getRadarTitle(), radarDto.getTitle());
 
     Mockito.verify(segmentService).save(any());
   }

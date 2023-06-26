@@ -47,7 +47,7 @@ public class Segment extends AbstractAuditable {
 
   @NotNull
   @ManyToOne(optional = false, fetch = FetchType.EAGER)
-  @JoinColumn(name = "radar_id", nullable = false, updatable = false)
+  @JoinColumn(name = "radar_id", nullable = false)
   private Radar radar;
 
   @NotBlank
