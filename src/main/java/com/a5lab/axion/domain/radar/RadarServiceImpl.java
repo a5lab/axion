@@ -4,7 +4,6 @@ import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -71,16 +70,14 @@ public class RadarServiceImpl implements RadarService {
       // Find another primary radar
       List<Radar> radarList = radarRepository.findByPrimary(true);
       for (Radar radar : radarList) {
-        if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary()) {
-          throw new InvalidPrimaryException("Should be only one primary radar");
-        }
+        new PrimaryApprover(radarDto, radar).approve();
       }
     }
     if (radarDto.isActive()) {
       Optional<Radar> radar = radarRepository.findById(radarDto.getId());
       if (radar.isPresent()) {
-        new RingApprover().approve(radar.get());
-        new SegmentApprover().approve(radar.get());
+        new RingApprover(radar.get()).approve();
+        new SegmentApprover(radar.get()).approve();
       }
     }
 
