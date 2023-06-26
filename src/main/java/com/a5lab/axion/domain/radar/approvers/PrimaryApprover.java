@@ -1,9 +1,12 @@
-package com.a5lab.axion.domain.radar;
+package com.a5lab.axion.domain.radar.approvers;
 
 
 import java.util.Objects;
 
 import lombok.RequiredArgsConstructor;
+
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarDto;
 
 @RequiredArgsConstructor
 public class PrimaryApprover {
