@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.radar;
 
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -114,6 +115,20 @@ public class RadarCfgController {
             messageSource.getMessage("radar.form.error.data_integrity_error", null,
                 LocaleContextHolder.getLocale()));
       }
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
+      return modelAndView;
+    } catch (ConstraintViolationException e) {
+      /*
+        Assertions.assertNotNull(exception);
+        Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
+        for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+          Assertions.assertEquals(
+              ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "primary");
+          Assertions.assertEquals(constraintViolation.getMessage(), "can be only one primary");
+       */
+
       // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
