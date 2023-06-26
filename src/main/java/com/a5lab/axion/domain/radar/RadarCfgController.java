@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.a5lab.axion.domain.radar.approvers.InvalidPrimaryException;
+import com.a5lab.axion.domain.InconsistentModelException;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 import com.a5lab.axion.utils.FlashMessages;
 
@@ -118,6 +118,16 @@ public class RadarCfgController {
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
+    } catch (InconsistentModelException e) {
+      bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
+
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
+      return modelAndView;
+    }
+
+    /* fuck
     } catch (InvalidPrimaryException e) {
       bindingResult.rejectValue("primary", "primary_invalid_primary",
           messageSource.getMessage("radar.form.error.invalid_primary", null,
@@ -128,6 +138,7 @@ public class RadarCfgController {
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
+     */
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -177,6 +188,15 @@ public class RadarCfgController {
       modelAndView.addObject("radarDto", radarDto);
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
+    } catch (InconsistentModelException e) {
+      bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
+
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
+      return modelAndView;
+    }
+    /* fuck
     } catch (InvalidPrimaryException e) {
       bindingResult.rejectValue("primary", "primary_invalid_primary",
           messageSource.getMessage("radar.form.error.invalid_primary", null,
@@ -187,6 +207,7 @@ public class RadarCfgController {
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
+     */
   }
 
   @GetMapping(value = "/delete/{id}")

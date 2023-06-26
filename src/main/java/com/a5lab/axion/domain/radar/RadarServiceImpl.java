@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,6 +24,9 @@ import com.a5lab.axion.domain.radar.approvers.SegmentApprover;
 @Service
 @Transactional
 public class RadarServiceImpl implements RadarService {
+
+  private final MessageSource messageSource;
+
   private final RadarRepository radarRepository;
 
   private final RadarMapper radarMapper;
@@ -74,14 +78,14 @@ public class RadarServiceImpl implements RadarService {
       // Find another primary radar
       List<Radar> radarList = radarRepository.findByPrimary(true);
       for (Radar radar : radarList) {
-        new PrimaryApprover(radarDto, radar).approve();
+        new PrimaryApprover(messageSource, radarDto, radar).approve();
       }
     }
     if (radarDto.isActive()) {
       Optional<Radar> radar = radarRepository.findById(radarDto.getId());
       if (radar.isPresent()) {
-        new RingApprover(radar.get()).approve();
-        new SegmentApprover(radar.get()).approve();
+        new RingApprover(messageSource, radar.get()).approve();
+        new SegmentApprover(messageSource, radar.get()).approve();
       }
     }
 
