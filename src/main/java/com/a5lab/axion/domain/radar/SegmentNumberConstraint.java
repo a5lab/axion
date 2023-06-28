@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SegmentNumberConstraint {
-  String message() default "must be only four segments";
+  String message() default "must be only four segments for active radar";
 
   Class<?>[] groups() default {};
 

@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RingNumberConstraint {
-  String message() default "must be only four rings";
+  String message() default "must be only four rings for active radar";
 
   Class<?>[] groups() default {};
 
