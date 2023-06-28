@@ -11,6 +11,13 @@ public class RingsNumberValidator
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
+    /*
+    // Attach error to primary fields
+    context.disableDefaultConstraintViolation();
+    context.buildConstraintViolationWithTemplate("can be only one primary")
+        .addPropertyNode("primary").addConstraintViolation();
+    return false;
+    */
     return true;
   }
 }

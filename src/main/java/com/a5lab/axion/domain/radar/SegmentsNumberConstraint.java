@@ -9,11 +9,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = RingsNumberValidator.class)
+@Constraint(validatedBy = SegmentsNumberValidator.class)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RingsNumberConstraint {
-  String message() default "must be only four rings";
+public @interface SegmentsNumberConstraint {
+  String message() default "must be only four segments";
 
   Class<?>[] groups() default {};
 
