@@ -192,7 +192,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-
     Mockito.doThrow(new DataIntegrityViolationException("constraint UC_RADARS_TITLE_index violation"))
         .when(radarService).save(any(RadarDto.class));
 
@@ -222,7 +221,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
     radarDto.setActive(true);
-
 
     Mockito.doThrow(new DataIntegrityViolationException("unknown data integrity error"))
         .when(radarService).save(any(RadarDto.class));
@@ -408,7 +406,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
     radarDto.setActive(true);
-
 
     Mockito.doThrow(new DataIntegrityViolationException("unknown data integrity error"))
         .when(radarService).save(any(RadarDto.class));

@@ -182,7 +182,7 @@ class RadarServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldSaveA1nyPrimaryRadarDto() throws Exception {
+  void shouldSaveAnyPrimaryRadarDtoWithAnyRadar() throws Exception {
     final RadarType radarType = new RadarType();
     radarType.setId(1L);
 
@@ -194,14 +194,14 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setActive(true);
     radar.setDescription("Radar description");
 
-    final Radar radar1 = new Radar();
-    radar1.setId(2L);
-    radar1.setRadarType(radarType);
-    radar1.setTitle("Radar title");
-    radar1.setPrimary(false);
-    radar1.setActive(false);
-    radar1.setDescription("Radar description");
-    List<Radar> radarList = List.of(radar1);
+    final Radar any_radar = new Radar();
+    any_radar.setId(2L);
+    any_radar.setRadarType(radarType);
+    any_radar.setTitle("Radar title");
+    any_radar.setPrimary(false);
+    any_radar.setActive(false);
+    any_radar.setDescription("Radar description");
+    List<Radar> radarList = List.of(any_radar);
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
     Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(radarList);
