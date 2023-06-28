@@ -182,7 +182,7 @@ public class RadarCfgController {
               LocaleContextHolder.getLocale()));
 
       // Show form again
-      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
