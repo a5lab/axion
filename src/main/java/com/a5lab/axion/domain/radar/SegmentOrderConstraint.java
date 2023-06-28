@@ -9,10 +9,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = SegmentsOrderValidator.class)
+@Constraint(validatedBy = SegmentOrderValidator.class)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SegmentsOrderConstraint {
+public @interface SegmentOrderConstraint {
   String message() default "segments must be consecutively numbered starting from 0";
 
   Class<?>[] groups() default {};

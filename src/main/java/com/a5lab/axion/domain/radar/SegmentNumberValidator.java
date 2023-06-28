@@ -6,8 +6,8 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class SegmentsOrderValidator
-    implements ConstraintValidator<SegmentsOrderConstraint, Radar> {
+public class SegmentNumberValidator
+    implements ConstraintValidator<SegmentNumberConstraint, Radar> {
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {

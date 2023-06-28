@@ -6,8 +6,8 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class RingsNumberValidator
-    implements ConstraintValidator<RingsNumberConstraint, Radar> {
+public class RingNumberValidator
+    implements ConstraintValidator<RingNumberConstraint, Radar> {
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {

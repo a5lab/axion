@@ -9,10 +9,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = RingsOrderValidator.class)
+@Constraint(validatedBy = RingOrderValidator.class)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RingsOrderConstraint {
+public @interface RingOrderConstraint {
   String message() default "rings must be consecutively numbered starting from 0";
 
   Class<?>[] groups() default {};
