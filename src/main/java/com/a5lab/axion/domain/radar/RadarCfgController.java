@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.radar;
 
+import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -120,14 +122,15 @@ public class RadarCfgController {
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     } catch (ConstraintViolationException e) {
-      /*
-        Assertions.assertNotNull(exception);
-        Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
-        for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
-          Assertions.assertEquals(
-              ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "primary");
-          Assertions.assertEquals(constraintViolation.getMessage(), "can be only one primary");
-       */
+      // Add errors to fields and global
+      for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
+        String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
+        if (field.isEmpty() || field.isBlank()) {
+          bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
+        } else {
+          bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
+        }
+      }
 
       // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
