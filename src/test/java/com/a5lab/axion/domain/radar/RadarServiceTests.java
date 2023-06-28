@@ -176,8 +176,7 @@ class RadarServiceTests extends AbstractServiceTests {
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
     InvalidPrimaryException exception =
-        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)),
-            InvalidPrimaryException.class);
+        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)), InvalidPrimaryException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
   }
 
