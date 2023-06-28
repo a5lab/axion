@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.radar;
 
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 
@@ -145,6 +146,65 @@ class RadarServiceTests extends AbstractServiceTests {
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
     Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
+    RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
+    Assertions.assertEquals(radar.getId(), radarDto.getId());
+    Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
+    Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
+
+    Mockito.verify(radarRepository).save(any());
+    Mockito.verify(radarRepository).findByPrimary(true);
+    Mockito.verify(radarTypeRepository).findById(radarType.getId());
+  }
+
+  @Test
+  void shouldSaveAnyPrimaryRadarDto() throws Exception {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(radarType);
+    radar.setTitle("Radar title");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radar.setDescription("Radar description");
+
+    Mockito.doThrow(new InvalidPrimaryException("Should be only one primary radar")).when(radarRepository).save(any());
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
+    InvalidPrimaryException exception =
+        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)),
+            InvalidPrimaryException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+  }
+
+  @Test
+  void shouldSaveA1nyPrimaryRadarDto() throws Exception {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(radarType);
+    radar.setTitle("Radar title");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radar.setDescription("Radar description");
+
+    final Radar radar1 = new Radar();
+    radar1.setId(2L);
+    radar1.setRadarType(radarType);
+    radar1.setTitle("Radar title");
+    radar1.setPrimary(false);
+    radar1.setActive(false);
+    radar1.setDescription("Radar description");
+    List<Radar> radarList = List.of(radar1);
+
+    Mockito.when(radarRepository.save(any())).thenReturn(radar);
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(radarList);
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
     RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
