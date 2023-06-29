@@ -4,11 +4,11 @@ import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,6 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class RadarServiceImpl implements RadarService {
+
+  private final MessageSource messageSource;
+
   private final RadarRepository radarRepository;
 
   private final RadarMapper radarMapper;
@@ -71,9 +74,7 @@ public class RadarServiceImpl implements RadarService {
       // Find another primary radar
       List<Radar> radarList = radarRepository.findByPrimary(true);
       for (Radar radar : radarList) {
-        if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary() && radar.isActive()) {
-          throw new InvalidPrimaryException("Should be only one primary radar");
-        }
+        new RadarPrimaryApprover(messageSource, radarDto, radar).approve();
       }
     }
     return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));

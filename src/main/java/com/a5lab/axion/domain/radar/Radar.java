@@ -38,7 +38,10 @@ import com.a5lab.axion.utils.JpaConstants;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@RadarPrimaryConstraint
+@RingNumberConstraint
+@RingOrderConstraint
+@SegmentNumberConstraint
+@SegmentOrderConstraint
 public class Radar extends AbstractAuditable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

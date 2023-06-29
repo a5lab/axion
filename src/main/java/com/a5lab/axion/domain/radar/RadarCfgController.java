@@ -1,5 +1,7 @@
 package com.a5lab.axion.domain.radar;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.axion.domain.InconsistentModelException;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 import com.a5lab.axion.utils.FlashMessages;
 
@@ -117,10 +121,23 @@ public class RadarCfgController {
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
-    } catch (InvalidPrimaryException e) {
-      bindingResult.rejectValue("primary", "primary_invalid_primary",
-          messageSource.getMessage("radar.form.error.invalid_primary", null,
-              LocaleContextHolder.getLocale()));
+    } catch (ConstraintViolationException e) {
+      // Add errors to fields and global
+      for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
+        String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
+        if (field.isEmpty() || field.isBlank()) {
+          bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
+        } else {
+          bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
+        }
+      }
+
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      modelAndView.addObject("radar_types", radarTypeService.findAll());
+      return modelAndView;
+    } catch (InconsistentModelException e) {
+      bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
 
       // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
@@ -176,10 +193,8 @@ public class RadarCfgController {
       modelAndView.addObject("radarDto", radarDto);
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
-    } catch (InvalidPrimaryException e) {
-      bindingResult.rejectValue("primary", "primary_invalid_primary",
-          messageSource.getMessage("radar.form.error.invalid_primary", null,
-              LocaleContextHolder.getLocale()));
+    } catch (InconsistentModelException e) {
+      bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
 
       // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");

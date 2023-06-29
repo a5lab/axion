@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.radar;
+package com.a5lab.axion.domain.segment;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -6,11 +6,11 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class RadarPrimaryValidator
-    implements ConstraintValidator<RadarPrimaryConstraint, Radar> {
+public class SegmentActiveValidator
+    implements ConstraintValidator<SegmentActiveConstraint, Segment> {
 
   @Override
-  public boolean isValid(Radar radar, ConstraintValidatorContext context) {
+  public boolean isValid(Segment segment, ConstraintValidatorContext context) {
     /*
     // Attach error to primary fields
     context.disableDefaultConstraintViolation();
