@@ -13,12 +13,13 @@ public class SegmentNumberValidator
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
-    if(radar.isActive()) {
-      if(radar.getSegmentList() != null){
+    /*
+    if (radar.isActive()) {
+      if (radar.getSegmentList() != null) {
         return radar.getSegmentList().size() == SEGMENT_NUBMER;
       }
       return false;
-    }
+    }*/
     return true;
   }
 }
