@@ -11,13 +11,9 @@ public class SegmentActiveValidator
 
   @Override
   public boolean isValid(Segment segment, ConstraintValidatorContext context) {
-    /*
-    // Attach error to primary fields
-    context.disableDefaultConstraintViolation();
-    context.buildConstraintViolationWithTemplate("can be only one primary")
-        .addPropertyNode("primary").addConstraintViolation();
-    return false;
-    */
+    if (segment.getRadar().isActive()) {
+      return false;
+    }
     return true;
   }
 }

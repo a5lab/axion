@@ -39,6 +39,7 @@ import com.a5lab.axion.utils.JpaConstants;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@RingActiveConstraint
 public class Ring extends AbstractAuditable {
 
   @Id

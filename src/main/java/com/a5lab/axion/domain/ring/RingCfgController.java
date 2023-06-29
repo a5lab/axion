@@ -1,5 +1,7 @@
 package com.a5lab.axion.domain.ring;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
@@ -95,11 +98,31 @@ public class RingCfgController {
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
-    ringService.save(ringDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("ring.flash.info.created", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/rings");
+
+    try {
+      ringService.save(ringDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("ring.flash.info.created", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/rings");
+    } catch (ConstraintViolationException e) {
+      // Add errors to fields and global
+      for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
+        String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
+        if (field.isEmpty() || field.isBlank()) {
+          bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
+        } else {
+          bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
+        }
+      }
+
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/rings/add");
+      modelAndView.addObject("ringDto", ringDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
+      return modelAndView;
+    }
+
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -127,11 +150,33 @@ public class RingCfgController {
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
-    ringService.save(ringDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("ring.flash.info.updated", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/rings");
+
+    try {
+      ringService.save(ringDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("ring.flash.info.updated", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/rings");
+    } catch (ConstraintViolationException e) {
+      if (e.getCause().getCause() instanceof ConstraintViolationException) {
+        // Add errors to fields and global
+        ConstraintViolationException exception = (ConstraintViolationException) e.getCause().getCause();
+        for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+          String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
+          if (field.isEmpty() || field.isBlank()) {
+            bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
+          } else {
+            bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
+          }
+        }
+      }
+
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
+      modelAndView.addObject("ringDto", ringDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
+      return modelAndView;
+    }
   }
 
   @GetMapping(value = "/delete/{id}")

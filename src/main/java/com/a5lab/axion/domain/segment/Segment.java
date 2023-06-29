@@ -38,6 +38,7 @@ import com.a5lab.axion.utils.JpaConstants;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@SegmentActiveConstraint
 public class Segment extends AbstractAuditable {
 
   @Id
