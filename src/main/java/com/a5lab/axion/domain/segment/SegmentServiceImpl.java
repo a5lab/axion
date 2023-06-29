@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class SegmentServiceImpl implements SegmentService {
+
+  private final MessageSource messageSource;
   private final SegmentRepository segmentRepository;
   private final SegmentMapper segmentMapper;
 
@@ -63,6 +66,10 @@ public class SegmentServiceImpl implements SegmentService {
   @Override
   @Transactional
   public void deleteById(Long id) {
-    segmentRepository.deleteById(id);
+    Optional<Segment> segmentOptional = segmentRepository.findById(id);
+    if (segmentOptional.isPresent()) {
+      new RadarActiveApprover(messageSource, segmentOptional.get()).approve();
+      segmentRepository.deleteById(id);
+    }
   }
 }
