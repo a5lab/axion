@@ -47,7 +47,6 @@ class SegmentMapperTests extends AbstractMapperTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     final var segmentDto = segmentMapper.toDto(segment);
 
@@ -86,7 +85,6 @@ class SegmentMapperTests extends AbstractMapperTests {
     ringDto.setDescription("My ring description");
     ringDto.setColor("My ring color");
     ringDto.setPosition(1);
-    ringDto.setActive(true);
     ringDto.setTechnologyBlipDtoList(List.of(new TechnologyBlipDto()));
 
     // Create segment
@@ -96,7 +94,6 @@ class SegmentMapperTests extends AbstractMapperTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(2);
-    segment.setActive(true);
     segment.setTechnologyBlipList(List.of(new TechnologyBlip()));
 
     // Create technology
@@ -191,7 +188,6 @@ class SegmentMapperTests extends AbstractMapperTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     final var segment = segmentMapper.toEntity(segmentDto);
 
@@ -229,7 +225,6 @@ class SegmentMapperTests extends AbstractMapperTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     final var segmentDto = new SegmentDto();
     segmentDto.setId(3L);
@@ -238,7 +233,6 @@ class SegmentMapperTests extends AbstractMapperTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
     segmentDto.setTechnologyBlipDtoList(List.of(new TechnologyBlipDto()));
 
     final var technologyBlip = new TechnologyBlip();

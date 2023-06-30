@@ -41,7 +41,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("My color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     List<Ring> ringList = List.of(ring);
     Mockito.when(ringRepository.findAll(any(Sort.class))).thenReturn(ringList);
@@ -64,7 +63,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("My color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     List<Ring> ringList = List.of(ring);
     Page<Ring> page = new PageImpl<>(ringList);
@@ -92,7 +90,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     Mockito.when(ringRepository.findById(ring.getId())).thenReturn(Optional.of(ring));
 
@@ -113,7 +110,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     Mockito.when(ringRepository.findByTitle(ring.getTitle())).thenReturn(Optional.of(ring));
 
@@ -145,7 +141,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
     Mockito.when(ringRepository.save(any())).thenReturn(ring);
@@ -176,7 +171,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
-    ring.setActive(false);
 
     Mockito.when(ringRepository.findById(any())).thenReturn(Optional.of(ring));
     Mockito.doAnswer((i) -> null).when(ringRepository).deleteById(ring.getId());

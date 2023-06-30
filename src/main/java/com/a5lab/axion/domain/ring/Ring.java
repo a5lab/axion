@@ -70,9 +70,6 @@ public class Ring extends AbstractAuditable {
   @Column(name = "color", nullable = false)
   private String color;
 
-  @Column(name = "is_active", nullable = false)
-  private boolean active = true;
-
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "ring", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)
   private List<TechnologyBlip> technologyBlipList;
