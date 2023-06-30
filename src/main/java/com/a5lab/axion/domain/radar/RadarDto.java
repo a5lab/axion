@@ -34,7 +34,7 @@ public class RadarDto {
   @JsonProperty("radar_type_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private long radarTypeId;
+  private Long radarTypeId;
 
   private String radarTypeTitle;
 

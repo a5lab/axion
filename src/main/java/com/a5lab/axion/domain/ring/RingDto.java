@@ -35,8 +35,7 @@ public class RingDto {
   @JsonProperty("radar_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-  private long radarId;
-
+  private Long radarId;
   private String radarTitle;
 
 

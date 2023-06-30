@@ -11,7 +11,7 @@ public class RingActiveValidator
 
   @Override
   public boolean isValid(Ring ring, ConstraintValidatorContext context) {
-    if (ring.getRadar().isActive()) {
+    if (ring.getRadar() != null && ring.getRadar().isActive()) {
       return false;
     }
     return true;

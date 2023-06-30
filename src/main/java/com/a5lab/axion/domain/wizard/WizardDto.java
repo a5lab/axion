@@ -18,7 +18,7 @@ public class WizardDto {
 
   @NotNull
   @Min(1)
-  private long radarTypeId;
+  private Long radarTypeId;
 
   private String radarTypeCode;
 

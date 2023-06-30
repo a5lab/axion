@@ -24,8 +24,7 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
 
   protected final WizardDto wizardDto;
 
-  protected RadarDto radarDto;
-
+  protected RadarDto radarDto = new RadarDto();
 
   public AbstractRadarProcessor(ApplicationContext applicationContext, WizardDto wizardDto) {
     this.applicationContext = applicationContext;
@@ -35,7 +34,7 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
     radarService =  applicationContext.getBean(RadarService.class);
   }
 
-  public void createRadar() throws Exception {
+  public void buildRadar() throws Exception {
     // Read radars
     URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/radars_en.csv");
     String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
@@ -46,19 +45,17 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
         .withCSVParser(new CSVParserBuilder().withSeparator('|').build())
         .withSkipLines(1).build();
     while ((record = csvReader.readNext()) != null) {
-      RadarDto radar = new RadarDto();
-      radar.setRadarTypeId(wizardDto.getRadarTypeId());
-      radar.setRadarTypeTitle(wizardDto.getRadarTypeTitle());
-      radar.setTitle(record[0]);
-      radar.setDescription(record[1]);
-      radar.setPrimary(Boolean.parseBoolean(record[2]));
-      radar.setActive(Boolean.parseBoolean(record[3]));
-      this.radarDto = this.radarService.save(radar);
+      radarDto.setRadarTypeId(wizardDto.getRadarTypeId());
+      radarDto.setRadarTypeTitle(wizardDto.getRadarTypeTitle());
+      radarDto.setTitle(record[0]);
+      radarDto.setDescription(record[1]);
+      radarDto.setPrimary(Boolean.parseBoolean(record[2]));
+      radarDto.setActive(Boolean.parseBoolean(record[3]));
     }
   }
 
-  public void activateRadar() {
-    this.radarDto.setActive(true);
+  public void createRadar() {
+    // Save radar and it's rings and segments
     this.radarService.save(this.radarDto);
   }
 }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 import com.opencsv.CSVParserBuilder;
@@ -45,55 +46,12 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
 
   @Override
   public void process() throws Exception {
-    this.createRadar();
-    this.createRings();
-    this.createSegments();
     this.createTechnologies();
+    this.buildRadar();
+    this.buildRings();
+    this.buildSegments();
+    this.createRadar();
     this.createTechnologyBlips();
-    this.activateRadar();
-  }
-
-  public void createRings() throws Exception {
-    // Read rings
-    URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/rings_en.csv");
-    String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
-        .collect(Collectors.joining("\n"));
-
-    String[] record = null;
-    CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))
-        .withCSVParser(new CSVParserBuilder().withSeparator('|').build())
-        .withSkipLines(1).build();
-    while ((record = csvReader.readNext()) != null) {
-      RingDto ringDto = new RingDto();
-      ringDto.setRadarId(radarDto.getId());
-      ringDto.setRadarTitle(radarDto.getTitle());
-      ringDto.setTitle(record[0]);
-      ringDto.setDescription(record[1]);
-      ringDto.setPosition(Integer.parseInt(record[2]));
-      ringDto.setColor(record[3]);
-      this.ringService.save(ringDto);
-    }
-  }
-
-  private void createSegments() throws Exception {
-    // Read segments
-    URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/segments_en.csv");
-    String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
-        .collect(Collectors.joining("\n"));
-
-    String[] record = null;
-    CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))
-        .withCSVParser(new CSVParserBuilder().withSeparator('|').build())
-        .withSkipLines(1).build();
-    while ((record = csvReader.readNext()) != null) {
-      SegmentDto segmentDto = new SegmentDto();
-      segmentDto.setRadarId(radarDto.getId());
-      segmentDto.setRadarTitle(radarDto.getTitle());
-      segmentDto.setTitle(record[0]);
-      segmentDto.setDescription(record[1]);
-      segmentDto.setPosition(Integer.parseInt(record[2]));
-      this.segmentService.save(segmentDto);
-    }
   }
 
   private void createTechnologies() throws Exception {
@@ -116,6 +74,55 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       if (this.technologyService.findByTitle(technologyDto.getTitle()).isEmpty()) {
         this.technologyService.save(technologyDto);
       }
+    }
+  }
+
+  public void buildRings() throws Exception {
+    // Read rings
+    URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/rings_en.csv");
+    String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
+        .collect(Collectors.joining("\n"));
+
+    String[] record = null;
+    CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))
+        .withCSVParser(new CSVParserBuilder().withSeparator('|').build())
+        .withSkipLines(1).build();
+    while ((record = csvReader.readNext()) != null) {
+      RingDto ringDto = new RingDto();
+      ringDto.setRadarId(radarDto.getId());
+      ringDto.setRadarTitle(radarDto.getTitle());
+      ringDto.setTitle(record[0]);
+      ringDto.setDescription(record[1]);
+      ringDto.setPosition(Integer.parseInt(record[2]));
+      ringDto.setColor(record[3]);
+      if(radarDto.getRingDtoList() == null){
+        radarDto.setRingDtoList(new LinkedList<>());
+      }
+      radarDto.getRingDtoList().add(ringDto);
+    }
+  }
+
+  private void buildSegments() throws Exception {
+    // Read segments
+    URL url = ResourceUtils.getURL("classpath:database/datasets/technology_radar/segments_en.csv");
+    String fileContent = new BufferedReader(new InputStreamReader(url.openStream())).lines()
+        .collect(Collectors.joining("\n"));
+
+    String[] record = null;
+    CSVReader csvReader = new CSVReaderBuilder(new StringReader(fileContent))
+        .withCSVParser(new CSVParserBuilder().withSeparator('|').build())
+        .withSkipLines(1).build();
+    while ((record = csvReader.readNext()) != null) {
+      SegmentDto segmentDto = new SegmentDto();
+      segmentDto.setRadarId(radarDto.getId());
+      segmentDto.setRadarTitle(radarDto.getTitle());
+      segmentDto.setTitle(record[0]);
+      segmentDto.setDescription(record[1]);
+      segmentDto.setPosition(Integer.parseInt(record[2]));
+      if(radarDto.getSegmentDtoList() == null){
+        radarDto.setSegmentDtoList(new LinkedList<>());
+      }
+      radarDto.getSegmentDtoList().add(segmentDto);
     }
   }
 

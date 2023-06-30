@@ -40,6 +40,7 @@ public abstract class TechnologyBlipMapper implements PlainMapper<TechnologyBlip
   @Mapping(source = "ring.position", target = "ringPosition")
   public abstract TechnologyBlipDto toDto(final TechnologyBlip entity);
 
+  // fuck
   @Mapping(target = "radar", expression = "java(radarRepository.findById(dto.getRadarId()).get())")
   @Mapping(target = "technology", expression = "java(technologyRepository.findById(dto.getTechnologyId()).get())")
   @Mapping(target = "segment", expression = "java(segmentRepository.findById(dto.getSegmentId()).get())")

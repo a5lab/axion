@@ -11,7 +11,7 @@ public class SegmentActiveValidator
 
   @Override
   public boolean isValid(Segment segment, ConstraintValidatorContext context) {
-    if (segment.getRadar().isActive()) {
+    if (segment.getRadar() != null && segment.getRadar().isActive()) {
       return false;
     }
     return true;
