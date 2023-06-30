@@ -161,17 +161,28 @@ class RingServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldDeleteRing() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(false);
+
     final Ring ring = new Ring();
     ring.setId(10L);
+    ring.setRadar(radar);
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
-    ring.setActive(true);
+    ring.setActive(false);
 
+    Mockito.when(ringRepository.findById(any())).thenReturn(Optional.of(ring));
     Mockito.doAnswer((i) -> null).when(ringRepository).deleteById(ring.getId());
 
     ringService.deleteById(ring.getId());
+    Mockito.verify(ringRepository).findById(ring.getId());
     Mockito.verify(ringRepository).deleteById(ring.getId());
   }
 }

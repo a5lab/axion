@@ -157,16 +157,27 @@ class SegmentServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldDeleteSegment() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(false);
+
     final Segment segment = new Segment();
     segment.setId(10L);
+    segment.setRadar(radar);
     segment.setTitle("My title");
     segment.setDescription("My description");
     segment.setPosition(1);
-    segment.setActive(true);
+    segment.setActive(false);
 
+    Mockito.when(segmentRepository.findById(any())).thenReturn(Optional.of(segment));
     Mockito.doAnswer((i) -> null).when(segmentRepository).deleteById(segment.getId());
 
     segmentService.deleteById(segment.getId());
+    Mockito.verify(segmentRepository).findById(segment.getId());
     Mockito.verify(segmentRepository).deleteById(segment.getId());
   }
 }
