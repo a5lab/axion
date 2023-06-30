@@ -56,6 +56,6 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
 
   public void createRadar() {
     // Save radar and it's rings and segments
-    this.radarService.save(this.radarDto);
+    this.radarDto = radarService.save(this.radarDto);
   }
 }
