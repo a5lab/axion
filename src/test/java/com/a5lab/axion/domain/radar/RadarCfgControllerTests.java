@@ -243,7 +243,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateRadarDueToNotUniquePrimary() throws Exception {
+  public void shouldFailToCreateRadarDueToNotOnePrimary() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
     radarDto.setRadarTypeId(3L);
@@ -435,7 +435,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
   /*
   @Test
-  public void shouldFailToUpdateRadarDueToNotUniquePrimary() throws Exception {
+  public void shouldFailToUpdateRadarDueToNotOnePrimary() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
     radarDto.setRadarTypeId(3L);

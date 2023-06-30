@@ -4,7 +4,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 
-import jakarta.validation.ConstraintViolationException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
