@@ -232,9 +232,13 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(5L);
     technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRadarTitle(radarDto.getTitle());
     technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setRingTitle(ringDto.getTitle());
     technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setTechnologyTitle(technologyDto.getTitle());
     technologyBlipDto.setSegmentId(segmentDto.getId());
+    technologyBlipDto.setSegmentTitle(segmentDto.getTitle());
 
     Mockito.when(technologyBlipService.save(any(TechnologyBlipDto.class))).thenReturn(technologyBlipDto);
 
@@ -250,6 +254,15 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash()
             .attribute(FlashMessages.INFO, "The technology blip has been created successfully."))
         .andReturn();
+
+    Assertions.assertEquals(technologyBlipDto.getRadarId(), radarDto.getId());
+    Assertions.assertEquals(technologyBlipDto.getRadarTitle(), radarDto.getTitle());
+    Assertions.assertEquals(technologyBlipDto.getRingId(), ringDto.getId());
+    Assertions.assertEquals(technologyBlipDto.getRingTitle(), ringDto.getTitle());
+    Assertions.assertEquals(technologyBlipDto.getSegmentId(), segmentDto.getId());
+    Assertions.assertEquals(technologyBlipDto.getSegmentTitle(), segmentDto.getTitle());
+    Assertions.assertEquals(technologyBlipDto.getTechnologyId(), technologyDto.getId());
+    Assertions.assertEquals(technologyBlipDto.getTechnologyTitle(), technologyDto.getTitle());
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
@@ -422,9 +435,13 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
     technologyBlipDto.setId(5L);
     technologyBlipDto.setRadarId(radarDto.getId());
+    technologyBlipDto.setRadarTitle(radarDto.getTitle());
     technologyBlipDto.setRingId(ringDto.getId());
+    technologyBlipDto.setRingTitle(ringDto.getTitle());
     technologyBlipDto.setTechnologyId(technologyDto.getId());
+    technologyBlipDto.setTechnologyTitle(technologyDto.getTitle());
     technologyBlipDto.setSegmentId(segmentDto.getId());
+    technologyBlipDto.setSegmentTitle(segmentDto.getTitle());
 
     Mockito.when(technologyBlipService.save(any(TechnologyBlipDto.class))).thenReturn(technologyBlipDto);
 
@@ -440,6 +457,15 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andExpect(MockMvcResultMatchers.flash()
             .attribute(FlashMessages.INFO, "The technology blip has been updated successfully."))
         .andReturn();
+
+    Assertions.assertEquals(technologyBlipDto.getRadarId(), radarDto.getId());
+    Assertions.assertEquals(technologyBlipDto.getRadarTitle(), radarDto.getTitle());
+    Assertions.assertEquals(technologyBlipDto.getRingId(), ringDto.getId());
+    Assertions.assertEquals(technologyBlipDto.getRingTitle(), ringDto.getTitle());
+    Assertions.assertEquals(technologyBlipDto.getSegmentId(), segmentDto.getId());
+    Assertions.assertEquals(technologyBlipDto.getSegmentTitle(), segmentDto.getTitle());
+    Assertions.assertEquals(technologyBlipDto.getTechnologyId(), technologyDto.getId());
+    Assertions.assertEquals(technologyBlipDto.getTechnologyTitle(), technologyDto.getTitle());
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }

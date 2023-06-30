@@ -9,11 +9,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = RadarPrimaryValidator.class)
+@Constraint(validatedBy = SegmentNumberValidator.class)
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RadarPrimaryConstraint {
-  String message() default "can be only one primary";
+public @interface SegmentNumberConstraint {
+  String message() default "must be only four segments for active radar";
 
   Class<?>[] groups() default {};
 
