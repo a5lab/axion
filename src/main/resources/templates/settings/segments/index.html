@@ -23,7 +23,6 @@
                   <th th:replace="~{settings/segments/sorting :: sorting('title','Title')}"></th>
                   <th th:replace="~{settings/segments/sorting :: sorting('description','Description')}"></th>
                   <th th:replace="~{settings/segments/sorting :: sorting('position','Position')}"></th>
-                  <th th:replace="~{settings/segments/sorting :: sorting('active','Active')}"></th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -33,7 +32,6 @@
                   <td th:text="${segmentDto.title}"></td>
                   <td th:text="${segmentDto.description}"></td>
                   <td th:text="${segmentDto.position}"></td>
-                  <td th:text="${segmentDto.active}"></td>
                   <td>
                     <a class="action-show" data-bs-placement="bottom" data-bs-toggle="tooltip"
                        th:href="@{/settings/segments/show/{id}(id=${segmentDto.id})}" title="Show"></a>

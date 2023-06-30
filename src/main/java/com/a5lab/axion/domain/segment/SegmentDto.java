@@ -50,7 +50,5 @@ public class SegmentDto {
   @Max(512)
   private int position;
 
-  private boolean active = true;
-
   private List<TechnologyBlipDto> technologyBlipDtoList;
 }

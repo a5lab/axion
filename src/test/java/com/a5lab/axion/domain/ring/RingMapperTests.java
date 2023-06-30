@@ -47,7 +47,6 @@ class RingMapperTests extends AbstractMapperTests {
     ring.setDescription("My ring description");
     ring.setColor("color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     final var ringDto = ringMapper.toDto(ring);
 
@@ -84,7 +83,6 @@ class RingMapperTests extends AbstractMapperTests {
     ring.setDescription("My description");
     ring.setColor("My color");
     ring.setPosition(1);
-    ring.setActive(true);
     ring.setTechnologyBlipList(List.of(new TechnologyBlip()));
 
     // Create segment
@@ -93,7 +91,6 @@ class RingMapperTests extends AbstractMapperTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(2);
-    segmentDto.setActive(true);
 
     // Create technology
     final var technologyDto = new TechnologyDto();
@@ -212,7 +209,6 @@ class RingMapperTests extends AbstractMapperTests {
     ring.setDescription("My ring description");
     ring.setColor("My color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(2L);

@@ -60,7 +60,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(3L);
@@ -69,7 +68,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
-    ringDto.setActive(true);
 
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(4L);
@@ -122,7 +120,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(3L);
@@ -131,7 +128,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
-    ringDto.setActive(true);
 
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(4L);
@@ -210,7 +206,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(3L);
@@ -219,7 +214,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
-    ringDto.setActive(true);
 
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(4L);
@@ -339,7 +333,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(4L);
@@ -348,7 +341,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
-    ringDto.setActive(true);
 
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(5L);
@@ -413,7 +405,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(3L);
@@ -422,7 +413,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
-    ringDto.setActive(true);
 
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(4L);
@@ -531,7 +521,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     final RingDto ringDto = new RingDto();
     ringDto.setId(3L);
@@ -540,7 +529,6 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setPosition(1);
     ringDto.setColor("#fbdb84");
-    ringDto.setActive(true);
 
     final TechnologyDto technologyDto = new TechnologyDto();
     technologyDto.setId(4L);
