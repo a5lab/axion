@@ -160,7 +160,7 @@ class RadarServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldSaveAnyPrimaryRadarDto() throws Exception {
+  void shouldFailToTheSaveSecondPrimaryRadarDto() throws Exception {
     final RadarType radarType = new RadarType();
     radarType.setId(1L);
 
@@ -195,7 +195,7 @@ class RadarServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldSaveAnyPrimaryRadarDtoWithAnyRadar() throws Exception {
+  void shouldSucceedToSavePrimaryRadarDtoWithNonPrimaryRadar() throws Exception {
     final RadarType radarType = new RadarType();
     radarType.setId(1L);
 
