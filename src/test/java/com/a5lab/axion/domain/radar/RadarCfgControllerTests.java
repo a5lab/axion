@@ -3,11 +3,11 @@ package com.a5lab.axion.domain.radar;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
@@ -253,27 +254,19 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    /*
-    Mockito.doThrow(new InvalidPrimaryException("should be only one primary radar"))
-        .when(radarService).save(any(RadarDto.class));
-
-     */
-
-    Mockito.doThrow(new ConstraintViolationException("should be only one primary radar"))
-        .when(radarService).save(any(RadarDto.class));
-
-    MvcResult result = mockMvc.perform(post("/settings/radars/create")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    this.mockMvc.perform(MockMvcRequestBuilders.post("/settings/radars/create")
+            .accept(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
-            .param("description", radarDto.getDescription())
-            .sessionAttr("radarDto", radarDto))
+            .param("description", radarDto.getDescription()))
+        .andExpect(model().attributeHasFieldErrorCode("radarDto", "Primary", "validation_is_broken"))
         .andExpect(status().isOk())
-        .andExpect(view().name("settings/radars/add"))
-        .andReturn();
+        .andDo(print());
 
+    /*
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("primary"));
+     */
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
