@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RingActiveConstraint {
-  String message() default "can't be active for active radar";
+  String message() default "active radar can't be modified";
 
   Class<?>[] groups() default {};
 

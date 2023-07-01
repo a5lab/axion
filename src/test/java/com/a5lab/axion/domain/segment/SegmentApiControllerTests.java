@@ -37,7 +37,6 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My title");
     segmentDto.setDescription("My description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     Page<SegmentDto> segmentDtoPage = new PageImpl<>(Arrays.asList(segmentDto));
     Mockito.when(segmentService.findAll(any(), any())).thenReturn(segmentDtoPage);
@@ -50,7 +49,6 @@ public class SegmentApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$[0].radar_id", equalTo(segmentDto.getRadarId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(segmentDto.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(segmentDto.getDescription())))
-        .andExpect(jsonPath("$[0].position", equalTo(segmentDto.getPosition()), int.class))
-        .andExpect(jsonPath("$[0].active", equalTo(segmentDto.isActive())));
+        .andExpect(jsonPath("$[0].position", equalTo(segmentDto.getPosition()), int.class));
   }
 }

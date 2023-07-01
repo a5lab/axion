@@ -49,7 +49,6 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setTitle("My ring");
     ringDto.setDescription("My ring description");
     ringDto.setPosition(1);
-    ringDto.setActive(true);
 
     List<RingDto> ringList = List.of(ringDto);
     Page<RingDto> page = new PageImpl<>(ringList);
@@ -78,7 +77,6 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
-    ringDto.setActive(true);
 
     Mockito.when(ringService.findById(any())).thenReturn(Optional.of(ringDto));
 
@@ -129,7 +127,6 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
-    ringDto.setActive(true);
 
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -171,7 +168,6 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
-    ringDto.setActive(true);
 
     Mockito.when(ringService.save(any())).thenReturn(ringDto);
 
@@ -214,7 +210,6 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
-    ringDto.setActive(true);
 
     Mockito.when(ringService.findById(any())).thenReturn(Optional.of(ringDto));
 
@@ -272,7 +267,6 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
-    ringDto.setActive(true);
 
     Mockito.when(ringService.save(any())).thenReturn(ringDto);
 
@@ -315,7 +309,6 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setDescription("My ring description");
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
-    ringDto.setActive(true);
 
     Mockito.doAnswer((i) -> null).when(ringService).deleteById(any());
 

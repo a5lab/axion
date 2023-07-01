@@ -1,5 +1,7 @@
 package com.a5lab.axion.domain.segment;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -7,12 +9,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.axion.domain.InconsistentModelException;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.utils.FlashMessages;
 
@@ -97,11 +102,29 @@ public class SegmentCfgController {
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
-    segmentService.save(segmentDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("segment.flash.info.created", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/segments");
+    try {
+      segmentService.save(segmentDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("segment.flash.info.created", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/segments");
+    } catch (ConstraintViolationException e) {
+      // Add errors to fields and global
+      for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
+        String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
+        if (field.isEmpty() || field.isBlank()) {
+          bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
+        } else {
+          bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
+        }
+      }
+
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/segments/add");
+      modelAndView.addObject("segmentDto", segmentDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
+      return modelAndView;
+    }
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -129,19 +152,46 @@ public class SegmentCfgController {
       modelAndView.addObject("radarDtos", this.radarService.findAll());
       return modelAndView;
     }
-    segmentService.save(segmentDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("segment.flash.info.updated", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/segments");
+
+    try {
+      segmentService.save(segmentDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("segment.flash.info.updated", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/segments");
+    } catch (TransactionSystemException e) {
+      if (e.getCause().getCause() instanceof ConstraintViolationException) {
+        // Add errors to fields and global
+        ConstraintViolationException exception = (ConstraintViolationException) e.getCause().getCause();
+        for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
+          String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
+          if (field.isEmpty() || field.isBlank()) {
+            bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
+          } else {
+            bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
+          }
+        }
+      }
+
+      // Show form again
+      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
+      modelAndView.addObject("segmentDto", segmentDto);
+      modelAndView.addObject("radarDtos", this.radarService.findAll());
+      return modelAndView;
+    }
   }
 
   @GetMapping(value = "/delete/{id}")
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-    segmentService.deleteById(id);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("segment.flash.info.deleted", null,
-            LocaleContextHolder.getLocale()));
-    return "redirect:/settings/segments";
+    try {
+      segmentService.deleteById(id);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("segment.flash.info.deleted", null,
+              LocaleContextHolder.getLocale()));
+      return "redirect:/settings/segments";
+    } catch (InconsistentModelException e) {
+      redirectAttributes.addFlashAttribute(FlashMessages.ERROR, e.getMessage());
+      return "redirect:/settings/segments";
+    }
   }
 }

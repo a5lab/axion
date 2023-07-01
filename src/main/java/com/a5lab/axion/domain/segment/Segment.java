@@ -38,6 +38,7 @@ import com.a5lab.axion.utils.JpaConstants;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@SegmentActiveConstraint
 public class Segment extends AbstractAuditable {
 
   @Id
@@ -62,9 +63,6 @@ public class Segment extends AbstractAuditable {
   @Max(512)
   @Column(name = "position", nullable = false)
   private int position;
-
-  @Column(name = "is_active", nullable = false)
-  private boolean active = true;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "segment", cascade = CascadeType.ALL)
   @BatchSize(size = JpaConstants.BATCH_SIZE_FOR_COLLECTIONS)

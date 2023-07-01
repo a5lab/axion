@@ -47,7 +47,6 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     Page<SegmentDto> page = new PageImpl<>(List.of(segmentDto));
     Mockito.when(segmentService.findAll(any(), any())).thenReturn(page);
@@ -73,7 +72,6 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     Mockito.when(segmentService.findById(any())).thenReturn(Optional.of(segmentDto));
 
@@ -136,7 +134,6 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     Mockito.when(segmentService.save(any())).thenReturn(segmentDto);
 
@@ -177,7 +174,6 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     Mockito.when(segmentService.findById(any())).thenReturn(Optional.of(segmentDto));
 
@@ -231,7 +227,6 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     Mockito.when(segmentService.save(any())).thenReturn(segmentDto);
 
@@ -272,7 +267,6 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     segmentDto.setTitle("My segment");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(1);
-    segmentDto.setActive(true);
 
     Mockito.doAnswer((i) -> null).when(segmentService).deleteById(any());
 

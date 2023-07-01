@@ -41,7 +41,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("My color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     List<Ring> ringList = List.of(ring);
     Mockito.when(ringRepository.findAll(any(Sort.class))).thenReturn(ringList);
@@ -64,7 +63,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("My color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     List<Ring> ringList = List.of(ring);
     Page<Ring> page = new PageImpl<>(ringList);
@@ -92,7 +90,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     Mockito.when(ringRepository.findById(ring.getId())).thenReturn(Optional.of(ring));
 
@@ -113,7 +110,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     Mockito.when(ringRepository.findByTitle(ring.getTitle())).thenReturn(Optional.of(ring));
 
@@ -145,7 +141,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
     Mockito.when(ringRepository.save(any())).thenReturn(ring);
@@ -161,17 +156,27 @@ class RingServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldDeleteRing() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(false);
+
     final Ring ring = new Ring();
     ring.setId(10L);
+    ring.setRadar(radar);
     ring.setTitle("My title");
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
-    ring.setActive(true);
 
+    Mockito.when(ringRepository.findById(any())).thenReturn(Optional.of(ring));
     Mockito.doAnswer((i) -> null).when(ringRepository).deleteById(ring.getId());
 
     ringService.deleteById(ring.getId());
+    Mockito.verify(ringRepository).findById(ring.getId());
     Mockito.verify(ringRepository).deleteById(ring.getId());
   }
 }
