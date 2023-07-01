@@ -1,10 +1,14 @@
 package com.a5lab.axion.domain.radar;
 
 import jakarta.persistence.criteria.Predicate;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Validator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class RadarServiceImpl implements RadarService {
+
+  private final Validator validator;
 
   private final MessageSource messageSource;
 
@@ -70,14 +76,28 @@ public class RadarServiceImpl implements RadarService {
   @Override
   @Transactional
   public RadarDto save(RadarDto radarDto) {
+    Radar radar = radarMapper.toEntity(radarDto);
+    Set<ConstraintViolation<Radar>> constraintViolationSet = validator.validate(radar);
+
     if (radarDto.isPrimary()) {
       // Find another primary radar
       List<Radar> radarList = radarRepository.findByPrimary(true);
-      for (Radar radar : radarList) {
-        new RadarPrimaryApprover(messageSource, radarDto, radar).approve();
+      for (Radar radarItem : radarList) {
+        try {
+          new RadarPrimaryApprover(messageSource, radarDto, radarItem).approve();
+        } catch (ConstraintViolationException e) {
+          for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
+            constraintViolationSet.add((ConstraintViolation<Radar>) constraintViolation);
+          }
+        }
       }
     }
-    return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
+
+    // Throw exception if violations are exists
+    if (!constraintViolationSet.isEmpty()) {
+      throw new ConstraintViolationException(constraintViolationSet);
+    }
+    return radarMapper.toDto(radarRepository.save(radar));
   }
 
   @Override

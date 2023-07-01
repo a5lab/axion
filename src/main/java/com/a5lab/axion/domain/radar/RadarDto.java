@@ -1,8 +1,5 @@
 package com.a5lab.axion.domain.radar;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -20,6 +17,11 @@ import com.a5lab.axion.domain.ring.RingDto;
 import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
+
+/**
+ * This class should not have any validation such as @NotNull etc
+ * due to custom primary validation at service layer.
+ */
 @JsonPropertyOrder({"id", "radar_type_id", "title", "description", "primary", "active"})
 @Getter
 @Setter
@@ -30,7 +32,7 @@ public class RadarDto {
 
   private Long id;
 
-  @NotNull
+  // fuck @NotNull
   @JsonProperty("radar_type_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -38,11 +40,11 @@ public class RadarDto {
 
   private String radarTypeTitle;
 
-  @NotBlank
-  @Size(min = 1, max = 64)
+  // fuck @NotBlank
+  // fuck @Size(min = 1, max = 64)
   private String title;
 
-  @NotBlank
+  // fuck @NotBlank
   private String description;
 
   private boolean primary;
