@@ -1,6 +1,7 @@
 package com.a5lab.axion.domain.radar;
 
 import jakarta.persistence.criteria.Predicate;
+import jakarta.validation.Validator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class RadarServiceImpl implements RadarService {
+
+  @Autowired
+  private Validator validator;
 
   private final MessageSource messageSource;
 
@@ -70,6 +75,8 @@ public class RadarServiceImpl implements RadarService {
   @Override
   @Transactional
   public RadarDto save(RadarDto radarDto) {
+    https://www.baeldung.com/spring-service-layer-validation
+    
     if (radarDto.isPrimary()) {
       // Find another primary radar
       List<Radar> radarList = radarRepository.findByPrimary(true);
