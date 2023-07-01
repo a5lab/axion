@@ -57,7 +57,5 @@ public class RingDto {
   @Size(min = 1, max = 8)
   private String color;
 
-  private boolean active = true;
-
   private List<TechnologyBlipDto> technologyBlipDtoList;
 }

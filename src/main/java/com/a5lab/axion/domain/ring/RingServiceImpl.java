@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class RingServiceImpl implements RingService {
+
+  private final MessageSource messageSource;
   private final RingRepository ringRepository;
   private final RingMapper ringMapper;
 
@@ -62,6 +65,10 @@ public class RingServiceImpl implements RingService {
   @Override
   @Transactional
   public void deleteById(Long id) {
-    ringRepository.deleteById(id);
+    Optional<Ring> ringOptional = ringRepository.findById(id);
+    if (ringOptional.isPresent()) {
+      new RadarActiveApprover(messageSource, ringOptional.get()).approve();
+      ringRepository.deleteById(id);
+    }
   }
 }

@@ -49,8 +49,7 @@ public class RingApiControllerTests extends AbstractControllerTests {
         .andExpect(jsonPath("$[0].radar_id", equalTo(ringDto.getRadarId()), Long.class))
         .andExpect(jsonPath("$[0].title", equalTo(ringDto.getTitle())))
         .andExpect(jsonPath("$[0].description", equalTo(ringDto.getDescription())))
-        .andExpect(jsonPath("$[0].color", equalTo(ringDto.getColor())))
-        .andExpect(jsonPath("$[0].active", equalTo(ringDto.isActive())));
+        .andExpect(jsonPath("$[0].color", equalTo(ringDto.getColor())));
 
     Mockito.verify(ringService).findAll(any(), any());
   }

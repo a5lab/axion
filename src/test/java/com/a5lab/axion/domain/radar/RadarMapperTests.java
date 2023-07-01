@@ -92,7 +92,6 @@ class RadarMapperTests extends AbstractMapperTests {
     ringDto.setDescription("My ring description");
     ringDto.setColor("My color");
     ringDto.setPosition(1);
-    ringDto.setActive(true);
 
     Mockito.when(ringMapper.toDto(any())).thenReturn(ringDto);
 
@@ -101,7 +100,6 @@ class RadarMapperTests extends AbstractMapperTests {
     segmentDto.setTitle("My segment title");
     segmentDto.setDescription("My segment description");
     segmentDto.setPosition(2);
-    segmentDto.setActive(true);
 
     Mockito.when(segmentMapper.toDto(any())).thenReturn(segmentDto);
 
@@ -147,7 +145,6 @@ class RadarMapperTests extends AbstractMapperTests {
     Assertions.assertEquals(radarDto.getRingDtoList().iterator().next().getDescription(), ringDto.getDescription());
     Assertions.assertEquals(radarDto.getRingDtoList().iterator().next().getPosition(), ringDto.getPosition());
     Assertions.assertEquals(radarDto.getRingDtoList().iterator().next().getColor(), ringDto.getColor());
-    Assertions.assertEquals(radarDto.getRingDtoList().iterator().next().isActive(), ringDto.isActive());
 
     // Compare segment values
     Assertions.assertNotNull(radarDto.getSegmentDtoList());
@@ -157,7 +154,6 @@ class RadarMapperTests extends AbstractMapperTests {
     Assertions.assertEquals(radarDto.getSegmentDtoList().iterator().next().getDescription(),
         segmentDto.getDescription());
     Assertions.assertEquals(radarDto.getSegmentDtoList().iterator().next().getPosition(), segmentDto.getPosition());
-    Assertions.assertEquals(radarDto.getSegmentDtoList().iterator().next().isActive(), segmentDto.isActive());
 
     // Compare technology blips values
     Assertions.assertNotNull(radarDto.getTechnologyBlipDtoList());
@@ -268,7 +264,6 @@ class RadarMapperTests extends AbstractMapperTests {
     ring.setDescription("My ring description");
     ring.setColor("My color");
     ring.setPosition(1);
-    ring.setActive(true);
 
     Mockito.when(ringMapper.toEntity(any())).thenReturn(ring);
 
@@ -279,7 +274,6 @@ class RadarMapperTests extends AbstractMapperTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     Mockito.when(segmentMapper.toEntity(any())).thenReturn(segment);
 
@@ -323,7 +317,6 @@ class RadarMapperTests extends AbstractMapperTests {
     Assertions.assertEquals(mappedRadar.getRingList().iterator().next().getDescription(), ring.getDescription());
     Assertions.assertEquals(mappedRadar.getRingList().iterator().next().getPosition(), ring.getPosition());
     Assertions.assertEquals(mappedRadar.getRingList().iterator().next().getColor(), ring.getColor());
-    Assertions.assertEquals(mappedRadar.getRingList().iterator().next().isActive(), ring.isActive());
 
     // Compare segment values
     Assertions.assertNotNull(mappedRadar.getSegmentList());
@@ -333,7 +326,6 @@ class RadarMapperTests extends AbstractMapperTests {
     Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().getTitle(), segment.getTitle());
     Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().getDescription(), segment.getDescription());
     Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().getPosition(), segment.getPosition());
-    Assertions.assertEquals(mappedRadar.getSegmentList().iterator().next().isActive(), segment.isActive());
 
     // Compare technology blips values
     Assertions.assertNotNull(mappedRadar.getTechnologyBlipList());

@@ -71,7 +71,6 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       ringDto.setDescription(record[1]);
       ringDto.setPosition(Integer.parseInt(record[2]));
       ringDto.setColor(record[3]);
-      ringDto.setActive(true);
       this.ringService.save(ringDto);
     }
   }
@@ -93,7 +92,6 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       segmentDto.setTitle(record[0]);
       segmentDto.setDescription(record[1]);
       segmentDto.setPosition(Integer.parseInt(record[2]));
-      segmentDto.setActive(true);
       this.segmentService.save(segmentDto);
     }
   }

@@ -37,7 +37,7 @@ class SegmentRepositoryTests extends AbstractRepositoryTests {
     radar.setTitle("My radar title");
     radar.setDescription("My radar description");
     radar.setPrimary(true);
-    radar.setActive(true);
+    radar.setActive(false);
     radarRepository.saveAndFlush(radar);
 
     final Segment segment = new Segment();

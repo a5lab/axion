@@ -63,7 +63,6 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment Description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     final Ring ring = new Ring();
     ring.setId(3L);
@@ -125,7 +124,6 @@ class TechnologyBlipMapperTests extends AbstractMapperTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment Description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     final Ring ring = new Ring();
     ring.setId(3L);

@@ -56,7 +56,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     final Ring ring = new Ring();
     ring.setId(3L);
@@ -65,7 +64,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     ring.setDescription("My ring description");
     ring.setPosition(1);
     ring.setColor("#fbdb84");
-    ring.setActive(true);
 
     final Technology technology = new Technology();
     technology.setId(4L);
@@ -113,7 +111,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     final Ring ring = new Ring();
     ring.setId(3L);
@@ -122,7 +119,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     ring.setDescription("My ring description");
     ring.setPosition(1);
     ring.setColor("#fbdb84");
-    ring.setActive(true);
 
     final Technology technology = new Technology();
     technology.setId(4L);
@@ -176,7 +172,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     ring.setDescription("My ring description");
     ring.setPosition(1);
     ring.setColor("#fbdb84");
-    ring.setActive(true);
 
     final Segment segment = new Segment();
     segment.setId(2L);
@@ -184,7 +179,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     final Technology technology = new Technology();
     technology.setId(4L);
@@ -227,7 +221,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     ring.setDescription("My ring description");
     ring.setPosition(1);
     ring.setColor("#fbdb84");
-    ring.setActive(true);
 
     final Segment segment = new Segment();
     segment.setId(2L);
@@ -235,7 +228,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     final Technology technology = new Technology();
     technology.setId(4L);
@@ -287,7 +279,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     ring.setDescription("My ring description");
     ring.setPosition(1);
     ring.setColor("#fbdb84");
-    ring.setActive(true);
 
     final Segment segment = new Segment();
     segment.setId(10L);
@@ -295,7 +286,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     segment.setTitle("My segment title");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     final Technology technology = new Technology();
     technology.setId(10L);

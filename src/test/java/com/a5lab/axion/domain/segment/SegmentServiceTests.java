@@ -44,7 +44,6 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setTitle("My segment");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     List<Segment> segmentList = List.of(segment);
     Mockito.when(segmentRepository.findAll(any(Sort.class))).thenReturn(segmentList);
@@ -64,7 +63,6 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setTitle("My segment");
     segment.setDescription("My segment description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     List<Segment> segmentList = List.of(segment);
     Page<Segment> page = new PageImpl<>(segmentList);
@@ -92,7 +90,6 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setTitle("My title");
     segment.setDescription("My description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     Mockito.when(segmentRepository.findById(segment.getId())).thenReturn(Optional.of(segment));
 
@@ -112,7 +109,6 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setTitle("My title");
     segment.setDescription("My description");
     segment.setPosition(1);
-    segment.setActive(true);
 
     Mockito.when(segmentRepository.findByTitle(segment.getTitle())).thenReturn(Optional.of(segment));
 
@@ -139,8 +135,6 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setTitle("My title");
     segment.setDescription("My description");
     segment.setPosition(1);
-    segment.setActive(true);
-
 
     Mockito.when(segmentRepository.save(any())).thenReturn(segment);
     Mockito.when(radarRepository.findById(radar.getId())).thenReturn(Optional.of(radar));
@@ -157,16 +151,26 @@ class SegmentServiceTests extends AbstractServiceTests {
 
   @Test
   void shouldDeleteSegment() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(false);
+
     final Segment segment = new Segment();
     segment.setId(10L);
+    segment.setRadar(radar);
     segment.setTitle("My title");
     segment.setDescription("My description");
     segment.setPosition(1);
-    segment.setActive(true);
 
+    Mockito.when(segmentRepository.findById(any())).thenReturn(Optional.of(segment));
     Mockito.doAnswer((i) -> null).when(segmentRepository).deleteById(segment.getId());
 
     segmentService.deleteById(segment.getId());
+    Mockito.verify(segmentRepository).findById(segment.getId());
     Mockito.verify(segmentRepository).deleteById(segment.getId());
   }
 }

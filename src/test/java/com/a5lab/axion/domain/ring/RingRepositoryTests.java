@@ -37,7 +37,7 @@ class RingRepositoryTests extends AbstractRepositoryTests {
     radar.setTitle("My radar title");
     radar.setDescription("My radar description");
     radar.setPrimary(true);
-    radar.setActive(true);
+    radar.setActive(false);
     radarRepository.saveAndFlush(radar);
 
     final Ring ring = new Ring();
@@ -147,7 +147,7 @@ class RingRepositoryTests extends AbstractRepositoryTests {
     radar.setTitle("My radar title");
     radar.setDescription("My radar description");
     radar.setPrimary(true);
-    radar.setActive(true);
+    radar.setActive(false);
     radarRepository.saveAndFlush(radar);
 
     final Ring ring = new Ring();
@@ -177,7 +177,7 @@ class RingRepositoryTests extends AbstractRepositoryTests {
     radar.setTitle("My radar title");
     radar.setDescription("My radar description");
     radar.setPrimary(true);
-    radar.setActive(true);
+    radar.setActive(false);
     radarRepository.saveAndFlush(radar);
 
     String title = "SUPER";
