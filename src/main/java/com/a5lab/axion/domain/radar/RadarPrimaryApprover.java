@@ -8,12 +8,12 @@ import java.util.Objects;
 import java.util.Set;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.a5lab.axion.domain.ConstraintViolationImpl;
 import com.a5lab.axion.domain.ModelApprover;
-import com.a5lab.axion.domain.PathImpl;
 
 @RequiredArgsConstructor
 public class RadarPrimaryApprover implements ModelApprover {
@@ -30,7 +30,7 @@ public class RadarPrimaryApprover implements ModelApprover {
     if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary()) {
       ConstraintViolation<Radar> constraintViolation = new ConstraintViolationImpl<Radar>(
           messageSource.getMessage("radar.form.error.invalid_primary", null, LocaleContextHolder.getLocale()),
-          new PathImpl("primary"));
+          PathImpl.createPathFromString("primary"));
       Set<ConstraintViolation<Radar>> constraintViolationSet = new HashSet<>();
       constraintViolationSet.add(constraintViolation);
       throw new ConstraintViolationException(constraintViolationSet);

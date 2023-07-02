@@ -123,8 +123,8 @@ public class RadarCfgController {
     } catch (ConstraintViolationException e) {
       // Add errors to fields and global
       for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
-        String field = ((PathImpl) constraintViolation.getPropertyPath()).toString();
-        // String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
+        // fuck String field = ((PathImpl) constraintViolation.getPropertyPath()).toString();
+        String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
         if (field.isEmpty() || field.isBlank()) {
           bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
         } else {
