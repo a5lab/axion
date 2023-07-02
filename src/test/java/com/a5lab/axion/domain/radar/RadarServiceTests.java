@@ -23,7 +23,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
-import com.a5lab.axion.domain.InconsistentModelException;
+import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 
@@ -185,8 +185,8 @@ class RadarServiceTests extends AbstractServiceTests {
     Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(radarList);
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
-    InconsistentModelException exception =
-        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)), InconsistentModelException.class);
+    ValidationException exception =
+        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
   }
 

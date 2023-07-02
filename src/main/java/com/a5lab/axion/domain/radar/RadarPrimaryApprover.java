@@ -1,14 +1,15 @@
 package com.a5lab.axion.domain.radar;
 
-
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
-import com.a5lab.axion.domain.InconsistentModelException;
 import com.a5lab.axion.domain.ModelApprover;
+import com.a5lab.axion.domain.ModelError;
 
 @RequiredArgsConstructor
 public class RadarPrimaryApprover implements ModelApprover {
@@ -21,11 +22,12 @@ public class RadarPrimaryApprover implements ModelApprover {
 
 
   @Override
-  public void approve() throws InconsistentModelException {
+  public List<ModelError> approve() {
     if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary()) {
-      throw new InconsistentModelException("primary_invalid_primary",
+      return List.of(new ModelError("primary_invalid_primary",
           messageSource.getMessage("radar.form.error.invalid_primary", null, LocaleContextHolder.getLocale()),
-          "primary");
+          "primary"));
     }
+    return new LinkedList<>();
   }
 }

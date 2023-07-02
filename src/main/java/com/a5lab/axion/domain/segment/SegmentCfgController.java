@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.a5lab.axion.domain.InconsistentModelException;
+import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.utils.FlashMessages;
 
@@ -189,7 +189,7 @@ public class SegmentCfgController {
           messageSource.getMessage("segment.flash.info.deleted", null,
               LocaleContextHolder.getLocale()));
       return "redirect:/settings/segments";
-    } catch (InconsistentModelException e) {
+    } catch (ValidationException e) {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR, e.getMessage());
       return "redirect:/settings/segments";
     }

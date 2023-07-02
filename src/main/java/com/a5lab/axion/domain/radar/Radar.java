@@ -13,6 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -54,6 +55,7 @@ public class Radar extends AbstractAuditable {
   private RadarType radarType;
 
   @NotBlank
+  @Size(min = 1, max = 64)
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 
