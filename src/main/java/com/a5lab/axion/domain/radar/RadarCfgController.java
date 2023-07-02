@@ -197,7 +197,7 @@ public class RadarCfgController {
       bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
 
       // Show form again
-      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
+      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }

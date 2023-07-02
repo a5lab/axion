@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.radar;
 
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 
@@ -22,6 +23,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.InconsistentModelException;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
 
@@ -145,6 +147,73 @@ class RadarServiceTests extends AbstractServiceTests {
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
     Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
+    RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
+    Assertions.assertEquals(radar.getId(), radarDto.getId());
+    Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
+    Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
+
+    Mockito.verify(radarRepository).save(any());
+    Mockito.verify(radarRepository).findByPrimary(true);
+    Mockito.verify(radarTypeRepository).findById(radarType.getId());
+  }
+
+  @Test
+  void shouldFailToTheSaveSecondPrimaryRadarDto() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(radarType);
+    radar.setTitle("Radar title");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radar.setDescription("Radar description");
+
+    final Radar radar1 = new Radar();
+    radar1.setId(12L);
+    radar1.setRadarType(radarType);
+    radar1.setTitle("Radar title");
+    radar1.setPrimary(true);
+    radar1.setActive(true);
+    radar1.setDescription("Radar description");
+    List<Radar> radarList = List.of(radar1);
+
+    Mockito.when(radarRepository.save(any())).thenReturn(radar);
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(radarList);
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
+    InconsistentModelException exception =
+        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)), InconsistentModelException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+  }
+
+  @Test
+  void shouldSucceedToSavePrimaryRadarDtoWithNonPrimaryRadar() throws Exception {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
+    final Radar radar = new Radar();
+    radar.setId(2L);
+    radar.setRadarType(radarType);
+    radar.setTitle("Radar title");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radar.setDescription("Radar description");
+
+    final Radar radar1 = new Radar();
+    radar1.setId(3L);
+    radar1.setRadarType(radarType);
+    radar1.setTitle("Radar title");
+    radar1.setPrimary(false);
+    radar1.setActive(false);
+    radar1.setDescription("Radar description");
+    List<Radar> radarList = List.of(radar1);
+
+    Mockito.when(radarRepository.save(any())).thenReturn(radar);
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(radarList);
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
     RadarDto radarDto = radarService.save(radarMapper.toDto(radar));

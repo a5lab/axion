@@ -3,10 +3,12 @@ package com.a5lab.axion.domain.radar;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
@@ -192,7 +195,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-
     Mockito.doThrow(new DataIntegrityViolationException("constraint UC_RADARS_TITLE_index violation"))
         .when(radarService).save(any(RadarDto.class));
 
@@ -210,6 +212,68 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("this title is already taken"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
+  }
+
+  @Test
+  public void shouldFailToCreateRadarDueToUnknownError() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type");
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+
+    Mockito.doThrow(new DataIntegrityViolationException("unknown data integrity error"))
+        .when(radarService).save(any(RadarDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/radars/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("title", radarDto.getTitle())
+            .param("description", radarDto.getDescription())
+            .sessionAttr("radarDto", radarDto))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("unknown data integrity error"));
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
+  }
+
+  @Test
+  public void shouldFailToCreateRadarDueToNotOnePrimary() throws Exception {
+    /* TODO: uncomment after reimplementation
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type");
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+
+    Mockito.doThrow(new ConstraintViolationException("should be only one primary radar", null))
+        .when(radarService).save(any(RadarDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/radars/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("title", radarDto.getTitle())
+            .param("description", radarDto.getDescription())
+            .sessionAttr("radarDto", radarDto))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("primary"));
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
+    */
   }
 
   @Test
@@ -337,6 +401,37 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
 
+  @Test
+  public void shouldFailToUpdateRadarDueToNotOnePrimary() throws Exception {
+    /* TODO: uncomment after reimplementation
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type");
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+
+    Mockito.doThrow(new ConstraintViolationException(null))
+        .when(radarService).save(any(RadarDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/radars/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("title", radarDto.getTitle())
+            .param("description", radarDto.getDescription())
+            .sessionAttr("radarDto", radarDto))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/edit"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("primary"));
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
+    */
+  }
 
   @Test
   public void shouldDeleteRadar() throws Exception {
