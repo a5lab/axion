@@ -255,7 +255,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    Mockito.doThrow(new ConstraintViolationException("should be only one primary radar", ))
+    Mockito.doThrow(new ConstraintViolationException("should be only one primary radar", null))
         .when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
@@ -410,7 +410,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    Mockito.doThrow(new ConstraintViolationException("should be only one primary radar"))
+    Mockito.doThrow(new ConstraintViolationException(null))
         .when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
