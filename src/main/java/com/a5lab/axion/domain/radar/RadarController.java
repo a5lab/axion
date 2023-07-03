@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.a5lab.axion.utils.FlashMessages;
+import com.a5lab.axion.domain.FlashMessages;
 
 @Controller
 @RequestMapping("/radars")
