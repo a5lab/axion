@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
@@ -109,7 +108,7 @@ public class RingCfgController {
     } catch (ConstraintViolationException e) {
       // Add errors to fields and global
       for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
-        String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
+        String field = constraintViolation.getPropertyPath().toString();
         if (field.isEmpty() || field.isBlank()) {
           bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
         } else {
@@ -163,7 +162,7 @@ public class RingCfgController {
         // Add errors to fields and global
         ConstraintViolationException exception = (ConstraintViolationException) e.getCause().getCause();
         for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
-          String field = ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString();
+          String field = constraintViolation.getPropertyPath().toString();
           if (field.isEmpty() || field.isBlank()) {
             bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
           } else {
