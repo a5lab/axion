@@ -1,10 +1,14 @@
 package com.a5lab.axion.domain.radar;
 
 import jakarta.persistence.criteria.Predicate;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -15,11 +19,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
+
 
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class RadarServiceImpl implements RadarService {
+
+  private final Validator validator;
 
   private final MessageSource messageSource;
 
@@ -70,14 +79,26 @@ public class RadarServiceImpl implements RadarService {
   @Override
   @Transactional
   public RadarDto save(RadarDto radarDto) {
+    Radar radar = radarMapper.toEntity(radarDto);
+    List<ModelError> modelErrorList = new LinkedList<>();
     if (radarDto.isPrimary()) {
       // Find another primary radar
       List<Radar> radarList = radarRepository.findByPrimary(true);
-      for (Radar radar : radarList) {
-        new RadarPrimaryApprover(messageSource, radarDto, radar).approve();
+      for (Radar radarItem : radarList) {
+        modelErrorList.addAll(new RadarPrimaryApprover(messageSource, radarDto, radarItem).approve());
       }
     }
-    return radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
+
+    // Throw exception if violations are exists
+    Set<ConstraintViolation<Radar>> constraintViolationSet = validator.validate(radar);
+    if (!modelErrorList.isEmpty() || !constraintViolationSet.isEmpty()) {
+      for (ConstraintViolation<Radar> constraintViolation : constraintViolationSet) {
+        modelErrorList.add(new ModelError(constraintViolation.getMessageTemplate(), constraintViolation.getMessage(),
+            constraintViolation.getPropertyPath().toString()));
+      }
+      throw new ValidationException(modelErrorList);
+    }
+    return radarMapper.toDto(radarRepository.save(radar));
   }
 
   @Override

@@ -1,5 +1,7 @@
 package com.a5lab.axion.domain;
 
+import java.util.List;
+
 public interface ModelApprover {
-  void approve() throws InconsistentModelException;
+  List<ModelError> approve();
 }
