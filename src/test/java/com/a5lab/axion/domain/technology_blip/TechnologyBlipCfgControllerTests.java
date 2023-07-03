@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.FlashMessages;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
@@ -32,7 +33,6 @@ import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
 import com.a5lab.axion.domain.technology.TechnologyDto;
 import com.a5lab.axion.domain.technology.TechnologyService;
-import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(TechnologyBlipCfgController.class)
 public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {

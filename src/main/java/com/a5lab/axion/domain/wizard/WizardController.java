@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.a5lab.axion.domain.FlashMessages;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
-import com.a5lab.axion.utils.FlashMessages;
 
 @Controller
 @RequestMapping("/wizard")

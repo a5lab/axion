@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import com.a5lab.axion.config.MapperConfiguration;
-import com.a5lab.axion.utils.PlainMapper;
+import com.a5lab.axion.domain.PlainMapper;
 
 @Mapper(config = MapperConfiguration.class)
 public abstract class RadarTypeMapper implements PlainMapper<RadarType, RadarTypeDto> {

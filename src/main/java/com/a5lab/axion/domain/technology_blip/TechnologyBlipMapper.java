@@ -5,11 +5,11 @@ import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.a5lab.axion.config.MapperConfiguration;
+import com.a5lab.axion.domain.PlainMapper;
 import com.a5lab.axion.domain.radar.RadarRepository;
 import com.a5lab.axion.domain.ring.RingRepository;
 import com.a5lab.axion.domain.segment.SegmentRepository;
 import com.a5lab.axion.domain.technology.TechnologyRepository;
-import com.a5lab.axion.utils.PlainMapper;
 
 @Mapper(config = MapperConfiguration.class)
 public abstract class TechnologyBlipMapper implements PlainMapper<TechnologyBlip, TechnologyBlipDto> {

@@ -26,9 +26,9 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.a5lab.axion.domain.AbstractAuditable;
+import com.a5lab.axion.domain.JpaConstants;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
-import com.a5lab.axion.utils.JpaConstants;
 
 @Entity
 @Table(name = "segments")

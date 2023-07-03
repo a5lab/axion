@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
-import com.a5lab.axion.utils.FlashMessages;
+import com.a5lab.axion.domain.FlashMessages;
 
 @WebMvcTest(TechnologyCfgController.class)
 public class TechnologyCfgControllerTests extends AbstractControllerTests {

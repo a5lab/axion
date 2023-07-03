@@ -1,4 +1,4 @@
-package com.a5lab.axion.utils;
+package com.a5lab.axion.domain;
 
 import java.util.Map;
 

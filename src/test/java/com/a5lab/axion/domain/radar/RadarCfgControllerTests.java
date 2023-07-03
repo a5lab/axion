@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import jakarta.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,15 +21,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
+import com.a5lab.axion.domain.FlashMessages;
 import com.a5lab.axion.domain.ModelError;
 import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
-import com.a5lab.axion.utils.FlashMessages;
 
 @WebMvcTest(RadarCfgController.class)
 public class RadarCfgControllerTests extends AbstractControllerTests {
