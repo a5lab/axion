@@ -200,8 +200,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    Mockito.doThrow(new DataIntegrityViolationException("constraint UC_RADARS_TITLE_index violation"))
-        .when(radarService).save(any(RadarDto.class));
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "is already taken", "title"));
+    Mockito.doThrow(new ValidationException(modelErrorList)).when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -214,37 +214,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("this title is already taken"));
-
-    Mockito.verify(radarService).save(any(RadarDto.class));
-  }
-
-  @Test
-  public void shouldFailToCreateRadarDueToUnknownError() throws Exception {
-    final RadarDto radarDto = new RadarDto();
-    radarDto.setId(10L);
-    radarDto.setRadarTypeId(3L);
-    radarDto.setRadarTypeTitle("My radar type");
-    radarDto.setTitle("My title");
-    radarDto.setDescription("My description");
-    radarDto.setPrimary(true);
-    radarDto.setActive(true);
-
-    Mockito.doThrow(new DataIntegrityViolationException("unknown data integrity error"))
-        .when(radarService).save(any(RadarDto.class));
-
-    MvcResult result = mockMvc.perform(post("/settings/radars/create")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
-            .param("title", radarDto.getTitle())
-            .param("description", radarDto.getDescription())
-            .sessionAttr("radarDto", radarDto))
-        .andExpect(status().isOk())
-        .andExpect(view().name("settings/radars/add"))
-        .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("unknown data integrity error"));
+    Assertions.assertTrue(content.contains("is already taken"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -390,8 +360,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    Mockito.doThrow(new DataIntegrityViolationException("constraint UC_RADARS_TITLE_index violation"))
-        .when(radarService).save(any(RadarDto.class));
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "is already taken", "title"));
+    Mockito.doThrow(new ValidationException(modelErrorList)).when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -404,7 +374,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("this title is already taken"));
+    Assertions.assertTrue(content.contains("is already taken"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }

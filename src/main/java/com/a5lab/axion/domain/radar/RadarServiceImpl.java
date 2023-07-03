@@ -89,6 +89,13 @@ public class RadarServiceImpl implements RadarService {
       }
     }
 
+    // Check uniqueness by title
+    List<Radar> radarList = this.radarRepository.findByTitle(radarDto.getTitle());
+    for (Radar radarItem : radarList) {
+      modelErrorList.addAll(new RadarUniqueTitleApprover(messageSource, radarDto, radarItem).approve());
+    }
+
+
     // Throw exception if violations are exists
     Set<ConstraintViolation<Radar>> constraintViolationSet = validator.validate(radar);
     if (!modelErrorList.isEmpty() || !constraintViolationSet.isEmpty()) {
