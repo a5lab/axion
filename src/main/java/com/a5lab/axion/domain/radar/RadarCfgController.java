@@ -115,6 +115,7 @@ public class RadarCfgController {
             messageSource.getMessage("radar.form.error.data_integrity_error", null,
                 LocaleContextHolder.getLocale()));
       }
+
       // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/radars/add");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
@@ -184,13 +185,21 @@ public class RadarCfgController {
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     } catch (ValidationException e) {
-      // todo: bindingResult.rejectValue(e.getField(), e.getErrorCode(), e.getMessage());
+      // Add errors to fields and global
+      for (ModelError modelError : e.getModelErrorList()) {
+        if (modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+          bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
+        } else {
+          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
+        }
+      }
 
       // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
       modelAndView.addObject("radar_types", radarTypeService.findAll());
       return modelAndView;
     }
+
   }
 
   @GetMapping(value = "/delete/{id}")
