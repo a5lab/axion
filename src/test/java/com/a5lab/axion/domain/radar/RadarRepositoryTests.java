@@ -132,46 +132,4 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
     assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
         .isInstanceOf(ValidationException.class);
   }
-
-  @Test
-  void shouldFailOnSecondPrimaryRadar() {
-    /* TODO
-    // Create a radar type
-    final RadarType radarType = new RadarType();
-    radarType.setTitle("Technology radars 2");
-    radarType.setCode("technology_radar_2");
-    radarType.setDescription("Technology radars");
-    radarTypeRepository.saveAndFlush(radarType);
-
-    // Create a radar
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My new test radar");
-    radar.setDescription("My awesome description");
-    radar.setPrimary(true);
-    radar.setActive(false);
-    radarRepository.saveAndFlush(radar);
-
-    // Create second radar
-    final Radar radar1 = new Radar();
-    radar1.setRadarType(radarType);
-    radar1.setTitle("My new primary test radar");
-    radar1.setDescription("My awesome description");
-    radar1.setPrimary(true);
-    radar1.setActive(false);
-
-    Assertions.assertNull(radar1.getId());
-    ConstraintViolationException exception =
-        catchThrowableOfType(() -> radarRepository.saveAndFlush(radar1),
-            ConstraintViolationException.class);
-
-    Assertions.assertNotNull(exception);
-    Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
-    for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
-      Assertions.assertEquals(
-          ((PathImpl) constraintViolation.getPropertyPath()).getLeafNode().asString(), "primary");
-      Assertions.assertEquals(constraintViolation.getMessage(), "can be only one primary");
-    }
-   */
-  }
 }

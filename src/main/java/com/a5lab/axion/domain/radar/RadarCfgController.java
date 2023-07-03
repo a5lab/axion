@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -33,8 +32,6 @@ import com.a5lab.axion.domain.radar_type.RadarTypeService;
 @RequestMapping("/settings/radars")
 @RequiredArgsConstructor
 public class RadarCfgController {
-  public static final String UC_RADARS_TITLE = "UC_RADARS_TITLE";
-
   private final RadarService radarService;
 
   private final RadarTypeService radarTypeService;
@@ -105,21 +102,6 @@ public class RadarCfgController {
           messageSource.getMessage("radar.flash.info.created", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/radars");
-    } catch (DataIntegrityViolationException e) {
-      if (e.getMessage().contains(UC_RADARS_TITLE)) {
-        bindingResult.rejectValue("title", "title_is_taken",
-            messageSource.getMessage("radar.form.error.title_is_taken", null,
-                LocaleContextHolder.getLocale()));
-      } else {
-        bindingResult.reject("unknown_data_integrity_error",
-            messageSource.getMessage("radar.form.error.data_integrity_error", null,
-                LocaleContextHolder.getLocale()));
-      }
-
-      // Show form again
-      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-      modelAndView.addObject("radar_types", radarTypeService.findAll());
-      return modelAndView;
     } catch (ValidationException e) {
       // Add errors to fields and global
       for (ModelError modelError : e.getModelErrorList()) {
@@ -169,21 +151,6 @@ public class RadarCfgController {
           messageSource.getMessage("radar.flash.info.updated", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/radars");
-    } catch (DataIntegrityViolationException e) {
-      if (e.getMessage().contains(UC_RADARS_TITLE)) {
-        bindingResult.rejectValue("title", "title_is_taken",
-            messageSource.getMessage("radar.form.error.title_is_taken", null,
-                LocaleContextHolder.getLocale()));
-      } else {
-        bindingResult.reject("unknown_data_integrity_error",
-            messageSource.getMessage("radar.form.error.data_integrity_error", null,
-                LocaleContextHolder.getLocale()));
-      }
-      // Show form again
-      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
-      modelAndView.addObject("radarDto", radarDto);
-      modelAndView.addObject("radar_types", radarTypeService.findAll());
-      return modelAndView;
     } catch (ValidationException e) {
       // Add errors to fields and global
       for (ModelError modelError : e.getModelErrorList()) {
