@@ -41,10 +41,10 @@ class RingRepositoryTests extends AbstractRepositoryTests {
     radarRepository.saveAndFlush(radar);
 
     final Ring ring = new Ring();
-    ring.setTitle("TEST");
+    ring.setTitle("ADOPT");
     ring.setRadar(radar);
     ring.setColor("d42d");
-    ring.setDescription("Very good description for Ring");
+    ring.setDescription("Very good description for ring");
 
     Assertions.assertNull(ring.getId());
     Ring saved = ringRepository.saveAndFlush(ring);
@@ -151,10 +151,10 @@ class RingRepositoryTests extends AbstractRepositoryTests {
     radarRepository.saveAndFlush(radar);
 
     final Ring ring = new Ring();
-    ring.setTitle("TEST");
+    ring.setTitle("ADOPT");
     ring.setRadar(radar);
     ring.setColor("d42d");
-    ring.setDescription("Very good description for Ring");
+    ring.setDescription("Very good description for ring");
 
     Assertions.assertNull(ring.getId());
     ringRepository.saveAndFlush(ring);

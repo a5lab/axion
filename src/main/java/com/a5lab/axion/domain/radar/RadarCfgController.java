@@ -105,7 +105,7 @@ public class RadarCfgController {
     } catch (ValidationException e) {
       // Add errors to fields and global
       for (ModelError modelError : e.getModelErrorList()) {
-        if (modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
           bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
         } else {
           bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
@@ -154,7 +154,7 @@ public class RadarCfgController {
     } catch (ValidationException e) {
       // Add errors to fields and global
       for (ModelError modelError : e.getModelErrorList()) {
-        if (modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
           bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
         } else {
           bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
