@@ -1,6 +1,7 @@
 package com.a5lab.axion.domain.segment;
 
 
+import java.util.LinkedList;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,9 @@ public class RadarActiveApprover implements ModelApprover {
   public List<ModelError> approve() throws ValidationException {
     if (segment.getRadar().isActive()) {
       return List.of(new ModelError("error_to_delete_due_to_active",
-          messageSource.getMessage("segment.flash.error.active_radar", null, LocaleContextHolder.getLocale()), null));
+          messageSource.getMessage("segment.flash.error.active_radar", null, LocaleContextHolder.getLocale()),
+          "primary"));
     }
-    return null;
+    return new LinkedList<>();
   }
 }
