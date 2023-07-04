@@ -106,6 +106,7 @@ public class RingCfgController {
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
     } catch (ConstraintViolationException e) {
+      // fuck
       // Add errors to fields and global
       for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
         String field = constraintViolation.getPropertyPath().toString();
@@ -158,6 +159,7 @@ public class RingCfgController {
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
     } catch (ConstraintViolationException e) {
+      // fuck
       if (e.getCause().getCause() instanceof ConstraintViolationException) {
         // Add errors to fields and global
         ConstraintViolationException exception = (ConstraintViolationException) e.getCause().getCause();

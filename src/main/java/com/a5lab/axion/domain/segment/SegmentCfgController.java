@@ -108,6 +108,7 @@ public class SegmentCfgController {
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
     } catch (ConstraintViolationException e) {
+      // fuck
       // Add errors to fields and global
       for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
         String field = constraintViolation.getPropertyPath().toString();
@@ -159,6 +160,7 @@ public class SegmentCfgController {
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
     } catch (TransactionSystemException e) {
+      // fuck
       if (e.getCause().getCause() instanceof ConstraintViolationException) {
         // Add errors to fields and global
         ConstraintViolationException exception = (ConstraintViolationException) e.getCause().getCause();
