@@ -78,7 +78,7 @@ public class SegmentCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("segment.flash.error.invalid_id", null,
+          messageSource.getMessage("segment.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
     }
@@ -104,7 +104,7 @@ public class SegmentCfgController {
     try {
       segmentService.save(segmentDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("segment.flash.info.created", null,
+          messageSource.getMessage("segment.info.created", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
     } catch (ConstraintViolationException e) {
@@ -137,7 +137,7 @@ public class SegmentCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("segment.flash.error.invalid_id", null,
+          messageSource.getMessage("segment.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
     }
@@ -156,7 +156,7 @@ public class SegmentCfgController {
     try {
       segmentService.save(segmentDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("segment.flash.info.updated", null,
+          messageSource.getMessage("segment.info.updated", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
     } catch (TransactionSystemException e) {
@@ -187,7 +187,7 @@ public class SegmentCfgController {
     try {
       segmentService.deleteById(id);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("segment.flash.info.deleted", null,
+          messageSource.getMessage("segment.info.deleted", null,
               LocaleContextHolder.getLocale()));
       return "redirect:/settings/segments";
     } catch (ValidationException e) {

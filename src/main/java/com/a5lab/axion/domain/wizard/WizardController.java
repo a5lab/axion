@@ -71,14 +71,14 @@ public class WizardController {
 
       // Redirect
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("radar.flash.info.created", null,
+          messageSource.getMessage("radar.info.created", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/home");
 
     } catch (Exception e) {
       // Redirect
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("radar.flash.error.exception", new Object[] {e.getMessage().toLowerCase()},
+          messageSource.getMessage("radar.error.exception", new Object[] {e.getMessage().toLowerCase()},
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/home");
     }

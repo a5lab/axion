@@ -67,7 +67,7 @@ public class TenantCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("tenant.flash.error.invalid_id", null,
+          messageSource.getMessage("tenant.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/tenants");
     }
@@ -90,7 +90,7 @@ public class TenantCfgController {
     }
     tenantService.save(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.flash.info.created", null,
+        messageSource.getMessage("tenant.info.created", null,
             LocaleContextHolder.getLocale()));
     return new ModelAndView("redirect:/settings/tenants");
   }
@@ -104,7 +104,7 @@ public class TenantCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("tenant.flash.error.invalid_id", null,
+          messageSource.getMessage("tenant.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/tenants");
     }
@@ -120,7 +120,7 @@ public class TenantCfgController {
     }
     tenantService.save(tenantDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.flash.info.updated", null,
+        messageSource.getMessage("tenant.info.updated", null,
             LocaleContextHolder.getLocale()));
     return new ModelAndView("redirect:/settings/tenants");
   }
@@ -129,7 +129,7 @@ public class TenantCfgController {
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     tenantService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.flash.info.deleted", null,
+        messageSource.getMessage("tenant.info.deleted", null,
             LocaleContextHolder.getLocale()));
     return "redirect:/settings/tenants";
   }

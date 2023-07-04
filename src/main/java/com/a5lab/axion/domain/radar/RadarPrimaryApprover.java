@@ -25,7 +25,7 @@ public class RadarPrimaryApprover implements ModelApprover {
   public List<ModelError> approve() {
     if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary()) {
       return List.of(new ModelError("primary_invalid_primary",
-          messageSource.getMessage("radar.form.error.invalid_primary", null, LocaleContextHolder.getLocale()),
+          messageSource.getMessage("radar.error.invalid_primary", null, LocaleContextHolder.getLocale()),
           "primary"));
     }
     return new LinkedList<>();

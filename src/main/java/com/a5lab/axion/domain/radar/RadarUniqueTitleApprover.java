@@ -25,7 +25,7 @@ public class RadarUniqueTitleApprover implements ModelApprover {
   public List<ModelError> approve() {
     if (!Objects.equals(radarDto.getId(), radar.getId())) {
       return List.of(new ModelError("title_is_taken",
-          messageSource.getMessage("radar.form.error.title_is_taken", null, LocaleContextHolder.getLocale()),
+          messageSource.getMessage("radar.error.title_is_taken", null, LocaleContextHolder.getLocale()),
           "title"));
     }
     return new LinkedList<>();

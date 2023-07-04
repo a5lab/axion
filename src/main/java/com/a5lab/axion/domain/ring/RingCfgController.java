@@ -75,7 +75,7 @@ public class RingCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("ring.flash.error.invalid_id", null,
+          messageSource.getMessage("ring.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
     }
@@ -102,7 +102,7 @@ public class RingCfgController {
     try {
       ringService.save(ringDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("ring.flash.info.created", null,
+          messageSource.getMessage("ring.info.created", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
     } catch (ConstraintViolationException e) {
@@ -136,7 +136,7 @@ public class RingCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("ring.flash.error.invalid_id", null,
+          messageSource.getMessage("ring.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
     }
@@ -155,7 +155,7 @@ public class RingCfgController {
     try {
       ringService.save(ringDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("ring.flash.info.updated", null,
+          messageSource.getMessage("ring.info.updated", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
     } catch (ConstraintViolationException e) {
@@ -186,7 +186,7 @@ public class RingCfgController {
     try {
       ringService.deleteById(id);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("ring.flash.info.deleted", null,
+          messageSource.getMessage("ring.info.deleted", null,
               LocaleContextHolder.getLocale()));
       return "redirect:/settings/rings";
     } catch (ValidationException e) {

@@ -23,7 +23,7 @@ public class RadarActiveApprover implements ModelApprover {
   public List<ModelError> approve() throws ValidationException {
     if (segment.getRadar().isActive()) {
       return List.of(new ModelError("unable_to_delete_active_radar",
-          messageSource.getMessage("segment.flash.error.unable_to_delete_active_radar", null,
+          messageSource.getMessage("segment.error.unable_to_delete_active_radar", null,
               LocaleContextHolder.getLocale()), null));
     }
     return new LinkedList<>();
