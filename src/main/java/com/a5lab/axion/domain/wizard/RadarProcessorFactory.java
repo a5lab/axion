@@ -1,9 +1,8 @@
-package com.a5lab.axion.domain.wizard.processors;
+package com.a5lab.axion.domain.wizard;
 
 import org.springframework.context.ApplicationContext;
 
 import com.a5lab.axion.domain.radar_type.RadarType;
-import com.a5lab.axion.domain.wizard.WizardDto;
 
 public class RadarProcessorFactory {
   public RadarProcessor create(ApplicationContext applicationContext, WizardDto wizardDto) {

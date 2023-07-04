@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.wizard.processors;
+package com.a5lab.axion.domain.wizard;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,7 +20,6 @@ import com.a5lab.axion.domain.technology.TechnologyDto;
 import com.a5lab.axion.domain.technology.TechnologyService;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
-import com.a5lab.axion.domain.wizard.WizardDto;
 
 public class TechnologyRadarProcessor extends AbstractRadarProcessor {
 
