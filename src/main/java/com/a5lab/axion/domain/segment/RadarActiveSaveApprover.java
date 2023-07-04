@@ -13,7 +13,7 @@ import com.a5lab.axion.domain.ModelError;
 import com.a5lab.axion.domain.ValidationException;
 
 @RequiredArgsConstructor
-public class RadarActiveDeleteApprover implements ModelApprover {
+public class RadarActiveSaveApprover implements ModelApprover {
 
   private final MessageSource messageSource;
 
