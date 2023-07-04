@@ -174,7 +174,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setActive(true);
 
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
-    Mockito.doThrow(new ValidationException(modelErrorList)).when(radarService).save(any(RadarDto.class));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -201,7 +202,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setActive(true);
 
     List<ModelError> modelErrorList = List.of(new ModelError(null, "is already taken", "title"));
-    Mockito.doThrow(new ValidationException(modelErrorList)).when(radarService).save(any(RadarDto.class));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -231,7 +233,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setActive(true);
 
     List<ModelError> modelErrorList = List.of(new ModelError(null, "should be only one primary radar", "primary"));
-    Mockito.doThrow(new ValidationException(modelErrorList)).when(radarService).save(any(RadarDto.class));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -333,7 +336,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setActive(true);
 
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
-    Mockito.doThrow(new ValidationException(modelErrorList)).when(radarService).save(any(RadarDto.class));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -361,7 +365,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setActive(true);
 
     List<ModelError> modelErrorList = List.of(new ModelError(null, "is already taken", "title"));
-    Mockito.doThrow(new ValidationException(modelErrorList)).when(radarService).save(any(RadarDto.class));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -391,7 +396,8 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setActive(true);
 
     List<ModelError> modelErrorList = List.of(new ModelError(null, "should be only one primary radar", "primary"));
-    Mockito.doThrow(new ValidationException(modelErrorList)).when(radarService).save(any(RadarDto.class));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService).save(any(RadarDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)

@@ -95,7 +95,6 @@ public class RadarServiceImpl implements RadarService {
       modelErrorList.addAll(new RadarUniqueTitleApprover(messageSource, radarDto, radarItem).approve());
     }
 
-
     // Throw exception if violations are exists
     Set<ConstraintViolation<Radar>> constraintViolationSet = validator.validate(radar);
     if (!modelErrorList.isEmpty() || !constraintViolationSet.isEmpty()) {
@@ -103,7 +102,8 @@ public class RadarServiceImpl implements RadarService {
         modelErrorList.add(new ModelError(constraintViolation.getMessageTemplate(), constraintViolation.getMessage(),
             constraintViolation.getPropertyPath().toString()));
       }
-      throw new ValidationException(modelErrorList);
+      String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+      throw new ValidationException(errorMessage, modelErrorList);
     }
     return radarMapper.toDto(radarRepository.save(radar));
   }

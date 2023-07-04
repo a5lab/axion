@@ -3,6 +3,7 @@ package com.a5lab.axion.domain.segment;
 import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,6 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
 
 @RequiredArgsConstructor
 @Service
@@ -68,7 +72,12 @@ public class SegmentServiceImpl implements SegmentService {
   public void deleteById(Long id) {
     Optional<Segment> segmentOptional = segmentRepository.findById(id);
     if (segmentOptional.isPresent()) {
-      new RadarActiveApprover(messageSource, segmentOptional.get()).approve();
+      List<ModelError> modelErrorList = new LinkedList<>();
+      modelErrorList.addAll(new RadarActiveApprover(messageSource, segmentOptional.get()).approve());
+      if (!modelErrorList.isEmpty()) {
+        String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+        throw new ValidationException(errorMessage, modelErrorList);
+      }
       segmentRepository.deleteById(id);
     }
   }
