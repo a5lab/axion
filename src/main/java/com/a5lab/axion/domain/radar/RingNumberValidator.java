@@ -10,6 +10,7 @@ public class RingNumberValidator
     implements ConstraintValidator<RingNumberConstraint, Radar> {
 
   private static final int RING_NUBMER = 4;
+  String message() default "must be only four rings for active radar";
 
 
   @Override

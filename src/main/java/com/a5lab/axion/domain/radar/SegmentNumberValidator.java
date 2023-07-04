@@ -10,6 +10,7 @@ public class SegmentNumberValidator
     implements ConstraintValidator<SegmentNumberConstraint, Radar> {
 
   private static final int SEGMENT_NUBMER = 4;
+  String message() default "must be only four segments for active radar";
 
   @Override
   public boolean isValid(Radar radar, ConstraintValidatorContext context) {
