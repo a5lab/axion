@@ -72,7 +72,7 @@ public class RingServiceImpl implements RingService {
     Optional<Ring> ringOptional = ringRepository.findById(id);
     if (ringOptional.isPresent()) {
       List<ModelError> modelErrorList = new LinkedList<>();
-      modelErrorList.addAll(new RadarActiveApprover(messageSource, ringOptional.get()).approve());
+      modelErrorList.addAll(new RadarActiveDeleteApprover(messageSource, ringOptional.get()).approve());
       if (!modelErrorList.isEmpty()) {
         String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
         throw new ValidationException(errorMessage, modelErrorList);

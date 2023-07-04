@@ -12,7 +12,7 @@ import com.a5lab.axion.domain.ModelApprover;
 import com.a5lab.axion.domain.ModelError;
 
 @RequiredArgsConstructor
-public class RadarPrimaryApprover implements ModelApprover {
+public class RadarPrimarySaveApprover implements ModelApprover {
 
   private final MessageSource messageSource;
 

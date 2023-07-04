@@ -73,7 +73,7 @@ public class SegmentServiceImpl implements SegmentService {
     Optional<Segment> segmentOptional = segmentRepository.findById(id);
     if (segmentOptional.isPresent()) {
       List<ModelError> modelErrorList = new LinkedList<>();
-      modelErrorList.addAll(new RadarActiveApprover(messageSource, segmentOptional.get()).approve());
+      modelErrorList.addAll(new RadarActiveDeleteApprover(messageSource, segmentOptional.get()).approve());
       if (!modelErrorList.isEmpty()) {
         String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
         throw new ValidationException(errorMessage, modelErrorList);
