@@ -222,6 +222,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+    Assertions.assertTrue(content.contains("title"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -253,6 +254,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("is already taken"));
+    Assertions.assertTrue(content.contains("title"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -283,6 +285,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be only one primary radar"));
     Assertions.assertTrue(content.contains("primary"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
@@ -385,6 +388,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+    Assertions.assertTrue(content.contains("title"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -454,6 +458,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("is already taken"));
+    Assertions.assertTrue(content.contains("title"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -484,6 +489,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be only one primary radar"));
     Assertions.assertTrue(content.contains("primary"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));

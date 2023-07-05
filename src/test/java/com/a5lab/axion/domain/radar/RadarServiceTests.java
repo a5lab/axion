@@ -147,6 +147,7 @@ class RadarServiceTests extends AbstractServiceTests {
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
     Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
+    Mockito.when(radarRepository.findByTitle(radar.getTitle())).thenReturn(new LinkedList<>());
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
     RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
@@ -156,6 +157,7 @@ class RadarServiceTests extends AbstractServiceTests {
 
     Mockito.verify(radarRepository).save(any());
     Mockito.verify(radarRepository).findByPrimary(true);
+    Mockito.verify(radarRepository).findByTitle(any());
     Mockito.verify(radarTypeRepository).findById(radarType.getId());
   }
 
@@ -175,7 +177,7 @@ class RadarServiceTests extends AbstractServiceTests {
     final Radar radar1 = new Radar();
     radar1.setId(12L);
     radar1.setRadarType(radarType);
-    radar1.setTitle("Radar title");
+    radar1.setTitle("Any radar title");
     radar1.setPrimary(true);
     radar1.setActive(true);
     radar1.setDescription("Radar description");
@@ -183,6 +185,7 @@ class RadarServiceTests extends AbstractServiceTests {
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
     Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(radarList);
+    Mockito.when(radarRepository.findByTitle(radar.getTitle())).thenReturn(radarList);
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
     ValidationException exception =
@@ -190,6 +193,7 @@ class RadarServiceTests extends AbstractServiceTests {
     Assertions.assertFalse(exception.getMessage().isEmpty());
 
     Mockito.verify(radarRepository).findByPrimary(true);
+    Mockito.verify(radarRepository).findByTitle(any());
     Mockito.verify(radarTypeRepository).findById(radarType.getId());
   }
 
@@ -216,6 +220,7 @@ class RadarServiceTests extends AbstractServiceTests {
     List<Radar> radarList = List.of(radar1);
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(radarList);
     Mockito.when(radarRepository.findByTitle(any())).thenReturn(radarList);
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
@@ -223,6 +228,7 @@ class RadarServiceTests extends AbstractServiceTests {
         catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
 
+    Mockito.verify(radarRepository).findByPrimary(true);
     Mockito.verify(radarRepository).findByTitle(any());
     Mockito.verify(radarTypeRepository).findById(radarType.getId());
   }
