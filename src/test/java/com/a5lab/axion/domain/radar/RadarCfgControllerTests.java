@@ -3,7 +3,6 @@ package com.a5lab.axion.domain.radar;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -16,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
@@ -156,6 +154,41 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/radars"))
         .andExpect(
             MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The radar has been created successfully."))
+        .andReturn();
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
+  }
+
+  @Test
+  public void shouldCreateRadarE() throws Exception {
+    final RadarTypeDto radarTypeDto = new RadarTypeDto();
+    radarTypeDto.setId(1L);
+    radarTypeDto.setDescription("My Description");
+    radarTypeDto.setTitle("My title");
+    radarTypeDto.setCode("My code");
+
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(2L);
+    radarDto.setRadarTypeId(radarTypeDto.getId());
+    radarDto.setRadarTypeTitle(radarTypeDto.getTitle());
+    radarDto.setTitle("My title");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+
+    List<ModelError> modelErrorList = List.of(new ModelError("", null, null));
+    Mockito.doThrow(new ValidationException(modelErrorList)).when(radarService).save(any(RadarDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/radars/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("title", radarDto.getTitle())
+            .param("description", radarDto.getDescription())
+            .sessionAttr("radarDto", radarDto))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/radars/add"))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "Validation is occurred"))
         .andReturn();
 
     Mockito.verify(radarService).save(any(RadarDto.class));

@@ -3,7 +3,6 @@ package com.a5lab.axion.domain.radar;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyString;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -252,7 +251,7 @@ class RadarServiceTests extends AbstractServiceTests {
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
     Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(radarList);
-    Mockito.when(radarRepository.findByTitle(anyString())).thenReturn(radarList);
+    Mockito.when(radarRepository.findByTitle(radar1.getTitle())).thenReturn(radarList);
     Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
 
     RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
