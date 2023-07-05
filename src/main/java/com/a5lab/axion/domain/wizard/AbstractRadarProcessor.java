@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.wizard.processors;
+package com.a5lab.axion.domain.wizard;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,7 +14,6 @@ import org.springframework.util.ResourceUtils;
 
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
-import com.a5lab.axion.domain.wizard.WizardDto;
 
 public abstract class AbstractRadarProcessor implements RadarProcessor {
 

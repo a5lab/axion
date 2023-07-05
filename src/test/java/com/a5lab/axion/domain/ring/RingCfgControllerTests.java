@@ -23,9 +23,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.FlashMessages;
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
+import com.a5lab.axion.domain.segment.SegmentDto;
 
 @WebMvcTest(RingCfgController.class)
 public class RingCfgControllerTests extends AbstractControllerTests {
@@ -128,6 +131,10 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
 
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "should be uppercase", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
+
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("description", ringDto.getDescription())
@@ -139,6 +146,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("should be uppercase"));
+
+    Mockito.verify(ringService).save(any(RingDto.class));
   }
 
   @Test
@@ -192,6 +201,10 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToCreateRingOnBlankDescription() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
+
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
@@ -200,6 +213,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(ringService).save(any(RingDto.class));
   }
 
   @Test
@@ -291,6 +306,10 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToUpdateRing() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
+
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
@@ -299,6 +318,8 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(ringService).save(any(RingDto.class));
   }
 
   @Test

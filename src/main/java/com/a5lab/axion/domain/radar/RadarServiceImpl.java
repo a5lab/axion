@@ -85,16 +85,15 @@ public class RadarServiceImpl implements RadarService {
       // Find another primary radar
       List<Radar> radarList = radarRepository.findByPrimary(true);
       for (Radar radarItem : radarList) {
-        modelErrorList.addAll(new RadarPrimaryApprover(messageSource, radarDto, radarItem).approve());
+        modelErrorList.addAll(new RadarPrimarySaveApprover(messageSource, radarDto, radarItem).approve());
       }
     }
 
     // Check uniqueness by title
     List<Radar> radarList = this.radarRepository.findByTitle(radarDto.getTitle());
     for (Radar radarItem : radarList) {
-      modelErrorList.addAll(new RadarUniqueTitleApprover(messageSource, radarDto, radarItem).approve());
+      modelErrorList.addAll(new RadarUniqueTitleSaveApprover(messageSource, radarDto, radarItem).approve());
     }
-
 
     // Throw exception if violations are exists
     Set<ConstraintViolation<Radar>> constraintViolationSet = validator.validate(radar);
@@ -103,7 +102,8 @@ public class RadarServiceImpl implements RadarService {
         modelErrorList.add(new ModelError(constraintViolation.getMessageTemplate(), constraintViolation.getMessage(),
             constraintViolation.getPropertyPath().toString()));
       }
-      throw new ValidationException(modelErrorList);
+      String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+      throw new ValidationException(errorMessage, modelErrorList);
     }
     return radarMapper.toDto(radarRepository.save(radar));
   }

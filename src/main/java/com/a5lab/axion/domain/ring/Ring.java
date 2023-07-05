@@ -15,6 +15,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -39,7 +40,6 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@RingActiveConstraint
 public class Ring extends AbstractAuditable {
 
   @Id
@@ -53,11 +53,13 @@ public class Ring extends AbstractAuditable {
   private Radar radar;
 
   @NotBlank
+  @Size(min = 1, max = 64)
   @RingTitleConstraint
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 
   @NotBlank
+  @Size(min = 1, max = 512)
   @Column(name = "description", nullable = false)
   private String description;
 
@@ -67,6 +69,7 @@ public class Ring extends AbstractAuditable {
   private int position;
 
   @NotBlank
+  @Size(min = 1, max = 8)
   @Column(name = "color", nullable = false)
   private String color;
 

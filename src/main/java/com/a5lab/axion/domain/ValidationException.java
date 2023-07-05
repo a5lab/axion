@@ -9,9 +9,16 @@ import lombok.Getter;
 public class ValidationException extends RuntimeException {
   private final List<ModelError> modelErrorList = new LinkedList<>();
 
-
-  public ValidationException(List<ModelError> modelErrorList) {
-    super("Validation error is occurred");
+  public ValidationException(String errorMessage, List<ModelError> modelErrorList) {
+    super(errorMessage);
     this.modelErrorList.addAll(modelErrorList);
+  }
+
+  public static String buildErrorMessage(List<ModelError> modelErrorList) {
+    StringBuilder stringBuilder = new StringBuilder();
+    for (ModelError modelError : modelErrorList) {
+      stringBuilder.append(modelError.getErrorMessage());
+    }
+    return stringBuilder.toString();
   }
 }

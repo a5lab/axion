@@ -1,7 +1,5 @@
 package com.a5lab.axion.domain.ring;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5lab.axion.domain.FlashMessages;
+import com.a5lab.axion.domain.ModelError;
 import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarService;
 
@@ -75,7 +74,7 @@ public class RingCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("ring.flash.error.invalid_id", null,
+          messageSource.getMessage("ring.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
     }
@@ -102,17 +101,16 @@ public class RingCfgController {
     try {
       ringService.save(ringDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("ring.flash.info.created", null,
+          messageSource.getMessage("ring.info.created", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
-    } catch (ConstraintViolationException e) {
+    } catch (ValidationException e) {
       // Add errors to fields and global
-      for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
-        String field = constraintViolation.getPropertyPath().toString();
-        if (field.isEmpty() || field.isBlank()) {
-          bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
+      for (ModelError modelError : e.getModelErrorList()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+          bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
         } else {
-          bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
+          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
         }
       }
 
@@ -135,7 +133,7 @@ public class RingCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("ring.flash.error.invalid_id", null,
+          messageSource.getMessage("ring.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
     }
@@ -154,20 +152,16 @@ public class RingCfgController {
     try {
       ringService.save(ringDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("ring.flash.info.updated", null,
+          messageSource.getMessage("ring.info.updated", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/rings");
-    } catch (ConstraintViolationException e) {
-      if (e.getCause().getCause() instanceof ConstraintViolationException) {
-        // Add errors to fields and global
-        ConstraintViolationException exception = (ConstraintViolationException) e.getCause().getCause();
-        for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
-          String field = constraintViolation.getPropertyPath().toString();
-          if (field.isEmpty() || field.isBlank()) {
-            bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
-          } else {
-            bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
-          }
+    } catch (ValidationException e) {
+      // Add errors to fields and global
+      for (ModelError modelError : e.getModelErrorList()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+          bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
+        } else {
+          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
         }
       }
 
@@ -184,7 +178,7 @@ public class RingCfgController {
     try {
       ringService.deleteById(id);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("ring.flash.info.deleted", null,
+          messageSource.getMessage("ring.info.deleted", null,
               LocaleContextHolder.getLocale()));
       return "redirect:/settings/rings";
     } catch (ValidationException e) {

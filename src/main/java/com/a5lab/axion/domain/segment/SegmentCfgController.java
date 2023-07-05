@@ -1,7 +1,5 @@
 package com.a5lab.axion.domain.segment;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5lab.axion.domain.FlashMessages;
+import com.a5lab.axion.domain.ModelError;
 import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarService;
 
@@ -78,7 +76,7 @@ public class SegmentCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("segment.flash.error.invalid_id", null,
+          messageSource.getMessage("segment.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
     }
@@ -104,17 +102,16 @@ public class SegmentCfgController {
     try {
       segmentService.save(segmentDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("segment.flash.info.created", null,
+          messageSource.getMessage("segment.info.created", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
-    } catch (ConstraintViolationException e) {
+    } catch (ValidationException e) {
       // Add errors to fields and global
-      for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
-        String field = constraintViolation.getPropertyPath().toString();
-        if (field.isEmpty() || field.isBlank()) {
-          bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
+      for (ModelError modelError : e.getModelErrorList()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+          bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
         } else {
-          bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
+          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
         }
       }
 
@@ -136,7 +133,7 @@ public class SegmentCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("segment.flash.error.invalid_id", null,
+          messageSource.getMessage("segment.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
     }
@@ -155,20 +152,16 @@ public class SegmentCfgController {
     try {
       segmentService.save(segmentDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("segment.flash.info.updated", null,
+          messageSource.getMessage("segment.info.updated", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/segments");
-    } catch (TransactionSystemException e) {
-      if (e.getCause().getCause() instanceof ConstraintViolationException) {
-        // Add errors to fields and global
-        ConstraintViolationException exception = (ConstraintViolationException) e.getCause().getCause();
-        for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
-          String field = constraintViolation.getPropertyPath().toString();
-          if (field.isEmpty() || field.isBlank()) {
-            bindingResult.reject("validation_is_broken", constraintViolation.getMessage());
-          } else {
-            bindingResult.rejectValue(field, "validation_is_broken", constraintViolation.getMessage());
-          }
+    } catch (ValidationException e) {
+      // Add errors to fields and global
+      for (ModelError modelError : e.getModelErrorList()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+          bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
+        } else {
+          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
         }
       }
 
@@ -185,7 +178,7 @@ public class SegmentCfgController {
     try {
       segmentService.deleteById(id);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("segment.flash.info.deleted", null,
+          messageSource.getMessage("segment.info.deleted", null,
               LocaleContextHolder.getLocale()));
       return "redirect:/settings/segments";
     } catch (ValidationException e) {
