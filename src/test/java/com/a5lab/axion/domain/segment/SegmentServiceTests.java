@@ -1,6 +1,7 @@
 package com.a5lab.axion.domain.segment;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 
 import java.util.Collection;
 import java.util.List;
@@ -128,6 +129,8 @@ class SegmentServiceTests extends AbstractServiceTests {
     radar.setRadarType(null);
     radar.setTitle("Radar title");
     radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(false);
 
     final Segment segment = new Segment();
     segment.setId(2L);
@@ -146,7 +149,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(segment.getPosition(), segmentDto.getPosition());
 
     Mockito.verify(segmentRepository).save(any());
-    Mockito.verify(radarRepository).findById(radar.getId());
+    Mockito.verify(radarRepository, times(2)).findById(radar.getId());
   }
 
   @Test

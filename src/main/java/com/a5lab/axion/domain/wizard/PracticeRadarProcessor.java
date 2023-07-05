@@ -1,9 +1,7 @@
-package com.a5lab.axion.domain.wizard.processors;
+package com.a5lab.axion.domain.wizard;
 
 
 import org.springframework.context.ApplicationContext;
-
-import com.a5lab.axion.domain.wizard.WizardDto;
 
 public class PracticeRadarProcessor extends AbstractRadarProcessor {
 

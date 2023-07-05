@@ -39,10 +39,6 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@RingNumberConstraint
-@RingOrderConstraint
-@SegmentNumberConstraint
-@SegmentOrderConstraint
 public class Radar extends AbstractAuditable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

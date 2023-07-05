@@ -1,11 +1,14 @@
 package com.a5lab.axion.domain.ring;
 
 import jakarta.persistence.criteria.Predicate;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -18,14 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.a5lab.axion.domain.ModelError;
 import com.a5lab.axion.domain.ValidationException;
+import com.a5lab.axion.domain.radar.Radar;
+import com.a5lab.axion.domain.radar.RadarRepository;
 
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class RingServiceImpl implements RingService {
-
+  private final Validator validator;
   private final MessageSource messageSource;
   private final RingRepository ringRepository;
+  private final RadarRepository radarRepository;
   private final RingMapper ringMapper;
 
   @Override
@@ -63,7 +69,24 @@ public class RingServiceImpl implements RingService {
   @Override
   @Transactional
   public RingDto save(RingDto ringDto) {
-    return ringMapper.toDto(ringRepository.save(ringMapper.toEntity(ringDto)));
+    List<ModelError> modelErrorList = new LinkedList<>();
+    Optional<Radar> radarOptional = radarRepository.findById(ringDto.getRadarId());
+    if (radarOptional.isPresent()) {
+      modelErrorList.addAll(new RadarActiveSaveApprover(messageSource, radarOptional.get()).approve());
+    }
+
+    Ring ring = ringMapper.toEntity(ringDto);
+    // Throw exception if violations are exists
+    Set<ConstraintViolation<Ring>> constraintViolationSet = validator.validate(ring);
+    if (!modelErrorList.isEmpty() || !constraintViolationSet.isEmpty()) {
+      for (ConstraintViolation<Ring> constraintViolation : constraintViolationSet) {
+        modelErrorList.add(new ModelError(constraintViolation.getMessageTemplate(), constraintViolation.getMessage(),
+            constraintViolation.getPropertyPath().toString()));
+      }
+      String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+      throw new ValidationException(errorMessage, modelErrorList);
+    }
+    return ringMapper.toDto(ringRepository.save(ring));
   }
 
   @Override
@@ -72,7 +95,7 @@ public class RingServiceImpl implements RingService {
     Optional<Ring> ringOptional = ringRepository.findById(id);
     if (ringOptional.isPresent()) {
       List<ModelError> modelErrorList = new LinkedList<>();
-      modelErrorList.addAll(new RadarActiveApprover(messageSource, ringOptional.get()).approve());
+      modelErrorList.addAll(new RadarActiveDeleteApprover(messageSource, ringOptional.get()).approve());
       if (!modelErrorList.isEmpty()) {
         String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
         throw new ValidationException(errorMessage, modelErrorList);

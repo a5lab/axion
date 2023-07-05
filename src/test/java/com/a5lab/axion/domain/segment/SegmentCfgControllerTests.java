@@ -23,6 +23,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.FlashMessages;
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
@@ -157,6 +159,11 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToCreateSegment() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any(SegmentDto.class));
+
     MvcResult result = mockMvc.perform(post("/settings/segments/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
@@ -165,6 +172,8 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(segmentService).save(any(SegmentDto.class));
   }
 
   @Test
@@ -250,6 +259,11 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToUpdateSegment() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any(SegmentDto.class));
+
     MvcResult result = mockMvc.perform(post("/settings/segments/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
@@ -258,6 +272,8 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(segmentService).save(any(SegmentDto.class));
   }
 
   @Test

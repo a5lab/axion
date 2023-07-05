@@ -12,7 +12,9 @@ import com.a5lab.axion.domain.ModelApprover;
 import com.a5lab.axion.domain.ModelError;
 
 @RequiredArgsConstructor
-public class RadarPrimaryApprover implements ModelApprover {
+public class SegmentNumberSaveApprover implements ModelApprover {
+
+  private static final int RING_NUBMER = 4;
 
   private final MessageSource messageSource;
 
@@ -23,9 +25,19 @@ public class RadarPrimaryApprover implements ModelApprover {
 
   @Override
   public List<ModelError> approve() {
+    /*
+      String message() default "must be only four segments for active radar";
+      if (radar.isActive()) {
+        if (radar.getSegmentList() != null) {
+          return radar.getSegmentList().size() == SEGMENT_NUBMER;
+        }
+        return false;
+      }
+    }*/
+
     if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary()) {
       return List.of(new ModelError("primary_invalid_primary",
-          messageSource.getMessage("radar.form.error.invalid_primary", null, LocaleContextHolder.getLocale()),
+          messageSource.getMessage("radar.error.invalid_primary", null, LocaleContextHolder.getLocale()),
           "primary"));
     }
     return new LinkedList<>();

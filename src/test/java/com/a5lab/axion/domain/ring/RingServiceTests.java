@@ -1,6 +1,7 @@
 package com.a5lab.axion.domain.ring;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 
 import java.util.Collection;
 import java.util.List;
@@ -132,12 +133,12 @@ class RingServiceTests extends AbstractServiceTests {
     radar.setDescription("My radar description");
     radar.setTitle("My radar title");
     radar.setPrimary(true);
-    radar.setActive(true);
+    radar.setActive(false);
 
     final Ring ring = new Ring();
     ring.setId(10L);
     ring.setRadar(radar);
-    ring.setTitle("My title");
+    ring.setTitle("ADOPT");
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
@@ -151,7 +152,7 @@ class RingServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(ring.getDescription(), ringDto.getDescription());
 
     Mockito.verify(ringRepository).save(any());
-    Mockito.verify(radarRepository).findById(radar.getId());
+    Mockito.verify(radarRepository, times(2)).findById(radar.getId());
   }
 
   @Test
@@ -167,7 +168,7 @@ class RingServiceTests extends AbstractServiceTests {
     final Ring ring = new Ring();
     ring.setId(10L);
     ring.setRadar(radar);
-    ring.setTitle("My title");
+    ring.setTitle("ADOPT");
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);

@@ -1,10 +1,5 @@
 package com.a5lab.axion.domain.ring;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -20,6 +15,10 @@ import lombok.ToString;
 
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 
+/**
+ * This class should not have any validation such as @NotNull etc
+ * due to custom primary validation at service layer.
+ */
 @Getter
 @Setter
 @ToString
@@ -30,8 +29,6 @@ public class RingDto {
 
   private Long id;
 
-  @NotNull
-  @Min(1)
   @JsonProperty("radar_id")
   @JsonIdentityReference(alwaysAsId = true)
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -39,22 +36,12 @@ public class RingDto {
 
   private String radarTitle;
 
-
-  @NotBlank
-  @Size(min = 1, max = 64)
-  @RingTitleConstraint
   private String title;
 
-  @NotBlank
-  @Size(min = 1, max = 512)
   private String description;
 
-  @Min(0)
-  @Max(512)
   private int position;
 
-  @NotBlank
-  @Size(min = 1, max = 8)
   private String color;
 
   private List<TechnologyBlipDto> technologyBlipDtoList;

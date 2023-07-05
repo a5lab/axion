@@ -15,6 +15,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -38,7 +39,6 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@SegmentActiveConstraint
 public class Segment extends AbstractAuditable {
 
   @Id
@@ -52,6 +52,7 @@ public class Segment extends AbstractAuditable {
   private Radar radar;
 
   @NotBlank
+  @Size(min = 1, max = 64)
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 

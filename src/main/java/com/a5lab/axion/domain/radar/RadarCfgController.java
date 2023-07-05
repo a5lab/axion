@@ -73,7 +73,7 @@ public class RadarCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("radar.flash.error.invalid_id", null,
+          messageSource.getMessage("radar.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/radars");
     }
@@ -99,13 +99,13 @@ public class RadarCfgController {
     try {
       radarService.save(radarDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("radar.flash.info.created", null,
+          messageSource.getMessage("radar.info.created", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/radars");
     } catch (ValidationException e) {
       // Add errors to fields and global
       for (ModelError modelError : e.getModelErrorList()) {
-        if (modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
           bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
         } else {
           bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
@@ -129,7 +129,7 @@ public class RadarCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("radar.flash.error.invalid_id", null,
+          messageSource.getMessage("radar.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/radars");
     }
@@ -148,13 +148,13 @@ public class RadarCfgController {
     try {
       radarService.save(radarDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("radar.flash.info.updated", null,
+          messageSource.getMessage("radar.info.updated", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/radars");
     } catch (ValidationException e) {
       // Add errors to fields and global
       for (ModelError modelError : e.getModelErrorList()) {
-        if (modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
           bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
         } else {
           bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
@@ -173,7 +173,7 @@ public class RadarCfgController {
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     radarService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("radar.flash.info.deleted", null,
+        messageSource.getMessage("radar.info.deleted", null,
             LocaleContextHolder.getLocale()));
     return "redirect:/settings/radars";
   }

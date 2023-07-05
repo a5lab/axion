@@ -69,7 +69,7 @@ public class TechnologyCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology.flash.error.invalid_id", null,
+          messageSource.getMessage("technology.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technologies");
     }
@@ -92,7 +92,7 @@ public class TechnologyCfgController {
     }
     technologyService.save(technologyDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology.flash.info.created", null,
+        messageSource.getMessage("technology.info.created", null,
             LocaleContextHolder.getLocale()));
     return new ModelAndView("redirect:/settings/technologies");
   }
@@ -106,7 +106,7 @@ public class TechnologyCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology.flash.error.invalid_id", null,
+          messageSource.getMessage("technology.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technologies");
     }
@@ -122,7 +122,7 @@ public class TechnologyCfgController {
     }
     technologyService.save(technologyDto);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology.flash.info.updated", null,
+        messageSource.getMessage("technology.info.updated", null,
             LocaleContextHolder.getLocale()));
     return new ModelAndView("redirect:/settings/technologies");
   }
@@ -131,7 +131,7 @@ public class TechnologyCfgController {
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     technologyService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology.flash.info.deleted", null,
+        messageSource.getMessage("technology.info.deleted", null,
             LocaleContextHolder.getLocale()));
     return "redirect:/settings/technologies";
   }

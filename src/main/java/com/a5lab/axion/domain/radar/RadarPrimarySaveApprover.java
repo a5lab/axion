@@ -12,7 +12,7 @@ import com.a5lab.axion.domain.ModelApprover;
 import com.a5lab.axion.domain.ModelError;
 
 @RequiredArgsConstructor
-public class RadarUniqueTitleApprover implements ModelApprover {
+public class RadarPrimarySaveApprover implements ModelApprover {
 
   private final MessageSource messageSource;
 
@@ -23,10 +23,10 @@ public class RadarUniqueTitleApprover implements ModelApprover {
 
   @Override
   public List<ModelError> approve() {
-    if (!Objects.equals(radarDto.getId(), radar.getId())) {
-      return List.of(new ModelError("title_is_taken",
-          messageSource.getMessage("radar.form.error.title_is_taken", null, LocaleContextHolder.getLocale()),
-          "title"));
+    if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary()) {
+      return List.of(new ModelError("primary_invalid_primary",
+          messageSource.getMessage("radar.error.invalid_primary", null, LocaleContextHolder.getLocale()),
+          "primary"));
     }
     return new LinkedList<>();
   }

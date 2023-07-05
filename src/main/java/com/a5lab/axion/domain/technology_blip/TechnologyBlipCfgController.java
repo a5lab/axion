@@ -79,7 +79,7 @@ public class TechnologyBlipCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blip.flash.error.invalid_id", null,
+          messageSource.getMessage("technology_blip.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     }
@@ -113,13 +113,13 @@ public class TechnologyBlipCfgController {
     try {
       technologyBlipService.save(technologyBlipDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("technology_blip.flash.info.created", null,
+          messageSource.getMessage("technology_blip.info.created", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     } catch (DataIntegrityViolationException e) {
       // Redirect
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blip.flash.error.exception", null,
+          messageSource.getMessage("technology_blip.error.exception", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     }
@@ -138,7 +138,7 @@ public class TechnologyBlipCfgController {
       return modelAndView;
     } else {
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blip.flash.error.invalid_id", null,
+          messageSource.getMessage("technology_blip.error.invalid_id", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     }
@@ -160,13 +160,13 @@ public class TechnologyBlipCfgController {
     try {
       technologyBlipService.save(technologyBlipDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("technology_blip.flash.info.updated", null,
+          messageSource.getMessage("technology_blip.info.updated", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     } catch (DataIntegrityViolationException e) {
       // Redirect
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blip.flash.error.exception", null,
+          messageSource.getMessage("technology_blip.error.exception", null,
               LocaleContextHolder.getLocale()));
       return new ModelAndView("redirect:/settings/technology_blips");
     }
@@ -176,7 +176,7 @@ public class TechnologyBlipCfgController {
   public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
     technologyBlipService.deleteById(id);
     redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("technology_blip.flash.info.deleted", null,
+        messageSource.getMessage("technology_blip.info.deleted", null,
             LocaleContextHolder.getLocale()));
     return "redirect:/settings/technology_blips";
   }
