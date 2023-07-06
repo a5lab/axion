@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.segment;
 
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 
@@ -21,6 +22,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
 
@@ -175,5 +177,33 @@ class SegmentServiceTests extends AbstractServiceTests {
     segmentService.deleteById(segment.getId());
     Mockito.verify(segmentRepository).findById(segment.getId());
     Mockito.verify(segmentRepository).deleteById(segment.getId());
+  }
+
+  @Test
+  void shouldFailToDeleteSegmentDueToRadarIsActive() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
+    final Segment segment = new Segment();
+    segment.setId(10L);
+    segment.setRadar(radar);
+    segment.setTitle("My title");
+    segment.setDescription("My description");
+    segment.setPosition(1);
+
+    Mockito.when(segmentRepository.findById(any())).thenReturn(Optional.of(segment));
+
+    ValidationException exception =
+        catchThrowableOfType(() -> segmentService.deleteById(segment.getId()), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertEquals(exception.getMessage(), "Segment can't be deleted for active radar.");
+    Assertions.assertTrue(segment.getId().describeConstable().isPresent());
+
+    Mockito.verify(segmentRepository).findById(segment.getId());
   }
 }
