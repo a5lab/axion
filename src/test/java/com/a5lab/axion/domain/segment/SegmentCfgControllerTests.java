@@ -158,7 +158,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateSegment() throws Exception {
+  public void shouldFailToCreateSegmentDueToEmptyTitle() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
@@ -174,6 +174,26 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("must not be blank"));
 
     Mockito.verify(segmentService).save(any(SegmentDto.class));
+  }
+
+  @Test
+  public void shouldFailToCreateSegmentDueToActiveRadar() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any());
+
+    MvcResult result = mockMvc.perform(post("/settings/segments/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/segments/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("be saved for active radar"));
+
+    Mockito.verify(segmentService).save(any());
   }
 
   @Test
@@ -258,7 +278,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToUpdateSegment() throws Exception {
+  public void shouldFailToUpdateSegmentDueToEmptyTitle() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
@@ -277,6 +297,26 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
+  public void shouldFailToUpdateSegmentDueToActiveRadar() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any());
+
+    MvcResult result = mockMvc.perform(post("/settings/segments/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/segments/edit"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("be saved for active radar"));
+
+    Mockito.verify(segmentService).save(any());
+  }
+
+  @Test
   public void shouldDeleteSegment() throws Exception {
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);
@@ -292,6 +332,29 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/segments"))
         .andExpect(
             MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The segment has been deleted successfully."))
+        .andReturn();
+
+    Mockito.verify(segmentService).deleteById(segmentDto.getId());
+  }
+
+  @Test
+  public void shouldFailToDeleteSegmentAndThrowException() throws Exception {
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setTitle("My segment");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(1);
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "Segment can't be deleted for active radar.", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService).deleteById(any());
+
+    String url = String.format("/settings/segments/delete/%d", segmentDto.getId());
+    MvcResult result = mockMvc.perform(get(url))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/segments"))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Segment can't be deleted for active radar."))
         .andReturn();
 
     Mockito.verify(segmentService).deleteById(segmentDto.getId());
