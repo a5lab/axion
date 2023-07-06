@@ -185,7 +185,7 @@ class RingServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFailToDeleteRing() {
+  void shouldFailToDeleteRingDueToRadarIsActive() {
     final Radar radar = new Radar();
     radar.setId(1L);
     radar.setTitle("My radar title");
