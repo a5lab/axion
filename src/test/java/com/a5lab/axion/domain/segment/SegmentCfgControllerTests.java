@@ -296,4 +296,27 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(segmentService).deleteById(segmentDto.getId());
   }
+
+  @Test
+  public void shouldFailToDeleteSegmentAndThrowException() throws Exception {
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setId(10L);
+    segmentDto.setTitle("My segment");
+    segmentDto.setDescription("My segment description");
+    segmentDto.setPosition(1);
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "Segment can't be deleted for active radar.", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService).deleteById(any());
+
+    String url = String.format("/settings/segments/delete/%d", segmentDto.getId());
+    MvcResult result = mockMvc.perform(get(url))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/segments"))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Segment can't be deleted for active radar."))
+        .andReturn();
+
+    Mockito.verify(segmentService).deleteById(segmentDto.getId());
+  }
 }

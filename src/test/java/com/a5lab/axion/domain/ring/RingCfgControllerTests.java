@@ -28,7 +28,6 @@ import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import com.a5lab.axion.domain.segment.SegmentDto;
 
 @WebMvcTest(RingCfgController.class)
 public class RingCfgControllerTests extends AbstractControllerTests {
@@ -339,6 +338,30 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("redirect:/settings/rings"))
         .andExpect(
             MockMvcResultMatchers.flash().attribute(FlashMessages.INFO, "The ring has been deleted successfully."))
+        .andReturn();
+
+    Mockito.verify(ringService).deleteById(ringDto.getId());
+  }
+
+  @Test
+  public void shouldFailToDeleteRingAndThrowException() throws Exception {
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setTitle("My ring");
+    ringDto.setDescription("My ring description");
+    ringDto.setColor("#fbdb84");
+    ringDto.setPosition(1);
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "Ring can't be deleted for active radar.", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).deleteById(any());
+
+    String url = String.format("/settings/rings/delete/%d", ringDto.getId());
+    MvcResult result = mockMvc.perform(get(url))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(view().name("redirect:/settings/rings"))
+        .andExpect(
+            MockMvcResultMatchers.flash().attribute(FlashMessages.ERROR, "Ring can't be deleted for active radar."))
         .andReturn();
 
     Mockito.verify(ringService).deleteById(ringDto.getId());
