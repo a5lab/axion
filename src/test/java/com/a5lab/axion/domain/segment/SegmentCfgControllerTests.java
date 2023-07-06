@@ -158,7 +158,24 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateSegment() throws Exception {
+  public void shouldFailToCreateSegmentDueToError() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any());
+
+    MvcResult result = mockMvc.perform(post("/settings/segments/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/segments/add"))
+        .andReturn();
+
+    Mockito.verify(segmentService).save(any());
+  }
+
+  @Test
+  public void shouldFailToCreateSegmentDueToEmptyTitle() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
@@ -274,6 +291,23 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("must not be blank"));
 
     Mockito.verify(segmentService).save(any(SegmentDto.class));
+  }
+
+  @Test
+  public void shouldFailToUpdateSegmentDueToError() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any());
+
+    MvcResult result = mockMvc.perform(post("/settings/segments/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/segments/edit"))
+        .andReturn();
+
+    Mockito.verify(segmentService).save(any());
   }
 
   @Test
