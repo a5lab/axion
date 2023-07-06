@@ -122,34 +122,6 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateRingOnLowerCaseTitle() throws Exception {
-    final RingDto ringDto = new RingDto();
-    ringDto.setId(10L);
-    ringDto.setTitle("My ring");
-    ringDto.setDescription("My ring description");
-    ringDto.setColor("#fbdb84");
-    ringDto.setPosition(1);
-
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "should be uppercase", "title"));
-    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
-    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
-
-    MvcResult result = mockMvc.perform(post("/settings/rings/create")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("description", ringDto.getDescription())
-            .param("title", ringDto.getTitle())
-            .sessionAttr("ringDto", ringDto))
-        .andExpect(status().isOk())
-        .andExpect(view().name("settings/rings/add"))
-        .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("should be uppercase"));
-
-    Mockito.verify(ringService).save(any(RingDto.class));
-  }
-
-  @Test
   public void shouldCreateRing() throws Exception {
     // Create a radar type
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
@@ -199,7 +171,35 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateRingDueToError() throws Exception {
+  public void shouldFailToCreateRingOnLowerCaseTitle() throws Exception {
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setTitle("My ring");
+    ringDto.setDescription("My ring description");
+    ringDto.setColor("#fbdb84");
+    ringDto.setPosition(1);
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "should be uppercase", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/rings/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("description", ringDto.getDescription())
+            .param("title", ringDto.getTitle())
+            .sessionAttr("ringDto", ringDto))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be uppercase"));
+
+    Mockito.verify(ringService).save(any(RingDto.class));
+  }
+
+  @Test
+  public void shouldFailToCreateRingDueToActiveRadar() throws Exception {
     List<ModelError> modelErrorList =
         List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
@@ -212,11 +212,14 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(view().name("settings/rings/add"))
         .andReturn();
 
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("can't be saved for active radar"));
+
     Mockito.verify(ringService).save(any());
   }
 
   @Test
-  public void shouldFailToCreateRingOnBlankDescription() throws Exception {
+  public void shouldFailToCreateRingOnEmptyTitle() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
@@ -321,7 +324,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToUpdateRing() throws Exception {
+  public void shouldFailToUpdateRingDueToEmptyTitle() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
@@ -339,7 +342,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToUpdateRingDueToError() throws Exception {
+  public void shouldFailToUpdateRingDueToActiveRadar() throws Exception {
     List<ModelError> modelErrorList =
         List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
@@ -351,6 +354,9 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andExpect(status().isOk())
         .andExpect(view().name("settings/rings/edit"))
         .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("can't be saved for active radar"));
 
     Mockito.verify(ringService).save(any());
   }

@@ -158,7 +158,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateSegmentDueToError() throws Exception {
+  public void shouldFailToCreateSegmentDueToActiveRadar() throws Exception {
     List<ModelError> modelErrorList =
         List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
@@ -170,6 +170,9 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         .andExpect(status().isOk())
         .andExpect(view().name("settings/segments/add"))
         .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("can't be saved for active radar"));
 
     Mockito.verify(segmentService).save(any());
   }
@@ -275,7 +278,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToUpdateSegment() throws Exception {
+  public void shouldFailToUpdateSegmentDueToEmptyTitle() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
@@ -294,7 +297,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToUpdateSegmentDueToError() throws Exception {
+  public void shouldFailToUpdateSegmentDueToActiveRadar() throws Exception {
     List<ModelError> modelErrorList =
         List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
@@ -306,6 +309,9 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
         .andExpect(status().isOk())
         .andExpect(view().name("settings/segments/edit"))
         .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("can't be saved for active radar"));
 
     Mockito.verify(segmentService).save(any());
   }
