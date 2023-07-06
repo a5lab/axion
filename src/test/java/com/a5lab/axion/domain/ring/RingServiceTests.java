@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.ring;
 
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 
@@ -21,10 +22,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
 
 class RingServiceTests extends AbstractServiceTests {
+
   @MockBean
   private RingRepository ringRepository;
   @MockBean
@@ -179,5 +182,34 @@ class RingServiceTests extends AbstractServiceTests {
     ringService.deleteById(ring.getId());
     Mockito.verify(ringRepository).findById(ring.getId());
     Mockito.verify(ringRepository).deleteById(ring.getId());
+  }
+
+  @Test
+  void shouldFailToDeleteRing() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setRadar(radar);
+    ring.setTitle("ADOPT");
+    ring.setDescription("My description");
+    ring.setColor("my color");
+    ring.setPosition(1);
+
+    Mockito.when(ringRepository.findById(any())).thenReturn(Optional.of(ring));
+
+    ValidationException exception =
+        catchThrowableOfType(() -> ringService.deleteById(ring.getId()), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertEquals(exception.getMessage(), "Ring can't be deleted for active radar.");
+    Assertions.assertTrue(ring.getId().describeConstable().isPresent());
+
+    Mockito.verify(ringRepository).findById(ring.getId());
   }
 }
