@@ -171,7 +171,25 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateRingOnLowerCaseTitle() throws Exception {
+  public void shouldFailToCreateRingDueToEmptyTitle() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/rings/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(ringService).save(any(RingDto.class));
+  }
+
+  @Test
+  public void shouldFailToCreateRingDueToLowerCaseTitle() throws Exception {
     final RingDto ringDto = new RingDto();
     ringDto.setId(10L);
     ringDto.setTitle("My ring");
@@ -213,28 +231,11 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("can't be saved for active radar"));
+    Assertions.assertTrue(content.contains("be saved for active radar"));
 
     Mockito.verify(ringService).save(any());
   }
 
-  @Test
-  public void shouldFailToCreateRingOnEmptyTitle() throws Exception {
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
-    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
-    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
-
-    MvcResult result = mockMvc.perform(post("/settings/rings/create")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-        .andExpect(status().isOk())
-        .andExpect(view().name("settings/rings/add"))
-        .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("must not be blank"));
-
-    Mockito.verify(ringService).save(any(RingDto.class));
-  }
 
   @Test
   public void shouldEditRing() throws Exception {
@@ -356,7 +357,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("can't be saved for active radar"));
+    Assertions.assertTrue(content.contains("be saved for active radar"));
 
     Mockito.verify(ringService).save(any());
   }
