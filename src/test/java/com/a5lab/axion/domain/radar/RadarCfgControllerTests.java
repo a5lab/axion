@@ -146,7 +146,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
@@ -183,7 +183,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
@@ -244,7 +244,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
@@ -276,7 +276,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
@@ -350,7 +350,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
@@ -417,7 +417,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
@@ -448,7 +448,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
@@ -480,7 +480,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarType.id", String.valueOf(radarDto.getRadarTypeId()))
+            .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
             .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
