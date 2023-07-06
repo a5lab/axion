@@ -28,7 +28,6 @@ import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import com.a5lab.axion.domain.segment.SegmentDto;
 
 @WebMvcTest(RingCfgController.class)
 public class RingCfgControllerTests extends AbstractControllerTests {
@@ -200,6 +199,23 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
+  public void shouldFailToCreateRingDueToError() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService)
+        .save(any(RingDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/rings/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/add"))
+        .andReturn();
+
+    Mockito.verify(ringService).save(any());
+  }
+
+  @Test
   public void shouldFailToCreateRingOnBlankDescription() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
@@ -320,6 +336,23 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("must not be blank"));
 
     Mockito.verify(ringService).save(any(RingDto.class));
+  }
+
+  @Test
+  public void shouldFailToUpdateRingDueToError() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService)
+        .save(any(RingDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/rings/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(view().name("settings/rings/edit"))
+        .andReturn();
+
+    Mockito.verify(ringService).save(any());
   }
 
   @Test
