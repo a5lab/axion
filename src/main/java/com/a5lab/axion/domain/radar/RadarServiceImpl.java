@@ -79,7 +79,6 @@ public class RadarServiceImpl implements RadarService {
   @Override
   @Transactional
   public RadarDto save(RadarDto radarDto) {
-    Radar radar = radarMapper.toEntity(radarDto);
     List<ModelError> modelErrorList = new LinkedList<>();
     if (radarDto.isPrimary()) {
       // Find another primary radar
@@ -89,6 +88,15 @@ public class RadarServiceImpl implements RadarService {
       }
     }
 
+    // Check consistency
+    if (radarDto.isActive()) {
+      Optional<Radar> radarOptional = radarRepository.findById(radarDto.getId());
+      modelErrorList.addAll(new RingNumberSaveApprover(messageSource, radarOptional).approve());
+      modelErrorList.addAll(new RingOrderSaveApprover(messageSource, radarOptional).approve());
+      modelErrorList.addAll(new SegmentNumberSaveApprover(messageSource, radarOptional).approve());
+      modelErrorList.addAll(new SegmentOrderSaveApprover(messageSource, radarOptional).approve());
+    }
+
     // Check uniqueness by title
     List<Radar> radarList = this.radarRepository.findByTitle(radarDto.getTitle());
     for (Radar radarItem : radarList) {
@@ -96,6 +104,7 @@ public class RadarServiceImpl implements RadarService {
     }
 
     // Throw exception if violations are exists
+    Radar radar = radarMapper.toEntity(radarDto);
     Set<ConstraintViolation<Radar>> constraintViolationSet = validator.validate(radar);
     if (!modelErrorList.isEmpty() || !constraintViolationSet.isEmpty()) {
       for (ConstraintViolation<Radar> constraintViolation : constraintViolationSet) {

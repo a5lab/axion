@@ -219,7 +219,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldFailToCreateRingDueToActiveRadar() throws Exception {
     List<ModelError> modelErrorList =
-        List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
+        List.of(new ModelError("unable_to_save_due_to_active_radar", "can't be saved for active radar", null));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService)
         .save(any(RingDto.class));
@@ -345,7 +345,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
   @Test
   public void shouldFailToUpdateRingDueToActiveRadar() throws Exception {
     List<ModelError> modelErrorList =
-        List.of(new ModelError("unable_to_save_active_radar", "can't be saved for active radar", null));
+        List.of(new ModelError("unable_to_save_due_to_active_radar", "can't be saved for active radar", null));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService)
         .save(any(RingDto.class));

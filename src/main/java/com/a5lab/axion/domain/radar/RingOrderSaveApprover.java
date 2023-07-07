@@ -1,8 +1,9 @@
 package com.a5lab.axion.domain.radar;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -10,29 +11,31 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.a5lab.axion.domain.ModelApprover;
 import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ring.Ring;
 
 @RequiredArgsConstructor
 public class RingOrderSaveApprover implements ModelApprover {
 
-  private static final int RING_NUBMER = 4;
-
   private final MessageSource messageSource;
 
-  private final RadarDto radarDto;
-
-  private final Radar radar;
+  private final Optional<Radar> radarOptional;
 
 
   @Override
   public List<ModelError> approve() {
-    /*
-      String message() default "rings must be consecutively numbered starting from 0";
-    }*/
+    int[] positionArray = new int[]{ 1, 1, 1, 1};
+    if (radarOptional.isPresent()) {
+      for (Ring ring : radarOptional.get().getRingList()) {
+        if (ring.getPosition() < positionArray.length) {
+          positionArray[ring.getPosition()] = 0;
+        }
+      }
+    }
 
-    if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary()) {
-      return List.of(new ModelError("primary_invalid_primary",
-          messageSource.getMessage("radar.error.invalid_primary", null, LocaleContextHolder.getLocale()),
-          "primary"));
+    if (Arrays.stream(positionArray).sum() != 0) {
+      return List.of(new ModelError("unable_to_save_due_to_ring_order",
+          messageSource.getMessage("radar.error.unable_to_save_due_to_ring_order", null,
+              LocaleContextHolder.getLocale()), null));
     }
     return new LinkedList<>();
   }
