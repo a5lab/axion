@@ -3,7 +3,6 @@ package com.a5lab.axion.domain.radar;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import jakarta.validation.ValidationException;
-
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
