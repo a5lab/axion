@@ -177,7 +177,6 @@ class RingServiceTests extends AbstractServiceTests {
     ring.setPosition(1);
 
     Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
-    Mockito.when(ringRepository.save(any())).thenReturn(ring);
 
     ValidationException exception =
         catchThrowableOfType(() -> ringService.save(ringMapper.toDto(ring)), ValidationException.class);
