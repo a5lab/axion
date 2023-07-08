@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import jakarta.validation.ValidationException;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,76 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
     Assertions.assertNotNull(saved.getCreatedDate());
     Assertions.assertNotNull(saved.getLastModifiedBy());
     Assertions.assertNotNull(saved.getLastModifiedDate());
+  }
+
+  @Test
+  void shouldFindByTitleRadar() {
+    // Create a radar type
+    final RadarType radarType = new RadarType();
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
+    radarType.setDescription("Technology radars");
+    radarTypeRepository.saveAndFlush(radarType);
+
+    // Create a radar
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My new test Radar");
+    radar.setDescription("My awesome description");
+    radar.setPrimary(false);
+    radar.setActive(false);
+    Radar saved = radarRepository.saveAndFlush(radar);
+    Assertions.assertNotNull(saved.getId());
+
+    List<Radar> radarList = radarRepository.findByTitle(radar.getTitle());
+    Assertions.assertNotNull(radarList);
+    Assertions.assertEquals(radarList.iterator().next().getTitle(), saved.getTitle(), radar.getTitle());
+  }
+
+  @Test
+  void shouldFailToFindByTitleRadarDueToEmptyField() {
+    // Create a radar type
+    final RadarType radarType = new RadarType();
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
+    radarType.setDescription("Technology radars");
+    radarTypeRepository.saveAndFlush(radarType);
+
+    // Create a radar
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My new test Radar");
+    radar.setDescription("My awesome description");
+    radar.setPrimary(false);
+    radar.setActive(false);
+    Radar saved = radarRepository.saveAndFlush(radar);
+    Assertions.assertNotNull(saved.getId());
+
+    List<Radar> radarList = radarRepository.findByTitle("");
+    Assertions.assertTrue(radarList.isEmpty());
+  }
+
+  @Test
+  void shouldFailToFindByTitleRadarDueToWhiteSpace() {
+    // Create a radar type
+    final RadarType radarType = new RadarType();
+    radarType.setTitle("Technology radars 1");
+    radarType.setCode("technology_radar_1");
+    radarType.setDescription("Technology radars");
+    radarTypeRepository.saveAndFlush(radarType);
+
+    // Create a radar
+    final Radar radar = new Radar();
+    radar.setRadarType(radarType);
+    radar.setTitle("My new test Radar");
+    radar.setDescription("My awesome description");
+    radar.setPrimary(false);
+    radar.setActive(false);
+    Radar saved = radarRepository.saveAndFlush(radar);
+    Assertions.assertNotNull(saved.getId());
+
+    List<Radar> radarList = radarRepository.findByTitle(" " + radar.getTitle());
+    Assertions.assertTrue(radarList.isEmpty());
   }
 
   @Test
