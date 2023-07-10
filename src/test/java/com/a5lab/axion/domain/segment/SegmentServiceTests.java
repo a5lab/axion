@@ -155,6 +155,33 @@ class SegmentServiceTests extends AbstractServiceTests {
   }
 
   @Test
+  void shouldFailToSaveSegmentDueToRadarIsActive() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setRadarType(null);
+    radar.setTitle("Radar title");
+    radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
+    final Segment segment = new Segment();
+    segment.setId(2L);
+    segment.setRadar(radar);
+    segment.setTitle("My title");
+    segment.setDescription("My description");
+    segment.setPosition(1);
+
+    Mockito.when(radarRepository.findById(radar.getId())).thenReturn(Optional.of(radar));
+
+    ValidationException exception =
+        catchThrowableOfType(() -> segmentService.save(segmentMapper.toDto(segment)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    System.out.println(exception.getMessage());
+
+    Mockito.verify(radarRepository, times(2)).findById(radar.getId());
+  }
+
+  @Test
   void shouldDeleteSegment() {
     final Radar radar = new Radar();
     radar.setId(1L);
