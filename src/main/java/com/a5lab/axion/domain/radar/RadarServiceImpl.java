@@ -91,10 +91,10 @@ public class RadarServiceImpl implements RadarService {
     // Check consistency
     if (radarDto.isActive()) {
       Optional<Radar> radarOptional = radarRepository.findById(radarDto.getId());
-      modelErrorList.addAll(new RingNumberSaveApprover(messageSource, radarOptional).approve());
-      modelErrorList.addAll(new RingOrderSaveApprover(messageSource, radarOptional).approve());
-      modelErrorList.addAll(new SegmentNumberSaveApprover(messageSource, radarOptional).approve());
-      modelErrorList.addAll(new SegmentOrderSaveApprover(messageSource, radarOptional).approve());
+      // modelErrorList.addAll(new RingNumberSaveApprover(messageSource, radarOptional).approve());
+      // modelErrorList.addAll(new RingOrderSaveApprover(messageSource, radarOptional).approve());
+      // modelErrorList.addAll(new SegmentNumberSaveApprover(messageSource, radarOptional).approve());
+      // modelErrorList.addAll(new SegmentOrderSaveApprover(messageSource, radarOptional).approve());
     }
 
     // Check uniqueness by title

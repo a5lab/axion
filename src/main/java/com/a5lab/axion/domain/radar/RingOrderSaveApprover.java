@@ -24,7 +24,7 @@ public class RingOrderSaveApprover implements ModelApprover {
   @Override
   public List<ModelError> approve() {
     int[] positionArray = new int[]{ 1, 1, 1, 1};
-    if (radarOptional.isPresent()) {
+    if (radarOptional.isPresent() && radarOptional.get().getRingList() != null) {
       for (Ring ring : radarOptional.get().getRingList()) {
         if (ring.getPosition() < positionArray.length) {
           positionArray[ring.getPosition()] = 0;

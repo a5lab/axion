@@ -23,7 +23,8 @@ public class SegmentNumberSaveApprover implements ModelApprover {
 
   @Override
   public List<ModelError> approve() {
-    if (radarOptional.isEmpty() || radarOptional.get().getSegmentList().size() != SEGMENT_NUMBER) {
+    if (radarOptional.isEmpty() || radarOptional.get().getSegmentList() == null
+        || radarOptional.get().getSegmentList().size() != SEGMENT_NUMBER) {
       return List.of(new ModelError("unable_to_save_due_to_segment_number",
           messageSource.getMessage("radar.error.unable_to_save_due_to_segment_number", null,
               LocaleContextHolder.getLocale()), null));

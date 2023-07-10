@@ -26,7 +26,7 @@ public class SegmentOrderSaveApprover implements ModelApprover {
   @Override
   public List<ModelError> approve() {
     int[] positionArray = new int[]{ 1, 1, 1, 1};
-    if (radarOptional.isPresent()) {
+    if (radarOptional.isPresent() && radarOptional.get().getSegmentList() != null) {
       for (Segment segment : radarOptional.get().getSegmentList()) {
         if (segment.getPosition() < positionArray.length) {
           positionArray[segment.getPosition()] = 0;

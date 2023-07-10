@@ -23,7 +23,8 @@ public class RingNumberSaveApprover implements ModelApprover {
 
   @Override
   public List<ModelError> approve() {
-    if (radarOptional.isEmpty() || radarOptional.get().getRingList().size() != RING_NUMBER) {
+    if (radarOptional.isEmpty() || radarOptional.get().getRingList() == null
+        || radarOptional.get().getRingList().size() != RING_NUMBER) {
       return List.of(new ModelError("unable_to_save_due_to_ring_number",
           messageSource.getMessage("radar.error.unable_to_save_due_to_ring_number", null,
               LocaleContextHolder.getLocale()), null));
