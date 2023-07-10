@@ -12,9 +12,7 @@ import com.a5lab.axion.domain.ModelApprover;
 import com.a5lab.axion.domain.ModelError;
 
 @RequiredArgsConstructor
-public class RingNumberSaveApprover implements ModelApprover {
-
-  private static final int RING_NUMBER = 4;
+public class RadarActiveSaveApprover implements ModelApprover {
 
   private final MessageSource messageSource;
 
@@ -23,10 +21,9 @@ public class RingNumberSaveApprover implements ModelApprover {
 
   @Override
   public List<ModelError> approve() {
-    if (radarOptional == null || radarOptional.isEmpty() || radarOptional.get().getRingList() == null
-        || radarOptional.get().getRingList().size() != RING_NUMBER) {
-      return List.of(new ModelError("unable_to_save_due_to_ring_number",
-          messageSource.getMessage("radar.error.unable_to_save_due_to_ring_number", null,
+    if (radarOptional == null) {
+      return List.of(new ModelError("unable_to_save_due_to_inconsistent_state",
+          messageSource.getMessage("radar.error.unable_to_save_due_to_inconsistent_state", null,
               LocaleContextHolder.getLocale()), null));
     }
     return new LinkedList<>();
