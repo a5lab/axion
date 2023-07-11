@@ -167,11 +167,9 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/settings/segments/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrorCode("segmentDto", "title", ""))
         .andExpect(view().name("settings/segments/add"))
         .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("must not be blank"));
 
     Mockito.verify(segmentService).save(any(SegmentDto.class));
   }
@@ -187,6 +185,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/settings/segments/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("segmentDto"))
         .andExpect(view().name("settings/segments/add"))
         .andReturn();
 
@@ -284,14 +283,12 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
         .save(any(SegmentDto.class));
 
-    MvcResult result = mockMvc.perform(post("/settings/segments/update")
+    this.mockMvc.perform(post("/settings/segments/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrorCode("segmentDto", "title", ""))
         .andExpect(view().name("settings/segments/edit"))
         .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("must not be blank"));
 
     Mockito.verify(segmentService).save(any(SegmentDto.class));
   }
@@ -307,6 +304,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/settings/segments/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("segmentDto"))
         .andExpect(view().name("settings/segments/edit"))
         .andReturn();
 
