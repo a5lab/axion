@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
@@ -172,13 +173,15 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToCreateRingDueToEmptyTitle() throws Exception {
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    List<ModelError> modelErrorList = List.of(new ModelError("RingTitleConstraint", "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
 
-    MvcResult result = mockMvc.perform(post("/settings/rings/create")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/rings/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", ""))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrorCode("ringDto", "title", "RingTitleConstraint"))
         .andExpect(view().name("settings/rings/add"))
         .andReturn();
 
@@ -197,16 +200,17 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
 
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "should be uppercase", "title"));
+    List<ModelError> modelErrorList = List.of(new ModelError("RingTitleConstraint", "should be uppercase", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
 
-    MvcResult result = mockMvc.perform(post("/settings/rings/create")
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("description", ringDto.getDescription())
             .param("title", ringDto.getTitle())
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrorCode(
+            "ringDto", "title", "RingTitleConstraint"))
         .andExpect(view().name("settings/rings/add"))
         .andReturn();
 
@@ -227,6 +231,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/settings/rings/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("ringDto"))
         .andExpect(view().name("settings/rings/add"))
         .andReturn();
 
@@ -326,18 +331,48 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToUpdateRingDueToEmptyTitle() throws Exception {
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    List<ModelError> modelErrorList = List.of(new ModelError("RingTitleConstraint", "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrorCode("ringDto", "title", "RingTitleConstraint"))
         .andExpect(view().name("settings/rings/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(ringService).save(any(RingDto.class));
+  }
+
+  @Test
+  public void shouldFailToUpdateRingDueToLowerCaseTitle() throws Exception {
+    final RingDto ringDto = new RingDto();
+    ringDto.setId(10L);
+    ringDto.setTitle("My ring");
+    ringDto.setDescription("My ring description");
+    ringDto.setColor("#fbdb84");
+    ringDto.setPosition(1);
+
+    List<ModelError> modelErrorList = List.of(new ModelError("RingTitleConstraint", "should be uppercase", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/rings/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", ringDto.getTitle())
+            .sessionAttr("ringDto", ringDto))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrorCode(
+            "ringDto", "title", "RingTitleConstraint"))
+        .andExpect(view().name("settings/rings/edit"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be uppercase"));
 
     Mockito.verify(ringService).save(any(RingDto.class));
   }
@@ -353,6 +388,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("ringDto"))
         .andExpect(view().name("settings/rings/edit"))
         .andReturn();
 
