@@ -27,6 +27,7 @@ import com.a5lab.axion.domain.ModelError;
 import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 
 @WebMvcTest(SegmentCfgController.class)
@@ -117,7 +118,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
     radarTypeDto.setId(1L);
     radarTypeDto.setTitle("Technology radars 1");
-    radarTypeDto.setCode("technology_radar_1");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeDto.setDescription("Technology radars");
 
     final RadarDto radarDto = new RadarDto();
@@ -167,9 +168,12 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/settings/segments/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrorCode("segmentDto", "title", ""))
+        .andExpect(model().attributeHasFieldErrors("segmentDto", "title"))
         .andExpect(view().name("settings/segments/add"))
         .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("must not be blank"));
 
     Mockito.verify(segmentService).save(any(SegmentDto.class));
   }
@@ -236,7 +240,7 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
     radarTypeDto.setId(1L);
     radarTypeDto.setTitle("Technology radars 1");
-    radarTypeDto.setCode("technology_radar_1");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeDto.setDescription("Technology radars");
 
     final RadarDto radarDto = new RadarDto();
@@ -283,12 +287,15 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
         .save(any(SegmentDto.class));
 
-    this.mockMvc.perform(post("/settings/segments/update")
+    MvcResult result = mockMvc.perform(post("/settings/segments/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrorCode("segmentDto", "title", ""))
+        .andExpect(model().attributeHasFieldErrors("segmentDto", "title"))
         .andExpect(view().name("settings/segments/edit"))
         .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("must not be blank"));
 
     Mockito.verify(segmentService).save(any(SegmentDto.class));
   }

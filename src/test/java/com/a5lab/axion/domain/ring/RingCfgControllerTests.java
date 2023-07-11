@@ -173,7 +173,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToCreateRingDueToEmptyTitle() throws Exception {
-    List<ModelError> modelErrorList = List.of(new ModelError("RingTitleConstraint", "must not be blank", "title"));
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
 
@@ -181,7 +181,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("title", ""))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrorCode("ringDto", "title", "RingTitleConstraint"))
+        .andExpect(model().attributeHasFieldErrors("ringDto", "title"))
         .andExpect(view().name("settings/rings/add"))
         .andReturn();
 
@@ -200,7 +200,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
 
-    List<ModelError> modelErrorList = List.of(new ModelError("RingTitleConstraint", "should be uppercase", "title"));
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "should be uppercase", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
 
@@ -209,8 +209,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .param("title", ringDto.getTitle())
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrorCode(
-            "ringDto", "title", "RingTitleConstraint"))
+        .andExpect(model().attributeHasFieldErrors("ringDto", "title"))
         .andExpect(view().name("settings/rings/add"))
         .andReturn();
 
@@ -331,14 +330,14 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToUpdateRingDueToEmptyTitle() throws Exception {
-    List<ModelError> modelErrorList = List.of(new ModelError("RingTitleConstraint", "must not be blank", "title"));
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrorCode("ringDto", "title", "RingTitleConstraint"))
+        .andExpect(model().attributeHasFieldErrors("ringDto", "title"))
         .andExpect(view().name("settings/rings/edit"))
         .andReturn();
 
@@ -357,7 +356,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setColor("#fbdb84");
     ringDto.setPosition(1);
 
-    List<ModelError> modelErrorList = List.of(new ModelError("RingTitleConstraint", "should be uppercase", "title"));
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "should be uppercase", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService).save(any(RingDto.class));
 
@@ -366,8 +365,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
             .param("title", ringDto.getTitle())
             .sessionAttr("ringDto", ringDto))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrorCode(
-            "ringDto", "title", "RingTitleConstraint"))
+        .andExpect(model().attributeHasFieldErrors("ringDto", "title"))
         .andExpect(view().name("settings/rings/edit"))
         .andReturn();
 

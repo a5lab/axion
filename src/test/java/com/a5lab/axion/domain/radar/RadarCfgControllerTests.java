@@ -411,7 +411,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    List<ModelError> modelErrorList =List.of(new ModelError(null, "Unable to create radar due to error: {0}", null));
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "Unable to create radar due to error: {0}", null));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService).save(any(RadarDto.class));
 
