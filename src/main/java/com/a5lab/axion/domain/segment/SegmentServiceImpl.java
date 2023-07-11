@@ -23,7 +23,6 @@ import com.a5lab.axion.domain.ModelError;
 import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
-import com.a5lab.axion.domain.ring.RadarActiveSaveApprover;
 
 @RequiredArgsConstructor
 @Service

@@ -1,6 +1,6 @@
-# Repo axion
+# Axion
 
-Technical and business radar. Spring boot based application
+Technical and business radar. Demo available at https://axion.a5lab.com. Spring boot based application.
 
 # Release application
 * update version at antora.yml file
