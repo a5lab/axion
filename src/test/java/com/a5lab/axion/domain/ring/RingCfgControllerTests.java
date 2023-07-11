@@ -28,6 +28,7 @@ import com.a5lab.axion.domain.ModelError;
 import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
+import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 
 @WebMvcTest(RingCfgController.class)
@@ -128,7 +129,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
     radarTypeDto.setId(1L);
     radarTypeDto.setTitle("Technology radars 1");
-    radarTypeDto.setCode("technology_radar_1");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeDto.setDescription("Technology radars");
 
     // Create a radar
@@ -285,7 +286,7 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
     radarTypeDto.setId(1L);
     radarTypeDto.setTitle("Technology radars 1");
-    radarTypeDto.setCode("technology_radar_1");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeDto.setDescription("Technology radars");
 
     // Create a radar
