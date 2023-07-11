@@ -15,16 +15,14 @@ import org.springframework.util.ResourceUtils;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarMapper;
 import com.a5lab.axion.domain.radar.RadarRepository;
-import com.a5lab.axion.domain.radar.RadarService;
 
 public abstract class AbstractRadarProcessor implements RadarProcessor {
 
   protected final ApplicationContext applicationContext;
 
-  protected final RadarService radarService;
+  // protected final RadarService radarService;
 
   protected final RadarRepository radarRepository;
-
   protected final RadarMapper radarMapper;
 
   protected final WizardDto wizardDto;
@@ -37,12 +35,11 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
     this.wizardDto = wizardDto;
 
     // Create radar service base on application context
-    radarService =  applicationContext.getBean(RadarService.class);
+    // radarService =  applicationContext.getBean(RadarService.class);
 
     // Create radar repository base on application context
     radarRepository =  applicationContext.getBean(RadarRepository.class);
     radarMapper =  applicationContext.getBean(RadarMapper.class);
-
   }
 
   public void createRadar() throws Exception {
@@ -65,7 +62,6 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
       radar.setActive(Boolean.parseBoolean(record[3]));
       // this.radarDto = this.radarService.save(radar);
       this.radarDto =  radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radar)));
-
     }
   }
 
