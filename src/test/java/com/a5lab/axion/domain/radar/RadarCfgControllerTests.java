@@ -25,6 +25,7 @@ import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.FlashMessages;
 import com.a5lab.axion.domain.ModelError;
 import com.a5lab.axion.domain.ValidationException;
+import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
 import com.a5lab.axion.domain.radar_type.RadarTypeService;
 
@@ -43,7 +44,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarTypeDto.setId(10L);
     radarTypeDto.setDescription("My Description");
     radarTypeDto.setTitle("My title");
-    radarTypeDto.setCode("My code");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
 
     //Create radar for radarType
     final RadarDto radarDto = new RadarDto();
@@ -131,7 +132,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarTypeDto.setId(10L);
     radarTypeDto.setDescription("My Description");
     radarTypeDto.setTitle("My title");
-    radarTypeDto.setCode("My code");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
@@ -165,7 +166,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarTypeDto.setId(1L);
     radarTypeDto.setDescription("My Description");
     radarTypeDto.setTitle("My title");
-    radarTypeDto.setCode("My code");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(2L);
@@ -188,6 +189,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("radarDto"))
         .andExpect(view().name("settings/radars/add"))
         .andReturn();
 
@@ -196,7 +198,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
-
 
   @Test
   public void shouldFailToCreateRadarDueToEmptyTitle() throws Exception {
@@ -218,11 +219,11 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("radarDto", "title"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
-    Assertions.assertTrue(content.contains("title"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -249,12 +250,12 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("radarDto", "title"))
         .andExpect(view().name("settings/radars/add"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("is already taken"));
-    Assertions.assertTrue(content.contains("title"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -281,12 +282,12 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("radarDto", "primary"))
         .andExpect(view().name("settings/radars/add"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("should be only one primary radar"));
-    Assertions.assertTrue(content.contains("primary"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -335,7 +336,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarTypeDto.setId(10L);
     radarTypeDto.setDescription("My Description");
     radarTypeDto.setTitle("My title");
-    radarTypeDto.setCode("My code");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
@@ -383,12 +384,12 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("radarDto", "title"))
         .andExpect(view().name("settings/radars/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
-    Assertions.assertTrue(content.contains("title"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -399,7 +400,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarTypeDto.setId(1L);
     radarTypeDto.setDescription("My Description");
     radarTypeDto.setTitle("My title");
-    radarTypeDto.setCode("My code");
+    radarTypeDto.setCode(RadarType.TECHNOLOGY_RADAR);
 
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(2L);
@@ -410,8 +411,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setPrimary(true);
     radarDto.setActive(true);
 
-    List<ModelError> modelErrorList =
-        List.of(new ModelError("radar.error.exception", "Unable to create radar due to error: {0}", null));
+    List<ModelError> modelErrorList =List.of(new ModelError(null, "Unable to create radar due to error: {0}", null));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService).save(any(RadarDto.class));
 
@@ -422,6 +422,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("radarDto"))
         .andExpect(view().name("settings/radars/edit"))
         .andReturn();
 
@@ -453,12 +454,12 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("radarDto", "title"))
         .andExpect(view().name("settings/radars/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("is already taken"));
-    Assertions.assertTrue(content.contains("title"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
@@ -485,12 +486,12 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("radarDto", "primary"))
         .andExpect(view().name("settings/radars/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("should be only one primary radar"));
-    Assertions.assertTrue(content.contains("primary"));
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
