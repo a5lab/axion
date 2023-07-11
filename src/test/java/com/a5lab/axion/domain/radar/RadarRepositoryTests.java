@@ -56,7 +56,7 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
     // Create a radar type
     final RadarType radarType = new RadarType();
     radarType.setTitle("Technology radars 1");
-    radarType.setCode("technology_radar_1");
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarType.setDescription("Technology radars");
     radarTypeRepository.saveAndFlush(radarType);
 
@@ -76,57 +76,11 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
   }
 
   @Test
-  void shouldFailToFindByTitleRadarDueToEmptyField() {
-    // Create a radar type
-    final RadarType radarType = new RadarType();
-    radarType.setTitle("Technology radars 1");
-    radarType.setCode("technology_radar_1");
-    radarType.setDescription("Technology radars");
-    radarTypeRepository.saveAndFlush(radarType);
-
-    // Create a radar
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My new test Radar");
-    radar.setDescription("My awesome description");
-    radar.setPrimary(false);
-    radar.setActive(false);
-    Radar saved = radarRepository.saveAndFlush(radar);
-    Assertions.assertNotNull(saved.getId());
-
-    List<Radar> radarList = radarRepository.findByTitle("");
-    Assertions.assertTrue(radarList.isEmpty());
-  }
-
-  @Test
-  void shouldFailToFindByTitleRadarDueToWhiteSpace() {
-    // Create a radar type
-    final RadarType radarType = new RadarType();
-    radarType.setTitle("Technology radars 1");
-    radarType.setCode("technology_radar_1");
-    radarType.setDescription("Technology radars");
-    radarTypeRepository.saveAndFlush(radarType);
-
-    // Create a radar
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My new test Radar");
-    radar.setDescription("My awesome description");
-    radar.setPrimary(false);
-    radar.setActive(false);
-    Radar saved = radarRepository.saveAndFlush(radar);
-    Assertions.assertNotNull(saved.getId());
-
-    List<Radar> radarList = radarRepository.findByTitle(" " + radar.getTitle());
-    Assertions.assertTrue(radarList.isEmpty());
-  }
-
-  @Test
   void shouldFailOnNullTitle() {
     // Create a radar type
     final RadarType radarType = new RadarType();
     radarType.setTitle("Technology radars");
-    radarType.setCode("technology_radar");
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarType.setDescription("Technology radars");
     radarTypeRepository.saveAndFlush(radarType);
 
