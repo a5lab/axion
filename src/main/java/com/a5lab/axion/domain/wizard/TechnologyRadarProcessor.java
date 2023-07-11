@@ -30,14 +30,6 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlipRepository;
 
 public class TechnologyRadarProcessor extends AbstractRadarProcessor {
 
-  // private final RingService ringService;
-
-  // private final SegmentService segmentService;
-
-  // private final TechnologyService technologyService;
-
-  // private final TechnologyBlipService technologyBlipService;
-
   private final RingRepository ringRepository;
 
   private final SegmentRepository segmentRepository;
@@ -57,12 +49,6 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
 
   public TechnologyRadarProcessor(ApplicationContext applicationContext, WizardDto wizardDto) {
     super(applicationContext, wizardDto);
-
-    // Create services based on application context
-    // ringService =  applicationContext.getBean(RingService.class);
-    // segmentService =  applicationContext.getBean(SegmentService.class);
-    // technologyService =  applicationContext.getBean(TechnologyService.class);
-    // technologyBlipService =  applicationContext.getBean(TechnologyBlipService.class);
 
     // Create repositories based on application context
     ringRepository =  applicationContext.getBean(RingRepository.class);
@@ -106,7 +92,6 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       ringDto.setDescription(record[1]);
       ringDto.setPosition(Integer.parseInt(record[2]));
       ringDto.setColor(record[3]);
-      // this.ringService.save(ringDto);
       this.ringRepository.save(this.ringMapper.toEntity(ringDto));
     }
   }
@@ -128,7 +113,6 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       segmentDto.setTitle(record[0]);
       segmentDto.setDescription(record[1]);
       segmentDto.setPosition(Integer.parseInt(record[2]));
-      // this.segmentService.save(segmentDto);
       this.segmentRepository.save(this.segmentMapper.toEntity(segmentDto));
     }
   }
@@ -150,9 +134,7 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       technologyDto.setDescription(record[2]);
 
       // Create only if not exists
-      // if (this.technologyService.findByTitle(technologyDto.getTitle()).isEmpty()) {
       if (this.technologyRepository.findByTitle(technologyDto.getTitle()).isEmpty()) {
-        // this.technologyService.save(technologyDto);
         this.technologyRepository.save(technologyMapper.toEntity(technologyDto));
       }
     }
@@ -177,19 +159,15 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
       TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
       technologyBlipDto.setRadarId(this.radarDto.getId());
       technologyBlipDto.setRadarTitle(this.radarDto.getTitle());
-      // RingDto ringDto = this.ringService.findByTitle(ringTitle).get();
       Ring ring = this.ringRepository.findByTitle(ringTitle).get();
       technologyBlipDto.setRingId(ring.getId());
       technologyBlipDto.setRingTitle(ring.getTitle());
-      // SegmentDto segmentDto = this.segmentService.findByTitle(segmentTitle).get();
       Segment segment = this.segmentRepository.findByTitle(segmentTitle).get();
       technologyBlipDto.setSegmentId(segment.getId());
       technologyBlipDto.setSegmentTitle(segment.getTitle());
-      // TechnologyDto technologyDto = this.technologyService.findByTitle(technologyTitle).get();
       Technology technology = this.technologyRepository.findByTitle(technologyTitle).get();
       technologyBlipDto.setTechnologyId(technology.getId());
       technologyBlipDto.setTechnologyTitle(technology.getTitle());
-      // this.technologyBlipService.save(technologyBlipDto);
       this.technologyBlipRepository.save(technologyBlipMapper.toEntity(technologyBlipDto));
     }
   }

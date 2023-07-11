@@ -20,8 +20,6 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
 
   protected final ApplicationContext applicationContext;
 
-  // protected final RadarService radarService;
-
   protected final RadarRepository radarRepository;
   protected final RadarMapper radarMapper;
 
@@ -34,10 +32,7 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
     this.applicationContext = applicationContext;
     this.wizardDto = wizardDto;
 
-    // Create radar service base on application context
-    // radarService =  applicationContext.getBean(RadarService.class);
-
-    // Create radar repository base on application context
+    // Create radar repository and mapper based on application context
     radarRepository =  applicationContext.getBean(RadarRepository.class);
     radarMapper =  applicationContext.getBean(RadarMapper.class);
   }
@@ -60,14 +55,12 @@ public abstract class AbstractRadarProcessor implements RadarProcessor {
       radar.setDescription(record[1]);
       radar.setPrimary(Boolean.parseBoolean(record[2]));
       radar.setActive(Boolean.parseBoolean(record[3]));
-      // this.radarDto = this.radarService.save(radar);
       this.radarDto =  radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radar)));
     }
   }
 
   public void activateRadar() {
     this.radarDto.setActive(true);
-    // this.radarService.save(this.radarDto);
     this.radarDto =  radarMapper.toDto(radarRepository.save(radarMapper.toEntity(radarDto)));
   }
 }
