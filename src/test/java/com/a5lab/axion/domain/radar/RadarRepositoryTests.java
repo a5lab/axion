@@ -27,7 +27,7 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
     // Create a radar type
     final RadarType radarType = new RadarType();
     radarType.setTitle("Technology radars 1");
-    radarType.setCode("technology_radar_1");
+    radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarType.setDescription("Technology radars");
     radarTypeRepository.saveAndFlush(radarType);
 
