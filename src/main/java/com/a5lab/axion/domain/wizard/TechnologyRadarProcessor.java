@@ -13,12 +13,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.util.ResourceUtils;
 
 import com.a5lab.axion.domain.ring.RingDto;
+import com.a5lab.axion.domain.ring.RingRepository;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentDto;
+import com.a5lab.axion.domain.segment.SegmentRepository;
 import com.a5lab.axion.domain.segment.SegmentService;
 import com.a5lab.axion.domain.technology.TechnologyDto;
+import com.a5lab.axion.domain.technology.TechnologyRepository;
 import com.a5lab.axion.domain.technology.TechnologyService;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
+import com.a5lab.axion.domain.technology_blip.TechnologyBlipRepository;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipService;
 
 public class TechnologyRadarProcessor extends AbstractRadarProcessor {
@@ -30,16 +34,31 @@ public class TechnologyRadarProcessor extends AbstractRadarProcessor {
   private final TechnologyService technologyService;
 
   private final TechnologyBlipService technologyBlipService;
+
+  private final RingRepository ringRepository;
+
+  private final SegmentRepository segmentRepository;
+
+  private final TechnologyRepository technologyRepository;
+
+  private final TechnologyBlipRepository technologyBlipRepository;
   
 
   public TechnologyRadarProcessor(ApplicationContext applicationContext, WizardDto wizardDto) {
     super(applicationContext, wizardDto);
 
-    // Create services base on application context
+    // Create services based on application context
     ringService =  applicationContext.getBean(RingService.class);
     segmentService =  applicationContext.getBean(SegmentService.class);
     technologyService =  applicationContext.getBean(TechnologyService.class);
     technologyBlipService =  applicationContext.getBean(TechnologyBlipService.class);
+
+    // Create repositories based on application context
+    ringRepository =  applicationContext.getBean(RingRepository.class);
+    segmentRepository =  applicationContext.getBean(SegmentRepository.class);
+    technologyRepository =  applicationContext.getBean(TechnologyRepository.class);
+    technologyBlipRepository =  applicationContext.getBean(TechnologyBlipRepository.class);
+    
   }
 
   @Override
