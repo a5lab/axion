@@ -263,7 +263,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("active radar rings should be consecutively numbered from 0 till 3"));
     Assertions.assertTrue(content.contains("active radar segments should be consecutively numbered from 0 till 3"));
 
-
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
 
