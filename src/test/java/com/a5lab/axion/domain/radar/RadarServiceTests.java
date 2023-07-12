@@ -26,6 +26,8 @@ import com.a5lab.axion.domain.AbstractServiceTests;
 import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeRepository;
+import com.a5lab.axion.domain.ring.Ring;
+import com.a5lab.axion.domain.segment.Segment;
 
 class RadarServiceTests extends AbstractServiceTests {
   @MockBean
@@ -158,6 +160,140 @@ class RadarServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
 
     Mockito.verify(radarRepository).save(any());
+    Mockito.verify(radarRepository).findByPrimary(true);
+    Mockito.verify(radarRepository).findByTitle(any());
+    Mockito.verify(radarTypeRepository).findById(radarType.getId());
+  }
+
+  @Test
+  void shouldSaveTheActiveRadarDto() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
+    final Ring ring0 = new Ring();
+    final Ring ring1 = new Ring();
+    final Ring ring2 = new Ring();
+    final Ring ring3 = new Ring();
+    ring0.setPosition(0);
+    ring1.setPosition(1);
+    ring2.setPosition(2);
+    ring3.setPosition(3);
+
+    final Segment segment0 = new Segment();
+    final Segment segment1 = new Segment();
+    final Segment segment2 = new Segment();
+    final Segment segment3 = new Segment();
+    segment0.setPosition(0);
+    segment1.setPosition(1);
+    segment2.setPosition(2);
+    segment3.setPosition(3);
+
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(radarType);
+    radar.setTitle("Radar title");
+    radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radar.setSegmentList(List.of(segment0, segment1, segment2, segment3));
+    radar.setRingList(List.of(ring0, ring1, ring2, ring3));
+    Assertions.assertEquals(radar.getRingList().size(), 4);
+
+    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
+    Mockito.when(radarRepository.save(any())).thenReturn(radar);
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
+    Mockito.when(radarRepository.findByTitle(radar.getTitle())).thenReturn(new LinkedList<>());
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
+    RadarDto radarDto = radarService.save(radarMapper.toDto(radar));
+    Assertions.assertEquals(radar.getId(), radarDto.getId());
+    Assertions.assertEquals(radar.getTitle(), radarDto.getTitle());
+    Assertions.assertEquals(radar.getDescription(), radarDto.getDescription());
+    Assertions.assertEquals(radar.getRingList().size(), radarDto.getRingDtoList().size());
+    Assertions.assertEquals(radar.getSegmentList().size(), radarDto.getSegmentDtoList().size());
+
+    Mockito.verify(radarRepository).findById(radar.getId());
+    Mockito.verify(radarRepository).save(any());
+    Mockito.verify(radarRepository).findByPrimary(true);
+    Mockito.verify(radarRepository).findByTitle(any());
+    Mockito.verify(radarTypeRepository).findById(radarType.getId());
+  }
+
+  @Test
+  void shouldFailToSaveActiveRadarDtoDueToMinimumRingAndSegment() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(radarType);
+    radar.setTitle("Radar title");
+    radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
+    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
+    Mockito.when(radarRepository.findByTitle(radar.getTitle())).thenReturn(new LinkedList<>());
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
+    ValidationException exception =
+        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertNull(radar.getSegmentList());
+    Assertions.assertNull(radar.getRingList());
+
+    Mockito.verify(radarRepository).findById(radar.getId());
+    Mockito.verify(radarRepository).findByPrimary(true);
+    Mockito.verify(radarRepository).findByTitle(any());
+    Mockito.verify(radarTypeRepository).findById(radarType.getId());
+  }
+
+  @Test
+  void shouldFailToSaveActiveRadarDtoDueToWrongRingAndSegmentPosition() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
+    final Ring ring0 = new Ring();
+    final Ring ring1 = new Ring();
+    final Ring ring2 = new Ring();
+    final Ring ring3 = new Ring();
+    ring0.setPosition(0);
+    ring1.setPosition(0);
+    ring2.setPosition(4);
+    ring3.setPosition(5);
+
+    final Segment segment0 = new Segment();
+    final Segment segment1 = new Segment();
+    final Segment segment2 = new Segment();
+    final Segment segment3 = new Segment();
+    segment0.setPosition(0);
+    segment1.setPosition(0);
+    segment2.setPosition(4);
+    segment3.setPosition(5);
+
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(radarType);
+    radar.setTitle("Radar title");
+    radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(true);
+    radar.setSegmentList(List.of(segment0, segment1, segment2, segment3));
+    radar.setRingList(List.of(ring0, ring1, ring2, ring3));
+
+    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
+    Mockito.when(radarRepository.findByTitle(radar.getTitle())).thenReturn(new LinkedList<>());
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
+    ValidationException exception =
+        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertEquals(radar.getSegmentList().size(), 4);
+    Assertions.assertEquals(radar.getRingList().size(), 4);
+
+    Mockito.verify(radarRepository).findById(radar.getId());
     Mockito.verify(radarRepository).findByPrimary(true);
     Mockito.verify(radarRepository).findByTitle(any());
     Mockito.verify(radarTypeRepository).findById(radarType.getId());
