@@ -2,7 +2,7 @@ package com.a5lab.axion.domain.radar;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -14,32 +14,22 @@ import com.a5lab.axion.domain.ModelError;
 @RequiredArgsConstructor
 public class SegmentNumberSaveApprover implements ModelApprover {
 
-  private static final int RING_NUBMER = 4;
+  private static final int SEGMENT_NUMBER = 4;
 
   private final MessageSource messageSource;
 
-  private final RadarDto radarDto;
-
-  private final Radar radar;
+  private final Optional<Radar> radarOptional;
 
 
   @Override
   public List<ModelError> approve() {
-    /*
-      String message() default "must be only four segments for active radar";
-      if (radar.isActive()) {
-        if (radar.getSegmentList() != null) {
-          return radar.getSegmentList().size() == SEGMENT_NUBMER;
-        }
-        return false;
-      }
-    }*/
-
-    if (!Objects.equals(radarDto.getId(), radar.getId()) && radar.isPrimary()) {
-      return List.of(new ModelError("primary_invalid_primary",
-          messageSource.getMessage("radar.error.invalid_primary", null, LocaleContextHolder.getLocale()),
-          "primary"));
+    if (radarOptional == null || radarOptional.isEmpty() || radarOptional.get().getSegmentList() == null
+        || radarOptional.get().getSegmentList().size() != SEGMENT_NUMBER) {
+      return List.of(new ModelError("unable_to_save_due_to_segment_number",
+          messageSource.getMessage("radar.error.unable_to_save_due_to_segment_number", null,
+              LocaleContextHolder.getLocale()), null));
     }
     return new LinkedList<>();
+
   }
 }

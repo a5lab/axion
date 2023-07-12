@@ -22,8 +22,8 @@ public class RadarActiveDeleteApprover implements ModelApprover {
   @Override
   public List<ModelError> approve() throws ValidationException {
     if (ring.getRadar().isActive()) {
-      return List.of(new ModelError("unable_to_delete_active_radar",
-          messageSource.getMessage("ring.error.unable_to_delete_active_radar", null,
+      return List.of(new ModelError("unable_to_delete_due_to_active_radar",
+          messageSource.getMessage("ring.error.unable_to_delete_due_to_active_radar", null,
               LocaleContextHolder.getLocale()), null));
     }
     return new LinkedList<>();

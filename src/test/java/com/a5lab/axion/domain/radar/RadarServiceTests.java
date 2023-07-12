@@ -144,6 +144,8 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setRadarType(radarType);
     radar.setTitle("Radar title");
     radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(false);
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
     Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
@@ -170,17 +172,17 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setId(10L);
     radar.setRadarType(radarType);
     radar.setTitle("Radar title");
-    radar.setPrimary(true);
-    radar.setActive(true);
     radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(false);
 
     final Radar radar1 = new Radar();
     radar1.setId(12L);
     radar1.setRadarType(radarType);
     radar1.setTitle("Any radar title");
-    radar1.setPrimary(true);
-    radar1.setActive(true);
     radar1.setDescription("Radar description");
+    radar1.setPrimary(true);
+    radar1.setActive(false);
     List<Radar> radarList = List.of(radar1);
 
     Mockito.when(radarRepository.save(any())).thenReturn(radar);
@@ -242,9 +244,9 @@ class RadarServiceTests extends AbstractServiceTests {
     radar.setId(2L);
     radar.setRadarType(radarType);
     radar.setTitle("Radar title");
-    radar.setPrimary(true);
-    radar.setActive(true);
     radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(false);
 
     final Radar radar1 = new Radar();
     radar1.setId(3L);
