@@ -220,7 +220,7 @@ class RadarServiceTests extends AbstractServiceTests {
   }
 
   @Test
-  void shouldFailToSaveActiveRadarDtoDueToWithoutRingAndSegment() {
+  void shouldFailToSaveActiveRadarDtoDueToMinimumRingAndSegment() {
     final RadarType radarType = new RadarType();
     radarType.setId(1L);
 
