@@ -329,6 +329,42 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
+  public void shouldFailToCreateSecondPrimaryRadarDtoAndEmptyTitle() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setId(10L);
+    radarDto.setRadarTypeId(3L);
+    radarDto.setRadarTypeTitle("My radar type");
+    radarDto.setTitle("");
+    radarDto.setDescription("My description");
+    radarDto.setPrimary(true);
+    radarDto.setActive(true);
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"),
+        new ModelError(null, "should be only one primary radar", "primary"),
+        new ModelError(null, "size must be between 1 and 64", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService).save(any(RadarDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/radars/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
+            .param("description", radarDto.getDescription())
+            .sessionAttr("radarDto", radarDto))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("radarDto", "title"))
+        .andExpect(model().attributeHasFieldErrors("radarDto", "primary"))
+        .andExpect(view().name("settings/radars/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be only one primary radar"));
+    Assertions.assertTrue(content.contains("must not be blank"));
+    Assertions.assertTrue(content.contains("size must be between 1 and 64"));
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
+  }
+
+  @Test
   public void shouldFailToCreateRadarDueToNotOnePrimary() throws Exception {
     final RadarDto radarDto = new RadarDto();
     radarDto.setId(10L);
@@ -605,7 +641,7 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     radarDto.setId(10L);
     radarDto.setRadarTypeId(3L);
     radarDto.setRadarTypeTitle("My radar type");
-    radarDto.setTitle("My title");
+    radarDto.setTitle("");
     radarDto.setDescription("My description");
     radarDto.setPrimary(true);
     radarDto.setActive(true);
@@ -619,7 +655,6 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     MvcResult result = mockMvc.perform(post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
             .param("radarTypeId", String.valueOf(radarDto.getRadarTypeId()))
-            .param("title", radarDto.getTitle())
             .param("description", radarDto.getDescription())
             .sessionAttr("radarDto", radarDto))
         .andExpect(status().isOk())
