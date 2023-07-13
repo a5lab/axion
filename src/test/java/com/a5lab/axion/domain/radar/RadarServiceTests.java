@@ -166,6 +166,44 @@ class RadarServiceTests extends AbstractServiceTests {
   }
 
   @Test
+  void shouldFailToTheSaveSecondPrimaryRadarDtoAndEmptyTitle() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(radarType);
+    radar.setTitle("");
+    radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(false);
+
+    final Radar radar1 = new Radar();
+    radar1.setId(12L);
+    radar1.setRadarType(radarType);
+    radar1.setTitle("Any radar title");
+    radar1.setDescription("Radar description");
+    radar1.setPrimary(true);
+    radar1.setActive(false);
+    List<Radar> radarList = List.of(radar1);
+
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(radarList);
+    Mockito.when(radarRepository.findByTitle(radar1.getTitle())).thenReturn(radarList);
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
+    ValidationException exception =
+        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertTrue(exception.getMessage().contains("must not be blank"));
+    Assertions.assertTrue(exception.getMessage().contains("should be only one primary radar"));
+    Assertions.assertTrue(exception.getMessage().contains("size must be between 1 and 64"));
+
+    Mockito.verify(radarRepository).findByPrimary(true);
+    Mockito.verify(radarRepository).findByTitle(any());
+    Mockito.verify(radarTypeRepository).findById(radarType.getId());
+  }
+
+  @Test
   void shouldSaveTheActiveRadarDto() {
     final RadarType radarType = new RadarType();
     radarType.setId(1L);
