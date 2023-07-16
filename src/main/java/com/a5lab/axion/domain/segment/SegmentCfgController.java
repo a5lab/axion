@@ -93,12 +93,6 @@ public class SegmentCfgController {
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid SegmentDto segmentDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/add");
-      modelAndView.addObject("segmentDto", segmentDto);
-      modelAndView.addObject("radarDtos", this.radarService.findAll());
-      return modelAndView;
-    }
     try {
       segmentService.save(segmentDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
@@ -142,13 +136,6 @@ public class SegmentCfgController {
   @PostMapping("/update")
   public ModelAndView update(@Valid SegmentDto segmentDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/segments/edit");
-      modelAndView.addObject("segmentDto", segmentDto);
-      modelAndView.addObject("radarDtos", this.radarService.findAll());
-      return modelAndView;
-    }
-
     try {
       segmentService.save(segmentDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
