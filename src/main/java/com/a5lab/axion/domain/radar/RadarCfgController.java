@@ -90,12 +90,6 @@ public class RadarCfgController {
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid RadarDto radarDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/add");
-      modelAndView.addObject("radarDto", radarDto);
-      modelAndView.addObject("radar_types", radarTypeService.findAll());
-      return modelAndView;
-    }
     try {
       radarService.save(radarDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
@@ -138,13 +132,6 @@ public class RadarCfgController {
   @PostMapping("/update")
   public ModelAndView update(@Valid RadarDto radarDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/radars/edit");
-      modelAndView.addObject("radarDto", radarDto);
-      modelAndView.addObject("radar_types", radarTypeService.findAll());
-      return modelAndView;
-    }
-
     try {
       radarService.save(radarDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,

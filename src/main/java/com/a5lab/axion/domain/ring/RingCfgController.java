@@ -91,13 +91,6 @@ public class RingCfgController {
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid RingDto ringDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/add");
-      modelAndView.addObject("ringDto", ringDto);
-      modelAndView.addObject("radarDtos", this.radarService.findAll());
-      return modelAndView;
-    }
-
     try {
       ringService.save(ringDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
@@ -142,13 +135,6 @@ public class RingCfgController {
   @PostMapping("/update")
   public ModelAndView update(@Valid RingDto ringDto,
                        BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
-      ModelAndView modelAndView = new ModelAndView("settings/rings/edit");
-      modelAndView.addObject("ringDto", ringDto);
-      modelAndView.addObject("radarDtos", this.radarService.findAll());
-      return modelAndView;
-    }
-
     try {
       ringService.save(ringDto);
       redirectAttributes.addFlashAttribute(FlashMessages.INFO,
