@@ -1,7 +1,12 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -11,10 +16,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class TechnologyBlipServiceImpl implements TechnologyBlipService {
+
+  private final Validator validator;
   private final TechnologyBlipRepository technologyBlipRepository;
   private final TechnologyBlipMapper technologyBlipMapper;
 
@@ -46,8 +56,19 @@ public class TechnologyBlipServiceImpl implements TechnologyBlipService {
   @Override
   @Transactional
   public TechnologyBlipDto save(TechnologyBlipDto technologyBlipDto) {
-    return technologyBlipMapper.toDto(
-        technologyBlipRepository.save(technologyBlipMapper.toEntity(technologyBlipDto)));
+    TechnologyBlip technologyBlip = technologyBlipMapper.toEntity(technologyBlipDto);
+    // Throw exception if violations are exists
+    List<ModelError> modelErrorList = new LinkedList<>();
+    Set<ConstraintViolation<TechnologyBlip>> constraintViolationSet = validator.validate(technologyBlip);
+    if (!constraintViolationSet.isEmpty()) {
+      for (ConstraintViolation<TechnologyBlip> constraintViolation : constraintViolationSet) {
+        modelErrorList.add(new ModelError(constraintViolation.getMessageTemplate(), constraintViolation.getMessage(),
+            constraintViolation.getPropertyPath().toString()));
+      }
+      String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+      throw new ValidationException(errorMessage, modelErrorList);
+    }
+    return technologyBlipMapper.toDto(technologyBlipRepository.save(technologyBlip));
   }
 
   @Override

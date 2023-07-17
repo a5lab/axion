@@ -45,14 +45,17 @@ public class TechnologyBlip extends AbstractAuditable {
   @JoinColumn(name = "radar_id", nullable = false)
   private Radar radar;
 
+  @NotNull
   @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "technology_id", nullable = false)
   private Technology technology;
 
+  @NotNull
   @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "segment_id", nullable = false)
   private Segment segment;
 
+  @NotNull
   @ManyToOne(optional = false, fetch = FetchType.EAGER)
   @JoinColumn(name = "ring_id", nullable = false)
   private Ring ring;

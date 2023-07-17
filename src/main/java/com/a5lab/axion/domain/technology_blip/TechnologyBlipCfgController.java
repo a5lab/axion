@@ -24,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5lab.axion.domain.FlashMessages;
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.ring.RingService;
 import com.a5lab.axion.domain.segment.SegmentService;
@@ -100,7 +102,23 @@ public class TechnologyBlipCfgController {
   public ModelAndView create(@Valid TechnologyBlipDto technologyBlipDto,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
+    try {
+      technologyBlipService.save(technologyBlipDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("technology_blip.info.created", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/technology_blips");
+    } catch (ValidationException e) {
+      // Add errors to fields and global
+      for (ModelError modelError : e.getModelErrorList()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+          bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
+        } else {
+          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
+        }
+      }
+
+      // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/technology_blips/add");
       modelAndView.addObject("technologyBlipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
@@ -108,14 +126,6 @@ public class TechnologyBlipCfgController {
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
-    }
-
-    try {
-      technologyBlipService.save(technologyBlipDto);
-      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("technology_blip.info.created", null,
-              LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/technology_blips");
     } catch (DataIntegrityViolationException e) {
       // Redirect
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
@@ -147,7 +157,23 @@ public class TechnologyBlipCfgController {
   @PostMapping("/update")
   public ModelAndView update(@Valid TechnologyBlipDto technologyBlipDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
+    try {
+      technologyBlipService.save(technologyBlipDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("technology_blip.info.updated", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/technology_blips");
+    } catch (ValidationException e) {
+      // Add errors to fields and global
+      for (ModelError modelError : e.getModelErrorList()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+          bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
+        } else {
+          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
+        }
+      }
+
+      // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/technology_blips/edit");
       modelAndView.addObject("technologyBlipDto", technologyBlipDto);
       modelAndView.addObject("radarDtos", this.radarService.findAll());
@@ -155,14 +181,6 @@ public class TechnologyBlipCfgController {
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
-    }
-
-    try {
-      technologyBlipService.save(technologyBlipDto);
-      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-          messageSource.getMessage("technology_blip.info.updated", null,
-              LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/technology_blips");
     } catch (DataIntegrityViolationException e) {
       // Redirect
       redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
