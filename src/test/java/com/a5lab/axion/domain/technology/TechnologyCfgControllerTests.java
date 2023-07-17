@@ -23,6 +23,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.FlashMessages;
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
 
 @WebMvcTest(TechnologyCfgController.class)
 public class TechnologyCfgControllerTests extends AbstractControllerTests {
@@ -109,29 +111,6 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("description"));
   }
 
-  @Test
-  public void shouldFailToCreateTechnology() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setId(10L);
-    technologyDto.setWebsite(null);
-    technologyDto.setTitle(null);
-    technologyDto.setDescription(null);
-    technologyDto.setMoved(0);
-    technologyDto.setActive(true);
-
-    MvcResult result = mockMvc.perform(post("/settings/technologies/create")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", technologyDto.getTitle())
-            .param("website", technologyDto.getWebsite())
-            .param("description", technologyDto.getDescription())
-            .sessionAttr("technologyDto", technologyDto))
-        .andExpect(status().isOk())
-        .andExpect(view().name("settings/technologies/add"))
-        .andReturn();
-
-    String content = result.getResponse().getContentAsString();
-    Assertions.assertTrue(content.contains("must not be blank"));
-  }
 
   @Test
   public void shouldCreateTechnology() throws Exception {
@@ -159,6 +138,28 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(technologyService).save(any());
   }
+
+  @Test
+  public void shouldFailToCreateTechnologyDueToEmptyTitle() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyService)
+        .save(any(TechnologyDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/technologies/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", ""))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("technologyDto", "title"))
+        .andExpect(view().name("settings/technologies/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(technologyService).save(any(TechnologyDto.class));
+  }
+
 
   @Test
   public void shouldEditTechnology() throws Exception {
@@ -226,26 +227,24 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToUpdateTechnology() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setId(10L);
-    technologyDto.setWebsite("My website");
-    technologyDto.setTitle("My technology");
-    technologyDto.setDescription("My technology description");
-    technologyDto.setMoved(0);
-    technologyDto.setActive(true);
+  public void shouldFailToUpdateTechnologyDueToEmptyTitle() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyService)
+        .save(any(TechnologyDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/technologies/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", technologyDto.getTitle())
-            .param("website", technologyDto.getWebsite())
-            .sessionAttr("technologyDto", technologyDto))
+            .param("title", ""))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("technologyDto", "title"))
         .andExpect(view().name("settings/technologies/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(technologyService).save(any(TechnologyDto.class));
   }
 
   @Test
