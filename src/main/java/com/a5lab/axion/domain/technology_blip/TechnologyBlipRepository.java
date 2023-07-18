@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TechnologyBlipRepository extends JpaRepository<TechnologyBlip, Long> {
-  @Query("SELECT t FROM TechnologyBlip t WHERE t.radar = ?1 AND t.technology = ?2")
+  @Query("SELECT t FROM TechnologyBlip t WHERE t.radar.id = ?1 AND t.technology.id = ?2")
   List<TechnologyBlip> findByRadarIdAndTechnologyId(Long radarId, Long technologyId);
 }
