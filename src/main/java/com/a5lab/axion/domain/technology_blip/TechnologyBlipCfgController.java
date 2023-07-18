@@ -114,7 +114,28 @@ public class TechnologyBlipCfgController {
         if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
           bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
         } else {
-          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
+          switch (modelError.getField()) {
+            case "radar": {
+              bindingResult.rejectValue("radarId", modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+            case "technology": {
+              bindingResult.rejectValue("technologyId", modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+            case "segment": {
+              bindingResult.rejectValue("segmentId", modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+            case "ring": {
+              bindingResult.rejectValue("ringId", modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+            default: {
+              bindingResult.rejectValue(modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+          }
         }
       }
 
@@ -169,7 +190,28 @@ public class TechnologyBlipCfgController {
         if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
           bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
         } else {
-          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
+          switch (modelError.getField()) {
+            case "radar": {
+              bindingResult.rejectValue("radarId", modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+            case "technology": {
+              bindingResult.rejectValue("technologyId", modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+            case "segment": {
+              bindingResult.rejectValue("segmentId", modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+            case "ring": {
+              bindingResult.rejectValue("ringId", modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+            default: {
+              bindingResult.rejectValue(modelError.getErrorCode(), modelError.getErrorMessage());
+              break;
+            }
+          }
         }
       }
 

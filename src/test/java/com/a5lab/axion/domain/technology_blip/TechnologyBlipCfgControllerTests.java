@@ -266,7 +266,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToCreateTechnologyBlipDueToNoData() throws Exception {
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "radarId"));
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be null", "radar"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyBlipService)
         .save(any(TechnologyBlipDto.class));
@@ -278,7 +278,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    // Assertions.assertTrue(content.contains("must not be blank"));
+    Assertions.assertTrue(content.contains("must not be null"));
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
@@ -475,7 +475,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
   @Test
   public void shouldFailToUpdateTechnologyBlipDueToNoData() throws Exception {
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "radarId"));
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be null", "radar"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyBlipService)
         .save(any(TechnologyBlipDto.class));
@@ -487,7 +487,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
-    // Assertions.assertTrue(content.contains("must not be blank"));
+    Assertions.assertTrue(content.contains("must not be null"));
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
