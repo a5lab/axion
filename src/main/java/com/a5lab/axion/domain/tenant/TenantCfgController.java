@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.a5lab.axion.domain.FlashMessages;
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
 
 @Controller
 @RequestMapping("/settings/tenants")
@@ -83,16 +85,27 @@ public class TenantCfgController {
   @PostMapping(value = "/create")
   public ModelAndView create(@Valid TenantDto tenantDto, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
+    try {
+      tenantService.save(tenantDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("tenant.info.created", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/tenants");
+    } catch (ValidationException e) {
+      // Add errors to fields and global
+      for (ModelError modelError : e.getModelErrorList()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+          bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
+        } else {
+          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
+        }
+      }
+
+      // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/tenants/add");
       modelAndView.addObject("tenantDto", tenantDto);
       return modelAndView;
     }
-    tenantService.save(tenantDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.info.created", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenants");
   }
 
   @GetMapping(value = "/edit/{id}")
@@ -113,16 +126,27 @@ public class TenantCfgController {
   @PostMapping("/update")
   public ModelAndView update(@Valid TenantDto tenantDto,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
+    try {
+      tenantService.save(tenantDto);
+      redirectAttributes.addFlashAttribute(FlashMessages.INFO,
+          messageSource.getMessage("tenant.info.updated", null,
+              LocaleContextHolder.getLocale()));
+      return new ModelAndView("redirect:/settings/tenants");
+    } catch (ValidationException e) {
+      // Add errors to fields and global
+      for (ModelError modelError : e.getModelErrorList()) {
+        if (modelError.getField() == null || modelError.getField().isEmpty() || modelError.getField().isBlank()) {
+          bindingResult.reject(modelError.getErrorCode(), modelError.getErrorMessage());
+        } else {
+          bindingResult.rejectValue(modelError.getField(), modelError.getErrorCode(), modelError.getErrorMessage());
+        }
+      }
+
+      // Show form again
       ModelAndView modelAndView = new ModelAndView("settings/tenants/edit");
       modelAndView.addObject("tenantDto", tenantDto);
       return modelAndView;
     }
-    tenantService.save(tenantDto);
-    redirectAttributes.addFlashAttribute(FlashMessages.INFO,
-        messageSource.getMessage("tenant.info.updated", null,
-            LocaleContextHolder.getLocale()));
-    return new ModelAndView("redirect:/settings/tenants");
   }
 
   @GetMapping(value = "/delete/{id}")

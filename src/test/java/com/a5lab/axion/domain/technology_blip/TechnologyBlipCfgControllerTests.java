@@ -24,6 +24,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.FlashMessages;
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
@@ -33,6 +35,7 @@ import com.a5lab.axion.domain.segment.SegmentDto;
 import com.a5lab.axion.domain.segment.SegmentService;
 import com.a5lab.axion.domain.technology.TechnologyDto;
 import com.a5lab.axion.domain.technology.TechnologyService;
+import com.a5lab.axion.domain.tenant.TenantDto;
 
 @WebMvcTest(TechnologyBlipCfgController.class)
 public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
@@ -262,12 +265,22 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateTechnologyBlip() throws Exception {
+  public void shouldFailToCreateTechnologyBlipDueToNoData() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be null", "radar"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyBlipService)
+        .save(any(TechnologyBlipDto.class));
+
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
         .andExpect(view().name("settings/technology_blips/add"))
         .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("must not be null"));
+
+    Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
 
   @Test
@@ -461,12 +474,22 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToUpdateTechnologyBlip() throws Exception {
+  public void shouldFailToUpdateTechnologyBlipDueToNoData() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be null", "radar"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyBlipService)
+        .save(any(TechnologyBlipDto.class));
+
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED))
         .andExpect(status().isOk())
         .andExpect(view().name("settings/technology_blips/edit"))
         .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("must not be null"));
+
+    Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
 
   @Test

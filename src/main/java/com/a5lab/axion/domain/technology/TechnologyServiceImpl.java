@@ -1,10 +1,14 @@
 package com.a5lab.axion.domain.technology;
 
 import jakarta.persistence.criteria.Predicate;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -14,10 +18,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class TechnologyServiceImpl implements TechnologyService {
+
+  private final Validator validator;
   private final TechnologyRepository technologyRepository;
   private final TechnologyMapper technologyMapper;
 
@@ -60,8 +69,19 @@ public class TechnologyServiceImpl implements TechnologyService {
   @Override
   @Transactional
   public TechnologyDto save(TechnologyDto technologyDto) {
-    return technologyMapper.toDto(
-        technologyRepository.save(technologyMapper.toEntity(technologyDto)));
+    Technology technology = technologyMapper.toEntity(technologyDto);
+    // Throw exception if violations are exists
+    List<ModelError> modelErrorList = new LinkedList<>();
+    Set<ConstraintViolation<Technology>> constraintViolationSet = validator.validate(technology);
+    if (!constraintViolationSet.isEmpty()) {
+      for (ConstraintViolation<Technology> constraintViolation : constraintViolationSet) {
+        modelErrorList.add(new ModelError(constraintViolation.getMessageTemplate(), constraintViolation.getMessage(),
+            constraintViolation.getPropertyPath().toString()));
+      }
+      String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+      throw new ValidationException(errorMessage, modelErrorList);
+    }
+    return technologyMapper.toDto(technologyRepository.save(technology));
   }
 
   @Override

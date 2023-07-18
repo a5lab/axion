@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * This class should not have any validation such as @NotNull etc
+ * due to custom primary validation at service layer.
+ */
 @Getter
 @Setter
 @ToString

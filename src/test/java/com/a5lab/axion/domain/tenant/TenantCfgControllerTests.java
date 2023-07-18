@@ -23,6 +23,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
 import com.a5lab.axion.domain.FlashMessages;
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
 
 @WebMvcTest(TenantCfgController.class)
 public class TenantCfgControllerTests extends AbstractControllerTests {
@@ -114,19 +116,24 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToCreateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
+  public void shouldFailToCreateTenantDueToEmptyTitle() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(tenantService)
+        .save(any(TenantDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/tenants/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", tenantDto.getTitle())
-            .sessionAttr("tenantDto", tenantDto))
+            .param("title", ""))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("tenantDto", "title"))
         .andExpect(view().name("settings/tenants/add"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(tenantService).save(any(TenantDto.class));
   }
 
   @Test
@@ -182,19 +189,24 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
-  public void shouldFailToUpdateTenant() throws Exception {
-    final TenantDto tenantDto = new TenantDto(10L, "My title", "My description");
+  public void shouldFailToUpdateTenantDueToEmptyTitle() throws Exception {
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(tenantService)
+        .save(any(TenantDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/tenants/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", tenantDto.getTitle())
-            .sessionAttr("tenantDto", tenantDto))
+            .param("title", ""))
         .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("tenantDto", "title"))
         .andExpect(view().name("settings/tenants/edit"))
         .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(tenantService).save(any(TenantDto.class));
   }
 
   @Test

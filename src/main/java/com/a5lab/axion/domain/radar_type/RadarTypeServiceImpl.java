@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.radar_type;
 
+import jakarta.validation.Validator;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class RadarTypeServiceImpl implements RadarTypeService {
+  private final Validator validator;
   private final RadarTypeRepository radarTypeRepository;
   private final RadarTypeMapper radarTypeMapper;
 

@@ -1,10 +1,14 @@
 package com.a5lab.axion.domain.tenant;
 
 import jakarta.persistence.criteria.Predicate;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -14,11 +18,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.a5lab.axion.domain.ModelError;
+import com.a5lab.axion.domain.ValidationException;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
 public class TenantServiceImpl implements TenantService {
 
+  private final Validator validator;
   private final TenantRepository tenantRepository;
   private final TenantMapper tenantMapper;
 
@@ -51,7 +59,19 @@ public class TenantServiceImpl implements TenantService {
   @Override
   @Transactional
   public TenantDto save(TenantDto tenantDto) {
-    return tenantMapper.toDto(tenantRepository.save(tenantMapper.toEntity(tenantDto)));
+    Tenant tenant = tenantMapper.toEntity(tenantDto);
+    // Throw exception if violations are exists
+    List<ModelError> modelErrorList = new LinkedList<>();
+    Set<ConstraintViolation<Tenant>> constraintViolationSet = validator.validate(tenant);
+    if (!constraintViolationSet.isEmpty()) {
+      for (ConstraintViolation<Tenant> constraintViolation : constraintViolationSet) {
+        modelErrorList.add(new ModelError(constraintViolation.getMessageTemplate(), constraintViolation.getMessage(),
+            constraintViolation.getPropertyPath().toString()));
+      }
+      String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+      throw new ValidationException(errorMessage, modelErrorList);
+    }
+    return tenantMapper.toDto(tenantRepository.save(tenant));
   }
 
   @Override
