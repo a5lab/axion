@@ -157,4 +157,24 @@ class RadarRepositoryTests extends AbstractRepositoryTests {
     assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
         .isInstanceOf(ValidationException.class);
   }
+
+  @Test
+  void shouldFailToSaveRadarDueToTitleWithRightWhiteSpace() {
+    final Radar radar = new Radar();
+    radar.setTitle("My new test Radar ");
+
+    Assertions.assertNull(radar.getId());
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
+            .isInstanceOf(ValidationException.class);
+  }
+
+  @Test
+  void shouldFailToSaveRadarDueToTitleWithLeftWhiteSpace() {
+    final Radar radar = new Radar();
+    radar.setTitle(" My new test Radar");
+
+    Assertions.assertNull(radar.getId());
+    assertThatThrownBy(() -> radarRepository.saveAndFlush(radar))
+            .isInstanceOf(ValidationException.class);
+  }
 }
