@@ -66,7 +66,7 @@ class RingRepositoryTests extends AbstractRepositoryTests {
 
     Assertions.assertNull(r.getId());
     assertThatThrownBy(() -> ringRepository.saveAndFlush(r))
-        .isInstanceOf(ValidationException.class);
+            .isInstanceOf(ValidationException.class);
   }
 
   @Test
