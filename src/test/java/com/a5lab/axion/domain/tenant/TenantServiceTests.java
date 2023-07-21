@@ -105,6 +105,7 @@ class TenantServiceTests extends AbstractServiceTests {
         catchThrowableOfType(() -> tenantService.save(tenantMapper.toDto(tenant)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
     System.out.println(exception.getMessage());
+    
 
     Mockito.verify(tenantRepository, times(2)).findById(tenant.getId());
   }
