@@ -266,6 +266,30 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(ringService).findById(ringDto.getId());
   }
 
+  /* TODO
+  @Test
+  public void shouldFailToCreateRingDueToTitleWithWhiteSpace() throws Exception {
+    final RingDto ringDto = new RingDto();
+    ringDto.setTitle(" My title ");
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService)
+        .save(any(RingDto.class));
+
+    Mockito.when(ringService.save(any())).thenReturn(ringDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/rings/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", ringDto.getTitle()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("ringDto", "title", "title has a space"))
+        .andExpect(view().name("settings/rings/add"))
+        .andReturn();
+
+    Mockito.verify(ringService).save(any(RingDto.class));
+  }
+   */
 
   @Test
   public void shouldRedirectEditRing() throws Exception {
@@ -396,6 +420,31 @@ public class RingCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(ringService).save(any());
   }
+
+  /* TODO
+  @Test
+  public void shouldFailToUpdateRingDueToTitleWithWhiteSpace() throws Exception {
+    final RingDto ringDto = new RingDto();
+    ringDto.setTitle(" My title ");
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService)
+        .save(any(RingDto.class));
+
+    Mockito.when(ringService.save(any())).thenReturn(ringDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/rings/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", ringDto.getTitle()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("ringDto", "title", "title has a space"))
+        .andExpect(view().name("settings/rings/edit"))
+        .andReturn();
+
+    Mockito.verify(ringService).save(any(RingDto.class));
+  }
+   */
 
   @Test
   public void shouldDeleteRing() throws Exception {

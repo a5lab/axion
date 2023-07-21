@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
@@ -115,6 +116,30 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(tenantService).save(any());
   }
 
+  /* TODO
+  @Test
+  public void shouldFailToCreateTenantDueToTitleWithWhiteSpace() throws Exception {
+    final TenantDto tenantDto = new TenantDto(10L," My title ", "My description");
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(tenantService)
+        .save(any(TenantDto.class));
+
+    Mockito.when(tenantService.save(any())).thenReturn(tenantDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/tenants/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", tenantDto.getTitle())
+            .param("description", tenantDto.getDescription()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("tenantDto", "title", "title has a space"))
+        .andExpect(view().name("settings/tenants/add"))
+        .andReturn();
+
+    Mockito.verify(tenantService).save(any(TenantDto.class));
+  }
+   */
+
   @Test
   public void shouldFailToCreateTenantDueToEmptyTitle() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
@@ -208,6 +233,30 @@ public class TenantCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(tenantService).save(any(TenantDto.class));
   }
+
+  /* TODO
+  @Test
+  public void shouldFailToUpdateTenantDueToTitleWithWhiteSpace() throws Exception {
+    final TenantDto tenantDto = new TenantDto(10L," My title ", "My description");
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(tenantService)
+        .save(any(TenantDto.class));
+
+    Mockito.when(tenantService.save(any())).thenReturn(tenantDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/tenants/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", tenantDto.getTitle())
+            .param("description", tenantDto.getDescription()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("tenantDto", "title", "title has a space"))
+        .andExpect(view().name("settings/tenants/edit"))
+        .andReturn();
+
+    Mockito.verify(tenantService).save(any(TenantDto.class));
+  }
+   */
 
   @Test
   public void shouldDeleteTenant() throws Exception {

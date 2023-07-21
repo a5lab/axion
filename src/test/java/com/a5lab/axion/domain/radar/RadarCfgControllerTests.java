@@ -160,6 +160,31 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
 
+  /* TODO
+  @Test
+  public void shouldFailToCreateRadarDueToTitleWithWhiteSpace() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setTitle(" My title ");
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService)
+        .save(any(RadarDto.class));
+
+    Mockito.when(radarService.save(any())).thenReturn(radarDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/radars/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", radarDto.getTitle()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("radarDto", "title", "title has a space"))
+        .andExpect(view().name("settings/radars/add"))
+        .andReturn();
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
+  }
+   */
+
   @Test
   public void shouldFailToCreateRadarDueToUnableToCreate() throws Exception {
     final RadarTypeDto radarTypeDto = new RadarTypeDto();
@@ -702,6 +727,31 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
+
+  /* TODO
+  @Test
+  public void shouldFailToUpdateRadarDueToTitleWithWhiteSpace() throws Exception {
+    final RadarDto radarDto = new RadarDto();
+    radarDto.setTitle(" My title ");
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService)
+        .save(any(RadarDto.class));
+
+    Mockito.when(radarService.save(any())).thenReturn(radarDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/radars/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", radarDto.getTitle()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("radarDto", "title", "title has a space"))
+        .andExpect(view().name("settings/radars/edit"))
+        .andReturn();
+
+    Mockito.verify(radarService).save(any(RadarDto.class));
+  }
+   */
 
   @Test
   public void shouldDeleteRadar() throws Exception {

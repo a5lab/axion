@@ -158,6 +158,31 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(segmentService).save(any());
   }
 
+  /* TODO
+  @Test
+  public void shouldFailToCreateSegmentDueToTitleWithWhiteSpace() throws Exception {
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setTitle(" My title ");
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any(SegmentDto.class));
+
+    Mockito.when(segmentService.save(any())).thenReturn(segmentDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/segments/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", segmentDto.getTitle()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("segmentDto", "title", "title has a space"))
+        .andExpect(view().name("settings/segments/add"))
+        .andReturn();
+
+    Mockito.verify(segmentService).save(any(SegmentDto.class));
+  }
+   */
+
   @Test
   public void shouldFailToCreateSegmentDueToEmptyTitle() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
@@ -299,6 +324,31 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(segmentService).save(any(SegmentDto.class));
   }
+
+  /* TODO
+  @Test
+  public void shouldFailToUpdateSegmentDueToTitleWithWhiteSpace() throws Exception {
+    final SegmentDto segmentDto = new SegmentDto();
+    segmentDto.setTitle(" My title ");
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any(SegmentDto.class));
+
+    Mockito.when(segmentService.save(any())).thenReturn(segmentDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/segments/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", segmentDto.getTitle()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("segmentDto", "title", "title has a space"))
+        .andExpect(view().name("settings/segments/edit"))
+        .andReturn();
+
+    Mockito.verify(segmentService).save(any(SegmentDto.class));
+  }
+   */
 
   @Test
   public void shouldFailToUpdateSegmentDueToActiveRadar() throws Exception {

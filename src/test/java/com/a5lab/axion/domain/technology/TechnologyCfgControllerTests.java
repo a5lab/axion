@@ -160,6 +160,30 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(technologyService).save(any(TechnologyDto.class));
   }
 
+  /* TODO
+  @Test
+  public void shouldFailToCreateTechnologyDueToTitleWithWhiteSpace() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setTitle(" My technology ");
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyService)
+        .save(any(TechnologyDto.class));
+
+    Mockito.when(technologyService.save(any())).thenReturn(technologyDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/technologies/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", technologyDto.getTitle()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("technologyDto", "title", "title has a space"))
+        .andExpect(view().name("settings/technologies/add"))
+        .andReturn();
+
+    Mockito.verify(technologyService).save(any(TechnologyDto.class));
+  }
+   */
 
   @Test
   public void shouldEditTechnology() throws Exception {
@@ -246,6 +270,31 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(technologyService).save(any(TechnologyDto.class));
   }
+
+  /* TODO
+  @Test
+  public void shouldFailToCreateTechnologyDueToTitleWithWhiteSpace() throws Exception {
+    final TechnologyDto technologyDto = new TechnologyDto();
+    technologyDto.setTitle(" My technology ");
+
+    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyService)
+        .save(any(TechnologyDto.class));
+
+    Mockito.when(technologyService.save(any())).thenReturn(technologyDto);
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/technologies/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", technologyDto.getTitle()))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("technologyDto", "title", "title has a space"))
+        .andExpect(view().name("settings/technologies/edit"))
+        .andReturn();
+
+    Mockito.verify(technologyService).save(any(TechnologyDto.class));
+  }
+   */
 
   @Test
   public void shouldDeleteTechnology() throws Exception {
