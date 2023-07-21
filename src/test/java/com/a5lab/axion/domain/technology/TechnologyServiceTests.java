@@ -1,6 +1,8 @@
 package com.a5lab.axion.domain.technology;
 
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,6 +22,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.ValidationException;
 
 class TechnologyServiceTests extends AbstractServiceTests {
   @MockBean
@@ -145,6 +148,28 @@ class TechnologyServiceTests extends AbstractServiceTests {
 
     Mockito.verify(technologyRepository).save(any());
   }
+
+  /* TODO: Uncommented when ValidationConstraint white space for TechnologyService has been implemented
+  @Test
+  void shouldFailToSaveTechnologyDueToTitleWithWhiteSpace() {
+    final Technology technology = new Technology();
+    technology.setId(10L);
+    technology.setTitle(" My technology ");
+    technology.setWebsite("My website");
+    technology.setDescription("My technology description");
+    technology.setMoved(0);
+    technology.setActive(true);
+
+    Mockito.when(technologyRepository.findById(technology.getId())).thenReturn(Optional.of(technology));
+
+    ValidationException exception = catchThrowableOfType(() ->
+        technologyService.save(technologyMapper.toDto(technology)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    System.out.println(exception.getMessage());
+
+    Mockito.verify(technologyRepository, times(2)).findById(technology.getId());
+  }
+  */
 
   @Test
   void shouldDeleteTechnology() {

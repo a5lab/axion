@@ -203,6 +203,34 @@ class RadarServiceTests extends AbstractServiceTests {
     Mockito.verify(radarTypeRepository).findById(radarType.getId());
   }
 
+  /* TODO: Uncommented when ValidationConstraint white space for RadarService has been implemented
+  @Test
+  void shouldFailToSaveRadarDtoDueToTitleWithWhiteSpace() {
+    final RadarType radarType = new RadarType();
+    radarType.setId(1L);
+
+    final Radar radar = new Radar();
+    radar.setId(10L);
+    radar.setRadarType(radarType);
+    radar.setTitle(" Radar title ");
+    radar.setDescription("Radar description");
+    radar.setPrimary(true);
+    radar.setActive(false);
+
+    Mockito.when(radarRepository.findByPrimary(anyBoolean())).thenReturn(new LinkedList<>());
+    Mockito.when(radarRepository.findByTitle(radar.getTitle())).thenReturn(new LinkedList<>());
+    Mockito.when(radarTypeRepository.findById(any())).thenReturn(Optional.of(radarType));
+
+    ValidationException exception =
+        catchThrowableOfType(() -> radarService.save(radarMapper.toDto(radar)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+
+    Mockito.verify(radarRepository).findByPrimary(true);
+    Mockito.verify(radarRepository).findByTitle(any());
+    Mockito.verify(radarTypeRepository).findById(radarType.getId());
+  }
+   */
+
   @Test
   void shouldSaveTheActiveRadarDto() {
     final RadarType radarType = new RadarType();
