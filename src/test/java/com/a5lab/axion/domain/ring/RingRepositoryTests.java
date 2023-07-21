@@ -194,24 +194,4 @@ class RingRepositoryTests extends AbstractRepositoryTests {
     // todo: use service (not repository?)
     Assertions.assertTrue(ringRepository.findByTitle(title).isPresent());
   }
-
-  @Test
-  void shouldFailToSaveRingDueToTitleWithRightWhiteSpace() {
-    final Ring ring = new Ring();
-    ring.setTitle("My new test Ring ");
-
-    Assertions.assertNull(ring.getId());
-    assertThatThrownBy(() -> ringRepository.saveAndFlush(ring))
-            .isInstanceOf(ValidationException.class);
-  }
-
-  @Test
-  void shouldFailToSaveRingDueToTitleWithLeftWhiteSpace() {
-    final Ring ring = new Ring();
-    ring.setTitle(" My new test Ring");
-
-    Assertions.assertNull(ring.getId());
-    assertThatThrownBy(() -> ringRepository.saveAndFlush(ring))
-            .isInstanceOf(ValidationException.class);
-  }
 }

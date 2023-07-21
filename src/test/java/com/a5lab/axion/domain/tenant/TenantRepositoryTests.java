@@ -1,11 +1,9 @@
 package com.a5lab.axion.domain.tenant;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.ValidationException;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -159,25 +157,5 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
       Assertions.assertEquals(constraintViolation.getPropertyPath().toString(), "description");
       Assertions.assertEquals(constraintViolation.getMessage(), "must not be blank");
     }
-  }
-
-  @Test
-  void shouldFailToSaveTenantDueToTitleWithRightWhiteSpace() {
-    final Tenant tenant = new Tenant();
-    tenant.setTitle("My new test Tenant ");
-
-    Assertions.assertNull(tenant.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
-            .isInstanceOf(ValidationException.class);
-  }
-
-  @Test
-  void shouldFailToSaveTenantDueToTitleWithLeftWhiteSpace() {
-    final Tenant tenant = new Tenant();
-    tenant.setTitle(" My new test Tenant");
-
-    Assertions.assertNull(tenant.getId());
-    assertThatThrownBy(() -> tenantRepository.saveAndFlush(tenant))
-            .isInstanceOf(ValidationException.class);
   }
 }

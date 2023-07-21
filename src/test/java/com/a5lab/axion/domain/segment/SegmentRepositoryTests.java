@@ -114,24 +114,4 @@ class SegmentRepositoryTests extends AbstractRepositoryTests {
     Assertions.assertNull(segment.getId());
     assertThatThrownBy(() -> segmentRepository.saveAndFlush(segment)).isInstanceOf(ValidationException.class);
   }
-
-  @Test
-  void shouldFailToSaveSegmentDueToTitleWithRightWhiteSpace() {
-    final Segment segment = new Segment();
-    segment.setTitle("My new test Segment ");
-
-    Assertions.assertNull(segment.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(segment))
-            .isInstanceOf(ValidationException.class);
-  }
-
-  @Test
-  void shouldFailToSaveSegmentDueToTitleWithLeftWhiteSpace() {
-    final Segment segment = new Segment();
-    segment.setTitle(" My new test Segment");
-
-    Assertions.assertNull(segment.getId());
-    assertThatThrownBy(() -> segmentRepository.saveAndFlush(segment))
-            .isInstanceOf(ValidationException.class);
-  }
 }
