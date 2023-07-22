@@ -25,6 +25,7 @@ import com.a5lab.axion.domain.AbstractServiceTests;
 import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.segment.Segment;
 
 class RingServiceTests extends AbstractServiceTests {
 
@@ -184,6 +185,46 @@ class RingServiceTests extends AbstractServiceTests {
 
     Mockito.verify(radarRepository, times(2)).findById(radar.getId());
   }
+
+  /* TODO: Uncomment when Validation handler will be implemented
+  @Test
+  void shouldFailToSaveRingDueToBelongActiveRadar() {
+    final Radar radarActive = new Radar();
+    radarActive.setId(1L);
+    radarActive.setTitle("My radar title");
+    radarActive.setDescription("My radar description");
+    radarActive.setTitle("My radar title");
+    radarActive.setPrimary(true);
+    radarActive.setActive(true);
+    radarActive.setRingList(List.of(new Ring(), new Ring(), new Ring()));
+    radarActive.setSegmentList(List.of(new Segment(), new Segment(), new Segment(), new Segment()));
+
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setRadar(radarActive);
+    ring.setTitle("ADOPT");
+    ring.setDescription("My description");
+    ring.setColor("my color");
+    ring.setPosition(1);
+
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(false);
+    radar.setRingList(List.of(ring));
+
+    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
+
+    ValidationException exception =
+            catchThrowableOfType(() -> ringService.save(ringMapper.toDto(ring)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+
+    Mockito.verify(radarRepository).findById(radar.getId());
+  }
+  */
 
   @Test
   void shouldDeleteRing() {
