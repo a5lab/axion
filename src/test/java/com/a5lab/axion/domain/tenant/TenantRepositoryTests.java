@@ -95,10 +95,11 @@ class TenantRepositoryTests extends AbstractRepositoryTests {
             ConstraintViolationException.class);
 
     Assertions.assertNotNull(exception);
-    Assertions.assertEquals(exception.getConstraintViolations().size(), 1);
+    Assertions.assertEquals(exception.getConstraintViolations().size(), 2);
     for (ConstraintViolation<?> constraintViolation : exception.getConstraintViolations()) {
       Assertions.assertEquals(constraintViolation.getPropertyPath().toString(), "title");
-      Assertions.assertEquals(constraintViolation.getMessage(), "must not be blank");
+      Assertions.assertTrue(constraintViolation.getMessage().equals("must not be blank")
+          || constraintViolation.getMessage().equals("should be without whitespaces before and after"));
     }
   }
 
