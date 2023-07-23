@@ -4,7 +4,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 
-public class SegmentTitleValidator implements ConstraintValidator<SegmentTitleConstraint, String> {
+public class SegmentTitleTrimValidator implements ConstraintValidator<SegmentTitleTrimConstraint, String> {
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {

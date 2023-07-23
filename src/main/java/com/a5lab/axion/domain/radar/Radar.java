@@ -52,7 +52,7 @@ public class Radar extends AbstractAuditable {
 
   @NotBlank
   @Size(min = 1, max = 64)
-  @RadarTitleConstraint
+  @RadarTitleTrimConstraint
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 

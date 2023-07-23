@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.tenant;
+package com.a5lab.axion.domain.ring;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -9,10 +9,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = TenantTitleValidator.class)
+@Constraint(validatedBy = RingTitleTrimValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TenantTitleConstraint {
+public @interface RingTitleTrimConstraint {
   String message() default "should be without whitespaces before and after";
 
   Class<?>[] groups() default {};

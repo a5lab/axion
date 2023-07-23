@@ -6,10 +6,10 @@ import jakarta.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
 
 
-public class RingTitleValidator implements ConstraintValidator<RingTitleConstraint, String> {
+public class RingTitleUppercaseValidator implements ConstraintValidator<RingTitleUppercaseConstraint, String> {
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
-    return StringUtils.isAllUpperCase(value) && (value == null || value.length() == value.trim().length());
+    return StringUtils.isAllUpperCase(value);
   }
 }

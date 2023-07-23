@@ -1,4 +1,4 @@
-package com.a5lab.axion.domain.segment;
+package com.a5lab.axion.domain.radar;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -9,10 +9,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = SegmentTitleValidator.class)
+@Constraint(validatedBy = RadarTitleTrimValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SegmentTitleConstraint {
+public @interface RadarTitleTrimConstraint {
   String message() default "should be without whitespaces before and after";
 
   Class<?>[] groups() default {};

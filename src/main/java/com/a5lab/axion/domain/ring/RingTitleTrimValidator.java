@@ -1,10 +1,10 @@
-package com.a5lab.axion.domain.radar;
+package com.a5lab.axion.domain.ring;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 
-public class RadarTitleValidator implements ConstraintValidator<RadarTitleConstraint, String> {
+public class RingTitleTrimValidator implements ConstraintValidator<RingTitleTrimConstraint, String> {
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {

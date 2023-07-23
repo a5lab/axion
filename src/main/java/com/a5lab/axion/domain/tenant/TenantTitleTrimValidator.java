@@ -1,10 +1,9 @@
-package com.a5lab.axion.domain.technology;
+package com.a5lab.axion.domain.tenant;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-
-public class TechnologyTitleValidator implements ConstraintValidator<TechnologyTitleConstraint, String> {
+public class TenantTitleTrimValidator implements ConstraintValidator<TenantTitleTrimConstraint, String> {
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {
