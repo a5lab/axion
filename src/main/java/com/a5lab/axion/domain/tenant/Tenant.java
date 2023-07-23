@@ -35,6 +35,7 @@ public class Tenant extends AbstractAuditable {
 
   @NotBlank
   @Size(min = 1, max = 64)
+  @TenantTrimTitleConstraint
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 
