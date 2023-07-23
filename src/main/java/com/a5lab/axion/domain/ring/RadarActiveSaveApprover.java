@@ -20,9 +20,11 @@ public class RadarActiveSaveApprover implements ModelApprover {
 
   private final Radar radar;
 
+  private final Ring ring;
+
   @Override
   public List<ModelError> approve() throws ValidationException {
-    if (radar.isActive()) {
+    if (radar.isActive() || radar.getId() != ring.getRadar().getId() && ring.getRadar().isActive()) {
       return List.of(new ModelError("unable_to_save_due_to_active_radar",
           messageSource.getMessage("ring.error.unable_to_save_due_to_active_radar", null,
               LocaleContextHolder.getLocale()), null));
