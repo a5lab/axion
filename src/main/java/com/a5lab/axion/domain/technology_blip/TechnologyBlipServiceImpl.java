@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,6 +26,9 @@ import com.a5lab.axion.domain.ValidationException;
 public class TechnologyBlipServiceImpl implements TechnologyBlipService {
 
   private final Validator validator;
+
+  private final MessageSource messageSource;
+
   private final TechnologyBlipRepository technologyBlipRepository;
   private final TechnologyBlipMapper technologyBlipMapper;
 
@@ -56,11 +60,21 @@ public class TechnologyBlipServiceImpl implements TechnologyBlipService {
   @Override
   @Transactional
   public TechnologyBlipDto save(TechnologyBlipDto technologyBlipDto) {
-    TechnologyBlip technologyBlip = technologyBlipMapper.toEntity(technologyBlipDto);
-    // Throw exception if violations are exists
     List<ModelError> modelErrorList = new LinkedList<>();
+
+    // Check uniqueness by radar id and technology_id
+    List<TechnologyBlip> technologyBlipList =
+        this.technologyBlipRepository.findByRadarIdAndTechnologyId(technologyBlipDto.getRadarId(),
+            technologyBlipDto.getTechnologyId());
+    for (TechnologyBlip technologyBlipItem : technologyBlipList) {
+      modelErrorList.addAll(
+          new TechnologyBlipUniqueFieldsSaveApprover(messageSource, technologyBlipDto, technologyBlipItem).approve());
+    }
+
+    // Throw exception if violations are exists
+    TechnologyBlip technologyBlip = technologyBlipMapper.toEntity(technologyBlipDto);
     Set<ConstraintViolation<TechnologyBlip>> constraintViolationSet = validator.validate(technologyBlip);
-    if (!constraintViolationSet.isEmpty()) {
+    if (!modelErrorList.isEmpty() || !constraintViolationSet.isEmpty()) {
       for (ConstraintViolation<TechnologyBlip> constraintViolation : constraintViolationSet) {
         modelErrorList.add(new ModelError(constraintViolation.getMessageTemplate(), constraintViolation.getMessage(),
             constraintViolation.getPropertyPath().toString()));
