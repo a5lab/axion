@@ -54,8 +54,8 @@ public class Ring extends AbstractAuditable {
 
   @NotBlank
   @Size(min = 1, max = 64)
-  @RingTitleTrimConstraint
-  @RingTitleUppercaseConstraint
+  @RingTrimTitleConstraint
+  @RingUppercaseTitleConstraint
   @Column(name = "title", unique = true, nullable = false)
   private String title;
 

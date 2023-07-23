@@ -4,7 +4,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 
-public class TechnologyTitleTrimValidator implements ConstraintValidator<TechnologyTitleTrimConstraint, String> {
+public class TechnologyTitleTrimValidator implements ConstraintValidator<TechnologyTrimTitleConstraint, String> {
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {

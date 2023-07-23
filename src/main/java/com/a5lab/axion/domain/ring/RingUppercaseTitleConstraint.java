@@ -9,10 +9,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = RingTitleUppercaseValidator.class)
+@Constraint(validatedBy = RingUppercaseTitleValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RingTitleUppercaseConstraint {
+public @interface RingUppercaseTitleConstraint {
   String message() default "should be uppercase";
 
   Class<?>[] groups() default {};
