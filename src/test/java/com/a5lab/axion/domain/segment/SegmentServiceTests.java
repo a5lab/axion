@@ -173,6 +173,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     segment.setPosition(1);
 
     Mockito.when(radarRepository.findById(radar.getId())).thenReturn(Optional.of(radar));
+    Mockito.when(segmentRepository.findById(segment.getId())).thenReturn(Optional.of(segment));
 
     ValidationException exception =
         catchThrowableOfType(() -> segmentService.save(segmentMapper.toDto(segment)), ValidationException.class);
@@ -180,6 +181,7 @@ class SegmentServiceTests extends AbstractServiceTests {
     System.out.println(exception.getMessage());
 
     Mockito.verify(radarRepository, times(2)).findById(radar.getId());
+    Mockito.verify(segmentRepository).findById(segment.getId());
   }
 
   /* TODO: Uncomment when Validation handler will be implemented
