@@ -6,7 +6,7 @@ import jakarta.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
 
 
-public class RingTitleValidator implements ConstraintValidator<RingTitleConstraint, String> {
+public class RingUppercaseTitleValidator implements ConstraintValidator<RingUppercaseTitleConstraint, String> {
 
   @Override
   public boolean isValid(String value, ConstraintValidatorContext context) {

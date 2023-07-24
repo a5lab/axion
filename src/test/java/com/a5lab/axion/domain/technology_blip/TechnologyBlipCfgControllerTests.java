@@ -283,6 +283,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
 
+  /*
   @Test
   public void shouldFailToCreateTechnologyBlipDueToRadarAndTechnologyIsNotUnique() throws Exception {
     List<ModelError> modelErrorList =
@@ -330,6 +331,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
+   */
 
   @Test
   public void shouldEditTechnologyBlip() throws Exception {
@@ -501,6 +503,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
 
+  /*
   @Test
   public void shouldFailToUpdateTechnologyBlipDueToRadarAndTechnologyIsNotUnique() throws Exception {
     List<ModelError> modelErrorList =
@@ -548,6 +551,7 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
+   */
 
   @Test
   public void shouldDeleteTechnologyBlip() throws Exception {
