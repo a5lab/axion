@@ -188,9 +188,16 @@ class RingServiceTests extends AbstractServiceTests {
     Mockito.verify(ringRepository).findById(ring.getId());
   }
 
-  /* TODO: Uncomment when Validation handler will be implemented
   @Test
   void shouldFailToSaveRingDueToBelongActiveRadar() {
+    final Radar radar = new Radar();
+    radar.setId(2L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(false);
+
     final Radar radarActive = new Radar();
     radarActive.setId(1L);
     radarActive.setTitle("My radar title");
@@ -198,35 +205,66 @@ class RingServiceTests extends AbstractServiceTests {
     radarActive.setTitle("My radar title");
     radarActive.setPrimary(true);
     radarActive.setActive(true);
-    radarActive.setRingList(List.of(new Ring(), new Ring(), new Ring()));
     radarActive.setSegmentList(List.of(new Segment(), new Segment(), new Segment(), new Segment()));
 
     final Ring ring = new Ring();
-    ring.setId(10L);
+    ring.setId(3L);
     ring.setRadar(radarActive);
     ring.setTitle("ADOPT");
     ring.setDescription("My description");
     ring.setColor("my color");
     ring.setPosition(1);
+    radarActive.setRingList(List.of(new Ring(), new Ring(), new Ring(), ring));
 
-    final Radar radar = new Radar();
-    radar.setId(1L);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar description");
-    radar.setTitle("My radar title");
-    radar.setPrimary(true);
-    radar.setActive(false);
-    radar.setRingList(List.of(ring));
-
-    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
+    Mockito.when(radarRepository.findById(ring.getRadar().getId())).thenReturn(Optional.of(radar));
+    Mockito.when(ringRepository.findById(ring.getId())).thenReturn(Optional.of(ring));
 
     ValidationException exception =
             catchThrowableOfType(() -> ringService.save(ringMapper.toDto(ring)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertTrue(exception.getMessage().contains("can't be saved for active radar"));
 
-    Mockito.verify(radarRepository).findById(radar.getId());
+    Mockito.verify(radarRepository, Mockito.times(2)).findById(radarActive.getId());
   }
-  */
+
+  @Test
+  void shouldFailToSaveRingToActiveRadarDueToAlreadyBelongActiveRadar() {
+    final Radar radar = new Radar();
+    radar.setId(2L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(true);
+
+    final Radar radarActive = new Radar();
+    radarActive.setId(1L);
+    radarActive.setTitle("My radar title");
+    radarActive.setDescription("My radar description");
+    radarActive.setTitle("My radar title");
+    radarActive.setPrimary(true);
+    radarActive.setActive(true);
+    radarActive.setSegmentList(List.of(new Segment(), new Segment(), new Segment(), new Segment()));
+
+    final Ring ring = new Ring();
+    ring.setId(3L);
+    ring.setRadar(radarActive);
+    ring.setTitle("ADOPT");
+    ring.setDescription("My description");
+    ring.setColor("my color");
+    ring.setPosition(1);
+    radarActive.setRingList(List.of(new Ring(), new Ring(), new Ring(), ring));
+
+    Mockito.when(radarRepository.findById(ring.getRadar().getId())).thenReturn(Optional.of(radar));
+    Mockito.when(ringRepository.findById(ring.getId())).thenReturn(Optional.of(ring));
+
+    ValidationException exception =
+        catchThrowableOfType(() -> ringService.save(ringMapper.toDto(ring)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertTrue(exception.getMessage().contains("can't be saved for active radar"));
+
+    Mockito.verify(radarRepository, Mockito.times(2)).findById(radarActive.getId());
+  }
 
   @Test
   void shouldDeleteRing() {
