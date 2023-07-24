@@ -149,7 +149,6 @@ class TechnologyServiceTests extends AbstractServiceTests {
     Mockito.verify(technologyRepository).save(any());
   }
 
-  /* TODO: Uncommented when ValidationConstraint white space for TechnologyService has been implemented
   @Test
   void shouldFailToSaveTechnologyDueToTitleWithWhiteSpace() {
     final Technology technology = new Technology();
@@ -160,16 +159,13 @@ class TechnologyServiceTests extends AbstractServiceTests {
     technology.setMoved(0);
     technology.setActive(true);
 
-    Mockito.when(technologyRepository.findById(technology.getId())).thenReturn(Optional.of(technology));
-
     ValidationException exception = catchThrowableOfType(() ->
         technologyService.save(technologyMapper.toDto(technology)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
     System.out.println(exception.getMessage());
+    Assertions.assertTrue(exception.getMessage().contains("should be without whitespaces before and after"));
 
-    Mockito.verify(technologyRepository, times(2)).findById(technology.getId());
   }
-  */
 
   @Test
   void shouldDeleteTechnology() {

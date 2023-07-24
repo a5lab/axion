@@ -183,7 +183,6 @@ class SegmentServiceTests extends AbstractServiceTests {
     Mockito.verify(segmentRepository).findById(segment.getId());
   }
 
-  /* TODO: Uncommented when ValidationConstraint white space for SegmentService has been implemented
   @Test
   void shouldFailToSaveSegmentDueToTitleWithWhiteSpace() {
     final Radar radar = new Radar();
@@ -206,10 +205,10 @@ class SegmentServiceTests extends AbstractServiceTests {
     ValidationException exception =
         catchThrowableOfType(() -> segmentService.save(segmentMapper.toDto(segment)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertTrue(exception.getMessage().contains("should be without whitespaces before and after"));
 
     Mockito.verify(radarRepository, times(2)).findById(radar.getId());
   }
-  */
 
   @Test
   void shouldDeleteSegment() {

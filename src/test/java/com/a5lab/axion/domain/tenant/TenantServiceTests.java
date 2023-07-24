@@ -95,20 +95,15 @@ class TenantServiceTests extends AbstractServiceTests {
     Mockito.verify(tenantRepository).save(any());
   }
 
-  /* TODO: Uncommented when ValidationConstraint white space for TenantService has been implemented
   @Test
   void shouldFailToSaveTenantDueToTitleWithWhiteSpace() {
     final Tenant tenant = new Tenant(10L, " My title ", "My description");
-    Mockito.when(tenantRepository.findById(tenant.getId())).thenReturn(Optional.of(tenant));
 
     ValidationException exception =
         catchThrowableOfType(() -> tenantService.save(tenantMapper.toDto(tenant)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
-    System.out.println(exception.getMessage());
-
-    Mockito.verify(tenantRepository, times(2)).findById(tenant.getId());
+    Assertions.assertTrue(exception.getMessage().contains("should be without whitespaces before and after"));
   }
-   */
 
   @Test
   void shouldDeleteTenant() {

@@ -181,7 +181,7 @@ class RingServiceTests extends AbstractServiceTests {
     ValidationException exception =
         catchThrowableOfType(() -> ringService.save(ringMapper.toDto(ring)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
-    System.out.println(exception.getMessage());
+    Assertions.assertTrue(exception.getMessage().contains("should be without whitespaces before and after"));
 
     Mockito.verify(radarRepository, times(2)).findById(radar.getId());
   }
