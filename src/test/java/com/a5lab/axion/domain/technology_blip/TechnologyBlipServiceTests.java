@@ -293,6 +293,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technology.setId(2L);
     technology.setTitle("My technology");
 
+    // Create Blips
     final TechnologyBlip technologyBlip = new TechnologyBlip();
     technologyBlip.setId(3L);
     technologyBlip.setRadar(radar);
@@ -300,6 +301,7 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     technologyBlip.setTechnology(technology);
     technologyBlip.setSegment(segment);
 
+    // Blip that have already been created
     final TechnologyBlip technologyBlip1 = new TechnologyBlip();
     technologyBlip1.setId(4L);
     technologyBlip1.setRadar(radar);
