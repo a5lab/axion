@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
@@ -160,30 +161,29 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
 
-  /* TODO
   @Test
   public void shouldFailToCreateRadarDueToTitleWithWhiteSpace() throws Exception {
-    final RadarDto radarDto = new RadarDto();
-    radarDto.setTitle(" My title ");
-
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    List<ModelError> modelErrorList = List.of(
+        new ModelError(null, "should be without whitespaces before and after", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService)
         .save(any(RadarDto.class));
 
-    Mockito.when(radarService.save(any())).thenReturn(radarDto);
-
     MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/radars/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", radarDto.getTitle()))
+            .param("title", " My title "))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrors("radarDto", "title", "title has a space"))
+        .andExpect(model().attributeHasFieldErrors("radarDto", "title"))
         .andExpect(view().name("settings/radars/add"))
         .andReturn();
 
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be without whitespaces before and after"));
+
+    Mockito.verify(radarService).save(any());
+
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
-   */
 
   @Test
   public void shouldFailToCreateRadarDueToUnableToCreate() throws Exception {
@@ -728,30 +728,27 @@ public class RadarCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(radarService).save(any(RadarDto.class));
   }
 
-  /* TODO
   @Test
   public void shouldFailToUpdateRadarDueToTitleWithWhiteSpace() throws Exception {
-    final RadarDto radarDto = new RadarDto();
-    radarDto.setTitle(" My title ");
-
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    List<ModelError> modelErrorList = List.of(
+        new ModelError(null, "should be without whitespaces before and after", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(radarService)
         .save(any(RadarDto.class));
 
-    Mockito.when(radarService.save(any())).thenReturn(radarDto);
-
     MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/radars/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", radarDto.getTitle()))
+            .param("title", " My title "))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrors("radarDto", "title", "title has a space"))
+        .andExpect(model().attributeHasFieldErrors("radarDto", "title"))
         .andExpect(view().name("settings/radars/edit"))
         .andReturn();
 
-    Mockito.verify(radarService).save(any(RadarDto.class));
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be without whitespaces before and after"));
+
+    Mockito.verify(radarService).save(any());
   }
-   */
 
   @Test
   public void shouldDeleteRadar() throws Exception {

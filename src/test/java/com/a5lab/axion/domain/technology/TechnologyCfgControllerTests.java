@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
@@ -160,30 +161,27 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(technologyService).save(any(TechnologyDto.class));
   }
 
-  /* TODO
   @Test
   public void shouldFailToCreateTechnologyDueToTitleWithWhiteSpace() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setTitle(" My technology ");
-
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+    List<ModelError> modelErrorList = List.of(
+        new ModelError(null, "should be without whitespaces before and after", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyService)
         .save(any(TechnologyDto.class));
 
-    Mockito.when(technologyService.save(any())).thenReturn(technologyDto);
-
     MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/technologies/create")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", technologyDto.getTitle()))
+            .param("title", " My title "))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrors("technologyDto", "title", "title has a space"))
+        .andExpect(model().attributeHasFieldErrors("technologyDto", "title"))
         .andExpect(view().name("settings/technologies/add"))
         .andReturn();
 
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be without whitespaces before and after"));
+
     Mockito.verify(technologyService).save(any(TechnologyDto.class));
   }
-   */
 
   @Test
   public void shouldEditTechnology() throws Exception {
@@ -271,30 +269,27 @@ public class TechnologyCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(technologyService).save(any(TechnologyDto.class));
   }
 
-  /* TODO
   @Test
-  public void shouldFailToCreateTechnologyDueToTitleWithWhiteSpace() throws Exception {
-    final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setTitle(" My technology ");
-
-    List<ModelError> modelErrorList = List.of(new ModelError(null, "title has a space", "title"));
+  public void shouldFailToUpdateTechnologyDueToTitleWithWhiteSpace() throws Exception {
+    List<ModelError> modelErrorList = List.of(
+        new ModelError(null, "should be without whitespaces before and after", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyService)
         .save(any(TechnologyDto.class));
 
-    Mockito.when(technologyService.save(any())).thenReturn(technologyDto);
-
     MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/technologies/update")
             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("title", technologyDto.getTitle()))
+            .param("title", " My title "))
         .andExpect(status().isOk())
-        .andExpect(model().attributeHasFieldErrors("technologyDto", "title", "title has a space"))
+        .andExpect(model().attributeHasFieldErrors("technologyDto", "title"))
         .andExpect(view().name("settings/technologies/edit"))
         .andReturn();
 
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be without whitespaces before and after"));
+
     Mockito.verify(technologyService).save(any(TechnologyDto.class));
   }
-   */
 
   @Test
   public void shouldDeleteTechnology() throws Exception {
