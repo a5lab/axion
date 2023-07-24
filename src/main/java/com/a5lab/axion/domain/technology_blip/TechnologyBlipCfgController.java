@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -147,12 +146,6 @@ public class TechnologyBlipCfgController {
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
-    } catch (DataIntegrityViolationException e) {
-      // Redirect
-      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blip.error.exception", null,
-              LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/technology_blips");
     }
   }
 
@@ -223,12 +216,6 @@ public class TechnologyBlipCfgController {
       modelAndView.addObject("segmentDtos", this.segmentService.findAll());
       modelAndView.addObject("ringDtos", this.ringService.findAll());
       return modelAndView;
-    } catch (DataIntegrityViolationException e) {
-      // Redirect
-      redirectAttributes.addFlashAttribute(FlashMessages.ERROR,
-          messageSource.getMessage("technology_blip.error.exception", null,
-              LocaleContextHolder.getLocale()));
-      return new ModelAndView("redirect:/settings/technology_blips");
     }
   }
 
