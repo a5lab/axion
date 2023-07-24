@@ -30,7 +30,6 @@ import com.a5lab.axion.domain.radar.RadarDto;
 import com.a5lab.axion.domain.radar.RadarService;
 import com.a5lab.axion.domain.radar_type.RadarType;
 import com.a5lab.axion.domain.radar_type.RadarTypeDto;
-import com.a5lab.axion.domain.segment.Segment;
 
 @WebMvcTest(RingCfgController.class)
 public class RingCfgControllerTests extends AbstractControllerTests {
@@ -407,18 +406,18 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     ringDto.setRadarId(radarDto.getId());
 
     List<ModelError> modelErrorList =
-            List.of(new ModelError(null, "can not be changed belong active radar", null));
+        List.of(new ModelError(null, "can not be changed belong active radar", null));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
     Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService)
-            .save(any());
+        .save(any());
 
     MvcResult result = mockMvc.perform(post("/settings/rings/update")
-                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                    .param("radarId", String.valueOf(ringDto.getRadarId())))
-            .andExpect(status().isOk())
-            .andExpect(model().attributeHasErrors("ringDto"))
-            .andExpect(view().name("settings/rings/edit"))
-            .andReturn();
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarId", String.valueOf(ringDto.getRadarId())))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("ringDto"))
+        .andExpect(view().name("settings/rings/edit"))
+        .andReturn();
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("can not be changed belong active radar"));
