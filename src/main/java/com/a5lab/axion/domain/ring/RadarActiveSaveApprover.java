@@ -3,6 +3,7 @@ package com.a5lab.axion.domain.ring;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -20,11 +21,12 @@ public class RadarActiveSaveApprover implements ModelApprover {
 
   private final Radar radar;
 
-  private final Ring ring;
+  private final Optional<Ring> ringOptional;
 
   @Override
   public List<ModelError> approve() throws ValidationException {
-    if (radar.isActive() || radar.getId() != ring.getRadar().getId() && ring.getRadar().isActive()) {
+    if (radar.isActive() || ringOptional.isPresent() && radar.getId() != ringOptional.get().getRadar().getId()
+        && ringOptional.get().getRadar().isActive()) {
       return List.of(new ModelError("unable_to_save_due_to_active_radar",
           messageSource.getMessage("ring.error.unable_to_save_due_to_active_radar", null,
               LocaleContextHolder.getLocale()), null));
