@@ -283,46 +283,53 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
 
-  /*
   @Test
-  public void shouldRedirectCreateTechnologyBlip() throws Exception {
-    final RadarDto radarDto = new RadarDto();
-    radarDto.setId(1L);
-
-    final RingDto ringDto = new RingDto();
-    ringDto.setId(2L);
-
-    final SegmentDto segmentDto = new SegmentDto();
-    segmentDto.setId(3L);
-
-    final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setId(4L);
-
-    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setId(5L);
-    technologyBlipDto.setRadarId(radarDto.getId());
-    technologyBlipDto.setRingId(ringDto.getId());
-    technologyBlipDto.setTechnologyId(technologyDto.getId());
-    technologyBlipDto.setSegmentId(segmentDto.getId());
-
-    Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService)
+  public void shouldFailToCreateTechnologyBlipDueToRadarAndTechnologyIsNotUnique() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError(null, "radar and technology should be unique", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyBlipService)
         .save(any(TechnologyBlipDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarId", String.valueOf(technologyBlipDto.getRadarId()))
-            .param("technologyId", String.valueOf(technologyBlipDto.getTechnologyId()))
-            .param("segmentId", String.valueOf(technologyBlipDto.getSegmentId()))
-            .param("ringId", String.valueOf(technologyBlipDto.getRingId()))
-            .sessionAttr("technologyBlipDto", technologyBlipDto))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(MockMvcResultMatchers.flash()
-            .attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("technologyBlipDto"))
+        .andExpect(view().name("settings/technology_blips/add"))
         .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("radar and technology should be unique"));
 
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
-   */
+
+  @Test
+  public void shouldFailToCreateTechnologyBlipDueToEmptyField() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError(null, "should not be equal null", "radar"),
+            new ModelError(null, "should not be equal null", "segment"),
+            new ModelError(null, "should not be equal null", "ring"),
+            new ModelError(null, "should not be equal null", "technology"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyBlipService)
+        .save(any(TechnologyBlipDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/technology_blips/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("technologyBlipDto", "radarId"))
+        .andExpect(model().attributeHasFieldErrors("technologyBlipDto", "segmentId"))
+        .andExpect(model().attributeHasFieldErrors("technologyBlipDto", "ringId"))
+        .andExpect(model().attributeHasFieldErrors("technologyBlipDto", "technologyId"))
+        .andExpect(view().name("settings/technology_blips/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should not be equal null"));
+
+    Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
+  }
 
   @Test
   public void shouldEditTechnologyBlip() throws Exception {
@@ -494,46 +501,53 @@ public class TechnologyBlipCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
 
-  /*
   @Test
-  public void shouldRedirectUpdateTechnologyBlip() throws Exception {
-    final RadarDto radarDto = new RadarDto();
-    radarDto.setId(1L);
-
-    final RingDto ringDto = new RingDto();
-    ringDto.setId(2L);
-
-    final SegmentDto segmentDto = new SegmentDto();
-    segmentDto.setId(3L);
-
-    final TechnologyDto technologyDto = new TechnologyDto();
-    technologyDto.setId(4L);
-
-    final TechnologyBlipDto technologyBlipDto = new TechnologyBlipDto();
-    technologyBlipDto.setId(5L);
-    technologyBlipDto.setRadarId(radarDto.getId());
-    technologyBlipDto.setRingId(ringDto.getId());
-    technologyBlipDto.setTechnologyId(technologyDto.getId());
-    technologyBlipDto.setSegmentId(segmentDto.getId());
-
-    Mockito.doThrow(DataIntegrityViolationException.class).when(technologyBlipService)
+  public void shouldFailToUpdateTechnologyBlipDueToRadarAndTechnologyIsNotUnique() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError(null, "radar and technology should be unique", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyBlipService)
         .save(any(TechnologyBlipDto.class));
 
     MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("radarId", String.valueOf(technologyBlipDto.getRadarId()))
-            .param("technologyId", String.valueOf(technologyBlipDto.getTechnologyId()))
-            .param("segmentId", String.valueOf(technologyBlipDto.getSegmentId()))
-            .param("ringId", String.valueOf(technologyBlipDto.getRingId()))
-            .sessionAttr("technologyBlipDto", technologyBlipDto))
-        .andExpect(status().is3xxRedirection())
-        .andExpect(MockMvcResultMatchers.flash()
-            .attribute(FlashMessages.ERROR, "Unable to save technology blip due to data integrity violation."))
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("technologyBlipDto"))
+        .andExpect(view().name("settings/technology_blips/edit"))
         .andReturn();
 
-    Mockito.verify(technologyBlipService).save(any((TechnologyBlipDto.class)));
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("radar and technology should be unique"));
+
+    Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
   }
-   */
+
+  @Test
+  public void shouldFailToUpdateTechnologyBlipDueToEmptyField() throws Exception {
+    List<ModelError> modelErrorList =
+        List.of(new ModelError(null, "should not be equal null", "radar"),
+            new ModelError(null, "should not be equal null", "segment"),
+            new ModelError(null, "should not be equal null", "ring"),
+            new ModelError(null, "should not be equal null", "technology"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(technologyBlipService)
+        .save(any(TechnologyBlipDto.class));
+
+    MvcResult result = mockMvc.perform(post("/settings/technology_blips/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("technologyBlipDto", "radarId"))
+        .andExpect(model().attributeHasFieldErrors("technologyBlipDto", "segmentId"))
+        .andExpect(model().attributeHasFieldErrors("technologyBlipDto", "ringId"))
+        .andExpect(model().attributeHasFieldErrors("technologyBlipDto", "technologyId"))
+        .andExpect(view().name("settings/technology_blips/edit"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should not be equal null"));
+
+    Mockito.verify(technologyBlipService).save(any(TechnologyBlipDto.class));
+  }
 
   @Test
   public void shouldDeleteTechnologyBlip() throws Exception {
