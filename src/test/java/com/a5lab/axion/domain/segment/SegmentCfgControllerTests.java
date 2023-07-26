@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.a5lab.axion.domain.AbstractControllerTests;
@@ -159,6 +160,28 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
+  public void shouldFailToCreateSegmentDueToTitleWithWhiteSpace() throws Exception {
+    List<ModelError> modelErrorList = List.of(
+        new ModelError(null, "should be without whitespaces before and after", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any(SegmentDto.class));
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/segments/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", " My title "))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("segmentDto", "title"))
+        .andExpect(view().name("settings/segments/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be without whitespaces before and after"));
+
+    Mockito.verify(segmentService).save(any(SegmentDto.class));
+  }
+
+  @Test
   public void shouldFailToCreateSegmentDueToEmptyTitle() throws Exception {
     List<ModelError> modelErrorList = List.of(new ModelError(null, "must not be blank", "title"));
     String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
@@ -296,6 +319,28 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
 
     String content = result.getResponse().getContentAsString();
     Assertions.assertTrue(content.contains("must not be blank"));
+
+    Mockito.verify(segmentService).save(any(SegmentDto.class));
+  }
+
+  @Test
+  public void shouldFailToUpdateSegmentDueToTitleWithWhiteSpace() throws Exception {
+    List<ModelError> modelErrorList = List.of(
+        new ModelError(null, "should be without whitespaces before and after", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any(SegmentDto.class));
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/segments/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", " My title "))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("segmentDto", "title"))
+        .andExpect(view().name("settings/segments/edit"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be without whitespaces before and after"));
 
     Mockito.verify(segmentService).save(any(SegmentDto.class));
   }

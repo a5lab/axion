@@ -1,6 +1,8 @@
 package com.a5lab.axion.domain.tenant;
 
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,6 +22,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.ValidationException;
 
 class TenantServiceTests extends AbstractServiceTests {
   @MockBean
@@ -90,6 +93,16 @@ class TenantServiceTests extends AbstractServiceTests {
     Assertions.assertEquals(tenant.getDescription(), tenantDto.getDescription());
 
     Mockito.verify(tenantRepository).save(any());
+  }
+
+  @Test
+  void shouldFailToSaveTenantDueToTitleWithWhiteSpace() {
+    final Tenant tenant = new Tenant(10L, " My title ", "My description");
+
+    ValidationException exception =
+        catchThrowableOfType(() -> tenantService.save(tenantMapper.toDto(tenant)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertTrue(exception.getMessage().contains("should be without whitespaces before and after"));
   }
 
   @Test

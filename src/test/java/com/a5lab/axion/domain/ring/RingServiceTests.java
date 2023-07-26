@@ -159,6 +159,34 @@ class RingServiceTests extends AbstractServiceTests {
   }
 
   @Test
+  void shouldFailToSaveRingDueToTitleWithWhiteSpace() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setTitle("My radar title");
+    radar.setPrimary(true);
+    radar.setActive(false);
+
+    final Ring ring = new Ring();
+    ring.setId(10L);
+    ring.setRadar(radar);
+    ring.setTitle(" ADOPT ");
+    ring.setDescription("My description");
+    ring.setColor("my color");
+    ring.setPosition(1);
+
+    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
+
+    ValidationException exception =
+        catchThrowableOfType(() -> ringService.save(ringMapper.toDto(ring)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertTrue(exception.getMessage().contains("should be without whitespaces before and after"));
+
+    Mockito.verify(radarRepository, times(2)).findById(radar.getId());
+  }
+
+  @Test
   void shouldFailToSaveRingDueToRadarIsActive() {
     final Radar radar = new Radar();
     radar.setId(1L);
