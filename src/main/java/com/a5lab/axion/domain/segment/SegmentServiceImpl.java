@@ -72,7 +72,10 @@ public class SegmentServiceImpl implements SegmentService {
   public SegmentDto save(SegmentDto segmentDto) {
     List<ModelError> modelErrorList = new LinkedList<>();
     Optional<Radar> radarOptional = radarRepository.findById(segmentDto.getRadarId());
-    Optional<Segment> segmentOptional = segmentRepository.findById(segmentDto.getId());
+    Optional<Segment> segmentOptional = Optional.empty();
+    if (segmentDto.getId() != null) {
+      segmentOptional = segmentRepository.findById(segmentDto.getId());
+    }
     if (radarOptional.isPresent() && segmentOptional.isPresent()) {
       modelErrorList.addAll(
           new RadarActiveSaveApprover(messageSource, radarOptional.get(), segmentOptional.get()).approve());

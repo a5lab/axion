@@ -71,7 +71,10 @@ public class RingServiceImpl implements RingService {
   public RingDto save(RingDto ringDto) {
     List<ModelError> modelErrorList = new LinkedList<>();
     Optional<Radar> radarOptional = radarRepository.findById(ringDto.getRadarId());
-    Optional<Ring> ringOptional = ringRepository.findById(ringDto.getId());
+    Optional<Ring> ringOptional = Optional.empty();
+    if (ringDto.getId() != null) {
+      ringOptional = ringRepository.findById(ringDto.getId());
+    }
     if (radarOptional.isPresent() && ringOptional.isPresent()) {
       modelErrorList.addAll(
           new RadarActiveSaveApprover(messageSource, radarOptional.get(), ringOptional.get()).approve());
