@@ -162,9 +162,7 @@ class TechnologyServiceTests extends AbstractServiceTests {
     ValidationException exception = catchThrowableOfType(() ->
         technologyService.save(technologyMapper.toDto(technology)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
-    System.out.println(exception.getMessage());
     Assertions.assertTrue(exception.getMessage().contains("should be without whitespaces before and after"));
-
   }
 
   @Test

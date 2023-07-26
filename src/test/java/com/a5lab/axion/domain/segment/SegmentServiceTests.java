@@ -177,7 +177,6 @@ class SegmentServiceTests extends AbstractServiceTests {
     ValidationException exception =
         catchThrowableOfType(() -> segmentService.save(segmentMapper.toDto(segment)), ValidationException.class);
     Assertions.assertFalse(exception.getMessage().isEmpty());
-    System.out.println(exception.getMessage());
 
     Mockito.verify(radarRepository, times(2)).findById(radar.getId());
     Mockito.verify(segmentRepository).findById(segment.getId());
