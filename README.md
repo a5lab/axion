@@ -6,6 +6,7 @@ Technical and business radar. Demo available at https://axion.a5lab.com. Spring 
 * update version at antora.yml file
 * run command mvn release:prepare and mvn release:perform
 * create archive by command: tar -zcvf Binaries.tar.gz axion*.jar
+* setup version at antora.yml file at latest value
 * create a new release at GitHub and provide information
 * press button publish release at GitHub
 
