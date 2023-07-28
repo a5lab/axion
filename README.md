@@ -3,12 +3,12 @@
 Technical and business radar. Demo available at https://axion.a5lab.com. Spring boot based application.
 
 # Release application
+* add release notes file to docs
 * update version at antora.yml file
 * run command mvn release:prepare and mvn release:perform
 * create archive by command: tar -zcvf Binaries.tar.gz axion*.jar
 * setup version at antora.yml file at latest value
-* create a new release at GitHub and provide information
-* press button publish release at GitHub
+* create and publish the new release at GitHub
 
 # Setup environment
 
