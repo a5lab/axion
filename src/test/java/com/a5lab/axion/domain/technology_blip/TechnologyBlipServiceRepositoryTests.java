@@ -41,15 +41,15 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRingWithNullFilter() {
+  void shouldFindAllTechnologyBlipsWithNullFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
-    radar.setTitle("My first radar");
+    radar.setTitle("My first radar title");
     radar.setRadarType(radarType);
     radar.setDescription("My radar description");
     radar.setPrimary(false);
@@ -57,7 +57,7 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     radarRepository.saveAndFlush(radar);
 
     final Radar radar1 = new Radar();
-    radar1.setTitle("My second radar");
+    radar1.setTitle("My second radar title");
     radar1.setRadarType(radarType);
     radar1.setDescription("My radar description");
     radar1.setPrimary(false);
@@ -75,7 +75,7 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     final Segment segment = new Segment();
     segment.setRadar(radar);
     segment.setTitle("My segment title");
-    segment.setDescription("My description");
+    segment.setDescription("My segment description");
     segment.setPosition(1);
     segmentRepository.saveAndFlush(segment);
 
@@ -127,13 +127,13 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
   @Transactional
   void shouldFindAllTechnologyBlipsWithBlankTitleFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
-    radar.setTitle("My first radar");
+    radar.setTitle("My first radar title");
     radar.setRadarType(radarType);
     radar.setDescription("My radar description");
     radar.setPrimary(false);
@@ -141,7 +141,7 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     radarRepository.saveAndFlush(radar);
 
     final Radar radar1 = new Radar();
-    radar1.setTitle("My second radar");
+    radar1.setTitle("My second radar title");
     radar1.setRadarType(radarType);
     radar1.setDescription("My radar description");
     radar1.setPrimary(false);
@@ -159,7 +159,7 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     final Segment segment = new Segment();
     segment.setRadar(radar);
     segment.setTitle("My segment title");
-    segment.setDescription("My description");
+    segment.setDescription("My segment description");
     segment.setPosition(1);
     segmentRepository.saveAndFlush(segment);
 
@@ -216,15 +216,15 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
   /*
   @Test
   @Transactional
-  void shouldFindAllRingWithTitleFilter() {
+  void shouldFindAllTechnologyBlipsWithTitleFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
-    radar.setTitle("My first radar");
+    radar.setTitle("My first radar title");
     radar.setRadarType(radarType);
     radar.setDescription("My radar description");
     radar.setPrimary(false);
@@ -232,7 +232,7 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     radarRepository.saveAndFlush(radar);
 
     final Radar radar1 = new Radar();
-    radar1.setTitle("My second radar");
+    radar1.setTitle("My second radar title");
     radar1.setRadarType(radarType);
     radar1.setDescription("My radar description");
     radar1.setPrimary(false);
@@ -250,7 +250,7 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     final Segment segment = new Segment();
     segment.setRadar(radar);
     segment.setTitle("My segment title");
-    segment.setDescription("My description");
+    segment.setDescription("My segment description");
     segment.setPosition(1);
     segmentRepository.saveAndFlush(segment);
 

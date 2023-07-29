@@ -29,17 +29,17 @@ class SegmentServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllSegmentWithNullFilter() {
+  void shouldFindAllSegmentsWithNullFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
-    radar.setTitle("My segment type");
+    radar.setTitle("My radar title");
     radar.setRadarType(radarType);
-    radar.setDescription("My segment type description");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
     radarType.setRadarList(List.of(radar));
@@ -47,14 +47,14 @@ class SegmentServiceRepositoryTests extends AbstractServiceTests {
 
     final Segment segment = new Segment();
     segment.setRadar(radar);
-    segment.setTitle("My segment");
-    segment.setDescription("My description");
+    segment.setTitle("My segment title");
+    segment.setDescription("My segment description");
     segment.setPosition(0);
 
     final Segment segment1 = new Segment();
     segment1.setRadar(radar);
-    segment1.setTitle("My new segment");
-    segment1.setDescription("My new description");
+    segment1.setTitle("My new segment title");
+    segment1.setDescription("My new segment description");
     segment1.setPosition(1);
     radar.setSegmentList(List.of(segment, segment1));
     List<Segment> segmentList = List.of(segment, segment1);
@@ -72,17 +72,17 @@ class SegmentServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllSegmentWithBlankTitleFilter() {
+  void shouldFindAllSegmentsWithBlankTitleFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
-    radar.setTitle("My segment type");
+    radar.setTitle("My radar title");
     radar.setRadarType(radarType);
-    radar.setDescription("My segment type description");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
     radarType.setRadarList(List.of(radar));
@@ -90,14 +90,14 @@ class SegmentServiceRepositoryTests extends AbstractServiceTests {
 
     final Segment segment = new Segment();
     segment.setRadar(radar);
-    segment.setTitle("My segment");
-    segment.setDescription("My description");
+    segment.setTitle("My segment title");
+    segment.setDescription("My segment description");
     segment.setPosition(0);
 
     final Segment segment1 = new Segment();
     segment1.setRadar(radar);
-    segment1.setTitle("My new segment");
-    segment1.setDescription("My new description");
+    segment1.setTitle("My new segment title");
+    segment1.setDescription("My new segment description");
     segment1.setPosition(1);
     radar.setSegmentList(List.of(segment, segment1));
     List<Segment> segmentList = List.of(segment, segment1);
@@ -117,17 +117,17 @@ class SegmentServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllSegmentWithTitleFilter() {
+  void shouldFindAllSegmentsWithTitleFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
-    radar.setTitle("My segment type");
+    radar.setTitle("My radar title");
     radar.setRadarType(radarType);
-    radar.setDescription("My segment type description");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
     radarType.setRadarList(List.of(radar));
@@ -135,14 +135,14 @@ class SegmentServiceRepositoryTests extends AbstractServiceTests {
 
     final Segment segment = new Segment();
     segment.setRadar(radar);
-    segment.setTitle("My segment");
-    segment.setDescription("My description");
+    segment.setTitle("My segment title");
+    segment.setDescription("My segment description");
     segment.setPosition(0);
 
     final Segment segment1 = new Segment();
     segment1.setRadar(radar);
-    segment1.setTitle("My new segment");
-    segment1.setDescription("My new description");
+    segment1.setTitle("My new segment title");
+    segment1.setDescription("My new segment description");
     segment1.setPosition(1);
     radar.setSegmentList(List.of(segment, segment1));
     List<Segment> segmentList = List.of(segment, segment1);

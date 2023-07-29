@@ -25,24 +25,24 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRadarWithNullFilter() {
+  void shouldFindAllRadarsWithNullFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
     radar.setRadarType(radarType);
-    radar.setTitle("My radar");
-    radar.setDescription("My description");
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
 
     final Radar radar1 = new Radar();
     radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar");
-    radar1.setDescription("My new description");
+    radar1.setTitle("My new radar title");
+    radar1.setDescription("My new radar description");
     radar1.setPrimary(false);
     radar1.setActive(false);
     radarType.setRadarList(List.of(radar, radar1));
@@ -61,24 +61,24 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRadarWithBlankTitleFilter() {
+  void shouldFindAllRadarsWithBlankTitleFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
     radar.setRadarType(radarType);
-    radar.setTitle("My radar");
-    radar.setDescription("My description");
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
 
     final Radar radar1 = new Radar();
     radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar");
-    radar1.setDescription("My new description");
+    radar1.setTitle("My new radar title");
+    radar1.setDescription("My new radar description");
     radar1.setPrimary(false);
     radar1.setActive(false);
     radarType.setRadarList(List.of(radar, radar1));
@@ -99,24 +99,24 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRadarWithTitleFilter() {
+  void shouldFindAllRadarsWithTitleFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
     radar.setRadarType(radarType);
-    radar.setTitle("My radar");
-    radar.setDescription("My description");
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
 
     final Radar radar1 = new Radar();
     radar1.setRadarType(radarType);
     radar1.setTitle("My new radar");
-    radar1.setDescription("My new description");
+    radar1.setDescription("My new radar description");
     radar1.setPrimary(false);
     radar1.setActive(false);
     radarType.setRadarList(List.of(radar, radar1));
@@ -141,24 +141,24 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRadarWithPrimaryFilter() {
+  void shouldFindAllRadarsWithPrimaryFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
     radar.setRadarType(radarType);
-    radar.setTitle("My radar");
-    radar.setDescription("My description");
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
     radar.setPrimary(true);
     radar.setActive(false);
 
     final Radar radar1 = new Radar();
     radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar");
-    radar1.setDescription("My new description");
+    radar1.setTitle("My new radar title");
+    radar1.setDescription("My new radar description");
     radar1.setPrimary(false);
     radar1.setActive(false);
     radarType.setRadarList(List.of(radar, radar1));
@@ -187,24 +187,24 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRadarWithActiveFilter() {
+  void shouldFindAllRadarsWithActiveFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
     radar.setRadarType(radarType);
-    radar.setTitle("My radar");
-    radar.setDescription("My description");
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(true);
 
     final Radar radar1 = new Radar();
     radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar");
-    radar1.setDescription("My new description");
+    radar1.setTitle("My new radar title");
+    radar1.setDescription("My new radar description");
     radar1.setPrimary(true);
     radar1.setActive(false);
     radarType.setRadarList(List.of(radar, radar1));
@@ -233,24 +233,24 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRadarWithPrimaryAndActiveFilter() {
+  void shouldFindAllRadarsWithPrimaryAndActiveFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
     radar.setRadarType(radarType);
-    radar.setTitle("My radar");
-    radar.setDescription("My description");
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
     radar.setPrimary(true);
     radar.setActive(true);
 
     final Radar radar1 = new Radar();
     radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar");
-    radar1.setDescription("My new description");
+    radar1.setTitle("My new radar title");
+    radar1.setDescription("My new radar description");
     radar1.setPrimary(false);
     radar1.setActive(false);
     radarType.setRadarList(List.of(radar, radar1));

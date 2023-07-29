@@ -29,17 +29,17 @@ class RingServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRingWithNullFilter() {
+  void shouldFindAllRingsWithNullFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
-    radar.setTitle("My ring type");
+    radar.setTitle("My radar title");
     radar.setRadarType(radarType);
-    radar.setDescription("My ring type description");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
     radarType.setRadarList(List.of(radar));
@@ -48,14 +48,14 @@ class RingServiceRepositoryTests extends AbstractServiceTests {
     final Ring ring = new Ring();
     ring.setRadar(radar);
     ring.setTitle("TRIAL");
-    ring.setDescription("My description");
+    ring.setDescription("My ring description");
     ring.setPosition(0);
     ring.setColor("Color");
 
     final Ring ring1 = new Ring();
     ring1.setRadar(radar);
     ring1.setTitle("ADOPT");
-    ring1.setDescription("My new description");
+    ring1.setDescription("My new ring description");
     ring1.setPosition(1);
     ring1.setColor("Color");
     radar.setRingList(List.of(ring, ring1));
@@ -74,17 +74,17 @@ class RingServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRingWithBlankTitleFilter() {
+  void shouldFindAllRingsWithBlankTitleFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
-    radar.setTitle("My ring type");
+    radar.setTitle("My radar title");
     radar.setRadarType(radarType);
-    radar.setDescription("My ring type description");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
     radarType.setRadarList(List.of(radar));
@@ -93,14 +93,14 @@ class RingServiceRepositoryTests extends AbstractServiceTests {
     final Ring ring = new Ring();
     ring.setRadar(radar);
     ring.setTitle("TRIAL");
-    ring.setDescription("My description");
+    ring.setDescription("My ring description");
     ring.setPosition(0);
     ring.setColor("Color");
 
     final Ring ring1 = new Ring();
     ring1.setRadar(radar);
     ring1.setTitle("ADOPT");
-    ring1.setDescription("My new description");
+    ring1.setDescription("My new ring description");
     ring1.setPosition(1);
     ring1.setColor("Color");
     radar.setRingList(List.of(ring, ring1));
@@ -121,17 +121,17 @@ class RingServiceRepositoryTests extends AbstractServiceTests {
 
   @Test
   @Transactional
-  void shouldFindAllRingWithTitleFilter() {
+  void shouldFindAllRingsWithTitleFilter() {
     final RadarType radarType = new RadarType();
-    radarType.setTitle("My radar type");
+    radarType.setTitle("My radar type title");
     radarType.setDescription("My radar type description");
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
     final Radar radar = new Radar();
-    radar.setTitle("My ring type");
+    radar.setTitle("My radar title");
     radar.setRadarType(radarType);
-    radar.setDescription("My ring type description");
+    radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
     radarType.setRadarList(List.of(radar));
@@ -140,14 +140,14 @@ class RingServiceRepositoryTests extends AbstractServiceTests {
     final Ring ring = new Ring();
     ring.setRadar(radar);
     ring.setTitle("TRIAL");
-    ring.setDescription("My description");
+    ring.setDescription("My ring description");
     ring.setPosition(0);
     ring.setColor("Color");
 
     final Ring ring1 = new Ring();
     ring1.setRadar(radar);
     ring1.setTitle("ADOPT");
-    ring1.setDescription("My new description");
+    ring1.setDescription("My new ring description");
     ring1.setPosition(1);
     ring1.setColor("Color");
     radar.setRingList(List.of(ring, ring1));
