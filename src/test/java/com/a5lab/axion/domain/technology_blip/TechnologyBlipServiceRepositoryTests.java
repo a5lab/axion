@@ -48,68 +48,36 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radar = new Radar();
-    radar.setTitle("My first radar title");
-    radar.setRadarType(radarType);
-    radar.setDescription("My radar description");
-    radar.setPrimary(false);
-    radar.setActive(false);
+    final Radar radar = new Radar(null, radarType,
+        "My first radar title", "Description", true, true);
     radarRepository.saveAndFlush(radar);
 
-    final Radar radar1 = new Radar();
-    radar1.setTitle("My second radar title");
-    radar1.setRadarType(radarType);
-    radar1.setDescription("My radar description");
-    radar1.setPrimary(false);
-    radar1.setActive(false);
+    final Radar radar1 = new Radar(null, radarType,
+        "My second radar title", "Description", true, true);
     radarRepository.saveAndFlush(radar1);
 
-    final Ring ring = new Ring();
-    ring.setRadar(radar);
-    ring.setTitle("TRIAL");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("Color");
+    final Ring ring = new Ring(null, radar, "ADOPT",
+        "Description", 0, "Color", null);
     ringRepository.saveAndFlush(ring);
 
-    final Segment segment = new Segment();
-    segment.setRadar(radar);
-    segment.setTitle("My segment title");
-    segment.setDescription("My segment description");
-    segment.setPosition(1);
+    final Segment segment = new Segment(null, radar, "My segment title",
+        "My segment description", 1, null);
     segmentRepository.saveAndFlush(segment);
 
-    final Technology technology = new Technology();
-    technology.setTitle("My first technology title");
-    technology.setWebsite("My technology website");
-    technology.setDescription("My technology description");
-    technology.setMoved(1);
-    technology.setActive(true);
+    final Technology technology = new Technology(null, "My first technology title",
+       "Website", "Description", 1, true);
     technologyRepository.saveAndFlush(technology);
 
-    final Technology technology1 = new Technology();
-    technology1.setTitle("My second technology title");
-    technology1.setWebsite("My technology website");
-    technology1.setDescription("My technology description");
-    technology1.setMoved(1);
-    technology1.setActive(true);
+    final Technology technology1 = new Technology(null, "My second technology title",
+        "Website", "Description", 1, true);
     technologyRepository.saveAndFlush(technology1);
 
-    final TechnologyBlip technologyBlip = new TechnologyBlip();
-    technologyBlip.setRadar(radar);
-    technologyBlip.setRing(ring);
-    technologyBlip.setSegment(segment);
-    technologyBlip.setTechnology(technology);
-
-    final TechnologyBlip technologyBlip1 = new TechnologyBlip();
-    technologyBlip1.setRadar(radar1);
-    technologyBlip1.setRing(ring);
-    technologyBlip1.setSegment(segment);
-    technologyBlip1.setTechnology(technology1);
-
-    List<TechnologyBlip> technologyBlipList = List.of(technologyBlip, technologyBlip1);
-    for (TechnologyBlip technologyBlipAll : technologyBlipList) {
-      technologyBlipRepository.save(technologyBlipAll);
+    List<TechnologyBlip> technologyBlipList = List.of(
+        new TechnologyBlip(null, radar, technology, segment, ring),
+        new TechnologyBlip(null, radar1, technology1, segment, ring)
+    );
+    for (TechnologyBlip technologyBlip : technologyBlipList) {
+      technologyBlipRepository.save(technologyBlip);
     }
 
     Pageable pageable = PageRequest.of(0, 10, Sort.by(new Sort.Order(Sort.Direction.ASC, "radar.title"),
@@ -132,68 +100,40 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radar = new Radar();
-    radar.setTitle("My first radar title");
-    radar.setRadarType(radarType);
-    radar.setDescription("My radar description");
-    radar.setPrimary(false);
-    radar.setActive(false);
+    // Create radar for first blips
+    final Radar radar = new Radar(null, radarType,
+        "My first radar title", "Description", true, true);
     radarRepository.saveAndFlush(radar);
 
-    final Radar radar1 = new Radar();
-    radar1.setTitle("My second radar title");
-    radar1.setRadarType(radarType);
-    radar1.setDescription("My radar description");
-    radar1.setPrimary(false);
-    radar1.setActive(false);
+    // Create radar for second blips
+    final Radar radar1 = new Radar(null, radarType,
+        "My second radar title", "Description", true, true);
     radarRepository.saveAndFlush(radar1);
 
-    final Ring ring = new Ring();
-    ring.setRadar(radar);
-    ring.setTitle("TRIAL");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("Color");
+    final Ring ring = new Ring(null, radar, "ADOPT",
+        "Description", 0, "Color", null);
     ringRepository.saveAndFlush(ring);
 
-    final Segment segment = new Segment();
-    segment.setRadar(radar);
-    segment.setTitle("My segment title");
-    segment.setDescription("My segment description");
-    segment.setPosition(1);
+    final Segment segment = new Segment(null, radar, "My segment title",
+        "My segment description", 1, null);
     segmentRepository.saveAndFlush(segment);
 
-    final Technology technology = new Technology();
-    technology.setTitle("My first technology title");
-    technology.setWebsite("My technology website");
-    technology.setDescription("My technology description");
-    technology.setMoved(1);
-    technology.setActive(true);
+    // Create technology for first blips
+    final Technology technology = new Technology(null, "My first technology title",
+        "Website", "Description", 1, true);
     technologyRepository.saveAndFlush(technology);
 
-    final Technology technology1 = new Technology();
-    technology1.setTitle("My second technology title");
-    technology1.setWebsite("My technology website");
-    technology1.setDescription("My technology description");
-    technology1.setMoved(1);
-    technology1.setActive(true);
+    // Create technology for second blips
+    final Technology technology1 = new Technology(null, "My second technology title",
+        "Website", "Description", 1, true);
     technologyRepository.saveAndFlush(technology1);
 
-    final TechnologyBlip technologyBlip = new TechnologyBlip();
-    technologyBlip.setRadar(radar);
-    technologyBlip.setRing(ring);
-    technologyBlip.setSegment(segment);
-    technologyBlip.setTechnology(technology);
-
-    final TechnologyBlip technologyBlip1 = new TechnologyBlip();
-    technologyBlip1.setRadar(radar1);
-    technologyBlip1.setRing(ring);
-    technologyBlip1.setSegment(segment);
-    technologyBlip1.setTechnology(technology1);
-
-    List<TechnologyBlip> technologyBlipList = List.of(technologyBlip, technologyBlip1);
-    for (TechnologyBlip technologyBlipAll : technologyBlipList) {
-      technologyBlipRepository.save(technologyBlipAll);
+    List<TechnologyBlip> technologyBlipList = List.of(
+        new TechnologyBlip(null, radar, technology, segment, ring),
+        new TechnologyBlip(null, radar1, technology1, segment, ring)
+    );
+    for (TechnologyBlip technologyBlip : technologyBlipList) {
+      technologyBlipRepository.save(technologyBlip);
     }
 
     TechnologyBlipFilter technologyBlipFilter = new TechnologyBlipFilter();
@@ -223,69 +163,42 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radar = new Radar();
-    radar.setTitle("My first radar title");
-    radar.setRadarType(radarType);
-    radar.setDescription("My radar description");
-    radar.setPrimary(false);
-    radar.setActive(false);
+    // Create radar for first blips
+    final Radar radar = new Radar(null, radarType,
+        "My first radar title", "Description", true, true);
     radarRepository.saveAndFlush(radar);
 
-    final Radar radar1 = new Radar();
-    radar1.setTitle("My second radar title");
-    radar1.setRadarType(radarType);
-    radar1.setDescription("My radar description");
-    radar1.setPrimary(false);
-    radar1.setActive(false);
+    // Create radar for second blips
+    final Radar radar1 = new Radar(null, radarType,
+        "My second radar title", "Description", true, true);
     radarRepository.saveAndFlush(radar1);
 
-    final Ring ring = new Ring();
-    ring.setRadar(radar);
-    ring.setTitle("TRIAL");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("Color");
+    final Ring ring = new Ring(null, radar, "ADOPT",
+        "Description", 0, "Color", null);
     ringRepository.saveAndFlush(ring);
 
-    final Segment segment = new Segment();
-    segment.setRadar(radar);
-    segment.setTitle("My segment title");
-    segment.setDescription("My segment description");
-    segment.setPosition(1);
+    final Segment segment = new Segment(null, radar, "My segment title",
+        "My segment description", 1, null);
     segmentRepository.saveAndFlush(segment);
 
-    final Technology technology = new Technology();
-    technology.setTitle("My first technology title");
-    technology.setWebsite("My technology website");
-    technology.setDescription("My technology description");
-    technology.setMoved(1);
-    technology.setActive(true);
+    // Create technology for first blips
+    final Technology technology = new Technology(null, "My first technology title",
+        "Website", "Description", 1, true);
     technologyRepository.saveAndFlush(technology);
 
-    final Technology technology1 = new Technology();
-    technology1.setTitle("My second technology title");
-    technology1.setWebsite("My technology website");
-    technology1.setDescription("My technology description");
-    technology1.setMoved(1);
-    technology1.setActive(true);
+    // Create technology for second blips
+    final Technology technology1 = new Technology(null, "My second technology title",
+        "Website", "Description", 1, true);
     technologyRepository.saveAndFlush(technology1);
 
-    final TechnologyBlip technologyBlip = new TechnologyBlip();
-    technologyBlip.setRadar(radar);
-    technologyBlip.setRing(ring);
-    technologyBlip.setSegment(segment);
-    technologyBlip.setTechnology(technology);
-
-    final TechnologyBlip technologyBlip1 = new TechnologyBlip();
-    technologyBlip1.setRadar(radar1);
-    technologyBlip1.setRing(ring);
-    technologyBlip1.setSegment(segment);
-    technologyBlip1.setTechnology(technology1);
-
-    List<TechnologyBlip> technologyBlipList = List.of(technologyBlip, technologyBlip1);
-    for (TechnologyBlip technologyBlipAll : technologyBlipList) {
-      technologyBlipRepository.save(technologyBlipAll);
+    List<TechnologyBlip> technologyBlipList = List.of(
+        new TechnologyBlip(null, radar, technology, segment, ring),
+        new TechnologyBlip(null, radar1, technology1, segment, ring)
+    );
+    for (TechnologyBlip technologyBlip : technologyBlipList) {
+      technologyBlipRepository.save(technologyBlip);
     }
+
     TechnologyBlipFilter technologyBlipFilter = new TechnologyBlipFilter();
     technologyBlipFilter.setTitle(technologyBlipList.iterator().next().getRadar().getTitle());
     Pageable pageable = PageRequest.of(0, 10, Sort.by(new Sort.Order(Sort.Direction.ASC, "radar.title"),
