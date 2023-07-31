@@ -42,24 +42,14 @@ class SegmentServiceRepositoryTests extends AbstractServiceTests {
     radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
-    radarType.setRadarList(List.of(radar));
     radarRepository.saveAndFlush(radar);
 
-    final Segment segment = new Segment();
-    segment.setRadar(radar);
-    segment.setTitle("My segment title");
-    segment.setDescription("My segment description");
-    segment.setPosition(0);
-
-    final Segment segment1 = new Segment();
-    segment1.setRadar(radar);
-    segment1.setTitle("My new segment title");
-    segment1.setDescription("My new segment description");
-    segment1.setPosition(1);
-    radar.setSegmentList(List.of(segment, segment1));
-    List<Segment> segmentList = List.of(segment, segment1);
-    for (Segment segmentAll : segmentList) {
-      segmentRepository.save(segmentAll);
+    List<Segment> segmentList = List.of(
+        new Segment(null, radar, "My first segment title", "Description", 0, null),
+        new Segment(null, radar, "My second segment title", "New description", 1, null)
+    );
+    for (Segment segment : segmentList) {
+      segmentRepository.save(segment);
     }
 
     Pageable pageable = PageRequest.of(0, 10, Sort.by(new Sort.Order(Sort.Direction.ASC, "title")));
@@ -88,21 +78,12 @@ class SegmentServiceRepositoryTests extends AbstractServiceTests {
     radarType.setRadarList(List.of(radar));
     radarRepository.saveAndFlush(radar);
 
-    final Segment segment = new Segment();
-    segment.setRadar(radar);
-    segment.setTitle("My segment title");
-    segment.setDescription("My segment description");
-    segment.setPosition(0);
-
-    final Segment segment1 = new Segment();
-    segment1.setRadar(radar);
-    segment1.setTitle("My new segment title");
-    segment1.setDescription("My new segment description");
-    segment1.setPosition(1);
-    radar.setSegmentList(List.of(segment, segment1));
-    List<Segment> segmentList = List.of(segment, segment1);
-    for (Segment segmentAll : segmentList) {
-      segmentRepository.save(segmentAll);
+    List<Segment> segmentList = List.of(
+        new Segment(null, radar, "My first segment title", "Description", 0, null),
+        new Segment(null, radar, "My second segment title", "New description", 1, null)
+    );
+    for (Segment segment : segmentList) {
+      segmentRepository.save(segment);
     }
 
     SegmentFilter segmentFilter = new SegmentFilter();
@@ -133,21 +114,12 @@ class SegmentServiceRepositoryTests extends AbstractServiceTests {
     radarType.setRadarList(List.of(radar));
     radarRepository.saveAndFlush(radar);
 
-    final Segment segment = new Segment();
-    segment.setRadar(radar);
-    segment.setTitle("My segment title");
-    segment.setDescription("My segment description");
-    segment.setPosition(0);
-
-    final Segment segment1 = new Segment();
-    segment1.setRadar(radar);
-    segment1.setTitle("My new segment title");
-    segment1.setDescription("My new segment description");
-    segment1.setPosition(1);
-    radar.setSegmentList(List.of(segment, segment1));
-    List<Segment> segmentList = List.of(segment, segment1);
-    for (Segment segmentAll : segmentList) {
-      segmentRepository.save(segmentAll);
+    List<Segment> segmentList = List.of(
+        new Segment(null, radar, "My first segment title", "Description", 0, null),
+        new Segment(null, radar, "My second segment title", "New description", 1, null)
+    );
+    for (Segment segment : segmentList) {
+      segmentRepository.save(segment);
     }
 
     SegmentFilter segmentFilter = new SegmentFilter();
