@@ -42,26 +42,14 @@ class RingServiceRepositoryTests extends AbstractServiceTests {
     radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
-    radarType.setRadarList(List.of(radar));
     radarRepository.saveAndFlush(radar);
 
-    final Ring ring = new Ring();
-    ring.setRadar(radar);
-    ring.setTitle("TRIAL");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("Color");
-
-    final Ring ring1 = new Ring();
-    ring1.setRadar(radar);
-    ring1.setTitle("ADOPT");
-    ring1.setDescription("My new ring description");
-    ring1.setPosition(1);
-    ring1.setColor("Color");
-    radar.setRingList(List.of(ring, ring1));
-    List<Ring> ringList = List.of(ring, ring1);
-    for (Ring ringAll : ringList) {
-      ringRepository.save(ringAll);
+    List<Ring> ringList = List.of(
+        new Ring(null, radar, "TRIAL", "Description", 0, "Color", null),
+        new Ring(null, radar, "ADOPT", "New description", 1, "Color", null)
+    );
+    for (Ring ring : ringList) {
+      ringRepository.save(ring);
     }
 
     Pageable pageable = PageRequest.of(0, 10, Sort.by(new Sort.Order(Sort.Direction.ASC, "title")));
@@ -87,26 +75,14 @@ class RingServiceRepositoryTests extends AbstractServiceTests {
     radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
-    radarType.setRadarList(List.of(radar));
     radarRepository.saveAndFlush(radar);
 
-    final Ring ring = new Ring();
-    ring.setRadar(radar);
-    ring.setTitle("TRIAL");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("Color");
-
-    final Ring ring1 = new Ring();
-    ring1.setRadar(radar);
-    ring1.setTitle("ADOPT");
-    ring1.setDescription("My new ring description");
-    ring1.setPosition(1);
-    ring1.setColor("Color");
-    radar.setRingList(List.of(ring, ring1));
-    List<Ring> ringList = List.of(ring, ring1);
-    for (Ring ringAll : ringList) {
-      ringRepository.save(ringAll);
+    List<Ring> ringList = List.of(
+        new Ring(null, radar, "TRIAL", "Description", 0, "Color", null),
+        new Ring(null, radar, "ADOPT", "New description", 1, "Color", null)
+    );
+    for (Ring ring : ringList) {
+      ringRepository.save(ring);
     }
 
     RingFilter ringFilter = new RingFilter();
@@ -134,26 +110,14 @@ class RingServiceRepositoryTests extends AbstractServiceTests {
     radar.setDescription("My radar description");
     radar.setPrimary(false);
     radar.setActive(false);
-    radarType.setRadarList(List.of(radar));
     radarRepository.saveAndFlush(radar);
 
-    final Ring ring = new Ring();
-    ring.setRadar(radar);
-    ring.setTitle("TRIAL");
-    ring.setDescription("My ring description");
-    ring.setPosition(0);
-    ring.setColor("Color");
-
-    final Ring ring1 = new Ring();
-    ring1.setRadar(radar);
-    ring1.setTitle("ADOPT");
-    ring1.setDescription("My new ring description");
-    ring1.setPosition(1);
-    ring1.setColor("Color");
-    radar.setRingList(List.of(ring, ring1));
-    List<Ring> ringList = List.of(ring, ring1);
-    for (Ring ringAll : ringList) {
-      ringRepository.save(ringAll);
+    List<Ring> ringList = List.of(
+        new Ring(null, radar, "TRIAL", "Description", 0, "Color", null),
+        new Ring(null, radar, "ADOPT", "New description", 1, "Color", null)
+    );
+    for (Ring ring : ringList) {
+      ringRepository.save(ring);
     }
 
     RingFilter ringFilter = new RingFilter();
