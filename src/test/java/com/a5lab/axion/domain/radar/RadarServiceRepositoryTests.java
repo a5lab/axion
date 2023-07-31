@@ -32,23 +32,12 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar description");
-    radar.setPrimary(false);
-    radar.setActive(false);
-
-    final Radar radar1 = new Radar();
-    radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar title");
-    radar1.setDescription("My new radar description");
-    radar1.setPrimary(false);
-    radar1.setActive(false);
-    radarType.setRadarList(List.of(radar, radar1));
-    List<Radar> radarList = List.of(radar, radar1);
-    for (Radar radarAll : radarList) {
-      radarRepository.save(radarAll);
+    List<Radar> radarList = List.of(
+        new Radar(null, radarType, "My first radar title", "Description", false, false, null, null, null),
+        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+    );
+    for (Radar radar : radarList) {
+      radarRepository.save(radar);
     }
 
     Pageable pageable = PageRequest.of(0, 10, Sort.by(new Sort.Order(Sort.Direction.ASC, "title")));
@@ -68,23 +57,12 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar description");
-    radar.setPrimary(false);
-    radar.setActive(false);
-
-    final Radar radar1 = new Radar();
-    radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar title");
-    radar1.setDescription("My new radar description");
-    radar1.setPrimary(false);
-    radar1.setActive(false);
-    radarType.setRadarList(List.of(radar, radar1));
-    List<Radar> radarList = List.of(radar, radar1);
-    for (Radar radarAll : radarList) {
-      radarRepository.save(radarAll);
+    List<Radar> radarList = List.of(
+        new Radar(null, radarType, "My first radar title", "Description", false, false, null, null, null),
+        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+    );
+    for (Radar radar : radarList) {
+      radarRepository.save(radar);
     }
 
     RadarFilter radarFilter = new RadarFilter();
@@ -106,23 +84,11 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar description");
-    radar.setPrimary(false);
-    radar.setActive(false);
-
-    final Radar radar1 = new Radar();
-    radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar");
-    radar1.setDescription("My new radar description");
-    radar1.setPrimary(false);
-    radar1.setActive(false);
-    radarType.setRadarList(List.of(radar, radar1));
-    List<Radar> radarList = List.of(radar, radar1);
-    for (Radar radarAll : radarList) {
-      radarRepository.save(radarAll);
+    List<Radar> radarList = List.of(
+        new Radar(null, radarType, "My first radar title", "Description", false, false, null, null, null),
+        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+    );    for (Radar radar : radarList) {
+      radarRepository.save(radar);
     }
 
     RadarFilter radarFilter = new RadarFilter();
@@ -148,23 +114,11 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar description");
-    radar.setPrimary(true);
-    radar.setActive(false);
-
-    final Radar radar1 = new Radar();
-    radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar title");
-    radar1.setDescription("My new radar description");
-    radar1.setPrimary(false);
-    radar1.setActive(false);
-    radarType.setRadarList(List.of(radar, radar1));
-    List<Radar> radarList = List.of(radar, radar1);
-    for (Radar radarAll : radarList) {
-      radarRepository.save(radarAll);
+    List<Radar> radarList = List.of(
+        new Radar(null, radarType, "My first radar title", "Description", true, false, null, null, null),
+        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+    );    for (Radar radar : radarList) {
+      radarRepository.save(radar);
     }
 
     RadarFilter radarFilter = new RadarFilter();
@@ -194,23 +148,11 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar description");
-    radar.setPrimary(false);
-    radar.setActive(true);
-
-    final Radar radar1 = new Radar();
-    radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar title");
-    radar1.setDescription("My new radar description");
-    radar1.setPrimary(true);
-    radar1.setActive(false);
-    radarType.setRadarList(List.of(radar, radar1));
-    List<Radar> radarList = List.of(radar, radar1);
-    for (Radar radarAll : radarList) {
-      radarRepository.save(radarAll);
+    List<Radar> radarList = List.of(
+        new Radar(null, radarType, "My first radar title", "Description", false, true, null, null, null),
+        new Radar(null, radarType, "My second radar title", "New description", true, false, null, null, null)
+    );    for (Radar radar : radarList) {
+      radarRepository.save(radar);
     }
 
     RadarFilter radarFilter = new RadarFilter();
@@ -240,23 +182,11 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarType.setCode(RadarType.TECHNOLOGY_RADAR);
     radarTypeRepository.saveAndFlush(radarType);
 
-    final Radar radar = new Radar();
-    radar.setRadarType(radarType);
-    radar.setTitle("My radar title");
-    radar.setDescription("My radar description");
-    radar.setPrimary(true);
-    radar.setActive(true);
-
-    final Radar radar1 = new Radar();
-    radar1.setRadarType(radarType);
-    radar1.setTitle("My new radar title");
-    radar1.setDescription("My new radar description");
-    radar1.setPrimary(false);
-    radar1.setActive(false);
-    radarType.setRadarList(List.of(radar, radar1));
-    List<Radar> radarList = List.of(radar, radar1);
-    for (Radar radarAll : radarList) {
-      radarRepository.save(radarAll);
+    List<Radar> radarList = List.of(
+        new Radar(null, radarType, "My first radar title", "Description", true, true, null, null, null),
+        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+    );    for (Radar radar : radarList) {
+      radarRepository.save(radar);
     }
 
     RadarFilter radarFilter = new RadarFilter();
