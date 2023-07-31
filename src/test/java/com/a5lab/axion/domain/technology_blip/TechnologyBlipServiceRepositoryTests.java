@@ -65,7 +65,7 @@ class TechnologyBlipServiceRepositoryTests extends AbstractServiceTests {
     segmentRepository.saveAndFlush(segment);
 
     final Technology technology = new Technology(null, "My first technology title",
-       "Website", "Description", 1, true);
+        "Website", "Description", 1, true);
     technologyRepository.saveAndFlush(technology);
 
     final Technology technology1 = new Technology(null, "My second technology title",
