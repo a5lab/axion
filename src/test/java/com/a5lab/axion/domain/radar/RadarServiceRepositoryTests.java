@@ -33,8 +33,8 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarTypeRepository.saveAndFlush(radarType);
 
     List<Radar> radarList = List.of(
-        new Radar(null, radarType, "My first radar title", "Description", false, false, null, null, null),
-        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+        new Radar(null, radarType, "My first radar title", "Description", false, false),
+        new Radar(null, radarType, "My second radar title", "New description", false, false)
     );
     for (Radar radar : radarList) {
       radarRepository.save(radar);
@@ -58,8 +58,8 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarTypeRepository.saveAndFlush(radarType);
 
     List<Radar> radarList = List.of(
-        new Radar(null, radarType, "My first radar title", "Description", false, false, null, null, null),
-        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+        new Radar(null, radarType, "My first radar title", "Description", false, false),
+        new Radar(null, radarType, "My second radar title", "New description", false, false)
     );
     for (Radar radar : radarList) {
       radarRepository.save(radar);
@@ -85,8 +85,8 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarTypeRepository.saveAndFlush(radarType);
 
     List<Radar> radarList = List.of(
-        new Radar(null, radarType, "My first radar title", "Description", false, false, null, null, null),
-        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+        new Radar(null, radarType, "My first radar title", "Description", false, false),
+        new Radar(null, radarType, "My second radar title", "New description", false, false)
     );    for (Radar radar : radarList) {
       radarRepository.save(radar);
     }
@@ -115,8 +115,8 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarTypeRepository.saveAndFlush(radarType);
 
     List<Radar> radarList = List.of(
-        new Radar(null, radarType, "My first radar title", "Description", true, false, null, null, null),
-        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+        new Radar(null, radarType, "My first radar title", "Description", true, false),
+        new Radar(null, radarType, "My second radar title", "New description", false, false)
     );    for (Radar radar : radarList) {
       radarRepository.save(radar);
     }
@@ -149,8 +149,8 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarTypeRepository.saveAndFlush(radarType);
 
     List<Radar> radarList = List.of(
-        new Radar(null, radarType, "My first radar title", "Description", false, true, null, null, null),
-        new Radar(null, radarType, "My second radar title", "New description", true, false, null, null, null)
+        new Radar(null, radarType, "My first radar title", "Description", false, true),
+        new Radar(null, radarType, "My second radar title", "New description", true, false)
     );    for (Radar radar : radarList) {
       radarRepository.save(radar);
     }
@@ -183,8 +183,8 @@ class RadarServiceRepositoryTests extends AbstractServiceTests {
     radarTypeRepository.saveAndFlush(radarType);
 
     List<Radar> radarList = List.of(
-        new Radar(null, radarType, "My first radar title", "Description", true, true, null, null, null),
-        new Radar(null, radarType, "My second radar title", "New description", false, false, null, null, null)
+        new Radar(null, radarType, "My first radar title", "Description", true, true),
+        new Radar(null, radarType, "My second radar title", "New description", false, false)
     );    for (Radar radar : radarList) {
       radarRepository.save(radar);
     }
