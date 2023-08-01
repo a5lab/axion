@@ -266,6 +266,27 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Mockito.verify(ringService).findById(ringDto.getId());
   }
 
+  @Test
+  public void shouldFailToCreateRingDueToTitleWithWhiteSpace() throws Exception {
+    List<ModelError> modelErrorList = List.of(
+        new ModelError(null, "should be without whitespaces before and after", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService)
+        .save(any(RingDto.class));
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/rings/create")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", " My title "))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("ringDto", "title"))
+        .andExpect(view().name("settings/rings/add"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be without whitespaces before and after"));
+
+    Mockito.verify(ringService).save(any(RingDto.class));
+  }
 
   @Test
   public void shouldRedirectEditRing() throws Exception {
@@ -395,6 +416,28 @@ public class RingCfgControllerTests extends AbstractControllerTests {
     Assertions.assertTrue(content.contains("be saved for active radar"));
 
     Mockito.verify(ringService).save(any());
+  }
+
+  @Test
+  public void shouldFailToUpdateRingDueToTitleWithWhiteSpace() throws Exception {
+    List<ModelError> modelErrorList = List.of(
+        new ModelError(null, "should be without whitespaces before and after", "title"));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(ringService)
+        .save(any(RingDto.class));
+
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/settings/rings/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("title", " My title "))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasFieldErrors("ringDto", "title"))
+        .andExpect(view().name("settings/rings/edit"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("should be without whitespaces before and after"));
+
+    Mockito.verify(ringService).save(any(RingDto.class));
   }
 
   @Test

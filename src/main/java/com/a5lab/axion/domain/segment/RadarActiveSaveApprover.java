@@ -3,6 +3,7 @@ package com.a5lab.axion.domain.segment;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -20,11 +21,12 @@ public class RadarActiveSaveApprover implements ModelApprover {
 
   private final Radar radar;
 
-  private final Segment segment;
+  private final Optional<Segment> segmentOptional;
 
   @Override
   public List<ModelError> approve() throws ValidationException {
-    if (radar.isActive() || radar.getId() != segment.getRadar().getId() && segment.getRadar().isActive()) {
+    if (radar.isActive() || segmentOptional.isPresent() && radar.getId() != segmentOptional.get().getRadar().getId()
+        && segmentOptional.get().getRadar().isActive()) {
       return List.of(new ModelError("unable_to_save_due_to_active_radar",
           messageSource.getMessage("segment.error.unable_to_save_due_to_active_radar", null,
               LocaleContextHolder.getLocale()), null));

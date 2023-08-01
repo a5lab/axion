@@ -1,5 +1,6 @@
 package com.a5lab.axion.domain.technology_blip;
 
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.Collection;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.a5lab.axion.domain.AbstractServiceTests;
+import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
 import com.a5lab.axion.domain.ring.Ring;
@@ -263,6 +265,78 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
     Mockito.verify(ringRepository).findById(ring.getId());
     Mockito.verify(segmentRepository).findById(segment.getId());
     Mockito.verify(technologyRepository).findById(technology.getId());
+  }
+
+  @Test
+  void shouldFailToSaveTechnologyBlipDueToRadarAndTechnologyIsNotUnique() {
+    final Radar radar = new Radar();
+    radar.setId(1L);
+    radar.setTitle("My radar");
+    radar.setDescription("My radar description");
+
+    final Ring ring = new Ring();
+    ring.setId(3L);
+    ring.setRadar(null);
+    ring.setTitle("My ring title");
+    ring.setDescription("My ring description");
+    ring.setPosition(1);
+    ring.setColor("#fbdb84");
+
+    final Segment segment = new Segment();
+    segment.setId(2L);
+    segment.setRadar(null);
+    segment.setTitle("My segment title");
+    segment.setDescription("My segment description");
+    segment.setPosition(1);
+
+    final Technology technology = new Technology();
+    technology.setId(2L);
+    technology.setTitle("My technology");
+
+    // Create Blips
+    final TechnologyBlip technologyBlip = new TechnologyBlip();
+    technologyBlip.setId(3L);
+    technologyBlip.setRadar(radar);
+    technologyBlip.setRing(ring);
+    technologyBlip.setTechnology(technology);
+    technologyBlip.setSegment(segment);
+
+    // Blip that have already been created
+    final TechnologyBlip technologyBlip1 = new TechnologyBlip();
+    technologyBlip1.setId(4L);
+    technologyBlip1.setRadar(radar);
+    technologyBlip1.setRing(ring);
+    technologyBlip1.setTechnology(technology);
+    technologyBlip1.setSegment(segment);
+    List<TechnologyBlip> technologyBlipList = List.of(technologyBlip1);
+
+    Mockito.when(radarRepository.findById(any())).thenReturn(Optional.of(radar));
+    Mockito.when(segmentRepository.findById(any())).thenReturn(Optional.of(segment));
+    Mockito.when(ringRepository.findById(any())).thenReturn(Optional.of(ring));
+    Mockito.when(technologyRepository.findById(any())).thenReturn(Optional.of(technology));
+    Mockito.when(technologyBlipRepository.findByRadarIdAndTechnologyId(
+        technologyBlip1.getRadar().getId(), technologyBlip1.getTechnology().getId())).thenReturn(technologyBlipList);
+
+    ValidationException exception = catchThrowableOfType(() ->
+        technologyBlipService.save(technologyBlipMapper.toDto(technologyBlip)), ValidationException.class);
+    System.out.println(exception.getMessage());
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertTrue(exception.getMessage().contains("radar and technology should be unique"));
+
+    Mockito.verify(technologyBlipRepository)
+        .findByRadarIdAndTechnologyId(technologyBlip.getRadar().getId(), technologyBlip1.getTechnology().getId());
+    Mockito.verify(radarRepository).findById(radar.getId());
+    Mockito.verify(ringRepository).findById(ring.getId());
+    Mockito.verify(segmentRepository).findById(segment.getId());
+    Mockito.verify(technologyRepository).findById(technology.getId());
+  }
+
+  @Test
+  void shouldFailToSaveTechnologyBlipDueToRadarAndTechnologyIsEmpty() {
+    ValidationException exception = catchThrowableOfType(() ->
+        technologyBlipService.save(technologyBlipMapper.toDto(new TechnologyBlip())), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertTrue(exception.getMessage().contains("must not be null"));
   }
 
   @Test

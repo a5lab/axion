@@ -1,5 +1,9 @@
 package com.a5lab.axion.domain.radar_type;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import jakarta.validation.ValidationException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +31,26 @@ class RadarTypeRepositoryTests extends AbstractRepositoryTests {
     Assertions.assertNotNull(radarType.getCreatedDate());
     Assertions.assertNotNull(radarType.getLastModifiedBy());
     Assertions.assertNotNull(radarType.getLastModifiedDate());
+  }
+
+
+  @Test
+  void shouldFailToSaveRadarTypeDueToTitleWithRightWhiteSpace() {
+    final RadarType radarType = new RadarType();
+    radarType.setTitle("My new test RadarType ");
+
+    Assertions.assertNull(radarType.getId());
+    assertThatThrownBy(() -> radarTypeRepository.saveAndFlush(radarType))
+            .isInstanceOf(ValidationException.class);
+  }
+
+  @Test
+  void shouldFailToSaveRadarTypeDueToTitleWithLeftWhiteSpace() {
+    final RadarType radarType = new RadarType();
+    radarType.setTitle(" My new test RadarType");
+
+    Assertions.assertNull(radarType.getId());
+    assertThatThrownBy(() -> radarTypeRepository.saveAndFlush(radarType))
+            .isInstanceOf(ValidationException.class);
   }
 }
