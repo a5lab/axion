@@ -319,7 +319,6 @@ class TechnologyBlipServiceTests extends AbstractServiceTests {
 
     ValidationException exception = catchThrowableOfType(() ->
         technologyBlipService.save(technologyBlipMapper.toDto(technologyBlip)), ValidationException.class);
-    System.out.println(exception.getMessage());
     Assertions.assertFalse(exception.getMessage().isEmpty());
     Assertions.assertTrue(exception.getMessage().contains("radar and technology should be unique"));
 
