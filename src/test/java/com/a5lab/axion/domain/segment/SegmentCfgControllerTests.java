@@ -367,6 +367,34 @@ public class SegmentCfgControllerTests extends AbstractControllerTests {
   }
 
   @Test
+  public void shouldFailToUpdateSegmentDueToBelongActiveRadar() throws Exception {
+    final var radarDto = new RadarDto();
+    radarDto.setId(1L);
+
+    final var segmentDto = new SegmentDto();
+    segmentDto.setRadarId(radarDto.getId());
+
+    List<ModelError> modelErrorList =
+        List.of(new ModelError(null, "can not be changed belong active radar", null));
+    String errorMessage = ValidationException.buildErrorMessage(modelErrorList);
+    Mockito.doThrow(new ValidationException(errorMessage, modelErrorList)).when(segmentService)
+        .save(any());
+
+    MvcResult result = mockMvc.perform(post("/settings/segments/update")
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .param("radarId", String.valueOf(segmentDto.getRadarId())))
+        .andExpect(status().isOk())
+        .andExpect(model().attributeHasErrors("segmentDto"))
+        .andExpect(view().name("settings/segments/edit"))
+        .andReturn();
+
+    String content = result.getResponse().getContentAsString();
+    Assertions.assertTrue(content.contains("can not be changed belong active radar"));
+
+    Mockito.verify(segmentService).save(any());
+  }
+
+  @Test
   public void shouldDeleteSegment() throws Exception {
     final SegmentDto segmentDto = new SegmentDto();
     segmentDto.setId(10L);

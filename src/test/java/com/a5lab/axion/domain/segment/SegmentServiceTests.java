@@ -25,6 +25,7 @@ import com.a5lab.axion.domain.AbstractServiceTests;
 import com.a5lab.axion.domain.ValidationException;
 import com.a5lab.axion.domain.radar.Radar;
 import com.a5lab.axion.domain.radar.RadarRepository;
+import com.a5lab.axion.domain.ring.Ring;
 
 class SegmentServiceTests extends AbstractServiceTests {
   @MockBean
@@ -180,6 +181,40 @@ class SegmentServiceTests extends AbstractServiceTests {
 
     Mockito.verify(radarRepository, times(2)).findById(radar.getId());
     Mockito.verify(segmentRepository).findById(segment.getId());
+  }
+
+  @Test
+  void shouldFailToSaveSegmentDueToBelongActiveRadar() {
+    final Radar radar = new Radar();
+    radar.setId(2L);
+    radar.setTitle("My radar title");
+    radar.setDescription("My radar description");
+    radar.setPrimary(true);
+    radar.setActive(false);
+
+    final Radar radarActive = new Radar();
+    radarActive.setId(1L);
+    radarActive.setTitle("My radar title");
+    radarActive.setDescription("My radar description");
+    radarActive.setPrimary(true);
+    radarActive.setActive(true);
+
+    final Segment segment = new Segment();
+    segment.setId(3L);
+    segment.setRadar(radarActive);
+    segment.setTitle("ADOPT");
+    segment.setDescription("My description");
+    segment.setPosition(1);
+
+    Mockito.when(radarRepository.findById(segment.getRadar().getId())).thenReturn(Optional.of(radar));
+    Mockito.when(segmentRepository.findById(segment.getId())).thenReturn(Optional.of(segment));
+
+    ValidationException exception =
+            catchThrowableOfType(() -> segmentService.save(segmentMapper.toDto(segment)), ValidationException.class);
+    Assertions.assertFalse(exception.getMessage().isEmpty());
+    Assertions.assertTrue(exception.getMessage().contains("can't be saved for active radar"));
+
+    Mockito.verify(radarRepository, Mockito.times(2)).findById(radarActive.getId());
   }
 
   @Test
