@@ -40,6 +40,15 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlip;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Radar extends AbstractAuditable {
+  public Radar(Long id, RadarType radarType, String title, String description, boolean primary, boolean active) {
+    this.id = id;
+    this.radarType = radarType;
+    this.title = title;
+    this.description = description;
+    this.primary = primary;
+    this.active = active;
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false, unique = true)
