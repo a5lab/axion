@@ -8,9 +8,16 @@
         <li th:each="error : ${#fields.allErrors()}" th:text="${error}"/>
       </ul>
     </div>
-    <label for="title">Title</label>
-    <input id="title" placeholder="Title" th:field="*{title}" type="text">
+    <label for="radar">Radar</label>
+    <input id="radar" class="me-2" placeholder="Radar" th:field="*{radarTitle}" type="text">
+    <label for="ring">Ring</label>
+    <input id="ring" placeholder="Ring" th:field="*{ringTitle}" type="text">
+    <label for="segment">Segment</label>
+    <input id="segment" placeholder="Segment" th:field="*{segmentTitle}" type="text">
+    <label for="technology">Technology</label>
+    <input id="technology" placeholder="Technology" th:field="*{technologyTitle}" type="text">
     <input class="filter-button" type="submit" value="Filter">
+
   </form>
   <div class="border-grey"></div>
 </div>

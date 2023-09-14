@@ -16,6 +16,15 @@ import lombok.ToString;
 public class TechnologyBlipFilter {
 
   @Size(min = 0, max = 64)
-  private String title;
+  private String radarTitle;
+
+  @Size(min = 0, max = 64)
+  private String ringTitle;
+
+  @Size(min = 0, max = 64)
+  private String segmentTitle;
+
+  @Size(min = 0, max = 64)
+  private String technologyTitle;
 
 }
