@@ -36,7 +36,7 @@ databaseChangeLog:
       value: varchar(255)
       dbms: h2
 
-  # BigInt
+  # BigInt type
   - property:
       name: bigint.type
       value: bigint
@@ -46,7 +46,7 @@ databaseChangeLog:
       value: BIGINT
       dbms: h2
 
-  # DATETIME
+  # Datetime type
   - property:
       name: datetime.type
       value: timestamp with time zone

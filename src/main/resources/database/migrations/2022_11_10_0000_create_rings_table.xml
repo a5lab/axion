@@ -8,7 +8,7 @@
 
     <changeSet id="create_rings_table" author="axion">
         <createTable tableName="rings" remarks="Holds information about rings.">
-            <column name="id" type="integer" remarks="Ring id, primary key." autoIncrement="true"
+            <column name="id" type="${bigint.type}" remarks="Ring id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="pk_rings_id"/>
             </column>

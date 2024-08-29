@@ -8,7 +8,7 @@
 
     <changeSet id="create_technologies_table" author="axion">
         <createTable tableName="technologies" remarks="Holds information about technologies.">
-            <column name="id" type="integer" remarks="Technology id, primary key." autoIncrement="true"
+            <column name="id" type="${bigint.type}" remarks="Technology id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_technologies_id" nullable="false"/>
             </column>

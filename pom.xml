@@ -18,14 +18,14 @@
         <testcontainers.version>1.17.6</testcontainers.version>
         <site.plugin.version>3.12.1</site.plugin.version>
         <liquibase.plugin.version>4.17.2</liquibase.plugin.version>
-        <jacoco.plugin.version>0.8.8</jacoco.plugin.version>
+        <jacoco.plugin.version>0.8.12</jacoco.plugin.version>
         <checkstyle.plugin.version>3.2.0</checkstyle.plugin.version>
         <jxr.plugin.version>3.3.0</jxr.plugin.version>
         <javadoc.plugin.version>3.4.1</javadoc.plugin.version>
         <micrometer.plugin.version>1.10.2</micrometer.plugin.version>
         <release.plugin.version>3.0.1</release.plugin.version>
         <pmd.plugin.version>3.19.0</pmd.plugin.version>
-        <spotbug.plugin.version>4.7.3.0</spotbug.plugin.version>
+        <spotbugs.plugin.version>4.8.6.2</spotbugs.plugin.version>
         <sonar.plugin.version>3.9.1.2184</sonar.plugin.version>
         <exec.plugin.version>3.1.0</exec.plugin.version>
         <properties.plugin.version>1.1.0</properties.plugin.version>
@@ -263,7 +263,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>${spotbug.plugin.version}</version>
+                <version>${spotbugs.plugin.version}</version>
                 <configuration>
                     <effort>Max</effort>
                     <threshold>medium</threshold>
@@ -585,7 +585,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>${spotbug.plugin.version}</version>
+                <version>${spotbugs.plugin.version}</version>
                 <configuration>
                     <effort>Max</effort>
                 </configuration>

@@ -8,7 +8,7 @@
 
     <changeSet id="create_radars_table" author="axion">
         <createTable tableName="radars" remarks="Holds information about radars.">
-            <column name="id" type="integer" remarks="Radar id, primary key." autoIncrement="true"
+            <column name="id" type="${bigint.type}" remarks="Radar id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_radars_id" nullable="false"/>
             </column>
