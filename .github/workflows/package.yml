@@ -15,16 +15,16 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
-      - name: Set up JDK 8
+      - name: Set up JDK 22
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '22'
           distribution: 'liberica'
           cache: maven
       - name: Set up NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
       - name: Install npm packages
         shell: bash
         run: npm install uglifycss uglify-js -g
