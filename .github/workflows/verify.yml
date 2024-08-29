@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
-      - name: Set up JDK 22
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: '22'
