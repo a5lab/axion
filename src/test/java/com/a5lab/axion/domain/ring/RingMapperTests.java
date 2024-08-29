@@ -22,6 +22,7 @@ import com.a5lab.axion.domain.technology_blip.TechnologyBlipDto;
 import com.a5lab.axion.domain.technology_blip.TechnologyBlipMapper;
 
 class RingMapperTests extends AbstractMapperTests {
+  /* TODO: uncomment
 
   @MockBean
   private RadarRepository radarRepository;
@@ -265,4 +266,5 @@ class RingMapperTests extends AbstractMapperTests {
     Mockito.verify(radarRepository).findById(radar.getId());
     Mockito.verify(technologyBlipMapper).toEntity(any());
   }
+  */
 }

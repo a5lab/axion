@@ -8,7 +8,7 @@
 
     <changeSet id="create_segments_table" author="axion">
         <createTable tableName="segments" remarks="Holds information about segments.">
-            <column name="id" type="integer" remarks="Segment id, primary key." autoIncrement="true"
+            <column name="id" type="${bigint.type}" remarks="Segment id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_segments_id" nullable="false"/>
             </column>

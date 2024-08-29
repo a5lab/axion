@@ -8,7 +8,7 @@
 
     <changeSet id="create_repositories_table" author="axion">
         <createTable tableName="repositories" remarks="Holds information about repositories.">
-            <column name="id" type="integer" remarks="Repository id, primary key." autoIncrement="true"
+            <column name="id" type="${bigint.type}" remarks="Repository id, primary key." autoIncrement="true"
                     generationType="ALWAYS">
                 <constraints primaryKey="true" primaryKeyName="pk_repositories_id" nullable="false"/>
             </column>
