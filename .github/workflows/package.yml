@@ -30,5 +30,4 @@ jobs:
         run: npm install uglifycss uglify-js -g
       - name: Build package
         shell: bash
-        # run: mvn package
-        run: mvn package -Dmaven.test.skip
+        run: mvn package
