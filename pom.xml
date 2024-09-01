@@ -13,7 +13,7 @@
     <name>axion</name>
     <description>Technical and business radar</description>
     <properties>
-        <java.version>22</java.version>
+        <java.version>21</java.version>
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <testcontainers.version>1.17.6</testcontainers.version>
         <site.plugin.version>3.12.1</site.plugin.version>
