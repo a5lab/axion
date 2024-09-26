@@ -6,8 +6,6 @@ target/
 
 # Node files
 node_modules/*
-package.json
-package-lock.json
 
 ### STS ###
 .apt_generated

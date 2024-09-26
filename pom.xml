@@ -325,7 +325,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>uglifycss</executable>
+                            <executable>${basedir}/node_modules/.bin/uglifycss</executable>
                             <workingDirectory>${basedir}/src/main/resources/static/css/</workingDirectory>
                             <arguments>
                                 <argument>application.css</argument>
@@ -341,7 +341,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>uglifyjs</executable>
+                            <executable>${basedir}/node_modules/.bin/uglifyjs</executable>
                             <workingDirectory>${basedir}/src/main/resources/static/js/</workingDirectory>
                             <arguments>
                                 <argument>application.js</argument>
@@ -359,7 +359,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>uglifyjs</executable>
+                            <executable>${basedir}/node_modules/.bin/uglifyjs</executable>
                             <workingDirectory>${basedir}/src/main/resources/static/js/</workingDirectory>
                             <arguments>
                                 <argument>filter.js</argument>
@@ -377,7 +377,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>uglifyjs</executable>
+                            <executable>${basedir}/node_modules/.bin/uglifyjs</executable>
                             <workingDirectory>${basedir}/src/main/resources/static/js/</workingDirectory>
                             <arguments>
                                 <argument>radar.js</argument>
