@@ -20,8 +20,7 @@ Technical and business radar. Demo available at https://axion.a5lab.com. Spring 
 * create JAVA_HOME environment variable with value C:\apache-maven-3.8.7
 * exit and run console again to apply environment variables
 * download and setup nodeJS, at least 18
-* install uglifycss by command: npm install -g uglifycss
-* install uglifyjs by command: npm install uglify-js -gt
+* install all npm packages by command: npm install
 * setup GitHub account and add ssh keys to GitHub profile
 * clone repo by command git clone: git@github.com:a5lab/axion.git
 * build application by command: mvn clean package -Pdev -Dmaven.test.skip from root folder
