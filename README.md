@@ -1,5 +1,4 @@
 # Axion
-
 Technical and business radar. Demo available at https://axion.a5lab.com. Spring boot based application.
 
 # Release application
@@ -11,7 +10,6 @@ Technical and business radar. Demo available at https://axion.a5lab.com. Spring 
 * create and publish the new release at GitHub
 
 # Setup environment
-
 ## Windows environment
 * download and install java, at least jdk-18
 * create JAVA_HOME environment variable with value C:\Program Files\Java\jdk-19
@@ -28,7 +26,6 @@ Technical and business radar. Demo available at https://axion.a5lab.com. Spring 
 * open browser with url http://127.0.0.1:8080 to view application
 
 ## Working with embedded H2 DB(In-Memory)
-
 * run application by command: "mvn spring-boot:run -Pdev"
 * enter http://localhost:8080/h2-console to browser
 * enter "jdbc:h2:mem:axion" into JDBC URL field
@@ -36,33 +33,26 @@ Technical and business radar. Demo available at https://axion.a5lab.com. Spring 
 * enter "secret" into Password field
 
 ## Idea configuration
-
 ### Java checkstyle
-
 * see overview https://plugins.jetbrains.com/plugin/1065-checkstyle-idea
 * see GitHub https://github.com/jshiell/checkstyle-idea/blob/main/README.md
 * import google_checkstyle.xml into idea java import schema at java code style
 * setup "hard wrap at" value to 120
 
 ### JavaScript checkstyle
-
 * setup ident 2 at JavaScript code style
 
 ### HTML checkstyle
-
 * setup ident 2 at html code style
 * remove all items from "do not indent child of" field
 
 # Conventions
-
 ## Git conventions
-
 * the first letter of the commit should be written in upper case
 * the simple perfect should be used for commit message
 * the title and description should be provided, for example by command: git commit -m "title" -m "description"
 
 # GPG key configuration
-
 * gpg --full-gen-key
 * gpg --list-secret-keys --keyid-format long
 * gpg --armor --export "key-gen" for example gpg --armor --export 3AA5C34371567BD2
@@ -71,7 +61,6 @@ Technical and business radar. Demo available at https://axion.a5lab.com. Spring 
 * git config --global tag.gpgSign true
 
 # Useful commands:
-
 * run postsgresql by command: docker-compose -f ./postgresql.yml up
 * obtain metrics by command: curl http://127.0.0.1:8080/actuator/prometheus
 * build package by command: ./mvnw clean package -Dmaven.test.skip
@@ -99,11 +88,9 @@ Technical and business radar. Demo available at https://axion.a5lab.com. Spring 
 * run psql console by command: su - postgres and run psql
 
 # Useful resources:
-
 * https://tooomm.github.io/github-release-stats/ to view GitHub statistics 
 
 # Inspired by
-
 * https://github.com/thoughtworks/build-your-own-radar
 * https://github.com/zalando/tech-radar
 
