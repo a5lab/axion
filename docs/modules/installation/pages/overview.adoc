@@ -1,3 +1,0 @@
-= Installation
-
-Before proceeding to xref:installation_methods.adoc[install] *axion*, make sure, that your system meets the xref:system_requirements.adoc[requirements].

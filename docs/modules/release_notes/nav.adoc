@@ -1,4 +1,0 @@
-* xref:overview.adoc[]
-** xref:0.3.0.adoc[]
-** xref:0.2.0.adoc[]
-** xref:0.1.0.adoc[]

@@ -1,5 +1,0 @@
-= 0.1.0 
-
-Changelog:
-
-* Basic technical radar functionality: creation, configuration and deletion

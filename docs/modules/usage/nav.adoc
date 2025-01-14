@@ -1,3 +1,0 @@
-* xref:overview.adoc[]
-** xref:concepts.adoc[]
-

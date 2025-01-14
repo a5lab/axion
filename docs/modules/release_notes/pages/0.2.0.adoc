@@ -1,7 +1,0 @@
-= 0.2.0
-
-Changelog:
-
-* Base features has been implemented
-* Custom error page has been made
-* Multiple radars support has been implemented
